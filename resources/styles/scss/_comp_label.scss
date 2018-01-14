@@ -1,0 +1,36 @@
+
+.label {
+  -fx-font-family: $fontFamily;
+  -fx-text-fill: $sisColor_black;
+  -fx-font-size: $fontSizeh6;
+  -fx-font-style: normal;
+
+  &.lbl_titulo {
+    -fx-text-fill: $sisColor_white;
+    -fx-font-size: $fontSizeh2;
+    -fx-font-weight: bold;
+    -fx-alignment: Center;
+  }
+
+  &.lbl_negrito {
+    -fx-font-weight: bold;
+  }
+  &.lbl_h1 {
+    -fx-font-size: $fontSizeh1;
+  }
+  &.lbl_h2 {
+    -fx-font-size: $fontSizeh2;
+  }
+  &.lbl_h3 {
+    -fx-font-size: $fontSizeh3;
+  }
+  &.lbl_h4 {
+    -fx-font-size: $fontSizeh4;
+  }
+  &.lbl_h5 {
+    -fx-font-size: $fontSizeh5;
+  }
+  &.lbl_h6 {
+    -fx-font-size: $fontSizeh6;
+  }
+}

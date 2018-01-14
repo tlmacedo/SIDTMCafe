@@ -1,0 +1,27 @@
+
+
+.list-view:focused {
+  -fx-border-color: #ff6600;
+}
+
+.list-view {
+  -fx-background-color: -fx-box-border, -fx-control-inner-background;
+}
+
+.list-view .list-cell {
+  -fx-background-color: -fx-control-inner-background;
+}
+
+.list-view .list-cell:odd {
+  -fx-background-color: derive(-fx-control-inner-background, -12%);
+}
+
+.list-view .list-cell:filled:selected, .list-view .list-cell:filled:selected:hover {
+  -fx-background-color: -fx-selection-bar;
+  -fx-text-fill: -fx-selection-bar-text;
+}
+
+.list-view .list-cell:filled:hover {
+  -fx-background-color: -fx-cell-hover-color;
+  -fx-text-fill: -fx-text-inner-color;
+}
