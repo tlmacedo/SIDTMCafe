@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXToolbar?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane fx:id="principalPainel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="825.0" prefWidth="1550.0" styleClass="login"
+            stylesheets="@../styles/min/sidtm.min.css"
+            xmlns="http://javafx.com/javafx/8.0.151" xmlns:fx="http://javafx.com/fxml/1">
+    <bottom>
+        <JFXToolbar fx:id="jfxStatusBarPrincipal" disable="true" layoutY="830.0" maxHeight="-Infinity"
+                    maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="1550.0"
+                    styleClass="jfx-tool-bar"/>
+    </bottom>
+    <left>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                    prefHeight="805.0" prefWidth="250.0" BorderPane.alignment="TOP_LEFT">
+            <children>
+                <Label alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="20.0" prefWidth="250.0" styleClass="label-menu-jtree"
+                       text="Menu Principal">
+                    <padding>
+                        <Insets left="5.0"/>
+                    </padding>
+                </Label>
+                <ImageView fx:id="btnMenuPrincipalMinimiza" fitHeight="20.0" fitWidth="20.0" layoutX="211.0"
+                           pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="5.0"
+                           AnchorPane.topAnchor="0.0">
+                    <image>
+                        <Image url=""/>
+                        <!--<Image url="@../Images/icoRedondoSubtracaoPreto.png"/>-->
+                    </image>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </ImageView>
+                <ImageView fx:id="btnMenuPrincipalMaximiza" fitHeight="20.0" fitWidth="20.0" layoutX="193.0"
+                           pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="30.0"
+                           AnchorPane.topAnchor="0.0">
+                    <image>
+                        <Image url=""/>
+                        <!--<Image url="@../Images/icoRedondoAdicaoPreto.png"/>-->
+                    </image>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </ImageView>
+                <ScrollPane fx:id="scrollPaneTreeView" fitToHeight="true" fitToWidth="true" layoutY="20.0"
+                            maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                            prefHeight="805.0" prefWidth="250.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0"
+                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                        <TreeView fx:id="menuJTree" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                  minWidth="-Infinity" prefHeight="783.0" prefWidth="350.0"/>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
+    </left>
+    <center>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                    prefHeight="805.0" prefWidth="1300.0" BorderPane.alignment="TOP_LEFT">
+            <children>
+                <JFXTabPane fx:id="principalTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                            minWidth="-Infinity" prefHeight="805.0" prefWidth="1300.0" tabMaxHeight="20.0"
+                            tabMinHeight="20.0"/>
+                <ImageView fx:id="imageViewLogomarca" fitHeight="805.0" fitWidth="1300.0" pickOnBounds="true">
+                    <image>
+                        <Image url=""/>
+                        <!--<Image url="@../Images/Plano de Fundo.jpg"/>-->
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

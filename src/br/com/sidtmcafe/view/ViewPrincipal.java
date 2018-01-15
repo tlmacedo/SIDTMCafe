@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ViewLogin extends Application {
+public class ViewPrincipal extends Application {
 
     private static Stage stage;
 
@@ -18,13 +18,13 @@ public class ViewLogin extends Application {
         return stage;
     }
 
-    public void openViewLogin(boolean abertoPeloSistema) {
+    public void openViewPrincipal(boolean abertoPeloSistema) {
         stage = new Stage();
         Parent root;
         Scene scene = null;
 
         try {
-            root = FXMLLoader.load(getClass().getResource("/fxml/FxmlLogin.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/fxml/FxmlPrincipal.fxml"));
             scene = new Scene(root);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -46,14 +46,15 @@ public class ViewLogin extends Application {
         } else {
             stage.show();
         }
-        ViewLogin.stage = stage;
+        ViewPrincipal.stage = stage;
+
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ViewLogin.stage = primaryStage;
+        ViewPrincipal.stage = primaryStage;
 
-        openViewLogin(false);
+        openViewPrincipal(false);
     }
 
     public static void main(String[] args) {
