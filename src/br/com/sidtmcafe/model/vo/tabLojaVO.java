@@ -6,31 +6,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class tabColaboradorVO extends RecursiveTreeObject<tabColaboradorVO> {
+public class tabLojaVO extends RecursiveTreeObject<tabLojaVO> {
 
-    tabCargoVO cargoVO;
-    tabLojaVO lojaVO;
+    IntegerProperty id, situacaoSistema_id;
+    StringProperty cnpj, ie, razao, fantasia, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids;
 
-    IntegerProperty id, cargo_id, loja_id, situacaoSistema_id;
-    StringProperty nome, apelido, senha, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids;
-
-    public tabColaboradorVO() {
-    }
-
-    public tabCargoVO getCargoVO() {
-        return cargoVO;
-    }
-
-    public void setCargoVO(tabCargoVO cargoVO) {
-        this.cargoVO = cargoVO;
-    }
-
-    public tabLojaVO getLojaVO() {
-        return lojaVO;
-    }
-
-    public void setLojaVO(tabLojaVO lojaVO) {
-        this.lojaVO = lojaVO;
+    public tabLojaVO() {
     }
 
     public int getId() {
@@ -46,32 +27,6 @@ public class tabColaboradorVO extends RecursiveTreeObject<tabColaboradorVO> {
         idProperty().set(id);
     }
 
-    public int getCargo_id() {
-        return cargo_idProperty().get();
-    }
-
-    public IntegerProperty cargo_idProperty() {
-        if (cargo_id == null) cargo_id = new SimpleIntegerProperty(-1);
-        return cargo_id;
-    }
-
-    public void setCargo_id(int cargo_id) {
-        cargo_idProperty().set(cargo_id);
-    }
-
-    public int getLoja_id() {
-        return loja_idProperty().get();
-    }
-
-    public IntegerProperty loja_idProperty() {
-        if (loja_id == null) loja_id = new SimpleIntegerProperty(-1);
-        return loja_id;
-    }
-
-    public void setLoja_id(int loja_id) {
-        loja_idProperty().set(loja_id);
-    }
-
     public int getSituacaoSistema_id() {
         return situacaoSistema_idProperty().get();
     }
@@ -85,43 +40,56 @@ public class tabColaboradorVO extends RecursiveTreeObject<tabColaboradorVO> {
         situacaoSistema_idProperty().set(situacaoSistema_id);
     }
 
-    public String getNome() {
-        return nomeProperty().get();
+    public String getCnpj() {
+        return cnpjProperty().get();
     }
 
-    public StringProperty nomeProperty() {
-        if (nome == null) nome = new SimpleStringProperty("");
-        return nome;
+    public StringProperty cnpjProperty() {
+        if (cnpj == null) cnpj = new SimpleStringProperty("");
+        return cnpj;
     }
 
-    public void setNome(String nome) {
-        nomeProperty().set(nome);
+    public void setCnpj(String cnpj) {
+        cnpjProperty().set(cnpj);
     }
 
-    public String getApelido() {
-        return apelidoProperty().get();
+    public String getIe() {
+        return ieProperty().get();
     }
 
-    public StringProperty apelidoProperty() {
-        if (apelido == null) apelido = new SimpleStringProperty("");
-        return apelido;
+    public StringProperty ieProperty() {
+        if (ie == null) ie = new SimpleStringProperty("");
+        return ie;
     }
 
-    public void setApelido(String apelido) {
-        apelidoProperty().set(apelido);
+    public void setIe(String ie) {
+        ieProperty().set(ie);
     }
 
-    public String getSenha() {
-        return senhaProperty().get();
+    public String getRazao() {
+        return razaoProperty().get();
     }
 
-    public StringProperty senhaProperty() {
-        if (senha == null) senha = new SimpleStringProperty("");
-        return senha;
+    public StringProperty razaoProperty() {
+        if (razao == null) razao = new SimpleStringProperty("");
+        return razao;
     }
 
-    public void setSenha(String senha) {
-        senhaProperty().set(senha);
+    public void setRazao(String razao) {
+        razaoProperty().set(razao);
+    }
+
+    public String getFantasia() {
+        return fantasiaProperty().get();
+    }
+
+    public StringProperty fantasiaProperty() {
+        if (fantasia == null) fantasia = new SimpleStringProperty("");
+        return fantasia;
+    }
+
+    public void setFantasia(String fantasia) {
+        fantasiaProperty().set(fantasia);
     }
 
     public String getEndereco_ids() {
@@ -176,16 +144,8 @@ public class tabColaboradorVO extends RecursiveTreeObject<tabColaboradorVO> {
         emailHomePage_idsProperty().set(emailHomePage_ids);
     }
 
-    public String getDetalheColaborador() {
-        if (nomeProperty().get() != "")
-            return "[Usuário]: " + nomeProperty().get() + " (" + apelidoProperty().get() + ") "
-                    + ";[Cargo]: " + cargoVO.getDescricao() + "  |  [Loja]: " + lojaVO.getFantasia();
-
-        return "";
-    }
-
     @Override
     public String toString() {
-        return apelidoProperty().get();
+        return razaoProperty().get() + " (" + fantasiaProperty().get() + ")";
     }
 }

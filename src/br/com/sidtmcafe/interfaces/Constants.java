@@ -10,7 +10,7 @@ public interface Constants {
     String BD_USER = "root";
     String BD_PASS = "4879";
     String BD_DRIVER = "com.mysql.jdbc.Driver";
-    String BD_URL = BD_DRIVER_CONN + BD_HOST + BD_PORTA + BD_DATABASE;
+    String BD_URL = BD_DRIVER_CONN + BD_HOST + BD_PORTA + BD_DATABASE + "?useSSL=true";
 
 
     String TIME_ZONE = "America/Manaus";

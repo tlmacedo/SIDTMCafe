@@ -23,13 +23,17 @@ public class tabColaboradorDAO {
         comandoSql = "SELECT * FROM tabColaborador ";
         if (idTabColaboradorVO > 0) comandoSql += " WHERE id = '" + idTabColaboradorVO + "' ";
         comandoSql += "ORDER BY nome ";
-        return buscaTabColaboradorVO(comandoSql);
+        if (buscaTabColaboradorVO(comandoSql) == null)
+            colaboradorVO = new tabColaboradorVO();
+        return colaboradorVO;
     }
 
     public List<tabColaboradorVO> getColaboradorVOList() {
         comandoSql = "SELECT * FROM tabColaborador ";
         comandoSql += "ORDER BY nome ";
-        return buscaListaTabColaboradorVO(comandoSql);
+        if (buscaListaTabColaboradorVO(comandoSql) == null)
+            colaboradorVOList.add(new tabColaboradorVO());
+        return colaboradorVOList;
     }
 
     public void insert(tabColaboradorVO colaboradorVO) {
@@ -47,7 +51,10 @@ public class tabColaboradorDAO {
                 colaboradorVO.setNome(rs.getString("nome"));
                 colaboradorVO.setApelido(rs.getString("apelido"));
                 colaboradorVO.setSenha(rs.getString("senha"));
+
                 colaboradorVO.setCargo_id(rs.getInt("cargo_id"));
+                colaboradorVO.setCargoVO(new tabCargoDAO().getCargoVO(colaboradorVO.getCargo_id()));
+
                 colaboradorVO.setLoja_id(rs.getInt("loja_id"));
                 colaboradorVO.setSituacaoSistema_id(rs.getInt("situacaoSistema_id"));
                 colaboradorVO.setEndereco_ids(rs.getString("endereco_ids"));
@@ -75,8 +82,13 @@ public class tabColaboradorDAO {
                 colaboradorVO.setNome(rs.getString("nome"));
                 colaboradorVO.setApelido(rs.getString("apelido"));
                 colaboradorVO.setSenha(rs.getString("senha"));
+
                 colaboradorVO.setCargo_id(rs.getInt("cargo_id"));
+                colaboradorVO.setCargoVO(new tabCargoDAO().getCargoVO(colaboradorVO.getCargo_id()));
+
                 colaboradorVO.setLoja_id(rs.getInt("loja_id"));
+                colaboradorVO.setLojaVO(new tabLojaDAO().getLojaVO(colaboradorVO.getLoja_id()));
+
                 colaboradorVO.setSituacaoSistema_id(rs.getInt("situacaoSistema_id"));
                 colaboradorVO.setEndereco_ids(rs.getString("endereco_ids"));
                 colaboradorVO.setTelefone_ids(rs.getString("telefone_ids"));

@@ -1,6 +1,5 @@
 package br.com.sidtmcafe.view;
 
-import br.com.sidtmcafe.configuracao.VariaveisSistema;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +20,7 @@ public class ViewLogin extends Application {
 
     public void Login(boolean abertoPeloSistema) {
         stage = new Stage();
-        Parent root = null;
+        Parent root;
         Scene scene = null;
 
         try {
@@ -52,7 +51,6 @@ public class ViewLogin extends Application {
 
     public void start(Stage primaryStage) throws Exception {
         ViewLogin.stage = primaryStage;
-        new VariaveisSistema();
 
         Login(false);
     }
