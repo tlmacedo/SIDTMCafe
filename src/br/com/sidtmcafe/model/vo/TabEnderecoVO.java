@@ -6,21 +6,21 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class tabEnderecoVO extends RecursiveTreeObject<tabEnderecoVO> {
+public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
 
-    sisTipoEnderecoVO tipoEnderecoVO;
+    SisTipoEnderecoVO tipoEnderecoVO;
 
     IntegerProperty id, tipoEndereco_id, uf_id, municipio_id, sistuacaoSistema_id;
     StringProperty cep, logradouro, numero, complemento, bairro;
 
-    public tabEnderecoVO() {
+    public TabEnderecoVO() {
     }
 
-    public sisTipoEnderecoVO getTipoEnderecoVO() {
+    public SisTipoEnderecoVO getTipoEnderecoVO() {
         return tipoEnderecoVO;
     }
 
-    public void setTipoEnderecoVO(sisTipoEnderecoVO tipoEnderecoVO) {
+    public void setTipoEnderecoVO(SisTipoEnderecoVO tipoEnderecoVO) {
         this.tipoEnderecoVO = tipoEnderecoVO;
     }
 

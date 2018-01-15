@@ -6,12 +6,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class sisTipoEnderecoVO extends RecursiveTreeObject<sisTipoEnderecoVO> {
+public class TabCargoVO extends RecursiveTreeObject<TabCargoVO> {
 
     IntegerProperty id;
     StringProperty descricao;
 
-    public sisTipoEnderecoVO() {
+    public TabCargoVO() {
     }
 
     public int getId() {

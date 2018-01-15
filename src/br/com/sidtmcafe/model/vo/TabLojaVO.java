@@ -8,21 +8,21 @@ import javafx.beans.property.StringProperty;
 
 import java.util.List;
 
-public class tabLojaVO extends RecursiveTreeObject<tabLojaVO> {
+public class TabLojaVO extends RecursiveTreeObject<TabLojaVO> {
 
-    List<tabEnderecoVO> enderecoVOList;
+    List<TabEnderecoVO> enderecoVOList;
 
     IntegerProperty id, situacaoSistema_id;
     StringProperty cnpj, ie, razao, fantasia, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids;
 
-    public tabLojaVO() {
+    public TabLojaVO() {
     }
 
-    public List<tabEnderecoVO> getEnderecoVOList() {
+    public List<TabEnderecoVO> getEnderecoVOList() {
         return enderecoVOList;
     }
 
-    public void setEnderecoVOList(List<tabEnderecoVO> enderecoVOList) {
+    public void setEnderecoVOList(List<TabEnderecoVO> enderecoVOList) {
         this.enderecoVOList = enderecoVOList;
     }
 

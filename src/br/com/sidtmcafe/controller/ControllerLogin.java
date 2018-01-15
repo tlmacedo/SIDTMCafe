@@ -1,8 +1,8 @@
 package br.com.sidtmcafe.controller;
 
 import br.com.sidtmcafe.interfaces.FormularioModelo;
-import br.com.sidtmcafe.model.dao.tabColaboradorDAO;
-import br.com.sidtmcafe.model.vo.tabColaboradorVO;
+import br.com.sidtmcafe.model.dao.TabColaboradorDAO;
+import br.com.sidtmcafe.model.vo.TabColaboradorVO;
 import br.com.sidtmcafe.view.ViewLogin;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -30,19 +30,19 @@ public class ControllerLogin implements Initializable, FormularioModelo {
     @Override
     public void preencherObjetos() {
         cboUsuarioLogin.setPromptText("Selecione usuário");
-        cboUsuarioLogin.getItems().add(new tabColaboradorVO());
-        cboUsuarioLogin.getItems().addAll(new tabColaboradorDAO().getColaboradorVOList());
+        cboUsuarioLogin.getItems().add(new TabColaboradorVO());
+        cboUsuarioLogin.getItems().addAll(new TabColaboradorDAO().getColaboradorVOList());
     }
 
     @Override
     public void fatorarObjetos() {
         cboUsuarioLogin.setCellFactory(
-                new Callback<ListView<tabColaboradorVO>, ListCell<tabColaboradorVO>>() {
+                new Callback<ListView<TabColaboradorVO>, ListCell<TabColaboradorVO>>() {
                     @Override
-                    public ListCell<tabColaboradorVO> call(ListView<tabColaboradorVO> param) {
-                        final ListCell<tabColaboradorVO> cell = new ListCell<tabColaboradorVO>() {
+                    public ListCell<TabColaboradorVO> call(ListView<TabColaboradorVO> param) {
+                        final ListCell<TabColaboradorVO> cell = new ListCell<TabColaboradorVO>() {
                             @Override
-                            public void updateItem(tabColaboradorVO item, boolean empty) {
+                            public void updateItem(TabColaboradorVO item, boolean empty) {
                                 super.updateItem(item, empty);
                                 if (item != null) {
                                     if (getIndex() == -1) {

@@ -6,30 +6,30 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class tabColaboradorVO extends RecursiveTreeObject<tabColaboradorVO> {
+public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
 
-    tabCargoVO cargoVO;
-    tabLojaVO lojaVO;
+    TabCargoVO cargoVO;
+    TabLojaVO lojaVO;
 
     IntegerProperty id, cargo_id, loja_id, situacaoSistema_id;
     StringProperty nome, apelido, senha, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids;
 
-    public tabColaboradorVO() {
+    public TabColaboradorVO() {
     }
 
-    public tabCargoVO getCargoVO() {
+    public TabCargoVO getCargoVO() {
         return cargoVO;
     }
 
-    public void setCargoVO(tabCargoVO cargoVO) {
+    public void setCargoVO(TabCargoVO cargoVO) {
         this.cargoVO = cargoVO;
     }
 
-    public tabLojaVO getLojaVO() {
+    public TabLojaVO getLojaVO() {
         return lojaVO;
     }
 
-    public void setLojaVO(tabLojaVO lojaVO) {
+    public void setLojaVO(TabLojaVO lojaVO) {
         this.lojaVO = lojaVO;
     }
 
@@ -179,9 +179,9 @@ public class tabColaboradorVO extends RecursiveTreeObject<tabColaboradorVO> {
     public String getDetalheColaborador() {
         if (nomeProperty().get() != "")
             return "[Usuário]: " + nomeProperty().get() + " (" + apelidoProperty().get() + ") "
-                    + ";[Cargo]: " + cargoVO.getDescricao() + "  |  [Loja]: " + lojaVO.getFantasia()
-                    + ";[End. Loja]: " + lojaVO.getEnderecoVOList().get(1).getLogradouro() + ", "
-                    + lojaVO.getEnderecoVOList().get(1).getNumero() + ".";
+                    + ";[Cargo]: " + cargoVO.getDescricao() + "  |  [Loja]: " + lojaVO.getFantasia();
+//                    + ";[End. Loja]: " + lojaVO.getEnderecoVOList().get(0).getLogradouro() + ", "
+//                    + lojaVO.getEnderecoVOList().get(0).getNumero();
 
         return "";
     }
