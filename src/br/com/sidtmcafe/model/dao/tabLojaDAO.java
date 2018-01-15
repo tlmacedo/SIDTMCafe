@@ -1,6 +1,7 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.database.ConnectionFactory;
+import br.com.sidtmcafe.model.vo.tabEnderecoVO;
 import br.com.sidtmcafe.model.vo.tabLojaVO;
 
 import java.sql.Connection;
@@ -50,7 +51,14 @@ public class tabLojaDAO {
                 lojaVO.setRazao(rs.getString("razao"));
                 lojaVO.setFantasia(rs.getString("fantasia"));
                 lojaVO.setSituacaoSistema_id(rs.getInt("situacaoSistema_id"));
+
                 lojaVO.setEndereco_ids(rs.getString("endereco_ids"));
+                List<tabEnderecoVO> enderecoVOList = new ArrayList<>();
+                for (String strCodEndereco : lojaVO.getEndereco_ids().split(";")) {
+                    enderecoVOList.add(new tabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
+                }
+                lojaVO.setEnderecoVOList(enderecoVOList);
+
                 lojaVO.setTelefone_ids(rs.getString("telefone_ids"));
                 lojaVO.setContato_ids(rs.getString("contato_ids"));
                 lojaVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));
@@ -77,7 +85,14 @@ public class tabLojaDAO {
                 lojaVO.setRazao(rs.getString("razao"));
                 lojaVO.setFantasia(rs.getString("fantasia"));
                 lojaVO.setSituacaoSistema_id(rs.getInt("situacaoSistema_id"));
+
                 lojaVO.setEndereco_ids(rs.getString("endereco_ids"));
+                List<tabEnderecoVO> enderecoVOList = new ArrayList<>();
+                for (String strCodEndereco : lojaVO.getEndereco_ids().split(";")) {
+                    enderecoVOList.add(new tabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
+                }
+                lojaVO.setEnderecoVOList(enderecoVOList);
+
                 lojaVO.setTelefone_ids(rs.getString("telefone_ids"));
                 lojaVO.setContato_ids(rs.getString("contato_ids"));
                 lojaVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));

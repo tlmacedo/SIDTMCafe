@@ -6,12 +6,24 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.List;
+
 public class tabLojaVO extends RecursiveTreeObject<tabLojaVO> {
+
+    List<tabEnderecoVO> enderecoVOList;
 
     IntegerProperty id, situacaoSistema_id;
     StringProperty cnpj, ie, razao, fantasia, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids;
 
     public tabLojaVO() {
+    }
+
+    public List<tabEnderecoVO> getEnderecoVOList() {
+        return enderecoVOList;
+    }
+
+    public void setEnderecoVOList(List<tabEnderecoVO> enderecoVOList) {
+        this.enderecoVOList = enderecoVOList;
     }
 
     public int getId() {

@@ -49,13 +49,10 @@ public class ControllerLogin implements Initializable, FormularioModelo {
                                         setText(item.toString());
                                     } else {
                                         String textoCombo = "";
-                                        int cont = 1;
                                         for (String detalheColaborador : item.getDetalheColaborador().split(";")) {
-                                            textoCombo += detalheColaborador;
-                                            if (cont < 2) {
+                                            if (textoCombo != "")
                                                 textoCombo += "\r\n";
-                                                cont++;
-                                            }
+                                            textoCombo += detalheColaborador;
                                         }
                                         setText(textoCombo);
                                     }

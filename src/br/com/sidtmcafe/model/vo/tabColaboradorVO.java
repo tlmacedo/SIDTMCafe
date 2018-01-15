@@ -179,7 +179,9 @@ public class tabColaboradorVO extends RecursiveTreeObject<tabColaboradorVO> {
     public String getDetalheColaborador() {
         if (nomeProperty().get() != "")
             return "[Usuário]: " + nomeProperty().get() + " (" + apelidoProperty().get() + ") "
-                    + ";[Cargo]: " + cargoVO.getDescricao() + "  |  [Loja]: " + lojaVO.getFantasia();
+                    + ";[Cargo]: " + cargoVO.getDescricao() + "  |  [Loja]: " + lojaVO.getFantasia()
+                    + ";[End. Loja]: " + lojaVO.getEnderecoVOList().get(1).getLogradouro() + ", "
+                    + lojaVO.getEnderecoVOList().get(1).getNumero() + ".";
 
         return "";
     }
