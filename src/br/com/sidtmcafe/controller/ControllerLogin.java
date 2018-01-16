@@ -3,7 +3,10 @@ package br.com.sidtmcafe.controller;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.TabColaboradorDAO;
 import br.com.sidtmcafe.model.vo.TabColaboradorVO;
+import br.com.sidtmcafe.service.PasswordUtils;
+import br.com.sidtmcafe.service.ServiceError;
 import br.com.sidtmcafe.view.ViewLogin;
+import br.com.sidtmcafe.view.ViewPrincipal;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
@@ -68,14 +71,20 @@ public class ControllerLogin implements Initializable, FormularioModelo {
 
     @Override
     public void escutarTeclas() {
-        btnOK.setDisable(true);
         btnCancela.setOnAction(event -> {
             fechar(ViewLogin.getStage());
         });
+
+        btnOK.setDisable(true);
+        btnOK.setOnAction(event -> {
+            executaLogin((TabColaboradorVO) cboUsuarioLogin.getSelectionModel().getSelectedItem());
+        });
+
         cboUsuarioLogin.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
             if (n != o)
                 habilitarBotaoOK();
         });
+
         pswUsuarioSenha.textProperty().addListener((ov, o, n) -> {
             if (n != o)
                 habilitarBotaoOK();
@@ -92,4 +101,23 @@ public class ControllerLogin implements Initializable, FormularioModelo {
     void habilitarBotaoOK() {
         btnOK.setDisable((cboUsuarioLogin.getSelectionModel().getSelectedIndex() <= 0) || (pswUsuarioSenha.getText().length() == 0));
     }
+
+    void executaLogin(TabColaboradorVO colaboradorVO) {
+        boolean passwordMatch = PasswordUtils.verifyUserPassword(pswUsuarioSenha.getText(),
+                colaboradorVO.getSenha(), colaboradorVO.getSenhaSalt());
+        if (passwordMatch) {
+            fechar(ViewLogin.getStage());
+            new ViewPrincipal().openViewPrincipal();
+        } else {
+            tremeLogin();
+        }
+    }
+
+    void tremeLogin() {
+        ServiceError serviceError = new ServiceError();
+        serviceError.setStage(ViewLogin.getStage());
+        Thread thread = new Thread(serviceError);
+        thread.start();
+    }
+
 }

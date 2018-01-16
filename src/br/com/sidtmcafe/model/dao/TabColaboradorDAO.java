@@ -44,6 +44,7 @@ public class TabColaboradorDAO extends BuscaBandoDados {
                 colaboradorVO.setNome(rs.getString("nome"));
                 colaboradorVO.setApelido(rs.getString("apelido"));
                 colaboradorVO.setSenha(rs.getString("senha"));
+                colaboradorVO.setSenhaSalt(rs.getString("senhaSalt"));
 
                 colaboradorVO.setCargo_id(rs.getInt("cargo_id"));
                 colaboradorVO.setCargoVO(new TabCargoDAO().getCargoVO(colaboradorVO.getCargo_id()));

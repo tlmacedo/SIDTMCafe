@@ -12,7 +12,7 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
     TabLojaVO lojaVO;
 
     IntegerProperty id, cargo_id, loja_id, situacaoSistema_id;
-    StringProperty nome, apelido, senha, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids;
+    StringProperty nome, apelido, senha, senhaSalt, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids;
 
     public TabColaboradorVO() {
     }
@@ -122,6 +122,19 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
 
     public void setSenha(String senha) {
         senhaProperty().set(senha);
+    }
+
+    public String getSenhaSalt() {
+        return senhaSaltProperty().get();
+    }
+
+    public StringProperty senhaSaltProperty() {
+        if (senhaSalt == null) senhaSalt = new SimpleStringProperty("");
+        return senhaSalt;
+    }
+
+    public void setSenhaSalt(String senhaSalt) {
+        senhaSaltProperty().set(senhaSalt);
     }
 
     public String getEndereco_ids() {

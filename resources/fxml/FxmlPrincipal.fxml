@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXToolbar?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TreeView?>
@@ -9,38 +10,66 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1550.0" stylesheets="@../styles/min/sidtm.min.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.sidtmcafe.controller.ControllerPrincipal">
+<BorderPane fx:id="pnlViewPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="825.0" prefWidth="1550.0" stylesheets="@../styles/min/sidtm.min.css"
+            xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="br.com.sidtmcafe.controller.ControllerPrincipal">
     <bottom>
-        <JFXToolbar disable="true" layoutY="830.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="1550.0" BorderPane.alignment="BOTTOM_CENTER">
-         <left>
-            <Label text="StatusBar" BorderPane.alignment="CENTER" />
-         </left>
-         <center>
-            <Label text="StatusBar_Center" BorderPane.alignment="CENTER" />
-         </center></JFXToolbar>
+        <JFXToolbar fx:id="stbViewPrincipal" disable="true" layoutY="830.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                    minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="1550.0"
+                    BorderPane.alignment="BOTTOM_CENTER">
+            <left>
+                <Label text="StatusBar" BorderPane.alignment="CENTER"/>
+            </left>
+            <center>
+                <Label text="StatusBar_Center" BorderPane.alignment="CENTER"/>
+            </center>
+        </JFXToolbar>
     </bottom>
-   <center>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="1300.0" BorderPane.alignment="TOP_LEFT">
-         <children>
-            <JFXTabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="1300.0" tabMaxHeight="20.0" tabMinHeight="20.0" />
-            <ImageView fitHeight="805.0" fitWidth="1300.0" pickOnBounds="true" smooth="false" />
-         </children>
-      </AnchorPane>
-   </center>
-   <left>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="250.0" BorderPane.alignment="TOP_LEFT">
-         <children>
-            <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="250.0" text="Label" wrapText="true" />
-            <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="250.0">
-               <content>
-                  <AnchorPane prefHeight="805.0" prefWidth="250.0">
-                     <children>
-                        <TreeView maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="783.0" prefWidth="248.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </ScrollPane>
-         </children>
-      </AnchorPane>
-   </left>
+    <center>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                    prefHeight="805.0" prefWidth="1300.0" BorderPane.alignment="TOP_LEFT">
+            <children>
+                <JFXTabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                            prefHeight="805.0" prefWidth="1300.0" tabMaxHeight="20.0" tabMinHeight="20.0"/>
+                <ImageView fitHeight="805.0" fitWidth="1300.0" pickOnBounds="true" smooth="false"/>
+            </children>
+        </AnchorPane>
+    </center>
+    <left>
+        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                    prefHeight="805.0" prefWidth="250.0" BorderPane.alignment="TOP_LEFT">
+            <children>
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                       prefHeight="20.0" prefWidth="250.0" text="Label" wrapText="true"/>
+                <ImageView fx:id="btnRetraiMenuViewPrincipal" fitHeight="20.0" fitWidth="20.0" layoutX="193.0"
+                           pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="30.0"
+                           AnchorPane.topAnchor="0.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </ImageView>
+                <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true"
+                           AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </ImageView>
+                <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="20.0" maxHeight="-Infinity"
+                            maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0"
+                            prefWidth="250.0">
+                    <content>
+                        <AnchorPane prefHeight="805.0" prefWidth="250.0">
+                            <children>
+                                <TreeView fx:id="treeMenuViewPrincipal" maxHeight="-Infinity" maxWidth="-Infinity"
+                                          minHeight="-Infinity" minWidth="-Infinity" prefHeight="783.0"
+                                          prefWidth="248.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                                          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
+    </left>
 </BorderPane>

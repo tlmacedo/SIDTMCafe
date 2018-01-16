@@ -18,7 +18,8 @@ public class ViewPrincipal extends Application {
         return stage;
     }
 
-    public void openViewPrincipal(boolean abertoPeloSistema) {
+
+    public void openViewPrincipal() {
         stage = new Stage();
         Parent root;
         Scene scene = null;
@@ -35,26 +36,15 @@ public class ViewPrincipal extends Application {
         stage.getIcons().clear();
         stage.getIcons().add(new Image(this.getClass().getResource("/images/material-design-icons/hardware/1x_web/ic_security_black_18dp.png").toString()));
 
-        if (abertoPeloSistema) {
-            try {
-                stage.initModality(Modality.APPLICATION_MODAL);
-            } catch (Exception ex) {
-
-            } finally {
-                stage.showAndWait();
-            }
-        } else {
-            stage.show();
-        }
+        stage.show();
         ViewPrincipal.stage = stage;
-
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
         ViewPrincipal.stage = primaryStage;
 
-        openViewPrincipal(false);
+        openViewPrincipal();
     }
 
     public static void main(String[] args) {
