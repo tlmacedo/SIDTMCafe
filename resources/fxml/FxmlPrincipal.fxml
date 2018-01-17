@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
+<?import javafx.scene.control.TreeTableView?>
 <BorderPane fx:id="pnlViewPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="825.0" prefWidth="1550.0" stylesheets="@../styles/min/sidtm.min.css"
             xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1"
@@ -40,35 +41,40 @@
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
                     prefHeight="805.0" prefWidth="250.0" BorderPane.alignment="TOP_LEFT">
             <children>
-                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                       prefHeight="20.0" prefWidth="250.0" text="Label" wrapText="true"/>
-                <ImageView fx:id="btnRetraiMenuViewPrincipal" fitHeight="20.0" fitWidth="20.0" layoutX="193.0"
-                           pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="30.0"
-                           AnchorPane.topAnchor="0.0">
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                </ImageView>
-                <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="211.0" pickOnBounds="true" preserveRatio="true"
-                           AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
-                    <cursor>
-                        <Cursor fx:constant="HAND"/>
-                    </cursor>
-                </ImageView>
                 <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="20.0" maxHeight="-Infinity"
                             maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0"
                             prefWidth="250.0">
                     <content>
                         <AnchorPane prefHeight="805.0" prefWidth="250.0">
                             <children>
-                                <TreeView fx:id="treeMenuViewPrincipal" maxHeight="-Infinity" maxWidth="-Infinity"
-                                          minHeight="-Infinity" minWidth="-Infinity" prefHeight="783.0"
-                                          prefWidth="248.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                                <TreeTableView fx:id="treeMenuViewPrincipal" maxHeight="-Infinity" maxWidth="-Infinity"
+                                               minHeight="-Infinity" minWidth="-Infinity" prefHeight="783.0"
+                                               prefWidth="248.0" AnchorPane.bottomAnchor="0.0"
+                                               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                                               AnchorPane.topAnchor="0.0"/>
                             </children>
                         </AnchorPane>
                     </content>
                 </ScrollPane>
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                       prefHeight="20.0" prefWidth="250.0" styleClass="lbl_menu_principal" text="Menu Principal"
+                       wrapText="true"/>
+                <Label fx:id="btnExpandeMenuViewPrincipal" layoutX="193.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                       minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="true" prefHeight="18.0" prefWidth="18.0"
+                       styleClass="lbl_btn_expande_menu_view_principal" AnchorPane.rightAnchor="30.0"
+                       AnchorPane.topAnchor="1.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+                <Label fx:id="btnRetraiMenuViewPrincipal" layoutX="211.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                       minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="true" prefHeight="18.0" prefWidth="18.0"
+                       styleClass="lbl_btn_retrai_menu_view_principal" AnchorPane.rightAnchor="5.0"
+                       AnchorPane.topAnchor="1.0">
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
             </children>
         </AnchorPane>
     </left>

@@ -12,6 +12,14 @@
     -fx-alignment: Center;
   }
 
+  &.lbl_menu_principal {
+    -fx-padding: 0 10;
+    -fx-background-color: $sisColor_whiteblack;
+    -fx-text-fill: $sisColor_cafe-perfeito;
+    -fx-font-size: $fontSizeh4;
+    -fx-font-weight: bold;
+  }
+
   &.lbl_negrito {
     -fx-font-weight: bold;
   }
