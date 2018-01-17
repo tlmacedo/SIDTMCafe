@@ -1,91 +1,119 @@
-/*
-Error: Undefined variable: "$sisCaminhoIcones".
-        on line 2 of _imagem_icones.scss
-        from line 9 of sidtm.scss
+.certificado_digital {
+  -fx-background-color: #eeeceb;
+  -fx-background-size: cover;
+  -fx-background-image: url("/images/paineis/certificadosDigitais.png"); }
 
-1: // stilo principal
-2: @import "variaveis.scss";
-3: @import "fundo.scss";
-4: @import "comp_list-view.scss";
-5: @import "comp_label.scss";
-6: @import "comp_combo-box.scss";
-7: @import "comp_botao.scss";
+.login {
+  -fx-background-color: #eeeceb;
+  -fx-background-size: cover;
+  -fx-background-image: url("/images/paineis/login.png"); }
 
-Backtrace:
-_imagem_icones.scss:2
-sidtm.scss:9
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/script/tree/variable.rb:49:in `_perform'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/script/tree/node.rb:50:in `perform'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/script/tree/operation.rb:67:in `_perform'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/script/tree/node.rb:50:in `perform'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/script/tree/funcall.rb:186:in `perform_arg'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/script/tree/funcall.rb:133:in `block in _perform'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/script/tree/funcall.rb:133:in `each'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/script/tree/funcall.rb:133:in `each_with_index'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/script/tree/funcall.rb:133:in `each'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/script/tree/funcall.rb:133:in `map'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/script/tree/funcall.rb:133:in `_perform'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/script/tree/node.rb:50:in `perform'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:402:in `visit_prop'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:36:in `visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:79:in `block in with_base'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:135:in `with_frame'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:79:in `with_base'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:162:in `visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:444:in `block (2 levels) in visit_rule'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:444:in `map'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:444:in `block in visit_rule'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:442:in `visit_rule'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:36:in `visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:79:in `block in with_base'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:135:in `with_frame'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:79:in `with_base'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:162:in `visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:329:in `block (2 levels) in visit_import'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:329:in `map'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:329:in `block in visit_import'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:88:in `block in with_import'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:135:in `with_frame'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:88:in `with_import'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:326:in `visit_import'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:36:in `visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:162:in `block in visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:79:in `block in with_base'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:135:in `with_frame'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/stack.rb:79:in `with_base'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:162:in `visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:52:in `map'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:171:in `block in visit_children'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:183:in `with_environment'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:170:in `visit_children'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:190:in `visit_root'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/base.rb:36:in `visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:161:in `visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/visitors/perform.rb:10:in `visit'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/root_node.rb:36:in `css_tree'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/engine.rb:307:in `render_with_sourcemap'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:209:in `each'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/plugin.rb:82:in `update_stylesheets'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/exec/sass_scss.rb:340:in `watch_or_update'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/exec/sass_scss.rb:51:in `process_result'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/exec/base.rb:52:in `parse'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/lib/sass/exec/base.rb:19:in `parse!'
-/usr/local/lib/ruby/gems/2.5.0/gems/sass-3.5.5/bin/scss:13:in `<top (required)>'
-/usr/local/bin/scss:23:in `load'
-/usr/local/bin/scss:23:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Undefined variable: \"$sisCaminhoIcones\".\A         on line 2 of _imagem_icones.scss\A         from line 9 of sidtm.scss\A \A 1: // stilo principal\A 2: @import \"variaveis.scss\";\A 3: @import \"fundo.scss\";\A 4: @import \"comp_list-view.scss\";\A 5: @import \"comp_label.scss\";\A 6: @import \"comp_combo-box.scss\";\A 7: @import \"comp_botao.scss\";"; }
+.list-view:focused {
+  -fx-border-color: #ff6600; }
+
+.list-view {
+  -fx-background-color: -fx-box-border, -fx-control-inner-background; }
+
+.list-view .list-cell {
+  -fx-background-color: -fx-control-inner-background; }
+
+.list-view .list-cell:odd {
+  -fx-background-color: derive(-fx-control-inner-background, -12%); }
+
+.list-view .list-cell:filled:selected, .list-view .list-cell:filled:selected:hover {
+  -fx-background-color: -fx-selection-bar;
+  -fx-text-fill: -fx-selection-bar-text; }
+
+.list-view .list-cell:filled:hover {
+  -fx-background-color: -fx-cell-hover-color;
+  -fx-text-fill: -fx-text-inner-color; }
+
+.label {
+  -fx-font-family: sans-serif;
+  -fx-text-fill: #000000;
+  -fx-font-size: 10px;
+  -fx-font-style: normal; }
+  .label.lbl_titulo {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-alignment: Center; }
+  .label.lbl_menu_principal {
+    -fx-padding: 0 10;
+    -fx-background-color: #e9e9e9;
+    -fx-text-fill: #FF6600;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold; }
+  .label.lbl_negrito {
+    -fx-font-weight: bold; }
+  .label.lbl_h1 {
+    -fx-font-size: 24px; }
+  .label.lbl_h2 {
+    -fx-font-size: 22px; }
+  .label.lbl_h3 {
+    -fx-font-size: 18px; }
+  .label.lbl_h4 {
+    -fx-font-size: 16px; }
+  .label.lbl_h5 {
+    -fx-font-size: 12px; }
+  .label.lbl_h6 {
+    -fx-font-size: 10px; }
+
+.jfx-combo-box {
+  -fx-font-family: sans-serif;
+  -fx-text-fill: #000000;
+  -fx-font-size: 12px;
+  -fx-font-style: normal;
+  -jfx-focus-color: #FF6600;
+  -jfx-unfocus-color: #000000;
+  -jfx-label-float: true; }
+  .jfx-combo-box .label {
+    -fx-font-size: 12px; }
+
+.jfx-button {
+  -fx-max-height: 30px;
+  -fx-background-color: linear-gradient(#f2f2f2, #d6d6d6), linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%), linear-gradient(#dddddd 0%, #f6f6f6 50%);
+  -fx-background-radius: 8, 7, 6;
+  -fx-background-insets: 0, 1, 2;
+  -fx-text-fill: black;
+  -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.6), 5, 0, 0, 1); }
+  .jfx-button:hover {
+    -fx-background-color: #FF6600; }
+
+.btn_ok > .label {
+  -fx-graphic: url("/images/material-design-icons/action/1x_web/ic_check_circle_black_18dp.png"); }
+
+.btn_cancel > .label {
+  -fx-graphic: url("/images/material-design-icons/navigation/1x_web/ic_cancel_black_18dp.png"); }
+
+.jfx-password-field {
+  -fx-font-family: sans-serif;
+  -fx-text-fill: #000000;
+  -fx-font-size: 12px;
+  -fx-font-style: normal;
+  -jfx-focus-color: #FF6600;
+  -jfx-unfocus-color: #000000;
+  -jfx-label-float: true;
+  -fx-pref-height: 20px; }
+  .jfx-password-field .label {
+    -fx-font-size: 12px; }
+
+.usuario_login {
+  -fx-background-image: url("/images/material-design-icons/action/1x_web/ic_account_circle_black_24dp.png"); }
+
+.usuario_senha {
+  -fx-background-image: url("/images/material-design-icons/action/1x_web/ic_lock_black_24dp.png"); }
+
+.lbl_btn_retrai_menu_view_principal {
+  -fx-background-image: url("/images/material-design-icons/content/1x_web/ic_remove_circle_black_18dp.png"); }
+
+.lbl_btn_expande_menu_view_principal {
+  -fx-background-image: url("/images/material-design-icons/content/1x_web/ic_add_circle_black_18dp.png"); }
+
+.certificado_digital_valido {
+  -fx-text-fill: #0091ff; }
+
+.certificado_digital_invalido {
+  -fx-text-fill: #ff1c00; }
+
+/*# sourceMappingURL=sidtm.css.map */
