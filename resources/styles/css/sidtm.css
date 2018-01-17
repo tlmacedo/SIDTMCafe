@@ -1,12 +1,15 @@
+.lbl_img_fundo_principal {
+  -fx-background-image: url("/images/material-design-icons/../paineis/principal.png"); }
+
 .certificado_digital {
   -fx-background-color: #eeeceb;
   -fx-background-size: cover;
-  -fx-background-image: url("/images/paineis/certificadosDigitais.png"); }
+  -fx-background-image: url("/images/material-design-icons/../paineis/certificadosDigitais.png"); }
 
 .login {
   -fx-background-color: #eeeceb;
   -fx-background-size: cover;
-  -fx-background-image: url("/images/paineis/login.png"); }
+  -fx-background-image: url("/images/material-design-icons/../paineis/login.png"); }
 
 .list-view:focused {
   -fx-border-color: #ff6600; }

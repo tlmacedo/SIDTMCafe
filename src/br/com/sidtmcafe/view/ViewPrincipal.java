@@ -30,11 +30,11 @@ public class ViewPrincipal extends Application {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        stage.setTitle("Login.");
+        stage.setTitle("Principal");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.getIcons().clear();
-        stage.getIcons().add(new Image(this.getClass().getResource("/images/material-design-icons/hardware/1x_web/ic_security_black_18dp.png").toString()));
+        stage.getIcons().add(new Image(this.getClass().getResource("/images/icos/ic_xicara_cafe_black_18dp.png").toString()));
 
         stage.show();
         ViewPrincipal.stage = stage;

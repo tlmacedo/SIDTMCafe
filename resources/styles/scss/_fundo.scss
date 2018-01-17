@@ -1,12 +1,16 @@
 
+.lbl_img_fundo_principal {
+  -fx-background-image: url($sisPathIcones + "../paineis/principal.png");
+}
+
 .certificado_digital {
   -fx-background-color: #eeeceb;
   -fx-background-size: cover;
-  -fx-background-image: url("/images/paineis/certificadosDigitais.png");
+  -fx-background-image: url($sisPathIcones + "../paineis/certificadosDigitais.png");
 }
 
 .login {
   -fx-background-color: #eeeceb;
   -fx-background-size: cover;
-  -fx-background-image: url("/images/paineis/login.png");
+  -fx-background-image: url($sisPathIcones + "../paineis/login.png");
 }

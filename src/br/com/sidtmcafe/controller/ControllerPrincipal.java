@@ -1,5 +1,6 @@
 package br.com.sidtmcafe.controller;
 
+import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.SisMenuPrincipalDAO;
 import br.com.sidtmcafe.model.vo.SisMenuPrincipalVO;
@@ -14,7 +15,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ControllerPrincipal implements Initializable, FormularioModelo {
+public class ControllerPrincipal implements Initializable, FormularioModelo, Constants {
 
 
     public BorderPane pnlViewPrincipal;
@@ -78,7 +79,7 @@ public class ControllerPrincipal implements Initializable, FormularioModelo {
             if (icoMenu.equals("")) {
                 treeItems[idTemp] = new TreeItem(principalVO);
             } else {
-                treeItems[idTemp] = new TreeItem(principalVO, new ImageView("/images/material-design-icons/" + icoMenu));
+                treeItems[idTemp] = new TreeItem(principalVO, new ImageView(PATH_IMAGENS + icoMenu));
             }
             treeItems[idTemp].setExpanded(true);
             treeItems[filhoTemp].getChildren().add(treeItems[idTemp]);

@@ -17,14 +17,14 @@
 .btn_ok {
   > .label {
     //-fx-max-height: 30px;
-    -fx-graphic: url("/images/material-design-icons/action/1x_web/ic_check_circle_black_18dp.png");
+    -fx-graphic: url($sisPathIcones + "action/1x_web/ic_check_circle_black_18dp.png");
   }
 }
 
 .btn_cancel {
   > .label {
     //-fx-max-height: 30px;
-    -fx-graphic: url("/images/material-design-icons/navigation/1x_web/ic_cancel_black_18dp.png");
+    -fx-graphic: url($sisPathIcones + "navigation/1x_web/ic_cancel_black_18dp.png");
   }
 }
 
