@@ -13,7 +13,7 @@ public interface Constants {
     String BD_URL = BD_DRIVER_CONN + BD_HOST + BD_PORTA + BD_DATABASE + "?useSSL=true";
 
 
-    String PATH_IMAGENS = "/images/material-design-icons/";
+    String PATH_IMAGENS = "/images/icos/";
     String TIME_ZONE = "America/Manaus";
     String TOKEN_DIRETORIO_BIBLIOTECA = "/certificados";
     String TOKEN_EXTENSAO_BIBLIOTECA = "cfg";

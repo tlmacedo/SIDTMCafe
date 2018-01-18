@@ -33,7 +33,7 @@ public class ViewLogin extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.getIcons().clear();
-        stage.getIcons().add(new Image(this.getClass().getResource("/images/material-design-icons/hardware/1x_web/ic_security_black_18dp.png").toString()));
+        stage.getIcons().add(new Image(this.getClass().getResource("/images/icos/ic_security_black_24dp.png").toString()));
 
         if (abertoPeloSistema) {
             try {

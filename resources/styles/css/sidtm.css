@@ -1,15 +1,15 @@
 .lbl_img_fundo_principal {
-  -fx-background-image: url("/images/material-design-icons/../paineis/principal.png"); }
+  -fx-background-image: url("/images/icos/../paineis/principal.png"); }
 
 .certificado_digital {
   -fx-background-color: #eeeceb;
   -fx-background-size: cover;
-  -fx-background-image: url("/images/material-design-icons/../paineis/certificadosDigitais.png"); }
+  -fx-background-image: url("/images/icos/../paineis/certificadosDigitais.png"); }
 
 .login {
   -fx-background-color: #eeeceb;
   -fx-background-size: cover;
-  -fx-background-image: url("/images/material-design-icons/../paineis/login.png"); }
+  -fx-background-image: url("/images/icos/../paineis/login.png"); }
 
 .list-view:focused {
   -fx-border-color: #ff6600; }
@@ -84,10 +84,10 @@
     -fx-background-color: #FF6600; }
 
 .btn_ok > .label {
-  -fx-graphic: url("/images/material-design-icons/action/1x_web/ic_check_circle_black_18dp.png"); }
+  -fx-graphic: url("/images/icos/ic_check_circulo_black_24dp.png"); }
 
 .btn_cancel > .label {
-  -fx-graphic: url("/images/material-design-icons/navigation/1x_web/ic_cancel_black_18dp.png"); }
+  -fx-graphic: url("/images/icos/ic_cancel_circulo_black_24dp.png"); }
 
 .jfx-password-field {
   -fx-font-family: sans-serif;
@@ -102,16 +102,16 @@
     -fx-font-size: 12px; }
 
 .usuario_login {
-  -fx-background-image: url("/images/material-design-icons/action/1x_web/ic_account_circle_black_24dp.png"); }
+  -fx-background-image: url("/images/icos/ic_usuario_circulo_black_24dp.png"); }
 
 .usuario_senha {
-  -fx-background-image: url("/images/material-design-icons/action/1x_web/ic_lock_black_24dp.png"); }
+  -fx-background-image: url("/images/icos/ic_password_black_24dp.png"); }
 
 .lbl_btn_retrai_menu_view_principal {
-  -fx-background-image: url("/images/material-design-icons/content/1x_web/ic_remove_circle_black_18dp.png"); }
+  -fx-background-image: url("/images/icos/ic_remove_quadrado_black_24dp.png"); }
 
 .lbl_btn_expande_menu_view_principal {
-  -fx-background-image: url("/images/material-design-icons/content/1x_web/ic_add_circle_black_18dp.png"); }
+  -fx-background-image: url("/images/icos/ic_adiciona_quadrado_black_24dp.png"); }
 
 .certificado_digital_valido {
   -fx-text-fill: #0091ff; }
