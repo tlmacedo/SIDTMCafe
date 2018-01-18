@@ -33,8 +33,8 @@ public class ControllerLogin implements Initializable, FormularioModelo, Constan
     public JFXButton btnOK;
 
     @Override
-    public void fechar(Stage stage) {
-        stage.close();
+    public void fechar() {
+        ViewLogin.getStage().close();
     }
 
     @Override
@@ -89,7 +89,7 @@ public class ControllerLogin implements Initializable, FormularioModelo, Constan
         });
 
         btnCancela.setOnAction(event -> {
-            fechar(ViewLogin.getStage());
+            fechar();
         });
 
         btnOK.setDisable(true);
@@ -124,7 +124,7 @@ public class ControllerLogin implements Initializable, FormularioModelo, Constan
                 colaboradorVO.getSenha(), colaboradorVO.getSenhaSalt());
         if (passwordMatch) {
             criarVariaveisSistema_UsuarioLogado(colaboradorVO);
-            fechar(ViewLogin.getStage());
+            fechar();
             new ViewPrincipal().openViewPrincipal();
         } else {
             tremeLogin();

@@ -4,20 +4,26 @@ import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.SisMenuPrincipalDAO;
 import br.com.sidtmcafe.model.vo.SisMenuPrincipalVO;
+import br.com.sidtmcafe.view.ViewPrincipal;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableView;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class ControllerPrincipal implements Initializable, FormularioModelo, Constants {
 
-    public BorderPane pnlViewPrincipal;
+    public BorderPane painelViewPrincipal;
     public JFXToolbar stbViewPrincipal;
     public Label btnRetraiMenuViewPrincipal;
     public Label btnExpandeMenuViewPrincipal;
@@ -28,8 +34,8 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
     TreeTableColumn<SisMenuPrincipalVO, String> colunaAtalho;
 
     @Override
-    public void fechar(Stage stage) {
-
+    public void fechar() {
+        ViewPrincipal.getStage().close();
     }
 
     @Override
@@ -44,12 +50,20 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
 
     @Override
     public void escutarTeclas() {
-
+        painelViewPrincipal.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                System.out.println("apertou escape");
+                if (sairSistema())
+                    fechar();
+            }
+        });
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         preencherObjetos();
+        fatorarObjetos();
+        escutarTeclas();
     }
 
     void preencheMenuItem() {
@@ -87,5 +101,11 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
         viewPrincipal_StatusBarLeft.setText(System.getProperty("USUARIO_LOGADO_NOME"));
 
 
+    }
+
+    boolean sairSistema() {
+        System.out.println("pedindo pra sair");
+        JOptionPane.showMessageDialog(null, "thank you for using java");
+        return true;
     }
 }

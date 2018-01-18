@@ -4,7 +4,7 @@ import javafx.stage.Stage;
 
 public interface FormularioModelo {
 
-    public void fechar(Stage stage);
+    public void fechar();
 
     public void preencherObjetos();
 
