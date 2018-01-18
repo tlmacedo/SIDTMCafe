@@ -1,5 +1,6 @@
 package br.com.sidtmcafe.controller;
 
+import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.TabColaboradorDAO;
 import br.com.sidtmcafe.model.vo.TabColaboradorVO;
@@ -13,13 +14,19 @@ import com.jfoenix.controls.JFXPasswordField;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.ResourceBundle;
 
-public class ControllerLogin implements Initializable, FormularioModelo {
+public class ControllerLogin implements Initializable, FormularioModelo, Constants {
+    public AnchorPane painelViewLogin;
     public JFXComboBox cboUsuarioLogin;
     public JFXPasswordField pswUsuarioSenha;
     public JFXButton btnCancela;
@@ -71,6 +78,16 @@ public class ControllerLogin implements Initializable, FormularioModelo {
 
     @Override
     public void escutarTeclas() {
+        painelViewLogin.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            if (event.getCode() == KeyCode.ENTER & btnOK.isDisable()) {
+                if (cboUsuarioLogin.isFocused()) {
+                    pswUsuarioSenha.requestFocus();
+                } else {
+                    cboUsuarioLogin.requestFocus();
+                }
+            }
+        });
+
         btnCancela.setOnAction(event -> {
             fechar(ViewLogin.getStage());
         });
@@ -106,6 +123,7 @@ public class ControllerLogin implements Initializable, FormularioModelo {
         boolean passwordMatch = PasswordUtils.verifyUserPassword(pswUsuarioSenha.getText(),
                 colaboradorVO.getSenha(), colaboradorVO.getSenhaSalt());
         if (passwordMatch) {
+            criarVariaveisSistema_UsuarioLogado(colaboradorVO);
             fechar(ViewLogin.getStage());
             new ViewPrincipal().openViewPrincipal();
         } else {
@@ -120,4 +138,12 @@ public class ControllerLogin implements Initializable, FormularioModelo {
         thread.start();
     }
 
+    void criarVariaveisSistema_UsuarioLogado(TabColaboradorVO colaboradorVO) {
+        System.setProperty("USUARIO_LOGADO_ID", String.valueOf(colaboradorVO.getId()));
+        System.setProperty("USUARIO_LOGADO_NOME", colaboradorVO.getNome());
+        System.setProperty("USUARIO_LOGADO_APELIDO", colaboradorVO.getApelido());
+        System.setProperty("USUARIO_LOGADO_DATA", DATAHORA_LOCAL.format(DTFORMAT_DATA));
+        System.setProperty("USUARIO_LOGADO_HORA", DATAHORA_LOCAL.format(DTFORMAT_HORA));
+
+    }
 }

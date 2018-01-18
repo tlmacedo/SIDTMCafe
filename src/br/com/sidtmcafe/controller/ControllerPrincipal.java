@@ -17,12 +17,12 @@ import java.util.ResourceBundle;
 
 public class ControllerPrincipal implements Initializable, FormularioModelo, Constants {
 
-
     public BorderPane pnlViewPrincipal;
     public JFXToolbar stbViewPrincipal;
     public Label btnRetraiMenuViewPrincipal;
     public Label btnExpandeMenuViewPrincipal;
     public TreeTableView treeMenuViewPrincipal;
+    public Label viewPrincipal_StatusBarLeft;
 
     TreeTableColumn<SisMenuPrincipalVO, String> colunaItem;
     TreeTableColumn<SisMenuPrincipalVO, String> colunaAtalho;
@@ -53,12 +53,6 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
     }
 
     void preencheMenuItem() {
-        /*colunaRazao = new JFXTreeTableColumn<EmpresasVO, String>();
-        colunaRazao.setPrefWidth(200);
-        Label labelRazao = new Label("Razão / Nome");
-        labelRazao.setPrefWidth(200);
-        colunaRazao.setGraphic(labelRazao);
-        colunaRazao.setCellValueFactory(param -> param.getValue().getValue().razaoProperty());*/
 
         colunaItem = new TreeTableColumn<SisMenuPrincipalVO, String>();
         colunaItem.setPrefWidth(250);
@@ -88,5 +82,10 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
         treeMenuViewPrincipal.getColumns().setAll(colunaItem, colunaAtalho);
         treeMenuViewPrincipal.setRoot(treeItems[0]);
         treeMenuViewPrincipal.setShowRoot(false);
+
+
+        viewPrincipal_StatusBarLeft.setText(System.getProperty("USUARIO_LOGADO_NOME"));
+
+
     }
 }

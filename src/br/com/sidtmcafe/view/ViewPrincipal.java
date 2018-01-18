@@ -1,5 +1,6 @@
 package br.com.sidtmcafe.view;
 
+import br.com.sidtmcafe.interfaces.Constants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ViewPrincipal extends Application {
+public class ViewPrincipal extends Application implements Constants {
 
     private static Stage stage;
 
@@ -25,7 +26,7 @@ public class ViewPrincipal extends Application {
         Scene scene = null;
 
         try {
-            root = FXMLLoader.load(getClass().getResource("/fxml/FxmlPrincipal.fxml"));
+            root = FXMLLoader.load(getClass().getResource(PATH_FXML + "FxmlPrincipal.fxml"));
             scene = new Scene(root);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -34,7 +35,7 @@ public class ViewPrincipal extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.getIcons().clear();
-        stage.getIcons().add(new Image(this.getClass().getResource("/images/icos/ic_xicara_cafe_black_18dp.png").toString()));
+        stage.getIcons().add(new Image(this.getClass().getResource(PATH_IMAGENS + "ic_grao_cafe_black_24dp.png").toString()));
 
         stage.show();
         ViewPrincipal.stage = stage;

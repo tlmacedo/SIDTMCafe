@@ -101,6 +101,32 @@
   .jfx-password-field .label {
     -fx-font-size: 12px; }
 
+.jfx-tool-bar {
+  /*-fx-background-color: #0091ff;*/
+  -fx-alignment: center; }
+
+.jfx-tool-bar.viewPrincipal_StatusBarLeft {
+  -fx-padding: 2px 10px;
+  -fx-alignment: center-left;
+  -fx-background-color: transparent;
+  -fx-font-family: sans-serif;
+  -fx-text-fill: #000000;
+  -fx-font-size: 12px; }
+.jfx-tool-bar.viewPrincipal_StatusBarCenter {
+  -fx-padding: 0px 20px;
+  -fx-alignment: center;
+  -fx-background-color: transparent;
+  -fx-font-family: sans-serif;
+  -fx-text-fill: #000000;
+  -fx-font-size: 12px; }
+.jfx-tool-bar.viewPrincipal_StatusBarRight {
+  -fx-padding: 0px 20px;
+  -fx-alignment: center-right;
+  -fx-background-color: transparent;
+  -fx-font-family: sans-serif;
+  -fx-text-fill: #000000;
+  -fx-font-size: 10px; }
+
 .usuario_login {
   -fx-background-image: url("/images/icos/ic_usuario_circulo_black_24dp.png"); }
 

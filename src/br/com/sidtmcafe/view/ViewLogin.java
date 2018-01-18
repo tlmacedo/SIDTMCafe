@@ -1,5 +1,6 @@
 package br.com.sidtmcafe.view;
 
+import br.com.sidtmcafe.interfaces.Constants;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ViewLogin extends Application {
+public class ViewLogin extends Application implements Constants {
 
     private static Stage stage;
 
@@ -24,16 +25,16 @@ public class ViewLogin extends Application {
         Scene scene = null;
 
         try {
-            root = FXMLLoader.load(getClass().getResource("/fxml/FxmlLogin.fxml"));
+            root = FXMLLoader.load(getClass().getResource(PATH_FXML + "FxmlLogin.fxml"));
             scene = new Scene(root);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        stage.setTitle("Login.");
+        stage.setTitle("Login");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.getIcons().clear();
-        stage.getIcons().add(new Image(this.getClass().getResource("/images/icos/ic_security_black_24dp.png").toString()));
+        stage.getIcons().add(new Image(this.getClass().getResource(PATH_IMAGENS + "ic_security_black_24dp.png").toString()));
 
         if (abertoPeloSistema) {
             try {

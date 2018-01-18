@@ -9,15 +9,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="pnlViewPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1550.0" stylesheets="@../styles/min/sidtm.min.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.sidtmcafe.controller.ControllerPrincipal">
+<BorderPane fx:id="painelViewPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1550.0" stylesheets="@../styles/min/sidtm.min.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.sidtmcafe.controller.ControllerPrincipal">
     <bottom>
         <JFXToolbar fx:id="stbViewPrincipal" disable="true" layoutY="830.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="1550.0" BorderPane.alignment="BOTTOM_CENTER">
             <left>
-                <Label text="StatusBar" BorderPane.alignment="CENTER" />
+                <Label fx:id="viewPrincipal_StatusBarLeft" prefHeight="18.0" prefWidth="250.0" styleClass="viewPrincipal_StatusBarLeft" text="StatusBar_Left" BorderPane.alignment="CENTER" />
             </left>
             <center>
-                <Label text="StatusBar_Center" BorderPane.alignment="CENTER" />
+                <Label fx:id="viewPrincipal_StatusBarCenter" prefHeight="18.0" prefWidth="1067.0" styleClass="viewPrincipal_StatusBarCenter" text="StatusBar_Center" BorderPane.alignment="CENTER" />
             </center>
+         <right>
+            <Label fx:id="viewPrincipal_StatusBarRight" prefHeight="18.0" prefWidth="213.0" styleClass="viewPrincipal_StatusBarRight" text="Label" BorderPane.alignment="CENTER" />
+         </right>
         </JFXToolbar>
     </bottom>
     <center>
@@ -31,7 +34,7 @@
     <left>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="250.0" BorderPane.alignment="TOP_LEFT">
             <children>
-                <ScrollPane fitToHeight="true" fitToWidth="true" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="785.0" prefWidth="250.0">
+                <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="250.0">
                     <content>
                         <AnchorPane prefHeight="805.0" prefWidth="250.0">
                             <children>
@@ -40,13 +43,13 @@
                         </AnchorPane>
                     </content>
                 </ScrollPane>
-                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="250.0" styleClass="lbl_menu_principal" text="Menu Principal" wrapText="true" />
-                <Label fx:id="btnExpandeMenuViewPrincipal" layoutX="193.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="true" prefHeight="18.0" prefWidth="18.0" styleClass="lbl_btn_expande_menu_view_principal" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="1.0">
+                <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="250.0" styleClass="lbl_menu_principal" text="Menu Principal" wrapText="true" />
+                <Label fx:id="btnExpandeMenuViewPrincipal" layoutX="193.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="true" prefHeight="24.0" prefWidth="24.0" styleClass="lbl_btn_expande_menu_view_principal" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="1.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Label>
-                <Label fx:id="btnRetraiMenuViewPrincipal" layoutX="211.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="true" prefHeight="18.0" prefWidth="18.0" styleClass="lbl_btn_retrai_menu_view_principal" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="1.0">
+                <Label fx:id="btnRetraiMenuViewPrincipal" layoutX="211.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="true" prefHeight="24.0" prefWidth="24.0" styleClass="lbl_btn_retrai_menu_view_principal" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="1.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
