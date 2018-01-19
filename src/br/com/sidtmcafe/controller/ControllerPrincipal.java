@@ -103,9 +103,9 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
     boolean sairSistema() {
 
         if (new AlertMensagem("Sair do sistema",
-                System.getProperty("USUARIO_LOGADO_NOME")
+                System.getProperty("USUARIO_LOGADO_APELIDO")
                         + ", deseja sair do sistema?", PATH_IMAGENS
-                + "ic_sair_sistema_black_32dp.png").getRetornoAlert_YES_NO().get() == ButtonType.YES)
+                + "ic_sair_sistema_white_32dp.png").getRetornoAlert_YES_NO().get() == ButtonType.YES)
             return true;
         return false;
     }

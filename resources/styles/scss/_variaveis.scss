@@ -1,5 +1,24 @@
 $sisPathIcones: "/images/icos/";
 
+$painelViewLogin: $sisPathIcones + "../paineis/login.png";
+$painelViewPrincipal: $sisPathIcones + "../paineis/principal.png";
+$painelViewCertificadoDigital: $sisPathIcones + "../paineis/certificadosDigitais.png";
+$painelDialogPane: $sisPathIcones + "../paineis/dialogPane.png";
+$painelDialogPane_YES_NO: $sisPathIcones + "../paineis/dialogPane_yes_no.png";
+
+$sisHeightDialogPane: 150px;
+$sisWidthDialogPane: 570px;
+$sisHeightDialogPane_YES_NO: 150px;
+$sisWidthDialogPane_YES_NO: 570px;
+
+$icoBotaoOK: $sisPathIcones + "ic_check_circulo_black_24dp.png";
+$icoBotaoCancel: $sisPathIcones + "ic_cancel_circulo_black_24dp.png";
+
+$icoUsuarioLogin: $sisPathIcones + "ic_usuario_circulo_black_24dp.png";
+$icoSenha: $sisPathIcones + "ic_password_black_24dp.png";
+$icoCirculoNegativo: $sisPathIcones + "ic_remove_quadrado_black_24dp.png";
+$icoCirculoPositivo: $sisPathIcones + "ic_adiciona_quadrado_black_24dp.png";
+
 $sisColor_transparent: transparent;
 $sisColor_cafe-perfeito: #FF6600;
 $sisColor_red: #F44336;

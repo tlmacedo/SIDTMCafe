@@ -17,14 +17,14 @@
 .btn_ok {
   > .label {
     //-fx-max-height: 30px;
-    -fx-graphic: url($sisPathIcones + "ic_check_circulo_black_24dp.png");
+    -fx-graphic: url($icoBotaoOK);
   }
 }
 
 .btn_cancel {
   > .label {
     //-fx-max-height: 30px;
-    -fx-graphic: url($sisPathIcones + "ic_cancel_circulo_black_24dp.png");
+    -fx-graphic: url($icoBotaoCancel);
   }
 }
 

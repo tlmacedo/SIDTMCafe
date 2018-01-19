@@ -1,5 +1,67 @@
 .dialog-pane {
-  -fx-pref-width: 570px;
-  -fx-pref-height: 150px;
-  -fx-background-color: $sisColor_black;
+  -fx-pref-width: $sisWidthDialogPane;
+  -fx-pref-height: $sisHeightDialogPane;
+  -fx-background-color: $sisColor_transparent;
+  -fx-background-image: url($painelDialogPane);
+
+  .yes_no {
+    -fx-pref-width: $sisWidthDialogPane_YES_NO;
+    -fx-pref-height: $sisHeightDialogPane_YES_NO;
+    -fx-background-image: url($painelDialogPane_YES_NO);
+  }
+
+  > .header-panel {
+    -fx-background-color: $sisColor_transparent;
+    .label {
+      -fx-text-fill: $sisColor_white;
+      -fx-font-size: $fontSizeh4;
+      -fx-font-weight: bold;
+      -fx-font-style: italic;
+    }
+  }
+  > .content {
+    .label {
+      -fx-text-fill: $sisColor_black;
+      -fx-font-size: $fontSizeh2;
+      -fx-font-weight: bold;
+    }
+
+    //.jfx-text-area {
+    //  -fx-font-family: monospace;
+    //  -fx-font-style: normal;
+    //  -fx-text-fill: $sisColor_black;
+    //  -fx-font-size: $fontSizeh6;
+    //
+    //  -jfx-focus-color: $sisColor_transparent;
+    //  -jfx-unfocus-color: $sisColor_transparent;
+    //  -jfx-label-float: true;
+    //}
+
+    //.jfx-combo-box {
+    //  -fx-font-family: sans-serif;
+    //  -fx-font-style: normal;
+    //  -fx-text-fill: $sisColor_black;
+    //  -fx-font-size: $fontSizeh5;
+    //
+    //  -jfx-focus-color: $corJFX-Focus;
+    //  -jfx-unfocus-color: $corJFX-Unforcus;
+    //  -jfx-label-float: true;
+    //}
+
+    //.jfx-text-field {
+    //  -fx-font-family: sans-serif;
+    //  -fx-font-style: normal;
+    //  -fx-text-fill: $sisColor_black;
+    //  -fx-font-size: $fontSizeh5;
+    //
+    //  -jfx-focus-color: $corJFX-Focus;
+    //  -jfx-unfocus-color: $corJFX-Unforcus;
+    //  -jfx-label-float: true;
+    //}
+  }
+
+  .button-bar {
+    -fx-background-color: $sisColor_transparent;
+  }
 }
+
