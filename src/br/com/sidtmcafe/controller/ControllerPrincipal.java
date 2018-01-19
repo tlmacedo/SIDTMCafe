@@ -1,5 +1,6 @@
 package br.com.sidtmcafe.controller;
 
+import br.com.sidtmcafe.componentes.AlertMensagem;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.SisMenuPrincipalDAO;
@@ -7,10 +8,7 @@ import br.com.sidtmcafe.model.vo.SisMenuPrincipalVO;
 import br.com.sidtmcafe.view.ViewPrincipal;
 import com.jfoenix.controls.JFXToolbar;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -51,8 +49,7 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
     @Override
     public void escutarTeclas() {
         painelViewPrincipal.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
-            if (event.getCode() == KeyCode.ESCAPE) {
-                System.out.println("apertou escape");
+            if (event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.F12) {
                 if (sairSistema())
                     fechar();
             }
@@ -104,8 +101,12 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
     }
 
     boolean sairSistema() {
-        System.out.println("pedindo pra sair");
-        JOptionPane.showMessageDialog(null, "thank you for using java");
-        return true;
+
+        if (new AlertMensagem("Sair do sistema",
+                System.getProperty("USUARIO_LOGADO_NOME")
+                        + ", deseja sair do sistema?", PATH_IMAGENS
+                + "ic_sair_sistema_black_32dp.png").getRetornoAlert_YES_NO().get() == ButtonType.YES)
+            return true;
+        return false;
     }
 }

@@ -17,6 +17,7 @@ public interface Constants {
     String BD_URL = BD_DRIVER_CONN + BD_HOST + BD_PORTA + BD_DATABASE + "?useSSL=true";
 
 
+    String STYLESHEETS = "/styles/min/sidtm.min.css";
     String PATH_IMAGENS = "/images/icos/";
     String PATH_FXML = "/fxml/";
     String PATH_TOKEN_BIBLIOTECA = "/certificados";
