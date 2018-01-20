@@ -4,13 +4,7 @@
   -fx-background-color: $sisColor_transparent;
   -fx-background-image: url($painelDialogPane);
 
-  .yes_no {
-    -fx-pref-width: $sisWidthDialogPane_YES_NO;
-    -fx-pref-height: $sisHeightDialogPane_YES_NO;
-    -fx-background-image: url($painelDialogPane_YES_NO);
-  }
-
-  > .header-panel {
+  .header-panel {
     -fx-background-color: $sisColor_transparent;
     .label {
       -fx-text-fill: $sisColor_white;
@@ -19,10 +13,10 @@
       -fx-font-style: italic;
     }
   }
-  > .content {
-    .label {
+  .content {
+    &.label {
       -fx-text-fill: $sisColor_black;
-      -fx-font-size: $fontSizeh2;
+      -fx-font-size: $fontSizeh5;
       -fx-font-weight: bold;
     }
 
@@ -63,5 +57,12 @@
   .button-bar {
     -fx-background-color: $sisColor_transparent;
   }
+
+  .yes_no {
+    -fx-pref-width: $sisWidthDialogPane_YES_NO;
+    -fx-pref-height: $sisHeightDialogPane_YES_NO;
+    -fx-background-image: url($painelDialogPane_YES_NO);
+  }
+
 }
 

@@ -90,7 +90,6 @@ public class AlertMensagem implements Constants {
     void addStyleDialogPane(String styleAdd) {
         dialogPane = dialog.getDialogPane();
         dialogPane.getStylesheets().add(STYLESHEETS);
-        //dialogPane.getStyleClass().add("dialog-pane");
         if (styleAdd != "")
             dialogPane.getStyleClass().add(styleAdd);
         dialog.initStyle(StageStyle.UNDECORATED);
@@ -112,12 +111,10 @@ public class AlertMensagem implements Constants {
         botaoNo = (Button) dialog.getDialogPane().lookupButton(ButtonType.NO);
         botaoNo.setCancelButton(true);
         botaoNo.setDefaultButton(false);
-        System.out.println("StyleClass: " + dialogPane.getStyleClass().toString());
 
         dialog.setResultConverter(new Callback() {
             @Override
             public Object call(Object param) {
-                System.out.println("param: " + param);
                 if (param == ButtonType.YES)
                     return ButtonType.YES;
                 return ButtonType.NO;
