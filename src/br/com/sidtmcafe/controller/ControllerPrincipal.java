@@ -8,6 +8,9 @@ import br.com.sidtmcafe.model.vo.SisMenuPrincipalVO;
 import br.com.sidtmcafe.view.ViewPrincipal;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXToolbar;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -17,8 +20,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.util.Duration;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -145,19 +151,36 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
         Label stbUsuarioLogado = new Label("Usuário: " + System.getProperty("USUARIO_LOGADO_APELIDO") + " [" + System.getProperty("USUARIO_LOGADO_ID") + "]");
         stbUsuarioLogado.getStyleClass().add("status-bar-usuario-logado");
 
-        Label stbCentral = new Label("");
+        Label stbTeclasTela = new Label("F1-NNOVO  F2-INCLUIR  F3-EXCLUIR  F4-EDITAR  F5-ATUALIZAR  F7-PESQUISAR  F12-SAIR");
 
-        statusBar_ViewPrincipal.getLeftItems().setAll(stbUsuarioLogado, stbCentral);
+        statusBar_ViewPrincipal.getLeftItems().setAll(stbUsuarioLogado, stbTeclasTela);
 
-        Label stbDataBase = new Label("logado: " + horarioLog + " ["
-                + BD_DATABASE_STB + "]");
+        Label stbDataBase = new Label("banco de dados: [" + BD_DATABASE_STB
+                + "]   horario_log: " + horarioLog);
         stbDataBase.getStyleClass().add("status-bar-database");
+
+        Tooltip tooltipDetalhesLog = new Tooltip(stbDataBase.getText());
+        tooltipDetalhesLog.getStyleClass().add("tool-tip-hora-view-principal");
 
         Label stbIcoRelogio = new Label("");
         stbIcoRelogio.getStyleClass().add("ico-relogio");
 
-        statusBar_ViewPrincipal.getRightItems().setAll(stbDataBase, stbIcoRelogio);
+        Label stbHora = new Label(horarioLog);
+        stbHora.getStyleClass().setAll("hora");
+        stbHora.setTooltip(tooltipDetalhesLog);
 
+        statusBar_ViewPrincipal.getRightItems().setAll(stbIcoRelogio, stbHora);
+
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(1000), event -> {
+            String hora = LocalTime.now().format(DTFORMAT_HORA);
+            stbHora.setText(hora);
+            statusBar_ViewPrincipal.getRightItems().set(1, stbHora);
+        }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+
+        //statusBar_ViewPrincipal.getCenter().
 
     }
 

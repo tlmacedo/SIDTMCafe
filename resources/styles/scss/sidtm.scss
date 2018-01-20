@@ -9,6 +9,7 @@
 @import "comp_status_bar";
 @import "imagem_icones.scss";
 @import "comp_dialog_pane.scss";
+@import "comp_tooltip";
 
 .certificado_digital_valido {
   -fx-text-fill: $sisCorCertValido;

@@ -1,7 +1,3 @@
-.jfx-tool-bar {
-  /*-fx-background-color: #0091ff;*/
-  -fx-alignment: center;
-}
 
 .jfx-tool-bar {
   -fx-background-color: $sisColor_transparent;
@@ -11,18 +7,26 @@
   -fx-alignment: center-left;
 
   .ico-relogio {
-    -fx-background-repeat: no-repeat;
-    -fx-padding: 1 20 1 10;
-    -fx-font-size: 20px;
+    -fx-padding: 1 10;
+    -fx-font-size: $fontSizeh3;
     -fx-alignment: center;
     -fx-background-image: url($icoRelogio);
+    -fx-background-repeat: no-repeat;
   }
+
+  .hora {
+    -fx-padding: 2;
+    -fx-font-size: $fontSizeh5;
+    -fx-alignment: center;
+  }
+
   .status-bar-usuario-logado {
     -fx-padding: 2 10;
     -fx-font-size: $fontSizeh5;
   }
+
   .status-bar-database {
-    -fx-padding: 4 0 0 0;
+    -fx-padding: 2 0;
     -fx-alignment: center;
     -fx-font-size: $fontSizeh6;
   }
