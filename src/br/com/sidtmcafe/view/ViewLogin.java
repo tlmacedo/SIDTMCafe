@@ -33,8 +33,9 @@ public class ViewLogin extends Application implements Constants {
         stage.setTitle("Login");
         stage.setResizable(false);
         stage.setScene(scene);
-        stage.getIcons().clear();
-        stage.getIcons().add(new Image(this.getClass().getResource(PATH_IMAGENS + "ic_security_black_24dp.png").toString()));
+        stage.getIcons().setAll(new Image(this.getClass().getResource(PATH_IMAGENS + "ic_security_black_24dp.png").toString()));
+        scene.getStylesheets().setAll(STYLE_SHEETS);
+        scene.getRoot().getStyleClass().add("login");
 
         if (abertoPeloSistema) {
             try {

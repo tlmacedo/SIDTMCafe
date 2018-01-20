@@ -105,27 +105,25 @@
   /*-fx-background-color: #0091ff;*/
   -fx-alignment: center; }
 
-.jfx-tool-bar.viewPrincipal_StatusBarLeft {
-  -fx-padding: 2px 10px;
-  -fx-alignment: center-left;
+.jfx-tool-bar {
   -fx-background-color: transparent;
   -fx-font-family: sans-serif;
   -fx-text-fill: #000000;
-  -fx-font-size: 12px; }
-.jfx-tool-bar.viewPrincipal_StatusBarCenter {
-  -fx-padding: 0px 20px;
-  -fx-alignment: center;
-  -fx-background-color: transparent;
-  -fx-font-family: sans-serif;
-  -fx-text-fill: #000000;
-  -fx-font-size: 12px; }
-.jfx-tool-bar.viewPrincipal_StatusBarRight {
-  -fx-padding: 0px 20px;
-  -fx-alignment: center-right;
-  -fx-background-color: transparent;
-  -fx-font-family: sans-serif;
-  -fx-text-fill: #000000;
-  -fx-font-size: 10px; }
+  -fx-font-size: 10px;
+  -fx-alignment: center-left; }
+  .jfx-tool-bar .ico-relogio {
+    -fx-background-repeat: no-repeat;
+    -fx-padding: 1 20 1 10;
+    -fx-font-size: 20px;
+    -fx-alignment: center;
+    -fx-background-image: url("/images/icos/ic_relogio_orange_18dp.png"); }
+  .jfx-tool-bar .status-bar-usuario-logado {
+    -fx-padding: 2 10;
+    -fx-font-size: 12px; }
+  .jfx-tool-bar .status-bar-database {
+    -fx-padding: 4 0 0 0;
+    -fx-alignment: center;
+    -fx-font-size: 10px; }
 
 .usuario_login {
   -fx-background-image: url("/images/icos/ic_usuario_circulo_black_24dp.png"); }

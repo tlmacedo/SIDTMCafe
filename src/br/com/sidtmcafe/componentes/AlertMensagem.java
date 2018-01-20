@@ -89,7 +89,7 @@ public class AlertMensagem implements Constants {
 
     void addStyleDialogPane(String styleAdd) {
         dialogPane = dialog.getDialogPane();
-        dialogPane.getStylesheets().add(STYLESHEETS);
+        dialogPane.getStylesheets().add(STYLE_SHEETS);
         if (styleAdd != "")
             dialogPane.getStyleClass().add(styleAdd);
         dialog.initStyle(StageStyle.UNDECORATED);

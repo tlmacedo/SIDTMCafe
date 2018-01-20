@@ -9,19 +9,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="painelViewPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1550.0" stylesheets="@../styles/min/sidtm.min.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.sidtmcafe.controller.ControllerPrincipal">
+<BorderPane fx:id="painelViewPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="825.0" prefWidth="1550.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.sidtmcafe.controller.ControllerPrincipal">
     <bottom>
-        <JFXToolbar fx:id="stbViewPrincipal" disable="true" layoutY="830.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="1550.0" BorderPane.alignment="BOTTOM_CENTER">
-            <left>
-                <Label fx:id="viewPrincipal_StatusBarLeft" prefHeight="18.0" prefWidth="250.0" styleClass="viewPrincipal_StatusBarLeft" text="StatusBar_Left" BorderPane.alignment="CENTER" />
-            </left>
-            <center>
-                <Label fx:id="viewPrincipal_StatusBarCenter" prefHeight="18.0" prefWidth="1067.0" styleClass="viewPrincipal_StatusBarCenter" text="StatusBar_Center" BorderPane.alignment="CENTER" />
-            </center>
-            <right>
-                <Label fx:id="viewPrincipal_StatusBarRight" prefHeight="18.0" prefWidth="213.0" styleClass="viewPrincipal_StatusBarRight" text="Label" BorderPane.alignment="CENTER" />
-            </right>
-        </JFXToolbar>
+        <JFXToolbar fx:id="statusBar_ViewPrincipal" layoutY="830.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="1545.0" BorderPane.alignment="BOTTOM_CENTER" />
     </bottom>
     <center>
         <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="805.0" prefWidth="1300.0" BorderPane.alignment="TOP_LEFT">

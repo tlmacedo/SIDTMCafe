@@ -20,9 +20,10 @@ public interface Constants {
     String BD_PASS = "4879";
     String BD_DRIVER = "com.mysql.jdbc.Driver";
     String BD_URL = BD_DRIVER_CONN + BD_HOST + BD_PORTA + BD_DATABASE + "?useSSL=true";
+    String BD_DATABASE_STB = BD_HOST + BD_PORTA + BD_DATABASE;
 
 
-    String STYLESHEETS = "/styles/min/sidtm.min.css";
+    String STYLE_SHEETS = "/styles/css/sidtm.css"; //"/styles/min/sidtm.min.css";
     String PATH_IMAGENS = "/images/icos/";
     String PATH_FXML = "/fxml/";
     String PATH_TOKEN_BIBLIOTECA = "/certificados";

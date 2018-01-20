@@ -25,11 +25,11 @@ import java.util.ResourceBundle;
 public class ControllerPrincipal implements Initializable, FormularioModelo, Constants {
 
     public BorderPane painelViewPrincipal;
-    public JFXToolbar stbViewPrincipal;
+    public JFXToolbar statusBar_ViewPrincipal;
     public TreeTableView<SisMenuPrincipalVO> treeMenuViewPrincipal;
-    public Label viewPrincipal_StatusBarLeft;
-    public Label viewPrincipal_StatusBarCenter;
-    public Label viewPrincipal_StatusBarRight;
+    //    public Label viewPrincipal_StatusBarLeft;
+//    public Label viewPrincipal_StatusBarCenter;
+//    public Label viewPrincipal_StatusBarRight;
     public JFXTabPane tabPaneViewPrincipal;
     public Label lblImageLogoViewPrincipal;
     public Label lblBotaoExpandeMenuViewPrincipal;
@@ -37,6 +37,8 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
 
     TreeTableColumn<SisMenuPrincipalVO, String> colunaItem;
     TreeTableColumn<SisMenuPrincipalVO, String> colunaAtalho;
+
+    String horarioLog = DATAHORA_LOCAL.format(DTFORMAT_HORA).toString();
 
     @Override
     public void fechar() {
@@ -46,6 +48,7 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
     @Override
     public void preencherObjetos() {
         preencheMenuItem();
+        atualizarStatusBar();
     }
 
     @Override
@@ -136,9 +139,24 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
         treeMenuViewPrincipal.getColumns().setAll(colunaItem, colunaAtalho);
         treeMenuViewPrincipal.setRoot(treeItems[0]);
         treeMenuViewPrincipal.setShowRoot(false);
+    }
 
+    void atualizarStatusBar() {
+        Label stbUsuarioLogado = new Label("Usuário: " + System.getProperty("USUARIO_LOGADO_APELIDO") + " [" + System.getProperty("USUARIO_LOGADO_ID") + "]");
+        stbUsuarioLogado.getStyleClass().add("status-bar-usuario-logado");
 
-        viewPrincipal_StatusBarLeft.setText(System.getProperty("USUARIO_LOGADO_NOME"));
+        Label stbCentral = new Label("");
+
+        statusBar_ViewPrincipal.getLeftItems().setAll(stbUsuarioLogado, stbCentral);
+
+        Label stbDataBase = new Label("logado: " + horarioLog + " ["
+                + BD_DATABASE_STB + "]");
+        stbDataBase.getStyleClass().add("status-bar-database");
+
+        Label stbIcoRelogio = new Label("");
+        stbIcoRelogio.getStyleClass().add("ico-relogio");
+
+        statusBar_ViewPrincipal.getRightItems().setAll(stbDataBase, stbIcoRelogio);
 
 
     }
@@ -156,6 +174,7 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
     void adicionaNovaTab(SisMenuPrincipalVO menuPrincipalVO) {
 
     }
+
 
     boolean sairSistema() {
         if (tabPaneViewPrincipal.getTabs().size() > 0) {

@@ -34,8 +34,8 @@ public class ViewPrincipal extends Application implements Constants {
         stage.setTitle("Principal");
         stage.setResizable(false);
         stage.setScene(scene);
-        stage.getIcons().clear();
-        stage.getIcons().add(new Image(this.getClass().getResource(PATH_IMAGENS + "ic_grao_cafe_black_24dp.png").toString()));
+        stage.getIcons().setAll(new Image(this.getClass().getResource(PATH_IMAGENS + "ic_grao_cafe_black_24dp.png").toString()));
+        scene.getStylesheets().setAll(STYLE_SHEETS);
 
         stage.show();
         ViewPrincipal.stage = stage;
