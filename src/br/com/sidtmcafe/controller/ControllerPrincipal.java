@@ -45,6 +45,10 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
     TreeTableColumn<SisMenuPrincipalVO, String> colunaAtalho;
 
     String horarioLog = DATAHORA_LOCAL.format(DTFORMAT_HORA).toString();
+    Label stbUsuarioLogado, stbTeclasTela, stbDataBase, stbIcoRelogio, stbHora;
+
+    Timeline timeline;
+    int tabSelecionadaId = 0;
 
     @Override
     public void fechar() {
@@ -101,10 +105,17 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
         });
 
         treeMenuViewPrincipal.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
-            TreeItem item = treeMenuViewPrincipal.getSelectionModel().getSelectedItem();
+            SisMenuPrincipalVO item = treeMenuViewPrincipal.getSelectionModel().getSelectedItem().getValue();
             if (item == null) return;
             if (event.getCode() == KeyCode.ENTER)
-                adicionaNovaTab((SisMenuPrincipalVO) item.getValue());
+                adicionaNovaTab(item);
+        });
+
+        treeMenuViewPrincipal.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            SisMenuPrincipalVO item = treeMenuViewPrincipal.getSelectionModel().getSelectedItem().getValue();
+            if (item == null) return;
+            if (item.getDescricao().equals("Sair") || event.getClickCount() == 2)
+                treeMenuViewPrincipal.fireEvent(executarClickTelcado(KeyCode.ENTER));
         });
     }
 
@@ -148,30 +159,30 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
     }
 
     void atualizarStatusBar() {
-        Label stbUsuarioLogado = new Label("Usuário: " + System.getProperty("USUARIO_LOGADO_APELIDO") + " [" + System.getProperty("USUARIO_LOGADO_ID") + "]");
-        stbUsuarioLogado.getStyleClass().add("status-bar-usuario-logado");
+        stbUsuarioLogado = new Label("Usuário: " + System.getProperty("USUARIO_LOGADO_APELIDO") + " [" + System.getProperty("USUARIO_LOGADO_ID") + "]");
+        stbUsuarioLogado.getStyleClass().setAll("status-bar-usuario-logado");
 
-        Label stbTeclasTela = new Label("F1-NNOVO  F2-INCLUIR  F3-EXCLUIR  F4-EDITAR  F5-ATUALIZAR  F7-PESQUISAR  F12-SAIR");
+        stbTeclasTela = new Label("");
+        stbTeclasTela.getStyleClass().setAll("status-bar-center");
 
         statusBar_ViewPrincipal.getLeftItems().setAll(stbUsuarioLogado, stbTeclasTela);
 
-        Label stbDataBase = new Label("banco de dados: [" + BD_DATABASE_STB
+        stbDataBase = new Label("banco de dados: [" + BD_DATABASE_STB
                 + "]   horario_log: " + horarioLog);
-        stbDataBase.getStyleClass().add("status-bar-database");
 
         Tooltip tooltipDetalhesLog = new Tooltip(stbDataBase.getText());
-        tooltipDetalhesLog.getStyleClass().add("tool-tip-hora-view-principal");
+        tooltipDetalhesLog.getStyleClass().setAll("tool-tip-hora-view-principal");
 
-        Label stbIcoRelogio = new Label("");
-        stbIcoRelogio.getStyleClass().add("ico-relogio");
+        stbIcoRelogio = new Label("");
+        stbIcoRelogio.getStyleClass().setAll("ico-relogio");
 
-        Label stbHora = new Label(horarioLog);
+        stbHora = new Label(horarioLog);
         stbHora.getStyleClass().setAll("hora");
         stbHora.setTooltip(tooltipDetalhesLog);
 
         statusBar_ViewPrincipal.getRightItems().setAll(stbIcoRelogio, stbHora);
 
-        Timeline timeline = new Timeline(new KeyFrame(
+        timeline = new Timeline(new KeyFrame(
                 Duration.millis(1000), event -> {
             String hora = LocalTime.now().format(DTFORMAT_HORA);
             stbHora.setText(hora);
@@ -179,9 +190,11 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+    }
 
-        //statusBar_ViewPrincipal.getCenter().
-
+    void atualizarTeclasStatusBar(String teclasStatusBar) {
+        stbTeclasTela.setText(teclasStatusBar);
+        statusBar_ViewPrincipal.getLeftItems().set(1, stbTeclasTela);
     }
 
     KeyEvent executarClickTelcado(KeyCode keyCode) {
@@ -194,10 +207,36 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
                 true, true, true, true, true, true, null);
     }
 
-    void adicionaNovaTab(SisMenuPrincipalVO menuPrincipalVO) {
-
+    boolean existeTab(SisMenuPrincipalVO menuPrincipalVO) {
+        tabSelecionadaId = 0;
+        for (Tab tab : tabPaneViewPrincipal.getTabs()) {
+            if (tab.getText().equals(menuPrincipalVO.getDescricao()))
+                return true;
+            tabSelecionadaId++;
+        }
+        return false;
     }
 
+    void adicionaNovaTab(SisMenuPrincipalVO menuPrincipalVO) {
+        if (existeTab(menuPrincipalVO)) {
+            tabPaneViewPrincipal.getSelectionModel().select(tabSelecionadaId);
+        } else {
+            if (menuPrincipalVO.getTabPane() == 0) {
+
+            } else {
+                String menuprincipal = menuPrincipalVO.getDescricao();
+                switch (menuprincipal) {
+                    case "Sair":
+                        fechar();
+                        break;
+                    default:
+                        tabPaneViewPrincipal.getTabs().add(new Tab(menuprincipal));
+                        break;
+                }
+                tabPaneViewPrincipal.getSelectionModel().select(tabSelecionadaId);
+            }
+        }
+    }
 
     boolean sairSistema() {
         if (tabPaneViewPrincipal.getTabs().size() > 0) {
