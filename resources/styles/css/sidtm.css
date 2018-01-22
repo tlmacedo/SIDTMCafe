@@ -1,3 +1,15 @@
+.jfx-combo-box {
+  -fx-font-family: sans-serif;
+  -fx-text-fill: #000000;
+  -fx-font-size: 12px;
+  -fx-font-style: normal;
+  -jfx-focus-color: #FF6600;
+  -jfx-unfocus-color: #000000;
+  -jfx-label-float: true; }
+  .jfx-combo-box .view-cadastro-empresa {
+    -jfx-focus-color: #1a6eff;
+    -fx-font-size: 10px; }
+
 .lbl_img_fundo_principal {
   -fx-background-image: url("/images/paineis/principal.png"); }
 
@@ -6,7 +18,7 @@
   -fx-background-size: cover;
   -fx-background-image: url("/images/paineis/certificadosDigitais.png"); }
 
-.login {
+.view-login {
   -fx-background-color: #eeeceb;
   -fx-background-size: cover;
   -fx-background-image: url("/images/paineis/login.png"); }
@@ -61,17 +73,6 @@
     -fx-font-size: 12px; }
   .label.lbl_h6 {
     -fx-font-size: 10px; }
-
-.jfx-combo-box {
-  -fx-font-family: sans-serif;
-  -fx-text-fill: #000000;
-  -fx-font-size: 12px;
-  -fx-font-style: normal;
-  -jfx-focus-color: #FF6600;
-  -jfx-unfocus-color: #000000;
-  -jfx-label-float: true; }
-  .jfx-combo-box .label {
-    -fx-font-size: 12px; }
 
 .jfx-button {
   -fx-max-height: 30px;
@@ -170,6 +171,19 @@
   -fx-background-radius: 7px;
   -fx-padding: 0.667em 0.75em 0.667em 0.75em;
   -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 3); }
+
+.jfx-text-field {
+  -fx-font-family: sans-serif;
+  -fx-font-style: normal;
+  -fx-text-fill: #000000;
+  -fx-font-size: 10px;
+  -jfx-focus-color: #FF6600;
+  -jfx-unfocus-color: #000000;
+  -jfx-label-float: true; }
+  .jfx-text-field .campo-total {
+    -fx-font-size: 16px; }
+  .jfx-text-field :disabled {
+    -fx-opacity: 1.0; }
 
 .certificado_digital_valido {
   -fx-text-fill: #0091ff; }

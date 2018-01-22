@@ -125,7 +125,7 @@ public class ControllerLogin implements Initializable, FormularioModelo, Constan
         if (passwordMatch) {
             criarVariaveisSistema_UsuarioLogado(colaboradorVO);
             fechar();
-            new ViewPrincipal().openViewPrincipal();
+            new ViewPrincipal().openViewPrincipal(false);
         } else {
             tremeLogin();
         }

@@ -9,7 +9,7 @@ import javafx.beans.property.StringProperty;
 public class SisMenuPrincipalVO extends RecursiveTreeObject<SisMenuPrincipalVO> {
 
     IntegerProperty id, filho_id, tabPane;
-    StringProperty descricao, icoMenu, teclaAtalho;
+    StringProperty descricao, tituloTab, icoMenu, teclaAtalho;
 
     public SisMenuPrincipalVO() {
     }
@@ -64,6 +64,19 @@ public class SisMenuPrincipalVO extends RecursiveTreeObject<SisMenuPrincipalVO> 
 
     public void setDescricao(String descricao) {
         descricaoProperty().set(descricao);
+    }
+
+    public String getTituloTab() {
+        return tituloTabProperty().get();
+    }
+
+    public StringProperty tituloTabProperty() {
+        if (tituloTab == null) tituloTab = new SimpleStringProperty("");
+        return tituloTab;
+    }
+
+    public void setTituloTab(String tituloTab) {
+        tituloTabProperty().set(tituloTab);
     }
 
     public String getIcoMenu() {

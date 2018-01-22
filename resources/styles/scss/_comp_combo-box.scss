@@ -7,10 +7,18 @@
   -jfx-focus-color: $corJFX-Focus;
   -jfx-unfocus-color: $corJFX-Unforcus;
   -jfx-label-float: true;
-  //-fx-pref-height: 20px;
 
-  .label {
-    -fx-font-size: $fontSizeh5;
+  .view-login {
+
   }
+
+  .view-cadastro-empresa {
+    -jfx-focus-color: #1a6eff;
+    -fx-font-size: $fontSizeh6;
+  }
+
+  //.label {
+  //  -fx-font-size: $fontSizeh5;
+  //}
 
 }

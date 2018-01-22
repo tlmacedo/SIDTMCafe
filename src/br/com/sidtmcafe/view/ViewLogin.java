@@ -1,6 +1,7 @@
 package br.com.sidtmcafe.view;
 
 import br.com.sidtmcafe.interfaces.Constants;
+import br.com.sidtmcafe.service.OpenView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +20,7 @@ public class ViewLogin extends Application implements Constants {
         return stage;
     }
 
-    public void openViewLogin(boolean abertoPeloSistema) {
+    public void openViewLogin(boolean showAndWait) {
         stage = new Stage();
         Parent root;
         Scene scene = null;
@@ -35,19 +36,10 @@ public class ViewLogin extends Application implements Constants {
         stage.setScene(scene);
         stage.getIcons().setAll(new Image(this.getClass().getResource(PATH_IMAGENS + "ic_security_black_24dp.png").toString()));
         scene.getStylesheets().setAll(STYLE_SHEETS);
-        scene.getRoot().getStyleClass().add("login");
+        scene.getRoot().getStyleClass().add("view-login");
 
-        if (abertoPeloSistema) {
-            try {
-                stage.initModality(Modality.APPLICATION_MODAL);
-            } catch (Exception ex) {
+        new OpenView(stage, showAndWait);
 
-            } finally {
-                stage.showAndWait();
-            }
-        } else {
-            stage.show();
-        }
         ViewLogin.stage = stage;
     }
 

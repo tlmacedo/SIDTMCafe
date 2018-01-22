@@ -5,6 +5,7 @@ import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.SisMenuPrincipalDAO;
 import br.com.sidtmcafe.model.vo.SisMenuPrincipalVO;
+import br.com.sidtmcafe.view.ViewCadastroEmpresa;
 import br.com.sidtmcafe.view.ViewPrincipal;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXToolbar;
@@ -222,15 +223,15 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
             tabPaneViewPrincipal.getSelectionModel().select(tabSelecionadaId);
         } else {
             if (menuPrincipalVO.getTabPane() == 0) {
-
+                //Abrir formulario em janela!
             } else {
                 String menuprincipal = menuPrincipalVO.getDescricao();
-                switch (menuprincipal) {
-                    case "Sair":
+                switch (menuprincipal.toLowerCase()) {
+                    case "sair":
                         fechar();
                         break;
-                    default:
-                        tabPaneViewPrincipal.getTabs().add(new Tab(menuprincipal));
+                    case "empresas":
+                        tabPaneViewPrincipal.getTabs().add(new ViewCadastroEmpresa().openTabViewCadastroEmpresa(menuPrincipalVO.getTituloTab()));
                         break;
                 }
                 tabPaneViewPrincipal.getSelectionModel().select(tabSelecionadaId);

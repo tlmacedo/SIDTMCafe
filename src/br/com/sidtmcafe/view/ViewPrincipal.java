@@ -1,6 +1,7 @@
 package br.com.sidtmcafe.view;
 
 import br.com.sidtmcafe.interfaces.Constants;
+import br.com.sidtmcafe.service.OpenView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,7 +21,7 @@ public class ViewPrincipal extends Application implements Constants {
     }
 
 
-    public void openViewPrincipal() {
+    public void openViewPrincipal(boolean showAndWait) {
         stage = new Stage();
         Parent root;
         Scene scene = null;
@@ -37,7 +38,8 @@ public class ViewPrincipal extends Application implements Constants {
         stage.getIcons().setAll(new Image(this.getClass().getResource(PATH_IMAGENS + "ic_grao_cafe_black_24dp.png").toString()));
         scene.getStylesheets().setAll(STYLE_SHEETS);
 
-        stage.show();
+        new OpenView(stage, showAndWait);
+
         ViewPrincipal.stage = stage;
     }
 
@@ -45,7 +47,7 @@ public class ViewPrincipal extends Application implements Constants {
     public void start(Stage primaryStage) throws Exception {
         ViewPrincipal.stage = primaryStage;
 
-        openViewPrincipal();
+        openViewPrincipal(false);
     }
 
     public static void main(String[] args) {

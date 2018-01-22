@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="tabCadastroEmpresasPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" prefHeight="785.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.141"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.sidtmcafe.controller.ControllerCadastroEmpresa">
+    <children>
+        <TitledPane fx:id="titledPaneCadastroEmpresas" collapsible="false" focusTraversable="false" layoutX="5.0"
+                    layoutY="5.0" prefHeight="186.0" prefWidth="1290.0" text="Cadastro de empresas">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="142.0" prefWidth="1278.0">
+                    <children>
+                        <JFXTextField fx:id="jfxtextPesquisa" accessibleText="text" labelFloat="true" layoutX="10.0"
+                                      layoutY="10.0" maxHeight="20.0" prefColumnCount="8" prefHeight="20.0"
+                                      prefWidth="360.0" promptText="Pesquisar empresas"/>
+                        <JFXTreeTableView fx:id="jfxTreeTableViewEmpresas" layoutX="5.0" layoutY="37.0"
+                                          nodeOrientation="LEFT_TO_RIGHT" prefHeight="122.0" prefWidth="1280.0"/>
+                        <JFXComboBox fx:id="cboFiltroPesquisa" labelFloat="true" layoutX="655.0" layoutY="10.0"
+                                     prefHeight="20.0" prefWidth="198.0" promptText="Filtro pesquisa [F8]"/>
+                        <Label fx:id="labelRegistrosLocalizados" layoutX="380.0" layoutY="20.0"
+                               styleClass="label-registros-localizados" text="Registros localizados"/>
+                    </children>
+                </AnchorPane>
+            </content>
+            <font>
+                <Font name="SansSerif Bold Italic" size="11.0"/>
+            </font>
+        </TitledPane>
+        <TitledPane fx:id="titledPaneDadosCadastrais" collapsible="false" focusTraversable="false" layoutX="5.0"
+                    layoutY="196.0" prefHeight="585.0" prefWidth="1290.0" text="Dados Cadastrais">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="142.0" prefWidth="1278.0">
+                    <children>
+                        <JFXComboBox fx:id="cboClassifJuridica" labelFloat="true" layoutX="10.0" layoutY="10.0"
+                                     maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                     minWidth="-Infinity" prefHeight="20.0" prefWidth="100.0"
+                                     promptText="Classif. Jurídica"/>
+                        <JFXTextField fx:id="jfxtextCNPJ" accessibleText="numeroN" alignment="CENTER_RIGHT"
+                                      layoutX="120.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                      minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="100.0"
+                                      promptText="C.N.P.J / C.P.F."/>
+                        <JFXTextField fx:id="jfxtextIE" accessibleText="numeroN" alignment="CENTER_RIGHT"
+                                      layoutX="230.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                      minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="90.0"
+                                      promptText="I.E. / R.G."/>
+                        <JFXComboBox fx:id="cboSituacaoSistema" labelFloat="true" layoutX="330.0" layoutY="10.0"
+                                     maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                     minWidth="-Infinity" prefHeight="20.0" prefWidth="130.0"
+                                     promptText="Situação empresa"/>
+                        <JFXTextField fx:id="jfxtextRazao" accessibleText="text" layoutX="470.0" layoutY="10.0"
+                                      maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                      minWidth="-Infinity" prefHeight="20.0" prefWidth="455.0"
+                                      promptText="Razão / Nome"/>
+                        <JFXTextField fx:id="jfxtextFantasia" accessibleText="text" layoutX="10.0" layoutY="40.0"
+                                      maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                      minWidth="-Infinity" prefHeight="20.0" prefWidth="455.0"
+                                      promptText="Fantasia / Nome"/>
+                        <JFXCheckBox fx:id="jfxcheckIsCliente" accessibleText="chkT" layoutX="475.0" layoutY="40.0"
+                                     maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                     minWidth="-Infinity" prefHeight="20.0" prefWidth="70.0" selected="true"
+                                     text="Cliente"/>
+                        <JFXCheckBox fx:id="jfxcheckIsFornecedor" accessibleText="chk" layoutX="555.0" layoutY="40.0"
+                                     maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                     minWidth="-Infinity" prefHeight="20.0" prefWidth="90.0" text="Fornecedor"/>
+                        <JFXCheckBox fx:id="jfxcheckIsTransportadora" accessibleText="chk" layoutX="655.0"
+                                     layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                     minWidth="-Infinity" prefHeight="20.0" prefWidth="105.0" text="Transportadora"/>
+                        <Label fx:id="labelDataCadastro" alignment="CENTER_RIGHT" layoutX="1000.0" layoutY="5.0"
+                               prefHeight="10.0" prefWidth="285.0" styleClass="label-registros-localizados"
+                               textAlignment="RIGHT"/>
+                        <Label fx:id="labelDataCadastroDiff" alignment="CENTER_RIGHT" layoutX="1000.0" layoutY="15.0"
+                               prefHeight="10.0" prefWidth="285.0" styleClass="label-registros-localizados"
+                               textAlignment="RIGHT"/>
+                        <Label fx:id="labelDataAtualizacao" alignment="CENTER_RIGHT" layoutX="1000.0" layoutY="25.0"
+                               prefHeight="10.0" prefWidth="285.0" styleClass="label-registros-localizados"
+                               textAlignment="RIGHT"/>
+                        <Label fx:id="labelDataAtualizacaoDiff" alignment="CENTER_RIGHT" layoutX="1000.0" layoutY="35.0"
+                               prefHeight="10.0" prefWidth="285.0" styleClass="label-registros-localizados"
+                               textAlignment="RIGHT"/>
+                        <TitledPane collapsible="false" focusTraversable="false" layoutX="5.0" layoutY="68.0"
+                                    maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                    minWidth="-Infinity" prefHeight="92.0" prefWidth="1280.0" text="Enderecos">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="200.0">
+                                    <children>
+                                        <JFXListView fx:id="jfxListViewEnderecos" layoutX="5.0" layoutY="5.0"
+                                                     prefHeight="60.0" prefWidth="130.0"/>
+                                        <JFXTextField fx:id="jfxtextEndCEP" accessibleText="numeroN"
+                                                      alignment="CENTER_RIGHT" layoutX="145.0" layoutY="10.0"
+                                                      maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                                      minWidth="-Infinity" prefHeight="20.0" prefWidth="60.0"
+                                                      promptText="C.E.P."/>
+                                        <JFXTextField fx:id="jfxtextEndLogradouro" accessibleText="text" layoutX="215.0"
+                                                      layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                                      minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0"
+                                                      prefWidth="455.0" promptText="Logradouro"/>
+                                        <JFXTextField fx:id="jfxtextEndNumero" accessibleText="numeroN"
+                                                      alignment="CENTER_RIGHT" layoutX="680.0" layoutY="10.0"
+                                                      maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                                      minWidth="-Infinity" prefHeight="20.0" prefWidth="65.0"
+                                                      promptText="Número"/>
+                                        <JFXTextField fx:id="jfxtextEndComplemento" accessibleText="text"
+                                                      layoutX="755.0" layoutY="10.0" maxHeight="-Infinity"
+                                                      maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                                                      prefHeight="20.0" prefWidth="285.0" promptText="Complemento"/>
+                                        <JFXTextField fx:id="jfxtextEndBairro" accessibleText="text" layoutX="145.0"
+                                                      layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                                      minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0"
+                                                      prefWidth="230.0" promptText="Bairro"/>
+                                        <JFXComboBox fx:id="jfxcboEndUF" labelFloat="true" layoutX="385.0"
+                                                     layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                                     minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0"
+                                                     prefWidth="60.0" promptText="U.F."/>
+                                        <JFXComboBox fx:id="jfxcboEndMunicipio" labelFloat="true" layoutX="455.0"
+                                                     layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                                     minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0"
+                                                     prefWidth="320.0" promptText="Município"/>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                            <font>
+                                <Font name="SansSerif Bold Italic" size="11.0"/>
+                            </font>
+                        </TitledPane>
+                        <TitledPane collapsible="false" focusTraversable="false" layoutX="5.0" layoutY="425.0"
+                                    maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                    minWidth="-Infinity" prefHeight="132.0" prefWidth="1280.0"
+                                    text="Detalhes Receita Federal">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="200.0">
+                                    <children>
+                                        <TitledPane collapsible="false" focusTraversable="false" layoutY="35.0"
+                                                    maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                                    minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0"
+                                                    text="Atividade principal">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="5.0"
+                                                            prefWidth="400.0">
+                                                    <children>
+                                                        <JFXListView fx:id="jfxListViewAtividadePrincipal"
+                                                                     prefHeight="52.0" prefWidth="448.0"/>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                            <font>
+                                                <Font name="SansSerif Bold Italic" size="11.0"/>
+                                            </font>
+                                        </TitledPane>
+                                        <TitledPane collapsible="false" focusTraversable="false" layoutX="450.0"
+                                                    maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                                    minWidth="-Infinity" prefHeight="109.0" prefWidth="450.0"
+                                                    text="Atividade secundaria">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="122.0"
+                                                            prefWidth="1268.0">
+                                                    <children>
+                                                        <JFXListView fx:id="jfxListViewAtividadeSecundaria"
+                                                                     prefHeight="86.0" prefWidth="448.0"/>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                            <font>
+                                                <Font name="SansSerif Bold Italic" size="11.0"/>
+                                            </font>
+                                        </TitledPane>
+                                        <Label fx:id="labelDataAbertura" accessibleText="clear" layoutX="5.0"
+                                               layoutY="2.0" prefHeight="10.0" prefWidth="440.0"
+                                               styleClass="label-registros-localizados"/>
+                                        <Label fx:id="labelDataAberturaDiff" accessibleText="clear" layoutX="5.0"
+                                               layoutY="12.0" prefHeight="10.0" prefWidth="440.0"
+                                               styleClass="label-registros-localizados"/>
+                                        <Label fx:id="labelNaturezaJuridica" accessibleText="clear" layoutX="5.0"
+                                               layoutY="22.0" prefHeight="10.0" prefWidth="440.0"
+                                               styleClass="label-registros-localizados"/>
+                                        <JFXTreeTableView fx:id="jfxTreeTableViewDetalhesReceita" accessibleText="clear"
+                                                          layoutX="900.0" nodeOrientation="LEFT_TO_RIGHT"
+                                                          prefHeight="109.0" prefWidth="378.0"/>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                            <font>
+                                <Font name="SansSerif Bold Italic" size="11.0"/>
+                            </font>
+                        </TitledPane>
+                        <JFXTabPane fx:id="jfxtabPaneContatosPrazosCondicoes" layoutX="5.0" layoutY="165.0"
+                                    maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                    minWidth="-Infinity" prefHeight="255.0" prefWidth="1280.0" tabMaxHeight="20.0"
+                                    tabMinHeight="20.0">
+                            <tabs>
+                                <Tab closable="false" text="Contatos">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="122.0"
+                                                    prefWidth="1268.0">
+                                            <children>
+                                                <TitledPane collapsible="false" focusTraversable="false" layoutX="5.0"
+                                                            layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                                            minHeight="-Infinity" minWidth="-Infinity"
+                                                            prefHeight="110.0" prefWidth="355.0" text="HomePage">
+                                                    <content>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="122.0"
+                                                                    prefWidth="1268.0">
+                                                            <children>
+                                                                <JFXListView fx:id="jfxListViewContatosHomePage"
+                                                                             layoutX="5.0" layoutY="5.0"
+                                                                             prefHeight="80.0" prefWidth="345.0"/>
+                                                            </children>
+                                                        </AnchorPane>
+                                                    </content>
+                                                    <font>
+                                                        <Font name="SansSerif Bold Italic" size="11.0"/>
+                                                    </font>
+                                                </TitledPane>
+                                                <TitledPane collapsible="false" focusTraversable="false" layoutX="5.0"
+                                                            layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                                            minHeight="-Infinity" minWidth="-Infinity"
+                                                            prefHeight="110.0" prefWidth="355.0" text="emails">
+                                                    <content>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="122.0"
+                                                                    prefWidth="1268.0">
+                                                            <children>
+                                                                <JFXListView fx:id="jfxListViewContatosEmail"
+                                                                             layoutX="5.0" layoutY="5.0"
+                                                                             prefHeight="80.0" prefWidth="345.0"/>
+                                                            </children>
+                                                        </AnchorPane>
+                                                    </content>
+                                                    <font>
+                                                        <Font name="SansSerif Bold Italic" size="11.0"/>
+                                                    </font>
+                                                </TitledPane>
+                                                <TitledPane collapsible="false" focusTraversable="false" layoutX="365.0"
+                                                            layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                                            minHeight="-Infinity" minWidth="-Infinity"
+                                                            prefHeight="225.0" prefWidth="200.0" text="Telefones">
+                                                    <content>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="122.0"
+                                                                    prefWidth="1268.0">
+                                                            <children>
+                                                                <JFXListView fx:id="jfxListViewContatosTelefone"
+                                                                             layoutX="5.0" layoutY="5.0"
+                                                                             prefHeight="195.0" prefWidth="190.0"/>
+                                                            </children>
+                                                        </AnchorPane>
+                                                    </content>
+                                                    <font>
+                                                        <Font name="SansSerif Bold Italic" size="11.0"/>
+                                                    </font>
+                                                </TitledPane>
+                                                <TitledPane collapsible="false" focusTraversable="false" layoutX="580.0"
+                                                            layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                                            minHeight="-Infinity" minWidth="-Infinity"
+                                                            prefHeight="225.0" prefWidth="695.0"
+                                                            text="Pessoas de contato">
+                                                    <content>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="122.0"
+                                                                    prefWidth="1268.0">
+                                                            <children>
+                                                                <JFXListView fx:id="jfxListViewPessoasContatoNome"
+                                                                             layoutX="5.0" layoutY="5.0"
+                                                                             prefHeight="195.0" prefWidth="160.0"/>
+                                                                <TitledPane collapsible="false" focusTraversable="false"
+                                                                            layoutX="170.0" layoutY="5.0"
+                                                                            maxHeight="-Infinity" maxWidth="-Infinity"
+                                                                            minHeight="-Infinity" minWidth="-Infinity"
+                                                                            prefHeight="95.0" prefWidth="310.0"
+                                                                            text="HomePage">
+                                                                    <content>
+                                                                        <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                                    prefHeight="122.0"
+                                                                                    prefWidth="1268.0">
+                                                                            <children>
+                                                                                <JFXListView
+                                                                                        fx:id="jfxListViewPessoasContatoHomePage"
+                                                                                        layoutX="5.0" layoutY="5.0"
+                                                                                        prefHeight="65.0"
+                                                                                        prefWidth="300.0"/>
+                                                                            </children>
+                                                                        </AnchorPane>
+                                                                    </content>
+                                                                    <font>
+                                                                        <Font name="SansSerif Bold Italic" size="11.0"/>
+                                                                    </font>
+                                                                </TitledPane>
+                                                                <TitledPane collapsible="false" focusTraversable="false"
+                                                                            layoutX="172.0" layoutY="105.0"
+                                                                            maxHeight="-Infinity" maxWidth="-Infinity"
+                                                                            minHeight="-Infinity" minWidth="-Infinity"
+                                                                            prefHeight="95.0" prefWidth="310.0"
+                                                                            text="emails">
+                                                                    <content>
+                                                                        <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                                    prefHeight="122.0"
+                                                                                    prefWidth="1268.0">
+                                                                            <children>
+                                                                                <JFXListView
+                                                                                        fx:id="jfxListViewPessoasContatoEmail"
+                                                                                        layoutX="5.0" layoutY="5.0"
+                                                                                        prefHeight="65.0"
+                                                                                        prefWidth="300.0"/>
+                                                                            </children>
+                                                                        </AnchorPane>
+                                                                    </content>
+                                                                    <font>
+                                                                        <Font name="SansSerif Bold Italic" size="11.0"/>
+                                                                    </font>
+                                                                </TitledPane>
+                                                                <TitledPane collapsible="false" focusTraversable="false"
+                                                                            layoutX="487.0" layoutY="5.0"
+                                                                            maxHeight="-Infinity" maxWidth="-Infinity"
+                                                                            minHeight="-Infinity" minWidth="-Infinity"
+                                                                            prefHeight="195.0" prefWidth="200.0"
+                                                                            text="Telefones">
+                                                                    <content>
+                                                                        <AnchorPane minHeight="0.0" minWidth="0.0"
+                                                                                    prefHeight="122.0"
+                                                                                    prefWidth="1268.0">
+                                                                            <children>
+                                                                                <JFXListView
+                                                                                        fx:id="jfxListViewPessoasContatoTelefone"
+                                                                                        layoutX="5.0" layoutY="5.0"
+                                                                                        prefHeight="165.0"
+                                                                                        prefWidth="190.0"/>
+                                                                            </children>
+                                                                        </AnchorPane>
+                                                                    </content>
+                                                                    <font>
+                                                                        <Font name="SansSerif Bold Italic" size="11.0"/>
+                                                                    </font>
+                                                                </TitledPane>
+                                                            </children>
+                                                        </AnchorPane>
+                                                    </content>
+                                                    <font>
+                                                        <Font name="SansSerif Bold Italic" size="11.0"/>
+                                                    </font>
+                                                </TitledPane>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </Tab>
+                                <Tab closable="false" text="Prazos e Condições">
+                                    <content>
+                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                            <children>
+                                                <TitledPane collapsible="false" focusTraversable="false" layoutX="5.0"
+                                                            layoutY="5.0" maxHeight="-Infinity" maxWidth="-Infinity"
+                                                            minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0"
+                                                            prefWidth="480.0" text="Prazos">
+                                                    <content>
+                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="122.0"
+                                                                    prefWidth="1268.0">
+                                                            <children>
+                                                                <JFXComboBox fx:id="jfxcboPrazoTipoPagto"
+                                                                             labelFloat="true" layoutX="10.0"
+                                                                             layoutY="10.0" prefHeight="20.0"
+                                                                             prefWidth="120.0" promptText="tipo pagto"/>
+                                                                <JFXTextField fx:id="jfxtextPrazoDias"
+                                                                              alignment="CENTER_RIGHT" labelFloat="true"
+                                                                              layoutX="140.0" layoutY="10.0"
+                                                                              maxHeight="-Infinity" maxWidth="-Infinity"
+                                                                              minHeight="-Infinity" minWidth="-Infinity"
+                                                                              prefHeight="20.0" prefWidth="70.0"
+                                                                              promptText="dias"/>
+                                                                <JFXTextField fx:id="jfxtextPrazoLimite"
+                                                                              alignment="CENTER_RIGHT" labelFloat="true"
+                                                                              layoutX="220.0" layoutY="10.0"
+                                                                              maxHeight="-Infinity" maxWidth="-Infinity"
+                                                                              minHeight="-Infinity" minWidth="-Infinity"
+                                                                              prefHeight="20.0" prefWidth="90.0"
+                                                                              promptText="limite R$"/>
+                                                                <JFXCheckBox fx:id="jfxcheckPrazoNFe" layoutX="320.0"
+                                                                             layoutY="10.0" maxHeight="-Infinity"
+                                                                             maxWidth="-Infinity" minHeight="-Infinity"
+                                                                             minWidth="-Infinity" prefHeight="20.0"
+                                                                             prefWidth="60.0" text="NF-e"/>
+                                                                <JFXCheckBox fx:id="jfxcheckPrazoRecibo" layoutX="390.0"
+                                                                             layoutY="10.0" maxHeight="-Infinity"
+                                                                             maxWidth="-Infinity" minHeight="-Infinity"
+                                                                             minWidth="-Infinity" prefHeight="20.0"
+                                                                             prefWidth="70.0" text="Recibo"/>
+                                                            </children>
+                                                        </AnchorPane>
+                                                    </content>
+                                                    <font>
+                                                        <Font name="SansSerif Bold Italic" size="11.0"/>
+                                                    </font>
+                                                </TitledPane>
+                                            </children>
+                                        </AnchorPane>
+                                    </content>
+                                </Tab>
+                            </tabs>
+                        </JFXTabPane>
+                    </children>
+                </AnchorPane>
+            </content>
+            <font>
+                <Font name="SansSerif Bold Italic" size="11.0"/>
+            </font>
+        </TitledPane>
+    </children>
+</AnchorPane>
