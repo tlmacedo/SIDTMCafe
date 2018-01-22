@@ -1,10 +1,11 @@
 $sisPathIcones: "/images/icos/";
+$sisPathPaineis:"/images/paineis/";
 
-$painelViewLogin: $sisPathIcones + "../paineis/login.png";
-$painelViewPrincipal: $sisPathIcones + "../paineis/principal.png";
-$painelViewCertificadoDigital: $sisPathIcones + "../paineis/certificadosDigitais.png";
-$painelDialogPane: $sisPathIcones + "../paineis/dialogPane.png";
-$painelDialogPane_YES_NO: $sisPathIcones + "../paineis/dialogPane_yes_no.png";
+$painelViewLogin: $sisPathPaineis + "login.png";
+$painelViewPrincipal: $sisPathPaineis + "principal.png";
+$painelViewCertificadoDigital: $sisPathPaineis + "certificadosDigitais.png";
+$painelDialogPane: $sisPathPaineis + "dialogPane.png";
+$painelDialogPane_YES_NO: $sisPathPaineis + "dialogPane_yes_no.png";
 
 $sisHeightDialogPane: 150px;
 $sisWidthDialogPane: 570px;

@@ -1,15 +1,15 @@
 .lbl_img_fundo_principal {
-  -fx-background-image: url("/images/icos/../paineis/principal.png"); }
+  -fx-background-image: url("/images/paineis/principal.png"); }
 
 .certificado_digital {
   -fx-background-color: #eeeceb;
   -fx-background-size: cover;
-  -fx-background-image: url("/images/icos/../paineis/certificadosDigitais.png"); }
+  -fx-background-image: url("/images/paineis/certificadosDigitais.png"); }
 
 .login {
   -fx-background-color: #eeeceb;
   -fx-background-size: cover;
-  -fx-background-image: url("/images/icos/../paineis/login.png"); }
+  -fx-background-image: url("/images/paineis/login.png"); }
 
 .list-view:focused {
   -fx-border-color: #ff6600; }
@@ -142,7 +142,7 @@
   -fx-pref-width: 570px;
   -fx-pref-height: 150px;
   -fx-background-color: transparent;
-  -fx-background-image: url("/images/icos/../paineis/dialogPane.png"); }
+  -fx-background-image: url("/images/paineis/dialogPane.png"); }
   .dialog-pane .header-panel {
     -fx-background-color: transparent; }
     .dialog-pane .header-panel .label {
@@ -159,7 +159,7 @@
   .dialog-pane .yes_no {
     -fx-pref-width: 570px;
     -fx-pref-height: 150px;
-    -fx-background-image: url("/images/icos/../paineis/dialogPane_yes_no.png"); }
+    -fx-background-image: url("/images/paineis/dialogPane_yes_no.png"); }
 
 .tooltip .tool-tip-hora-view-principal {
   -fx-background-color: #e9e9e9;

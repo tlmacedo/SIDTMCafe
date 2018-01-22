@@ -70,10 +70,10 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
     public void escutarTeclas() {
         painelViewPrincipal.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
             if (CODE_KEY_SHIFT_CTRL_POSITIVO.match(event) || CHAR_KEY_SHIFT_CTRL_POSITIVO.match(event))
-                lblBotaoExpandeMenuViewPrincipal.fireEvent(executarClickMouse(1));
+                lblBotaoExpandeMenuViewPrincipal.fireEvent(executarMouseClicado(1));
 
             if (CODE_KEY_SHIFT_CTRL_NEGATIVO.match(event) || CHAR_KEY_SHIFT_CTRL_NEGATIVO.match(event))
-                lblBotaoRetraiMenuViewPrincipal.fireEvent(executarClickMouse(1));
+                lblBotaoRetraiMenuViewPrincipal.fireEvent(executarMouseClicado(1));
 
             if (event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.F12) {
                 if (sairSistema())
@@ -115,7 +115,7 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
             SisMenuPrincipalVO item = treeMenuViewPrincipal.getSelectionModel().getSelectedItem().getValue();
             if (item == null) return;
             if (item.getDescricao().equals("Sair") || event.getClickCount() == 2)
-                treeMenuViewPrincipal.fireEvent(executarClickTelcado(KeyCode.ENTER));
+                treeMenuViewPrincipal.fireEvent(executarTelcadoPressionado(KeyCode.ENTER));
         });
     }
 
@@ -192,16 +192,16 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
         timeline.play();
     }
 
-    void atualizarTeclasStatusBar(String teclasStatusBar) {
+    void atualizarStatusBar(String teclasStatusBar) {
         stbTeclasTela.setText(teclasStatusBar);
         statusBar_ViewPrincipal.getLeftItems().set(1, stbTeclasTela);
     }
 
-    KeyEvent executarClickTelcado(KeyCode keyCode) {
+    KeyEvent executarTelcadoPressionado(KeyCode keyCode) {
         return new KeyEvent(KeyEvent.KEY_RELEASED, "", "", keyCode, true, true, true, true);
     }
 
-    MouseEvent executarClickMouse(int qtdClicks) {
+    MouseEvent executarMouseClicado(int qtdClicks) {
         return new MouseEvent(MouseEvent.MOUSE_CLICKED, 0,
                 0, 0, 0, MouseButton.PRIMARY, qtdClicks, true, true, true, true,
                 true, true, true, true, true, true, null);
