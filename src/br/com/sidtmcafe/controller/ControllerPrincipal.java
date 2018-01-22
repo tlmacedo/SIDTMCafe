@@ -168,13 +168,13 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
         statusBar_ViewPrincipal.getLeftItems().setAll(stbUsuarioLogado, stbTeclasTela);
 
         stbDataBase = new Label("banco de dados: [" + BD_DATABASE_STB
-                + "]   horario_log: " + horarioLog);
+                + "]    horario_log: " + horarioLog);
 
         Tooltip tooltipDetalhesLog = new Tooltip(stbDataBase.getText());
-        tooltipDetalhesLog.getStyleClass().setAll("tool-tip-hora-view-principal");
 
         stbIcoRelogio = new Label("");
         stbIcoRelogio.getStyleClass().setAll("ico-relogio");
+        stbIcoRelogio.setTooltip(tooltipDetalhesLog);
 
         stbHora = new Label(horarioLog);
         stbHora.getStyleClass().setAll("hora");
