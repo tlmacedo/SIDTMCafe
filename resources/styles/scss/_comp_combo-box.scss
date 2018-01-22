@@ -1,4 +1,4 @@
-.jfx-combo-box {
+.combo-box {
   -fx-font-family: $fontFamily;
   -fx-text-fill: $sisColor_black;
   -fx-font-size: $fontSizeh5;
@@ -8,17 +8,13 @@
   -jfx-unfocus-color: $corJFX-Unforcus;
   -jfx-label-float: true;
 
-  .view-login {
-
-  }
-
-  .view-cadastro-empresa {
-    -jfx-focus-color: #1a6eff;
+  .view-cadastro-empresa & {
     -fx-font-size: $fontSizeh6;
   }
-
-  //.label {
-  //  -fx-font-size: $fontSizeh5;
-  //}
-
 }
+
+
+
+
+
+

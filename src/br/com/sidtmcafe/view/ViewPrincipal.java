@@ -37,6 +37,7 @@ public class ViewPrincipal extends Application implements Constants {
         stage.setScene(scene);
         stage.getIcons().setAll(new Image(this.getClass().getResource(PATH_IMAGENS + "ic_grao_cafe_black_24dp.png").toString()));
         scene.getStylesheets().setAll(STYLE_SHEETS);
+        scene.getRoot().getStyleClass().add("view-principal");
 
         new OpenView(stage, showAndWait);
 

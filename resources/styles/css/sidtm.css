@@ -1,4 +1,4 @@
-.jfx-combo-box {
+.combo-box {
   -fx-font-family: sans-serif;
   -fx-text-fill: #000000;
   -fx-font-size: 12px;
@@ -6,8 +6,7 @@
   -jfx-focus-color: #FF6600;
   -jfx-unfocus-color: #000000;
   -jfx-label-float: true; }
-  .jfx-combo-box .view-cadastro-empresa {
-    -jfx-focus-color: #1a6eff;
+  .view-cadastro-empresa .combo-box {
     -fx-font-size: 10px; }
 
 .lbl_img_fundo_principal {

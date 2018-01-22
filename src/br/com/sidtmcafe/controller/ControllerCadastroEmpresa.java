@@ -34,10 +34,6 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("getStylesheets: " + tabCadastroEmpresasPrincipal.getStylesheets());
-        System.out.println("getStyleClass: " + tabCadastroEmpresasPrincipal.getStyleClass());
-        System.out.println("getStyleableParent: " + tabCadastroEmpresasPrincipal.getStyleableParent());
-        System.out.println("getStyle: " + tabCadastroEmpresasPrincipal.getStyle());
 
     }
 }

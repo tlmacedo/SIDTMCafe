@@ -86,6 +86,9 @@ public class ControllerLogin implements Initializable, FormularioModelo, Constan
                     cboUsuarioLogin.requestFocus();
                 }
             }
+            if (event.getCode() == KeyCode.F12) {
+                btnCancela.fire();
+            }
         });
 
         btnCancela.setOnAction(event -> {
@@ -113,6 +116,7 @@ public class ControllerLogin implements Initializable, FormularioModelo, Constan
         preencherObjetos();
         fatorarObjetos();
         escutarTeclas();
+
     }
 
     void habilitarBotaoOK() {
