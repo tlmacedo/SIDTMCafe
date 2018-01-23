@@ -1,0 +1,14 @@
+.jfx-check-box {
+  -fx-font-family: $fontFamily;
+  -fx-font-style: normal;
+  -fx-text-fill: $sisColor_black;
+  -fx-font-size: $fontSizeh6;
+
+  -jfx-checked-color: #ff6600;
+  -jfx-unchecked-color: #000000;
+
+  :disabled {
+    -fx-opacity: 1.0;
+  }
+
+}

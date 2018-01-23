@@ -14,4 +14,24 @@
   -fx-background-image: url($icoCirculoPositivo);
 }
 
+.lbl_ico_cliente {
+  -fx-background-image: url($icoClientesLoja);
+  .jfx-check-box:selected & {
+    -fx-background-image: url($icoClientesLojaOrange);
+  }
+}
+
+.lbl_ico_fornecedor {
+  -fx-background-image: url($icoFornecedor);
+  .jfx-check-box:selected & {
+    -fx-background-image: url($icoFornecedorOrange);
+  }
+}
+
+.lbl_ico_transportadora {
+  -fx-background-image: url($icoTransportadora);
+  .jfx-check-box:selected & {
+    -fx-background-image: url($icoTransportadoraOrange);
+  }
+}
 

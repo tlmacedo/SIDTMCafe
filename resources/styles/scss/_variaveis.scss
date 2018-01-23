@@ -1,5 +1,5 @@
 $sisPathIcones: "/images/icos/";
-$sisPathPaineis:"/images/paineis/";
+$sisPathPaineis: "/images/paineis/";
 
 $painelViewLogin: $sisPathPaineis + "login.png";
 $painelViewPrincipal: $sisPathPaineis + "principal.png";
@@ -20,6 +20,12 @@ $icoSenha: $sisPathIcones + "ic_password_black_24dp.png";
 $icoCirculoNegativo: $sisPathIcones + "ic_remove_quadrado_black_24dp.png";
 $icoCirculoPositivo: $sisPathIcones + "ic_adiciona_quadrado_black_24dp.png";
 $icoRelogio: $sisPathIcones + "ic_relogio_orange_18dp.png";
+$icoClientesLoja: $sisPathIcones + "ic_cliente_loja_black_24dp.png";
+$icoClientesLojaOrange: $sisPathIcones + "ic_cliente_loja_orange_24dp.png";
+$icoFornecedor: $sisPathIcones + "ic_fornecedor_black_24dp.png";
+$icoFornecedorOrange: $sisPathIcones + "ic_fornecedor_orange_24dp.png";
+$icoTransportadora: $sisPathIcones + "ic_transportadora_caminhao_black_24dp.png";
+$icoTransportadoraOrange: $sisPathIcones + "ic_transportadora_caminhao_orange_24dp.png";
 
 $sisColor_transparent: transparent;
 $sisColor_cafe-perfeito: #FF6600;

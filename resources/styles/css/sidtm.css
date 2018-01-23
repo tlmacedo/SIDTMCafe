@@ -1,4 +1,4 @@
-.combo-box {
+.jfx-combo-box {
   -fx-font-family: sans-serif;
   -fx-text-fill: #000000;
   -fx-font-size: 12px;
@@ -6,7 +6,7 @@
   -jfx-focus-color: #FF6600;
   -jfx-unfocus-color: #000000;
   -jfx-label-float: true; }
-  .view-cadastro-empresa .combo-box {
+  .view-cadastro-empresa .jfx-combo-box {
     -fx-font-size: 10px; }
 
 .lbl_img_fundo_principal {
@@ -138,6 +138,21 @@
 .lbl_btn_expande_menu_view_principal {
   -fx-background-image: url("/images/icos/ic_adiciona_quadrado_black_24dp.png"); }
 
+.lbl_ico_cliente {
+  -fx-background-image: url("/images/icos/ic_cliente_loja_black_24dp.png"); }
+  .jfx-check-box:selected .lbl_ico_cliente {
+    -fx-background-image: url("/images/icos/ic_cliente_loja_orange_24dp.png"); }
+
+.lbl_ico_fornecedor {
+  -fx-background-image: url("/images/icos/ic_fornecedor_black_24dp.png"); }
+  .jfx-check-box:selected .lbl_ico_fornecedor {
+    -fx-background-image: url("/images/icos/ic_fornecedor_orange_24dp.png"); }
+
+.lbl_ico_transportadora {
+  -fx-background-image: url("/images/icos/ic_transportadora_caminhao_black_24dp.png"); }
+  .jfx-check-box:selected .lbl_ico_transportadora {
+    -fx-background-image: url("/images/icos/ic_transportadora_caminhao_orange_24dp.png"); }
+
 .dialog-pane {
   -fx-pref-width: 570px;
   -fx-pref-height: 150px;
@@ -172,6 +187,7 @@
   -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.5), 10, 0, 0, 3); }
 
 .jfx-text-field {
+  -fx-alignment: center-left;
   -fx-font-family: sans-serif;
   -fx-font-style: normal;
   -fx-text-fill: #000000;
@@ -179,9 +195,21 @@
   -jfx-focus-color: #FF6600;
   -jfx-unfocus-color: #000000;
   -jfx-label-float: true; }
+  .jfx-text-field.a-direita {
+    -fx-alignment: center-right; }
   .jfx-text-field .campo-total {
     -fx-font-size: 16px; }
   .jfx-text-field :disabled {
+    -fx-opacity: 1.0; }
+
+.jfx-check-box {
+  -fx-font-family: sans-serif;
+  -fx-font-style: normal;
+  -fx-text-fill: #000000;
+  -fx-font-size: 10px;
+  -jfx-checked-color: #ff6600;
+  -jfx-unchecked-color: #000000; }
+  .jfx-check-box :disabled {
     -fx-opacity: 1.0; }
 
 .certificado_digital_valido {

@@ -1,4 +1,5 @@
 .jfx-text-field {
+  -fx-alignment: center-left;
   -fx-font-family: $fontFamily;
   -fx-font-style: normal;
   -fx-text-fill: $sisColor_black;
@@ -8,12 +9,20 @@
   -jfx-unfocus-color: $corJFX-Unforcus;
   -jfx-label-float: true;
 
+  &.a-direita {
+    -fx-alignment: center-right;
+  }
+
   .campo-total {
     -fx-font-size: $fontSizeh4;
   }
 
   :disabled {
     -fx-opacity: 1.0;
+  }
+
+  .view-cadastro-empresa & {
+
   }
 }
 

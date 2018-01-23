@@ -40,7 +40,7 @@ public class ControllerLogin implements Initializable, FormularioModelo, Constan
     @Override
     public void preencherObjetos() {
         cboUsuarioLogin.setPromptText("Selecione usuário");
-        cboUsuarioLogin.getItems().add(new TabColaboradorVO());
+//        cboUsuarioLogin.getItems().add(new TabColaboradorVO());
         cboUsuarioLogin.getItems().addAll(new TabColaboradorDAO().getColaboradorVOList());
     }
 
@@ -120,7 +120,7 @@ public class ControllerLogin implements Initializable, FormularioModelo, Constan
     }
 
     void habilitarBotaoOK() {
-        btnOK.setDisable((cboUsuarioLogin.getSelectionModel().getSelectedIndex() <= 0) || (pswUsuarioSenha.getText().length() == 0));
+        btnOK.setDisable((cboUsuarioLogin.getSelectionModel().getSelectedIndex() < 0) || (pswUsuarioSenha.getText().length() == 0));
     }
 
     void executaLogin(TabColaboradorVO colaboradorVO) {
