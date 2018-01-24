@@ -50,8 +50,12 @@ public class TabEnderecoDAO extends BuscaBandoDados {
                 enderecoVO.setNumero(rs.getString("numero"));
                 enderecoVO.setComplemento(rs.getString("complemento"));
                 enderecoVO.setBairro(rs.getString("bairro"));
+
                 enderecoVO.setUf_id(rs.getInt("uf_id"));
+                enderecoVO.setUfVO(new SisUFDAO().getUfVO(enderecoVO.getUf_id()));
+
                 enderecoVO.setMunicipio_id(rs.getInt("municipio_id"));
+                enderecoVO.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(enderecoVO.getMunicipio_id()));
 
                 enderecoVO.setSistuacaoSistema_id(rs.getInt("situacaoSistema_id"));
                 enderecoVO.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(enderecoVO.getSistuacaoSistema_id()));
