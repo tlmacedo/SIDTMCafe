@@ -6,10 +6,18 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.List;
+
 public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
 
     TabCargoVO cargoVO;
     TabLojaVO lojaVO;
+    SisSituacaoSistemaVO situacaoSistemaVO;
+    List<TabEnderecoVO> enderecoVOList;
+    List<TabTelefoneVO> telefoneVOList;
+    List<TabContatoVO> contatoVOList;
+    List<TabEmailHomePageVO> emailHomePageVOList;
+
 
     IntegerProperty id, cargo_id, loja_id, situacaoSistema_id;
     StringProperty nome, apelido, senha, senhaSalt, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids;
@@ -31,6 +39,46 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
 
     public void setLojaVO(TabLojaVO lojaVO) {
         this.lojaVO = lojaVO;
+    }
+
+    public SisSituacaoSistemaVO getSituacaoSistemaVO() {
+        return situacaoSistemaVO;
+    }
+
+    public void setSituacaoSistemaVO(SisSituacaoSistemaVO situacaoSistemaVO) {
+        this.situacaoSistemaVO = situacaoSistemaVO;
+    }
+
+    public List<TabEnderecoVO> getEnderecoVOList() {
+        return enderecoVOList;
+    }
+
+    public void setEnderecoVOList(List<TabEnderecoVO> enderecoVOList) {
+        this.enderecoVOList = enderecoVOList;
+    }
+
+    public List<TabTelefoneVO> getTelefoneVOList() {
+        return telefoneVOList;
+    }
+
+    public void setTelefoneVOList(List<TabTelefoneVO> telefoneVOList) {
+        this.telefoneVOList = telefoneVOList;
+    }
+
+    public List<TabContatoVO> getContatoVOList() {
+        return contatoVOList;
+    }
+
+    public void setContatoVOList(List<TabContatoVO> contatoVOList) {
+        this.contatoVOList = contatoVOList;
+    }
+
+    public List<TabEmailHomePageVO> getEmailHomePageVOList() {
+        return emailHomePageVOList;
+    }
+
+    public void setEmailHomePageVOList(List<TabEmailHomePageVO> emailHomePageVOList) {
+        this.emailHomePageVOList = emailHomePageVOList;
     }
 
     public int getId() {

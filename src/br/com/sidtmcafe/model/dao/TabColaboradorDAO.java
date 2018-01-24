@@ -1,7 +1,7 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.database.ConnectionFactory;
-import br.com.sidtmcafe.model.vo.TabColaboradorVO;
+import br.com.sidtmcafe.model.vo.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -53,10 +53,36 @@ public class TabColaboradorDAO extends BuscaBandoDados {
                 colaboradorVO.setLojaVO(new TabLojaDAO().getLojaVO(colaboradorVO.getLoja_id()));
 
                 colaboradorVO.setSituacaoSistema_id(rs.getInt("situacaoSistema_id"));
+                colaboradorVO.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(colaboradorVO.getSituacaoSistema_id()));
+
                 colaboradorVO.setEndereco_ids(rs.getString("endereco_ids"));
+                List<TabEnderecoVO> enderecoVOList = new ArrayList<>();
+                for (String strCodEndereco : colaboradorVO.getEndereco_ids().split(";")) {
+                    enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
+                }
+                colaboradorVO.setEnderecoVOList(enderecoVOList);
+
                 colaboradorVO.setTelefone_ids(rs.getString("telefone_ids"));
+                List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
+                for (String strCodTelefone : colaboradorVO.getTelefone_ids().split(";")) {
+                    telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
+                }
+                colaboradorVO.setTelefoneVOList(telefoneVOList);
+
                 colaboradorVO.setContato_ids(rs.getString("contato_ids"));
+                List<TabContatoVO> contatoVOList = new ArrayList<>();
+                for (String strCodContato : colaboradorVO.getContato_ids().split(";")) {
+                    contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
+                }
+                colaboradorVO.setContatoVOList(contatoVOList);
+
                 colaboradorVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));
+                List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
+                for (String strCodEmailHomePage : colaboradorVO.getEmailHomePage_ids().split(";")) {
+                    emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
+                }
+                colaboradorVO.setEmailHomePageVOList(emailHomePageVOList);
+
 
                 colaboradorVOList.add(colaboradorVO);
             }

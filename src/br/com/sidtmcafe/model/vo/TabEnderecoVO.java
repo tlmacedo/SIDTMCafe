@@ -9,6 +9,7 @@ import javafx.beans.property.StringProperty;
 public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
 
     SisTipoEnderecoVO tipoEnderecoVO;
+    SisSituacaoSistemaVO situacaoSistemaVO;
 
     IntegerProperty id, tipoEndereco_id, uf_id, municipio_id, sistuacaoSistema_id;
     StringProperty cep, logradouro, numero, complemento, bairro;
@@ -22,6 +23,14 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
 
     public void setTipoEnderecoVO(SisTipoEnderecoVO tipoEnderecoVO) {
         this.tipoEnderecoVO = tipoEnderecoVO;
+    }
+
+    public SisSituacaoSistemaVO getSituacaoSistemaVO() {
+        return situacaoSistemaVO;
+    }
+
+    public void setSituacaoSistemaVO(SisSituacaoSistemaVO situacaoSistemaVO) {
+        this.situacaoSistemaVO = situacaoSistemaVO;
     }
 
     public int getId() {

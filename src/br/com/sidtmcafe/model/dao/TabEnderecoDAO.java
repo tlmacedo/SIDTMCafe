@@ -52,7 +52,9 @@ public class TabEnderecoDAO extends BuscaBandoDados {
                 enderecoVO.setBairro(rs.getString("bairro"));
                 enderecoVO.setUf_id(rs.getInt("uf_id"));
                 enderecoVO.setMunicipio_id(rs.getInt("municipio_id"));
+
                 enderecoVO.setSistuacaoSistema_id(rs.getInt("situacaoSistema_id"));
+                enderecoVO.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(enderecoVO.getSistuacaoSistema_id()));
 
                 enderecoVOList.add(enderecoVO);
             }

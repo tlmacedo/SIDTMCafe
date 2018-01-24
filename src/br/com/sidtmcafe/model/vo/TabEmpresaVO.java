@@ -6,20 +6,24 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.sql.Timestamp;
 import java.util.List;
 
-public class TabLojaVO extends RecursiveTreeObject<TabLojaVO> {
+public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
 
     List<TabEnderecoVO> enderecoVOList;
     List<TabTelefoneVO> telefoneVOList;
     List<TabContatoVO> contatoVOList;
     List<TabEmailHomePageVO> emailHomePageVOList;
+    TabColaboradorVO usuarioCadastroVO;
+    TabColaboradorVO usuarioAtualizacaoVO;
     SisSituacaoSistemaVO situacaoSistemaVO;
 
-    IntegerProperty id, situacaoSistema_id;
-    StringProperty cnpj, ie, razao, fantasia, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids;
+    Timestamp dataCadastro, dataAtualizacao, dataAbertura;
+    IntegerProperty id, isPessoaJuridica, isCliente, isFornecedor, isTransportadora, usuarioCadastro_id, usuarioAtualizacao_id, situacaoSistema_id;
+    StringProperty cnpj, ie, razao, fantasia, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids, naturezaJuridica;
 
-    public TabLojaVO() {
+    public TabEmpresaVO() {
     }
 
     public List<TabEnderecoVO> getEnderecoVOList() {
@@ -54,12 +58,52 @@ public class TabLojaVO extends RecursiveTreeObject<TabLojaVO> {
         this.emailHomePageVOList = emailHomePageVOList;
     }
 
+    public TabColaboradorVO getUsuarioCadastroVO() {
+        return usuarioCadastroVO;
+    }
+
+    public void setUsuarioCadastroVO(TabColaboradorVO usuarioCadastroVO) {
+        this.usuarioCadastroVO = usuarioCadastroVO;
+    }
+
+    public TabColaboradorVO getUsuarioAtualizacaoVO() {
+        return usuarioAtualizacaoVO;
+    }
+
+    public void setUsuarioAtualizacaoVO(TabColaboradorVO usuarioAtualizacaoVO) {
+        this.usuarioAtualizacaoVO = usuarioAtualizacaoVO;
+    }
+
     public SisSituacaoSistemaVO getSituacaoSistemaVO() {
         return situacaoSistemaVO;
     }
 
     public void setSituacaoSistemaVO(SisSituacaoSistemaVO situacaoSistemaVO) {
         this.situacaoSistemaVO = situacaoSistemaVO;
+    }
+
+    public Timestamp getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Timestamp dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Timestamp getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public void setDataAtualizacao(Timestamp dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public Timestamp getDataAbertura() {
+        return dataAbertura;
+    }
+
+    public void setDataAbertura(Timestamp dataAbertura) {
+        this.dataAbertura = dataAbertura;
     }
 
     public int getId() {
@@ -73,6 +117,84 @@ public class TabLojaVO extends RecursiveTreeObject<TabLojaVO> {
 
     public void setId(int id) {
         idProperty().set(id);
+    }
+
+    public int getIsPessoaJuridica() {
+        return isPessoaJuridicaProperty().get();
+    }
+
+    public IntegerProperty isPessoaJuridicaProperty() {
+        if (isPessoaJuridica == null) isPessoaJuridica = new SimpleIntegerProperty(-1);
+        return isPessoaJuridica;
+    }
+
+    public void setIsPessoaJuridica(int isPessoaJuridica) {
+        isPessoaJuridicaProperty().set(isPessoaJuridica);
+    }
+
+    public int getIsCliente() {
+        return isClienteProperty().get();
+    }
+
+    public IntegerProperty isClienteProperty() {
+        if (isCliente == null) isCliente = new SimpleIntegerProperty(-1);
+        return isCliente;
+    }
+
+    public void setIsCliente(int isCliente) {
+        isClienteProperty().set(isCliente);
+    }
+
+    public int getIsFornecedor() {
+        return isFornecedorProperty().get();
+    }
+
+    public IntegerProperty isFornecedorProperty() {
+        if (isFornecedor == null) isFornecedor = new SimpleIntegerProperty(-1);
+        return isFornecedor;
+    }
+
+    public void setIsFornecedor(int isFornecedor) {
+        isFornecedorProperty().set(isFornecedor);
+    }
+
+    public int getIsTransportadora() {
+        return isTransportadoraProperty().get();
+    }
+
+    public IntegerProperty isTransportadoraProperty() {
+        if (isTransportadora == null) isTransportadora = new SimpleIntegerProperty(-1);
+        return isTransportadora;
+    }
+
+    public void setIsTransportadora(int isTransportadora) {
+        isTransportadoraProperty().set(isTransportadora);
+    }
+
+    public int getUsuarioCadastro_id() {
+        return usuarioCadastro_idProperty().get();
+    }
+
+    public IntegerProperty usuarioCadastro_idProperty() {
+        if (usuarioCadastro_id == null) usuarioCadastro_id = new SimpleIntegerProperty(-1);
+        return usuarioCadastro_id;
+    }
+
+    public void setUsuarioCadastro_id(int usuarioCadastro_id) {
+        usuarioCadastro_idProperty().set(usuarioCadastro_id);
+    }
+
+    public int getUsuarioAtualizacao_id() {
+        return usuarioAtualizacao_idProperty().get();
+    }
+
+    public IntegerProperty usuarioAtualizacao_idProperty() {
+        if (usuarioAtualizacao_id == null) usuarioAtualizacao_id = new SimpleIntegerProperty(-1);
+        return usuarioAtualizacao_id;
+    }
+
+    public void setUsuarioAtualizacao_id(int usuarioAtualizacao_id) {
+        usuarioAtualizacao_idProperty().set(usuarioAtualizacao_id);
     }
 
     public int getSituacaoSistema_id() {
@@ -192,8 +314,21 @@ public class TabLojaVO extends RecursiveTreeObject<TabLojaVO> {
         emailHomePage_idsProperty().set(emailHomePage_ids);
     }
 
+    public String getNaturezaJuridica() {
+        return naturezaJuridicaProperty().get();
+    }
+
+    public StringProperty naturezaJuridicaProperty() {
+        if (naturezaJuridica == null) naturezaJuridica = new SimpleStringProperty("");
+        return naturezaJuridica;
+    }
+
+    public void setNaturezaJuridica(String naturezaJuridica) {
+        naturezaJuridicaProperty().set(naturezaJuridica);
+    }
+
     @Override
     public String toString() {
-        return razaoProperty().get() + " (" + fantasiaProperty().get() + ")";
+        return razaoProperty().get();
     }
 }
