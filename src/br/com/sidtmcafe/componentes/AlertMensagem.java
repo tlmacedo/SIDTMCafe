@@ -2,8 +2,13 @@ package br.com.sidtmcafe.componentes;
 
 import br.com.sidtmcafe.interfaces.Constants;
 import com.jfoenix.controls.JFXTextArea;
+import javafx.concurrent.Task;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
@@ -16,7 +21,7 @@ public class AlertMensagem implements Constants {
     ProgressBar progressBar;
     ProgressIndicator progressIndicator;
     Label label;
-    JFXTextArea jfxTextArea;
+    JFXTextArea textArea;
     Button botaoOk, botaoApply, botaoYes, botaoClose, botaoFinish, botaoNo, botaoCancel;
 
 
@@ -84,7 +89,35 @@ public class AlertMensagem implements Constants {
         dialog.setHeaderText(getCabecalho());
         dialog.setContentText(getPromptText());
         if (!getStrIco().equals(""))
-            dialog.setGraphic(new ImageView(this.getClass().getResource(getStrIco()).toString()));
+            dialog.setGraphic(new ImageView(this.getClass().getResource(PATH_IMAGENS + getStrIco()).toString()));
+    }
+
+    void ativaProgressBar(boolean geraMsgRetorno) {
+        progressIndicator = new ProgressIndicator();
+        progressIndicator.setPrefSize(25, 25);
+        progressBar = new ProgressBar();
+        progressBar.setPrefWidth(520);
+
+        HBox hBox = new HBox();
+        hBox.setSpacing(7);
+        hBox.setAlignment(Pos.CENTER_LEFT);
+        label = new Label();
+        hBox.getChildren().addAll(progressIndicator, label);
+
+        VBox vBox = new VBox();
+        vBox.setSpacing(5);
+        vBox.setAlignment(Pos.CENTER_LEFT);
+        vBox.setPadding(new Insets(0, 25, 0, 25));
+        if (geraMsgRetorno) {
+            textArea = new JFXTextArea();
+            textArea.setWrapText(true);
+            textArea.setEditable(false);
+            vBox.getChildren().addAll(hBox, textArea, progressBar);
+        } else {
+            vBox.getChildren().addAll(hBox, progressBar);
+        }
+        dialogPane.setContent(vBox);
+
     }
 
     void addStyleDialogPane(String styleAdd) {
@@ -94,14 +127,13 @@ public class AlertMensagem implements Constants {
             dialogPane.getStyleClass().add(styleAdd);
         dialog.initStyle(StageStyle.UNDECORATED);
         dialog.setDialogPane(dialogPane);
-
-        dialog.getDialogPane().getButtonTypes().clear();
     }
 
     public Optional<ButtonType> getRetornoAlert_YES_NO() {
         carregaDialog();
         addStyleDialogPane("yes_no");
 
+        dialog.getDialogPane().getButtonTypes().clear();
         dialog.getDialogPane().getButtonTypes().add(ButtonType.YES);
         botaoYes = (Button) dialog.getDialogPane().lookupButton(ButtonType.YES);
         botaoYes.setDefaultButton(true);
@@ -124,4 +156,42 @@ public class AlertMensagem implements Constants {
         return result;
     }
 
+    public void getProgresBar(Task<?> task, boolean infinito, boolean geraMsgRetorno) {
+        carregaDialog();
+        addStyleDialogPane("");
+        ativaProgressBar(geraMsgRetorno);
+
+        dialog.getDialogPane().getButtonTypes().clear();
+        if (infinito) {
+            dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+            botaoOk = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+            botaoOk.setDisable(true);
+            botaoOk.setDefaultButton(true);
+        } else {
+            progressBar.progressProperty().bind(task.progressProperty());
+        }
+        label.textProperty().bind(task.messageProperty());
+
+        task.setOnSucceeded(event -> {
+            if (infinito) {
+                dialog.setHeaderText(getResultCabecalho());
+                dialogPane.lookupButton(ButtonType.OK).setDisable(false);
+                progressBar.setVisible(false);
+                progressIndicator.setVisible(false);
+                if (geraMsgRetorno)
+                    textArea.appendText(getResultPromptText());
+            } else {
+                closeDialog();
+            }
+        });
+        Thread thread = new Thread(task);
+        thread.start();
+
+        dialog.showAndWait();
+    }
+
+    void closeDialog() {
+        dialog.setResult(ButtonType.CANCEL);
+        dialog.close();
+    }
 }

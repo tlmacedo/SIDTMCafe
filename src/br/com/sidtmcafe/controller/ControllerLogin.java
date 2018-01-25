@@ -1,5 +1,6 @@
 package br.com.sidtmcafe.controller;
 
+import br.com.sidtmcafe.componentes.Variaveis;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.TabColaboradorDAO;
@@ -21,11 +22,13 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class ControllerLogin implements Initializable, FormularioModelo, Constants {
+public class ControllerLogin extends Variaveis implements Initializable, FormularioModelo, Constants {
     public AnchorPane painelViewLogin;
     public JFXComboBox cboUsuarioLogin;
     public JFXPasswordField pswUsuarioSenha;
@@ -143,11 +146,15 @@ public class ControllerLogin implements Initializable, FormularioModelo, Constan
     }
 
     void criarVariaveisSistema_UsuarioLogado(TabColaboradorVO colaboradorVO) {
-        System.setProperty("USUARIO_LOGADO_ID", String.valueOf(colaboradorVO.getId()));
-        System.setProperty("USUARIO_LOGADO_NOME", colaboradorVO.getNome());
-        System.setProperty("USUARIO_LOGADO_APELIDO", colaboradorVO.getApelido());
-        System.setProperty("USUARIO_LOGADO_DATA", DATAHORA_LOCAL.format(DTFORMAT_DATA));
-        System.setProperty("USUARIO_LOGADO_HORA", DATAHORA_LOCAL.format(DTFORMAT_HORA));
+        USUARIO_LOGADO_ID = String.valueOf(colaboradorVO.getId());
+        USUARIO_LOGADO_NOME = colaboradorVO.getNome();
+        USUARIO_LOGADO_APELIDO = colaboradorVO.getApelido();
+        DATA_HORA = LocalDateTime.now();
+        DATA_HORA_STR = DATA_HORA.format(DTFORMAT_DATAHORA);
+        USUARIO_LOGADO_DATA = LocalDate.now();
+        USUARIO_LOGADO_DATA_STR = USUARIO_LOGADO_DATA.format(DTFORMAT_DATA);
+        USUARIO_LOGADO_HORA = LocalTime.now();
+        USUARIO_LOGADO_HORA_STR = USUARIO_LOGADO_HORA.format(DTFORMAT_HORA);
 
     }
 }

@@ -1,12 +1,24 @@
 package br.com.sidtmcafe.controller;
 
+import br.com.sidtmcafe.componentes.Tarefa;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
+import br.com.sidtmcafe.model.dao.SisMunicipioDAO;
+import br.com.sidtmcafe.model.dao.SisSituacaoSistemaDAO;
+import br.com.sidtmcafe.model.dao.SisUFDAO;
+import br.com.sidtmcafe.model.vo.SisMunicipioVO;
+import br.com.sidtmcafe.model.vo.SisSituacaoSistemaVO;
+import br.com.sidtmcafe.model.vo.SisUFVO;
 import br.com.sidtmcafe.view.ViewCadastroEmpresa;
 import com.jfoenix.controls.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Pair;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -82,40 +94,77 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
 
     @Override
     public void escutarTeclas() {
-
+        cboEndUF.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
+            municipioVOFilteredList = new FilteredList<SisMunicipioVO>(municipioVOObservableList, m -> true);
+            if (n == null) {
+                municipioVOFilteredList.setPredicate(m -> true);
+            } else {
+                municipioVOFilteredList.setPredicate(m -> m.getUf_id() == ((SisUFVO) n).getId());
+            }
+            preencherCboEndMunicipio();
+        });
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         preencherObjetos();
+        fatorarObjetos();
+        escutarTeclas();
     }
+
+    FilteredList<SisMunicipioVO> municipioVOFilteredList;
+    ObservableList<SisMunicipioVO> municipioVOObservableList;
 
     void preencherCombos() {
-        preencherCboFiltroPesquisa();
-        preencherCboClassificacaoJuridica();
+        List<Pair> listaTarefas = new ArrayList<>();
+        listaTarefas.add(new Pair("preencherCboEndUF", "preenchendo dados UF..."));
+        listaTarefas.add(new Pair("carregarTodosMunicipios", "preenchendo dados de municipios..."));
+        listaTarefas.add(new Pair("preencherCboSituacaoSistema", "preenchendo dados situações do sistema..."));
+        listaTarefas.add(new Pair("preencherCboFiltroPesquisa", "preenchendo filtros pesquisa..."));
+        listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo dados classificações jurídicas..."));
+
+
+        new Tarefa().tarefaControllerCadastroEmpresa(this, listaTarefas);
     }
 
-    void preencherCboFiltroPesquisa() {
+    public void preencherCboFiltroPesquisa() {
         cboFiltroPesquisa.getItems().clear();
-        List<String> listFiltroPesquisa = new ArrayList<>();
-        listFiltroPesquisa.add(0, "");
-        listFiltroPesquisa.add(1, "Clientes");
-        listFiltroPesquisa.add(2, "Fornecedores");
-        listFiltroPesquisa.add(3, "Transportadoras");
-
-        cboFiltroPesquisa.getItems().setAll(listFiltroPesquisa);
+        cboFiltroPesquisa.getItems().add(0, "");
+        cboFiltroPesquisa.getItems().add(1, "Clientes");
+        cboFiltroPesquisa.getItems().add(2, "Fornecedores");
+        cboFiltroPesquisa.getItems().add(3, "Transportadoras");
         cboFiltroPesquisa.getSelectionModel().select(0);
 
     }
 
-    void preencherCboClassificacaoJuridica() {
+    public void preencherCboClassificacaoJuridica() {
         cboClassificacaoJuridica.getItems().clear();
-        List<String> listClassifcacaoJuridica = new ArrayList<>();
-        listClassifcacaoJuridica.add(0, "FÍSICA");
-        listClassifcacaoJuridica.add(1, "JURÍDICA");
-
-        cboClassificacaoJuridica.getItems().setAll(listClassifcacaoJuridica);
+        cboClassificacaoJuridica.getItems().add(0, "FÍSICA");
+        cboClassificacaoJuridica.getItems().add(1, "JURÍDICA");
         cboClassificacaoJuridica.getSelectionModel().select(1);
+    }
+
+    public void preencherCboSituacaoSistema() {
+        cboSituacaoSistema.getItems().clear();
+        cboSituacaoSistema.getItems().setAll(new SisSituacaoSistemaDAO().getSituacaoSistemaVOList());
+        cboSituacaoSistema.getSelectionModel().select(0);
+    }
+
+    public void preencherCboEndUF() {
+        cboEndUF.getItems().clear();
+        cboEndUF.getItems().add(new SisUFVO());
+        cboEndUF.getItems().addAll(new SisUFDAO().getUfVOList());
+        cboEndUF.getSelectionModel().select(0);
+    }
+
+    public void carregarTodosMunicipios() {
+        municipioVOObservableList = FXCollections.observableArrayList(new SisMunicipioDAO().getMunicipioVOList());
+    }
+
+    void preencherCboEndMunicipio() {
+        cboEndMunicipio.getItems().clear();
+        cboEndMunicipio.getItems().addAll(municipioVOFilteredList);
+        cboEndMunicipio.getSelectionModel().select(0);
     }
 
 

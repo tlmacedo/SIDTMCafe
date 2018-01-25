@@ -1,6 +1,7 @@
 package br.com.sidtmcafe.controller;
 
 import br.com.sidtmcafe.componentes.AlertMensagem;
+import br.com.sidtmcafe.componentes.Variaveis;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.SisMenuPrincipalDAO;
@@ -29,14 +30,11 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ControllerPrincipal implements Initializable, FormularioModelo, Constants {
+public class ControllerPrincipal extends Variaveis implements Initializable, FormularioModelo, Constants {
 
     public BorderPane painelViewPrincipal;
     public JFXToolbar statusBar_ViewPrincipal;
     public TreeTableView<SisMenuPrincipalVO> treeMenuViewPrincipal;
-    //    public Label viewPrincipal_StatusBarLeft;
-//    public Label viewPrincipal_StatusBarCenter;
-//    public Label viewPrincipal_StatusBarRight;
     public JFXTabPane tabPaneViewPrincipal;
     public Label lblImageLogoViewPrincipal;
     public Label lblBotaoExpandeMenuViewPrincipal;
@@ -45,7 +43,7 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
     TreeTableColumn<SisMenuPrincipalVO, String> colunaItem;
     TreeTableColumn<SisMenuPrincipalVO, String> colunaAtalho;
 
-    String horarioLog = DATAHORA_LOCAL.format(DTFORMAT_HORA).toString();
+    String horarioLog = USUARIO_LOGADO_HORA_STR;
     Label stbUsuarioLogado, stbTeclasTela, stbDataBase, stbIcoRelogio, stbHora;
 
     Timeline timeline;
@@ -160,7 +158,7 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
     }
 
     void atualizarStatusBar() {
-        stbUsuarioLogado = new Label("Usuário: " + System.getProperty("USUARIO_LOGADO_APELIDO") + " [" + System.getProperty("USUARIO_LOGADO_ID") + "]");
+        stbUsuarioLogado = new Label("Usuário: " + USUARIO_LOGADO_APELIDO + " [" + USUARIO_LOGADO_ID + "]");
         stbUsuarioLogado.getStyleClass().setAll("status-bar-usuario-logado");
 
         stbTeclasTela = new Label("");
@@ -243,10 +241,8 @@ public class ControllerPrincipal implements Initializable, FormularioModelo, Con
         if (tabPaneViewPrincipal.getTabs().size() > 0) {
             tabPaneViewPrincipal.getTabs().remove(tabPaneViewPrincipal.getSelectionModel().getSelectedItem());
         } else {
-            if (new AlertMensagem("Sair do sistema",
-                    System.getProperty("USUARIO_LOGADO_APELIDO")
-                            + ", deseja sair do sistema?", PATH_IMAGENS
-                    + "ic_sair_sistema_white_32dp.png").getRetornoAlert_YES_NO().get() == ButtonType.YES)
+            if (new AlertMensagem("Sair do sistema", USUARIO_LOGADO_APELIDO + ", deseja sair do sistema?",
+                    "ic_sair_sistema_white_32dp.png").getRetornoAlert_YES_NO().get() == ButtonType.YES)
                 return true;
         }
         return false;

@@ -30,9 +30,6 @@ public interface Constants {
     String TOKEN_EXTENSAO_ARQUIVO = "cfg";
 
 
-    String USUARIO_LOGADO_NOME = null;
-    String USUARIO_LOGADO_ID = null;
-
     String LOCAL_TIME_ZONE = "America/Manaus";
     ZoneId FUSO_TIME_ZONE = ZoneId.of(LOCAL_TIME_ZONE);
     LocalDateTime DATAHORA_LOCAL = LocalDateTime.now().atZone(FUSO_TIME_ZONE).toLocalDateTime();
