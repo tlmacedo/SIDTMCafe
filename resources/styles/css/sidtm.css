@@ -218,4 +218,12 @@
 .certificado_digital_invalido {
   -fx-text-fill: #ff1c00; }
 
+.progress-bar > .track {
+  -fx-text-box-border: forestgreen;
+  -fx-control-inner-background: #FF6600; }
+
+.progress-indicator > .track {
+  -fx-text-box-border: forestgreen;
+  -fx-control-inner-background: palegreen; }
+
 /*# sourceMappingURL=sidtm.css.map */

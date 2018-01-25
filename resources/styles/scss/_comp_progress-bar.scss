@@ -1,0 +1,13 @@
+.progress-bar {
+  > .track {
+    -fx-text-box-border: forestgreen;
+    -fx-control-inner-background: $corPricipal;
+  }
+}
+
+.progress-indicator {
+  > .track {
+    -fx-text-box-border: forestgreen;
+    -fx-control-inner-background: palegreen;
+  }
+}
