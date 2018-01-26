@@ -17,22 +17,37 @@ public class SisMenuPrincipalDAO extends BuscaBandoDados {
     List<SisMenuPrincipalVO> menuPrincipalVOList;
 
     public SisMenuPrincipalVO getMenuPrincipalVO(int idSisMenuPrincipalVO) {
-        buscaSisMenuPrincipalVO(idSisMenuPrincipalVO);
+        buscaSisMenuPrincipalVO(idSisMenuPrincipalVO, "");
+        if (menuPrincipalVO == null)
+            menuPrincipalVO = new SisMenuPrincipalVO();
+        return menuPrincipalVO;
+    }
+
+    public SisMenuPrincipalVO getMenuPrincipalVO(String teclaAtalho) {
+        buscaSisMenuPrincipalVO(0, teclaAtalho);
         if (menuPrincipalVO == null)
             menuPrincipalVO = new SisMenuPrincipalVO();
         return menuPrincipalVO;
     }
 
     public List<SisMenuPrincipalVO> getMenuPrincipalVOList() {
-        buscaSisMenuPrincipalVO(0);
+        buscaSisMenuPrincipalVO(0, "");
         if (menuPrincipalVOList == null)
             menuPrincipalVOList.add(new SisMenuPrincipalVO());
         return menuPrincipalVOList;
     }
 
-    void buscaSisMenuPrincipalVO(int idSisMenuPrincipalVO) {
+    void buscaSisMenuPrincipalVO(int idSisMenuPrincipalVO, String teclaAtalho) {
         comandoSql = "SELECT * FROM sisMenuPrincipal ";
         if (idSisMenuPrincipalVO > 0) comandoSql += "WHERE id '" + idSisMenuPrincipalVO + "' ";
+        if (teclaAtalho != "") {
+            if (!comandoSql.contains("WHERE")) {
+                comandoSql += "WHERE ";
+            } else {
+                comandoSql += "AND ";
+            }
+            comandoSql += "teclaAtalho = '" + teclaAtalho + "' ";
+        }
         comandoSql += "ORDER BY id ";
 
         menuPrincipalVOList = new ArrayList<>();

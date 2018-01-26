@@ -102,6 +102,7 @@ public class AlertMensagem implements Constants {
         hBox.setSpacing(7);
         hBox.setAlignment(Pos.CENTER_LEFT);
         label = new Label();
+        label.getStyleClass().add("progress-bar");
         hBox.getChildren().addAll(progressIndicator, label);
 
         VBox vBox = new VBox();
@@ -158,7 +159,7 @@ public class AlertMensagem implements Constants {
 
     public void getProgresBar(Task<?> task, boolean infinito, boolean geraMsgRetorno) {
         carregaDialog();
-        addStyleDialogPane("");
+        addStyleDialogPane("barra-progressiva");
         ativaProgressBar(geraMsgRetorno);
 
         dialog.getDialogPane().getButtonTypes().clear();

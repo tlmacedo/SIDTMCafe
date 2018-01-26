@@ -74,9 +74,14 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
             if (CODE_KEY_SHIFT_CTRL_NEGATIVO.match(event) || CHAR_KEY_SHIFT_CTRL_NEGATIVO.match(event))
                 lblBotaoRetraiMenuViewPrincipal.fireEvent(executarMouseClicado(1));
 
-            if (event.getCode() == KeyCode.ESCAPE || event.getCode() == KeyCode.F12) {
-                if (sairSistema())
+            if (event.getCode() == KeyCode.F12) {
+                if (sairSistema(event.isControlDown()))
                     fechar();
+            }
+            if (event.getCode() == KeyCode.E && event.isControlDown() && event.isShiftDown()) {
+                SisMenuPrincipalVO item = new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+E");
+                if (item == null) return;
+                adicionaNovaTab(item);
             }
         });
 
@@ -237,14 +242,32 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
         }
     }
 
-    boolean sairSistema() {
-        if (tabPaneViewPrincipal.getTabs().size() > 0) {
-            tabPaneViewPrincipal.getTabs().remove(tabPaneViewPrincipal.getSelectionModel().getSelectedItem());
+    boolean sairSistema(boolean ctrlPressionada) {
+        if (ctrlPressionada) {
+            return perguntaFecharSistema();
         } else {
-            if (new AlertMensagem("Sair do sistema", USUARIO_LOGADO_APELIDO + ", deseja sair do sistema?",
-                    "ic_sair_sistema_white_32dp.png").getRetornoAlert_YES_NO().get() == ButtonType.YES)
-                return true;
+            if (tabPaneViewPrincipal.getTabs().size() > 0) {
+                if (perguntaFecharTab())
+                    tabPaneViewPrincipal.getTabs().remove(tabPaneViewPrincipal.getSelectionModel().getSelectedItem());
+            } else {
+                return perguntaFecharSistema();
+            }
+            return false;
         }
+    }
+
+    boolean perguntaFecharSistema() {
+        if (new AlertMensagem("Sair do sistema", USUARIO_LOGADO_APELIDO + ", deseja sair do sistema?",
+                "ic_sair_sistema_white_32dp.png").getRetornoAlert_YES_NO().get() == ButtonType.YES)
+            return true;
+        return false;
+    }
+
+    boolean perguntaFecharTab() {
+        if (new AlertMensagem("Fechar guia", USUARIO_LOGADO_APELIDO + ", deseja fechar a guia "
+                + tabPaneViewPrincipal.getSelectionModel().getSelectedItem().getText() + "?",
+                "ic_sair_tab_principal_white_32dp.png").getRetornoAlert_YES_NO().get() == ButtonType.YES)
+            return true;
         return false;
     }
 }

@@ -124,7 +124,7 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
         listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo dados classificações jurídicas..."));
 
 
-        new Tarefa().tarefaControllerCadastroEmpresa(this, listaTarefas);
+        new Tarefa().tarefaAbreCadastroEmpresa(this, listaTarefas);
     }
 
     public void preencherCboFiltroPesquisa() {

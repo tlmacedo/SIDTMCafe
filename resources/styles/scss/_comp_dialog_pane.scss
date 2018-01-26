@@ -64,5 +64,14 @@
     -fx-background-image: url($painelDialogPane_YES_NO);
   }
 
+  .label {
+    &.progress-bar {
+      -fx-text-fill: $corPricipal;
+      -fx-opacity: 0.5;
+      -fx-font-size: $fontSizeh3;
+      -fx-font-weight: bold;
+    }
+  }
+
 }
 

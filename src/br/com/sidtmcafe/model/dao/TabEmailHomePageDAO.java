@@ -44,7 +44,7 @@ public class TabEmailHomePageDAO extends BuscaBandoDados {
         comandoSql = "SELECT * FROM tabEmailHomePage ";
         if (idTabEmailHomePageVO > 0) comandoSql += "WHERE id = '" + idTabEmailHomePageVO + "' ";
         if (isEmail >= 0) {
-            if (comandoSql.contains("WHERE")) {
+            if (!comandoSql.contains("WHERE")) {
                 comandoSql += "WHERE ";
             } else {
                 comandoSql += "AND ";

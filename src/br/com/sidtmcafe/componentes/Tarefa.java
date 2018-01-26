@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Tarefa implements Constants {
 
-    public void tarefaControllerCadastroEmpresa(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {
+    public void tarefaAbreCadastroEmpresa(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {
         Task<Void> voidTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
