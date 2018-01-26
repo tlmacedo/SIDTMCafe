@@ -5,12 +5,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public interface Constants {
 
+    String COPYRIGHT = "SIDTM Copyright " + LocalDate.now().getYear();
     String LOJA_ID = "1";
     String BD_DATABASE = "cafeperfeito";
     String BD_HOST = "127.0.0.1";

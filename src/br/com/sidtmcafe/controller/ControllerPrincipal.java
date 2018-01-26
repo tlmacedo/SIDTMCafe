@@ -32,6 +32,7 @@ import java.util.ResourceBundle;
 
 public class ControllerPrincipal extends Variaveis implements Initializable, FormularioModelo, Constants {
 
+    public Label lblCopyRight;
     public BorderPane painelViewPrincipal;
     public JFXToolbar statusBar_ViewPrincipal;
     public TreeTableView<SisMenuPrincipalVO> treeMenuViewPrincipal;
@@ -56,6 +57,7 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
 
     @Override
     public void preencherObjetos() {
+        lblCopyRight.setText(COPYRIGHT);
         preencheMenuItem();
         atualizarStatusBar();
     }
@@ -160,6 +162,8 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
         treeMenuViewPrincipal.getColumns().setAll(colunaItem, colunaAtalho);
         treeMenuViewPrincipal.setRoot(treeItems[0]);
         treeMenuViewPrincipal.setShowRoot(false);
+
+
     }
 
     void atualizarStatusBar() {
