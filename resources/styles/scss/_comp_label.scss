@@ -5,6 +5,15 @@
   -fx-font-size: $fontSizeh6;
   -fx-font-style: normal;
 
+  &.copyright {
+    -fx-alignment: center-right;
+    -fx-padding: 0 10;
+    -fx-font-family: $fontFamily;
+    -fx-text-fill: $corPricipal;
+    -fx-font-size: $fontSizeh5;
+    -fx-opacity: 0.6;
+  }
+
   &.lbl_titulo {
     -fx-text-fill: $sisColor_white;
     -fx-font-size: $fontSizeh2;

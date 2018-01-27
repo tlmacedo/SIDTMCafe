@@ -1,22 +1,22 @@
 package br.com.sidtmcafe.controller;
 
 import br.com.sidtmcafe.componentes.Tarefa;
+import br.com.sidtmcafe.configuracao.ValidadorDeDados;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.SisMunicipioDAO;
 import br.com.sidtmcafe.model.dao.SisSituacaoSistemaDAO;
 import br.com.sidtmcafe.model.dao.SisUFDAO;
 import br.com.sidtmcafe.model.vo.SisMunicipioVO;
-import br.com.sidtmcafe.model.vo.SisSituacaoSistemaVO;
 import br.com.sidtmcafe.model.vo.SisUFVO;
-import br.com.sidtmcafe.view.ViewCadastroEmpresa;
 import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.concurrent.Task;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Pair;
 
@@ -103,6 +103,26 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
             }
             preencherCboEndMunicipio();
         });
+        txtCNPJ.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                if (txtCNPJ.getText().length() != 11 && txtCNPJ.getText().length() != 14) {
+                    System.out.println("número invalido");
+                    return;
+                }
+                if (!ValidadorDeDados.isCnpjCpfValido(txtCNPJ.getText())) {
+                    switch (txtCNPJ.getText().length()) {
+                        case 11:
+                            System.out.println("cpf informado é inválido!");
+                            break;
+                        case 14:
+                            System.out.println("cnpj informado é inválido!!");
+                            break;
+                    }
+                    return;
+                }
+                System.out.println("OK");
+            }
+        });
     }
 
     @Override
@@ -118,7 +138,7 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
     void preencherCombos() {
         List<Pair> listaTarefas = new ArrayList<>();
         listaTarefas.add(new Pair("preencherCboEndUF", "preenchendo dados UF..."));
-        listaTarefas.add(new Pair("carregarTodosMunicipios", "preenchendo dados de municipios..."));
+        //listaTarefas.add(new Pair("carregarTodosMunicipios", "preenchendo dados de municipios..."));
         listaTarefas.add(new Pair("preencherCboSituacaoSistema", "preenchendo dados situações do sistema..."));
         listaTarefas.add(new Pair("preencherCboFiltroPesquisa", "preenchendo filtros pesquisa..."));
         listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo dados classificações jurídicas..."));

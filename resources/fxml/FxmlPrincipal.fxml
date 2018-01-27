@@ -44,7 +44,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Label>
-            <Label fx:id="lblCopyRight" layoutY="785.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" />
+            <Label fx:id="lblCopyRight" layoutY="765.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" />
             </children>
         </AnchorPane>
     </left>

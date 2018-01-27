@@ -58,6 +58,7 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
     @Override
     public void preencherObjetos() {
         lblCopyRight.setText(COPYRIGHT);
+        lblCopyRight.getStyleClass().add("copyright");
         preencheMenuItem();
         atualizarStatusBar();
     }

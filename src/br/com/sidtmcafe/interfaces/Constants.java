@@ -12,8 +12,10 @@ import java.time.format.DateTimeFormatter;
 
 public interface Constants {
 
-    String COPYRIGHT = "SIDTM Copyright " + LocalDate.now().getYear();
+    String COPYRIGHT = "Café Perfeito " + "\u00a9 " + LocalDate.now().getYear();
     String LOJA_ID = "1";
+
+    /*Constants para conexao Mysql*/
     String BD_DATABASE = "cafeperfeito";
     String BD_HOST = "127.0.0.1";
     String BD_DRIVER_CONN = "jdbc:mysql://";
@@ -25,13 +27,14 @@ public interface Constants {
     String BD_DATABASE_STB = BD_HOST + BD_PORTA + BD_DATABASE;
 
 
+    /* Constants para estilos do sistema*/
     String STYLE_SHEETS = "/styles/css/sidtm.css"; //"/styles/min/sidtm.min.css";
     String PATH_IMAGENS = "/images/icos/";
     String PATH_FXML = "/fxml/";
     String PATH_TOKEN_BIBLIOTECA = "/certificados";
     String TOKEN_EXTENSAO_ARQUIVO = "cfg";
 
-
+    /* Constants para utilizacao de datas e horas */
     String LOCAL_TIME_ZONE = "America/Manaus";
     ZoneId FUSO_TIME_ZONE = ZoneId.of(LOCAL_TIME_ZONE);
     LocalDateTime DATAHORA_LOCAL = LocalDateTime.now().atZone(FUSO_TIME_ZONE).toLocalDateTime();
@@ -48,9 +51,19 @@ public interface Constants {
     KeyCombination CODE_KEY_SHIFT_CTRL_NEGATIVO = new KeyCodeCombination(KeyCode.MINUS, KeyCombination.SHIFT_DOWN, KeyCombination.CONTROL_DOWN);
     KeyCombination CHAR_KEY_SHIFT_CTRL_NEGATIVO = new KeyCharacterCombination("-", KeyCombination.SHIFT_DOWN, KeyCombination.CONTROL_DOWN);
 
-    //KeyCombination codeKeyCtrlF12 = new KeyCodeCombination(KeyCombination.CONTROL_DOWN, KeyCode.F12);
+    /* ****** web services */
 
-//    String certificadoValidoCor = "#0091ff";
-//    String certificadoInvalidoCor = "#ff1c00";
+    /* receitaws */
+    String WS_RECEITAWS_URL = "https://www.receitaws.com.br/v1/cnpj/";
+    String WS_RECEITAWS_TOKEN = "1953100c818519b43b895394c25b0fa38525e2800587a8b140a42e6baff7a8af";
+
+    /* webmania */
+    String WS_WEBMANIA_URL = "https://webmaniabr.com/api/1/cep/";
+    String WS_WEBMANIA_APP_KEY = "GOxHMxSXNbX99szfTE7A6mMDmb26P1Ch";
+    String WS_WEBMANIA_APP_SECRET = "kMx5QczId1GqVLbpZ52qgEgfRhiKWFPZfa39IZfp6NZhFmTq";
+
+    /* postmon */
+    String WS_POSTMON_URL = "http://api.postmon.com.br/v1/cep/";
+
 
 }
