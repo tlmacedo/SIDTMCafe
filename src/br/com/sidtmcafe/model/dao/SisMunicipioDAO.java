@@ -17,22 +17,37 @@ public class SisMunicipioDAO extends BuscaBandoDados {
     List<SisMunicipioVO> municipioVOList;
 
     public SisMunicipioVO getMunicipioVO(int idSisMunicipioVO) {
-        buscaSisMunicipioVO(idSisMunicipioVO);
+        buscaSisMunicipioVO(idSisMunicipioVO, "");
+        if (municipioVO == null)
+            municipioVO = new SisMunicipioVO();
+        return municipioVO;
+    }
+
+    public SisMunicipioVO getMunicipioVO(String municipioIbge_id) {
+        buscaSisMunicipioVO(0, municipioIbge_id);
         if (municipioVO == null)
             municipioVO = new SisMunicipioVO();
         return municipioVO;
     }
 
     public List<SisMunicipioVO> getMunicipioVOList() {
-        buscaSisMunicipioVO(0);
+        buscaSisMunicipioVO(0, "");
         if (municipioVOList == null)
             municipioVOList.add(new SisMunicipioVO());
         return municipioVOList;
     }
 
-    void buscaSisMunicipioVO(int idSisMunicipioVO) {
+    void buscaSisMunicipioVO(int idSisMunicipioVO, String municipioIbge_id) {
         comandoSql = "SELECT * FROM sisMunicipio ";
         if (idSisMunicipioVO > 0) comandoSql += "WHERE id = '" + idSisMunicipioVO + "' ";
+        if (municipioIbge_id != "") {
+            if (!comandoSql.contains("WHERE")) {
+                comandoSql += "WHERE ";
+            } else {
+                comandoSql += "AND ";
+            }
+            comandoSql += "ibge_id = '" + municipioIbge_id + "' ";
+        }
         comandoSql += "ORDER BY isCapital DESC, descricao ";
 
         municipioVOList = new ArrayList<>();

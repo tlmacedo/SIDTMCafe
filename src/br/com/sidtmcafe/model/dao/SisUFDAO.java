@@ -17,22 +17,37 @@ public class SisUFDAO extends BuscaBandoDados {
     List<SisUFVO> ufVOList;
 
     public SisUFVO getUfVO(int idSisUFVO) {
-        buscaSisUFVO(idSisUFVO);
+        buscaSisUFVO(idSisUFVO, "");
+        if (ufVO == null)
+            ufVO = new SisUFVO();
+        return ufVO;
+    }
+
+    public SisUFVO getUfVO(String siglaUF) {
+        buscaSisUFVO(0, siglaUF);
         if (ufVO == null)
             ufVO = new SisUFVO();
         return ufVO;
     }
 
     public List<SisUFVO> getUfVOList() {
-        buscaSisUFVO(0);
+        buscaSisUFVO(0, "");
         if (ufVOList == null)
             ufVOList.add(new SisUFVO());
         return ufVOList;
     }
 
-    void buscaSisUFVO(int idSisUFVO) {
+    void buscaSisUFVO(int idSisUFVO, String siglaUF) {
         comandoSql = "SELECT * FROM sisUF ";
         if (idSisUFVO > 0) comandoSql += "WHERE id = '" + idSisUFVO + "' ";
+        if (siglaUF != "") {
+            if (!comandoSql.contains("WHERE")) {
+                comandoSql += "WHERE ";
+            } else {
+                comandoSql += "AND ";
+            }
+            comandoSql += "sigla = '" + siglaUF + "' ";
+        }
         comandoSql += "ORDER BY sigla ";
 
         ufVOList = new ArrayList<>();

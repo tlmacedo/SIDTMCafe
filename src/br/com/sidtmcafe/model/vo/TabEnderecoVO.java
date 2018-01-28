@@ -14,7 +14,7 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
     SisSituacaoSistemaVO situacaoSistemaVO;
 
     IntegerProperty id, tipoEndereco_id, uf_id, municipio_id, sistuacaoSistema_id;
-    StringProperty cep, logradouro, numero, complemento, bairro;
+    StringProperty cep, logradouro, numero, complemento, bairro, pontoReferencia;
 
     public TabEnderecoVO() {
     }
@@ -179,6 +179,19 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
 
     public void setBairro(String bairro) {
         bairroProperty().set(bairro);
+    }
+
+    public String getPontoReferencia() {
+        return pontoReferenciaProperty().get();
+    }
+
+    public StringProperty pontoReferenciaProperty() {
+        if (pontoReferencia == null) pontoReferencia = new SimpleStringProperty("");
+        return pontoReferencia;
+    }
+
+    public void setPontoReferencia(String pontoReferencia) {
+        pontoReferenciaProperty().set(pontoReferencia);
     }
 
     @Override

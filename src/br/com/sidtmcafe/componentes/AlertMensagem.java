@@ -2,6 +2,9 @@ package br.com.sidtmcafe.componentes;
 
 import br.com.sidtmcafe.interfaces.Constants;
 import com.jfoenix.controls.JFXTextArea;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,6 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
+import javafx.util.Duration;
 
 import java.util.Optional;
 
@@ -20,9 +24,13 @@ public class AlertMensagem implements Constants {
     DialogPane dialogPane;
     ProgressBar progressBar;
     ProgressIndicator progressIndicator;
-    Label label;
+    Label label, labelMsg;
+    String strContagem;
     JFXTextArea textArea;
     Button botaoOk, botaoApply, botaoYes, botaoClose, botaoFinish, botaoNo, botaoCancel;
+    int tempo = 0;
+    final int duracaoTimeOut = 30;
+    String pontos = "";
 
 
     public String cabecalho, promptText, strIco;
@@ -171,8 +179,26 @@ public class AlertMensagem implements Constants {
         } else {
             progressBar.progressProperty().bind(task.progressProperty());
         }
-        label.textProperty().bind(task.messageProperty());
+        labelMsg = new Label();
+        labelMsg.textProperty().bind(task.messageProperty());
 
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(100),
+                ae -> {
+                    if (tempo % 10 == 1)
+                        if (pontos.length() < 3) {
+                            pontos += ".";
+                        } else {
+                            pontos = "";
+                        }
+                    tempo++;
+                    strContagem = " (" + (duracaoTimeOut - (tempo / 10)) + ")" + pontos;
+                    label.setText(labelMsg.getText() + strContagem);
+                }));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+
+        Timeline finalTimeline = timeline;
         task.setOnSucceeded(event -> {
             if (infinito) {
                 dialog.setHeaderText(getResultCabecalho());
@@ -184,6 +210,7 @@ public class AlertMensagem implements Constants {
             } else {
                 closeDialog();
             }
+            finalTimeline.stop();
         });
         Thread thread = new Thread(task);
         thread.start();

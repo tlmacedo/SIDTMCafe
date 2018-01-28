@@ -6,6 +6,7 @@ import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.SisMunicipioDAO;
 import br.com.sidtmcafe.model.dao.SisSituacaoSistemaDAO;
 import br.com.sidtmcafe.model.dao.SisUFDAO;
+import br.com.sidtmcafe.model.dao.WsCepPostmonDAO;
 import br.com.sidtmcafe.model.vo.SisMunicipioVO;
 import br.com.sidtmcafe.model.vo.SisUFVO;
 import com.jfoenix.controls.*;
@@ -123,6 +124,17 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
                 System.out.println("OK");
             }
         });
+
+        txtEndCEP.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                if (txtEndCEP.getText().length() != 8) {
+                    System.out.println("número invalido");
+                    return;
+                }
+                 new WsCepPostmonDAO().getCepPostmonVO(txtEndCEP.getText());
+
+            }
+        });
     }
 
     @Override
@@ -137,11 +149,11 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
 
     void preencherCombos() {
         List<Pair> listaTarefas = new ArrayList<>();
-        listaTarefas.add(new Pair("preencherCboEndUF", "preenchendo dados UF..."));
-        //listaTarefas.add(new Pair("carregarTodosMunicipios", "preenchendo dados de municipios..."));
-        listaTarefas.add(new Pair("preencherCboSituacaoSistema", "preenchendo dados situações do sistema..."));
-        listaTarefas.add(new Pair("preencherCboFiltroPesquisa", "preenchendo filtros pesquisa..."));
-        listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo dados classificações jurídicas..."));
+        listaTarefas.add(new Pair("preencherCboEndUF", "preenchendo dados UF"));
+        //listaTarefas.add(new Pair("carregarTodosMunicipios", "preenchendo dados de municipios"));
+        listaTarefas.add(new Pair("preencherCboSituacaoSistema", "preenchendo dados situações do sistema"));
+        listaTarefas.add(new Pair("preencherCboFiltroPesquisa", "preenchendo filtros pesquisa"));
+        listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo dados classificações jurídicas"));
 
 
         new Tarefa().tarefaAbreCadastroEmpresa(this, listaTarefas);
