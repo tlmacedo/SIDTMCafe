@@ -57,12 +57,10 @@ public class SisMunicipioDAO extends BuscaBandoDados {
                 municipioVO = new SisMunicipioVO();
                 municipioVO.setId(rs.getInt("id"));
                 municipioVO.setDescricao(rs.getString("descricao"));
-
                 municipioVO.setUf_id(rs.getInt("uf_id"));
-                municipioVO.setUfVO(new SisUFDAO().getUfVO(municipioVO.getUf_id()));
-
                 municipioVO.setIsCapital(rs.getInt("isCapital"));
                 municipioVO.setIbge_id(rs.getInt("ibge_id"));
+                addObjetosPesquisa();
 
                 municipioVOList.add(municipioVO);
             }
@@ -72,4 +70,9 @@ public class SisMunicipioDAO extends BuscaBandoDados {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+
+    void addObjetosPesquisa() {
+        municipioVO.setUfVO(new SisUFDAO().getUfVO(municipioVO.getUf_id()));
+    }
+
 }

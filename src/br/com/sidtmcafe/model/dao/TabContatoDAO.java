@@ -45,23 +45,11 @@ public class TabContatoDAO extends BuscaBandoDados {
                 contatoVO = new TabContatoVO();
                 contatoVO.setId(rs.getInt("id"));
                 contatoVO.setDescricao(rs.getString("descricao"));
-
                 contatoVO.setCargo_id(rs.getInt("cargo_id"));
-                contatoVO.setCargoVO(new TabCargoDAO().getCargoVO(contatoVO.getId()));
-
                 contatoVO.setTelefone_ids(rs.getString("telefone_ids"));
-                List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
-                for (String strCodTelefone : contatoVO.getTelefone_ids().split(";")) {
-                    telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
-                }
-                contatoVO.setTelefoneVOList(telefoneVOList);
-
                 contatoVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));
-                List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
-                for (String strCodEmailHomePage : contatoVO.getEmailHomePage_ids().split(";")) {
-                    emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
-                }
-                contatoVO.setEmailHomePageVOList(emailHomePageVOList);
+
+                addObjetosPesquisa();
 
                 contatoVOList.add(contatoVO);
             }
@@ -71,4 +59,21 @@ public class TabContatoDAO extends BuscaBandoDados {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+
+    void addObjetosPesquisa() {
+        contatoVO.setCargoVO(new TabCargoDAO().getCargoVO(contatoVO.getId()));
+
+        List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
+        for (String strCodTelefone : contatoVO.getTelefone_ids().split(";")) {
+            telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
+        }
+        contatoVO.setTelefoneVOList(telefoneVOList);
+
+        List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
+        for (String strCodEmailHomePage : contatoVO.getEmailHomePage_ids().split(";")) {
+            emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
+        }
+        contatoVO.setEmailHomePageVOList(emailHomePageVOList);
+    }
+
 }

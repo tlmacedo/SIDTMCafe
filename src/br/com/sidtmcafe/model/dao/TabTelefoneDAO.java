@@ -42,9 +42,9 @@ public class TabTelefoneDAO extends BuscaBandoDados {
                 telefoneVO = new TabTelefoneVO();
                 telefoneVO.setId(rs.getInt("id"));
                 telefoneVO.setDescricao(rs.getString("descricao"));
-
                 telefoneVO.setTelefoneOperadora_id(rs.getInt("telefoneOperadora_id"));
-                telefoneVO.setTelefoneOperadoraVO(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVO(telefoneVO.getTelefoneOperadora_id()));
+
+                addObjetosPesquisa();
 
                 telefoneVOList.add(telefoneVO);
             }
@@ -54,4 +54,9 @@ public class TabTelefoneDAO extends BuscaBandoDados {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+
+    void addObjetosPesquisa() {
+        telefoneVO.setTelefoneOperadoraVO(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVO(telefoneVO.getTelefoneOperadora_id()));
+    }
+
 }

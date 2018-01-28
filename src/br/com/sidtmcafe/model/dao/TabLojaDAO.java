@@ -45,40 +45,13 @@ public class TabLojaDAO extends BuscaBandoDados {
                 lojaVO.setIe(rs.getString("ie"));
                 lojaVO.setRazao(rs.getString("razao"));
                 lojaVO.setFantasia(rs.getString("fantasia"));
-
                 lojaVO.setSituacaoSistema_id(rs.getInt("situacaoSistema_id"));
-                lojaVO.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(lojaVO.getSituacaoSistema_id()));
-
                 lojaVO.setEndereco_ids(rs.getString("endereco_ids"));
-                List<TabEnderecoVO> enderecoVOList = new ArrayList<>();
-                for (String strCodEndereco : lojaVO.getEndereco_ids().split(";")) {
-                    enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
-                }
-                lojaVO.setEnderecoVOList(enderecoVOList);
-
                 lojaVO.setTelefone_ids(rs.getString("telefone_ids"));
-                List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
-                for (String strCodTelefone : lojaVO.getTelefone_ids().split(";")) {
-                    telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
-                }
-                lojaVO.setTelefoneVOList(telefoneVOList);
-
-
                 lojaVO.setContato_ids(rs.getString("contato_ids"));
-                List<TabContatoVO> contatoVOList = new ArrayList<>();
-                for (String strCodContato : lojaVO.getContato_ids().split(";")) {
-                    contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
-                }
-                lojaVO.setContatoVOList(contatoVOList);
-
-
-
                 lojaVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));
-                List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
-                for (String strCodEmailHomePage : lojaVO.getEmailHomePage_ids().split(";")) {
-                    emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
-                }
-                lojaVO.setEmailHomePageVOList(emailHomePageVOList);
+
+                addObjetosPesquisa();
 
                 lojaVOList.add(lojaVO);
             }
@@ -88,4 +61,33 @@ public class TabLojaDAO extends BuscaBandoDados {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+
+    void addObjetosPesquisa() {
+        lojaVO.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(lojaVO.getSituacaoSistema_id()));
+
+        List<TabEnderecoVO> enderecoVOList = new ArrayList<>();
+        for (String strCodEndereco : lojaVO.getEndereco_ids().split(";")) {
+            enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
+        }
+        lojaVO.setEnderecoVOList(enderecoVOList);
+
+        List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
+        for (String strCodTelefone : lojaVO.getTelefone_ids().split(";")) {
+            telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
+        }
+        lojaVO.setTelefoneVOList(telefoneVOList);
+
+        List<TabContatoVO> contatoVOList = new ArrayList<>();
+        for (String strCodContato : lojaVO.getContato_ids().split(";")) {
+            contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
+        }
+        lojaVO.setContatoVOList(contatoVOList);
+
+        List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
+        for (String strCodEmailHomePage : lojaVO.getEmailHomePage_ids().split(";")) {
+            emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
+        }
+        lojaVO.setEmailHomePageVOList(emailHomePageVOList);
+    }
+
 }
