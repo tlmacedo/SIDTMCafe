@@ -3,12 +3,11 @@ package br.com.sidtmcafe.controller;
 import br.com.sidtmcafe.componentes.Tarefa;
 import br.com.sidtmcafe.configuracao.ValidadorDeDados;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
-import br.com.sidtmcafe.model.dao.SisMunicipioDAO;
-import br.com.sidtmcafe.model.dao.SisSituacaoSistemaDAO;
-import br.com.sidtmcafe.model.dao.SisUFDAO;
-import br.com.sidtmcafe.model.dao.WsCepPostmonDAO;
+import br.com.sidtmcafe.model.dao.*;
 import br.com.sidtmcafe.model.vo.SisMunicipioVO;
 import br.com.sidtmcafe.model.vo.SisUFVO;
+import br.com.sidtmcafe.model.vo.TabEnderecoVO;
+import br.com.sidtmcafe.model.vo.WsCepPostmonVO;
 import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -131,8 +130,9 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
                     System.out.println("número invalido");
                     return;
                 }
-                 new WsCepPostmonDAO().getCepPostmonVO(txtEndCEP.getText());
-
+                String strCep = txtEndCEP.getText().replaceAll("[\\-/.]", "");
+                WsCepPostmonVO wsCepPostmonVO = new WsCepPostmonDAO().getCepPostmonVO(strCep);
+                exibirDadosEndereco(new TabEnderecoDAO().getEnderecoVO(wsCepPostmonVO, -1, 1));
             }
         });
     }
@@ -150,7 +150,7 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
     void preencherCombos() {
         List<Pair> listaTarefas = new ArrayList<>();
         listaTarefas.add(new Pair("preencherCboEndUF", "preenchendo dados UF"));
-        //listaTarefas.add(new Pair("carregarTodosMunicipios", "preenchendo dados de municipios"));
+        listaTarefas.add(new Pair("carregarTodosMunicipios", "preenchendo dados de municipios"));
         listaTarefas.add(new Pair("preencherCboSituacaoSistema", "preenchendo dados situações do sistema"));
         listaTarefas.add(new Pair("preencherCboFiltroPesquisa", "preenchendo filtros pesquisa"));
         listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo dados classificações jurídicas"));
@@ -197,6 +197,17 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
         cboEndMunicipio.getItems().clear();
         cboEndMunicipio.getItems().addAll(municipioVOFilteredList);
         cboEndMunicipio.getSelectionModel().select(0);
+    }
+
+    void exibirDadosEndereco(TabEnderecoVO enderecoVO) {
+        txtEndCEP.setText(enderecoVO.getCep());
+        txtEndLogradouro.setText(enderecoVO.getLogradouro());
+        txtEndNumero.setText("");
+        txtEndComplemento.setText(enderecoVO.getComplemento());
+        txtEndBairro.setText(enderecoVO.getBairro());
+        cboEndUF.getSelectionModel().select(enderecoVO.getUfVO());
+        cboEndMunicipio.getSelectionModel().select(enderecoVO.getMunicipioVO());
+        txtEndPontoReferencia.setText(enderecoVO.getPontoReferencia());
     }
 
 

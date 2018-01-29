@@ -1,5 +1,6 @@
 $sisPathIcones: "/images/icos/";
 $sisPathPaineis: "/images/paineis/";
+$sisLoading: $sisPathIcones + "img_loading_coffe_1.gif";
 
 $painelViewLogin: $sisPathPaineis + "login.png";
 $painelViewPrincipal: $sisPathPaineis + "principal.png";
@@ -7,6 +8,8 @@ $painelViewCertificadoDigital: $sisPathPaineis + "certificadosDigitais.png";
 $painelDialogPane: $sisPathPaineis + "dialogPane.png";
 $painelDialogPane_YES_NO: $sisPathPaineis + "dialogPane_yes_no.png";
 
+$sisHeightDialogPane_Loading: 400px;
+$sisWidthDialogPane_Loading: 480px;
 $sisHeightDialogPane: 150px;
 $sisWidthDialogPane: 570px;
 $sisHeightDialogPane_YES_NO: 150px;

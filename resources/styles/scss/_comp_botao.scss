@@ -1,5 +1,5 @@
 
-.jfx-button {
+.button {
   -fx-max-height: 30px;
   -fx-background-color: linear-gradient(#f2f2f2, #d6d6d6),
   linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
@@ -15,6 +15,7 @@
 }
 
 .btn_ok {
+  -fx-pref-width: 90;
   > .label {
     //-fx-max-height: 30px;
     -fx-graphic: url($icoBotaoOK);
@@ -22,6 +23,7 @@
 }
 
 .btn_cancel {
+  -fx-pref-width: 100;
   > .label {
     //-fx-max-height: 30px;
     -fx-graphic: url($icoBotaoCancel);

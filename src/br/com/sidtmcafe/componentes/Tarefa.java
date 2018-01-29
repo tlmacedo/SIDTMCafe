@@ -2,17 +2,9 @@ package br.com.sidtmcafe.componentes;
 
 import br.com.sidtmcafe.controller.ControllerCadastroEmpresa;
 import br.com.sidtmcafe.interfaces.Constants;
-import javafx.animation.Animation;
-import javafx.animation.AnimationTimer;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.concurrent.Task;
-import javafx.scene.control.Label;
-import javafx.util.Duration;
 import javafx.util.Pair;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.List;
 
 public class Tarefa implements Constants {
@@ -49,9 +41,10 @@ public class Tarefa implements Constants {
                 return null;
             }
         };
-        new AlertMensagem("Aguarde carregando dados do sistema...", "",
-                "ic_aguarde_sentado_orange_32dp.png")
-                .getProgresBar(voidTask, false, false);
+        new AlertMensagem().getProgressBarTransparent(voidTask, false);
+//        new AlertMensagem("Aguarde carregando dados do sistema...", "",
+//                "ic_aguarde_sentado_orange_32dp.png")
+//                .getProgressBar(voidTask, false, false);
     }
 
 }

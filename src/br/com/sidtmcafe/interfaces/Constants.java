@@ -1,10 +1,14 @@
 package br.com.sidtmcafe.interfaces;
 
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCharacterCombination;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 
+import javax.swing.text.Element;
+import javax.swing.text.html.ImageView;
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;

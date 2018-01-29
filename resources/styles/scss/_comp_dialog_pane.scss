@@ -20,38 +20,6 @@
       -fx-font-weight: bold;
     }
 
-    //.jfx-text-area {
-    //  -fx-font-family: monospace;
-    //  -fx-font-style: normal;
-    //  -fx-text-fill: $sisColor_black;
-    //  -fx-font-size: $fontSizeh6;
-    //
-    //  -jfx-focus-color: $sisColor_transparent;
-    //  -jfx-unfocus-color: $sisColor_transparent;
-    //  -jfx-label-float: true;
-    //}
-
-    //.jfx-combo-box {
-    //  -fx-font-family: sans-serif;
-    //  -fx-font-style: normal;
-    //  -fx-text-fill: $sisColor_black;
-    //  -fx-font-size: $fontSizeh5;
-    //
-    //  -jfx-focus-color: $corJFX-Focus;
-    //  -jfx-unfocus-color: $corJFX-Unforcus;
-    //  -jfx-label-float: true;
-    //}
-
-    //.jfx-text-field {
-    //  -fx-font-family: sans-serif;
-    //  -fx-font-style: normal;
-    //  -fx-text-fill: $sisColor_black;
-    //  -fx-font-size: $fontSizeh5;
-    //
-    //  -jfx-focus-color: $corJFX-Focus;
-    //  -jfx-unfocus-color: $corJFX-Unforcus;
-    //  -jfx-label-float: true;
-    //}
   }
 
   .button-bar {
@@ -63,15 +31,35 @@
     -fx-pref-height: $sisHeightDialogPane_YES_NO;
     -fx-background-image: url($painelDialogPane_YES_NO);
   }
+}
 
-  .label {
-    &.progress-bar {
-      -fx-text-fill: $corPricipal;
-      -fx-opacity: 0.5;
-      -fx-font-size: $fontSizeh3;
-      -fx-font-weight: bold;
-    }
+.progress-bar-transparent {
+  //-fx-pref-height: ($sisHeightDialogPane_Loading + 200);
+  //-fx-pref-width: ($sisWidthDialogPane_Loading + 200);
+  -fx-pref-height: $sisHeightDialogPane_Loading;
+  -fx-pref-width: $sisWidthDialogPane_Loading;
+
+  .progress-bar-loading {
+    -fx-pref-width: $sisWidthDialogPane_Loading;
+    -fx-pref-height: $sisHeightDialogPane_Loading;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+  }
+
+  .progress-bar-msg {
+    -fx-alignment: center-left;
+    -fx-pref-width: ($sisWidthDialogPane_Loading - 30);
+    -fx-padding: 0 15;
+    -fx-text-fill: $corPricipal;
+    -fx-opacity: 0.8;
+    -fx-font-size: $fontSizeh3;
+    -fx-font-weight: bold;
+  }
+
+  .progress-bar {
+    -fx-pref-width: $sisWidthDialogPane_Loading;
+    -fx-padding: 5 15;
   }
 
 }
-
