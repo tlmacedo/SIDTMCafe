@@ -2,7 +2,6 @@
   -fx-pref-width: $sisWidthDialogPane;
   -fx-pref-height: $sisHeightDialogPane;
   -fx-background-color: $sisColor_transparent;
-  -fx-background-image: url($painelDialogPane);
 
   .header-panel {
     -fx-background-color: $sisColor_transparent;
@@ -13,6 +12,7 @@
       -fx-font-style: italic;
     }
   }
+
   .content {
     &.label {
       -fx-text-fill: $sisColor_black;
@@ -26,40 +26,33 @@
     -fx-background-color: $sisColor_transparent;
   }
 
-  .yes_no {
+  &.yes_no {
     -fx-pref-width: $sisWidthDialogPane_YES_NO;
     -fx-pref-height: $sisHeightDialogPane_YES_NO;
     -fx-background-image: url($painelDialogPane_YES_NO);
   }
-}
 
-.progress-bar-transparent {
-  //-fx-pref-height: ($sisHeightDialogPane_Loading + 200);
-  //-fx-pref-width: ($sisWidthDialogPane_Loading + 200);
-  -fx-pref-height: $sisHeightDialogPane_Loading;
-  -fx-pref-width: $sisWidthDialogPane_Loading;
-
-  .progress-bar-loading {
+  &.dialog-pane-transparent {
     -fx-pref-width: $sisWidthDialogPane_Loading;
     -fx-pref-height: $sisHeightDialogPane_Loading;
-    -fx-alignment: center;
-    -fx-background-color: transparent;
-    -fx-background-repeat: no-repeat;
+    -fx-background-color: $corPricipalTransparencia;
+    .label {
+      &.msg {
+        -fx-wrap-text: true;
+        -fx-padding: 15 0 0 0;
+        -fx-alignment: center-left;
+        -fx-pref-width: ($sisWidthDialogPane_Loading - 15);
+        -fx-text-fill: $corPricipal;
+        -fx-opacity: 0.8;
+        -fx-font-size: $fontSizeh5;
+        -fx-font-weight: bold;
+      }
+    }
+    .progress-bar {
+      -fx-pref-width: ($sisWidthDialogPane_Loading - 20);
+      //-fx-pref-height: 40;
+      //-fx-padding: 5 0;
+    }
   }
-
-  .progress-bar-msg {
-    -fx-alignment: center-left;
-    -fx-pref-width: ($sisWidthDialogPane_Loading - 30);
-    -fx-padding: 0 15;
-    -fx-text-fill: $corPricipal;
-    -fx-opacity: 0.8;
-    -fx-font-size: $fontSizeh3;
-    -fx-font-weight: bold;
-  }
-
-  .progress-bar {
-    -fx-pref-width: $sisWidthDialogPane_Loading;
-    -fx-padding: 5 15;
-  }
-
 }
+

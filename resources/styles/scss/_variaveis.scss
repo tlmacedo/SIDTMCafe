@@ -6,14 +6,14 @@ $painelViewLogin: $sisPathPaineis + "login.png";
 $painelViewPrincipal: $sisPathPaineis + "principal.png";
 $painelViewCertificadoDigital: $sisPathPaineis + "certificadosDigitais.png";
 $painelDialogPane: $sisPathPaineis + "dialogPane.png";
-$painelDialogPane_YES_NO: $sisPathPaineis + "dialogPane_yes_no.png";
+$painelDialogPane_YES_NO: $painelDialogPane;
 
-$sisHeightDialogPane_Loading: 400px;
-$sisWidthDialogPane_Loading: 480px;
+$sisHeightDialogPane_Loading: 320px;
+$sisWidthDialogPane_Loading: 350px;
 $sisHeightDialogPane: 150px;
 $sisWidthDialogPane: 570px;
-$sisHeightDialogPane_YES_NO: 150px;
-$sisWidthDialogPane_YES_NO: 570px;
+$sisHeightDialogPane_YES_NO: $sisHeightDialogPane;
+$sisWidthDialogPane_YES_NO: $sisWidthDialogPane;
 
 $icoBotaoOK: $sisPathIcones + "ic_check_circulo_black_24dp.png";
 $icoBotaoCancel: $sisPathIcones + "ic_cancel_circulo_black_24dp.png";
@@ -59,6 +59,7 @@ $sisCorCertInValido: #ff1c00;
 
 $corPricipal: $sisColor_cafe-perfeito;
 $corBackground: $sisColor_whiteblack;
+$corPricipalTransparencia: rgba(255, 255, 255, 0.7);
 
 $corJFX-Focus: $corPricipal;
 $corJFX-Unforcus: $sisColor_black;

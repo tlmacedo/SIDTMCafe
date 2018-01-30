@@ -35,6 +35,17 @@ public interface Constants {
     String STYLE_SHEETS = "/styles/css/sidtm.css"; //"/styles/min/sidtm.min.css";
     String PATH_IMAGENS = "/images/icos/";
     String PATH_FXML = "/fxml/";
+    String[] IMAGE_LOADING = {PATH_IMAGENS + "img_loading_coffee0.gif",
+            PATH_IMAGENS + "img_loading_coffee1.gif",
+            PATH_IMAGENS + "img_loading_coffee2.gif",
+            PATH_IMAGENS + "img_loading_coffee3.gif",
+            PATH_IMAGENS + "img_loading_coffee4.gif",
+            PATH_IMAGENS + "img_loading_coffee5.gif",
+            PATH_IMAGENS + "img_loading_coffee6.gif",
+            PATH_IMAGENS + "img_loading_coffee7.gif",
+            PATH_IMAGENS + "img_loading_coffee8.gif",
+            PATH_IMAGENS + "img_loading_coffee9.gif",
+            PATH_IMAGENS + "img_loading_coffee10.gif"};
     String PATH_TOKEN_BIBLIOTECA = "/certificados";
     String TOKEN_EXTENSAO_ARQUIVO = "cfg";
 
