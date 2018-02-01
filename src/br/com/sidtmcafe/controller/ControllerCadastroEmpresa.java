@@ -150,7 +150,7 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
     void preencherCombos() {
         List<Pair> listaTarefas = new ArrayList<>();
         listaTarefas.add(new Pair("preencherCboEndUF", "preenchendo dados UF"));
-        listaTarefas.add(new Pair("carregarTodosMunicipios", "preenchendo dados de municipios"));
+        //listaTarefas.add(new Pair("carregarTodosMunicipios", "preenchendo dados de municipios"));
         listaTarefas.add(new Pair("preencherCboSituacaoSistema", "preenchendo dados situações do sistema"));
         listaTarefas.add(new Pair("preencherCboFiltroPesquisa", "preenchendo filtros pesquisa"));
         listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo dados classificações jurídicas"));

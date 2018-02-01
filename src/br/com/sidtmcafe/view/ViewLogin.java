@@ -7,8 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -35,6 +37,8 @@ public class ViewLogin extends Application implements Constants {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.getIcons().setAll(new Image(this.getClass().getResource(PATH_IMAGENS + "ic_security_black_24dp.png").toString()));
+        stage.initStyle(StageStyle.TRANSPARENT);
+        scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().setAll(STYLE_SHEETS);
         scene.getRoot().getStyleClass().add("view-login");
 

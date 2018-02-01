@@ -30,6 +30,10 @@ public interface Constants {
     String BD_URL = BD_DRIVER_CONN + BD_HOST + BD_PORTA + BD_DATABASE + "?useSSL=true";
     String BD_DATABASE_STB = BD_HOST + BD_PORTA + BD_DATABASE;
 
+    /* Valores para webServices */
+    String WS_FONTE_DE_DADOS_LOGIN_NAME = "t.l.macedo";
+    String WS_FONTE_DE_DADOS_LOGIN_SENHA = "Tlm487901";
+
 
     /* Constants para estilos do sistema*/
     String STYLE_SHEETS = "/styles/css/sidtm.css"; //"/styles/min/sidtm.min.css";

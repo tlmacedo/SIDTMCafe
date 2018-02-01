@@ -1,16 +1,12 @@
-
-.lbl_img_fundo_principal {
-  -fx-background-image: url($painelViewPrincipal);
+.view-login {
+  -fx-background-color: transparent;
+  -fx-background-size: cover;
+  -fx-background-image: url($painelViewLogin);
 }
 
 .certificado_digital {
-  -fx-background-color: #eeeceb;
+  -fx-background-color: transparent;
   -fx-background-size: cover;
   -fx-background-image: url($painelViewCertificadoDigital);
 }
 
-.view-login {
-  -fx-background-color: #eeeceb;
-  -fx-background-size: cover;
-  -fx-background-image: url($painelViewLogin);
-}

@@ -9,7 +9,7 @@ $painelDialogPane: $sisPathPaineis + "dialogPane.png";
 $painelDialogPane_YES_NO: $painelDialogPane;
 
 $sisHeightDialogPane_Loading: 320px;
-$sisWidthDialogPane_Loading: 350px;
+$sisWidthDialogPane_Loading: 450px;
 $sisHeightDialogPane: 150px;
 $sisWidthDialogPane: 570px;
 $sisHeightDialogPane_YES_NO: $sisHeightDialogPane;
@@ -58,8 +58,10 @@ $sisCorCertValido: #0091ff;
 $sisCorCertInValido: #ff1c00;
 
 $corPricipal: $sisColor_cafe-perfeito;
+$corPricipalBorda: $sisColor_yellow;
 $corBackground: $sisColor_whiteblack;
-$corPricipalTransparencia: rgba(255, 255, 255, 0.7);
+$corTransparenciaPreta: rgba(0, 0, 0, 0.5);
+$corTransparenciaBranca: rgba(255, 255, 255, 0.5);
 
 $corJFX-Focus: $corPricipal;
 $corJFX-Unforcus: $sisColor_black;

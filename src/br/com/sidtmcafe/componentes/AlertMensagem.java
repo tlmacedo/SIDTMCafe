@@ -1,7 +1,10 @@
 package br.com.sidtmcafe.componentes;
 
 import br.com.sidtmcafe.interfaces.Constants;
-import javafx.animation.*;
+import com.jfoenix.controls.JFXTextArea;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -16,14 +19,15 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 
 import javax.swing.*;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Optional;
+import java.util.Random;
 
 
 public class AlertMensagem extends JFrame implements Constants {
     Dialog dialog;
     DialogPane dialogPane;
     boolean transparenteDialog = false;
+    boolean geraMsgRetornoDialog = false;
     Task<?> taskDialog;
 
     Random random;
@@ -37,6 +41,7 @@ public class AlertMensagem extends JFrame implements Constants {
     VBox vBoxDialog;
 
     Label lblMensagem, lblTextoMsg;
+    JFXTextArea textArea;
     String strContagem;
     Button botaoOk, botaoApply, botaoYes, botaoClose, botaoFinish, botaoNo, botaoCancel;
 
@@ -48,6 +53,10 @@ public class AlertMensagem extends JFrame implements Constants {
     public String cabecalho, promptText, strIco;
     public String resultCabecalho, resultPromptText;
     public Exception exceptionErr;
+
+    public AlertMensagem() {
+
+    }
 
     public AlertMensagem(String cabecalho, String promptText, String strIco) {
         this.cabecalho = cabecalho;
@@ -104,14 +113,11 @@ public class AlertMensagem extends JFrame implements Constants {
     }
 
     void carregaDialog() {
-        random = new Random();
         dialog = new Dialog();
         dialogPane = dialog.getDialogPane();
 
-        if (transparenteDialog) {
-            dialog.initStyle(StageStyle.TRANSPARENT);
-            dialogPane.getScene().setFill(Color.TRANSPARENT);
-        }
+        dialog.initStyle(StageStyle.TRANSPARENT);
+        dialogPane.getScene().setFill(Color.TRANSPARENT);
         dialogPane.getStylesheets().add(STYLE_SHEETS);
 
         dialogPane.getButtonTypes().clear();
@@ -128,13 +134,12 @@ public class AlertMensagem extends JFrame implements Constants {
         }
     }
 
-    VBox ativaProgressBar() {
+    VBox preencheDialogBasico() {
         hBoxDialog = new HBox();
         hBoxDialog.setSpacing(7);
         hBoxDialog.setAlignment(Pos.CENTER_LEFT);
 
         vBoxDialog = new VBox();
-        //vBoxDialog.setSpacing(5);
         vBoxDialog.setAlignment(Pos.CENTER);
 
         lblTextoMsg = new Label();
@@ -160,14 +165,23 @@ public class AlertMensagem extends JFrame implements Constants {
         }
 
         progressBarDialog = new ProgressBar();
-        progressBarDialog.progressProperty().bind(taskDialog.progressProperty());
+
+        if (geraMsgRetornoDialog) {
+            textArea = new JFXTextArea();
+            textArea.setWrapText(true);
+            textArea.setEditable(false);
+            vBoxDialog.getChildren().add(textArea);
+            progressBarDialog.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+        } else {
+            progressBarDialog.progressProperty().bind(taskDialog.progressProperty());
+        }
 
         vBoxDialog.getChildren().add(progressBarDialog);
 
         return vBoxDialog;
     }
 
-    public void getProgressBar(Task<?> task, boolean transparente, boolean showAndWait, boolean geraMsgRetorno) {
+    public void getProgressBar(Task<?> task, boolean transparente, boolean showAndWait) {
         transparenteDialog = transparente;
         taskDialog = task;
         carregaDialog();
@@ -183,8 +197,7 @@ public class AlertMensagem extends JFrame implements Constants {
             botaoOk.setDefaultButton(true);
             botaoOk.setDisable(true);
         }
-
-        dialogPane.setContent(ativaProgressBar());
+        dialogPane.setContent(preencheDialogBasico());
 
         contagemRegressiva(30);
 
@@ -193,6 +206,10 @@ public class AlertMensagem extends JFrame implements Constants {
                 closeDialog();
             } else {
                 botaoOk.setDisable(false);
+                if (getResultPromptText() != null) {
+                    lblMensagem.setText(getResultPromptText());
+                    progressBarDialog.setVisible(false);
+                }
             }
             tlRegressiva.stop();
         });

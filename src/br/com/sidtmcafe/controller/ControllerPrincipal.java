@@ -1,6 +1,7 @@
 package br.com.sidtmcafe.controller;
 
 import br.com.sidtmcafe.componentes.AlertMensagem;
+import br.com.sidtmcafe.componentes.Tarefa;
 import br.com.sidtmcafe.componentes.Variaveis;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
@@ -80,6 +81,12 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
             if (event.getCode() == KeyCode.F12) {
                 if (sairSistema(event.isControlDown()))
                     fechar();
+            }
+            if (event.getCode() == KeyCode.F11 && event.isControlDown() && event.isShiftDown()) {
+                new Tarefa().tarefaWsFonteDeDados_ConstulaSaldo();
+            }
+            if (event.getCode() == KeyCode.F9 && event.isControlDown() && event.isShiftDown()) {
+                new Tarefa().tarefaWsCorreios_BuscaCEP("69067360");
             }
             if (event.getCode() == KeyCode.E && event.isControlDown() && event.isShiftDown()) {
                 SisMenuPrincipalVO item = new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+E");
