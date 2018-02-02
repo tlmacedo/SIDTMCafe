@@ -108,15 +108,19 @@ public class Tarefa implements Constants {
                             cadastroEmpresa.carregarTodosMunicipios();
                             break;
                         case "carregarTipoEndereco":
-                            cadastroEmpresa.carregarTipoEndereco();
+                            cadastroEmpresa.carregarSisTipoEndereco();
                             break;
+                        case "carregarSisTelefoneOperadora":
+                            cadastroEmpresa.carregarSisTelefoneOperadora();
+                            break;
+                        case "criarTabelaEmpresa":
+                            cadastroEmpresa.criarTabelaEmpresa();
                     }
                 }
                 updateProgress(tarefas.size(), tarefas.size());
                 return null;
             }
         };
-        //new AlertMensagem().getProgressBarTransparent(voidTask, false);
         new AlertMensagem("Aguarde carregando dados do sistema...", "",
                 "ic_aguarde_sentado_orange_32dp.png")
                 .getProgressBar(voidTask, true, false);

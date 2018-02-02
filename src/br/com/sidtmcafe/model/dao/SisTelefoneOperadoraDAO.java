@@ -31,11 +31,12 @@ public class SisTelefoneOperadoraDAO extends BuscaBandoDados {
     }
 
     void buscaSisTelefoneOperadoraVO(int idSisTelefoneOperadoraVO) {
-        comandoSql = "SELECT * FROM sisTelefoneOperadoraa ";
+        comandoSql = "SELECT * FROM sisTelefoneOperadora ";
         if (idSisTelefoneOperadoraVO > 0) comandoSql += "WHERE id ='" + idSisTelefoneOperadoraVO + "' ";
         comandoSql += "ORDER BY tipo DESC, descricao ";
 
         telefoneOperadoraVOList = new ArrayList<>();
+//        System.out.println("comandoSql: " + comandoSql);
         rs = getResultadosBandoDados(comandoSql);
         try {
             while (rs.next()) {

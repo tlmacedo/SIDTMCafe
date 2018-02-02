@@ -6,18 +6,31 @@ import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.*;
 import br.com.sidtmcafe.model.vo.*;
 import com.jfoenix.controls.*;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TitledPane;
+import javafx.geometry.Pos;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTreeTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Pair;
 
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,14 +40,14 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
     public AnchorPane painelViewCadastroEmpresa;
     public TitledPane tpnCadastroEmpresa;
     public JFXTextField txtPesquisa;
-    public JFXTreeTableView ttvEmpresa;
+    public JFXTreeTableView<TabEmpresaVO> ttvEmpresa;
     public JFXComboBox cboFiltroPesquisa;
     public Label lblRegistrosLocalizados;
     public TitledPane tpnDadosCadastrais;
     public JFXComboBox cboClassificacaoJuridica;
     public JFXTextField txtCNPJ;
     public JFXTextField txtIE;
-    public JFXComboBox cboSituacaoSistema;
+    public JFXComboBox<SisSituacaoSistemaVO> cboSituacaoSistema;
     public JFXTextField txtRazao;
     public JFXTextField txtFantasia;
     public JFXCheckBox chkIsCliente;
@@ -44,14 +57,14 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
     public Label labelDataCadastroDiff;
     public Label labelDataAtualizacao;
     public Label labelDataAtualizacaoDiff;
-    public JFXListView listEndereco;
+    public JFXListView<TabEnderecoVO> listEndereco;
     public JFXTextField txtEndCEP;
     public JFXTextField txtEndLogradouro;
     public JFXTextField txtEndNumero;
     public JFXTextField txtEndComplemento;
     public JFXTextField txtEndBairro;
-    public JFXComboBox cboEndUF;
-    public JFXComboBox cboEndMunicipio;
+    public JFXComboBox<SisUFVO> cboEndUF;
+    public JFXComboBox<SisMunicipioVO> cboEndMunicipio;
     public JFXTextField txtEndPontoReferencia;
     public JFXListView listAtividadePrincipal;
     public JFXListView listAtividadeSecundaria;
@@ -82,6 +95,7 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
     @Override
     public void preencherObjetos() {
         preencherCombos();
+        criarTabelas();
     }
 
     @Override
@@ -141,21 +155,41 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
         escutarTeclas();
     }
 
+    TabEmpresaVO tabEmpresaVO;
+    List<Pair> listaTarefas;
+
     FilteredList<SisMunicipioVO> municipioVOFilteredList;
     ObservableList<SisMunicipioVO> municipioVOObservableList;
     List<SisTipoEnderecoVO> tipoEnderecoVOList;
+    List<SisTelefoneOperadoraVO> telefoneOperadoraVOList;
+
+    JFXTreeTableColumn<TabEmpresaVO, Integer> colunaId;
+    JFXTreeTableColumn<TabEmpresaVO, String> colunaCnpj;
+    JFXTreeTableColumn<TabEmpresaVO, String> colunaRazao;
+    JFXTreeTableColumn<TabEmpresaVO, String> colunaFantasia;
+    JFXTreeTableColumn<TabEmpresaVO, String> colunaEndereco;
+    JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsCliente;
+    JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsFornecedor;
+    JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsTransportadora;
+    JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaAtivo;
 
     void preencherCombos() {
-        List<Pair> listaTarefas = new ArrayList<>();
+        listaTarefas = new ArrayList<>();
         listaTarefas.add(new Pair("preencherCboEndUF", "preenchendo dados UF"));
         //listaTarefas.add(new Pair("carregarTodosMunicipios", "carregando listas de municipios"));
         listaTarefas.add(new Pair("preencherCboSituacaoSistema", "preenchendo situações do sistema"));
         listaTarefas.add(new Pair("preencherCboFiltroPesquisa", "preenchendo filtros pesquisa"));
         listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo classificações jurídicas"));
-        listaTarefas.add(new Pair("carregarTipoEndereco", "carregando lista tipo endereço"));
+        listaTarefas.add(new Pair("carregarSisTipoEndereco", "carregando lista tipo endereço"));
+        listaTarefas.add(new Pair("carregarSisTelefoneOperadora", "carregando lista operadoras telefone"));
 
+        criarTabelas();
 
         new Tarefa().tarefaAbreCadastroEmpresa(this, listaTarefas);
+    }
+
+    void criarTabelas() {
+        listaTarefas.add(new Pair("criarTabelaEmpresa", "criando tabela empresas"));
     }
 
     public void preencherCboFiltroPesquisa() {
@@ -192,8 +226,12 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
         municipioVOObservableList = FXCollections.observableArrayList(new SisMunicipioDAO().getMunicipioVOList());
     }
 
-    public void carregarTipoEndereco() {
+    public void carregarSisTipoEndereco() {
         tipoEnderecoVOList = new ArrayList<SisTipoEnderecoVO>(new SisTipoEnderecoDAO().getTipoEnderecoVOList());
+    }
+
+    public void carregarSisTelefoneOperadora() {
+        telefoneOperadoraVOList = new ArrayList<SisTelefoneOperadoraVO>(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVOList());
     }
 
     void preencherCboEndMunicipio() {
@@ -213,5 +251,35 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
         txtEndPontoReferencia.setText(enderecoVO.getPontoReferencia());
     }
 
+    public void criarTabelaEmpresa() {
+        Label lblId = new Label("id");
+        colunaId = new JFXTreeTableColumn<TabEmpresaVO, Integer>();
+        colunaId.setGraphic(lblId);
+        colunaId.setPrefWidth(25);
+        colunaId.setStyle("-fx-alignment: CENTER-RIGHT;");
+        colunaId.setCellValueFactory(param -> param.getValue().getValue().idProperty().asObject());
+
+        Label lblCnpj = new Label("C.N.P.J / C.P.F.");
+        colunaCnpj = new JFXTreeTableColumn<TabEmpresaVO, String>();
+        colunaCnpj.setGraphic(lblCnpj);
+        colunaCnpj.setPrefWidth(100);
+        colunaCnpj.setStyle("fx-alignment: CENTER-RIGHT;");
+        colunaCnpj.setCellValueFactory(param -> param.getValue().getValue().cnpjProperty());
+
+        Label lblRazao = new Label("Razão / Nome");
+        colunaRazao = new JFXTreeTableColumn<TabEmpresaVO, String>();
+        colunaRazao.setGraphic(lblRazao);
+        colunaRazao.setPrefWidth(200);
+        colunaRazao.setCellValueFactory(param -> param.getValue().getValue().razaoProperty());
+
+//        colunaFantasia;
+//        colunaEndereco;
+//        colunaIsCliente;
+//        colunaIsFornecedor;
+//        colunaIsTransportadora;
+//        colunaAtivo;
+
+
+    }
 
 }

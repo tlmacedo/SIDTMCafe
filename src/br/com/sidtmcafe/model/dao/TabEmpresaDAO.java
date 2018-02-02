@@ -100,6 +100,8 @@ public class TabEmpresaDAO extends BuscaBandoDados {
         empresaVO.setUsuarioCadastroVO(new TabColaboradorDAO().getColaboradorVO(empresaVO.getUsuarioCadastro_id()));
         empresaVO.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getColaboradorVO(empresaVO.getUsuarioAtualizacao_id()));
         empresaVO.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(empresaVO.getSituacaoSistema_id()));
+
+        empresaVO.setDetalheReceitaFederalVOList(new TabEmpresa_DetalheReceitaFederalDAO().getDetalheReceitaFederalVOList());
     }
 
 }
