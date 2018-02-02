@@ -15,6 +15,15 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>br.com.nfe-hom4</groupId>
+            <artifactId>nfe-hom4</artifactId>
+            <version>4.0</version>
+            <!--<scope>system</scope>-->
+            <systemPath>${project.basedir}/resources/libs/NFe/NFe-Hom4.jar</systemPath>
+        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/org.apache.axis2/axis2 -->
         <dependency>
             <groupId>org.apache.axis2</groupId>
@@ -22,13 +31,6 @@
             <version>1.7.7</version>
             <type>pom</type>
         </dependency>
-
-
-        <!--<dependency>-->
-            <!--<groupId>org.apache.axis2</groupId>-->
-            <!--<artifactId>axis2</artifactId>-->
-            <!--<version>1.7.7</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>com.jfoenix</groupId>
             <artifactId>jfoenix</artifactId>
@@ -49,17 +51,12 @@
             <artifactId>bcprov-jdk16</artifactId>
             <version>1.46</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.json/json -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20171018</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.apache.cxf.karaf</groupId>-->
-            <!--<artifactId>apache-cxf</artifactId>-->
-            <!--<version>3.2.1</version>-->
-        <!--</dependency>-->
+
 
     </dependencies>
 </project>

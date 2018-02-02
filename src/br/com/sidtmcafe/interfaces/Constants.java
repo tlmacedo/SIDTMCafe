@@ -50,6 +50,7 @@ public interface Constants {
             PATH_IMAGENS + "img_loading_coffee8.gif",
             PATH_IMAGENS + "img_loading_coffee9.gif",
             PATH_IMAGENS + "img_loading_coffee10.gif"};
+    String IMAGE_CAFE_PERFEITO_240DP = PATH_IMAGENS + "ic_cafe_perfeito_240dp.png";
     String PATH_TOKEN_BIBLIOTECA = "/certificados";
     String TOKEN_EXTENSAO_ARQUIVO = "cfg";
 

@@ -151,10 +151,8 @@ public class AlertMensagem extends JFrame implements Constants {
                     String.valueOf(Integer.parseInt(System.getProperty("random", "-1"))
                             >= (IMAGE_LOADING.length - 1) ? 0 : Integer.parseInt(System.getProperty("random", "-1")) + 1));
             int random = Integer.parseInt(System.getProperty("random", "0"));
-            imageDialog = new Image(IMAGE_LOADING[random]);
             imageViewDialog = new ImageView();
-            imageViewDialog.setImage(imageDialog);
-            imageViewDialog.setClip(new Circle(120, 120, 120));
+            addImagem(IMAGE_LOADING[random]);
             vBoxDialog.getChildren().addAll(imageViewDialog, lblMensagem);
         } else {
             progressIndicatorDialog = new ProgressIndicator();
@@ -181,6 +179,12 @@ public class AlertMensagem extends JFrame implements Constants {
         return vBoxDialog;
     }
 
+    void addImagem(String strImage) {
+        imageDialog = new Image(strImage);
+        imageViewDialog.setImage(imageDialog);
+        imageViewDialog.setClip(new Circle(120, 120, 120));
+    }
+
     public void getProgressBar(Task<?> task, boolean transparente, boolean showAndWait) {
         transparenteDialog = transparente;
         taskDialog = task;
@@ -205,6 +209,7 @@ public class AlertMensagem extends JFrame implements Constants {
             if (!showAndWait) {
                 closeDialog();
             } else {
+                addImagem(IMAGE_CAFE_PERFEITO_240DP);
                 botaoOk.setDisable(false);
                 if (getResultPromptText() != null) {
                     lblMensagem.setText(getResultPromptText());

@@ -2,7 +2,7 @@
  * ConsultaStub.java
  *
  * This file was auto-generated from WSDL
- * by the Apache Axis2 version: 1.7.7  Built on : Nov 20, 2017 (11:41:20 GMT)
+ * by the Apache Axis2 version: 1.6.3  Built on : Jun 27, 2015 (11:17:49 BST)
  */
 package webService.fonteDeDados;
 
@@ -226,7 +226,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.ProtestoPFResponse protestoPF(
         webService.fonteDeDados.ConsultaStub.ProtestoPF protestoPF0)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[0].getName());
@@ -238,6 +238,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
 
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
+
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
 
@@ -248,7 +251,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         new javax.xml.namespace.QName(
                             "http://ws.fontededados.com.br/", "protestoPF")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "ProtestoPF"));
+                        "http://ws.fontededados.com.br/", "protestoPF"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -266,7 +269,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.ProtestoPFResponse.class);
+                    webService.fonteDeDados.ConsultaStub.ProtestoPFResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.ProtestoPFResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -289,7 +293,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "ProtestoPF"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -359,7 +363,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "protestoPF")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "ProtestoPF"));
+                    "http://ws.fontededados.com.br/", "protestoPF"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -377,7 +381,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.ProtestoPFResponse.class);
+                                webService.fonteDeDados.ConsultaStub.ProtestoPFResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultprotestoPF((webService.fonteDeDados.ConsultaStub.ProtestoPFResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrorprotestoPF(e);
@@ -408,7 +413,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 "ProtestoPF"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -486,7 +491,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.DenatranRenavamResponse denatranRenavam(
         webService.fonteDeDados.ConsultaStub.DenatranRenavam denatranRenavam2)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[1].getName());
@@ -498,6 +503,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
 
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
+
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
 
@@ -508,7 +516,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         new javax.xml.namespace.QName(
                             "http://ws.fontededados.com.br/", "denatranRenavam")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "DenatranRenavam"));
+                        "http://ws.fontededados.com.br/", "denatranRenavam"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -526,7 +534,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.DenatranRenavamResponse.class);
+                    webService.fonteDeDados.ConsultaStub.DenatranRenavamResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.DenatranRenavamResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -549,7 +558,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "DenatranRenavam"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -619,7 +628,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "denatranRenavam")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "DenatranRenavam"));
+                    "http://ws.fontededados.com.br/", "denatranRenavam"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -637,7 +646,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.DenatranRenavamResponse.class);
+                                webService.fonteDeDados.ConsultaStub.DenatranRenavamResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultdenatranRenavam((webService.fonteDeDados.ConsultaStub.DenatranRenavamResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrordenatranRenavam(e);
@@ -669,7 +679,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 "DenatranRenavam"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -747,7 +757,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.CertidaoRFCnpjResponse certidaoRFCnpj(
         webService.fonteDeDados.ConsultaStub.CertidaoRFCnpj certidaoRFCnpj4)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[2].getName());
@@ -759,6 +769,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
 
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
+
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
 
@@ -769,7 +782,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         new javax.xml.namespace.QName(
                             "http://ws.fontededados.com.br/", "certidaoRFCnpj")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "CertidaoRFCnpj"));
+                        "http://ws.fontededados.com.br/", "certidaoRFCnpj"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -787,7 +800,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.CertidaoRFCnpjResponse.class);
+                    webService.fonteDeDados.ConsultaStub.CertidaoRFCnpjResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.CertidaoRFCnpjResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -810,7 +824,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "CertidaoRFCnpj"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -880,7 +894,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "certidaoRFCnpj")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "CertidaoRFCnpj"));
+                    "http://ws.fontededados.com.br/", "certidaoRFCnpj"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -898,7 +912,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.CertidaoRFCnpjResponse.class);
+                                webService.fonteDeDados.ConsultaStub.CertidaoRFCnpjResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultcertidaoRFCnpj((webService.fonteDeDados.ConsultaStub.CertidaoRFCnpjResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrorcertidaoRFCnpj(e);
@@ -930,7 +945,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 "CertidaoRFCnpj"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -1008,7 +1023,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.CertidaoSPCcmResponse certidaoSPCcm(
         webService.fonteDeDados.ConsultaStub.CertidaoSPCcm certidaoSPCcm6)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[3].getName());
@@ -1020,6 +1035,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
 
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
+
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
 
@@ -1030,7 +1048,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         new javax.xml.namespace.QName(
                             "http://ws.fontededados.com.br/", "certidaoSPCcm")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "CertidaoSPCcm"));
+                        "http://ws.fontededados.com.br/", "certidaoSPCcm"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -1048,7 +1066,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.CertidaoSPCcmResponse.class);
+                    webService.fonteDeDados.ConsultaStub.CertidaoSPCcmResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.CertidaoSPCcmResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -1071,7 +1090,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "CertidaoSPCcm"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -1141,7 +1160,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "certidaoSPCcm")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "CertidaoSPCcm"));
+                    "http://ws.fontededados.com.br/", "certidaoSPCcm"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -1159,7 +1178,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.CertidaoSPCcmResponse.class);
+                                webService.fonteDeDados.ConsultaStub.CertidaoSPCcmResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultcertidaoSPCcm((webService.fonteDeDados.ConsultaStub.CertidaoSPCcmResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrorcertidaoSPCcm(e);
@@ -1190,7 +1210,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 "CertidaoSPCcm"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -1268,7 +1288,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.BonusResponse bonus(
         webService.fonteDeDados.ConsultaStub.Bonus bonus8)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[4].getName());
@@ -1280,6 +1300,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
 
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
+
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
 
@@ -1290,7 +1313,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         new javax.xml.namespace.QName(
                             "http://ws.fontededados.com.br/", "bonus")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "Bonus"));
+                        "http://ws.fontededados.com.br/", "bonus"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -1308,7 +1331,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.BonusResponse.class);
+                    webService.fonteDeDados.ConsultaStub.BonusResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.BonusResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -1331,7 +1355,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "Bonus"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -1400,7 +1424,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "bonus")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "Bonus"));
+                    "http://ws.fontededados.com.br/", "bonus"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -1418,7 +1442,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.BonusResponse.class);
+                                webService.fonteDeDados.ConsultaStub.BonusResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultbonus((webService.fonteDeDados.ConsultaStub.BonusResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrorbonus(e);
@@ -1447,7 +1472,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 faultElt.getQName(), "Bonus"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -1525,7 +1550,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.SituacaoCadastralPFResponse situacaoCadastralPF(
         webService.fonteDeDados.ConsultaStub.SituacaoCadastralPF situacaoCadastralPF10)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[5].getName());
@@ -1536,6 +1561,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             addPropertyToOperationClient(_operationClient,
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
+
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
 
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
@@ -1548,7 +1576,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             "http://ws.fontededados.com.br/",
                             "situacaoCadastralPF")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "SituacaoCadastralPF"));
+                        "http://ws.fontededados.com.br/", "situacaoCadastralPF"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -1566,7 +1594,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.SituacaoCadastralPFResponse.class);
+                    webService.fonteDeDados.ConsultaStub.SituacaoCadastralPFResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.SituacaoCadastralPFResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -1589,7 +1618,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "SituacaoCadastralPF"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -1659,7 +1688,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "situacaoCadastralPF")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "SituacaoCadastralPF"));
+                    "http://ws.fontededados.com.br/", "situacaoCadastralPF"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -1677,7 +1706,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.SituacaoCadastralPFResponse.class);
+                                webService.fonteDeDados.ConsultaStub.SituacaoCadastralPFResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultsituacaoCadastralPF((webService.fonteDeDados.ConsultaStub.SituacaoCadastralPFResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrorsituacaoCadastralPF(e);
@@ -1709,7 +1739,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 "SituacaoCadastralPF"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -1787,7 +1817,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.NomePorCPFResponse nomePorCPF(
         webService.fonteDeDados.ConsultaStub.NomePorCPF nomePorCPF12)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[6].getName());
@@ -1799,6 +1829,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
 
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
+
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
 
@@ -1809,7 +1842,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         new javax.xml.namespace.QName(
                             "http://ws.fontededados.com.br/", "nomePorCPF")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "NomePorCPF"));
+                        "http://ws.fontededados.com.br/", "nomePorCPF"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -1827,7 +1860,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.NomePorCPFResponse.class);
+                    webService.fonteDeDados.ConsultaStub.NomePorCPFResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.NomePorCPFResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -1850,7 +1884,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "NomePorCPF"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -1920,7 +1954,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "nomePorCPF")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "NomePorCPF"));
+                    "http://ws.fontededados.com.br/", "nomePorCPF"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -1938,7 +1972,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.NomePorCPFResponse.class);
+                                webService.fonteDeDados.ConsultaStub.NomePorCPFResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultnomePorCPF((webService.fonteDeDados.ConsultaStub.NomePorCPFResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrornomePorCPF(e);
@@ -1969,7 +2004,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 "NomePorCPF"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -2047,7 +2082,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.ProtestoPJResponse protestoPJ(
         webService.fonteDeDados.ConsultaStub.ProtestoPJ protestoPJ14)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[7].getName());
@@ -2059,6 +2094,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
 
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
+
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
 
@@ -2069,7 +2107,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         new javax.xml.namespace.QName(
                             "http://ws.fontededados.com.br/", "protestoPJ")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "ProtestoPJ"));
+                        "http://ws.fontededados.com.br/", "protestoPJ"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -2087,7 +2125,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.ProtestoPJResponse.class);
+                    webService.fonteDeDados.ConsultaStub.ProtestoPJResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.ProtestoPJResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -2110,7 +2149,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "ProtestoPJ"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -2180,7 +2219,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "protestoPJ")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "ProtestoPJ"));
+                    "http://ws.fontededados.com.br/", "protestoPJ"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -2198,7 +2237,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.ProtestoPJResponse.class);
+                                webService.fonteDeDados.ConsultaStub.ProtestoPJResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultprotestoPJ((webService.fonteDeDados.ConsultaStub.ProtestoPJResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrorprotestoPJ(e);
@@ -2229,7 +2269,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 "ProtestoPJ"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -2307,7 +2347,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.NfeResponse nfe(
         webService.fonteDeDados.ConsultaStub.Nfe nfe16)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[8].getName());
@@ -2319,6 +2359,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
 
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
+
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
 
@@ -2329,7 +2372,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         new javax.xml.namespace.QName(
                             "http://ws.fontededados.com.br/", "nfe")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "Nfe"));
+                        "http://ws.fontededados.com.br/", "nfe"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -2347,7 +2390,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.NfeResponse.class);
+                    webService.fonteDeDados.ConsultaStub.NfeResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.NfeResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -2370,7 +2414,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "Nfe"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -2439,7 +2483,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "nfe")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "Nfe"));
+                    "http://ws.fontededados.com.br/", "nfe"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -2457,7 +2501,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.NfeResponse.class);
+                                webService.fonteDeDados.ConsultaStub.NfeResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultnfe((webService.fonteDeDados.ConsultaStub.NfeResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrornfe(e);
@@ -2486,7 +2531,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 faultElt.getQName(), "Nfe"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -2564,7 +2609,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.SituacaoCadastralPJResponse situacaoCadastralPJ(
         webService.fonteDeDados.ConsultaStub.SituacaoCadastralPJ situacaoCadastralPJ18)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[9].getName());
@@ -2575,6 +2620,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             addPropertyToOperationClient(_operationClient,
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
+
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
 
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
@@ -2587,7 +2635,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             "http://ws.fontededados.com.br/",
                             "situacaoCadastralPJ")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "SituacaoCadastralPJ"));
+                        "http://ws.fontededados.com.br/", "situacaoCadastralPJ"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -2605,7 +2653,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.SituacaoCadastralPJResponse.class);
+                    webService.fonteDeDados.ConsultaStub.SituacaoCadastralPJResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.SituacaoCadastralPJResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -2628,7 +2677,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "SituacaoCadastralPJ"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -2698,7 +2747,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "situacaoCadastralPJ")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "SituacaoCadastralPJ"));
+                    "http://ws.fontededados.com.br/", "situacaoCadastralPJ"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -2716,7 +2765,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.SituacaoCadastralPJResponse.class);
+                                webService.fonteDeDados.ConsultaStub.SituacaoCadastralPJResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultsituacaoCadastralPJ((webService.fonteDeDados.ConsultaStub.SituacaoCadastralPJResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrorsituacaoCadastralPJ(e);
@@ -2748,7 +2798,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 "SituacaoCadastralPJ"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -2826,7 +2876,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.CepResponse cep(
         webService.fonteDeDados.ConsultaStub.Cep cep20)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[10].getName());
@@ -2838,6 +2888,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
 
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
+
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
 
@@ -2848,7 +2901,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         new javax.xml.namespace.QName(
                             "http://ws.fontededados.com.br/", "cep")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "Cep"));
+                        "http://ws.fontededados.com.br/", "cep"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -2866,7 +2919,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.CepResponse.class);
+                    webService.fonteDeDados.ConsultaStub.CepResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.CepResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -2889,7 +2943,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "Cep"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -2958,7 +3012,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "cep")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "Cep"));
+                    "http://ws.fontededados.com.br/", "cep"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -2976,7 +3030,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.CepResponse.class);
+                                webService.fonteDeDados.ConsultaStub.CepResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultcep((webService.fonteDeDados.ConsultaStub.CepResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrorcep(e);
@@ -3005,7 +3060,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 faultElt.getQName(), "Cep"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -3083,7 +3138,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.SaldoResponse saldo(
         webService.fonteDeDados.ConsultaStub.Saldo saldo22)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[11].getName());
@@ -3095,6 +3150,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
 
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
+
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
 
@@ -3105,7 +3163,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         new javax.xml.namespace.QName(
                             "http://ws.fontededados.com.br/", "saldo")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "Saldo"));
+                        "http://ws.fontededados.com.br/", "saldo"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -3123,7 +3181,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.SaldoResponse.class);
+                    webService.fonteDeDados.ConsultaStub.SaldoResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.SaldoResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -3146,7 +3205,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "Saldo"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -3215,7 +3274,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "saldo")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "Saldo"));
+                    "http://ws.fontededados.com.br/", "saldo"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -3233,7 +3292,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.SaldoResponse.class);
+                                webService.fonteDeDados.ConsultaStub.SaldoResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultsaldo((webService.fonteDeDados.ConsultaStub.SaldoResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrorsaldo(e);
@@ -3262,7 +3322,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 faultElt.getQName(), "Saldo"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -3340,7 +3400,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.SimplesNacionalResponse simplesNacional(
         webService.fonteDeDados.ConsultaStub.SimplesNacional simplesNacional24)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[12].getName());
@@ -3352,6 +3412,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
 
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
+
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
 
@@ -3362,7 +3425,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         new javax.xml.namespace.QName(
                             "http://ws.fontededados.com.br/", "simplesNacional")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "SimplesNacional"));
+                        "http://ws.fontededados.com.br/", "simplesNacional"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -3380,7 +3443,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.SimplesNacionalResponse.class);
+                    webService.fonteDeDados.ConsultaStub.SimplesNacionalResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.SimplesNacionalResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -3403,7 +3467,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "SimplesNacional"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -3473,7 +3537,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "simplesNacional")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "SimplesNacional"));
+                    "http://ws.fontededados.com.br/", "simplesNacional"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -3491,7 +3555,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.SimplesNacionalResponse.class);
+                                webService.fonteDeDados.ConsultaStub.SimplesNacionalResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultsimplesNacional((webService.fonteDeDados.ConsultaStub.SimplesNacionalResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrorsimplesNacional(e);
@@ -3523,7 +3588,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 "SimplesNacional"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -3601,7 +3666,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     public webService.fonteDeDados.ConsultaStub.SintegraCNPJResponse sintegraCNPJ(
         webService.fonteDeDados.ConsultaStub.SintegraCNPJ sintegraCNPJ26)
         throws java.rmi.RemoteException {
-        org.apache.axis2.context.MessageContext _messageContext = new org.apache.axis2.context.MessageContext();
+        org.apache.axis2.context.MessageContext _messageContext = null;
 
         try {
             org.apache.axis2.client.OperationClient _operationClient = _serviceClient.createClient(_operations[13].getName());
@@ -3613,6 +3678,9 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 org.apache.axis2.description.WSDL2Constants.ATTR_WHTTP_QUERY_PARAMETER_SEPARATOR,
                 "&");
 
+            // create a message context
+            _messageContext = new org.apache.axis2.context.MessageContext();
+
             // create SOAP envelope with that payload
             org.apache.axiom.soap.SOAPEnvelope env = null;
 
@@ -3623,7 +3691,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         new javax.xml.namespace.QName(
                             "http://ws.fontededados.com.br/", "sintegraCNPJ")),
                     new javax.xml.namespace.QName(
-                        "http://ws.fontededados.com.br/", "SintegraCNPJ"));
+                        "http://ws.fontededados.com.br/", "sintegraCNPJ"));
 
             //adding SOAP soap_headers
             _serviceClient.addHeadersToEnvelope(env);
@@ -3641,7 +3709,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
             java.lang.Object object = fromOM(_returnEnv.getBody()
                                                        .getFirstElement(),
-                    webService.fonteDeDados.ConsultaStub.SintegraCNPJResponse.class);
+                    webService.fonteDeDados.ConsultaStub.SintegraCNPJResponse.class,
+                    getEnvelopeNamespaces(_returnEnv));
 
             return (webService.fonteDeDados.ConsultaStub.SintegraCNPJResponse) object;
         } catch (org.apache.axis2.AxisFault f) {
@@ -3664,7 +3733,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                     faultElt.getQName(), "SintegraCNPJ"));
                         java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                         java.lang.Object messageObject = fromOM(faultElt,
-                                messageClass);
+                                messageClass, null);
                         java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                 new java.lang.Class[] { messageClass });
                         m.invoke(ex, new java.lang.Object[] { messageObject });
@@ -3734,7 +3803,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     new javax.xml.namespace.QName(
                         "http://ws.fontededados.com.br/", "sintegraCNPJ")),
                 new javax.xml.namespace.QName(
-                    "http://ws.fontededados.com.br/", "SintegraCNPJ"));
+                    "http://ws.fontededados.com.br/", "sintegraCNPJ"));
 
         // adding SOAP soap_headers
         _serviceClient.addHeadersToEnvelope(env);
@@ -3752,7 +3821,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
                         java.lang.Object object = fromOM(resultEnv.getBody()
                                                                   .getFirstElement(),
-                                webService.fonteDeDados.ConsultaStub.SintegraCNPJResponse.class);
+                                webService.fonteDeDados.ConsultaStub.SintegraCNPJResponse.class,
+                                getEnvelopeNamespaces(resultEnv));
                         callback.receiveResultsintegraCNPJ((webService.fonteDeDados.ConsultaStub.SintegraCNPJResponse) object);
                     } catch (org.apache.axis2.AxisFault e) {
                         callback.receiveErrorsintegraCNPJ(e);
@@ -3783,7 +3853,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                                                 "SintegraCNPJ"));
                                     java.lang.Class messageClass = java.lang.Class.forName(messageClassName);
                                     java.lang.Object messageObject = fromOM(faultElt,
-                                            messageClass);
+                                            messageClass, null);
                                     java.lang.reflect.Method m = exceptionClass.getMethod("setFaultMessage",
                                             new java.lang.Class[] { messageClass });
                                     m.invoke(ex,
@@ -3850,6 +3920,22 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
 
         //execute the operation client
         _operationClient.execute(false);
+    }
+
+    /**
+     *  A utility method that copies the namepaces from the SOAPEnvelope
+     */
+    private java.util.Map getEnvelopeNamespaces(
+        org.apache.axiom.soap.SOAPEnvelope env) {
+        java.util.Map returnMap = new java.util.HashMap();
+        java.util.Iterator namespaceIterator = env.getAllDeclaredNamespaces();
+
+        while (namespaceIterator.hasNext()) {
+            org.apache.axiom.om.OMNamespace ns = (org.apache.axiom.om.OMNamespace) namespaceIterator.next();
+            returnMap.put(ns.getPrefix(), ns.getNamespaceURI());
+        }
+
+        return returnMap;
     }
 
     private boolean optimizeContent(javax.xml.namespace.QName opName) {
@@ -4177,7 +4263,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.ProtestoPF param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4196,7 +4282,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.DenatranRenavam param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4215,7 +4301,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.CertidaoRFCnpj param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4234,7 +4320,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.CertidaoSPCcm param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4253,7 +4339,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.Bonus param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4271,7 +4357,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.SituacaoCadastralPF param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4290,7 +4376,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.NomePorCPF param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4309,7 +4395,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.ProtestoPJ param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4328,7 +4414,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.Nfe param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4346,7 +4432,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.SituacaoCadastralPJ param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4365,7 +4451,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.Cep param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4383,7 +4469,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.Saldo param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4401,7 +4487,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.SimplesNacional param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4420,7 +4506,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     private org.apache.axiom.soap.SOAPEnvelope toEnvelope(
         org.apache.axiom.soap.SOAPFactory factory,
         webService.fonteDeDados.ConsultaStub.SintegraCNPJ param,
-        boolean optimizeContent, javax.xml.namespace.QName elementQName)
+        boolean optimizeContent, javax.xml.namespace.QName methodQName)
         throws org.apache.axis2.AxisFault {
         try {
             org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
@@ -4446,7 +4532,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
     }
 
     private java.lang.Object fromOM(org.apache.axiom.om.OMElement param,
-        java.lang.Class type) throws org.apache.axis2.AxisFault {
+        java.lang.Class type, java.util.Map extraNamespaces)
+        throws org.apache.axis2.AxisFault {
         try {
             if (webService.fonteDeDados.ConsultaStub.Bonus.class.equals(type)) {
                 return webService.fonteDeDados.ConsultaStub.Bonus.Factory.parse(param.getXMLStreamReaderWithoutCaching());
@@ -4638,8 +4725,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -4710,7 +4799,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -4732,16 +4821,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -4754,8 +4839,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -4785,8 +4870,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -4898,11 +4982,35 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localProtestoPFResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "ProtestoPFResult"));
+
+                if (localProtestoPFResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "ProtestoPFResult cannot be null!!");
+                }
+
+                elementList.add(localProtestoPFResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -4916,7 +5024,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 ProtestoPFResponse object = new ProtestoPFResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -4924,8 +5031,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -4983,7 +5088,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -5740,8 +5845,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -6174,7 +6281,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -6196,16 +6303,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -6218,8 +6321,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -6249,8 +6352,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -6362,11 +6464,346 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://www.w3.org/2001/XMLSchema-instance", "type"));
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/",
+                    "RetornoSituacaoCadastralPJ"));
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            if (localCNPJTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CNPJ"));
+
+                if (localCNPJ != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCNPJ));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CNPJ cannot be null!!");
+                }
+            }
+
+            if (localDataAberturaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "DataAbertura"));
+
+                if (localDataAbertura != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDataAbertura));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DataAbertura cannot be null!!");
+                }
+            }
+
+            if (localNomeEmpresaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "NomeEmpresa"));
+
+                if (localNomeEmpresa != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNomeEmpresa));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "NomeEmpresa cannot be null!!");
+                }
+            }
+
+            if (localNomeFantasiaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "NomeFantasia"));
+
+                if (localNomeFantasia != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNomeFantasia));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "NomeFantasia cannot be null!!");
+                }
+            }
+
+            if (localAtividadePrincipalTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "AtividadePrincipal"));
+
+                if (localAtividadePrincipal != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localAtividadePrincipal));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "AtividadePrincipal cannot be null!!");
+                }
+            }
+
+            if (localAtividadeSecundariaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "AtividadeSecundaria"));
+
+                if (localAtividadeSecundaria != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localAtividadeSecundaria));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "AtividadeSecundaria cannot be null!!");
+                }
+            }
+
+            if (localAtividadesTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Atividades"));
+
+                if (localAtividades == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Atividades cannot be null!!");
+                }
+
+                elementList.add(localAtividades);
+            }
+
+            if (localNaturezaJuridicaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "NaturezaJuridica"));
+
+                if (localNaturezaJuridica != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNaturezaJuridica));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "NaturezaJuridica cannot be null!!");
+                }
+            }
+
+            if (localLogradouroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Logradouro"));
+
+                if (localLogradouro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogradouro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Logradouro cannot be null!!");
+                }
+            }
+
+            if (localNumeroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Numero"));
+
+                if (localNumero != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNumero));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Numero cannot be null!!");
+                }
+            }
+
+            if (localComplementoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Complemento"));
+
+                if (localComplemento != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localComplemento));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Complemento cannot be null!!");
+                }
+            }
+
+            if (localCEPTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CEP"));
+
+                if (localCEP != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCEP));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CEP cannot be null!!");
+                }
+            }
+
+            if (localBairroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Bairro"));
+
+                if (localBairro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localBairro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Bairro cannot be null!!");
+                }
+            }
+
+            if (localMunicipioTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Municipio"));
+
+                if (localMunicipio != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMunicipio));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Municipio cannot be null!!");
+                }
+            }
+
+            if (localUFTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "UF"));
+
+                if (localUF != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localUF));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "UF cannot be null!!");
+                }
+            }
+
+            if (localSituacaoCadastralTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "SituacaoCadastral"));
+
+                if (localSituacaoCadastral != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSituacaoCadastral));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "SituacaoCadastral cannot be null!!");
+                }
+            }
+
+            if (localDataSituacaoCadastralTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "DataSituacaoCadastral"));
+
+                if (localDataSituacaoCadastral != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDataSituacaoCadastral));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DataSituacaoCadastral cannot be null!!");
+                }
+            }
+
+            if (localMotivoSituacaoCadastralTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "MotivoSituacaoCadastral"));
+
+                if (localMotivoSituacaoCadastral != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMotivoSituacaoCadastral));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MotivoSituacaoCadastral cannot be null!!");
+                }
+            }
+
+            if (localSituacaoEspecialTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "SituacaoEspecial"));
+
+                if (localSituacaoEspecial != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSituacaoEspecial));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "SituacaoEspecial cannot be null!!");
+                }
+            }
+
+            if (localDataSituacaoEspecialTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "DataSituacaoEspecial"));
+
+                if (localDataSituacaoEspecial != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDataSituacaoEspecial));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DataSituacaoEspecial cannot be null!!");
+                }
+            }
+
+            if (localEnderecoEletronicoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "EnderecoEletronico"));
+
+                if (localEnderecoEletronico != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localEnderecoEletronico));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "EnderecoEletronico cannot be null!!");
+                }
+            }
+
+            if (localTelefoneTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Telefone"));
+
+                if (localTelefone != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localTelefone));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Telefone cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -6380,7 +6817,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoSituacaoCadastralPJ object = new RetornoSituacaoCadastralPJ();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -6388,8 +6824,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -6481,7 +6915,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -6512,7 +6946,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -7123,7 +7557,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -8077,8 +8511,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -8598,7 +9034,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -8620,16 +9056,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -8642,8 +9074,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -8673,8 +9105,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -8786,11 +9217,424 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://www.w3.org/2001/XMLSchema-instance", "type"));
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "RetornoNfe"));
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            if (localChaveAcessoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "ChaveAcesso"));
+
+                if (localChaveAcesso != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localChaveAcesso));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "ChaveAcesso cannot be null!!");
+                }
+            }
+
+            if (localNumeroNFeTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "NumeroNFe"));
+
+                if (localNumeroNFe != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNumeroNFe));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "NumeroNFe cannot be null!!");
+                }
+            }
+
+            if (localVersaoXmlTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "VersaoXml"));
+
+                if (localVersaoXml != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localVersaoXml));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "VersaoXml cannot be null!!");
+                }
+            }
+
+            if (localNumeroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Numero"));
+
+                if (localNumero != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNumero));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Numero cannot be null!!");
+                }
+            }
+
+            if (localSerieTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Serie"));
+
+                if (localSerie != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSerie));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Serie cannot be null!!");
+                }
+            }
+
+            if (localDataEmissaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "DataEmissao"));
+
+                if (localDataEmissao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDataEmissao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DataEmissao cannot be null!!");
+                }
+            }
+
+            if (localValorTotalNotaFiscalTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "ValorTotalNotaFiscal"));
+
+                if (localValorTotalNotaFiscal != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localValorTotalNotaFiscal));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "ValorTotalNotaFiscal cannot be null!!");
+                }
+            }
+
+            if (localCnpjEmitenteTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CnpjEmitente"));
+
+                if (localCnpjEmitente != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCnpjEmitente));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CnpjEmitente cannot be null!!");
+                }
+            }
+
+            if (localNomeEmitenteTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "NomeEmitente"));
+
+                if (localNomeEmitente != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNomeEmitente));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "NomeEmitente cannot be null!!");
+                }
+            }
+
+            if (localInscricaoEstadualEmitenteTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "InscricaoEstadualEmitente"));
+
+                if (localInscricaoEstadualEmitente != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localInscricaoEstadualEmitente));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "InscricaoEstadualEmitente cannot be null!!");
+                }
+            }
+
+            if (localUFEmitenteTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "UFEmitente"));
+
+                if (localUFEmitente != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localUFEmitente));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "UFEmitente cannot be null!!");
+                }
+            }
+
+            if (localCnpjDestinatarioTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CnpjDestinatario"));
+
+                if (localCnpjDestinatario != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCnpjDestinatario));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CnpjDestinatario cannot be null!!");
+                }
+            }
+
+            if (localNomeDestinatarioTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "NomeDestinatario"));
+
+                if (localNomeDestinatario != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNomeDestinatario));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "NomeDestinatario cannot be null!!");
+                }
+            }
+
+            if (localInscricaoEstadualDestinatarioTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "InscricaoEstadualDestinatario"));
+
+                if (localInscricaoEstadualDestinatario != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localInscricaoEstadualDestinatario));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "InscricaoEstadualDestinatario cannot be null!!");
+                }
+            }
+
+            if (localUFDestinatarioTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "UFDestinatario"));
+
+                if (localUFDestinatario != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localUFDestinatario));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "UFDestinatario cannot be null!!");
+                }
+            }
+
+            if (localProcessoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Processo"));
+
+                if (localProcesso != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localProcesso));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Processo cannot be null!!");
+                }
+            }
+
+            if (localVersaoProcessoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "VersaoProcesso"));
+
+                if (localVersaoProcesso != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localVersaoProcesso));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "VersaoProcesso cannot be null!!");
+                }
+            }
+
+            if (localTipoEmissaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "TipoEmissao"));
+
+                if (localTipoEmissao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localTipoEmissao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "TipoEmissao cannot be null!!");
+                }
+            }
+
+            if (localFinalidadeTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Finalidade"));
+
+                if (localFinalidade != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localFinalidade));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Finalidade cannot be null!!");
+                }
+            }
+
+            if (localNaturezaOperacaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "NaturezaOperacao"));
+
+                if (localNaturezaOperacao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNaturezaOperacao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "NaturezaOperacao cannot be null!!");
+                }
+            }
+
+            if (localTipoOperacaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "TipoOperacao"));
+
+                if (localTipoOperacao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localTipoOperacao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "TipoOperacao cannot be null!!");
+                }
+            }
+
+            if (localFormaPagamentoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "FormaPagamento"));
+
+                if (localFormaPagamento != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localFormaPagamento));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "FormaPagamento cannot be null!!");
+                }
+            }
+
+            if (localDigestValueTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "DigestValue"));
+
+                if (localDigestValue != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDigestValue));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DigestValue cannot be null!!");
+                }
+            }
+
+            if (localOcorrenciaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Ocorrencia"));
+
+                if (localOcorrencia != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localOcorrencia));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Ocorrencia cannot be null!!");
+                }
+            }
+
+            if (localProtocoloTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Protocolo"));
+
+                if (localProtocolo != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localProtocolo));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Protocolo cannot be null!!");
+                }
+            }
+
+            if (localDataHoraTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "DataHora"));
+
+                if (localDataHora != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDataHora));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DataHora cannot be null!!");
+                }
+            }
+
+            if (localRecebimentoAmbienteNacionalTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "RecebimentoAmbienteNacional"));
+
+                if (localRecebimentoAmbienteNacional != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localRecebimentoAmbienteNacional));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "RecebimentoAmbienteNacional cannot be null!!");
+                }
+            }
+
+            if (localProdutoServicoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "ProdutoServico"));
+
+                if (localProdutoServico == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "ProdutoServico cannot be null!!");
+                }
+
+                elementList.add(localProdutoServico);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -8804,7 +9648,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoNfe object = new RetornoNfe();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -8812,8 +9655,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -8905,7 +9746,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -8936,7 +9777,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -9721,7 +10562,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -10016,8 +10857,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -10239,7 +11082,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -10261,16 +11104,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -10283,8 +11122,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -10314,8 +11153,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -10427,11 +11265,163 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://www.w3.org/2001/XMLSchema-instance", "type"));
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/",
+                    "RetornoSituacaoCadastralPF"));
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            if (localNomeTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Nome"));
+
+                if (localNome != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNome));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Nome cannot be null!!");
+                }
+            }
+
+            if (localCpfTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Cpf"));
+
+                if (localCpf != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCpf));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Cpf cannot be null!!");
+                }
+            }
+
+            if (localSituacaoCadastralTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "SituacaoCadastral"));
+
+                if (localSituacaoCadastral != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSituacaoCadastral));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "SituacaoCadastral cannot be null!!");
+                }
+            }
+
+            if (localCodigoControleTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CodigoControle"));
+
+                if (localCodigoControle != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCodigoControle));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CodigoControle cannot be null!!");
+                }
+            }
+
+            if (localDataHoraTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "DataHora"));
+
+                if (localDataHora != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDataHora));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DataHora cannot be null!!");
+                }
+            }
+
+            if (localDataNascimentoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "DataNascimento"));
+
+                if (localDataNascimento != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDataNascimento));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DataNascimento cannot be null!!");
+                }
+            }
+
+            if (localDataInscricaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "DataInscricao"));
+
+                if (localDataInscricao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDataInscricao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DataInscricao cannot be null!!");
+                }
+            }
+
+            if (localDigitoVerificadorTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "DigitoVerificador"));
+
+                if (localDigitoVerificador != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDigitoVerificador));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DigitoVerificador cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -10445,7 +11435,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoSituacaoCadastralPF object = new RetornoSituacaoCadastralPF();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -10453,8 +11442,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -10546,7 +11533,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -10577,7 +11564,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -10808,7 +11795,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -10934,8 +11921,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -11040,7 +12029,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -11062,16 +12051,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -11084,8 +12069,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -11115,8 +12100,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -11228,11 +12212,62 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            if (localCnpjTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "cnpj"));
+
+                if (localCnpj != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCnpj));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "cnpj cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -11246,7 +12281,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 CertidaoSPCcm object = new CertidaoSPCcm();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -11254,8 +12288,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -11378,7 +12410,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -11471,8 +12503,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -11562,7 +12596,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -11584,16 +12618,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -11606,8 +12636,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -11637,8 +12667,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -11750,11 +12779,49 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -11767,7 +12834,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 Bonus object = new Bonus();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -11775,8 +12841,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -11872,7 +12936,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -11932,8 +12996,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -12004,7 +13070,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -12026,16 +13092,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -12048,8 +13110,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -12079,8 +13141,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -12192,11 +13253,35 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localSintegraCNPJResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "SintegraCNPJResult"));
+
+                if (localSintegraCNPJResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "SintegraCNPJResult cannot be null!!");
+                }
+
+                elementList.add(localSintegraCNPJResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -12210,7 +13295,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 SintegraCNPJResponse object = new SintegraCNPJResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -12218,8 +13302,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -12277,7 +13359,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -13000,8 +14082,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -13416,7 +14500,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -13438,16 +14522,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -13460,8 +14540,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -13491,8 +14571,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -13604,11 +14683,331 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://www.w3.org/2001/XMLSchema-instance", "type"));
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "RetornoDenatranRenavam"));
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            if (localPlacaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Placa"));
+
+                if (localPlaca != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localPlaca));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Placa cannot be null!!");
+                }
+            }
+
+            if (localRenavamTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Renavam"));
+
+                if (localRenavam != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localRenavam));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Renavam cannot be null!!");
+                }
+            }
+
+            if (localCpfCnpjTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CpfCnpj"));
+
+                if (localCpfCnpj != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCpfCnpj));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CpfCnpj cannot be null!!");
+                }
+            }
+
+            if (localNomeProprietarioTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "NomeProprietario"));
+
+                if (localNomeProprietario != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNomeProprietario));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "NomeProprietario cannot be null!!");
+                }
+            }
+
+            if (localTipoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Tipo"));
+
+                if (localTipo != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localTipo));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Tipo cannot be null!!");
+                }
+            }
+
+            if (localEspecieTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Especie"));
+
+                if (localEspecie != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localEspecie));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Especie cannot be null!!");
+                }
+            }
+
+            if (localCarroceriaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Carroceria"));
+
+                if (localCarroceria != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCarroceria));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Carroceria cannot be null!!");
+                }
+            }
+
+            if (localCategoriaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Categoria"));
+
+                if (localCategoria != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCategoria));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Categoria cannot be null!!");
+                }
+            }
+
+            if (localCombustivelTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Combustivel"));
+
+                if (localCombustivel != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCombustivel));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Combustivel cannot be null!!");
+                }
+            }
+
+            if (localMarcaModeloTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MarcaModelo"));
+
+                if (localMarcaModelo != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMarcaModelo));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MarcaModelo cannot be null!!");
+                }
+            }
+
+            if (localAnoFabricacaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "AnoFabricacao"));
+
+                if (localAnoFabricacao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localAnoFabricacao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "AnoFabricacao cannot be null!!");
+                }
+            }
+
+            if (localAnoModeloTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "AnoModelo"));
+
+                if (localAnoModelo != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localAnoModelo));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "AnoModelo cannot be null!!");
+                }
+            }
+
+            if (localCorTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Cor"));
+
+                if (localCor != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCor));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Cor cannot be null!!");
+                }
+            }
+
+            if (localLotacaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Lotacao"));
+
+                if (localLotacao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLotacao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Lotacao cannot be null!!");
+                }
+            }
+
+            if (localCapacidadeCargaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CapacidadeCarga"));
+
+                if (localCapacidadeCarga != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCapacidadeCarga));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CapacidadeCarga cannot be null!!");
+                }
+            }
+
+            if (localPotenciaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Potencia"));
+
+                if (localPotencia != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localPotencia));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Potencia cannot be null!!");
+                }
+            }
+
+            if (localCilindradasTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Cilindradas"));
+
+                if (localCilindradas != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCilindradas));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Cilindradas cannot be null!!");
+                }
+            }
+
+            if (localRestricao1Tracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Restricao1"));
+
+                if (localRestricao1 != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localRestricao1));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Restricao1 cannot be null!!");
+                }
+            }
+
+            if (localRestricao2Tracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Restricao2"));
+
+                if (localRestricao2 != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localRestricao2));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Restricao2 cannot be null!!");
+                }
+            }
+
+            if (localRestricao3Tracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Restricao3"));
+
+                if (localRestricao3 != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localRestricao3));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Restricao3 cannot be null!!");
+                }
+            }
+
+            if (localRestricao4Tracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Restricao4"));
+
+                if (localRestricao4 != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localRestricao4));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Restricao4 cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -13622,7 +15021,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoDenatranRenavam object = new RetornoDenatranRenavam();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -13630,8 +15028,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -13723,7 +15119,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -13754,7 +15150,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -14348,7 +15744,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -14396,8 +15792,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -14446,7 +15844,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -14468,16 +15866,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -14490,8 +15884,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -14521,8 +15915,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -14634,11 +16027,24 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            //We can safely assume an element has only one type associated with it
+            if (localRetornoDenatranRenavam == null) {
+                return new org.apache.axis2.databinding.utils.reader.NullXMLStreamReader(MY_QNAME);
+            } else {
+                return localRetornoDenatranRenavam.getPullParser(MY_QNAME);
+            }
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -14652,7 +16058,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoDenatranRenavamE object = new RetornoDenatranRenavamE();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -14660,8 +16065,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -14700,7 +16103,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             } // End of if for expected property start element
 
                             else {
-                                // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                                // A start element we are not expecting indicates an invalid parameter was passed
                                 throw new org.apache.axis2.databinding.ADBException(
                                     "Unexpected subelement " +
                                     reader.getName());
@@ -14794,8 +16197,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -14887,7 +16292,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -14909,16 +16314,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -14931,8 +16332,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -14962,8 +16363,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -15075,11 +16475,46 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localProdutoServicoInfoTracker) {
+                if (localProdutoServicoInfo != null) {
+                    for (int i = 0; i < localProdutoServicoInfo.length; i++) {
+                        if (localProdutoServicoInfo[i] != null) {
+                            elementList.add(new javax.xml.namespace.QName(
+                                    "http://ws.fontededados.com.br/",
+                                    "ProdutoServicoInfo"));
+                            elementList.add(localProdutoServicoInfo[i]);
+                        } else {
+                            elementList.add(new javax.xml.namespace.QName(
+                                    "http://ws.fontededados.com.br/",
+                                    "ProdutoServicoInfo"));
+                            elementList.add(null);
+                        }
+                    }
+                } else {
+                    elementList.add(new javax.xml.namespace.QName(
+                            "http://ws.fontededados.com.br/",
+                            "ProdutoServicoInfo"));
+                    elementList.add(localProdutoServicoInfo);
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -15093,7 +16528,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 ArrayOfProdutoServicoInfo object = new ArrayOfProdutoServicoInfo();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -15101,8 +16535,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -15214,7 +16646,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -15340,8 +16772,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -15446,7 +16880,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -15468,16 +16902,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -15490,8 +16920,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -15521,8 +16951,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -15634,11 +17063,62 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            if (localCepTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "cep"));
+
+                if (localCep != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCep));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "cep cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -15651,7 +17131,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 Cep object = new Cep();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -15659,8 +17138,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -15783,7 +17260,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -15843,8 +17320,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -15915,7 +17394,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -15937,16 +17416,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -15959,8 +17434,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -15990,8 +17465,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -16103,11 +17577,35 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localProtestoPJResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "ProtestoPJResult"));
+
+                if (localProtestoPJResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "ProtestoPJResult cannot be null!!");
+                }
+
+                elementList.add(localProtestoPJResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -16121,7 +17619,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 ProtestoPJResponse object = new ProtestoPJResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -16129,8 +17626,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -16188,7 +17683,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -16317,8 +17812,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -16458,7 +17955,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -16480,16 +17977,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -16502,8 +17995,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -16533,8 +18026,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -16646,11 +18138,96 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://www.w3.org/2001/XMLSchema-instance", "type"));
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "RetornoProtesto"));
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            if (localNumeroInscricaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "NumeroInscricao"));
+
+                if (localNumeroInscricao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNumeroInscricao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "NumeroInscricao cannot be null!!");
+                }
+            }
+
+            if (localSituacaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Situacao"));
+
+                if (localSituacao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSituacao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Situacao cannot be null!!");
+                }
+            }
+
+            if (localDetalhesTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Detalhes"));
+
+                if (localDetalhes == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Detalhes cannot be null!!");
+                }
+
+                elementList.add(localDetalhes);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -16664,7 +18241,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoProtesto object = new RetornoProtesto();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -16672,8 +18248,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -16765,7 +18339,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -16796,7 +18370,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -16877,7 +18451,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -17039,8 +18613,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -17201,7 +18777,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -17223,16 +18799,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -17245,8 +18817,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -17276,8 +18848,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -17389,11 +18960,110 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://www.w3.org/2001/XMLSchema-instance", "type"));
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "RetornoSimplesNacional"));
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            if (localCnpjTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Cnpj"));
+
+                if (localCnpj != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCnpj));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Cnpj cannot be null!!");
+                }
+            }
+
+            if (localNomeEmpresarialTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "NomeEmpresarial"));
+
+                if (localNomeEmpresarial != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNomeEmpresarial));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "NomeEmpresarial cannot be null!!");
+                }
+            }
+
+            if (localOpcaoSimplesNacionalTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "OpcaoSimplesNacional"));
+
+                if (localOpcaoSimplesNacional != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localOpcaoSimplesNacional));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "OpcaoSimplesNacional cannot be null!!");
+                }
+            }
+
+            if (localOpcaoSIMEITracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "OpcaoSIMEI"));
+
+                if (localOpcaoSIMEI != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localOpcaoSIMEI));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "OpcaoSIMEI cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -17407,7 +19077,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoSimplesNacional object = new RetornoSimplesNacional();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -17415,8 +19084,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -17508,7 +19175,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -17539,7 +19206,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -17659,7 +19326,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -17785,8 +19452,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -17891,7 +19560,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -17913,16 +19582,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -17935,8 +19600,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -17966,8 +19631,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -18079,11 +19743,62 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            if (localCnpjTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "cnpj"));
+
+                if (localCnpj != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCnpj));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "cnpj cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -18097,7 +19812,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 SimplesNacional object = new SimplesNacional();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -18105,8 +19819,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -18229,7 +19941,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -18277,8 +19989,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -18327,7 +20041,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -18349,16 +20063,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -18371,8 +20081,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -18402,8 +20112,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -18515,11 +20224,24 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            //We can safely assume an element has only one type associated with it
+            if (localRetornoSimplesNacional == null) {
+                return new org.apache.axis2.databinding.utils.reader.NullXMLStreamReader(MY_QNAME);
+            } else {
+                return localRetornoSimplesNacional.getPullParser(MY_QNAME);
+            }
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -18533,7 +20255,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoSimplesNacionalE object = new RetornoSimplesNacionalE();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -18541,8 +20262,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -18581,7 +20300,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             } // End of if for expected property start element
 
                             else {
-                                // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                                // A start element we are not expecting indicates an invalid parameter was passed
                                 throw new org.apache.axis2.databinding.ADBException(
                                     "Unexpected subelement " +
                                     reader.getName());
@@ -19177,8 +20896,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -19492,7 +21213,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -19514,16 +21235,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -19536,8 +21253,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -19567,8 +21284,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -19680,11 +21396,241 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://www.w3.org/2001/XMLSchema-instance", "type"));
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "RetornoSintegra"));
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            if (localCnpjTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Cnpj"));
+
+                if (localCnpj != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCnpj));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Cnpj cannot be null!!");
+                }
+            }
+
+            if (localInscricaoEstadualTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "InscricaoEstadual"));
+
+                if (localInscricaoEstadual != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localInscricaoEstadual));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "InscricaoEstadual cannot be null!!");
+                }
+            }
+
+            if (localRazaoSocialTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "RazaoSocial"));
+
+                if (localRazaoSocial != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localRazaoSocial));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "RazaoSocial cannot be null!!");
+                }
+            }
+
+            if (localLogradouroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Logradouro"));
+
+                if (localLogradouro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogradouro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Logradouro cannot be null!!");
+                }
+            }
+
+            if (localNumeroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Numero"));
+
+                if (localNumero != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNumero));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Numero cannot be null!!");
+                }
+            }
+
+            if (localComplementoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Complemento"));
+
+                if (localComplemento != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localComplemento));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Complemento cannot be null!!");
+                }
+            }
+
+            if (localBairroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Bairro"));
+
+                if (localBairro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localBairro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Bairro cannot be null!!");
+                }
+            }
+
+            if (localMunicipioTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Municipio"));
+
+                if (localMunicipio != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMunicipio));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Municipio cannot be null!!");
+                }
+            }
+
+            if (localUFTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "UF"));
+
+                if (localUF != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localUF));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "UF cannot be null!!");
+                }
+            }
+
+            if (localCEPTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CEP"));
+
+                if (localCEP != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCEP));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CEP cannot be null!!");
+                }
+            }
+
+            if (localAtividadeEconomicaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "AtividadeEconomica"));
+
+                if (localAtividadeEconomica != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localAtividadeEconomica));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "AtividadeEconomica cannot be null!!");
+                }
+            }
+
+            if (localSituacaoCadastralTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "SituacaoCadastral"));
+
+                if (localSituacaoCadastral != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSituacaoCadastral));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "SituacaoCadastral cannot be null!!");
+                }
+            }
+
+            if (localDataSituacaoCadastralTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "DataSituacaoCadastral"));
+
+                if (localDataSituacaoCadastral != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDataSituacaoCadastral));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DataSituacaoCadastral cannot be null!!");
+                }
+            }
+
+            if (localRegimeApuracaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "RegimeApuracao"));
+
+                if (localRegimeApuracao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localRegimeApuracao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "RegimeApuracao cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -19698,7 +21644,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoSintegra object = new RetornoSintegra();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -19706,8 +21651,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -19799,7 +21742,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -19830,7 +21773,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -20229,7 +22172,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -20424,8 +22367,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -20600,7 +22545,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -20622,16 +22567,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -20644,8 +22585,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -20675,8 +22616,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -20788,11 +22728,123 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://www.w3.org/2001/XMLSchema-instance", "type"));
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "RetornoCep"));
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            if (localEnderecoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Endereco"));
+
+                if (localEndereco != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localEndereco));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Endereco cannot be null!!");
+                }
+            }
+
+            if (localBairroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Bairro"));
+
+                if (localBairro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localBairro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Bairro cannot be null!!");
+                }
+            }
+
+            if (localCidadeTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Cidade"));
+
+                if (localCidade != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCidade));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Cidade cannot be null!!");
+                }
+            }
+
+            if (localEstadoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Estado"));
+
+                if (localEstado != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localEstado));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Estado cannot be null!!");
+                }
+            }
+
+            if (localCepTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Cep"));
+
+                if (localCep != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCep));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Cep cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -20806,7 +22858,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoCep object = new RetornoCep();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -20814,8 +22865,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -20907,7 +22956,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -20938,7 +22987,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -21086,7 +23135,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -21146,8 +23195,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -21218,7 +23269,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -21240,16 +23291,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -21262,8 +23309,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -21293,8 +23340,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -21406,11 +23452,35 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localCertidaoRFCnpjResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CertidaoRFCnpjResult"));
+
+                if (localCertidaoRFCnpjResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CertidaoRFCnpjResult cannot be null!!");
+                }
+
+                elementList.add(localCertidaoRFCnpjResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -21424,7 +23494,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 CertidaoRFCnpjResponse object = new CertidaoRFCnpjResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -21432,8 +23501,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -21491,7 +23558,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -22379,8 +24446,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -22842,7 +24911,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -22864,16 +24933,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -22886,8 +24951,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -22917,8 +24982,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -23030,11 +25094,365 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localNumTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Num"));
+
+                if (localNum != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNum));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Num cannot be null!!");
+                }
+            }
+
+            if (localDescricaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Descricao"));
+
+                if (localDescricao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDescricao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Descricao cannot be null!!");
+                }
+            }
+
+            if (localQtdTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Qtd"));
+
+                if (localQtd != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localQtd));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Qtd cannot be null!!");
+                }
+            }
+
+            if (localValorTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Valor"));
+
+                if (localValor != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localValor));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Valor cannot be null!!");
+                }
+            }
+
+            if (localCodigoProdutoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CodigoProduto"));
+
+                if (localCodigoProduto != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCodigoProduto));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CodigoProduto cannot be null!!");
+                }
+            }
+
+            if (localCodigoNCMTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CodigoNCM"));
+
+                if (localCodigoNCM != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCodigoNCM));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CodigoNCM cannot be null!!");
+                }
+            }
+
+            if (localCFOPTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CFOP"));
+
+                if (localCFOP != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCFOP));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CFOP cannot be null!!");
+                }
+            }
+
+            if (localIndicadorComposicaoValorTotalNFTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "IndicadorComposicaoValorTotalNF"));
+
+                if (localIndicadorComposicaoValorTotalNF != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localIndicadorComposicaoValorTotalNF));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "IndicadorComposicaoValorTotalNF cannot be null!!");
+                }
+            }
+
+            if (localCodigoEANComercialTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CodigoEANComercial"));
+
+                if (localCodigoEANComercial != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCodigoEANComercial));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CodigoEANComercial cannot be null!!");
+                }
+            }
+
+            if (localUnidadeComercialTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "UnidadeComercial"));
+
+                if (localUnidadeComercial != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localUnidadeComercial));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "UnidadeComercial cannot be null!!");
+                }
+            }
+
+            if (localQuantidadeComercialTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "QuantidadeComercial"));
+
+                if (localQuantidadeComercial != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localQuantidadeComercial));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "QuantidadeComercial cannot be null!!");
+                }
+            }
+
+            if (localCodigoEANTributavelTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CodigoEANTributavel"));
+
+                if (localCodigoEANTributavel != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCodigoEANTributavel));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CodigoEANTributavel cannot be null!!");
+                }
+            }
+
+            if (localUnidadeTributavelTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "UnidadeTributavel"));
+
+                if (localUnidadeTributavel != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localUnidadeTributavel));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "UnidadeTributavel cannot be null!!");
+                }
+            }
+
+            if (localQuantidadeTributavelTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "QuantidadeTributavel"));
+
+                if (localQuantidadeTributavel != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localQuantidadeTributavel));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "QuantidadeTributavel cannot be null!!");
+                }
+            }
+
+            if (localValorUnitarioComercializacaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "ValorUnitarioComercializacao"));
+
+                if (localValorUnitarioComercializacao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localValorUnitarioComercializacao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "ValorUnitarioComercializacao cannot be null!!");
+                }
+            }
+
+            if (localValorUnitarioTributacaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "ValorUnitarioTributacao"));
+
+                if (localValorUnitarioTributacao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localValorUnitarioTributacao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "ValorUnitarioTributacao cannot be null!!");
+                }
+            }
+
+            if (localOrigemMercadoriaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "OrigemMercadoria"));
+
+                if (localOrigemMercadoria != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localOrigemMercadoria));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "OrigemMercadoria cannot be null!!");
+                }
+            }
+
+            if (localTributacaoICMSTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "TributacaoICMS"));
+
+                if (localTributacaoICMS != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localTributacaoICMS));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "TributacaoICMS cannot be null!!");
+                }
+            }
+
+            if (localValorBCIcmsSTRetidoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "ValorBCIcmsSTRetido"));
+
+                if (localValorBCIcmsSTRetido != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localValorBCIcmsSTRetido));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "ValorBCIcmsSTRetido cannot be null!!");
+                }
+            }
+
+            if (localValorIcmsSTretidoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "ValorIcmsSTretido"));
+
+                if (localValorIcmsSTretido != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localValorIcmsSTretido));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "ValorIcmsSTretido cannot be null!!");
+                }
+            }
+
+            if (localBaseCalculoICMSNormalTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "BaseCalculoICMSNormal"));
+
+                if (localBaseCalculoICMSNormal != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localBaseCalculoICMSNormal));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "BaseCalculoICMSNormal cannot be null!!");
+                }
+            }
+
+            if (localAliquotaICMSNormalTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "AliquotaICMSNormal"));
+
+                if (localAliquotaICMSNormal != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localAliquotaICMSNormal));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "AliquotaICMSNormal cannot be null!!");
+                }
+            }
+
+            if (localValorICMSNormalTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "ValorICMSNormal"));
+
+                if (localValorICMSNormal != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localValorICMSNormal));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "ValorICMSNormal cannot be null!!");
+                }
+            }
+
+            if (localBaseCalculoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "BaseCalculo"));
+
+                if (localBaseCalculo != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localBaseCalculo));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "BaseCalculo cannot be null!!");
+                }
+            }
+
+            if (localAliquotaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Aliquota"));
+
+                if (localAliquota != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localAliquota));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Aliquota cannot be null!!");
+                }
+            }
+
+            if (localValorIPITracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "ValorIPI"));
+
+                if (localValorIPI != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localValorIPI));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "ValorIPI cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -23048,7 +25466,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 ProdutoServicoInfo object = new ProdutoServicoInfo();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -23056,8 +25473,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -23829,7 +26244,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -23955,8 +26370,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -24061,7 +26478,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -24083,16 +26500,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -24105,8 +26518,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -24136,8 +26549,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -24249,11 +26661,62 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            if (localChaveTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "chave"));
+
+                if (localChave != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localChave));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "chave cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -24266,7 +26729,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 Nfe object = new Nfe();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -24274,8 +26736,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -24398,7 +26858,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -24626,8 +27086,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -24817,7 +27279,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -24839,16 +27301,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -24861,8 +27319,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -24892,8 +27350,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -25005,11 +27462,136 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://www.w3.org/2001/XMLSchema-instance", "type"));
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "RetornoCertidaoRFCnpj"));
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            if (localCnpjTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Cnpj"));
+
+                if (localCnpj != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCnpj));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Cnpj cannot be null!!");
+                }
+            }
+
+            if (localNomeTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Nome"));
+
+                if (localNome != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNome));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Nome cannot be null!!");
+                }
+            }
+
+            if (localSituacaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Situacao"));
+
+                if (localSituacao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSituacao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Situacao cannot be null!!");
+                }
+            }
+
+            if (localDataHoraTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "DataHora"));
+
+                if (localDataHora != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localDataHora));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DataHora cannot be null!!");
+                }
+            }
+
+            if (localValidadeTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Validade"));
+
+                if (localValidade != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localValidade));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Validade cannot be null!!");
+                }
+            }
+
+            if (localRaw64Tracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Raw64"));
+
+                if (localRaw64 != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localRaw64));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Raw64 cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -25023,7 +27605,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoCertidaoRFCnpj object = new RetornoCertidaoRFCnpj();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -25031,8 +27612,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -25124,7 +27703,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -25155,7 +27734,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -25329,7 +27908,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -25389,8 +27968,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -25461,7 +28042,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -25483,16 +28064,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -25505,8 +28082,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -25536,8 +28113,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -25649,11 +28225,35 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localBonusResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "BonusResult"));
+
+                if (localBonusResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "BonusResult cannot be null!!");
+                }
+
+                elementList.add(localBonusResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -25667,7 +28267,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 BonusResponse object = new BonusResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -25675,8 +28274,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -25734,7 +28331,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -25783,8 +28380,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -25833,7 +28432,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -25855,16 +28454,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -25877,8 +28472,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -25908,8 +28503,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -26021,11 +28615,24 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            //We can safely assume an element has only one type associated with it
+            if (localRetornoSituacaoCadastralPJ == null) {
+                return new org.apache.axis2.databinding.utils.reader.NullXMLStreamReader(MY_QNAME);
+            } else {
+                return localRetornoSituacaoCadastralPJ.getPullParser(MY_QNAME);
+            }
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -26039,7 +28646,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoSituacaoCadastralPJE object = new RetornoSituacaoCadastralPJE();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -26047,8 +28653,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -26087,7 +28691,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             } // End of if for expected property start element
 
                             else {
-                                // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                                // A start element we are not expecting indicates an invalid parameter was passed
                                 throw new org.apache.axis2.databinding.ADBException(
                                     "Unexpected subelement " +
                                     reader.getName());
@@ -26141,8 +28745,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -26191,7 +28797,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -26213,16 +28819,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -26235,8 +28837,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -26266,8 +28868,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -26379,11 +28980,24 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            //We can safely assume an element has only one type associated with it
+            if (localRetornoSituacaoCadastralPF == null) {
+                return new org.apache.axis2.databinding.utils.reader.NullXMLStreamReader(MY_QNAME);
+            } else {
+                return localRetornoSituacaoCadastralPF.getPullParser(MY_QNAME);
+            }
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -26397,7 +29011,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoSituacaoCadastralPFE object = new RetornoSituacaoCadastralPFE();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -26405,8 +29018,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -26445,7 +29056,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             } // End of if for expected property start element
 
                             else {
-                                // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                                // A start element we are not expecting indicates an invalid parameter was passed
                                 throw new org.apache.axis2.databinding.ADBException(
                                     "Unexpected subelement " +
                                     reader.getName());
@@ -26510,8 +29121,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -26582,7 +29195,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -26604,16 +29217,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -26626,8 +29235,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -26657,8 +29266,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -26770,11 +29378,35 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localSaldoResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "SaldoResult"));
+
+                if (localSaldoResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "SaldoResult cannot be null!!");
+                }
+
+                elementList.add(localSaldoResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -26788,7 +29420,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 SaldoResponse object = new SaldoResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -26796,8 +29427,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -26855,7 +29484,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -26981,8 +29610,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -27087,7 +29718,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -27109,16 +29740,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -27131,8 +29758,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -27162,8 +29789,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -27275,11 +29901,62 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            if (localCpfTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "cpf"));
+
+                if (localCpf != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCpf));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "cpf cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -27293,7 +29970,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 ProtestoPF object = new ProtestoPF();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -27301,8 +29977,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -27425,7 +30099,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -27485,8 +30159,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -27557,7 +30233,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -27579,16 +30255,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -27601,8 +30273,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -27632,8 +30304,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -27745,11 +30416,35 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localCertidaoSPCcmResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CertidaoSPCcmResult"));
+
+                if (localCertidaoSPCcmResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CertidaoSPCcmResult cannot be null!!");
+                }
+
+                elementList.add(localCertidaoSPCcmResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -27763,7 +30458,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 CertidaoSPCcmResponse object = new CertidaoSPCcmResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -27771,8 +30465,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -27830,7 +30522,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -27878,8 +30570,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -27928,7 +30622,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -27950,16 +30644,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -27972,8 +30662,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -28003,8 +30693,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -28116,11 +30805,24 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            //We can safely assume an element has only one type associated with it
+            if (localRetornoCertidaoSPCcm == null) {
+                return new org.apache.axis2.databinding.utils.reader.NullXMLStreamReader(MY_QNAME);
+            } else {
+                return localRetornoCertidaoSPCcm.getPullParser(MY_QNAME);
+            }
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -28134,7 +30836,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoCertidaoSPCcmE object = new RetornoCertidaoSPCcmE();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -28142,8 +30843,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -28182,7 +30881,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             } // End of if for expected property start element
 
                             else {
-                                // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                                // A start element we are not expecting indicates an invalid parameter was passed
                                 throw new org.apache.axis2.databinding.ADBException(
                                     "Unexpected subelement " +
                                     reader.getName());
@@ -28235,8 +30934,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -28284,7 +30985,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -28306,16 +31007,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -28328,8 +31025,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -28359,8 +31056,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -28472,11 +31168,24 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            //We can safely assume an element has only one type associated with it
+            if (localRetornoNfe == null) {
+                return new org.apache.axis2.databinding.utils.reader.NullXMLStreamReader(MY_QNAME);
+            } else {
+                return localRetornoNfe.getPullParser(MY_QNAME);
+            }
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -28490,7 +31199,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoNfeE object = new RetornoNfeE();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -28498,8 +31206,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -28537,7 +31243,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             } // End of if for expected property start element
 
                             else {
-                                // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                                // A start element we are not expecting indicates an invalid parameter was passed
                                 throw new org.apache.axis2.databinding.ADBException(
                                     "Unexpected subelement " +
                                     reader.getName());
@@ -28671,8 +31377,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -28817,7 +31525,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -28839,16 +31547,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -28861,8 +31565,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -28892,8 +31596,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -29005,11 +31708,97 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://www.w3.org/2001/XMLSchema-instance", "type"));
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "RetornoCertidaoSPCcm"));
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            if (localCnpjTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Cnpj"));
+
+                if (localCnpj != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCnpj));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Cnpj cannot be null!!");
+                }
+            }
+
+            if (localSituacaoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Situacao"));
+
+                if (localSituacao != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSituacao));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Situacao cannot be null!!");
+                }
+            }
+
+            if (localRaw64Tracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Raw64"));
+
+                if (localRaw64 != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localRaw64));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Raw64 cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -29023,7 +31812,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoCertidaoSPCcm object = new RetornoCertidaoSPCcm();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -29031,8 +31819,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -29124,7 +31910,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -29155,7 +31941,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -29246,7 +32032,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -29307,8 +32093,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -29380,7 +32168,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -29402,16 +32190,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -29424,8 +32208,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -29455,8 +32239,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -29568,11 +32351,36 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localSituacaoCadastralPFResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "SituacaoCadastralPFResult"));
+
+                if (localSituacaoCadastralPFResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "SituacaoCadastralPFResult cannot be null!!");
+                }
+
+                elementList.add(localSituacaoCadastralPFResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -29586,7 +32394,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 SituacaoCadastralPFResponse object = new SituacaoCadastralPFResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -29594,8 +32401,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -29654,7 +32459,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -29780,8 +32585,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -29886,7 +32693,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -29908,16 +32715,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -29930,8 +32733,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -29961,8 +32764,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -30074,11 +32876,62 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            if (localCnpjTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "cnpj"));
+
+                if (localCnpj != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCnpj));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "cnpj cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -30092,7 +32945,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 CertidaoRFCnpj object = new CertidaoRFCnpj();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -30100,8 +32952,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -30224,7 +33074,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -30320,8 +33170,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -30451,7 +33303,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -30473,16 +33325,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -30495,8 +33343,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -30526,8 +33374,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -30639,11 +33486,84 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://www.w3.org/2001/XMLSchema-instance", "type"));
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "RetornoNomePF"));
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            if (localCpfTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Cpf"));
+
+                if (localCpf != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCpf));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Cpf cannot be null!!");
+                }
+            }
+
+            if (localNomeTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Nome"));
+
+                if (localNome != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localNome));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Nome cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -30657,7 +33577,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoNomePF object = new RetornoNomePF();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -30665,8 +33584,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -30758,7 +33675,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -30789,7 +33706,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -30852,7 +33769,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -30900,8 +33817,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -30949,7 +33868,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -30971,16 +33890,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -30993,8 +33908,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -31024,8 +33939,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -31137,11 +34051,24 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            //We can safely assume an element has only one type associated with it
+            if (localRetornoCep == null) {
+                return new org.apache.axis2.databinding.utils.reader.NullXMLStreamReader(MY_QNAME);
+            } else {
+                return localRetornoCep.getPullParser(MY_QNAME);
+            }
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -31155,7 +34082,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoCepE object = new RetornoCepE();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -31163,8 +34089,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -31202,7 +34126,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             } // End of if for expected property start element
 
                             else {
-                                // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                                // A start element we are not expecting indicates an invalid parameter was passed
                                 throw new org.apache.axis2.databinding.ADBException(
                                     "Unexpected subelement " +
                                     reader.getName());
@@ -31333,8 +34257,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -31439,7 +34365,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -31461,16 +34387,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -31483,8 +34405,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -31514,8 +34436,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -31627,11 +34548,62 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            if (localCnpjTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "cnpj"));
+
+                if (localCnpj != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCnpj));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "cnpj cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -31645,7 +34617,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 ProtestoPJ object = new ProtestoPJ();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -31653,8 +34624,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -31777,7 +34746,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -31837,8 +34806,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -31909,7 +34880,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -31931,16 +34902,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -31953,8 +34920,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -31984,8 +34951,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -32097,11 +35063,35 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localNfeResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "NfeResult"));
+
+                if (localNfeResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "NfeResult cannot be null!!");
+                }
+
+                elementList.add(localNfeResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -32115,7 +35105,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 NfeResponse object = new NfeResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -32123,8 +35112,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -32181,7 +35168,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -32229,8 +35216,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -32278,7 +35267,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -32300,16 +35289,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -32322,8 +35307,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -32353,8 +35338,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -32466,11 +35450,24 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            //We can safely assume an element has only one type associated with it
+            if (localRetornoSintegra == null) {
+                return new org.apache.axis2.databinding.utils.reader.NullXMLStreamReader(MY_QNAME);
+            } else {
+                return localRetornoSintegra.getPullParser(MY_QNAME);
+            }
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -32484,7 +35481,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoSintegraE object = new RetornoSintegraE();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -32492,8 +35488,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -32532,7 +35526,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             } // End of if for expected property start element
 
                             else {
-                                // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                                // A start element we are not expecting indicates an invalid parameter was passed
                                 throw new org.apache.axis2.databinding.ADBException(
                                     "Unexpected subelement " +
                                     reader.getName());
@@ -32585,8 +35579,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -32634,7 +35630,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -32656,16 +35652,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -32678,8 +35670,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -32709,8 +35701,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -32822,11 +35813,24 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            //We can safely assume an element has only one type associated with it
+            if (localRetornoNumerico == null) {
+                return new org.apache.axis2.databinding.utils.reader.NullXMLStreamReader(MY_QNAME);
+            } else {
+                return localRetornoNumerico.getPullParser(MY_QNAME);
+            }
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -32840,7 +35844,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoNumericoE object = new RetornoNumericoE();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -32848,8 +35851,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -32888,7 +35889,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             } // End of if for expected property start element
 
                             else {
-                                // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                                // A start element we are not expecting indicates an invalid parameter was passed
                                 throw new org.apache.axis2.databinding.ADBException(
                                     "Unexpected subelement " +
                                     reader.getName());
@@ -32986,8 +35987,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -33077,7 +36080,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -33099,16 +36102,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -33121,8 +36120,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -33152,8 +36151,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -33265,11 +36263,49 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -33282,7 +36318,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 Saldo object = new Saldo();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -33290,8 +36325,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -33387,7 +36420,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -33476,8 +36509,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -33575,7 +36610,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -33597,16 +36632,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -33619,8 +36650,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -33650,8 +36681,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -33763,11 +36793,44 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localStringTracker) {
+                if (localString != null) {
+                    for (int i = 0; i < localString.length; i++) {
+                        if (localString[i] != null) {
+                            elementList.add(new javax.xml.namespace.QName(
+                                    "http://ws.fontededados.com.br/", "string"));
+                            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                                    localString[i]));
+                        } else {
+                            elementList.add(new javax.xml.namespace.QName(
+                                    "http://ws.fontededados.com.br/", "string"));
+                            elementList.add(null);
+                        }
+                    }
+                } else {
+                    elementList.add(new javax.xml.namespace.QName(
+                            "http://ws.fontededados.com.br/", "string"));
+                    elementList.add(null);
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -33781,7 +36844,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 ArrayOfString object = new ArrayOfString();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -33789,8 +36851,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -33903,7 +36963,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -33951,8 +37011,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -34001,7 +37063,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -34023,16 +37085,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -34045,8 +37103,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -34076,8 +37134,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -34189,11 +37246,24 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            //We can safely assume an element has only one type associated with it
+            if (localRetornoCertidaoRFCnpj == null) {
+                return new org.apache.axis2.databinding.utils.reader.NullXMLStreamReader(MY_QNAME);
+            } else {
+                return localRetornoCertidaoRFCnpj.getPullParser(MY_QNAME);
+            }
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -34207,7 +37277,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoCertidaoRFCnpjE object = new RetornoCertidaoRFCnpjE();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -34215,8 +37284,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -34255,7 +37322,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             } // End of if for expected property start element
 
                             else {
-                                // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                                // A start element we are not expecting indicates an invalid parameter was passed
                                 throw new org.apache.axis2.databinding.ADBException(
                                     "Unexpected subelement " +
                                     reader.getName());
@@ -34419,8 +37486,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -34540,7 +37609,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -34562,16 +37631,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -34584,8 +37649,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -34615,8 +37680,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -34728,11 +37792,75 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            if (localCpfCnpjTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "cpfCnpj"));
+
+                if (localCpfCnpj != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCpfCnpj));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "cpfCnpj cannot be null!!");
+                }
+            }
+
+            if (localRenavamTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "renavam"));
+
+                if (localRenavam != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localRenavam));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "renavam cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -34746,7 +37874,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 DenatranRenavam object = new DenatranRenavam();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -34754,8 +37881,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -34907,7 +38032,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -34967,8 +38092,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -35039,7 +38166,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -35061,16 +38188,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -35083,8 +38206,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -35114,8 +38237,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -35227,11 +38349,36 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localSimplesNacionalResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "SimplesNacionalResult"));
+
+                if (localSimplesNacionalResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "SimplesNacionalResult cannot be null!!");
+                }
+
+                elementList.add(localSimplesNacionalResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -35245,7 +38392,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 SimplesNacionalResponse object = new SimplesNacionalResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -35253,8 +38399,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -35313,7 +38457,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -35402,8 +38546,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -35494,7 +38640,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -35516,16 +38662,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -35538,8 +38680,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -35569,8 +38711,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -35682,11 +38823,45 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localProtestoInfoTracker) {
+                if (localProtestoInfo != null) {
+                    for (int i = 0; i < localProtestoInfo.length; i++) {
+                        if (localProtestoInfo[i] != null) {
+                            elementList.add(new javax.xml.namespace.QName(
+                                    "http://ws.fontededados.com.br/",
+                                    "ProtestoInfo"));
+                            elementList.add(localProtestoInfo[i]);
+                        } else {
+                            elementList.add(new javax.xml.namespace.QName(
+                                    "http://ws.fontededados.com.br/",
+                                    "ProtestoInfo"));
+                            elementList.add(null);
+                        }
+                    }
+                } else {
+                    elementList.add(new javax.xml.namespace.QName(
+                            "http://ws.fontededados.com.br/", "ProtestoInfo"));
+                    elementList.add(localProtestoInfo);
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -35700,7 +38875,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 ArrayOfProtestoInfo object = new ArrayOfProtestoInfo();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -35708,8 +38882,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -35821,7 +38993,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -35968,8 +39140,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -36088,7 +39262,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -36110,16 +39284,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -36132,8 +39302,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -36163,8 +39333,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -36276,11 +39445,73 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            if (localCpfTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "cpf"));
+
+                if (localCpf != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCpf));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "cpf cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "dataNascimento"));
+
+            if (localDataNascimento != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localDataNascimento));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "dataNascimento cannot be null!!");
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -36294,7 +39525,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 SituacaoCadastralPF object = new SituacaoCadastralPF();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -36302,8 +39532,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -36448,7 +39676,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -36457,7 +39685,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -36583,8 +39811,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -36689,7 +39919,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -36711,16 +39941,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -36733,8 +39959,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -36764,8 +39990,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -36877,11 +40102,62 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            if (localCpfTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "cpf"));
+
+                if (localCpf != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCpf));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "cpf cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -36895,7 +40171,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 NomePorCPF object = new NomePorCPF();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -36903,8 +40178,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -37027,7 +40300,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -37153,8 +40426,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -37259,7 +40534,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -37281,16 +40556,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -37303,8 +40574,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -37334,8 +40605,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -37447,11 +40717,62 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            if (localCnpjTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "cnpj"));
+
+                if (localCnpj != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCnpj));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "cnpj cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -37465,7 +40786,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 SituacaoCadastralPJ object = new SituacaoCadastralPJ();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -37473,8 +40793,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -37597,7 +40915,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -37645,8 +40963,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -37694,7 +41014,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -37716,16 +41036,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -37738,8 +41054,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -37769,8 +41085,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -37882,11 +41197,24 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            //We can safely assume an element has only one type associated with it
+            if (localRetornoNomePF == null) {
+                return new org.apache.axis2.databinding.utils.reader.NullXMLStreamReader(MY_QNAME);
+            } else {
+                return localRetornoNomePF.getPullParser(MY_QNAME);
+            }
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -37900,7 +41228,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoNomePFE object = new RetornoNomePFE();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -37908,8 +41235,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -37948,7 +41273,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             } // End of if for expected property start element
 
                             else {
-                                // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                                // A start element we are not expecting indicates an invalid parameter was passed
                                 throw new org.apache.axis2.databinding.ADBException(
                                     "Unexpected subelement " +
                                     reader.getName());
@@ -38014,8 +41339,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -38087,7 +41414,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -38109,16 +41436,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -38131,8 +41454,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -38162,8 +41485,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -38275,11 +41597,36 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localSituacaoCadastralPJResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "SituacaoCadastralPJResult"));
+
+                if (localSituacaoCadastralPJResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "SituacaoCadastralPJResult cannot be null!!");
+                }
+
+                elementList.add(localSituacaoCadastralPJResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -38293,7 +41640,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 SituacaoCadastralPJResponse object = new SituacaoCadastralPJResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -38301,8 +41647,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -38361,7 +41705,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -38457,8 +41801,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -38548,7 +41894,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -38570,16 +41916,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -38592,8 +41934,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -38623,8 +41965,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -38736,11 +42077,49 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localEstadoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Estado"));
+
+                if (localEstado != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localEstado));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Estado cannot be null!!");
+                }
+            }
+
+            if (localMensagemTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "Mensagem"));
+
+                if (localMensagem != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagem));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "Mensagem cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -38754,7 +42133,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 ProtestoInfo object = new ProtestoInfo();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -38762,8 +42140,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -38861,7 +42237,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -38909,8 +42285,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -38958,7 +42336,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -38980,16 +42358,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -39002,8 +42376,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -39033,8 +42407,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -39146,11 +42519,24 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            //We can safely assume an element has only one type associated with it
+            if (localRetornoProtesto == null) {
+                return new org.apache.axis2.databinding.utils.reader.NullXMLStreamReader(MY_QNAME);
+            } else {
+                return localRetornoProtesto.getPullParser(MY_QNAME);
+            }
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -39164,7 +42550,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoProtestoE object = new RetornoProtestoE();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -39172,8 +42557,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance",
                             "nil");
@@ -39212,7 +42595,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                             } // End of if for expected property start element
 
                             else {
-                                // 3 - A start element we are not expecting indicates an invalid parameter was passed
+                                // A start element we are not expecting indicates an invalid parameter was passed
                                 throw new org.apache.axis2.databinding.ADBException(
                                     "Unexpected subelement " +
                                     reader.getName());
@@ -39277,8 +42660,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -39349,7 +42734,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -39371,16 +42756,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -39393,8 +42774,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -39424,8 +42805,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -39537,11 +42917,35 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localNomePorCPFResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "NomePorCPFResult"));
+
+                if (localNomePorCPFResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "NomePorCPFResult cannot be null!!");
+                }
+
+                elementList.add(localNomePorCPFResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -39555,7 +42959,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 NomePorCPFResponse object = new NomePorCPFResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -39563,8 +42966,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -39622,7 +43023,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -39682,8 +43083,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -39754,7 +43157,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -39776,16 +43179,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -39798,8 +43197,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -39829,8 +43228,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -39942,11 +43340,36 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localDenatranRenavamResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/",
+                        "DenatranRenavamResult"));
+
+                if (localDenatranRenavamResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "DenatranRenavamResult cannot be null!!");
+                }
+
+                elementList.add(localDenatranRenavamResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -39960,7 +43383,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 DenatranRenavamResponse object = new DenatranRenavamResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -39968,8 +43390,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -40028,7 +43448,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -40133,8 +43553,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -40236,7 +43658,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -40258,16 +43680,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -40280,8 +43698,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -40311,8 +43729,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -40424,11 +43841,53 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -40442,7 +43901,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 BaseRetorno object = new BaseRetorno();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -40450,8 +43908,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -40543,7 +43999,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -40574,7 +44030,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -40583,7 +44039,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -40643,8 +44099,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -40715,7 +44173,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -40737,16 +44195,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -40759,8 +44213,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -40790,8 +44244,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -40903,11 +44356,35 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localCepResultTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "CepResult"));
+
+                if (localCepResult == null) {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "CepResult cannot be null!!");
+                }
+
+                elementList.add(localCepResult);
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -40921,7 +44398,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 CepResponse object = new CepResponse();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -40929,8 +44405,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -40987,7 +44461,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -41146,8 +44620,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, MY_QNAME));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    MY_QNAME);
+
+            return factory.createOMElement(dataSource, MY_QNAME);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -41267,7 +44743,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -41289,16 +44765,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -41311,8 +44783,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -41342,8 +44814,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -41455,11 +44926,75 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            if (localLoginTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "login"));
+
+                if (localLogin != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localLogin));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "login cannot be null!!");
+                }
+            }
+
+            if (localSenhaTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "senha"));
+
+                if (localSenha != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localSenha));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "senha cannot be null!!");
+                }
+            }
+
+            if (localCnpjTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "cnpj"));
+
+                if (localCnpj != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localCnpj));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "cnpj cannot be null!!");
+                }
+            }
+
+            if (localEstadoTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "estado"));
+
+                if (localEstado != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localEstado));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "estado cannot be null!!");
+                }
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -41473,7 +45008,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 SintegraCNPJ object = new SintegraCNPJ();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -41481,8 +45015,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -41633,7 +45165,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -41684,8 +45216,10 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             final javax.xml.namespace.QName parentQName,
             final org.apache.axiom.om.OMFactory factory)
             throws org.apache.axis2.databinding.ADBException {
-            return factory.createOMElement(new org.apache.axis2.databinding.ADBDataSource(
-                    this, parentQName));
+            org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this,
+                    parentQName);
+
+            return factory.createOMElement(dataSource, parentQName);
         }
 
         public void serialize(final javax.xml.namespace.QName parentQName,
@@ -41799,7 +45333,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
 
             if (writerPrefix != null) {
-                xmlWriter.writeStartElement(writerPrefix, localPart, namespace);
+                xmlWriter.writeStartElement(namespace, localPart);
             } else {
                 if (namespace.length() == 0) {
                     prefix = "";
@@ -41821,16 +45355,12 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             java.lang.String attValue,
             javax.xml.stream.XMLStreamWriter xmlWriter)
             throws javax.xml.stream.XMLStreamException {
-            java.lang.String writerPrefix = xmlWriter.getPrefix(namespace);
-
-            if (writerPrefix != null) {
-                xmlWriter.writeAttribute(writerPrefix, namespace, attName,
-                    attValue);
-            } else {
+            if (xmlWriter.getPrefix(namespace) == null) {
                 xmlWriter.writeNamespace(prefix, namespace);
                 xmlWriter.setPrefix(prefix, namespace);
-                xmlWriter.writeAttribute(prefix, namespace, attName, attValue);
             }
+
+            xmlWriter.writeAttribute(namespace, attName, attValue);
         }
 
         /**
@@ -41843,8 +45373,8 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
             if (namespace.equals("")) {
                 xmlWriter.writeAttribute(attName, attValue);
             } else {
-                xmlWriter.writeAttribute(registerPrefix(xmlWriter, namespace),
-                    namespace, attName, attValue);
+                registerPrefix(xmlWriter, namespace);
+                xmlWriter.writeAttribute(namespace, attName, attValue);
             }
         }
 
@@ -41874,8 +45404,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 xmlWriter.writeAttribute(attName, attributeValue);
             } else {
                 registerPrefix(xmlWriter, namespace);
-                xmlWriter.writeAttribute(attributePrefix, namespace, attName,
-                    attributeValue);
+                xmlWriter.writeAttribute(namespace, attName, attributeValue);
             }
         }
 
@@ -41987,11 +45516,69 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
         }
 
         /**
+         * databinding method to get an XML representation of this object
+         *
+         */
+        public javax.xml.stream.XMLStreamReader getPullParser(
+            javax.xml.namespace.QName qName)
+            throws org.apache.axis2.databinding.ADBException {
+            java.util.ArrayList elementList = new java.util.ArrayList();
+            java.util.ArrayList attribList = new java.util.ArrayList();
+
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://www.w3.org/2001/XMLSchema-instance", "type"));
+            attribList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "RetornoNumerico"));
+
+            if (localMensagemErroTracker) {
+                elementList.add(new javax.xml.namespace.QName(
+                        "http://ws.fontededados.com.br/", "MensagemErro"));
+
+                if (localMensagemErro != null) {
+                    elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                            localMensagemErro));
+                } else {
+                    throw new org.apache.axis2.databinding.ADBException(
+                        "MensagemErro cannot be null!!");
+                }
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "ValorCobrado"));
+
+            if (localValorCobrado != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValorCobrado));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "ValorCobrado cannot be null!!");
+            }
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "CodErro"));
+
+            elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                    localCodErro));
+
+            elementList.add(new javax.xml.namespace.QName(
+                    "http://ws.fontededados.com.br/", "Valor"));
+
+            if (localValor != null) {
+                elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(
+                        localValor));
+            } else {
+                throw new org.apache.axis2.databinding.ADBException(
+                    "Valor cannot be null!!");
+            }
+
+            return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName,
+                elementList.toArray(), attribList.toArray());
+        }
+
+        /**
          *  Factory class that keeps the parse method
          */
         public static class Factory {
-            private static org.apache.commons.logging.Log log = org.apache.commons.logging.LogFactory.getLog(Factory.class);
-
             /**
              * static method to create the object
              * Precondition:  If this object is an element, the current or next start element starts this object and any intervening reader events are ignorable
@@ -42005,7 +45592,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 RetornoNumerico object = new RetornoNumerico();
 
                 int event;
-                javax.xml.namespace.QName currentQName = null;
                 java.lang.String nillableValue = null;
                 java.lang.String prefix = "";
                 java.lang.String namespaceuri = "";
@@ -42013,8 +45599,6 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                 try {
                     while (!reader.isStartElement() && !reader.isEndElement())
                         reader.next();
-
-                    currentQName = reader.getName();
 
                     if (reader.getAttributeValue(
                                 "http://www.w3.org/2001/XMLSchema-instance",
@@ -42106,7 +45690,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -42137,7 +45721,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -42167,7 +45751,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                     } // End of if for expected property start element
 
                     else {
-                        // 1 - A start element we are not expecting indicates an invalid parameter was passed
+                        // A start element we are not expecting indicates an invalid parameter was passed
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }
@@ -42176,7 +45760,7 @@ public class ConsultaStub extends org.apache.axis2.client.Stub {
                         reader.next();
 
                     if (reader.isStartElement()) {
-                        // 2 - A start element we are not expecting indicates a trailing invalid property
+                        // A start element we are not expecting indicates a trailing invalid property
                         throw new org.apache.axis2.databinding.ADBException(
                             "Unexpected subelement " + reader.getName());
                     }

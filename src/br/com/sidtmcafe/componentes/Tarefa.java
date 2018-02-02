@@ -4,15 +4,11 @@ import br.com.sidtmcafe.controller.ControllerCadastroEmpresa;
 import br.com.sidtmcafe.interfaces.Constants;
 import javafx.concurrent.Task;
 import javafx.util.Pair;
-import webService.correios.atende.*;
-import webService.correios.rastreio.RastroStub;
-import webService.correios.rastreio.RastroStub.BuscaEventos;
-import webService.correios.rastreio.RastroStub.BuscaEventosE;
+import webService.correios.atende.EnderecoERP;
 import webService.fonteDeDados.ConsultaStub;
 import webService.fonteDeDados.ConsultaStub.*;
 
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
@@ -31,24 +27,24 @@ public class Tarefa implements Constants {
             protected Void call() throws Exception {
                 updateMessage("localizando cep [" + cep + "] ");
                 try {
-                    RastroStub rastroStub;
-                    url = new URL("http://webservice.correios.com.br/service/rastro/Rastro.wsdl");
-                    BuscaEventos buscaEventos = new BuscaEventos();
-                    BuscaEventosE buscaEventosE = new BuscaEventosE();
-                    RastroStub.BuscaEventosResponse buscaEventosResponse = new RastroStub.BuscaEventosResponse();
-
-                    buscaEventos.setUsuario("9999999999");
-                    buscaEventos.setSenha("S@1234YWC5");
-                    buscaEventos.setTipo("L");
-                    buscaEventos.setResultado("T");
-                    buscaEventos.setLingua("101");
-                    //buscaEventos.setObjetos(objeto);
-
-                    buscaEventosE.setBuscaEventos(buscaEventos);
-
-                    rastroStub = new RastroStub(url.toString());
-                    buscaEventosResponse = rastroStub.buscaEventos(buscaEventosE).getBuscaEventosResponse();
-                    System.out.println("retorno objeto correio: " + buscaEventosResponse.get_return().toString());
+//                    RastroStub rastroStub;
+//                    url = new URL("http://webservice.correios.com.br/service/rastro/Rastro.wsdl");
+//                    BuscaEventos buscaEventos = new BuscaEventos();
+//                    BuscaEventosE buscaEventosE = new BuscaEventosE();
+//                    RastroStub.BuscaEventosResponse buscaEventosResponse = new RastroStub.BuscaEventosResponse();
+//
+//                    buscaEventos.setUsuario("9999999999");
+//                    buscaEventos.setSenha("S@1234YWC5");
+//                    buscaEventos.setTipo("L");
+//                    buscaEventos.setResultado("T");
+//                    buscaEventos.setLingua("101");
+//                    //buscaEventos.setObjetos(objeto);
+//
+//                    buscaEventosE.setBuscaEventos(buscaEventos);
+//
+//                    rastroStub = new RastroStub(url.toString());
+//                    buscaEventosResponse = rastroStub.buscaEventos(buscaEventosE).getBuscaEventosResponse();
+//                    System.out.println("retorno objeto correio: " + buscaEventosResponse.get_return().toString());
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
@@ -110,6 +106,9 @@ public class Tarefa implements Constants {
                             break;
                         case "carregarTodosMunicipios":
                             cadastroEmpresa.carregarTodosMunicipios();
+                            break;
+                        case "carregarTipoEndereco":
+                            cadastroEmpresa.carregarTipoEndereco();
                             break;
                     }
                 }

@@ -4,10 +4,7 @@ import br.com.sidtmcafe.componentes.Tarefa;
 import br.com.sidtmcafe.configuracao.ValidadorDeDados;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.*;
-import br.com.sidtmcafe.model.vo.SisMunicipioVO;
-import br.com.sidtmcafe.model.vo.SisUFVO;
-import br.com.sidtmcafe.model.vo.TabEnderecoVO;
-import br.com.sidtmcafe.model.vo.WsCepPostmonVO;
+import br.com.sidtmcafe.model.vo.*;
 import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -146,14 +143,16 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
 
     FilteredList<SisMunicipioVO> municipioVOFilteredList;
     ObservableList<SisMunicipioVO> municipioVOObservableList;
+    List<SisTipoEnderecoVO> tipoEnderecoVOList;
 
     void preencherCombos() {
         List<Pair> listaTarefas = new ArrayList<>();
         listaTarefas.add(new Pair("preencherCboEndUF", "preenchendo dados UF"));
-        //listaTarefas.add(new Pair("carregarTodosMunicipios", "preenchendo dados de municipios"));
-        listaTarefas.add(new Pair("preencherCboSituacaoSistema", "preenchendo dados situações do sistema"));
+        //listaTarefas.add(new Pair("carregarTodosMunicipios", "carregando listas de municipios"));
+        listaTarefas.add(new Pair("preencherCboSituacaoSistema", "preenchendo situações do sistema"));
         listaTarefas.add(new Pair("preencherCboFiltroPesquisa", "preenchendo filtros pesquisa"));
-        listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo dados classificações jurídicas"));
+        listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo classificações jurídicas"));
+        listaTarefas.add(new Pair("carregarTipoEndereco", "carregando lista tipo endereço"));
 
 
         new Tarefa().tarefaAbreCadastroEmpresa(this, listaTarefas);
@@ -191,6 +190,10 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
 
     public void carregarTodosMunicipios() {
         municipioVOObservableList = FXCollections.observableArrayList(new SisMunicipioDAO().getMunicipioVOList());
+    }
+
+    public void carregarTipoEndereco() {
+        tipoEnderecoVOList = new ArrayList<SisTipoEnderecoVO>(new SisTipoEnderecoDAO().getTipoEnderecoVOList());
     }
 
     void preencherCboEndMunicipio() {
