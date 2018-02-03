@@ -17,23 +17,31 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
     List<TabEmpresa_DetalheReceitaFederalVO> detalheReceitaFederalVOList;
 
     public TabEmpresa_DetalheReceitaFederalVO getDetalheReceitaFederalVO(int idTabEmpresa_DetalheReceitaFederalVO) {
-        buscaTabEmpresa_DetalheReceitaFederal(idTabEmpresa_DetalheReceitaFederalVO);
+        buscaTabEmpresa_DetalheReceitaFederal(idTabEmpresa_DetalheReceitaFederalVO, 0);
         if (detalheReceitaFederalVO == null)
             detalheReceitaFederalVO = new TabEmpresa_DetalheReceitaFederalVO();
         return detalheReceitaFederalVO;
     }
 
-    public List<TabEmpresa_DetalheReceitaFederalVO> getDetalheReceitaFederalVOList() {
-        buscaTabEmpresa_DetalheReceitaFederal(0);
+    public List<TabEmpresa_DetalheReceitaFederalVO> getDetalheReceitaFederalVOList(int idTabEmpresaVO) {
+        buscaTabEmpresa_DetalheReceitaFederal(0, idTabEmpresaVO);
         if (detalheReceitaFederalVOList == null)
             detalheReceitaFederalVOList.add(new TabEmpresa_DetalheReceitaFederalVO());
         return detalheReceitaFederalVOList;
     }
 
-    void buscaTabEmpresa_DetalheReceitaFederal(int idTabEmpresa_DetalheReceitaFederalVO) {
+    void buscaTabEmpresa_DetalheReceitaFederal(int idTabEmpresa_DetalheReceitaFederalVO, int idTabEmpresaVO) {
         comandoSql = "SELECT * FROM tabEmpresa_DetalheReceitaFederal ";
         if (idTabEmpresa_DetalheReceitaFederalVO > 0)
             comandoSql += "WHERE id = '" + idTabEmpresa_DetalheReceitaFederalVO + "' ";
+        if (idTabEmpresaVO > 0) {
+            if (!comandoSql.contains("WHERE")) {
+                comandoSql += "WHERE ";
+            } else {
+                comandoSql += "AND ";
+            }
+            comandoSql += "empresa_id = '" + idTabEmpresaVO + "' ";
+        }
         comandoSql += "ORDER BY empresa_id, isAtividadePrincipal DESC, str_key ";
         detalheReceitaFederalVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);

@@ -17,7 +17,8 @@ public class TabEmailHomePageDAO extends BuscaBandoDados {
     List<TabEmailHomePageVO> emailHomePageVOList;
 
     public TabEmailHomePageVO getEmailHomePageVO(int idTabEmailHomePageVO) {
-        buscaTabEmailHomePageVO(idTabEmailHomePageVO, -1);
+        if (idTabEmailHomePageVO > 0)
+            buscaTabEmailHomePageVO(idTabEmailHomePageVO, -1);
         if (emailHomePageVO == null)
             emailHomePageVO = new TabEmailHomePageVO();
         return emailHomePageVO;

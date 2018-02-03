@@ -17,7 +17,8 @@ public class TabTelefoneDAO extends BuscaBandoDados {
     List<TabTelefoneVO> telefoneVOList;
 
     public TabTelefoneVO getTelefoneVO(int idTabTelefoneVO) {
-        buscaTabTelefoneVO(idTabTelefoneVO);
+        if (idTabTelefoneVO > 0)
+            buscaTabTelefoneVO(idTabTelefoneVO);
         if (telefoneVO == null)
             telefoneVO = new TabTelefoneVO();
         return telefoneVO;

@@ -11,6 +11,8 @@ import br.com.sidtmcafe.view.ViewCadastroEmpresa;
 import br.com.sidtmcafe.view.ViewPrincipal;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXToolbar;
+import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.controls.JFXTreeView;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -36,7 +38,7 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
     public Label lblCopyRight;
     public BorderPane painelViewPrincipal;
     public JFXToolbar statusBar_ViewPrincipal;
-    public TreeTableView<SisMenuPrincipalVO> treeMenuViewPrincipal;
+    public JFXTreeView<SisMenuPrincipalVO> treeMenuViewPrincipal;
     public JFXTabPane tabPaneViewPrincipal;
     public Label lblImageLogoViewPrincipal;
     public Label lblBotaoExpandeMenuViewPrincipal;
@@ -141,19 +143,9 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
     }
 
     void preencheMenuItem() {
-
-        colunaItem = new TreeTableColumn<SisMenuPrincipalVO, String>();
-        colunaItem.setPrefWidth(250);
-        colunaItem.setCellValueFactory(param -> param.getValue().getValue().descricaoProperty());
-
-        colunaAtalho = new TreeTableColumn<SisMenuPrincipalVO, String>();
-        colunaAtalho.setPrefWidth(150);
-        colunaAtalho.setCellValueFactory(param -> param.getValue().getValue().teclaAtalhoProperty());
-
         List<SisMenuPrincipalVO> menuPrincipalVOList = new SisMenuPrincipalDAO().getMenuPrincipalVOList();
         TreeItem[] treeItems = new TreeItem[menuPrincipalVOList.size() + 1];
         treeItems[0] = new TreeItem();
-
         for (SisMenuPrincipalVO principalVO : menuPrincipalVOList) {
             int idTemp = principalVO.getId();
             int filhoTemp = principalVO.getFilho_id();
@@ -166,12 +158,8 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
             treeItems[idTemp].setExpanded(true);
             treeItems[filhoTemp].getChildren().add(treeItems[idTemp]);
         }
-
-        treeMenuViewPrincipal.getColumns().setAll(colunaItem, colunaAtalho);
         treeMenuViewPrincipal.setRoot(treeItems[0]);
         treeMenuViewPrincipal.setShowRoot(false);
-
-
     }
 
     void atualizarStatusBar() {

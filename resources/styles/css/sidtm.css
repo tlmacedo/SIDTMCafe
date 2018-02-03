@@ -19,25 +19,23 @@
   -fx-background-size: cover;
   -fx-background-image: url("/images/paineis/certificadosDigitais.png"); }
 
-.list-view:focused {
-  -fx-border-color: #ff6600; }
-
 .list-view {
   -fx-background-color: -fx-box-border, -fx-control-inner-background; }
-
-.list-view .list-cell {
-  -fx-background-color: -fx-control-inner-background; }
-
-.list-view .list-cell:odd {
-  -fx-background-color: derive(-fx-control-inner-background, -12%); }
-
-.list-view .list-cell:filled:selected, .list-view .list-cell:filled:selected:hover {
-  -fx-background-color: -fx-selection-bar;
-  -fx-text-fill: -fx-selection-bar-text; }
-
-.list-view .list-cell:filled:hover {
-  -fx-background-color: -fx-cell-hover-color;
-  -fx-text-fill: -fx-text-inner-color; }
+  .list-view:focused {
+    -fx-border-color: #FF6600; }
+  .list-view .list-cell {
+    -fx-background-color: -fx-control-inner-background; }
+    .list-view .list-cell:odd {
+      -fx-background-color: derive(-fx-control-inner-background, -12%); }
+    .list-view .list-cell:filled:selected {
+      -fx-background-color: -fx-selection-bar;
+      -fx-text-fill: -fx-selection-bar-text; }
+      .list-view .list-cell:filled:selected:hover {
+        -fx-background-color: -fx-selection-bar;
+        -fx-text-fill: -fx-selection-bar-text; }
+    .list-view .list-cell:filled:hover {
+      -fx-background-color: -fx-cell-hover-color;
+      -fx-text-fill: -fx-text-inner-color; }
 
 .label {
   -fx-font-family: sans-serif;
@@ -244,5 +242,49 @@
   -fx-progress-color: #FF6600; }
   .progress-indicator .indicator {
     -fx-background-color: transparent; }
+
+.jfx-tree-view {
+  -fx-font-family: sans-serif;
+  -fx-text-fill: #e9e9e9;
+  -fx-font-size: 12px; }
+  .jfx-tree-view .column-header {
+    -fx-background-color: transparent; }
+    .jfx-tree-view .column-header .label {
+      -fx-font-size: 16px;
+      -fx-font-family: sans-serif; }
+  .jfx-tree-view:focused {
+    -fx-background-color: -fx-focus-color; }
+
+.tree-table-view .column-header .label {
+  -fx-background-color: transparent;
+  -fx-alignment: center-left;
+  -fx-font-family: sans-serif;
+  -fx-text-fill: #FF6600;
+  -fx-font-size: 10px;
+  -fx-padding: 0 4 0 0; }
+.tree-table-view .tree-table-cell {
+  -fx-background-color: transparent;
+  -fx-alignment: center-left;
+  -fx-pref-height: 15;
+  -fx-font-family: sans-serif;
+  -fx-font-size: 10px;
+  -fx-text-fill: #000000;
+  -fx-padding: 0 4 0 0; }
+.tree-table-view .tree-table-row-cell {
+  -fx-background-color: #e9e9e9;
+  -fx-background-insets: 0, 0 0 1 0;
+  -fx-text-fill: #000000; }
+  .tree-table-view .tree-table-row-cell:odd {
+    -fx-background-color: #e9e9e9, derive(#e9e9e9, -12%);
+    -fx-background-insets: 0, 0 0 1 0; }
+  .tree-table-view .tree-table-row-cell:empty {
+    -fx-background-color: transparent; }
+    .tree-table-view .tree-table-row-cell:empty .table-cell {
+      -fx-border-width: 0; }
+  .tree-table-view .tree-table-row-cell:selected {
+    -fx-background-color: #FF6600;
+    -fx-opacity: 0.7;
+    -fx-text-fill: #000000;
+    -fx-background-insets: 0, 0 0 4 0; }
 
 /*# sourceMappingURL=sidtm.css.map */

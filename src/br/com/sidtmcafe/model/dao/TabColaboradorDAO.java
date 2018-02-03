@@ -17,7 +17,8 @@ public class TabColaboradorDAO extends BuscaBandoDados {
     List<TabColaboradorVO> colaboradorVOList;
 
     public TabColaboradorVO getColaboradorVO(int idTabColaboradorVO) {
-        buscaTabColaboradorVO(idTabColaboradorVO);
+        if (idTabColaboradorVO > 0)
+            buscaTabColaboradorVO(idTabColaboradorVO);
         if (colaboradorVO == null)
             colaboradorVO = new TabColaboradorVO();
         return colaboradorVO;

@@ -17,7 +17,8 @@ public class SisSituacaoSistemaDAO extends BuscaBandoDados {
     List<SisSituacaoSistemaVO> situacaoSistemaVOList;
 
     public SisSituacaoSistemaVO getSituacaoSistemaVO(int idSisSituacaoSistemaVO) {
-        buscaSisSituacaoSistemaVO(idSisSituacaoSistemaVO);
+        if (idSisSituacaoSistemaVO > 0)
+            buscaSisSituacaoSistemaVO(idSisSituacaoSistemaVO);
         if (situacaoSistemaVO == null)
             situacaoSistemaVO = new SisSituacaoSistemaVO();
         return situacaoSistemaVO;

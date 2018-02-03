@@ -147,10 +147,11 @@ public class AlertMensagem extends JFrame implements Constants {
         //lblMensagem.textProperty().bind(taskDialog.messageProperty());
         lblMensagem.getStyleClass().add("msg");
         if (transparenteDialog) {
-            System.setProperty("random",
-                    String.valueOf(Integer.parseInt(System.getProperty("random", "-1"))
-                            >= (IMAGE_LOADING.length - 1) ? 0 : Integer.parseInt(System.getProperty("random", "-1")) + 1));
-            int random = Integer.parseInt(System.getProperty("random", "0"));
+//            System.setProperty("random",
+//                    String.valueOf(Integer.parseInt(System.getProperty("random", "-1"))
+//                            >= (IMAGE_LOADING.length - 1) ? 0 : Integer.parseInt(System.getProperty("random", "-1")) + 1));
+//            int random = Integer.parseInt(System.getProperty("random", "0"));
+            int random = (int) (Math.random() * IMAGE_LOADING.length);
             imageViewDialog = new ImageView();
             addImagem(IMAGE_LOADING[random]);
             vBoxDialog.getChildren().addAll(imageViewDialog, lblMensagem);

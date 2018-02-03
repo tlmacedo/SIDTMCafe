@@ -92,29 +92,36 @@ public class Tarefa implements Constants {
                     Thread.sleep(200);
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
+                        case "criarTabelaEmpresa":
+                            cadastroEmpresa.criarTabelaEmpresa();
+                            break;
+                        case "carregarSisTipoEndereco":
+                            cadastroEmpresa.carregarSisTipoEndereco();
+                            break;
+                        case "carregarSisTelefoneOperadora":
+                            cadastroEmpresa.carregarSisTelefoneOperadora();
+                            break;
+                        case "carregarTodosMunicipios":
+                            cadastroEmpresa.carregarTodosMunicipios();
+                            break;
+                        case "carregarListaEmpresa":
+                            cadastroEmpresa.carregarListaEmpresa();
+                            break;
+                        case "preencherCboEndUF":
+                            cadastroEmpresa.preencherCboEndUF();
+                            break;
+                        case "preencherCboSituacaoSistema":
+                            cadastroEmpresa.preencherCboSituacaoSistema();
+                            break;
                         case "preencherCboFiltroPesquisa":
                             cadastroEmpresa.preencherCboFiltroPesquisa();
                             break;
                         case "preencherCboClassificacaoJuridica":
                             cadastroEmpresa.preencherCboClassificacaoJuridica();
                             break;
-                        case "preencherCboSituacaoSistema":
-                            cadastroEmpresa.preencherCboSituacaoSistema();
+                        case "preencherTabelaEmpresa":
+                            cadastroEmpresa.preencherTabelaEmpresa();
                             break;
-                        case "preencherCboEndUF":
-                            cadastroEmpresa.preencherCboEndUF();
-                            break;
-                        case "carregarTodosMunicipios":
-                            cadastroEmpresa.carregarTodosMunicipios();
-                            break;
-                        case "carregarTipoEndereco":
-                            cadastroEmpresa.carregarSisTipoEndereco();
-                            break;
-                        case "carregarSisTelefoneOperadora":
-                            cadastroEmpresa.carregarSisTelefoneOperadora();
-                            break;
-                        case "criarTabelaEmpresa":
-                            cadastroEmpresa.criarTabelaEmpresa();
                     }
                 }
                 updateProgress(tarefas.size(), tarefas.size());

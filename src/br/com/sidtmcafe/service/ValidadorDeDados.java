@@ -1,4 +1,4 @@
-package br.com.sidtmcafe.configuracao;
+package br.com.sidtmcafe.service;
 
 import br.com.sidtmcafe.interfaces.Constants;
 

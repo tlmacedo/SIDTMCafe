@@ -1,41 +1,30 @@
 package br.com.sidtmcafe.controller;
 
 import br.com.sidtmcafe.componentes.Tarefa;
-import br.com.sidtmcafe.configuracao.ValidadorDeDados;
+import br.com.sidtmcafe.service.FormatadorDeDados;
+import br.com.sidtmcafe.service.ValidadorDeDados;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.*;
 import br.com.sidtmcafe.model.vo.*;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.application.Platform;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTreeTableCell;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.util.Callback;
 import javafx.util.Pair;
 
 import java.net.URL;
-import java.text.DecimalFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ControllerCadastroEmpresa implements Initializable, FormularioModelo {
+public class ControllerCadastroEmpresa extends FormatadorDeDados implements Initializable, FormularioModelo {
 
     public AnchorPane painelViewCadastroEmpresa;
     public TitledPane tpnCadastroEmpresa;
@@ -94,8 +83,13 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
 
     @Override
     public void preencherObjetos() {
-        preencherCombos();
+        listaTarefas = new ArrayList<>();
         criarTabelas();
+        carregaListas();
+        preencherCombos();
+        preencherTabelas();
+
+        new Tarefa().tarefaAbreCadastroEmpresa(this, listaTarefas);
     }
 
     @Override
@@ -106,14 +100,10 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
     @Override
     public void escutarTeclas() {
         cboEndUF.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
-            municipioVOFilteredList = new FilteredList<SisMunicipioVO>(municipioVOObservableList, m -> true);
-            if (n == null) {
-                municipioVOFilteredList.setPredicate(m -> true);
-            } else {
-                municipioVOFilteredList.setPredicate(m -> m.getUf_id() == ((SisUFVO) n).getId());
-            }
-            preencherCboEndMunicipio();
+            if (n != null)
+                carregarPesquisaMunicipios(n.getSigla());
         });
+
         txtCNPJ.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 if (txtCNPJ.getText().length() != 11 && txtCNPJ.getText().length() != 14) {
@@ -158,8 +148,10 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
     TabEmpresaVO tabEmpresaVO;
     List<Pair> listaTarefas;
 
-    FilteredList<SisMunicipioVO> municipioVOFilteredList;
+    ObservableList<TabEmpresaVO> empresaVOObservableList;
+    FilteredList<TabEmpresaVO> empresaVOFilteredList;
     ObservableList<SisMunicipioVO> municipioVOObservableList;
+    FilteredList<SisMunicipioVO> municipioVOFilteredList;
     List<SisTipoEnderecoVO> tipoEnderecoVOList;
     List<SisTelefoneOperadoraVO> telefoneOperadoraVOList;
 
@@ -173,23 +165,90 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
     JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsTransportadora;
     JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaAtivo;
 
+    void criarTabelas() {
+        listaTarefas.add(new Pair("criarTabelaEmpresa", "criando tabela empresas"));
+    }
+
+    void carregaListas() {
+        listaTarefas.add(new Pair("carregarSisTipoEndereco", "carregando lista tipo endereço"));
+        listaTarefas.add(new Pair("carregarSisTelefoneOperadora", "carregando lista operadoras telefone"));
+        listaTarefas.add(new Pair("carregarTodosMunicipios", "carregando listas de municipios"));
+        listaTarefas.add(new Pair("carregarListaEmpresa", "carregando lista de empresas"));
+    }
+
     void preencherCombos() {
-        listaTarefas = new ArrayList<>();
         listaTarefas.add(new Pair("preencherCboEndUF", "preenchendo dados UF"));
-        //listaTarefas.add(new Pair("carregarTodosMunicipios", "carregando listas de municipios"));
         listaTarefas.add(new Pair("preencherCboSituacaoSistema", "preenchendo situações do sistema"));
         listaTarefas.add(new Pair("preencherCboFiltroPesquisa", "preenchendo filtros pesquisa"));
         listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo classificações jurídicas"));
-        listaTarefas.add(new Pair("carregarSisTipoEndereco", "carregando lista tipo endereço"));
-        listaTarefas.add(new Pair("carregarSisTelefoneOperadora", "carregando lista operadoras telefone"));
-
-        criarTabelas();
-
-        new Tarefa().tarefaAbreCadastroEmpresa(this, listaTarefas);
     }
 
-    void criarTabelas() {
-        listaTarefas.add(new Pair("criarTabelaEmpresa", "criando tabela empresas"));
+    void preencherTabelas() {
+        listaTarefas.add(new Pair("preencherTabelaEmpresa", "preenchendo tabela empresa"));
+        //preencherTabelaEmpresa();
+    }
+
+    public void criarTabelaEmpresa() {
+        Label lblId = new Label("id");
+        lblId.setPrefWidth(30);
+        colunaId = new JFXTreeTableColumn<TabEmpresaVO, Integer>();
+        colunaId.setGraphic(lblId);
+        colunaId.setPrefWidth(30);
+        colunaId.setStyle("-fx-alignment: center-right;");
+        colunaId.setCellValueFactory(param -> param.getValue().getValue().idProperty().asObject());
+
+        Label lblCnpj = new Label("C.N.P.J / C.P.F.");
+        lblCnpj.setPrefWidth(120);
+        colunaCnpj = new JFXTreeTableColumn<TabEmpresaVO, String>();
+        colunaCnpj.setGraphic(lblCnpj);
+        colunaCnpj.setPrefWidth(120);
+        colunaCnpj.setStyle("-fx-alignment: center-right;");
+        colunaCnpj.setCellValueFactory(param -> new SimpleStringProperty(getFormat(param.getValue().getValue().getCnpj(), "cnpj")));
+
+        Label lblRazao = new Label("Razão / Nome");
+        lblRazao.setPrefWidth(300);
+        colunaRazao = new JFXTreeTableColumn<TabEmpresaVO, String>();
+        colunaRazao.setGraphic(lblRazao);
+        colunaRazao.setPrefWidth(300);
+        colunaRazao.setCellValueFactory(param -> param.getValue().getValue().razaoProperty());
+
+//        colunaFantasia;
+//        colunaEndereco;
+//        colunaIsCliente;
+//        colunaIsFornecedor;
+//        colunaIsTransportadora;
+//        colunaAtivo;
+
+
+    }
+
+    public void carregarSisTipoEndereco() {
+        tipoEnderecoVOList = new ArrayList<SisTipoEnderecoVO>(new SisTipoEnderecoDAO().getTipoEnderecoVOList());
+    }
+
+    public void carregarSisTelefoneOperadora() {
+        telefoneOperadoraVOList = new ArrayList<SisTelefoneOperadoraVO>(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVOList());
+    }
+
+    public void carregarTodosMunicipios() {
+        municipioVOObservableList = FXCollections.observableArrayList(new SisMunicipioDAO().getMunicipioVOList());
+    }
+
+    public void carregarListaEmpresa() {
+        empresaVOObservableList = FXCollections.observableArrayList(new TabEmpresaDAO().getEmpresaVOList());
+    }
+
+    public void preencherCboEndUF() {
+        cboEndUF.getItems().clear();
+        cboEndUF.getItems().add(new SisUFVO());
+        cboEndUF.getItems().addAll(new SisUFDAO().getUfVOList());
+        cboEndUF.getSelectionModel().select(0);
+    }
+
+    public void preencherCboSituacaoSistema() {
+        cboSituacaoSistema.getItems().clear();
+        cboSituacaoSistema.getItems().setAll(new SisSituacaoSistemaDAO().getSituacaoSistemaVOList());
+        cboSituacaoSistema.getSelectionModel().select(0);
     }
 
     public void preencherCboFiltroPesquisa() {
@@ -209,35 +268,66 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
         cboClassificacaoJuridica.getSelectionModel().select(1);
     }
 
-    public void preencherCboSituacaoSistema() {
-        cboSituacaoSistema.getItems().clear();
-        cboSituacaoSistema.getItems().setAll(new SisSituacaoSistemaDAO().getSituacaoSistemaVOList());
-        cboSituacaoSistema.getSelectionModel().select(0);
-    }
-
-    public void preencherCboEndUF() {
-        cboEndUF.getItems().clear();
-        cboEndUF.getItems().add(new SisUFVO());
-        cboEndUF.getItems().addAll(new SisUFDAO().getUfVOList());
-        cboEndUF.getSelectionModel().select(0);
-    }
-
-    public void carregarTodosMunicipios() {
-        municipioVOObservableList = FXCollections.observableArrayList(new SisMunicipioDAO().getMunicipioVOList());
-    }
-
-    public void carregarSisTipoEndereco() {
-        tipoEnderecoVOList = new ArrayList<SisTipoEnderecoVO>(new SisTipoEnderecoDAO().getTipoEnderecoVOList());
-    }
-
-    public void carregarSisTelefoneOperadora() {
-        telefoneOperadoraVOList = new ArrayList<SisTelefoneOperadoraVO>(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVOList());
+    public void preencherTabelaEmpresa() {
+        try {
+            if (empresaVOFilteredList == null)
+                carregarPesquisaEmpresas(txtPesquisa.getText());
+            final TreeItem<TabEmpresaVO> root = new RecursiveTreeItem<TabEmpresaVO>(empresaVOFilteredList, RecursiveTreeObject::getChildren);
+            ttvEmpresa.getColumns().setAll(colunaId, colunaCnpj, colunaRazao); //colunaFantasia, colunaEndereco, colunaIsCliente, colunaIsFornecedor, colunaIsTransportadora, colunaAtivo);
+            ttvEmpresa.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+//            ttvEmpresa.getStyleClass().add("tabEmpresa");
+            ttvEmpresa.setRoot(root);
+            ttvEmpresa.setShowRoot(false);
+//            System.out.println("ttvEmpresa.getStyleableParent(): " + ttvEmpresa.getStyleableParent());
+//            System.out.println("ttvEmpresa.getStylesheets(): " + ttvEmpresa.getStylesheets());
+//            System.out.println("ttvEmpresa.getStyleClass(): " + ttvEmpresa.getStyleClass());
+//            System.out.println("ttvEmpresa.getStyle(): " + ttvEmpresa.getStyle());
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     void preencherCboEndMunicipio() {
         cboEndMunicipio.getItems().clear();
-        cboEndMunicipio.getItems().addAll(municipioVOFilteredList);
+        if (municipioVOFilteredList != null)
+            cboEndMunicipio.getItems().addAll(municipioVOFilteredList);
         cboEndMunicipio.getSelectionModel().select(0);
+    }
+
+    void carregarPesquisaEmpresas(String strPesq) {
+        empresaVOFilteredList = new FilteredList<TabEmpresaVO>(empresaVOObservableList, m -> true);
+        empresaVOFilteredList.setPredicate(empresa -> {
+            String busca = strPesq.toLowerCase().trim();
+            int filtro = cboFiltroPesquisa.getSelectionModel().getSelectedIndex();
+            if (filtro > 0) {
+                switch (filtro) {
+                    case 1:
+                        if (empresa.getIsCliente() == 0) return false;
+                        break;
+                    case 2:
+                        if (empresa.getIsFornecedor() == 0) return false;
+                        break;
+                    case 3:
+                        if (empresa.getIsTransportadora() == 0) return false;
+                        break;
+                }
+            }
+            if (busca.length() <= 0) return true;
+
+            if (empresa.getCnpj().toLowerCase().contains(busca)) return true;
+            if (empresa.getIe().toLowerCase().contains(busca)) return true;
+            if (empresa.getRazao().toLowerCase().contains(busca)) return true;
+            if (empresa.getFantasia().toLowerCase().contains(busca)) return true;
+
+
+            return false;
+        });
+    }
+
+    void carregarPesquisaMunicipios(String siglaUF) {
+        municipioVOFilteredList = new FilteredList<SisMunicipioVO>(municipioVOObservableList, m -> true);
+        municipioVOFilteredList.setPredicate(municipio -> municipio.getUfVO().getSigla() == siglaUF);
+        preencherCboEndMunicipio();
     }
 
     void exibirDadosEndereco(TabEnderecoVO enderecoVO) {
@@ -249,37 +339,6 @@ public class ControllerCadastroEmpresa implements Initializable, FormularioModel
         cboEndUF.getSelectionModel().select(enderecoVO.getUfVO());
         cboEndMunicipio.getSelectionModel().select(enderecoVO.getMunicipioVO());
         txtEndPontoReferencia.setText(enderecoVO.getPontoReferencia());
-    }
-
-    public void criarTabelaEmpresa() {
-        Label lblId = new Label("id");
-        colunaId = new JFXTreeTableColumn<TabEmpresaVO, Integer>();
-        colunaId.setGraphic(lblId);
-        colunaId.setPrefWidth(25);
-        colunaId.setStyle("-fx-alignment: CENTER-RIGHT;");
-        colunaId.setCellValueFactory(param -> param.getValue().getValue().idProperty().asObject());
-
-        Label lblCnpj = new Label("C.N.P.J / C.P.F.");
-        colunaCnpj = new JFXTreeTableColumn<TabEmpresaVO, String>();
-        colunaCnpj.setGraphic(lblCnpj);
-        colunaCnpj.setPrefWidth(100);
-        colunaCnpj.setStyle("fx-alignment: CENTER-RIGHT;");
-        colunaCnpj.setCellValueFactory(param -> param.getValue().getValue().cnpjProperty());
-
-        Label lblRazao = new Label("Razão / Nome");
-        colunaRazao = new JFXTreeTableColumn<TabEmpresaVO, String>();
-        colunaRazao.setGraphic(lblRazao);
-        colunaRazao.setPrefWidth(200);
-        colunaRazao.setCellValueFactory(param -> param.getValue().getValue().razaoProperty());
-
-//        colunaFantasia;
-//        colunaEndereco;
-//        colunaIsCliente;
-//        colunaIsFornecedor;
-//        colunaIsTransportadora;
-//        colunaAtivo;
-
-
     }
 
 }

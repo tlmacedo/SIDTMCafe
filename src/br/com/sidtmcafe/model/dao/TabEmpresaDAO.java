@@ -33,7 +33,7 @@ public class TabEmpresaDAO extends BuscaBandoDados {
     void buscaTabEmpresaVO(int idTabEmpresaVO) {
         comandoSql = "SELECT * FROM tabEmpresa ";
         if (idTabEmpresaVO > 0) comandoSql += "WHERE id = '" + idTabEmpresaVO + "' ";
-        comandoSql = "ORDER BY razao, fantasia ";
+        comandoSql += "ORDER BY razao, fantasia ";
 
         empresaVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);
@@ -75,24 +75,28 @@ public class TabEmpresaDAO extends BuscaBandoDados {
     void addObjetosPesquisa() {
         List<TabEnderecoVO> enderecoVOList = new ArrayList<>();
         for (String strCodEndereco : empresaVO.getEndereco_ids().split(";")) {
+            if (strCodEndereco == "") strCodEndereco = "0";
             enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
         }
         empresaVO.setEnderecoVOList(enderecoVOList);
 
         List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
         for (String strCodTelefone : empresaVO.getTelefone_ids().split(";")) {
+            if (strCodTelefone == "") strCodTelefone = "0";
             telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
         }
         empresaVO.setTelefoneVOList(telefoneVOList);
 
         List<TabContatoVO> contatoVOList = new ArrayList<>();
         for (String strCodContato : empresaVO.getContato_ids().split(";")) {
+            if (strCodContato == "") strCodContato = "0";
             contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
         }
         empresaVO.setContatoVOList(contatoVOList);
 
         List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
         for (String strCodEmailHomePage : empresaVO.getEmailHomePage_ids().split(";")) {
+            if (strCodEmailHomePage == "") strCodEmailHomePage = "0";
             emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
         }
         empresaVO.setEmailHomePageVOList(emailHomePageVOList);
@@ -101,7 +105,7 @@ public class TabEmpresaDAO extends BuscaBandoDados {
         empresaVO.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getColaboradorVO(empresaVO.getUsuarioAtualizacao_id()));
         empresaVO.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(empresaVO.getSituacaoSistema_id()));
 
-        empresaVO.setDetalheReceitaFederalVOList(new TabEmpresa_DetalheReceitaFederalDAO().getDetalheReceitaFederalVOList());
+        empresaVO.setDetalheReceitaFederalVOList(new TabEmpresa_DetalheReceitaFederalDAO().getDetalheReceitaFederalVOList(empresaVO.getId()));
     }
 
 }

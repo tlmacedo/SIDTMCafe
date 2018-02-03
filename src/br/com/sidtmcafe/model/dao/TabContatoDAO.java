@@ -20,7 +20,8 @@ public class TabContatoDAO extends BuscaBandoDados {
     List<TabContatoVO> contatoVOList;
 
     public TabContatoVO getContatoVO(int idTabContatoVO) {
-        buscaTabContatoVO(idTabContatoVO);
+        if (idTabContatoVO > 0)
+            buscaTabContatoVO(idTabContatoVO);
         if (contatoVO == null)
             contatoVO = new TabContatoVO();
         return contatoVO;

@@ -15,13 +15,13 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>br.com.nfe-hom4</groupId>
-            <artifactId>nfe-hom4</artifactId>
-            <version>4.0</version>
-            <!--<scope>system</scope>-->
-            <systemPath>${project.basedir}/resources/libs/NFe/NFe-Hom4.jar</systemPath>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>br.com.nfe-hom4</groupId>-->
+            <!--<artifactId>nfe-hom4</artifactId>-->
+            <!--<version>4.0</version>-->
+            <!--&lt;!&ndash;<scope>system</scope>&ndash;&gt;-->
+            <!--<systemPath>${project.basedir}/resources/libs/NFe/NFe-Hom4.jar</systemPath>-->
+        <!--</dependency>-->
 
 
         <!-- https://mvnrepository.com/artifact/org.apache.axis2/axis2 -->
