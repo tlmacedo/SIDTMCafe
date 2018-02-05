@@ -1,9 +1,10 @@
 package br.com.sidtmcafe.model.dao;
 
+import br.com.sidtmcafe.componentes.AlertMensagem;
+import br.com.sidtmcafe.componentes.Variaveis;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.model.vo.WsCepPostmonVO;
 import org.json.JSONObject;
-
 
 
 public class WsCepPostmonDAO extends BuscaWebService implements Constants {
@@ -14,6 +15,9 @@ public class WsCepPostmonDAO extends BuscaWebService implements Constants {
 
     public WsCepPostmonVO getCepPostmonVO(String cep) {
         jsonObject = getJsonObjectWebService(WS_POSTMON_URL + cep);
+
+        if (jsonObject == null)
+            return wsCepPostmonVO = null;
 
         try {
             wsCepPostmonVO = new WsCepPostmonVO();

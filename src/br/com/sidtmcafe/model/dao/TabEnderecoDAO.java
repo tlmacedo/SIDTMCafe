@@ -1,6 +1,7 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.database.ConnectionFactory;
+import br.com.sidtmcafe.model.vo.TabEmpresaVO;
 import br.com.sidtmcafe.model.vo.TabEnderecoVO;
 import br.com.sidtmcafe.model.vo.WsCepPostmonVO;
 
@@ -65,10 +66,13 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         }
     }
 
-    public TabEnderecoVO getEnderecoVO(WsCepPostmonVO wsCepPostmonVO, int idNovoEndereco, int idTipoEndereco) {
+    public TabEnderecoVO getEnderecoVO(WsCepPostmonVO wsCepPostmonVO, TabEnderecoVO enderecoAnt) {
         enderecoVO = new TabEnderecoVO();
-        enderecoVO.setId(idNovoEndereco);
-        enderecoVO.setTipoEndereco_id(idTipoEndereco);
+        enderecoVO.setId(enderecoAnt.getId());
+        enderecoVO.setTipoEndereco_id(enderecoAnt.getTipoEndereco_id());
+        if (wsCepPostmonVO == null)
+            return enderecoVO;
+
         enderecoVO.setCep(wsCepPostmonVO.getCep());
         enderecoVO.setLogradouro(wsCepPostmonVO.getLogradouro());
         enderecoVO.setNumero("");

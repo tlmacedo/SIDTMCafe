@@ -68,4 +68,5 @@ public class SisUFDAO extends BuscaBandoDados {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+
 }

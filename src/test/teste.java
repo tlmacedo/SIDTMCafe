@@ -1,11 +1,13 @@
+import br.com.sidtmcafe.service.FormatadorDeDados;
+import com.jfoenix.controls.JFXTextField;
+
 import static javafx.application.Application.launch;
 
 public class teste {
     public teste() {
-        String teste = " 14 DE JULHO ";
-        System.out.println(teste + " - " + teste.length());
-        teste = teste.trim();
-        System.out.println(teste + " - " + teste.length());
+        String textField = "69067";
+        //System.out.println(FormatadorDeDados.campoMask(textField, "##.###-###"));
+
     }
 
     public static void main(String[] args) {

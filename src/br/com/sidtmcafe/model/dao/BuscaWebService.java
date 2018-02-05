@@ -18,6 +18,7 @@ public class BuscaWebService {
     JSONObject jsonObject;
 
     public JSONObject getJsonObjectWebService(String strURL) {
+        jsonObject = null;
         try {
             retorno = new URL(strURL).openStream();
             bufferedReader = new BufferedReader(new InputStreamReader((InputStream) retorno, "UTF-8"));
@@ -29,10 +30,9 @@ public class BuscaWebService {
 
             jsonObject = new JSONObject(stringBuilder.toString());
 
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (MalformedURLException ex) {
+            ex.printStackTrace();
+        } catch (IOException ex) {
         }
         return jsonObject;
     }

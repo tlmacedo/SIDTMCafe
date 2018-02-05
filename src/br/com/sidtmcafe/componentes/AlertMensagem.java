@@ -130,7 +130,11 @@ public class AlertMensagem extends JFrame implements Constants {
             dialog.setHeaderText(getCabecalho());
             dialog.setContentText(getPromptText());
             if (!getStrIco().equals(""))
-                dialog.setGraphic(new ImageView(this.getClass().getResource(PATH_IMAGENS + getStrIco()).toString()));
+                try {
+                    dialog.setGraphic(new ImageView(this.getClass().getResource(PATH_IMAGENS + getStrIco()).toString()));
+                } catch (Exception ex) {
+
+                }
         }
     }
 
@@ -144,13 +148,8 @@ public class AlertMensagem extends JFrame implements Constants {
 
         lblTextoMsg = new Label();
         lblMensagem = new Label();
-        //lblMensagem.textProperty().bind(taskDialog.messageProperty());
         lblMensagem.getStyleClass().add("msg");
         if (transparenteDialog) {
-//            System.setProperty("random",
-//                    String.valueOf(Integer.parseInt(System.getProperty("random", "-1"))
-//                            >= (IMAGE_LOADING.length - 1) ? 0 : Integer.parseInt(System.getProperty("random", "-1")) + 1));
-//            int random = Integer.parseInt(System.getProperty("random", "0"));
             int random = (int) (Math.random() * IMAGE_LOADING.length);
             imageViewDialog = new ImageView();
             addImagem(IMAGE_LOADING[random]);
@@ -184,6 +183,49 @@ public class AlertMensagem extends JFrame implements Constants {
         imageDialog = new Image(strImage);
         imageViewDialog.setImage(imageDialog);
         imageViewDialog.setClip(new Circle(120, 120, 120));
+    }
+
+    void contagemRegressiva(final int duracaoTimeOut) {
+        lblTextoMsg.textProperty().bind(taskDialog.messageProperty());
+        tlRegressiva = new Timeline(new KeyFrame(
+                Duration.millis(100),
+                ae -> {
+                    if (tempo % 10 == 1)
+                        if (pontos.length() < 3) {
+                            pontos += ".";
+                        } else {
+                            pontos = "";
+                        }
+                    tempo++;
+                    strContagem = " (" + (duracaoTimeOut - (tempo / 10)) + ")" + pontos;
+                    lblMensagem.setText(lblTextoMsg.getText() + strContagem);
+                }));
+        tlRegressiva.setCycleCount(Animation.INDEFINITE);
+        tlRegressiva.play();
+    }
+
+    void closeDialog() {
+        dialog.setResult(ButtonType.CANCEL);
+        dialog.close();
+    }
+
+    public void getRetornoAlert_OK() {
+        carregaDialog();
+        preparaDialogPane();
+        dialogPane.getStyleClass().add("dialog_ok");
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        botaoOk = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+        botaoOk.setDefaultButton(true);
+        botaoOk.setCancelButton(false);
+
+        botaoOk = new Button();
+        botaoOk.setOnAction(event -> {
+            closeDialog();
+        });
+
+        dialog.showAndWait();
+
     }
 
     public void getProgressBar(Task<?> task, boolean transparente, boolean showAndWait) {
@@ -229,7 +271,7 @@ public class AlertMensagem extends JFrame implements Constants {
     public Optional<ButtonType> getRetornoAlert_YES_NO() {
         carregaDialog();
         preparaDialogPane();
-        dialogPane.getStyleClass().add("yes_no");
+        dialogPane.getStyleClass().add("dialog_yes_no");
 
         dialog.getDialogPane().getButtonTypes().add(ButtonType.YES);
         botaoYes = (Button) dialog.getDialogPane().lookupButton(ButtonType.YES);
@@ -253,27 +295,5 @@ public class AlertMensagem extends JFrame implements Constants {
         return result;
     }
 
-    void contagemRegressiva(final int duracaoTimeOut) {
-        lblTextoMsg.textProperty().bind(taskDialog.messageProperty());
-        tlRegressiva = new Timeline(new KeyFrame(
-                Duration.millis(100),
-                ae -> {
-                    if (tempo % 10 == 1)
-                        if (pontos.length() < 3) {
-                            pontos += ".";
-                        } else {
-                            pontos = "";
-                        }
-                    tempo++;
-                    strContagem = " (" + (duracaoTimeOut - (tempo / 10)) + ")" + pontos;
-                    lblMensagem.setText(lblTextoMsg.getText() + strContagem);
-                }));
-        tlRegressiva.setCycleCount(Animation.INDEFINITE);
-        tlRegressiva.play();
-    }
 
-    void closeDialog() {
-        dialog.setResult(ButtonType.CANCEL);
-        dialog.close();
-    }
 }
