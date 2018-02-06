@@ -22,25 +22,19 @@ public class ViewCadastroEmpresa implements Constants {
     }
 
     public Tab openTabViewCadastroEmpresa(String tituloJanela) {
-        Parent root;
-        Scene scene = null;
-
+        setTituloJanela(tituloJanela);
         try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            Parent root = fxmlLoader.load(getClass().getResource(PATH_FXML + "FxmlCadastroEmpresa.fxml"));
+            root.getStylesheets().setAll(STYLE_SHEETS);
+            root.getStyleClass().add("view-cadastro-empresa");
+
             Tab tab = new Tab(tituloJanela);
-
-            root = FXMLLoader.load(getClass().getResource(PATH_FXML + "FxmlCadastroEmpresa.fxml"));
-            scene = new Scene(root);
-
-            scene.getStylesheets().setAll(STYLE_SHEETS);
-            scene.getRoot().getStyleClass().add("view-cadastro-empresa");
-
-            tab.setContent(scene.getRoot());
-
+            tab.setContent(root);
             return tab;
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-
         return null;
     }
 

@@ -17,6 +17,7 @@ public class TabLojaDAO extends BuscaBandoDados {
     List<TabLojaVO> lojaVOList;
 
     public TabLojaVO getLojaVO(int idTabLoja) {
+        if (idTabLoja>0)
         buscaTabLojaVO(idTabLoja);
         if (lojaVO == null)
             lojaVO = new TabLojaVO();
@@ -67,24 +68,28 @@ public class TabLojaDAO extends BuscaBandoDados {
 
         List<TabEnderecoVO> enderecoVOList = new ArrayList<>();
         for (String strCodEndereco : lojaVO.getEndereco_ids().split(";")) {
+            if (strCodEndereco == "") strCodEndereco = "0";
             enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
         }
         lojaVO.setEnderecoVOList(enderecoVOList);
 
         List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
         for (String strCodTelefone : lojaVO.getTelefone_ids().split(";")) {
+            if (strCodTelefone == "") strCodTelefone = "0";
             telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
         }
         lojaVO.setTelefoneVOList(telefoneVOList);
 
         List<TabContatoVO> contatoVOList = new ArrayList<>();
         for (String strCodContato : lojaVO.getContato_ids().split(";")) {
+            if (strCodContato == "") strCodContato = "0";
             contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
         }
         lojaVO.setContatoVOList(contatoVOList);
 
         List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
         for (String strCodEmailHomePage : lojaVO.getEmailHomePage_ids().split(";")) {
+            if (strCodEmailHomePage == "") strCodEmailHomePage = "0";
             emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
         }
         lojaVO.setEmailHomePageVOList(emailHomePageVOList);

@@ -35,6 +35,8 @@ import java.util.ResourceBundle;
 
 public class ControllerPrincipal extends Variaveis implements Initializable, FormularioModelo, Constants {
 
+    public static ControllerPrincipal ctrlPrincipal;
+
     public Label lblCopyRight;
     public BorderPane painelViewPrincipal;
     public JFXToolbar statusBar_ViewPrincipal;
@@ -80,20 +82,19 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
             if (CODE_KEY_SHIFT_CTRL_NEGATIVO.match(event) || CHAR_KEY_SHIFT_CTRL_NEGATIVO.match(event))
                 lblBotaoRetraiMenuViewPrincipal.fireEvent(executarMouseClicado(1));
 
-            if (event.getCode() == KeyCode.F12) {
-                if (sairSistema(event.isControlDown()))
-                    fechar();
-            }
             if (event.getCode() == KeyCode.F11 && event.isControlDown() && event.isShiftDown()) {
                 new Tarefa().tarefaWsFonteDeDados_ConstulaSaldo();
-            }
-            if (event.getCode() == KeyCode.F9 && event.isControlDown() && event.isShiftDown()) {
-                new Tarefa().tarefaWsCorreios_BuscaCEP("69067360");
             }
             if (event.getCode() == KeyCode.E && event.isControlDown() && event.isShiftDown()) {
                 SisMenuPrincipalVO item = new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+E");
                 if (item == null) return;
                 adicionaNovaTab(item);
+            }
+
+
+            if (event.getCode() == KeyCode.F12) {
+                if (sairSistema(event.isControlDown()))
+                    fechar();
             }
         });
 
@@ -137,6 +138,7 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ctrlPrincipal = this;
         preencherObjetos();
         fatorarObjetos();
         escutarTeclas();
@@ -196,7 +198,7 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
         timeline.play();
     }
 
-    void atualizarStatusBar(String teclasStatusBar) {
+    void atualizarTeclasStatusBar(String teclasStatusBar) {
         stbTeclasTela.setText(teclasStatusBar);
         statusBar_ViewPrincipal.getLeftItems().set(1, stbTeclasTela);
     }
@@ -214,7 +216,7 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
     boolean existeTab(SisMenuPrincipalVO menuPrincipalVO) {
         tabSelecionadaId = 0;
         for (Tab tab : tabPaneViewPrincipal.getTabs()) {
-            if (tab.getText().equals(menuPrincipalVO.getDescricao()))
+            if (tab.getText().equals(menuPrincipalVO.getTituloTab()))
                 return true;
             tabSelecionadaId++;
         }

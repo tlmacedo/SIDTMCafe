@@ -17,6 +17,7 @@ public class SisTelefoneOperadoraDAO extends BuscaBandoDados {
     List<SisTelefoneOperadoraVO> telefoneOperadoraVOList;
 
     public SisTelefoneOperadoraVO getTelefoneOperadoraVO(int idSisTelefoneOperadoraVO) {
+        if (idSisTelefoneOperadoraVO>0)
         buscaSisTelefoneOperadoraVO(idSisTelefoneOperadoraVO);
         if (telefoneOperadoraVO == null)
             telefoneOperadoraVO = new SisTelefoneOperadoraVO();

@@ -17,7 +17,8 @@ public class SisMenuPrincipalDAO extends BuscaBandoDados {
     List<SisMenuPrincipalVO> menuPrincipalVOList;
 
     public SisMenuPrincipalVO getMenuPrincipalVO(int idSisMenuPrincipalVO) {
-        buscaSisMenuPrincipalVO(idSisMenuPrincipalVO, "");
+        if (idSisMenuPrincipalVO > 0)
+            buscaSisMenuPrincipalVO(idSisMenuPrincipalVO, "");
         if (menuPrincipalVO == null)
             menuPrincipalVO = new SisMenuPrincipalVO();
         return menuPrincipalVO;

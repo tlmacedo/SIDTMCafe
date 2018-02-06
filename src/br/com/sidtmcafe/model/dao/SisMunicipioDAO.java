@@ -17,7 +17,8 @@ public class SisMunicipioDAO extends BuscaBandoDados {
     List<SisMunicipioVO> municipioVOList;
 
     public SisMunicipioVO getMunicipioVO(int idSisMunicipioVO) {
-        buscaSisMunicipioVO(idSisMunicipioVO, "");
+        if (idSisMunicipioVO > 0)
+            buscaSisMunicipioVO(idSisMunicipioVO, "");
         if (municipioVO == null)
             municipioVO = new SisMunicipioVO();
         return municipioVO;

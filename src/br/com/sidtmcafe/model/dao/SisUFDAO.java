@@ -17,7 +17,8 @@ public class SisUFDAO extends BuscaBandoDados {
     List<SisUFVO> ufVOList;
 
     public SisUFVO getUfVO(int idSisUFVO) {
-        buscaSisUFVO(idSisUFVO, "");
+        if (idSisUFVO > 0)
+            buscaSisUFVO(idSisUFVO, "");
         if (ufVO == null)
             ufVO = new SisUFVO();
         return ufVO;

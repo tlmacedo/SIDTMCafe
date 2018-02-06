@@ -72,24 +72,28 @@ public class TabColaboradorDAO extends BuscaBandoDados {
 
         List<TabEnderecoVO> enderecoVOList = new ArrayList<>();
         for (String strCodEndereco : colaboradorVO.getEndereco_ids().split(";")) {
+            if (strCodEndereco == "") strCodEndereco = "0";
             enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
         }
         colaboradorVO.setEnderecoVOList(enderecoVOList);
 
         List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
         for (String strCodTelefone : colaboradorVO.getTelefone_ids().split(";")) {
+            if (strCodTelefone == "") strCodTelefone = "0";
             telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
         }
         colaboradorVO.setTelefoneVOList(telefoneVOList);
 
         List<TabContatoVO> contatoVOList = new ArrayList<>();
         for (String strCodContato : colaboradorVO.getContato_ids().split(";")) {
+            if (strCodContato == "") strCodContato = "0";
             contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
         }
         colaboradorVO.setContatoVOList(contatoVOList);
 
         List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
         for (String strCodEmailHomePage : colaboradorVO.getEmailHomePage_ids().split(";")) {
+            if (strCodEmailHomePage == "") strCodEmailHomePage = "0";
             emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
         }
         colaboradorVO.setEmailHomePageVOList(emailHomePageVOList);

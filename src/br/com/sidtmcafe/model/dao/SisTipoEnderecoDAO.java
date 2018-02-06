@@ -17,7 +17,8 @@ public class SisTipoEnderecoDAO extends BuscaBandoDados {
     List<SisTipoEnderecoVO> tipoEnderecoVOList;
 
     public SisTipoEnderecoVO getTipoEnderecoVO(int idSisTipoEnderecoVO) {
-        buscaSisTipoEnderecoVO(idSisTipoEnderecoVO);
+        if (idSisTipoEnderecoVO > 0)
+            buscaSisTipoEnderecoVO(idSisTipoEnderecoVO);
         if (tipoEnderecoVO == null)
             tipoEnderecoVO = new SisTipoEnderecoVO();
         return tipoEnderecoVO;

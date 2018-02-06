@@ -17,6 +17,7 @@ public class TabCargoDAO extends BuscaBandoDados {
     List<TabCargoVO> cargoVOList;
 
     public TabCargoVO getCargoVO(int idTabCargoVO) {
+        if (idTabCargoVO>0)
         buscaTabCargoVO(idTabCargoVO);
         if (cargoVO == null)
             cargoVO = new TabCargoVO();

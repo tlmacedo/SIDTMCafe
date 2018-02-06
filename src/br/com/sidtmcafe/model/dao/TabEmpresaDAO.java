@@ -17,7 +17,8 @@ public class TabEmpresaDAO extends BuscaBandoDados {
     List<TabEmpresaVO> empresaVOList;
 
     public TabEmpresaVO getEmpresaVO(int idTabEmpresaVO) {
-        buscaTabEmpresaVO(idTabEmpresaVO);
+        if (idTabEmpresaVO > 0)
+            buscaTabEmpresaVO(idTabEmpresaVO);
         if (empresaVO == null)
             empresaVO = new TabEmpresaVO();
         return empresaVO;

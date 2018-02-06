@@ -65,9 +65,7 @@ public class PersonalizarCampos implements Constants {
                 }
             }
         }
-        //limpeza(anchorPane);
     }
-
 
     public static void limpeza(AnchorPane anchorPane) {
         String vlrCampoLimpo = "";
@@ -131,5 +129,30 @@ public class PersonalizarCampos implements Constants {
             }
         }
     }
+
+    public static void desabilitaCampos(AnchorPane anchorPane, boolean setDisable) {
+        for (Node node : anchorPane.getChildren()) {
+            if (node instanceof TitledPane) {
+                desabilitaCampos((AnchorPane) ((TitledPane) node).getContent(), setDisable);
+            } else if (node instanceof JFXTextField) {
+                ((JFXTextField) node).setDisable(setDisable);
+            } else if (node instanceof JFXTextArea) {
+                ((JFXTextArea) node).setDisable(setDisable);
+            } else if (node instanceof JFXComboBox) {
+                ((JFXComboBox) node).setDisable(setDisable);
+            } else if (node instanceof JFXCheckBox) {
+                ((JFXCheckBox) node).setDisable(setDisable);
+            } else if (node instanceof JFXTreeTableView) {
+                ((JFXTreeTableView) node).setEditable(setDisable);
+            } else if (node instanceof AnchorPane) {
+                desabilitaCampos((AnchorPane) node, setDisable);
+            } else if (node instanceof JFXTabPane) {
+                for (Tab tab : ((JFXTabPane) node).getTabs()) {
+                    desabilitaCampos((AnchorPane) tab.getContent(), setDisable);
+                }
+            }
+        }
+    }
+
 
 }

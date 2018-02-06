@@ -17,7 +17,8 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
     List<TabEmpresa_DetalheReceitaFederalVO> detalheReceitaFederalVOList;
 
     public TabEmpresa_DetalheReceitaFederalVO getDetalheReceitaFederalVO(int idTabEmpresa_DetalheReceitaFederalVO) {
-        buscaTabEmpresa_DetalheReceitaFederal(idTabEmpresa_DetalheReceitaFederalVO, 0);
+        if (idTabEmpresa_DetalheReceitaFederalVO > 0)
+            buscaTabEmpresa_DetalheReceitaFederal(idTabEmpresa_DetalheReceitaFederalVO, 0);
         if (detalheReceitaFederalVO == null)
             detalheReceitaFederalVO = new TabEmpresa_DetalheReceitaFederalVO();
         return detalheReceitaFederalVO;

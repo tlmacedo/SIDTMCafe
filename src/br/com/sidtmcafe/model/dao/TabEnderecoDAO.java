@@ -19,8 +19,7 @@ public class TabEnderecoDAO extends BuscaBandoDados {
     List<TabEnderecoVO> enderecoVOList;
 
     public TabEnderecoVO getEnderecoVO(int idTabEnderecoVO) {
-        if (idTabEnderecoVO > 0)
-            buscaTabEnderecoVO(idTabEnderecoVO);
+        buscaTabEnderecoVO(idTabEnderecoVO);
         if (enderecoVO == null)
             enderecoVO = new TabEnderecoVO();
         return enderecoVO;
@@ -35,7 +34,7 @@ public class TabEnderecoDAO extends BuscaBandoDados {
 
     void buscaTabEnderecoVO(int idTabEnderecoVO) {
         comandoSql = "SELECT * FROM tabEndereco ";
-        if (idTabEnderecoVO > 0) comandoSql += "WHERE id = '" + idTabEnderecoVO + "' ";
+        if (idTabEnderecoVO >= 0) comandoSql += "WHERE id = '" + idTabEnderecoVO + "' ";
         comandoSql += "ORDER BY tipoEndereco_id, id ";
 
         enderecoVOList = new ArrayList<>();

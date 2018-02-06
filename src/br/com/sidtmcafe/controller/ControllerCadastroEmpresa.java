@@ -9,8 +9,10 @@ import br.com.sidtmcafe.service.ValidadorDeDados;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.*;
 import br.com.sidtmcafe.model.vo.*;
+import br.com.sidtmcafe.view.ViewCadastroEmpresa;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -18,10 +20,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 
 import java.net.URL;
@@ -102,6 +107,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
         PersonalizarCampos.limpeza(painelViewCadastroEmpresa);
         PersonalizarCampos.mascara(painelViewCadastroEmpresa);
+        //PersonalizarCampos.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), false);
+        //PersonalizarCampos.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), true);
     }
 
     @Override
@@ -111,6 +118,54 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     @Override
     public void escutarTeclas() {
+        ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
+            if (ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().size() <= 0) return;
+            if (n.getText().equals(ViewCadastroEmpresa.getTituloJanela())) {
+                ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
+                    switch (event.getCode()) {
+                        case F1:
+                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                            setStatusFormulario("Incluir");
+                            System.out.println("Apertou: " + event.getCode());
+                            break;
+                        case F2:
+                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                            setStatusFormulario("Pesquisa");
+                            System.out.println("Apertou: " + event.getCode());
+                            break;
+                        case F3:
+                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                            setStatusFormulario("Pesquisa");
+                            System.out.println("Apertou: " + event.getCode());
+                            break;
+                        case F4:
+                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                            setStatusFormulario("Editar");
+                            System.out.println("Apertou: " + event.getCode());
+                            break;
+                        case F5:
+                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                            System.out.println("Apertou: " + event.getCode());
+                            break;
+                        case F7:
+                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                            txtPesquisa.requestFocus();
+                            System.out.println("Apertou: " + event.getCode());
+                            break;
+                        case F8:
+                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                            cboFiltroPesquisa.requestFocus();
+                            System.out.println("Apertou: " + event.getCode());
+                            break;
+                        case F12:
+                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                            System.out.println("Apertou: " + event.getCode());
+                            break;
+                    }
+                });
+            }
+        });
+
         cboEndUF.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
             if (n != null)
                 carregarPesquisaMunicipios(n.getSigla());
@@ -183,6 +238,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         preencherObjetos();
         fatorarObjetos();
         escutarTeclas();
+        setStatusFormulario("Pesquisa");
     }
 
     TabEmpresaVO ttvEmpresaVO;
@@ -200,13 +256,21 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     JFXTreeTableColumn<TabEmpresaVO, String> colunaRazao;
     JFXTreeTableColumn<TabEmpresaVO, String> colunaFantasia;
     JFXTreeTableColumn<TabEmpresaVO, String> colunaEndereco;
+    JFXTreeTableColumn<TabEmpresaVO, String> colunaEndLogradouro;
+    JFXTreeTableColumn<TabEmpresaVO, String> colunaEndNumero;
+    JFXTreeTableColumn<TabEmpresaVO, String> colunaEndComplemento;
+    JFXTreeTableColumn<TabEmpresaVO, String> colunaEndBairro;
+    JFXTreeTableColumn<TabEmpresaVO, String> colunaEndUFMunicipio;
     JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsCliente;
     JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsFornecedor;
     JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsTransportadora;
-    JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaAtivo;
 
     int qtdRegistrosLocalizados = 0;
-    String statusFormulario = "Pesquisa";
+    String statusFormulario, statusBarFormulario;
+
+    static String STATUSBARPESQUISA = "[F1-Novo]  [F3-Excluir]  [F4-Editar]  [F7-Pesquisar]  [F8-Filtro pesquisa]  [F12-Sair]";
+    static String STATUSBAREDITAR = "[F3-Cancelar edição]  [F5-Atualizar]";
+    static String STATUSBARINCLUIR = "[F2-Incluir]  [F3-Cancelar inclusão]";
 
     public TabEmpresaVO getTtvEmpresaVO() {
         return ttvEmpresaVO;
@@ -232,6 +296,22 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     public void setStatusFormulario(String statusFormulario) {
         this.statusFormulario = statusFormulario;
         atualizaLblRegistrosLocalizados();
+        setStatusBarFormulario(statusFormulario);
+    }
+
+    public String getStatusBarFormulario() {
+        return statusBarFormulario;
+    }
+
+    public void setStatusBarFormulario(String statusFormulario) {
+        if (statusFormulario.toLowerCase().contains("incluir")) {
+            this.statusBarFormulario = STATUSBARINCLUIR;
+        } else if (statusFormulario.toLowerCase().contains("editar")) {
+            this.statusBarFormulario = STATUSBAREDITAR;
+        } else if (statusFormulario.toLowerCase().contains("pesquisa")) {
+            this.statusBarFormulario = STATUSBARPESQUISA;
+        }
+        ControllerPrincipal.ctrlPrincipal.atualizarTeclasStatusBar(statusBarFormulario);
     }
 
     void atualizaLblRegistrosLocalizados() {
@@ -262,28 +342,147 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     }
 
     public void criarTabelaEmpresa() {
-        Label lblId = new Label("id");
-        lblId.setPrefWidth(30);
-        colunaId = new JFXTreeTableColumn<TabEmpresaVO, Integer>();
-        colunaId.setGraphic(lblId);
-        colunaId.setPrefWidth(30);
-        colunaId.setStyle("-fx-alignment: center-right;");
-        colunaId.setCellValueFactory(param -> param.getValue().getValue().idProperty().asObject());
+        try {
 
-        Label lblCnpj = new Label("C.N.P.J / C.P.F.");
-        lblCnpj.setPrefWidth(120);
-        colunaCnpj = new JFXTreeTableColumn<TabEmpresaVO, String>();
-        colunaCnpj.setGraphic(lblCnpj);
-        colunaCnpj.setPrefWidth(120);
-        colunaCnpj.setStyle("-fx-alignment: center-right;");
-        colunaCnpj.setCellValueFactory(param -> new SimpleStringProperty(FormatadorDeDados.getFormatado(param.getValue().getValue().getCnpj(), "cnpj")));
+            Label lblId = new Label("id");
+            lblId.setPrefWidth(30);
+            colunaId = new JFXTreeTableColumn<TabEmpresaVO, Integer>();
+            colunaId.setGraphic(lblId);
+            colunaId.setPrefWidth(30);
+            colunaId.setStyle("-fx-alignment: center-right;");
+            colunaId.setCellValueFactory(param -> param.getValue().getValue().idProperty().asObject());
 
-        Label lblRazao = new Label("Razão / Nome");
-        lblRazao.setPrefWidth(300);
-        colunaRazao = new JFXTreeTableColumn<TabEmpresaVO, String>();
-        colunaRazao.setGraphic(lblRazao);
-        colunaRazao.setPrefWidth(300);
-        colunaRazao.setCellValueFactory(param -> param.getValue().getValue().razaoProperty());
+            Label lblCnpj = new Label("C.N.P.J / C.P.F.");
+            lblCnpj.setPrefWidth(120);
+            colunaCnpj = new JFXTreeTableColumn<TabEmpresaVO, String>();
+            colunaCnpj.setGraphic(lblCnpj);
+            colunaCnpj.setPrefWidth(120);
+            colunaCnpj.setStyle("-fx-alignment: center-right;");
+            colunaCnpj.setCellValueFactory(param -> new SimpleStringProperty(FormatadorDeDados.getFormatado(param.getValue().getValue().getCnpj(), "cnpj")));
+
+            Label lblRazao = new Label("Razão / Nome");
+            lblRazao.setPrefWidth(300);
+            colunaRazao = new JFXTreeTableColumn<TabEmpresaVO, String>();
+            colunaRazao.setGraphic(lblRazao);
+            colunaRazao.setPrefWidth(300);
+            colunaRazao.setCellValueFactory(param -> param.getValue().getValue().razaoProperty());
+
+            Label lblFantasia = new Label("Fantasia / Apelido");
+            lblFantasia.setPrefWidth(300);
+            colunaFantasia = new JFXTreeTableColumn<TabEmpresaVO, String>();
+            colunaFantasia.setGraphic(lblFantasia);
+            colunaFantasia.setPrefWidth(300);
+            colunaFantasia.setCellValueFactory(param -> param.getValue().getValue().fantasiaProperty());
+
+            colunaEndereco = new JFXTreeTableColumn<TabEmpresaVO, String>("Endereço");
+
+            Label lblEndLogradouro = new Label("Logradouro");
+            lblEndLogradouro.setPrefWidth(140);
+            colunaEndLogradouro = new JFXTreeTableColumn<TabEmpresaVO, String>();
+            colunaEndLogradouro.setGraphic(lblEndLogradouro);
+            colunaEndLogradouro.setPrefWidth(140);
+            colunaEndLogradouro.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getEnderecoVOList().size() > 0)
+                    if (param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty() != null)
+                        return param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty();
+                return new SimpleStringProperty("");
+            });
+
+            Label lblEndNumero = new Label("Número");
+            lblEndNumero.setPrefWidth(50);
+            colunaEndNumero = new JFXTreeTableColumn<TabEmpresaVO, String>();
+            colunaEndNumero.setGraphic(lblEndNumero);
+            colunaEndNumero.setPrefWidth(50);
+            colunaEndNumero.setStyle("-fx-alignment: center-right;");
+            colunaEndNumero.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getEnderecoVOList().size() > 0)
+                    if (param.getValue().getValue().getEnderecoVOList().get(0).numeroProperty() != null)
+                        return param.getValue().getValue().getEnderecoVOList().get(0).numeroProperty();
+                return new SimpleStringProperty("");
+            });
+
+            Label lblEndComplemento = new Label("Complemento");
+            lblEndComplemento.setPrefWidth(150);
+            colunaEndComplemento = new JFXTreeTableColumn<TabEmpresaVO, String>();
+            colunaEndComplemento.setGraphic(lblEndComplemento);
+            colunaEndComplemento.setPrefWidth(150);
+            colunaEndComplemento.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getEnderecoVOList().size() > 0)
+                    if (param.getValue().getValue().getEnderecoVOList().get(0).complementoProperty() != null)
+                        return param.getValue().getValue().getEnderecoVOList().get(0).complementoProperty();
+                return new SimpleStringProperty("");
+            });
+
+            Label lblEndBairro = new Label("Bairro");
+            lblEndBairro.setPrefWidth(85);
+            colunaEndBairro = new JFXTreeTableColumn<TabEmpresaVO, String>();
+            colunaEndBairro.setGraphic(lblEndBairro);
+            colunaEndBairro.setPrefWidth(85);
+            colunaEndBairro.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getEnderecoVOList().size() > 0)
+                    if (param.getValue().getValue().getEnderecoVOList().get(0).bairroProperty() != null)
+                        return param.getValue().getValue().getEnderecoVOList().get(0).bairroProperty();
+                return new SimpleStringProperty("");
+            });
+
+            Label lblEndUFMunicipio = new Label("UF - Cidade");
+            lblEndUFMunicipio.setPrefWidth(75);
+            colunaEndUFMunicipio = new JFXTreeTableColumn<TabEmpresaVO, String>();
+            colunaEndUFMunicipio.setGraphic(lblEndUFMunicipio);
+            colunaEndUFMunicipio.setPrefWidth(75);
+            colunaEndUFMunicipio.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getEnderecoVOList().size() > 0)
+                    if (param.getValue().getValue().getEnderecoVOList().get(0) != null)
+                        return new SimpleStringProperty(
+                                param.getValue().getValue().getEnderecoVOList().get(0).getUfVO().siglaProperty() + " - " +
+                                        param.getValue().getValue().getEnderecoVOList().get(0).getMunicipioVO().descricaoProperty());
+                return new SimpleStringProperty("");
+            });
+
+            colunaEndereco.getColumns().addAll(colunaEndLogradouro, colunaEndNumero,
+                    colunaEndComplemento, colunaEndBairro);
+
+            colunaIsCliente = new JFXTreeTableColumn<TabEmpresaVO, Boolean>();
+            colunaIsCliente.setPrefWidth(50);
+            VBox vBoxIsCliente = new VBox();
+//            ImageView imageViewIsCliente = null;// = new ImageView("/Images/icoClientesLoja.png");
+//            imageViewIsCliente.getStyleClass().add("lbl_ico_cliente");
+            Label labelIsCliente = new Label("Cliente");
+            vBoxIsCliente.setAlignment(Pos.CENTER);
+            vBoxIsCliente.getChildren().addAll(labelIsCliente);
+            colunaIsCliente.setGraphic(vBoxIsCliente);
+            colunaIsCliente.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getIsCliente() == 0) return new SimpleBooleanProperty(false);
+                else return new SimpleBooleanProperty(true);
+            });
+
+            colunaIsFornecedor = new JFXTreeTableColumn<TabEmpresaVO, Boolean>();
+            colunaIsFornecedor.setPrefWidth(65);
+            VBox vBoxIsFornecedor = new VBox();
+//            ImageView imageViewIsFornecedor = null; // new ImageView("/Images/icoFornecedores.png");
+//            imageViewIsFornecedor.getStyleClass().add("lbl_ico_fornecedor");
+            Label labelIsFornecedor = new Label("Fornecedor");
+            vBoxIsFornecedor.setAlignment(Pos.CENTER);
+            vBoxIsFornecedor.getChildren().addAll(labelIsFornecedor);
+            colunaIsFornecedor.setGraphic(vBoxIsFornecedor);
+            colunaIsFornecedor.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getIsFornecedor() == 0) return new SimpleBooleanProperty(false);
+                else return new SimpleBooleanProperty(true);
+            });
+
+            colunaIsTransportadora = new JFXTreeTableColumn<TabEmpresaVO, Boolean>();
+            colunaIsTransportadora.setPrefWidth(78);
+            VBox vBoxIsTransportadora = new VBox();
+//            ImageView imageViewIsTransportadora = null; // new ImageView("/Images/icoTransportadoraCaminhao.png");
+//            imageViewIsTransportadora.getStyleClass().add("lbl_ico_transportadora");
+            Label labelIsTransportadora = new Label("Transportadora");
+            vBoxIsTransportadora.setAlignment(Pos.CENTER);
+            vBoxIsTransportadora.getChildren().addAll(labelIsTransportadora);
+            colunaIsTransportadora.setGraphic(vBoxIsTransportadora);
+            colunaIsTransportadora.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getIsTransportadora() == 0) return new SimpleBooleanProperty(false);
+                else return new SimpleBooleanProperty(true);
+            });
 
 //        colunaFantasia;
 //        colunaEndereco;
@@ -292,7 +491,9 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 //        colunaIsTransportadora;
 //        colunaAtivo;
 
-
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void carregarSisTipoEndereco() {
@@ -349,7 +550,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                 carregarPesquisaEmpresas(txtPesquisa.getText());
             setQtdRegistrosLocalizados(empresaVOFilteredList.size());
             final TreeItem<TabEmpresaVO> root = new RecursiveTreeItem<TabEmpresaVO>(empresaVOFilteredList, RecursiveTreeObject::getChildren);
-            ttvEmpresa.getColumns().setAll(colunaId, colunaCnpj, colunaRazao); //colunaFantasia, colunaEndereco, colunaIsCliente, colunaIsFornecedor, colunaIsTransportadora, colunaAtivo);
+            ttvEmpresa.getColumns().setAll(colunaId, colunaCnpj, colunaRazao, colunaFantasia, colunaEndereco, colunaIsCliente,
+                    colunaIsFornecedor, colunaIsTransportadora);
             ttvEmpresa.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             ttvEmpresa.setRoot(root);
             ttvEmpresa.setShowRoot(false);
@@ -429,23 +631,17 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     void exibirDadosEndereco(int index) {
         TabEnderecoVO enderecoVO = ttvEmpresaVO.getEnderecoVOList().get(index);
-        if (enderecoVO == null)
-            enderecoVO = new TabEnderecoVO();
+        if (enderecoVO == null) return;
+        //enderecoVO = new TabEnderecoVO();
         txtEndCEP.setText(FormatadorDeDados.getFormatado(enderecoVO.getCep(), "cep"));
         txtEndLogradouro.setText(enderecoVO.getLogradouro());
-        txtEndNumero.setText("");
+        txtEndNumero.setText(enderecoVO.getNumero());
         txtEndComplemento.setText(enderecoVO.getComplemento());
         txtEndBairro.setText(enderecoVO.getBairro());
-        cboEndUF.getSelectionModel().select(enderecoVO.getUfVO());
-        cboEndMunicipio.getSelectionModel().select(enderecoVO.getMunicipioVO());
         txtEndPontoReferencia.setText(enderecoVO.getPontoReferencia());
+        cboEndUF.getSelectionModel().select(enderecoVO.getUfVO().getId());
+        cboEndMunicipio.getSelectionModel().select(enderecoVO.getMunicipioVO());
     }
 
-    public void teclaEspecial(KeyCode keyCode) {
-        switch (keyCode) {
-            case F4:
-
-        }
-    }
 
 }

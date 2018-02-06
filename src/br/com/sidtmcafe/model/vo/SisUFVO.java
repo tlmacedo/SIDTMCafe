@@ -14,6 +14,7 @@ public class SisUFVO extends RecursiveTreeObject<SisUFVO> {
     public SisUFVO() {
     }
 
+
     public int getId() {
         return idProperty().get();
     }
