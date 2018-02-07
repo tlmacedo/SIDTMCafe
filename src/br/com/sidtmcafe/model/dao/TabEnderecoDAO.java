@@ -66,9 +66,8 @@ public class TabEnderecoDAO extends BuscaBandoDados {
     }
 
     public TabEnderecoVO getEnderecoVO(WsCepPostmonVO wsCepPostmonVO, TabEnderecoVO enderecoAnt) {
-        enderecoVO = new TabEnderecoVO();
-        enderecoVO.setId(enderecoAnt.getId());
-        enderecoVO.setTipoEndereco_id(enderecoAnt.getTipoEndereco_id());
+        buscaTabEnderecoVO(enderecoAnt.getId());
+
         if (wsCepPostmonVO == null)
             return enderecoVO;
 

@@ -204,10 +204,10 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
 
     @Override
     public String toString() {
-        try {
-            return getTipoEnderecoVO().descricaoProperty().get();
-        } catch (Exception ex) {
-            return new SisTipoEnderecoDAO().getTipoEnderecoVO(1).descricaoProperty().get();
-        }
+//        try {
+        return getTipoEnderecoVO().descricaoProperty().get();
+//        } catch (Exception ex) {
+//            return new SisTipoEnderecoDAO().getTipoEnderecoVO(1).descricaoProperty().get();
+//        }
     }
 }

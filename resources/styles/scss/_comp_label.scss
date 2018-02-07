@@ -72,4 +72,17 @@
   &.lbl_h6 {
     -fx-font-size: $fontSizeh6;
   }
+
+  &.lbl_ico_cliente {
+    -fx-background-image: url($icoClientesLojaOrange);
+  }
+
+  &.lbl_ico_fornecedor {
+    -fx-background-image: url($icoFornecedorOrange);
+  }
+
+  &.lbl_ico_transportadora {
+    -fx-background-image: url($icoTransportadoraOrange);
+  }
+
 }

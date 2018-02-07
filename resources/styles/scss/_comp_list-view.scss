@@ -5,15 +5,21 @@
     -fx-border-color: $corPricipal;
   }
 
-  .list-cell{
+  .list-cell {
     -fx-background-color: -fx-control-inner-background;
+    -fx-alignment: center-left;
+    -fx-font-family: $fontFamily;
+    -fx-font-size: $fontSizeh5;
+    -fx-text-fill: $sisColor_black;
+    -fx-padding: 3;
+
     &:odd {
       -fx-background-color: derive(-fx-control-inner-background, -12%);
     }
     &:filled:selected {
       -fx-background-color: -fx-selection-bar;
       -fx-text-fill: -fx-selection-bar-text;
-      &:hover{
+      &:hover {
         -fx-background-color: -fx-selection-bar;
         -fx-text-fill: -fx-selection-bar-text;
       }
@@ -23,5 +29,22 @@
       -fx-text-fill: -fx-text-inner-color;
     }
   }
+
+  &.endereco {
+    .list-cell {
+      -fx-pref-height: 25;
+      -fx-background-color: -fx-control-inner-background;
+      -fx-text-fill: $sisColor_black;
+      -fx-padding: 0 0 0 3;
+      &:odd {
+        -fx-background-color: derive(-fx-control-inner-background, -12%);
+      }
+      &:filled:selected {
+        -fx-background-color: -fx-selection-bar;
+        -fx-text-fill: -fx-selection-bar-text;
+      }
+    }
+  }
+
 }
 
