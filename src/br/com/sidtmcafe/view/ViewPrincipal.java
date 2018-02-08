@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class ViewPrincipal extends Application implements Constants {
 
-    private static Stage stage;
+    public static Stage stage;
 
     public static Stage getStage() {
         return stage;

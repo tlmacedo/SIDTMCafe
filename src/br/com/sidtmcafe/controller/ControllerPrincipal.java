@@ -19,6 +19,7 @@ import javafx.animation.Timeline;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -103,8 +104,10 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
             public void onChanged(Change<? extends Tab> c) {
                 if (tabPaneViewPrincipal.getTabs().size() > 0) {
                     lblImageLogoViewPrincipal.setVisible(false);
+                    ViewPrincipal.stage.getIcons().setAll(new Image(this.getClass().getResource(PATH_IMAGENS + "ic_grao_cafe_orange_24dp.png").toString()));
                 } else {
                     lblImageLogoViewPrincipal.setVisible(true);
+                    ViewPrincipal.stage.getIcons().setAll(new Image(this.getClass().getResource(PATH_IMAGENS + "ic_grao_cafe_black_24dp.png").toString()));
                 }
             }
         });

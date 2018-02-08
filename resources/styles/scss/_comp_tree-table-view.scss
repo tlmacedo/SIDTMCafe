@@ -8,13 +8,13 @@
       -fx-text-fill: $corPricipal;
       -fx-font-size: $fontSizeh6;
       -fx-padding: 0 4 0 0;
+      -fx-pref-height: 15;
     }
   }
 
   .tree-table-cell {
     -fx-background-color: transparent;
     -fx-alignment: center-left;
-    //-fx-pref-height: 13;
     -fx-font-family: $fontFamily;
     -fx-font-size: $fontSizeh6;
     -fx-text-fill: $sisColor_black;
@@ -26,6 +26,7 @@
   }
 
   .tree-table-row-cell {
+    -fx-pref-height: 18;
     -fx-background-color: $sisColor_whiteblack;
     -fx-text-fill: $sisColor_black;
     //-fx-background-insets: 0, 0 0 1 0;

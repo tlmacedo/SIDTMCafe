@@ -14,21 +14,17 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
-import org.apache.velocity.runtime.directive.contrib.For;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -87,6 +83,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     public JFXCheckBox chkPrazoRecibo;
 
 
+    FormatadorDeDados formatCNPJ_CPF, formatIE;
+
     @Override
     public void fechar() {
 
@@ -106,7 +104,13 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
         new Tarefa().tarefaAbreCadastroEmpresa(this, listaTarefas);
 
-        PersonalizarCampos.mascara(painelViewCadastroEmpresa);
+        PersonalizarCampos.fieldMaxLen(painelViewCadastroEmpresa);
+        PersonalizarCampos.maskFields(painelViewCadastroEmpresa);
+        formatCNPJ_CPF = new FormatadorDeDados();
+        formatCNPJ_CPF.maskField(txtCNPJ, FormatadorDeDados.gerarMascara("cnpj", 0, "#"));
+        formatIE = new FormatadorDeDados();
+        formatIE.maskField(txtIE, FormatadorDeDados.gerarMascara("ie", 0, "#"));
+
     }
 
     @Override
@@ -169,23 +173,24 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
         cboClassificacaoJuridica.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
             if (n.intValue() == 1) {
-                txtCNPJ.setPromptText("C.N.P.J.");
-                //txtCNPJ.setText(FormatadorDeDados.getFormatado(txtCNPJ.getText(), "cnpj"));
-                FormatadorDeDados.campoMask(txtCNPJ, FormatadorDeDados.geraMascara("cnpj", 0, "#"));
+                txtIE.setPromptText("IE");
                 txtRazao.setPromptText("Razão");
                 txtFantasia.setPromptText("Fantasia");
+                txtCNPJ.setPromptText("C.N.P.J.");
+                formatCNPJ_CPF.setMascara("cnpj");
             } else {
-                txtCNPJ.setPromptText("C.P.F.");
-                //txtCNPJ.setText(FormatadorDeDados.getFormatado(txtCNPJ.getText(), "cpf"));
-                FormatadorDeDados.campoMask(txtCNPJ, FormatadorDeDados.geraMascara("cpf", 0, "#"));
+                txtIE.setPromptText("RG");
                 txtRazao.setPromptText("Nome");
                 txtFantasia.setPromptText("Apelido");
+                txtCNPJ.setPromptText("C.P.F.");
+                formatCNPJ_CPF.setMascara("cpf");
             }
         });
 
         cboEndUF.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
-            if (n != null)
-                carregarPesquisaMunicipios(n.getSigla());
+            if (n == null) return;
+            carregarPesquisaMunicipios(n.getSigla());
+            formatIE.setMascara("#ie" + n.getSigla());
         });
 
         txtPesquisa.textProperty().addListener((ov, o, n) -> {
@@ -264,6 +269,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         fatorarObjetos();
         escutarTeclas();
         setStatusFormulario("Pesquisa");
+        //cboClassificacaoJuridica.getSelectionModel().select(1);
     }
 
     TabEmpresaVO ttvEmpresaVO;
@@ -334,7 +340,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             this.statusBarFormulario = STATUSBARINCLUIR;
             PersonalizarCampos.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
             PersonalizarCampos.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), false);
-            PersonalizarCampos.limpeza((AnchorPane) tpnDadosCadastrais.getContent());
+            PersonalizarCampos.clearField((AnchorPane) tpnDadosCadastrais.getContent());
             cboClassificacaoJuridica.requestFocus();
         } else if (statusFormulario.toLowerCase().contains("editar")) {
             this.statusBarFormulario = STATUSBAREDITAR;
@@ -395,7 +401,13 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             colunaCnpj.setGraphic(lblCnpj);
             colunaCnpj.setPrefWidth(120);
             colunaCnpj.setStyle("-fx-alignment: center-right;");
-            colunaCnpj.setCellValueFactory(param -> new SimpleStringProperty(FormatadorDeDados.getFormatado(param.getValue().getValue().getCnpj(), "cnpj")));
+            colunaCnpj.setCellValueFactory(param -> {
+                if (param.getValue().getValue().isPessoaJuridicaProperty().get() == 0)
+                    return new SimpleStringProperty(FormatadorDeDados.getCampoFormatado(param.getValue().getValue().cnpjProperty().getValue(), "cpf"));
+                return new SimpleStringProperty(FormatadorDeDados.getCampoFormatado(param.getValue().getValue().cnpjProperty().getValue(), "cnpj"));
+            });
+//            colunaCnpj.setCellValueFactory(param -> {
+//                new SimpleStringProperty(FormatadorDeDados.getCampoFormatado(param.getValue().getValue().getCnpj(), "cnpj"))});
 
             Label lblIe = new Label(("IE / RG"));
             lblIe.setPrefWidth(75);
@@ -403,7 +415,11 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             colunaIe.setGraphic(lblIe);
             colunaIe.setPrefWidth(75);
             colunaIe.setStyle("-fx-alignment: center-right;");
-            colunaIe.setCellValueFactory(param -> param.getValue().getValue().ieProperty());
+            colunaIe.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty().get() != "")
+                    return new SimpleStringProperty(FormatadorDeDados.getCampoFormatado(param.getValue().getValue().ieProperty().getValue(), "ie" + param.getValue().getValue().getEnderecoVOList().get(0).getUfVO().getSigla()));
+                return new SimpleStringProperty(FormatadorDeDados.getCampoFormatado(param.getValue().getValue().ieProperty().getValue(), "ie"));
+            });
 
             Label lblRazao = new Label("Razão / Nome");
             lblRazao.setPrefWidth(200);
@@ -583,7 +599,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         cboClassificacaoJuridica.getItems().clear();
         cboClassificacaoJuridica.getItems().add(0, "FÍSICA");
         cboClassificacaoJuridica.getItems().add(1, "JURÍDICA");
-        cboClassificacaoJuridica.getSelectionModel().select(1);
+        cboClassificacaoJuridica.getSelectionModel().select(0);
     }
 
     public void preencherTabelaEmpresa() {
@@ -653,7 +669,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         String tipFormat = "cnpj";
         if (cboClassificacaoJuridica.getSelectionModel().getSelectedIndex() == 0)
             tipFormat = "cpf";
-        txtCNPJ.setText(FormatadorDeDados.getFormatado(ttvEmpresaVO.getCnpj(), tipFormat));
+        txtCNPJ.setText(FormatadorDeDados.getCampoFormatado(ttvEmpresaVO.getCnpj(), tipFormat));
         txtIE.setText(ttvEmpresaVO.getIe());
         cboSituacaoSistema.getSelectionModel().select(ttvEmpresaVO.getSituacaoSistemaVO());
         txtRazao.setText(ttvEmpresaVO.getRazao());
@@ -675,7 +691,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         TabEnderecoVO enderecoVO = ttvEmpresaVO.getEnderecoVOList().get(index);
         if (enderecoVO == null) return;
         //enderecoVO = new TabEnderecoVO();
-        txtEndCEP.setText(FormatadorDeDados.getFormatado(enderecoVO.getCep(), "cep"));
+        txtEndCEP.setText(FormatadorDeDados.getCampoFormatado(enderecoVO.getCep(), "cep"));
         txtEndLogradouro.setText(enderecoVO.getLogradouro());
         txtEndNumero.setText(enderecoVO.getNumero());
         txtEndComplemento.setText(enderecoVO.getComplemento());

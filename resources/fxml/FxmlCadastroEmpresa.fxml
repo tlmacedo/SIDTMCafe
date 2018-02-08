@@ -22,7 +22,7 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="142.0" prefWidth="1278.0">
                     <children>
-                        <JFXTextField fx:id="txtPesquisa" accessibleText="ALFANUM_060MAI" labelFloat="true"
+                        <JFXTextField fx:id="txtPesquisa" accessibleText="060@_" labelFloat="true"
                                       layoutX="10.0"
                                       layoutY="10.0" maxHeight="20.0" prefColumnCount="8" prefHeight="20.0"
                                       prefWidth="360.0" promptText="Pesquisar empresas">
@@ -66,7 +66,7 @@
                                 <Tooltip text="classificação jurídica da empresa"/>
                             </tooltip>
                         </JFXComboBox>
-                        <JFXTextField fx:id="txtCNPJ" accessibleText="NUMERO_CNPJ" layoutX="120.0" layoutY="10.0"
+                        <JFXTextField fx:id="txtCNPJ" layoutX="120.0" layoutY="10.0"
                                       maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                                       minWidth="-Infinity" prefHeight="20.0" prefWidth="100.0"
                                       promptText="C.N.P.J / C.P.F." styleClass="a-direita">
@@ -74,7 +74,7 @@
                                 <Tooltip text="C.N.P.J ou C.P.F. da empresa"/>
                             </tooltip>
                         </JFXTextField>
-                        <JFXTextField fx:id="txtIE" accessibleText="NUMERO_012" layoutX="230.0" layoutY="10.0"
+                        <JFXTextField fx:id="txtIE" layoutX="230.0" layoutY="10.0"
                                       maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                                       minWidth="-Infinity" prefHeight="20.0" prefWidth="90.0" promptText="I.E. / R.G."
                                       styleClass="a-direita">
@@ -90,7 +90,7 @@
                                 <Tooltip text="situação da empresa no sistema"/>
                             </tooltip>
                         </JFXComboBox>
-                        <JFXTextField fx:id="txtRazao" accessibleText="ALFANUM_080MAI" layoutX="470.0" layoutY="10.0"
+                        <JFXTextField fx:id="txtRazao" accessibleText="080@_" layoutX="470.0" layoutY="10.0"
                                       maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                                       minWidth="-Infinity" prefHeight="20.0" prefWidth="455.0"
                                       promptText="Razão / Nome">
@@ -98,7 +98,7 @@
                                 <Tooltip text="razão ou nome da empresa"/>
                             </tooltip>
                         </JFXTextField>
-                        <JFXTextField fx:id="txtFantasia" accessibleText="ALFANUM_080MAI" layoutX="10.0" layoutY="40.0"
+                        <JFXTextField fx:id="txtFantasia" accessibleText="080@_" layoutX="10.0" layoutY="40.0"
                                       maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                                       minWidth="-Infinity" prefHeight="20.0" prefWidth="455.0"
                                       promptText="Fantasia / Apelido">
@@ -188,7 +188,7 @@
                                                 <Tooltip text="lista de endereços da empresa"/>
                                             </tooltip>
                                         </JFXListView>
-                                        <JFXTextField fx:id="txtEndCEP" accessibleText="NUMERO_CEP"
+                                        <JFXTextField fx:id="txtEndCEP" accessibleText="010#_CEP"
                                                       alignment="CENTER_RIGHT"
                                                       layoutX="145.0" layoutY="10.0" maxHeight="-Infinity"
                                                       maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
@@ -198,7 +198,7 @@
                                                 <Tooltip text="cep do endereço selecionado"/>
                                             </tooltip>
                                         </JFXTextField>
-                                        <JFXTextField fx:id="txtEndLogradouro" accessibleText="ALFANUM_080MAI"
+                                        <JFXTextField fx:id="txtEndLogradouro" accessibleText="080@_"
                                                       layoutX="215.0"
                                                       layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity"
                                                       minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0"
@@ -207,7 +207,7 @@
                                                 <Tooltip text="logradouro do endereço selecionado"/>
                                             </tooltip>
                                         </JFXTextField>
-                                        <JFXTextField fx:id="txtEndNumero" accessibleText="NUMERO_009"
+                                        <JFXTextField fx:id="txtEndNumero" accessibleText="009#_"
                                                       alignment="CENTER_RIGHT" layoutX="680.0" layoutY="10.0"
                                                       maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                                                       minWidth="-Infinity" prefHeight="20.0" prefWidth="65.0"
@@ -216,7 +216,7 @@
                                                 <Tooltip text="número do endereço selecionado"/>
                                             </tooltip>
                                         </JFXTextField>
-                                        <JFXTextField fx:id="txtEndComplemento" accessibleText="ALFANUM_080MAI"
+                                        <JFXTextField fx:id="txtEndComplemento" accessibleText="080@_"
                                                       layoutX="755.0"
                                                       layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity"
                                                       minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0"
@@ -225,7 +225,7 @@
                                                 <Tooltip text="complemento do endereço selecionado"/>
                                             </tooltip>
                                         </JFXTextField>
-                                        <JFXTextField fx:id="txtEndBairro" accessibleText="ALFANUM_050MAI"
+                                        <JFXTextField fx:id="txtEndBairro" accessibleText="050@_"
                                                       layoutX="145.0"
                                                       layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity"
                                                       minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0"
@@ -250,7 +250,7 @@
                                                 <Tooltip text="municipio do endereço selecionado"/>
                                             </tooltip>
                                         </JFXComboBox>
-                                        <JFXTextField fx:id="txtEndPontoReferencia" accessibleText="ALFANUM_080MAI"
+                                        <JFXTextField fx:id="txtEndPontoReferencia" accessibleText="080@_"
                                                       layoutX="785.0" layoutY="40.0" maxHeight="-Infinity"
                                                       maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
                                                       prefHeight="20.0" prefWidth="455.0"
@@ -498,7 +498,7 @@
                                                                              prefHeight="20.0" prefWidth="120.0"
                                                                              promptText="tipo pagto"/>
                                                                 <JFXTextField fx:id="txtPrazoDias"
-                                                                              accessibleText="NUMERO0003"
+                                                                              accessibleText="003#0"
                                                                               alignment="CENTER_RIGHT" labelFloat="true"
                                                                               layoutX="140.0" layoutY="10.0"
                                                                               maxHeight="-Infinity" maxWidth="-Infinity"
@@ -506,7 +506,7 @@
                                                                               prefHeight="20.0" prefWidth="70.0"
                                                                               promptText="dias"/>
                                                                 <JFXTextField fx:id="txtPrazoLimite"
-                                                                              accessibleText="MOEDA0002"
+                                                                              accessibleText="002$0"
                                                                               alignment="CENTER_RIGHT" labelFloat="true"
                                                                               layoutX="220.0" layoutY="10.0"
                                                                               maxHeight="-Infinity" maxWidth="-Infinity"

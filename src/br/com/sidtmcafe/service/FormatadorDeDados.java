@@ -17,49 +17,139 @@ import java.text.ParseException;
 
 public class FormatadorDeDados {
 
-    public static String getFormatado(String value, String format) {
-        value = value.replaceAll("[\\-/.]", "");
-        MaskFormatter mf = null;
-        try {
-            mf = new MaskFormatter(geraMascara(format, 0, "@"));
-            mf.setValueContainsLiteralCharacters(false);
-            return mf.valueToString(value);
-        } catch (ParseException e) {
-            e.printStackTrace();
+    String mascara;
+
+    public String getMascara() {
+        return mascara;
+    }
+
+    public void setMascara(String tipMascOrMascara) {
+        String ms = "#@?", digt = tipMascOrMascara.substring(0, 1);
+        if (!ms.contains(digt)) {
+            tipMascOrMascara = gerarMascara(tipMascOrMascara, 0, "");
         }
+        this.mascara = tipMascOrMascara;
+    }
+
+    public static String getCampoFormatado(String value, String tipMascOrMascara) {
+        String ms = "#@?", digt = tipMascOrMascara.substring(0, 1);
+        if (!ms.contains(digt)) {
+            tipMascOrMascara = gerarMascara(tipMascOrMascara, 0, "");
+        }
+        value = value.replaceAll("[\\-/.]", "");
+        if (value.length() > 0)
+            try {
+                MaskFormatter mf = new MaskFormatter(tipMascOrMascara);
+                mf.setValueContainsLiteralCharacters(false);
+                return mf.valueToString(value);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         return value;
     }
 
-    public static String geraMascara(String mascara, int qtd, String caractere) {
-        switch (mascara.toLowerCase()) {
-            case "cnpj":
-                return "##.###.###/####-##";
-            case "cpf":
-                return "###.###.###-##";
-            case "cep":
-                return "##.###-###";
-            case "telefone":
-                return "# ####-####";
-            default:
-                String mf = "";
-                for (int i = 0; i < qtd; i++) {
-                    mf += caractere;
-                }
-                return mf;
+    public static String gerarMascara(String tipMasc, int qtd, String caractere) {
+        String tipM = tipMasc.toLowerCase();
+        if (tipM.contains("cnpj")) {
+            return "##.###.###/####-##";
+        } else if (tipM.contains("cpf")) {
+            return "###.###.###-##";
+        } else if (tipM.contains("cep")) {
+            return "##.###-###";
+        } else if (tipM.contains("telefone")) {
+            return "# ####-####";
+        } else if (tipM.contains("ie")) {
+            return gerarMascaraIE(tipM);
+        } else {
+            String masc = "";
+            for (int i = 0; i < qtd; i++) {
+                masc += caractere;
+            }
+            return masc;
         }
     }
 
-    public static void campoMask(JFXTextField textField, String mascara) {
-        maxField(textField, mascara.length());
-        System.out.println("textField: [" + textField + "]  mascara: {" + mascara + "} mascara.length(): " + mascara.length() + " textField.getText().length(): " + textField.getText().length() + "...");
-        textField.lengthProperty().addListener((ObservableValue<? extends Number> ov, Number n1, Number n2) -> {
+    static String gerarMascaraIE(String tipMasc) {
+        if (tipMasc.length() < 4)
+            return "############";
+
+        switch (tipMasc.substring(2, 4).toUpperCase()) {
+            case "AC":
+                return "##.###.###/###-##";
+            case "AL":
+                return "#########";
+            case "AM":
+                return "##.###.###-#";
+            case "AP":
+                return "#########";
+            case "BA":
+                return "###.###.##-#";
+            case "CE":
+                return "########-#";
+            case "DF":
+                return "###########-##";
+            case "ES":
+                return "###.###.##-#";
+            case "GO":
+                return "##.###.###-#";
+            case "MA":
+                return "#########";
+            case "MG":
+                return "###.###.###/####";
+            case "MS":
+                return "#########";
+            case "MT":
+                return "#########";
+            case "PA":
+                return "##-######-#";
+            case "PB":
+                return "########-#";
+            case "PE":
+                return "##.#.###.#######-#";
+            case "PI":
+                return "#########";
+            case "PR":
+                return "########-##";
+            case "RJ":
+                return "##.###.##-#";
+            case "RN":
+                return "##.###.###-#";
+            case "RO":
+                return "###.#####-#";
+            case "RR":
+                return "########-#";
+            case "RS":
+                return "###-#######";
+            case "SC":
+                return "###.###.###";
+            case "SE":
+                return "#########-#";
+            case "SP":
+                return "###.###.###.###";
+            case "TO":
+                return "###########";
+            default:
+                return "############";
+
+
+        }
+
+
+    }
+
+    public void maskField(JFXTextField textField, String strMascara) {
+        if (strMascara.length() > 0)
+            setMascara(strMascara);
+        textField.lengthProperty().addListener((ObservableValue<? extends Number> observable, Number n1, Number n2) -> {
             String alphaAndDigits = textField.getText().replaceAll("[\\-/.]", "");
             StringBuilder resultado = new StringBuilder();
             int i = 0;
             int quant = 0;
+            String mascara = getMascara();
+            int lenMascara = mascara.length();
             if (n2.intValue() > n1.intValue()) {
-                if (textField.getText().length() <= mascara.length()) {
-                    while (i < mascara.length()) {
+                if (textField.getText().length() <= lenMascara) {
+                    while (i < lenMascara) {
                         if (quant < alphaAndDigits.length()) {
                             if ("@".equals(mascara.substring(i, i + 1))) {
                                 resultado.append(alphaAndDigits.substring(quant, quant + 1).toUpperCase());
@@ -78,11 +168,10 @@ public class FormatadorDeDados {
                         i++;
                     }
                     textField.setText(resultado.toString());
-                    positionCaret(textField);
+                    //positionCaret(textField);
+                } else {
+                    textField.setText(textField.getText(0, lenMascara));
                 }
-//                else {
-//                    textField.setText(textField.getText(0, mascara.length()));
-//                }
             }
         });
 
@@ -98,11 +187,11 @@ public class FormatadorDeDados {
         });
     }
 
-    private static void maxField(final TextField textField, final Integer length) {
+    public static void maxField(final TextField textField, final Integer tamMax) {
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String oldValue, String newValue) {
-                if (newValue.length() > length)
+                if (newValue.length() > tamMax)
                     textField.setText(oldValue);
             }
         });
@@ -119,5 +208,6 @@ public class FormatadorDeDados {
             }
         });
     }
+
 
 }

@@ -5,8 +5,8 @@ import static javafx.application.Application.launch;
 
 public class teste {
     public teste() {
-        String textField = "69067";
-        //System.out.println(FormatadorDeDados.campoMask(textField, "##.###-###"));
+        String textField = "###.###.###-##";
+        System.out.println(textField.charAt(0));
 
     }
 
