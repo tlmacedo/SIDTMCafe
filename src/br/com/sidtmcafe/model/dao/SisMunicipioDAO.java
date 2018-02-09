@@ -24,12 +24,19 @@ public class SisMunicipioDAO extends BuscaBandoDados {
         return municipioVO;
     }
 
-    public SisMunicipioVO getMunicipioVO(String municipioIbge_id) {
-        buscaSisMunicipioVO(0, municipioIbge_id);
+    public SisMunicipioVO getMunicipioVO(String strMunicipio) {
+        buscaSisMunicipioVO(0, strMunicipio);
         if (municipioVO == null)
             municipioVO = new SisMunicipioVO();
         return municipioVO;
     }
+
+//    public SisMunicipioVO getMunicipioVO(String municipioIbge_id) {
+//        buscaSisMunicipioVO(0, municipioIbge_id, "");
+//        if (municipioVO == null)
+//            municipioVO = new SisMunicipioVO();
+//        return municipioVO;
+//    }
 
     public List<SisMunicipioVO> getMunicipioVOList() {
         buscaSisMunicipioVO(0, "");
@@ -38,16 +45,24 @@ public class SisMunicipioDAO extends BuscaBandoDados {
         return municipioVOList;
     }
 
-    void buscaSisMunicipioVO(int idSisMunicipioVO, String municipioIbge_id) {
+    void buscaSisMunicipioVO(int idSisMunicipioVO, String strMunicipio) {
         comandoSql = "SELECT * FROM sisMunicipio ";
         if (idSisMunicipioVO > 0) comandoSql += "WHERE id = '" + idSisMunicipioVO + "' ";
-        if (municipioIbge_id != "") {
+//        if (municipioIbge_id != "") {
+//            if (!comandoSql.contains("WHERE")) {
+//                comandoSql += "WHERE ";
+//            } else {
+//                comandoSql += "AND ";
+//            }
+//            comandoSql += "ibge_id = '" + municipioIbge_id + "' ";
+//        }
+        if (strMunicipio != "") {
             if (!comandoSql.contains("WHERE")) {
                 comandoSql += "WHERE ";
             } else {
                 comandoSql += "AND ";
             }
-            comandoSql += "ibge_id = '" + municipioIbge_id + "' ";
+            comandoSql += "descricao = '" + strMunicipio + "' ";
         }
         comandoSql += "ORDER BY isCapital DESC, descricao ";
 

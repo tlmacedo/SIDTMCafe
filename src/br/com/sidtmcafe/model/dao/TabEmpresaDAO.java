@@ -1,14 +1,21 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.database.ConnectionFactory;
+import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.model.vo.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class TabEmpresaDAO extends BuscaBandoDados {
+public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
 
     ResultSet rs;
 
@@ -71,6 +78,45 @@ public class TabEmpresaDAO extends BuscaBandoDados {
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
+    }
+
+    public TabEmpresaVO getEmpresaVO(WsCnpjReceitaWsVO receitaWsVO, TabEmpresaVO empresaAnt) {
+        buscaTabEmpresaVO(empresaAnt.getId());
+
+        if (receitaWsVO == null)
+            return empresaAnt;
+
+        empresaVO.setIsPessoaJuridica(1);
+        empresaVO.setCnpj(receitaWsVO.getCnpj());
+        empresaVO.setRazao(receitaWsVO.getNome());
+        empresaVO.setFantasia(receitaWsVO.getFantasia());
+//        empresaVO.setEndereco_ids(rs.getString("endereco_ids"));
+//        empresaVO.setTelefone_ids(rs.getString("telefone_ids"));
+//        empresaVO.setContato_ids(rs.getString("contato_ids"));
+//        empresaVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));
+
+        LocalDate dtTemp = LocalDate.parse(receitaWsVO.getAbertura(), DTFORMAT_DATA);
+        LocalDateTime dtAbertura = LocalDateTime.of(dtTemp.getYear(), dtTemp.getMonth(), dtTemp.getDayOfMonth(), 0, 0, 0);
+        empresaVO.setDataAbertura(Timestamp.valueOf(dtAbertura));
+
+        empresaVO.setNaturezaJuridica(receitaWsVO.getNaturezaJuridica());
+
+        TabEnderecoVO enderecoVO = empresaVO.getEnderecoVOList().get(0);
+
+        enderecoVO.setCep(receitaWsVO.getCep().replaceAll("[\\-/.]", ""));
+        enderecoVO.setLogradouro(receitaWsVO.getLogradouro());
+        enderecoVO.setNumero(receitaWsVO.getNumero());
+        enderecoVO.setComplemento(receitaWsVO.getComplemento());
+        enderecoVO.setBairro(receitaWsVO.getBairro());
+        if (receitaWsVO.getUf().equals("")) receitaWsVO.setUf("AM");
+        enderecoVO.setUfVO(new SisUFDAO().getUfVO(receitaWsVO.getUf()));
+        enderecoVO.setUf_id(enderecoVO.getUfVO().getId());
+        if (receitaWsVO.getMunicipio().equals("")) receitaWsVO.setMunicipio("MANAUS");
+        enderecoVO.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(receitaWsVO.getMunicipio()));
+        enderecoVO.setMunicipio_id(enderecoVO.getMunicipioVO().getId());
+        empresaVO.getEnderecoVOList().set(0, enderecoVO);
+
+        return empresaVO;
     }
 
     void addObjetosPesquisa() {

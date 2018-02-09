@@ -12,7 +12,6 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
     SisTipoEnderecoVO tipoEnderecoVO;
     SisUFVO ufVO;
     SisMunicipioVO municipioVO;
-    SisSituacaoSistemaVO situacaoSistemaVO;
 
     IntegerProperty id, tipoEndereco_id, uf_id, municipio_id, sistuacaoSistema_id;
     StringProperty cep, logradouro, numero, complemento, bairro, pontoReferencia;
@@ -49,14 +48,6 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
 
     public void setMunicipioVO(SisMunicipioVO municipioVO) {
         this.municipioVO = municipioVO;
-    }
-
-    public SisSituacaoSistemaVO getSituacaoSistemaVO() {
-        return situacaoSistemaVO;
-    }
-
-    public void setSituacaoSistemaVO(SisSituacaoSistemaVO situacaoSistemaVO) {
-        this.situacaoSistemaVO = situacaoSistemaVO;
     }
 
     public int getId() {

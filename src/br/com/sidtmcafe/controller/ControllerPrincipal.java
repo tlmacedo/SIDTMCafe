@@ -7,6 +7,7 @@ import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.SisMenuPrincipalDAO;
 import br.com.sidtmcafe.model.vo.SisMenuPrincipalVO;
+import br.com.sidtmcafe.service.ExecutaComandoTecladoMouse;
 import br.com.sidtmcafe.view.ViewCadastroEmpresa;
 import br.com.sidtmcafe.view.ViewPrincipal;
 import com.jfoenix.controls.JFXTabPane;
@@ -78,10 +79,10 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
     public void escutarTeclas() {
         painelViewPrincipal.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
             if (CODE_KEY_SHIFT_CTRL_POSITIVO.match(event) || CHAR_KEY_SHIFT_CTRL_POSITIVO.match(event))
-                lblBotaoExpandeMenuViewPrincipal.fireEvent(executarMouseClicado(1));
+                lblBotaoExpandeMenuViewPrincipal.fireEvent(ExecutaComandoTecladoMouse.clickMouse(1));
 
             if (CODE_KEY_SHIFT_CTRL_NEGATIVO.match(event) || CHAR_KEY_SHIFT_CTRL_NEGATIVO.match(event))
-                lblBotaoRetraiMenuViewPrincipal.fireEvent(executarMouseClicado(1));
+                lblBotaoRetraiMenuViewPrincipal.fireEvent(ExecutaComandoTecladoMouse.clickMouse(1));
 
             if (event.getCode() == KeyCode.F11 && event.isControlDown() && event.isShiftDown()) {
                 new Tarefa().tarefaWsFonteDeDados_ConstulaSaldo();
@@ -94,8 +95,9 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
 
 
             if (event.getCode() == KeyCode.F12) {
-                if (sairSistema(event.isControlDown()))
-                    fechar();
+                //if (tabPaneViewPrincipal.getTabs().size() <= 0)
+                    if (sairSistema(event.isControlDown()))
+                        fechar();
             }
         });
 
@@ -135,7 +137,7 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
             SisMenuPrincipalVO item = treeMenuViewPrincipal.getSelectionModel().getSelectedItem().getValue();
             if (item == null) return;
             if (item.getDescricao().equals("Sair") || event.getClickCount() == 2)
-                treeMenuViewPrincipal.fireEvent(executarTelcadoPressionado(KeyCode.ENTER));
+                treeMenuViewPrincipal.fireEvent(ExecutaComandoTecladoMouse.pressTecla(KeyCode.ENTER));
         });
     }
 
@@ -204,16 +206,6 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
     void atualizarTeclasStatusBar(String teclasStatusBar) {
         stbTeclasTela.setText(teclasStatusBar);
         statusBar_ViewPrincipal.getLeftItems().set(1, stbTeclasTela);
-    }
-
-    KeyEvent executarTelcadoPressionado(KeyCode keyCode) {
-        return new KeyEvent(KeyEvent.KEY_RELEASED, "", "", keyCode, true, true, true, true);
-    }
-
-    MouseEvent executarMouseClicado(int qtdClicks) {
-        return new MouseEvent(MouseEvent.MOUSE_CLICKED, 0,
-                0, 0, 0, MouseButton.PRIMARY, qtdClicks, true, true, true, true,
-                true, true, true, true, true, true, null);
     }
 
     boolean existeTab(SisMenuPrincipalVO menuPrincipalVO) {

@@ -17,14 +17,15 @@ public class WsCnpjReceitaWsDAO extends BuscaWebService implements Constants {
     WsCnpjReceitaWsVO wsCnpjReceitaWsVO;
 
     public WsCnpjReceitaWsVO getWsCnpjReceitaWsVO(String cnpj) {
-        jsonObject = getJsonObjectWebService(WS_RECEITAWS_URL + cnpj);
-
+        jsonObject = getJsonObjectHttpUrlConnection(WS_RECEITAWS_URL + cnpj, WS_RECEITAWS_TOKEN, "/days/0");
         if (jsonObject == null)
             return wsCnpjReceitaWsVO = null;
-
         try {
+            wsCnpjReceitaWsVO = new WsCnpjReceitaWsVO();
+
             wsCnpjReceitaWsVO.setStatus(jsonObject.getString("status"));
-            wsCnpjReceitaWsVO.setMessage(jsonObject.getString("message"));
+            if (wsCnpjReceitaWsVO.getStatus().equals("ERROR"))
+                wsCnpjReceitaWsVO.setMessage(jsonObject.getString("message"));
             wsCnpjReceitaWsVO.setCnpj(jsonObject.getString("cnpj"));
             wsCnpjReceitaWsVO.setTipo(jsonObject.getString("tipo"));
             wsCnpjReceitaWsVO.setAbertura(jsonObject.getString("abertura"));
@@ -72,10 +73,7 @@ public class WsCnpjReceitaWsDAO extends BuscaWebService implements Constants {
             wsCnpjReceitaWsVO.setSituacaoEspecial(jsonObject.getString("situacao_especial"));
             wsCnpjReceitaWsVO.setDataSituacaoEspecial(jsonObject.getString("data_situacao_especial"));
             wsCnpjReceitaWsVO.setCapitalSocial(jsonObject.getString("capital_social"));
-            wsCnpjReceitaWsVO.setExtra(jsonObject.getString("extra"));
-
-
-            //wsCnpjReceitaWsVO.set(jsonObject.getString("status"));
+            wsCnpjReceitaWsVO.setExtra("");//jsonObject.getString("extra"));
 
         } catch (Exception ex) {
             ex.printStackTrace();

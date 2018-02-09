@@ -52,7 +52,6 @@ public class TabEnderecoDAO extends BuscaBandoDados {
                 enderecoVO.setUf_id(rs.getInt("uf_id"));
                 enderecoVO.setMunicipio_id(rs.getInt("municipio_id"));
                 enderecoVO.setPontoReferencia(rs.getString("pontoReferencia"));
-                enderecoVO.setSistuacaoSistema_id(rs.getInt("situacaoSistema_id"));
 
                 addObjetosPesquisa();
 
@@ -90,6 +89,5 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         enderecoVO.setTipoEnderecoVO(new SisTipoEnderecoDAO().getTipoEnderecoVO(enderecoVO.getTipoEndereco_id()));
         enderecoVO.setUfVO(new SisUFDAO().getUfVO(enderecoVO.getUf_id()));
         enderecoVO.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(enderecoVO.getMunicipio_id()));
-        enderecoVO.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(enderecoVO.getSistuacaoSistema_id()));
     }
 }
