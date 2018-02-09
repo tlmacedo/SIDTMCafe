@@ -107,11 +107,12 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
         PersonalizarCampos.fieldMaxLen(painelViewCadastroEmpresa);
         PersonalizarCampos.maskFields(painelViewCadastroEmpresa);
+
         formatCNPJ_CPF = new FormatadorDeDados();
         formatCNPJ_CPF.maskField(txtCNPJ, FormatadorDeDados.gerarMascara("cnpj", 0, "#"));
         formatIE = new FormatadorDeDados();
         formatIE.maskField(txtIE, FormatadorDeDados.gerarMascara("ie", 0, "#"));
-
+        txtPesquisa.requestFocus();
     }
 
     @Override
@@ -124,6 +125,9 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     @Override
     public void escutarTeclas() {
+        txtPesquisa.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("txtPesquisa.focusedPropety(): " + newValue);
+        });
         ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
             if (ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().size() <= 0) return;
             if (n.getText().equals(ViewCadastroEmpresa.getTituloJanela())) {
@@ -281,7 +285,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         fatorarObjetos();
         escutarTeclas();
         setStatusFormulario("Pesquisa");
-        ExecutaComandoTecladoMouse.pressTecla(KeyCode.F7);
+        painelViewCadastroEmpresa.fireEvent(ExecutaComandoTecladoMouse.pressTecla(KeyCode.F7));
     }
 
     TabEmpresaVO ttvEmpresaVO;
@@ -349,25 +353,20 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     public void setStatusBarFormulario(String statusFormulario) {
         if (statusFormulario.toLowerCase().contains("incluir")) {
-            this.statusBarFormulario = STATUSBARINCLUIR;
             PersonalizarCampos.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
             PersonalizarCampos.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), false);
             PersonalizarCampos.clearField((AnchorPane) tpnDadosCadastrais.getContent());
             cboClassificacaoJuridica.getSelectionModel().select(0);
             cboClassificacaoJuridica.getSelectionModel().select(1);
-            cboClassificacaoJuridica.requestFocus();
+            this.statusBarFormulario = STATUSBARINCLUIR;
         } else if (statusFormulario.toLowerCase().contains("editar")) {
-            this.statusBarFormulario = STATUSBAREDITAR;
             PersonalizarCampos.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
             PersonalizarCampos.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), false);
-            txtCNPJ.requestFocus();
-            txtCNPJ.selectAll();
+            this.statusBarFormulario = STATUSBAREDITAR;
         } else if (statusFormulario.toLowerCase().contains("pesquisa")) {
-            this.statusBarFormulario = STATUSBARPESQUISA;
             PersonalizarCampos.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), false);
             PersonalizarCampos.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), true);
-            txtPesquisa.requestFocus();
-            txtPesquisa.selectAll();
+            this.statusBarFormulario = STATUSBARPESQUISA;
         }
         ControllerPrincipal.ctrlPrincipal.atualizarTeclasStatusBar(statusBarFormulario);
     }
