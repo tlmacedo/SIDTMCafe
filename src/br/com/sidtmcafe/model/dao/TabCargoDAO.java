@@ -17,7 +17,6 @@ public class TabCargoDAO extends BuscaBandoDados {
     List<TabCargoVO> cargoVOList;
 
     public TabCargoVO getCargoVO(int idTabCargoVO) {
-        if (idTabCargoVO>0)
         buscaTabCargoVO(idTabCargoVO);
         if (cargoVO == null)
             cargoVO = new TabCargoVO();
@@ -25,7 +24,7 @@ public class TabCargoDAO extends BuscaBandoDados {
     }
 
     public List<TabCargoVO> getCargoVOList() {
-        buscaTabCargoVO(0);
+        buscaTabCargoVO(-1);
         if (cargoVOList == null)
             cargoVOList.add(new TabCargoVO());
         return cargoVOList;
@@ -33,7 +32,7 @@ public class TabCargoDAO extends BuscaBandoDados {
 
     void buscaTabCargoVO(int idTabCargoVO) {
         comandoSql = "SELECT * FROM tabCargo ";
-        if (idTabCargoVO > 0) comandoSql += "WHERE id = '" + idTabCargoVO + "' ";
+        if (idTabCargoVO >= 0) comandoSql += "WHERE id = '" + idTabCargoVO + "' ";
         comandoSql += "ORDER BY descricao ";
 
         cargoVOList = new ArrayList<>();

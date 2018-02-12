@@ -95,7 +95,7 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
 
 
             if (event.getCode() == KeyCode.F12) {
-                //if (tabPaneViewPrincipal.getTabs().size() <= 0)
+                if (tabPaneViewPrincipal.getTabs().size() <= 0)
                     if (sairSistema(event.isControlDown()))
                         fechar();
             }

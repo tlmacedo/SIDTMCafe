@@ -17,15 +17,14 @@ public class TabTelefoneDAO extends BuscaBandoDados {
     List<TabTelefoneVO> telefoneVOList;
 
     public TabTelefoneVO getTelefoneVO(int idTabTelefoneVO) {
-        if (idTabTelefoneVO > 0)
-            buscaTabTelefoneVO(idTabTelefoneVO);
+        buscaTabTelefoneVO(idTabTelefoneVO);
         if (telefoneVO == null)
             telefoneVO = new TabTelefoneVO();
         return telefoneVO;
     }
 
     public List<TabTelefoneVO> getTelefoneVOList() {
-        buscaTabTelefoneVO(0);
+        buscaTabTelefoneVO(-1);
         if (telefoneVOList == null)
             telefoneVOList.add(new TabTelefoneVO());
         return telefoneVOList;
@@ -33,7 +32,7 @@ public class TabTelefoneDAO extends BuscaBandoDados {
 
     void buscaTabTelefoneVO(int idTabTelefoneVO) {
         comandoSql = "SELECT * FROM tabTelefone ";
-        if (idTabTelefoneVO > 0) comandoSql += "WHERE id = '" + idTabTelefoneVO + "' ";
+        if (idTabTelefoneVO >= 0) comandoSql += "WHERE id = '" + idTabTelefoneVO + "' ";
         comandoSql += "ORDER BY id DESC ";
 
         telefoneVOList = new ArrayList<>();

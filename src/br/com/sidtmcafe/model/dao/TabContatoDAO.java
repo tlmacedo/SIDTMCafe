@@ -20,15 +20,16 @@ public class TabContatoDAO extends BuscaBandoDados {
     List<TabContatoVO> contatoVOList;
 
     public TabContatoVO getContatoVO(int idTabContatoVO) {
-        if (idTabContatoVO > 0)
-            buscaTabContatoVO(idTabContatoVO);
-        if (contatoVO == null)
+        buscaTabContatoVO(idTabContatoVO);
+        if (contatoVO == null) {
             contatoVO = new TabContatoVO();
+            addObjetosPesquisa();
+        }
         return contatoVO;
     }
 
     public List<TabContatoVO> getContatoVOList() {
-        buscaTabContatoVO(0);
+        buscaTabContatoVO(-1);
         if (contatoVOList == null)
             contatoVOList.add(new TabContatoVO());
         return contatoVOList;
@@ -36,7 +37,7 @@ public class TabContatoDAO extends BuscaBandoDados {
 
     void buscaTabContatoVO(int idTabContatoVO) {
         comandoSql = "SELECT * FROM tabContato ";
-        if (idTabContatoVO > 0) comandoSql += "WHERE id = '" + idTabContatoVO + "' ";
+        if (idTabContatoVO >= 0) comandoSql += "WHERE id = '" + idTabContatoVO + "' ";
         comandoSql += "ORDER BY id DESC ";
 
         contatoVOList = new ArrayList<>();
@@ -66,12 +67,14 @@ public class TabContatoDAO extends BuscaBandoDados {
 
         List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
         for (String strCodTelefone : contatoVO.getTelefone_ids().split(";")) {
+            if (strCodTelefone == "") strCodTelefone = "0";
             telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
         }
         contatoVO.setTelefoneVOList(telefoneVOList);
 
         List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
         for (String strCodEmailHomePage : contatoVO.getEmailHomePage_ids().split(";")) {
+            if (strCodEmailHomePage == "") strCodEmailHomePage = "0";
             emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
         }
         contatoVO.setEmailHomePageVOList(emailHomePageVOList);

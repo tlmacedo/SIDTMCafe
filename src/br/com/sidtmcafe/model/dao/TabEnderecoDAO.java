@@ -26,7 +26,7 @@ public class TabEnderecoDAO extends BuscaBandoDados {
     }
 
     public List<TabEnderecoVO> getEnderecoVOList() {
-        buscaTabEnderecoVO(0);
+        buscaTabEnderecoVO(-1);
         if (enderecoVOList == null)
             enderecoVOList.add(new TabEnderecoVO());
         return enderecoVOList;

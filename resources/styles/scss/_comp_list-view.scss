@@ -11,7 +11,7 @@
     -fx-font-family: $fontFamily;
     -fx-font-size: $fontSizeh5;
     -fx-text-fill: $sisColor_black;
-    -fx-padding: 3;
+    -fx-padding: 5;
 
     &:odd {
       -fx-background-color: derive(-fx-control-inner-background, -12%);

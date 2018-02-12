@@ -17,8 +17,7 @@ public class TabEmailHomePageDAO extends BuscaBandoDados {
     List<TabEmailHomePageVO> emailHomePageVOList;
 
     public TabEmailHomePageVO getEmailHomePageVO(int idTabEmailHomePageVO) {
-        if (idTabEmailHomePageVO > 0)
-            buscaTabEmailHomePageVO(idTabEmailHomePageVO, -1);
+        buscaTabEmailHomePageVO(idTabEmailHomePageVO, -1);
         if (emailHomePageVO == null)
             emailHomePageVO = new TabEmailHomePageVO();
         return emailHomePageVO;
@@ -35,7 +34,7 @@ public class TabEmailHomePageDAO extends BuscaBandoDados {
 
 
     public List<TabEmailHomePageVO> getEmailHomePageVOList() {
-        buscaTabEmailHomePageVO(0, -1);
+        buscaTabEmailHomePageVO(-1, -1);
         if (emailHomePageVOList == null)
             emailHomePageVOList.add(new TabEmailHomePageVO());
         return emailHomePageVOList;
@@ -43,7 +42,7 @@ public class TabEmailHomePageDAO extends BuscaBandoDados {
 
     void buscaTabEmailHomePageVO(int idTabEmailHomePageVO, int isEmail) {
         comandoSql = "SELECT * FROM tabEmailHomePage ";
-        if (idTabEmailHomePageVO > 0) comandoSql += "WHERE id = '" + idTabEmailHomePageVO + "' ";
+        if (idTabEmailHomePageVO >= 0) comandoSql += "WHERE id = '" + idTabEmailHomePageVO + "' ";
         if (isEmail >= 0) {
             if (!comandoSql.contains("WHERE")) {
                 comandoSql += "WHERE ";

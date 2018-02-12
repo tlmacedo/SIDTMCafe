@@ -17,7 +17,6 @@ public class TabLojaDAO extends BuscaBandoDados {
     List<TabLojaVO> lojaVOList;
 
     public TabLojaVO getLojaVO(int idTabLoja) {
-        if (idTabLoja>0)
         buscaTabLojaVO(idTabLoja);
         if (lojaVO == null)
             lojaVO = new TabLojaVO();
@@ -25,7 +24,7 @@ public class TabLojaDAO extends BuscaBandoDados {
     }
 
     public List<TabLojaVO> getLojaVOList() {
-        buscaTabLojaVO(0);
+        buscaTabLojaVO(-1);
         if (lojaVOList == null)
             lojaVOList.add(new TabLojaVO());
         return lojaVOList;
@@ -33,7 +32,7 @@ public class TabLojaDAO extends BuscaBandoDados {
 
     void buscaTabLojaVO(int idTabLoja) {
         comandoSql = "SELECT * FROM tabLoja ";
-        if (idTabLoja > 0) comandoSql += "WHERE id = '" + idTabLoja + "' ";
+        if (idTabLoja >= 0) comandoSql += "WHERE id = '" + idTabLoja + "' ";
         comandoSql += "ORDER BY id DESC ";
 
         lojaVOList = new ArrayList<>();

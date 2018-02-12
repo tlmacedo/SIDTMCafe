@@ -34,7 +34,7 @@ public class FormatadorDeDados {
     public static String getCampoFormatado(String value, String tipMascOrMascara) {
         String ms = "#@?", digt = tipMascOrMascara.substring(0, 1);
         if (!ms.contains(digt)) {
-            tipMascOrMascara = gerarMascara(tipMascOrMascara, 0, "");
+            tipMascOrMascara = gerarMascara(tipMascOrMascara, value.length(), "");
         }
         value = value.replaceAll("[\\-/.]", "");
         if (value.length() > 0)
@@ -57,6 +57,8 @@ public class FormatadorDeDados {
         } else if (tipM.contains("cep")) {
             return "##.###-###";
         } else if (tipM.contains("telefone")) {
+            if (qtd < 9)
+                return "####-####";
             return "# ####-####";
         } else if (tipM.contains("ie")) {
             return gerarMascaraIE(tipM);

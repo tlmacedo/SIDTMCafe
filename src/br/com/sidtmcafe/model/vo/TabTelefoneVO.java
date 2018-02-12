@@ -1,10 +1,12 @@
 package br.com.sidtmcafe.model.vo;
 
+import br.com.sidtmcafe.service.FormatadorDeDados;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.apache.velocity.runtime.directive.contrib.For;
 
 public class TabTelefoneVO extends RecursiveTreeObject<TabTelefoneVO> {
 
@@ -14,6 +16,13 @@ public class TabTelefoneVO extends RecursiveTreeObject<TabTelefoneVO> {
     StringProperty descricao;
 
     public TabTelefoneVO() {
+    }
+
+    public TabTelefoneVO(SisTelefoneOperadoraVO telefoneOperadoraVO, int id, int telefoneOperadora_id, String descricao) {
+        this.telefoneOperadoraVO = telefoneOperadoraVO;
+        this.id = new SimpleIntegerProperty(id);
+        this.telefoneOperadora_id = new SimpleIntegerProperty(telefoneOperadora_id);
+        this.descricao = new SimpleStringProperty(descricao);
     }
 
     public SisTelefoneOperadoraVO getTelefoneOperadoraVO() {
@@ -65,10 +74,14 @@ public class TabTelefoneVO extends RecursiveTreeObject<TabTelefoneVO> {
 
     @Override
     public String toString() {
-        if (telefoneOperadoraVO.getTipo() == 0) {
-            return descricaoProperty().get() + " fixo(" + telefoneOperadoraVO.getDescricao() + ")";
-        } else {
-            return descricaoProperty().get() + " celular(" + telefoneOperadoraVO.getDescricao() + ")";
-        }
+        String telefone = descricaoProperty().get();
+        if (telefone.length() > 0) telefone = FormatadorDeDados.getCampoFormatado(telefone, "telefone");
+        if (telefoneOperadoraVO != null)
+            if (telefoneOperadoraVO.getTipo() == 0 || (Integer.parseInt(descricaoProperty().get().substring(0, 1)) < 8)) {
+                telefone += " fixo (" + telefoneOperadoraVO.getDescricao() + ")";
+            } else {
+                telefone += " celular (" + telefoneOperadoraVO.getDescricao() + ")";
+            }
+        return telefone;
     }
 }

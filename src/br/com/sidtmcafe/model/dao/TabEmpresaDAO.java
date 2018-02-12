@@ -7,12 +7,9 @@ import br.com.sidtmcafe.model.vo.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
@@ -24,15 +21,14 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
     List<TabEmpresaVO> empresaVOList;
 
     public TabEmpresaVO getEmpresaVO(int idTabEmpresaVO) {
-        if (idTabEmpresaVO > 0)
-            buscaTabEmpresaVO(idTabEmpresaVO);
+        buscaTabEmpresaVO(idTabEmpresaVO);
         if (empresaVO == null)
             empresaVO = new TabEmpresaVO();
         return empresaVO;
     }
 
     public List<TabEmpresaVO> getEmpresaVOList() {
-        buscaTabEmpresaVO(0);
+        buscaTabEmpresaVO(-1);
         if (empresaVOList == null)
             empresaVOList.add(new TabEmpresaVO());
         return empresaVOList;
@@ -40,7 +36,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
 
     void buscaTabEmpresaVO(int idTabEmpresaVO) {
         comandoSql = "SELECT * FROM tabEmpresa ";
-        if (idTabEmpresaVO > 0) comandoSql += "WHERE id = '" + idTabEmpresaVO + "' ";
+        if (idTabEmpresaVO >= 0) comandoSql += "WHERE id = '" + idTabEmpresaVO + "' ";
         comandoSql += "ORDER BY razao, fantasia ";
 
         empresaVOList = new ArrayList<>();
@@ -90,10 +86,6 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         empresaVO.setCnpj(receitaWsVO.getCnpj());
         empresaVO.setRazao(receitaWsVO.getNome());
         empresaVO.setFantasia(receitaWsVO.getFantasia());
-//        empresaVO.setEndereco_ids(rs.getString("endereco_ids"));
-//        empresaVO.setTelefone_ids(rs.getString("telefone_ids"));
-//        empresaVO.setContato_ids(rs.getString("contato_ids"));
-//        empresaVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));
 
         LocalDate dtTemp = LocalDate.parse(receitaWsVO.getAbertura(), DTFORMAT_DATA);
         LocalDateTime dtAbertura = LocalDateTime.of(dtTemp.getYear(), dtTemp.getMonth(), dtTemp.getDayOfMonth(), 0, 0, 0);
@@ -115,6 +107,34 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         enderecoVO.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(receitaWsVO.getMunicipio()));
         enderecoVO.setMunicipio_id(enderecoVO.getMunicipioVO().getId());
         empresaVO.getEnderecoVOList().set(0, enderecoVO);
+
+        List<TabTelefoneVO> telefoneVOList = empresaVO.getTelefoneVOList();
+        if (receitaWsVO.getTelefone() != "") {
+            List<String> telefonesReceitaWsVOList = new ArrayList<>();
+            for (String strCodTelefone : receitaWsVO.getTelefone().split(" / ")) {
+                strCodTelefone = strCodTelefone.replaceAll("[\\-/.() ]", "");
+                telefonesReceitaWsVOList.add(strCodTelefone.substring(2));
+            }
+            for (int i = 0; i < telefonesReceitaWsVOList.size(); i++) {
+                TabTelefoneVO tel = new TabTelefoneVO();
+                tel.setDescricao(telefonesReceitaWsVOList.get(i));
+                tel.setTelefoneOperadora_id(2);
+                tel.setTelefoneOperadoraVO(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVO(2));
+                if (telefoneVOList.size() > i) {
+                    telefoneVOList.set(i, tel);
+                } else {
+                    tel = new TabTelefoneVO();
+                    tel.setId(0);
+                    telefoneVOList.add(tel);
+                }
+            }
+            empresaVO.setTelefoneVOList(telefoneVOList);
+        }
+
+
+//        empresaVO.setTelefone_ids(rs.getString("telefone_ids"));
+//        empresaVO.setContato_ids(rs.getString("contato_ids"));
+//        empresaVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));
 
         return empresaVO;
     }

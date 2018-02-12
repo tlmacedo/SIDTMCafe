@@ -139,7 +139,8 @@ public class PersonalizarCampos implements Constants {
             } else if (node instanceof JFXCheckBox) {
                 ((JFXCheckBox) node).setDisable(setDisable);
             } else if (node instanceof JFXTreeTableView) {
-                ((JFXTreeTableView) node).setEditable(setDisable);
+                //((JFXTreeTableView) node).setEditable(setDisable);
+                ((JFXTreeTableView) node).setDisable(setDisable);
             } else if (node instanceof AnchorPane) {
                 desabilitaCampos((AnchorPane) node, setDisable);
             } else if (node instanceof JFXTabPane) {

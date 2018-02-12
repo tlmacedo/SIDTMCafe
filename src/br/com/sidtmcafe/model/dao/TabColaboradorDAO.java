@@ -17,15 +17,14 @@ public class TabColaboradorDAO extends BuscaBandoDados {
     List<TabColaboradorVO> colaboradorVOList;
 
     public TabColaboradorVO getColaboradorVO(int idTabColaboradorVO) {
-        if (idTabColaboradorVO > 0)
-            buscaTabColaboradorVO(idTabColaboradorVO);
+        buscaTabColaboradorVO(idTabColaboradorVO);
         if (colaboradorVO == null)
             colaboradorVO = new TabColaboradorVO();
         return colaboradorVO;
     }
 
     public List<TabColaboradorVO> getColaboradorVOList() {
-        buscaTabColaboradorVO(0);
+        buscaTabColaboradorVO(-1);
         if (colaboradorVOList == null)
             colaboradorVOList.add(new TabColaboradorVO());
         return colaboradorVOList;
@@ -33,7 +32,7 @@ public class TabColaboradorDAO extends BuscaBandoDados {
 
     void buscaTabColaboradorVO(int idTabColaboradorVO) {
         comandoSql = "SELECT * FROM tabColaborador ";
-        if (idTabColaboradorVO > 0) comandoSql += " WHERE id = '" + idTabColaboradorVO + "' ";
+        if (idTabColaboradorVO >= 0) comandoSql += " WHERE id = '" + idTabColaboradorVO + "' ";
         comandoSql += "ORDER BY nome ";
 
         colaboradorVOList = new ArrayList<>();

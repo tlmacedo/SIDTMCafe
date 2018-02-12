@@ -17,15 +17,14 @@ public class SisSituacaoSistemaDAO extends BuscaBandoDados {
     List<SisSituacaoSistemaVO> situacaoSistemaVOList;
 
     public SisSituacaoSistemaVO getSituacaoSistemaVO(int idSisSituacaoSistemaVO) {
-        if (idSisSituacaoSistemaVO > 0)
-            buscaSisSituacaoSistemaVO(idSisSituacaoSistemaVO);
+        buscaSisSituacaoSistemaVO(idSisSituacaoSistemaVO);
         if (situacaoSistemaVO == null)
             situacaoSistemaVO = new SisSituacaoSistemaVO();
         return situacaoSistemaVO;
     }
 
     public List<SisSituacaoSistemaVO> getSituacaoSistemaVOList() {
-        buscaSisSituacaoSistemaVO(0);
+        buscaSisSituacaoSistemaVO(-1);
         if (situacaoSistemaVOList == null)
             situacaoSistemaVOList.add(new SisSituacaoSistemaVO());
         return situacaoSistemaVOList;
@@ -33,7 +32,7 @@ public class SisSituacaoSistemaDAO extends BuscaBandoDados {
 
     void buscaSisSituacaoSistemaVO(int idSisSituacaoSistemaVO) {
         comandoSql = "SELECT * FROM sisSituacaoSistema ";
-        if (idSisSituacaoSistemaVO > 0) comandoSql += "WHERE id = '" + idSisSituacaoSistemaVO + "' ";
+        if (idSisSituacaoSistemaVO >= 0) comandoSql += "WHERE id = '" + idSisSituacaoSistemaVO + "' ";
         comandoSql += "ORDER BY descricao ";
 
         situacaoSistemaVOList = new ArrayList<>();

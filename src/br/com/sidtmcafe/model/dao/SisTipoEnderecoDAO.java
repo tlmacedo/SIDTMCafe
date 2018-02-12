@@ -17,15 +17,14 @@ public class SisTipoEnderecoDAO extends BuscaBandoDados {
     List<SisTipoEnderecoVO> tipoEnderecoVOList;
 
     public SisTipoEnderecoVO getTipoEnderecoVO(int idSisTipoEnderecoVO) {
-        if (idSisTipoEnderecoVO > 0)
-            buscaSisTipoEnderecoVO(idSisTipoEnderecoVO);
+        buscaSisTipoEnderecoVO(idSisTipoEnderecoVO);
         if (tipoEnderecoVO == null)
             tipoEnderecoVO = new SisTipoEnderecoVO();
         return tipoEnderecoVO;
     }
 
     public List<SisTipoEnderecoVO> getTipoEnderecoVOList() {
-        buscaSisTipoEnderecoVO(0);
+        buscaSisTipoEnderecoVO(-1);
         if (tipoEnderecoVOList == null)
             tipoEnderecoVOList.add(new SisTipoEnderecoVO());
         return tipoEnderecoVOList;
@@ -33,7 +32,7 @@ public class SisTipoEnderecoDAO extends BuscaBandoDados {
 
     void buscaSisTipoEnderecoVO(int idSisTipoEnderecoVO) {
         comandoSql = "SELECT * FROM sisTipoEndereco ";
-        if (idSisTipoEnderecoVO > 0) comandoSql += "WHERE id = '" + idSisTipoEnderecoVO + "' ";
+        if (idSisTipoEnderecoVO >= 0) comandoSql += "WHERE id = '" + idSisTipoEnderecoVO + "' ";
         comandoSql += "ORDER BY descricao ";
 
         tipoEnderecoVOList = new ArrayList<>();

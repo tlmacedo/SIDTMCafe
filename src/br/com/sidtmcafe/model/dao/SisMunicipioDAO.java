@@ -17,15 +17,14 @@ public class SisMunicipioDAO extends BuscaBandoDados {
     List<SisMunicipioVO> municipioVOList;
 
     public SisMunicipioVO getMunicipioVO(int idSisMunicipioVO) {
-        if (idSisMunicipioVO > 0)
-            buscaSisMunicipioVO(idSisMunicipioVO, "");
+        buscaSisMunicipioVO(idSisMunicipioVO, "");
         if (municipioVO == null)
             municipioVO = new SisMunicipioVO();
         return municipioVO;
     }
 
     public SisMunicipioVO getMunicipioVO(String strMunicipio) {
-        buscaSisMunicipioVO(0, strMunicipio);
+        buscaSisMunicipioVO(-1, strMunicipio);
         if (municipioVO == null)
             municipioVO = new SisMunicipioVO();
         return municipioVO;
@@ -39,7 +38,7 @@ public class SisMunicipioDAO extends BuscaBandoDados {
 //    }
 
     public List<SisMunicipioVO> getMunicipioVOList() {
-        buscaSisMunicipioVO(0, "");
+        buscaSisMunicipioVO(-1, "");
         if (municipioVOList == null)
             municipioVOList.add(new SisMunicipioVO());
         return municipioVOList;
@@ -47,7 +46,7 @@ public class SisMunicipioDAO extends BuscaBandoDados {
 
     void buscaSisMunicipioVO(int idSisMunicipioVO, String strMunicipio) {
         comandoSql = "SELECT * FROM sisMunicipio ";
-        if (idSisMunicipioVO > 0) comandoSql += "WHERE id = '" + idSisMunicipioVO + "' ";
+        if (idSisMunicipioVO >= 0) comandoSql += "WHERE id = '" + idSisMunicipioVO + "' ";
 //        if (municipioIbge_id != "") {
 //            if (!comandoSql.contains("WHERE")) {
 //                comandoSql += "WHERE ";

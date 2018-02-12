@@ -17,7 +17,6 @@ public class SisTelefoneOperadoraDAO extends BuscaBandoDados {
     List<SisTelefoneOperadoraVO> telefoneOperadoraVOList;
 
     public SisTelefoneOperadoraVO getTelefoneOperadoraVO(int idSisTelefoneOperadoraVO) {
-        if (idSisTelefoneOperadoraVO>0)
         buscaSisTelefoneOperadoraVO(idSisTelefoneOperadoraVO);
         if (telefoneOperadoraVO == null)
             telefoneOperadoraVO = new SisTelefoneOperadoraVO();
@@ -25,7 +24,7 @@ public class SisTelefoneOperadoraDAO extends BuscaBandoDados {
     }
 
     public List<SisTelefoneOperadoraVO> getTelefoneOperadoraVOList() {
-        buscaSisTelefoneOperadoraVO(0);
+        buscaSisTelefoneOperadoraVO(-1);
         if (telefoneOperadoraVOList == null)
             telefoneOperadoraVOList.add(new SisTelefoneOperadoraVO());
         return telefoneOperadoraVOList;
@@ -33,7 +32,7 @@ public class SisTelefoneOperadoraDAO extends BuscaBandoDados {
 
     void buscaSisTelefoneOperadoraVO(int idSisTelefoneOperadoraVO) {
         comandoSql = "SELECT * FROM sisTelefoneOperadora ";
-        if (idSisTelefoneOperadoraVO > 0) comandoSql += "WHERE id ='" + idSisTelefoneOperadoraVO + "' ";
+        if (idSisTelefoneOperadoraVO >= 0) comandoSql += "WHERE id ='" + idSisTelefoneOperadoraVO + "' ";
         comandoSql += "ORDER BY tipo DESC, descricao ";
 
         telefoneOperadoraVOList = new ArrayList<>();

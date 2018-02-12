@@ -1,6 +1,7 @@
 
 .tree-table-view {
   .column-header {
+    -fx-pref-height: 24;
     .label {
       -fx-background-color: transparent;
       -fx-alignment: center-left;
@@ -8,7 +9,6 @@
       -fx-text-fill: $corPricipal;
       -fx-font-size: $fontSizeh6;
       -fx-padding: 0 4 0 0;
-      -fx-pref-height: 15;
     }
   }
 
@@ -26,7 +26,7 @@
   }
 
   .tree-table-row-cell {
-    -fx-pref-height: 18;
+    -fx-pref-height: 20;
     -fx-background-color: $sisColor_whiteblack;
     -fx-text-fill: $sisColor_black;
     //-fx-background-insets: 0, 0 0 1 0;
