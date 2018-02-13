@@ -23,11 +23,11 @@ public class PersonalizarCampos implements Constants {
         for (Node node : anchorPane.getChildren()) {
             String textFormatador;
             if (node instanceof JFXTextField) {
-                if (node.getAccessibleText() != null)
-                    if ((textFormatador = node.getAccessibleText()).toLowerCase() != null) {
-                        int qtdMax = Integer.parseInt(textFormatador.substring(0, 3));
-                        FormatadorDeDados.maxField((JFXTextField) node, qtdMax);
-                    }
+                if (node.getAccessibleText() != null) {
+                    textFormatador = node.getAccessibleText();
+                    int qtdMax = Integer.parseInt(textFormatador.substring(0, 3));
+                    FormatadorDeDados.maxField((JFXTextField) node, qtdMax);
+                }
             } else if (node instanceof AnchorPane) {
                 fieldMaxLen((AnchorPane) node);
             } else if (node instanceof TitledPane) {
@@ -45,7 +45,8 @@ public class PersonalizarCampos implements Constants {
             if (node instanceof JFXTextField) {
                 String textFormatador;
                 if (node.getAccessibleText() != null)
-                    if ((textFormatador = node.getAccessibleText()).toLowerCase() != null) {
+                    if (node.getAccessibleText() != null) {
+                        textFormatador = node.getAccessibleText();
                         int qtdMax = Integer.parseInt(textFormatador.substring(0, 3));
                         String tipoDados = textFormatador.substring(3, 4);
                         //String campoLimpo = textFormatador.substring(4, 5);
@@ -71,11 +72,9 @@ public class PersonalizarCampos implements Constants {
     public static void clearField(AnchorPane anchorPane) {
         for (Node node : anchorPane.getChildren()) {
             String textFormatador, textCampoLimpo = "";
-            if ((textFormatador = node.getAccessibleText()).toLowerCase() != null) {
-                String tipoDados = textFormatador.substring(3, 4);
-                String campoLimpo = textFormatador.substring(4, 5);
-
-                if (textFormatador.length() < 4 || (tipoDados != "#" & tipoDados != "@" & tipoDados != "?")) {
+            if (node.getAccessibleText() != null) {
+                textFormatador = node.getAccessibleText().toLowerCase();
+                if (!Character.isDigit(textFormatador.charAt(0))) {
                     textCampoLimpo = textFormatador;
                     if (textFormatador.equals("lblregistroslocalizados")) {
                         textCampoLimpo = "[pesquisa]  0 registro(s) localizado(s).";
@@ -87,6 +86,8 @@ public class PersonalizarCampos implements Constants {
                         textCampoLimpo = "falso";
                     }
                 } else {
+                    String tipoDados = textFormatador.substring(3, 4);
+                    String campoLimpo = textFormatador.substring(4, 5);
                     if (campoLimpo.equals("_")) {
                         textCampoLimpo = "";
                     } else {

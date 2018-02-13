@@ -1,10 +1,12 @@
 package br.com.sidtmcafe.componentes;
 
 import br.com.sidtmcafe.interfaces.Constants;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -19,6 +21,7 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 
 import javax.swing.*;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -42,6 +45,8 @@ public class AlertMensagem extends JFrame implements Constants {
 
     Label lblMensagem, lblTextoMsg;
     JFXTextArea textArea;
+    JFXComboBox comboBox;
+    List list;
     String strContagem;
     Button botaoOk, botaoApply, botaoYes, botaoClose, botaoFinish, botaoNo, botaoCancel;
 
@@ -179,6 +184,19 @@ public class AlertMensagem extends JFrame implements Constants {
         return vBoxDialog;
     }
 
+    VBox preencheDialogComboBox() {
+        vBoxDialog = new VBox();
+        vBoxDialog.setAlignment(Pos.CENTER);
+
+        comboBox = new JFXComboBox();
+        comboBox.getItems().setAll(list);
+        comboBox.setPromptText(getPromptText());
+
+        vBoxDialog.getChildren().add(comboBox);
+
+        return vBoxDialog;
+    }
+
     void addImagem(String strImage) {
         imageDialog = new Image(strImage);
         imageViewDialog.setImage(imageDialog);
@@ -207,25 +225,6 @@ public class AlertMensagem extends JFrame implements Constants {
     void closeDialog() {
         dialog.setResult(ButtonType.CANCEL);
         dialog.close();
-    }
-
-    public void getRetornoAlert_OK() {
-        carregaDialog();
-        preparaDialogPane();
-        dialogPane.getStyleClass().add("dialog_ok");
-
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
-        botaoOk = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
-        botaoOk.setDefaultButton(true);
-        botaoOk.setCancelButton(false);
-
-        botaoOk = new Button();
-        botaoOk.setOnAction(event -> {
-            closeDialog();
-        });
-
-        dialog.showAndWait();
-
     }
 
     public void getProgressBar(Task<?> task, boolean transparente, boolean showAndWait) {
@@ -268,6 +267,25 @@ public class AlertMensagem extends JFrame implements Constants {
         dialog.showAndWait();
     }
 
+    public void getRetornoAlert_OK() {
+        carregaDialog();
+        preparaDialogPane();
+        dialogPane.getStyleClass().add("dialog_ok");
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        botaoOk = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+        botaoOk.setDefaultButton(true);
+        botaoOk.setCancelButton(false);
+
+        botaoOk = new Button();
+        botaoOk.setOnAction(event -> {
+            closeDialog();
+        });
+
+        dialog.showAndWait();
+
+    }
+
     public Optional<ButtonType> getRetornoAlert_YES_NO() {
         carregaDialog();
         preparaDialogPane();
@@ -295,5 +313,38 @@ public class AlertMensagem extends JFrame implements Constants {
         return result;
     }
 
+    public Optional<Object> getRetornoAlert_ComboBox(List listCombo) {
+        list = listCombo;
+        carregaDialog();
+        preparaDialogPane();
+        dialogPane.getStyleClass().add("dialog_combo_box");
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        botaoOk = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+        botaoOk.setDefaultButton(true);
+        botaoOk.setCancelButton(false);
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        botaoCancel = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+        botaoCancel.setCancelButton(true);
+        botaoCancel.setDefaultButton(false);
+
+        dialogPane.setContent(preencheDialogComboBox());
+
+        Platform.runLater(() -> comboBox.requestFocus());
+
+        dialog.setResultConverter(new Callback<ButtonType, Object>() {
+            @Override
+            public Object call(ButtonType param) {
+                if (param.getButtonData().isDefaultButton()) {
+                    return comboBox.getSelectionModel().getSelectedItem();
+                }
+                return "";
+            }
+        });
+
+        Optional<Object> result = dialog.showAndWait();
+        return result;
+    }
 
 }

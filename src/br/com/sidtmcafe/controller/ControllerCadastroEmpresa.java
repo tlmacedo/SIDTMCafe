@@ -123,7 +123,6 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         FormatadorDeDados.fatorarColunaCheckBox(colunaIsTransportadora);
     }
 
-
     @Override
     public void escutarTeclas() {
         ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
@@ -143,11 +142,22 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                             break;
                         case F3:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                            if (getStatusFormulario().toLowerCase().equals("incluir")) {
-                                PersonalizarCampos.clearField((AnchorPane) tpnDadosCadastrais.getContent());
-                            } else if (getStatusFormulario().toLowerCase().equals("editar")) {
-                                ttvEmpresaVO = new TabEmpresaDAO().getEmpresaVO(ttvEmpresaVO.getId());
-                                exibirDadosEmpresa();
+                            switch (getStatusFormulario().toLowerCase()) {
+                                case "incluir":
+                                    if (new AlertMensagem("Cancelar inclusão", USUARIO_LOGADO_APELIDO
+                                            + ", deseja cancelar inclusão no cadastro de empresa?",
+                                            "ic_cadastro_empresas_black_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
+                                        return;
+                                    PersonalizarCampos.clearField((AnchorPane) tpnDadosCadastrais.getContent());
+                                    break;
+                                case "editar":
+                                    if (new AlertMensagem("Cancelar edição", USUARIO_LOGADO_APELIDO
+                                            + ", deseja cancelar edição do cadastro de empresa?",
+                                            "ic_cadastro_empresas_black_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
+                                        return;
+                                    ttvEmpresaVO = new TabEmpresaDAO().getEmpresaVO(ttvEmpresaVO.getId());
+                                    exibirDadosEmpresa();
+                                    break;
                             }
                             setStatusFormulario("Pesquisa");
                             break;
@@ -155,10 +165,10 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                             if ((!getStatusBarFormulario().contains(event.getCode().toString())) || (ttvEmpresaVO == null))
                                 break;
                             setStatusFormulario("Editar");
-
                             break;
                         case F5:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                            setStatusFormulario("Pesquisa");
 
                             break;
                         case F7:
@@ -282,6 +292,14 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                     txtEndNumero.requestFocus();
                 }
                 exibirDadosEndereco();
+            }
+        });
+
+        listEndereco.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
+            if (event.getCode() == KeyCode.HELP) {
+                guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
+                addEndereco();
             }
         });
     }
@@ -829,4 +847,43 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         preencherListaTelefoneContato(contatoVO.getTelefoneVOList());
     }
 
+    void guardarEndereco(int index) {
+        if (index < 0) return;
+        TabEnderecoVO endVO = ttvEmpresaVO.getEnderecoVOList().get(index);
+        if (endVO == null) return;
+        endVO.setCep(txtEndCEP.getText().replaceAll("[\\-/. ]", ""));
+        endVO.setLogradouro(txtEndLogradouro.getText());
+        endVO.setNumero(txtEndNumero.getText());
+        endVO.setComplemento(txtEndComplemento.getText());
+        endVO.setBairro(txtEndBairro.getText());
+        endVO.setUf_id(cboEndUF.getSelectionModel().getSelectedItem().getId());
+        endVO.setUfVO(cboEndUF.getSelectionModel().getSelectedItem());
+        endVO.setMunicipio_id(cboEndMunicipio.getSelectionModel().getSelectedItem().getId());
+        endVO.setMunicipioVO(cboEndMunicipio.getSelectionModel().getSelectedItem());
+        endVO.setPontoReferencia(txtEndPontoReferencia.getText());
+        ttvEmpresaVO.getEnderecoVOList().set(index, endVO);
+    }
+
+    void addEndereco() {
+        int tipEnd = 1;
+        if (listEndereco.getItems().get(0).getTipoEndereco_id() == 1) {
+            Object o = new AlertMensagem("Adicionar dados [endereço]",
+                    USUARIO_LOGADO_APELIDO + ", selecione o tipo endereço",
+                    "ic_endereco_add_white_24dp.png").getRetornoAlert_ComboBox(tipoEnderecoVOList).get();
+            if (o == null || o == "") return;
+            tipEnd = ((SisTipoEnderecoVO) o).getId();
+        }
+        TabEnderecoVO newEndereco = new TabEnderecoVO();
+        newEndereco.setId(0);
+        newEndereco.setTipoEndereco_id(tipEnd);
+        newEndereco.setTipoEnderecoVO(new SisTipoEnderecoDAO().getTipoEnderecoVO(tipEnd));
+        newEndereco.setUf_id(3);
+        newEndereco.setUfVO(new SisUFDAO().getUfVO(newEndereco.getUf_id()));
+        newEndereco.setMunicipio_id(112);
+        newEndereco.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(newEndereco.getMunicipio_id()));
+        ttvEmpresaVO.getEnderecoVOList().add(newEndereco);
+
+        listEndereco.getItems().setAll(ttvEmpresaVO.getEnderecoVOList());
+        listEndereco.getSelectionModel().selectLast();
+    }
 }
