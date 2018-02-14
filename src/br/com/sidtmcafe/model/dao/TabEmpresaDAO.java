@@ -95,7 +95,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
 
         TabEnderecoVO enderecoVO = empresaVO.getEnderecoVOList().get(0);
 
-        enderecoVO.setCep(receitaWsVO.getCep().replaceAll("[\\-/.]", ""));
+        enderecoVO.setCep(receitaWsVO.getCep().replaceAll("[\\-/. \\[\\]]", ""));
         enderecoVO.setLogradouro(receitaWsVO.getLogradouro());
         enderecoVO.setNumero(receitaWsVO.getNumero());
         enderecoVO.setComplemento(receitaWsVO.getComplemento());
@@ -112,8 +112,10 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         if (receitaWsVO.getTelefone() != "") {
             List<String> telefonesReceitaWsVOList = new ArrayList<>();
             for (String strCodTelefone : receitaWsVO.getTelefone().split(" / ")) {
-                strCodTelefone = strCodTelefone.replaceAll("[\\-/.() ]", "");
-                telefonesReceitaWsVOList.add(strCodTelefone.substring(2));
+                strCodTelefone = strCodTelefone.substring(strCodTelefone.length() - 10).replaceAll("[\\-/. \\[\\]]", "");
+                if (strCodTelefone.length() == 8 & Integer.parseInt(strCodTelefone.substring(0, 1)) >= 8)
+                    strCodTelefone = "9" + strCodTelefone;
+                telefonesReceitaWsVOList.add(strCodTelefone);
             }
             for (int i = 0; i < telefonesReceitaWsVOList.size(); i++) {
                 TabTelefoneVO tel = new TabTelefoneVO();

@@ -185,7 +185,7 @@
     -fx-font-weight: bold; }
   .dialog-pane .button-bar {
     -fx-background-color: transparent; }
-  .dialog-pane.dialog_yes_no, .dialog-pane.dialog_ok {
+  .dialog-pane.dialog_yes_no, .dialog-pane.dialog_ok, .dialog-pane.dialog_combo_box {
     -fx-pref-width: 570px;
     -fx-pref-height: 150px;
     -fx-background-image: url("/images/paineis/dialogPane.png"); }
@@ -204,6 +204,8 @@
       -fx-font-weight: bold; }
     .dialog-pane.dialog-pane-transparent .progress-bar {
       -fx-pref-width: 430px; }
+    .dialog-pane.dialog-pane-transparent .combo-box {
+      -fx-pref-width: 550px; }
 
 .tooltip {
   -fx-background-color: #e9e9e9;

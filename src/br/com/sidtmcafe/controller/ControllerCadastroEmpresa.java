@@ -234,6 +234,10 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         });
 
         listEndereco.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
+            if (!getStatusFormulario().toLowerCase().equals("pesquisa"))
+                if (o.intValue() >= 0 && n.intValue() != o.intValue() && n.intValue() >= 0) {
+                    guardarEndereco(o.intValue());
+                }
             if (n == null || n.intValue() < 0) return;
             exibirDadosEndereco();
         });
@@ -245,7 +249,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
         txtCNPJ.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             if ((event.getCode() == KeyCode.ENTER)) {
-                String valCnpj = txtCNPJ.getText().replaceAll("[\\-/.]", "");
+                String valCnpj = txtCNPJ.getText().replaceAll("[\\-/. \\[\\]]", "");
                 int idTipBusca = cboClassificacaoJuridica.getSelectionModel().getSelectedIndex();
                 String tipBusca = "C.N.P.J.";
                 if (idTipBusca == 0) tipBusca = "C.P.F.";
@@ -258,7 +262,11 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                 }
 
                 if (idTipBusca == 1) {
-                    WsCnpjReceitaWsVO wsCnpjReceitaWsVO = new WsCnpjReceitaWsDAO().getWsCnpjReceitaWsVO(valCnpj);
+                    listaTarefas = new ArrayList<>();
+                    listaTarefas.add(new Pair("pesquisa cnpj", "Pesquisando C.N.P.J: [" + txtCNPJ.getText() + "]"));
+
+                    WsCnpjReceitaWsVO wsCnpjReceitaWsVO = new Tarefa().tarefaWsCnpjReceitaWs(listaTarefas);
+
                     if (wsCnpjReceitaWsVO == null) {
                         txtCNPJ.requestFocus();
                         txtCNPJ.selectAll();
@@ -274,24 +282,16 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
         txtEndCEP.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                String valCep = txtEndCEP.getText().replaceAll("[\\-/.]", "");
+                String valCep = txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "");
                 if (valCep.length() != 8) {
-                    System.out.println("cep número invalido");
                     return;
                 }
-                WsCepPostmonVO wsCepPostmonVO = new WsCepPostmonDAO().getCepPostmonVO(valCep);
-                if (wsCepPostmonVO == null) {
-                    new AlertMensagem("Resultado consulta web service", USUARIO_LOGADO_APELIDO + ", resultado busca cep: "
-                            + txtEndCEP.getText() + ": " + "\nCEP informado é inválido ou não existe!",
-                            "ic_web_service_err_white_24dp").getRetornoAlert_OK();
-                    txtEndCEP.requestFocus();
-                    txtEndCEP.selectAll();
-                } else {
-                    listEndereco.getItems().set(listEndereco.getSelectionModel().getSelectedIndex(),
-                            new TabEnderecoDAO().getEnderecoVO(wsCepPostmonVO, listEndereco.getSelectionModel().getSelectedItem()));
-                    txtEndNumero.requestFocus();
-                }
+                listaTarefas = new ArrayList<>();
+                listaTarefas.add(new Pair("pesquisa cep", "Pesquisando C.E.P.: [" + txtEndCEP.getText() + "]"));
+
+                new Tarefa().tarefaWsCepPostmon(this, listaTarefas);
                 exibirDadosEndereco();
+                txtEndNumero.requestFocus();
             }
         });
 
@@ -824,7 +824,9 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     void exibirDadosEndereco() {
         int index = listEndereco.getSelectionModel().getSelectedIndex();
-        TabEnderecoVO enderecoVO = ttvEmpresaVO.getEnderecoVOList().get(index);
+        if (index < 0)
+            index = 0;
+        TabEnderecoVO enderecoVO = listEndereco.getItems().get(index);
         if (enderecoVO == null) return;
         //enderecoVO = new TabEnderecoVO();
         txtEndCEP.setText(FormatadorDeDados.getCampoFormatado(enderecoVO.getCep(), "cep"));
@@ -849,9 +851,9 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     void guardarEndereco(int index) {
         if (index < 0) return;
-        TabEnderecoVO endVO = ttvEmpresaVO.getEnderecoVOList().get(index);
+        TabEnderecoVO endVO = listEndereco.getItems().get(index);
         if (endVO == null) return;
-        endVO.setCep(txtEndCEP.getText().replaceAll("[\\-/. ]", ""));
+        endVO.setCep(txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", ""));
         endVO.setLogradouro(txtEndLogradouro.getText());
         endVO.setNumero(txtEndNumero.getText());
         endVO.setComplemento(txtEndComplemento.getText());
@@ -861,17 +863,41 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         endVO.setMunicipio_id(cboEndMunicipio.getSelectionModel().getSelectedItem().getId());
         endVO.setMunicipioVO(cboEndMunicipio.getSelectionModel().getSelectedItem());
         endVO.setPontoReferencia(txtEndPontoReferencia.getText());
-        ttvEmpresaVO.getEnderecoVOList().set(index, endVO);
+        listEndereco.getItems().set(index, endVO);
+        //ttvEmpresaVO.getEnderecoVOList().set(index, endVO);
+    }
+
+    public void updateEndRetornoBuscaCep(WsCepPostmonVO wsCepPostmonVO) {
+        if (wsCepPostmonVO == null) {
+            new AlertMensagem("Resultado consulta web service", USUARIO_LOGADO_APELIDO + ", resultado busca cep: "
+                    + txtEndCEP.getText() + ": " + "\nCEP informado é inválido ou não existe!",
+                    "ic_web_service_err_white_24dp").getRetornoAlert_OK();
+            txtEndCEP.requestFocus();
+            txtEndCEP.selectAll();
+        } else {
+            int index = listEndereco.getSelectionModel().getSelectedIndex();
+            TabEnderecoVO endRetornoWs = new TabEnderecoDAO().getEnderecoVO(wsCepPostmonVO, listEndereco.getSelectionModel().getSelectedItem());
+            listEndereco.getItems().set(index, endRetornoWs);
+            //ttvEmpresaVO.getEnderecoVOList().set(index, endRetornoWs);
+        }
     }
 
     void addEndereco() {
         int tipEnd = 1;
         if (listEndereco.getItems().get(0).getTipoEndereco_id() == 1) {
-            Object o = new AlertMensagem("Adicionar dados [endereço]",
-                    USUARIO_LOGADO_APELIDO + ", selecione o tipo endereço",
-                    "ic_endereco_add_white_24dp.png").getRetornoAlert_ComboBox(tipoEnderecoVOList).get();
-            if (o == null || o == "") return;
-            tipEnd = ((SisTipoEnderecoVO) o).getId();
+            if (!validaEnd()) {
+                new AlertMensagem("Endereço invalido",
+                        USUARIO_LOGADO_APELIDO + ", para adicionar endereço 1˚ informe endereço principal valido",
+                        "ic_endereco_add_white_24dp.png").getRetornoAlert_OK();
+                return;
+            } else {
+                Object o = new AlertMensagem("Adicionar dados [endereço]",
+                        USUARIO_LOGADO_APELIDO + ", selecione o tipo endereço",
+                        "ic_endereco_add_white_24dp.png").getRetornoAlert_ComboBox(getTipoEnderecoDisponivel()).get();
+                if (o == null || o == "") return;
+                tipEnd = ((SisTipoEnderecoVO) o).getId();
+            }
+            txtEndCEP.requestFocus();
         }
         TabEnderecoVO newEndereco = new TabEnderecoVO();
         newEndereco.setId(0);
@@ -881,9 +907,31 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         newEndereco.setUfVO(new SisUFDAO().getUfVO(newEndereco.getUf_id()));
         newEndereco.setMunicipio_id(112);
         newEndereco.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(newEndereco.getMunicipio_id()));
-        ttvEmpresaVO.getEnderecoVOList().add(newEndereco);
-
-        listEndereco.getItems().setAll(ttvEmpresaVO.getEnderecoVOList());
+        listEndereco.getItems().add(newEndereco);
         listEndereco.getSelectionModel().selectLast();
     }
+
+    boolean validaEnd() {
+        if (txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "").length() != 8 || txtEndCEP.getText().equals(""))
+            return false;
+        if (txtEndLogradouro.getText().equals("")) return false;
+        if (txtEndNumero.getText().equals("")) return false;
+        if (txtEndBairro.getText().equals("")) return false;
+
+        return true;
+    }
+
+    List<SisTipoEnderecoVO> getTipoEnderecoDisponivel() {
+        List<SisTipoEnderecoVO> endDisponiveis = new ArrayList<>();
+        for (SisTipoEnderecoVO tipEnd : tipoEnderecoVOList) {
+            int exite = 0;
+            for (int i = 0; i < listEndereco.getItems().size(); i++) {
+                if (tipEnd.equals(listEndereco.getItems().get(i).getTipoEnderecoVO()))
+                    exite = 1;
+            }
+            if (exite == 0) endDisponiveis.add(tipEnd);
+        }
+        return endDisponiveis;
+    }
+
 }

@@ -14,6 +14,8 @@ import javafx.util.Callback;
 
 import javax.swing.text.MaskFormatter;
 import java.text.ParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FormatadorDeDados {
 
@@ -36,7 +38,10 @@ public class FormatadorDeDados {
         if (!ms.contains(digt)) {
             tipMascOrMascara = gerarMascara(tipMascOrMascara, value.length(), "");
         }
-        value = value.replaceAll("[\\-/.]", "");
+        Pattern pattern = Pattern.compile("[\\-/.\\[\\]]");
+        Matcher matcher = pattern.matcher(tipMascOrMascara);
+        if (matcher.find())
+            value = value.replaceAll("[\\-/.\\[\\]]", "");
         if (value.length() > 0)
             try {
                 MaskFormatter mf = new MaskFormatter(tipMascOrMascara);
@@ -143,7 +148,11 @@ public class FormatadorDeDados {
         if (strMascara.length() > 0)
             setMascara(strMascara);
         textField.lengthProperty().addListener((ObservableValue<? extends Number> observable, Number n1, Number n2) -> {
-            String alphaAndDigits = textField.getText().replaceAll("[\\-/.]", "");
+            String alphaAndDigits = textField.getText();
+            Pattern pattern = Pattern.compile("[\\-/.\\[\\]]");
+            Matcher matcher = pattern.matcher(getMascara());
+            if (matcher.find())
+                alphaAndDigits = textField.getText().replaceAll("[\\-/.\\[\\]]", "");
             StringBuilder resultado = new StringBuilder();
             int i = 0;
             int quant = 0;

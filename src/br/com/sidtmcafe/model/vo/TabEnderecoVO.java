@@ -13,17 +13,16 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
     SisUFVO ufVO;
     SisMunicipioVO municipioVO;
 
-    IntegerProperty id, tipoEndereco_id, uf_id, municipio_id, sistuacaoSistema_id;
+    IntegerProperty id, tipoEndereco_id, uf_id, municipio_id;
     StringProperty cep, logradouro, numero, complemento, bairro, pontoReferencia;
 
     public TabEnderecoVO() {
     }
 
-    public TabEnderecoVO(int tipoEndereco_id, int uf_id, int municipio_id, int sistuacaoSistema_id) {
+    public TabEnderecoVO(int tipoEndereco_id, int uf_id, int municipio_id) {
         this.tipoEndereco_id = new SimpleIntegerProperty(tipoEndereco_id);
         this.uf_id = new SimpleIntegerProperty(uf_id);
         this.municipio_id = new SimpleIntegerProperty(municipio_id);
-        this.sistuacaoSistema_id = new SimpleIntegerProperty(sistuacaoSistema_id);
     }
 
     public SisTipoEnderecoVO getTipoEnderecoVO() {
@@ -100,19 +99,6 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
 
     public void setMunicipio_id(int municipio_id) {
         municipio_idProperty().set(municipio_id);
-    }
-
-    public int getSistuacaoSistema_id() {
-        return sistuacaoSistema_idProperty().get();
-    }
-
-    public IntegerProperty sistuacaoSistema_idProperty() {
-        if (sistuacaoSistema_id == null) sistuacaoSistema_id = new SimpleIntegerProperty(-1);
-        return sistuacaoSistema_id;
-    }
-
-    public void setSistuacaoSistema_id(int sistuacaoSistema_id) {
-        sistuacaoSistema_idProperty().set(sistuacaoSistema_id);
     }
 
     public String getCep() {

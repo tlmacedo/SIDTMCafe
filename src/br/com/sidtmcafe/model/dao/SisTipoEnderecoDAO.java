@@ -33,7 +33,7 @@ public class SisTipoEnderecoDAO extends BuscaBandoDados {
     void buscaSisTipoEnderecoVO(int idSisTipoEnderecoVO) {
         comandoSql = "SELECT * FROM sisTipoEndereco ";
         if (idSisTipoEnderecoVO >= 0) comandoSql += "WHERE id = '" + idSisTipoEnderecoVO + "' ";
-        comandoSql += "ORDER BY descricao ";
+        comandoSql += "ORDER BY id ";
 
         tipoEnderecoVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);

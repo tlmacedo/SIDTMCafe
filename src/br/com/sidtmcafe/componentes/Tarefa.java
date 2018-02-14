@@ -2,6 +2,10 @@ package br.com.sidtmcafe.componentes;
 
 import br.com.sidtmcafe.controller.ControllerCadastroEmpresa;
 import br.com.sidtmcafe.interfaces.Constants;
+import br.com.sidtmcafe.model.dao.WsCepPostmonDAO;
+import br.com.sidtmcafe.model.dao.WsCnpjReceitaWsDAO;
+import br.com.sidtmcafe.model.vo.WsCepPostmonVO;
+import br.com.sidtmcafe.model.vo.WsCnpjReceitaWsVO;
 import javafx.concurrent.Task;
 import javafx.util.Pair;
 import webService.correios.atende.EnderecoERP;
@@ -18,6 +22,9 @@ public class Tarefa implements Constants {
 
     URL url;
     BigDecimal getSaldo;
+    WsCnpjReceitaWsVO wsCnpjReceitaWsVO;
+    WsCepPostmonVO wsCepPostmonVO;
+    int qtdTarefas = 1;
 
 
     public void tarefaWsCorreios_BuscaCEP(String cep) {
@@ -52,7 +59,7 @@ public class Tarefa implements Constants {
                 return null;
             }
         };
-        alertMensagem.getProgressBar(voidTask, true, true);
+        alertMensagem.getProgressBar(voidTask, true, true, qtdTarefas);
     }
 
     public void tarefaWsFonteDeDados_ConstulaSaldo() {
@@ -78,17 +85,69 @@ public class Tarefa implements Constants {
                 return null;
             }
         };
-        alertMensagem.getProgressBar(voidTask, true, true);
+        alertMensagem.getProgressBar(voidTask, true, true, qtdTarefas);
     }
 
-
-    public void tarefaAbreCadastroEmpresa(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {
+    public WsCnpjReceitaWsVO tarefaWsCnpjReceitaWs(List<Pair> tarefas) {
+        qtdTarefas = tarefas.size();
         Task<Void> voidTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 updateMessage("carregando");
                 for (Pair tarefaAtual : tarefas) {
-                    updateProgress(tarefas.indexOf(tarefaAtual), tarefas.size());
+                    updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
+                    Thread.sleep(200);
+                    updateMessage(tarefaAtual.getValue().toString());
+                    String valCnpj = tarefaAtual.getValue().toString().replaceAll("[\\-/. \\[\\]]", "");
+                    System.out.println("valCnpj: " + valCnpj);
+                    valCnpj = valCnpj.substring(valCnpj.length() - 14);
+                    System.out.println("valCnpj-14: " + valCnpj);
+                    wsCnpjReceitaWsVO = new WsCnpjReceitaWsDAO().getWsCnpjReceitaWsVO(valCnpj);
+
+                }
+                updateProgress(qtdTarefas, qtdTarefas);
+                return null;
+            }
+        };
+        new AlertMensagem("Aguarde pesquisando cnpj na receita federal...", "",
+                "ic_aguarde_sentado_orange_32dp.png")
+                .getProgressBar(voidTask, true, false, qtdTarefas);
+        return wsCnpjReceitaWsVO;
+    }
+
+    public void tarefaWsCepPostmon(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {
+        qtdTarefas = tarefas.size();
+        Task<Void> voidTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                updateMessage("carregando");
+                for (Pair tarefaAtual : tarefas) {
+                    updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
+                    Thread.sleep(200);
+                    updateMessage(tarefaAtual.getValue().toString());
+                    String valCep = tarefaAtual.getValue().toString().replaceAll("[\\-/. \\[\\]]", "");
+                    valCep = valCep.substring(valCep.length() - 8);
+                    wsCepPostmonVO = new WsCepPostmonDAO().getCepPostmonVO(valCep);
+                    cadastroEmpresa.updateEndRetornoBuscaCep(wsCepPostmonVO);
+                }
+                updateProgress(qtdTarefas, qtdTarefas);
+                return null;
+            }
+        };
+        new AlertMensagem("Aguarde pesquisando cep nos correios...", "",
+                "ic_aguarde_sentado_orange_32dp.png")
+                .getProgressBar(voidTask, true, false, qtdTarefas);
+        //return wsCepPostmonVO;
+    }
+
+    public void tarefaAbreCadastroEmpresa(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {
+        qtdTarefas = tarefas.size();
+        Task<Void> voidTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                updateMessage("carregando");
+                for (Pair tarefaAtual : tarefas) {
+                    updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
                     Thread.sleep(200);
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
@@ -124,13 +183,13 @@ public class Tarefa implements Constants {
                             break;
                     }
                 }
-                updateProgress(tarefas.size(), tarefas.size());
+                updateProgress(qtdTarefas, qtdTarefas);
                 return null;
             }
         };
         new AlertMensagem("Aguarde carregando dados do sistema...", "",
                 "ic_aguarde_sentado_orange_32dp.png")
-                .getProgressBar(voidTask, true, false);
+                .getProgressBar(voidTask, true, false, qtdTarefas);
     }
 
 

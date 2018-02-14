@@ -29,6 +29,7 @@ import java.util.Random;
 public class AlertMensagem extends JFrame implements Constants {
     Dialog dialog;
     DialogPane dialogPane;
+    int qtdTarefasDialog = 2;
     boolean transparenteDialog = false;
     boolean geraMsgRetornoDialog = false;
     Task<?> taskDialog;
@@ -176,7 +177,11 @@ public class AlertMensagem extends JFrame implements Constants {
             vBoxDialog.getChildren().add(textArea);
             progressBarDialog.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
         } else {
-            progressBarDialog.progressProperty().bind(taskDialog.progressProperty());
+            if (qtdTarefasDialog > 1) {
+                progressBarDialog.progressProperty().bind(taskDialog.progressProperty());
+            } else {
+                progressBarDialog.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+            }
         }
 
         vBoxDialog.getChildren().add(progressBarDialog);
@@ -186,11 +191,11 @@ public class AlertMensagem extends JFrame implements Constants {
 
     VBox preencheDialogComboBox() {
         vBoxDialog = new VBox();
-        vBoxDialog.setAlignment(Pos.CENTER);
+        vBoxDialog.setAlignment(Pos.CENTER_LEFT);
 
         comboBox = new JFXComboBox();
         comboBox.getItems().setAll(list);
-        comboBox.setPromptText(getPromptText());
+        //comboBox.setPromptText(getPromptText());
 
         vBoxDialog.getChildren().add(comboBox);
 
@@ -227,7 +232,8 @@ public class AlertMensagem extends JFrame implements Constants {
         dialog.close();
     }
 
-    public void getProgressBar(Task<?> task, boolean transparente, boolean showAndWait) {
+    public void getProgressBar(Task<?> task, boolean transparente, boolean showAndWait, int qtdTarefas) {
+        qtdTarefasDialog = qtdTarefas;
         transparenteDialog = transparente;
         taskDialog = task;
         carregaDialog();

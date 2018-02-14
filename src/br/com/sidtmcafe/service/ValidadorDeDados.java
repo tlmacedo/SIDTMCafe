@@ -7,7 +7,7 @@ public class ValidadorDeDados implements Constants {
     private static final int[] pesoCnpj = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
 
     public static boolean isCnpjCpfValido(final String numero) {
-        numero.replaceAll("[\\-/. ]", "");
+        numero.replaceAll("[\\-/. \\[\\]]", "");
 
         if ((numero == null) || (numero.length() != 11 && numero.length() != 14)
                 || (numero.matches(numero.charAt(0) + "{11}") && numero.matches(numero.charAt(0) + "{14}")))
