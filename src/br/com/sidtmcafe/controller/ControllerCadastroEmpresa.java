@@ -859,6 +859,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     void guardarEndereco(int index) {
         if (index < 0) return;
         TabEnderecoVO endVO = new TabEnderecoVO();
+        endVO.setTipoEnderecoVO(listEndereco.getItems().get(index).getTipoEnderecoVO());
+        endVO.setTipoEndereco_id(endVO.getTipoEnderecoVO().getId());
         endVO.setCep(txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", ""));
         endVO.setLogradouro(txtEndLogradouro.getText());
         endVO.setNumero(txtEndNumero.getText());
@@ -870,7 +872,6 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         endVO.setMunicipioVO(cboEndMunicipio.getSelectionModel().getSelectedItem());
         endVO.setPontoReferencia(txtEndPontoReferencia.getText());
         listEndereco.getItems().set(index, endVO);
-        //ttvEmpresaVO.getEnderecoVOList().set(index, endVO);
     }
 
     public void updateEndRetornoBuscaCep(WsCepPostmonVO wsCepPostmonVO) {
