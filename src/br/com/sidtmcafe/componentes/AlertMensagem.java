@@ -195,6 +195,7 @@ public class AlertMensagem extends JFrame implements Constants {
 
         comboBox = new JFXComboBox();
         comboBox.getItems().setAll(list);
+        comboBox.getSelectionModel().select(0);
         //comboBox.setPromptText(getPromptText());
 
         vBoxDialog.getChildren().add(comboBox);

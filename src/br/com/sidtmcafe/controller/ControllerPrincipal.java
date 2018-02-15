@@ -94,10 +94,9 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
             }
 
 
-            if (event.getCode() == KeyCode.F12) {
-                if (tabPaneViewPrincipal.getTabs().size() <= 0)
-                    if (sairSistema(event.isControlDown()))
-                        fechar();
+            if ((event.getCode() == KeyCode.F12 && event.isControlDown()) || (event.getCode() == KeyCode.F12 && tabPaneViewPrincipal.getTabs().size() <= 0)) {
+                if (sairSistema())
+                    fechar();
             }
         });
 
@@ -239,18 +238,8 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
         }
     }
 
-    boolean sairSistema(boolean ctrlPressionada) {
-        if (ctrlPressionada) {
-            return perguntaFecharSistema();
-        } else {
-            if (tabPaneViewPrincipal.getTabs().size() > 0) {
-                if (perguntaFecharTab())
-                    tabPaneViewPrincipal.getTabs().remove(tabPaneViewPrincipal.getSelectionModel().getSelectedItem());
-            } else {
-                return perguntaFecharSistema();
-            }
-            return false;
-        }
+    boolean sairSistema() {
+        return perguntaFecharSistema();
     }
 
     boolean perguntaFecharSistema() {

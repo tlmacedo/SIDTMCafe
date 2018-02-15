@@ -1,5 +1,6 @@
 package br.com.sidtmcafe.service;
 
+import br.com.sidtmcafe.interfaces.Constants;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import javafx.application.Platform;
@@ -17,9 +18,10 @@ import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FormatadorDeDados {
+public class FormatadorDeDados implements Constants {
 
     String mascara;
+    Matcher matcher;
 
     public String getMascara() {
         return mascara;
@@ -38,8 +40,7 @@ public class FormatadorDeDados {
         if (!ms.contains(digt)) {
             tipMascOrMascara = gerarMascara(tipMascOrMascara, value.length(), "");
         }
-        Pattern pattern = Pattern.compile("[\\-/.\\[\\]]");
-        Matcher matcher = pattern.matcher(tipMascOrMascara);
+        Matcher matcher = PATTERN.matcher(tipMascOrMascara);
         if (matcher.find())
             value = value.replaceAll("[\\-/.\\[\\]]", "");
         if (value.length() > 0)
@@ -149,8 +150,7 @@ public class FormatadorDeDados {
             setMascara(strMascara);
         textField.lengthProperty().addListener((ObservableValue<? extends Number> observable, Number n1, Number n2) -> {
             String alphaAndDigits = textField.getText();
-            Pattern pattern = Pattern.compile("[\\-/.\\[\\]]");
-            Matcher matcher = pattern.matcher(getMascara());
+            matcher = PATTERN.matcher(getMascara());
             if (matcher.find())
                 alphaAndDigits = textField.getText().replaceAll("[\\-/.\\[\\]]", "");
             StringBuilder resultado = new StringBuilder();
