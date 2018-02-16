@@ -115,7 +115,7 @@ public class Tarefa implements Constants {
         return wsCnpjReceitaWsVO;
     }
 
-    public void tarefaWsCepPostmon(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {
+    public WsCepPostmonVO tarefaWsCepPostmon(List<Pair> tarefas) {
         qtdTarefas = tarefas.size();
         Task<Void> voidTask = new Task<Void>() {
             @Override
@@ -128,7 +128,6 @@ public class Tarefa implements Constants {
                     String valCep = tarefaAtual.getValue().toString().replaceAll("[\\-/. \\[\\]]", "");
                     valCep = valCep.substring(valCep.length() - 8);
                     wsCepPostmonVO = new WsCepPostmonDAO().getCepPostmonVO(valCep);
-                    cadastroEmpresa.updateEndRetornoBuscaCep(wsCepPostmonVO);
                 }
                 updateProgress(qtdTarefas, qtdTarefas);
                 return null;
@@ -137,7 +136,7 @@ public class Tarefa implements Constants {
         new AlertMensagem("Aguarde pesquisando cep nos correios...", "",
                 "ic_aguarde_sentado_orange_32dp.png")
                 .getProgressBar(voidTask, true, false, qtdTarefas);
-        //return wsCepPostmonVO;
+        return wsCepPostmonVO;
     }
 
     public void tarefaAbreCadastroEmpresa(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {

@@ -64,27 +64,6 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         }
     }
 
-    public TabEnderecoVO getEnderecoVO(WsCepPostmonVO wsCepPostmonVO, TabEnderecoVO enderecoAnt) {
-        //buscaTabEnderecoVO(enderecoAnt.getId());
-        enderecoVO = enderecoAnt;
-
-        if (wsCepPostmonVO == null)
-            return enderecoVO;
-
-        enderecoVO.setCep(wsCepPostmonVO.getCep());
-        enderecoVO.setLogradouro(wsCepPostmonVO.getLogradouro().toUpperCase());
-        enderecoVO.setNumero("");
-        enderecoVO.setComplemento("");
-        enderecoVO.setBairro(wsCepPostmonVO.getBairro().toUpperCase());
-        enderecoVO.setUf_id(new SisUFDAO().getUfVO(wsCepPostmonVO.getEstado_sigla()).getId());
-        enderecoVO.setMunicipio_id(new SisMunicipioDAO().getMunicipioVO(wsCepPostmonVO.getCidade()).getId());
-        enderecoVO.setPontoReferencia("");
-
-        addObjetosPesquisa();
-
-        return enderecoVO;
-    }
-
     void addObjetosPesquisa() {
         enderecoVO.setTipoEnderecoVO(new SisTipoEnderecoDAO().getTipoEnderecoVO(enderecoVO.getTipoEndereco_id()));
         enderecoVO.setUfVO(new SisUFDAO().getUfVO(enderecoVO.getUf_id()));

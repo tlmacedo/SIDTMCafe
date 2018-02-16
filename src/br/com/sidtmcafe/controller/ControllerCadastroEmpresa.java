@@ -3,10 +3,7 @@ package br.com.sidtmcafe.controller;
 import br.com.sidtmcafe.componentes.AlertMensagem;
 import br.com.sidtmcafe.componentes.Tarefa;
 import br.com.sidtmcafe.componentes.Variaveis;
-import br.com.sidtmcafe.service.ExecutaComandoTecladoMouse;
-import br.com.sidtmcafe.service.FormatadorDeDados;
-import br.com.sidtmcafe.service.PersonalizarCampos;
-import br.com.sidtmcafe.service.ValidadorDeDados;
+import br.com.sidtmcafe.service.*;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.*;
 import br.com.sidtmcafe.model.vo.*;
@@ -28,8 +25,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 
+import javax.xml.crypto.Data;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -37,6 +34,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static br.com.sidtmcafe.interfaces.Constants.DTFORMAT_DATA;
+import static br.com.sidtmcafe.interfaces.Constants.DTFORMAT_DATAHORA;
+import static br.com.sidtmcafe.interfaces.Constants.DTFORMAT_HORA;
 
 public class ControllerCadastroEmpresa extends Variaveis implements Initializable, FormularioModelo {
 
@@ -56,10 +55,10 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     public JFXCheckBox chkIsCliente;
     public JFXCheckBox chkIsFornecedor;
     public JFXCheckBox chkIsTransportadora;
-    public Label labelDataCadastro;
-    public Label labelDataCadastroDiff;
-    public Label labelDataAtualizacao;
-    public Label labelDataAtualizacaoDiff;
+    public Label lblDataCadastro;
+    public Label lblDataCadastroDiff;
+    public Label lblDataAtualizacao;
+    public Label lblDataAtualizacaoDiff;
     public JFXListView<TabEnderecoVO> listEndereco;
     public JFXTextField txtEndCEP;
     public JFXTextField txtEndLogradouro;
@@ -130,6 +129,13 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     @Override
     public void escutarTeclas() {
+
+        ttvEmpresa.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
+            if (n == null) return;
+            setTtvEmpresaVO(n.getValue());
+            exibirDadosEmpresa();
+        });
+
         ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
             if (ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().size() <= 0) return;
             if (n.getText().equals(ViewCadastroEmpresa.getTituloJanela())) {
@@ -160,9 +166,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                                             + ", deseja cancelar edição do cadastro de empresa?",
                                             "ic_cadastro_empresas_black_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
                                         return;
-//                                    setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
-//                                    exibirDadosEmpresa();
-                                    PersonalizarCampos.clearField((AnchorPane) tpnDadosCadastrais.getContent());
+                                    setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
+                                    exibirDadosEmpresa();
                                     break;
                             }
                             setStatusFormulario("Pesquisa");
@@ -174,8 +179,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                             break;
                         case F5:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                            setStatusFormulario("Pesquisa");
 
+                            setStatusFormulario("Pesquisa");
                             break;
                         case F7:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
@@ -191,8 +196,32 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
                             ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().remove(ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getSelectionModel().getSelectedItem());
                             break;
+                        case HELP:
+                            break;
+                        case DELETE:
+                            if (listEndereco.isFocused())
+                                listEndereco.getItems().remove(listEndereco.getSelectionModel().getSelectedIndex());
+                            if (listHomePage.isFocused())
+                                listHomePage.getItems().remove(listHomePage.getSelectionModel().getSelectedIndex());
+                            if (listEmail.isFocused())
+                                listEmail.getItems().remove(listEmail.getSelectionModel().getSelectedIndex());
+                            if (listTelefone.isFocused())
+                                listTelefone.getItems().remove(listTelefone.getSelectionModel().getSelectedIndex());
+                            break;
                     }
                 });
+            }
+        });
+
+        txtPesquisa.textProperty().addListener((ov, o, n) -> {
+            carregarPesquisaEmpresas(n);
+        });
+
+        txtPesquisa.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                ttvEmpresa.requestFocus();
+                ttvEmpresa.getSelectionModel().select(0);
+                ttvEmpresa.getFocusModel().focus(0);
             }
         });
 
@@ -212,45 +241,6 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                 formatCNPJ_CPF.setMascara("cpf");
                 txtCNPJ.setText(FormatadorDeDados.getCampoFormatado(txtCNPJ.getText(), "cpf"));
             }
-        });
-
-        cboEndUF.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
-            if (n == null) return;
-            carregarPesquisaMunicipios(n.getSigla());
-            formatIE.setMascara("ie" + n.getSigla());
-            txtIE.setText(FormatadorDeDados.getCampoFormatado(txtIE.getText(), "ie" + n.getSigla()));
-        });
-
-        txtPesquisa.textProperty().addListener((ov, o, n) -> {
-            carregarPesquisaEmpresas(n);
-        });
-
-        txtPesquisa.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                ttvEmpresa.requestFocus();
-                ttvEmpresa.getSelectionModel().select(0);
-                ttvEmpresa.getFocusModel().focus(0);
-            }
-        });
-
-        ttvEmpresa.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
-            if (n == null) return;
-            setTtvEmpresaVO(n.getValue());
-            exibirDadosEmpresa();
-        });
-
-        listEndereco.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
-            if (!getStatusFormulario().toLowerCase().equals("pesquisa"))
-                if ((o.intValue() >= 0) && (n.intValue() != o.intValue()) && (n.intValue() >= 0)) {
-                    guardarEndereco(o.intValue());
-                }
-            if (n == null || n.intValue() < 0) return;
-            exibirDadosEndereco();
-        });
-
-        listContatoNome.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
-            if (n == null || n.intValue() < 0) return;
-            exiberDadosContato();
         });
 
         txtCNPJ.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
@@ -287,6 +277,36 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             }
         });
 
+        listEndereco.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
+            if (!getStatusFormulario().toLowerCase().equals("pesquisa"))
+                if ((o != null) && (n != o) && (n != null)) {
+                    guardarEndereco(o);
+                }
+            if (n == null) return;
+            exibirDadosEndereco();
+        });
+
+//        listEndereco.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+//            if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
+//            switch (event.getCode()) {
+//                case HELP:
+//                    guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
+//                    addEndereco();
+//                    break;
+//                case DELETE:
+//                    if (listEndereco.getItems().size() <= 0) break;
+//                    listEndereco.getItems().remove(listEndereco.getSelectionModel().getSelectedIndex());
+//                    break;
+//            }
+////            if (event.getCode() == KeyCode.HELP) {
+////                guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
+////                addEndereco();
+////            }
+////            if (event.getCode() == KeyCode.DELETE) {
+////                listEndereco.getItems().remove(listEndereco.getSelectionModel().getSelectedIndex());
+////            }
+//        });
+
         txtEndCEP.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 String valCep = txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "");
@@ -296,19 +316,67 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                 listaTarefas = new ArrayList<>();
                 listaTarefas.add(new Pair("pesquisa cep", "Pesquisando C.E.P.: [" + txtEndCEP.getText() + "]"));
 
-                new Tarefa().tarefaWsCepPostmon(this, listaTarefas);
-                exibirDadosEndereco();
-                txtEndNumero.requestFocus();
+                WsCepPostmonVO wsCepPostmonVO = new Tarefa().tarefaWsCepPostmon(listaTarefas);
+                if (wsCepPostmonVO == null) {
+                    txtEndCEP.requestFocus();
+                    txtEndCEP.selectAll();
+                } else {
+                    exibirRetorno_WsCepPostmon(wsCepPostmonVO);
+                    txtEndNumero.requestFocus();
+                }
             }
         });
 
-        listEndereco.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
-            if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
-            if (event.getCode() == KeyCode.HELP) {
-                guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
-                addEndereco();
-            }
+        cboEndUF.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
+            if (n == null) return;
+            carregarPesquisaMunicipios(n.getSigla());
+            formatIE.setMascara("ie" + n.getSigla());
+            txtIE.setText(FormatadorDeDados.getCampoFormatado(txtIE.getText(), "ie" + n.getSigla()));
         });
+
+//        listHomePage.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+//            if (getStatusBarFormulario().toLowerCase().equals("pesquisa")) return;
+//            switch (event.getCode()) {
+//                case HELP:
+//                    break;
+//                case DELETE:
+//                    if (listHomePage.getItems().size() <= 0) break;
+//                    listHomePage.getItems().remove(listHomePage.getSelectionModel().getSelectedIndex());
+//                    break;
+//            }
+//        });
+//
+//        listEmail.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+//            if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
+//            switch (event.getCode()) {
+//                case HELP:
+//                    break;
+//                case DELETE:
+//                    if (listEmail.getItems().size() <= 0) break;
+//                    listEmail.getItems().remove(listEmail.getSelectionModel().getSelectedIndex());
+//                    break;
+//            }
+//        });
+//
+//        listTelefone.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+//            if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
+//            switch (event.getCode()) {
+//                case HELP:
+//                    break;
+//                case DELETE:
+//                    if (listTelefone.getItems().size() <= 0) break;
+//                    listTelefone.getItems().remove(listTelefone.getSelectionModel().getSelectedIndex());
+//                    break;
+//            }
+//        });
+
+
+        listContatoNome.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
+            if (n == null || n.intValue() < 0) return;
+            exiberDadosContato();
+        });
+
+
     }
 
     @Override
@@ -823,6 +891,24 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         chkIsCliente.setSelected(getTtvEmpresaVO().getIsCliente() == 1);
         chkIsFornecedor.setSelected(getTtvEmpresaVO().getIsFornecedor() == 1);
         chkIsTransportadora.setSelected(getTtvEmpresaVO().getIsTransportadora() == 1);
+
+        lblNaturezaJuridica.setText(getTtvEmpresaVO().getNaturezaJuridica());
+        lblDataAbertura.setText("");
+        lblDataAberturaDiff.setText("");
+        if (getTtvEmpresaVO().getDataAbertura() != null) {
+            lblDataAbertura.setText(getTtvEmpresaVO().getDataAbertura().toLocalDateTime().format(DTFORMAT_DATA));
+            lblDataAberturaDiff.setText(DatasTrabalhadas.getStrIntervaloDatas(getTtvEmpresaVO().getDataAbertura().toLocalDateTime(), null));
+        }
+
+        lblDataCadastro.setText(getTtvEmpresaVO().getDataCadastro().toLocalDateTime().format(DTFORMAT_DATAHORA));
+        lblDataCadastroDiff.setText(DatasTrabalhadas.getStrIntervaloDatas(getTtvEmpresaVO().getDataCadastro().toLocalDateTime(), null));
+        lblDataAtualizacao.setText("");
+        lblDataAtualizacaoDiff.setText("");
+        if (getTtvEmpresaVO().getDataAtualizacao() != null) {
+            lblDataAtualizacao.setText(getTtvEmpresaVO().getDataAtualizacao().toLocalDateTime().format(DTFORMAT_DATAHORA));
+            lblDataAtualizacaoDiff.setText(DatasTrabalhadas.getStrIntervaloDatas(getTtvEmpresaVO().getDataAtualizacao().toLocalDateTime(), null));
+        }
+
         preencherListaEnderecoEmpresa();
         preencherListaTelefoneEmpresa();
         carregarEmailHomePage();
@@ -856,10 +942,10 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         preencherListaTelefoneContato(contatoVO.getTelefoneVOList());
     }
 
-    void guardarEndereco(int index) {
-        if (index < 0) return;
+    void guardarEndereco(TabEnderecoVO enderecoVO) {
+        if (enderecoVO == null) return;
         TabEnderecoVO endVO = new TabEnderecoVO();
-        endVO.setTipoEnderecoVO(listEndereco.getItems().get(index).getTipoEnderecoVO());
+        endVO.setTipoEnderecoVO(enderecoVO.getTipoEnderecoVO());
         endVO.setTipoEndereco_id(endVO.getTipoEnderecoVO().getId());
         endVO.setCep(txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", ""));
         endVO.setLogradouro(txtEndLogradouro.getText());
@@ -871,28 +957,14 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         endVO.setMunicipio_id(cboEndMunicipio.getSelectionModel().getSelectedItem().getId());
         endVO.setMunicipioVO(cboEndMunicipio.getSelectionModel().getSelectedItem());
         endVO.setPontoReferencia(txtEndPontoReferencia.getText());
-        listEndereco.getItems().set(index, endVO);
-    }
-
-    public void updateEndRetornoBuscaCep(WsCepPostmonVO wsCepPostmonVO) {
-        if (wsCepPostmonVO == null) {
-            new AlertMensagem("Resultado consulta web service", USUARIO_LOGADO_APELIDO + ", resultado busca cep: "
-                    + txtEndCEP.getText() + ": " + "\nCEP informado é inválido ou não existe!",
-                    "ic_web_service_err_white_24dp").getRetornoAlert_OK();
-            txtEndCEP.requestFocus();
-            txtEndCEP.selectAll();
-        } else {
-            int index = listEndereco.getSelectionModel().getSelectedIndex();
-            TabEnderecoVO endRetornoWs = new TabEnderecoDAO().getEnderecoVO(wsCepPostmonVO, listEndereco.getSelectionModel().getSelectedItem());
-            listEndereco.getItems().set(index, endRetornoWs);
-            //ttvEmpresaVO.getEnderecoVOList().set(index, endRetornoWs);
-        }
+        listEndereco.getItems().remove(enderecoVO);
+        listEndereco.getItems().add(endVO);
     }
 
     void addEndereco() {
         int tipEnd = 1;
         if (listEndereco.getItems().get(0).getTipoEndereco_id() == 1) {
-            if (!validaEnd()) {
+            if (!validarEnd()) {
                 new AlertMensagem("Endereço invalido",
                         USUARIO_LOGADO_APELIDO + ", para adicionar endereço 1˚ informe endereço principal valido",
                         "ic_endereco_add_white_24dp.png").getRetornoAlert_OK();
@@ -926,13 +998,60 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         listEndereco.getSelectionModel().selectLast();
     }
 
-    boolean validaEnd() {
-        if (txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "").length() != 8 || txtEndCEP.getText().equals(""))
-            return false;
-        if (txtEndLogradouro.getText().equals("")) return false;
-        if (txtEndNumero.getText().equals("")) return false;
-        if (txtEndBairro.getText().equals("")) return false;
+    boolean validarDadosCadastrais() {
+        if (!validarDadosEmpresa()) return false;
 
+        if (!validarEnd()) return false;
+
+        return true;
+    }
+
+    boolean validarDadosEmpresa() {
+        String valCnpj = txtCNPJ.getText().replaceAll("[\\-/. \\[\\]]", "");
+        if ((valCnpj.length() != 11 && valCnpj.length() != 14) & (!ValidadorDeDados.isCnpjCpfValido(valCnpj))) {
+            txtCNPJ.requestFocus();
+            return false;
+        }
+        if (txtRazao.getText().length() == 0) {
+            txtRazao.requestFocus();
+            return false;
+        }
+        if (txtFantasia.getText().length() == 0) {
+            txtFantasia.requestFocus();
+            return false;
+        }
+
+        int tipEmpresa = 0;
+        if (chkIsCliente.isSelected()) tipEmpresa++;
+        if (chkIsFornecedor.isSelected()) tipEmpresa++;
+        if (chkIsTransportadora.isSelected()) tipEmpresa++;
+
+        if (tipEmpresa == 0) {
+            chkIsCliente.requestFocus();
+            return false;
+        }
+
+
+        return true;
+    }
+
+    boolean validarEnd() {
+        if (txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "").length() != 8 || txtEndCEP.getText().equals("")) {
+            txtEndCEP.requestFocus();
+            return false;
+        }
+        if (txtEndLogradouro.getText().equals("")) {
+            txtEndLogradouro.requestFocus();
+            return false;
+        }
+        if (txtEndNumero.getText().equals("")) {
+            txtEndNumero.requestFocus();
+            return false;
+        }
+        if (txtEndBairro.getText().equals("")) {
+            txtEndBairro.requestFocus();
+            return false;
+        }
         return true;
     }
 
@@ -957,9 +1076,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
         LocalDate dtTemp = LocalDate.parse(receitaWsVO.getAbertura(), DTFORMAT_DATA);
         LocalDateTime dtAbertura = LocalDateTime.of(dtTemp.getYear(), dtTemp.getMonth(), dtTemp.getDayOfMonth(), 0, 0, 0);
-        //ttvEmpresaVO.setDataAbertura(Timestamp.valueOf(dtAbertura));
         lblDataAbertura.setText(dtAbertura.toString());
-        //ttvEmpresaVO.setNaturezaJuridica(receitaWsVO.getNaturezaJuridica());
+        lblDataAbertura.setText(dtAbertura.format(DTFORMAT_DATA));
         lblNaturezaJuridica.setText(receitaWsVO.getNaturezaJuridica());
 
         txtEndCEP.setText(receitaWsVO.getCep().replaceAll("[\\-/. \\[\\]]", ""));
@@ -971,7 +1089,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         cboEndUF.getSelectionModel().select(new SisUFDAO().getUfVO(receitaWsVO.getUf()));
         if (receitaWsVO.getMunicipio().equals("")) receitaWsVO.setMunicipio("MANAUS");
         cboEndMunicipio.getSelectionModel().select(new SisMunicipioDAO().getMunicipioVO(receitaWsVO.getMunicipio()));
-        guardarEndereco(0);
+        guardarEndereco(listEndereco.getSelectionModel().getSelectedItem());
 
         if (receitaWsVO.getTelefone() != "") {
             List<String> telefonesReceitaWsVOList = new ArrayList<>();
@@ -1015,6 +1133,19 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         }
 
 
+    }
+
+    void exibirRetorno_WsCepPostmon(WsCepPostmonVO cepPostmonVO) {
+        txtEndCEP.setText(cepPostmonVO.getCep().replaceAll("[\\-/. \\[\\]]", ""));
+        txtEndLogradouro.setText(cepPostmonVO.getLogradouro());
+        txtEndNumero.setText("");
+        txtEndComplemento.setText("");
+        txtEndBairro.setText(cepPostmonVO.getBairro());
+        if (cepPostmonVO.getEstado_sigla().equals("")) cepPostmonVO.setEstado_sigla("AM");
+        cboEndUF.getSelectionModel().select(new SisUFDAO().getUfVO(cepPostmonVO.getEstado_sigla()));
+        if (cepPostmonVO.getCidade().equals("")) cepPostmonVO.setCidade("MANAUS");
+        cboEndMunicipio.getSelectionModel().select(new SisMunicipioDAO().getMunicipioVO(cepPostmonVO.getCidade()));
+        guardarEndereco(listEndereco.getSelectionModel().getSelectedItem());
     }
 
 }

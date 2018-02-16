@@ -146,28 +146,28 @@
                                 <Tooltip text="Empresa é transportadora"/>
                             </tooltip>
                         </JFXCheckBox>
-                        <Label fx:id="labelDataCadastro" accessibleText="LBL" alignment="CENTER_RIGHT" layoutX="1000.0"
+                        <Label fx:id="lblDataCadastro" accessibleText="LBL" alignment="CENTER_RIGHT" layoutX="1000.0"
                                layoutY="5.0" prefHeight="10.0" prefWidth="285.0"
                                styleClass="lbl-informaçoes" textAlignment="RIGHT">
                             <tooltip>
                                 <Tooltip text="data de cadastro da empresa no sistema"/>
                             </tooltip>
                         </Label>
-                        <Label fx:id="labelDataCadastroDiff" accessibleText="LBL" alignment="CENTER_RIGHT"
+                        <Label fx:id="lblDataCadastroDiff" accessibleText="LBL" alignment="CENTER_RIGHT"
                                layoutX="1000.0" layoutY="15.0" prefHeight="10.0" prefWidth="285.0"
                                styleClass="lbl-informacoes" textAlignment="RIGHT">
                             <tooltip>
                                 <Tooltip text="tempo que a empresa está cadastrada no sistema"/>
                             </tooltip>
                         </Label>
-                        <Label fx:id="labelDataAtualizacao" accessibleText="LBL" alignment="CENTER_RIGHT"
+                        <Label fx:id="lblDataAtualizacao" accessibleText="LBL" alignment="CENTER_RIGHT"
                                layoutX="1000.0" layoutY="25.0" prefHeight="10.0" prefWidth="285.0"
                                styleClass="lbl-informacoes" textAlignment="RIGHT">
                             <tooltip>
                                 <Tooltip text="data da ultima atualizacao feita no cadastro da empresa no sistema"/>
                             </tooltip>
                         </Label>
-                        <Label fx:id="labelDataAtualizacaoDiff" accessibleText="LBL" alignment="CENTER_RIGHT"
+                        <Label fx:id="lblDataAtualizacaoDiff" accessibleText="LBL" alignment="CENTER_RIGHT"
                                layoutX="1000.0" layoutY="35.0" prefHeight="10.0" prefWidth="285.0"
                                styleClass="lbl-informacoes" textAlignment="RIGHT">
                             <tooltip>
