@@ -22,7 +22,6 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
 
     public TabEmpresaVO getEmpresaVO(int idTabEmpresaVO) {
         buscaTabEmpresaVO(idTabEmpresaVO);
-        System.out.println("comandoSql: " + comandoSql);
         if (empresaVO == null)
             empresaVO = new TabEmpresaVO();
         return empresaVO;

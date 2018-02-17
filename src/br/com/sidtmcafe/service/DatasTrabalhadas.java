@@ -21,7 +21,8 @@ public class DatasTrabalhadas implements Constants {
             periodoTemp += period.getMonths() + " Meses ";
         if (period.getDays() > 0)
             periodoTemp += period.getDays() + " dias ";
-        else periodoTemp = " hoje ";
+        if (periodoTemp.equals(""))
+            periodoTemp = " hoje ";
         return periodoTemp;
     }
 }

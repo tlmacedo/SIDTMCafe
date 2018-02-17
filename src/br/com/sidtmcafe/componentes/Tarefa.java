@@ -99,9 +99,7 @@ public class Tarefa implements Constants {
                     Thread.sleep(200);
                     updateMessage(tarefaAtual.getValue().toString());
                     String valCnpj = tarefaAtual.getValue().toString().replaceAll("[\\-/. \\[\\]]", "");
-                    System.out.println("valCnpj: " + valCnpj);
                     valCnpj = valCnpj.substring(valCnpj.length() - 14);
-                    System.out.println("valCnpj-14: " + valCnpj);
                     wsCnpjReceitaWsVO = new WsCnpjReceitaWsDAO().getWsCnpjReceitaWsVO(valCnpj);
 
                 }
@@ -179,6 +177,9 @@ public class Tarefa implements Constants {
                             break;
                         case "preencherTabelaEmpresa":
                             cadastroEmpresa.preencherTabelaEmpresa();
+                            break;
+                        case "carregarTabCargo":
+                            cadastroEmpresa.carregarTabCargo();
                             break;
                     }
                 }

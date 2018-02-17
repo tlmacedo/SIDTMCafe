@@ -26,7 +26,7 @@
     -fx-background-color: $sisColor_transparent;
   }
 
-  &.dialog_yes_no, &.dialog_ok, &.dialog_combo_box {
+  &.dialog_yes_no, &.dialog_ok, &.dialog_combo_box, &.dialog_text_box, &.dialog_text_field_e_combo_box {
     -fx-pref-width: $sisWidthDialogPane_YES_NO;
     -fx-pref-height: $sisHeightDialogPane_YES_NO;
     -fx-background-image: url($painelDialogPane_YES_NO);
@@ -57,8 +57,11 @@
       //-fx-pref-height: 40;
       //-fx-padding: 5 0;
     }
-    .combo-box {
+    .jfx-combo-box {
       -fx-pref-width: ($sisWidthDialogPane - 20);
+    }
+    .jfx-text-field {
+      -fx-pref-width: ($sisWidthDialogPane - 40);
     }
   }
 }

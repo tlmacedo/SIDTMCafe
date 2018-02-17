@@ -3,6 +3,7 @@ package br.com.sidtmcafe.componentes;
 import br.com.sidtmcafe.interfaces.Constants;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -19,6 +20,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import javafx.util.Pair;
 
 import javax.swing.*;
 import java.util.List;
@@ -47,6 +49,7 @@ public class AlertMensagem extends JFrame implements Constants {
     Label lblMensagem, lblTextoMsg;
     JFXTextArea textArea;
     JFXComboBox comboBox;
+    JFXTextField textField;
     List list;
     String strContagem;
     Button botaoOk, botaoApply, botaoYes, botaoClose, botaoFinish, botaoNo, botaoCancel;
@@ -58,6 +61,7 @@ public class AlertMensagem extends JFrame implements Constants {
 
     public String cabecalho, promptText, strIco;
     public String resultCabecalho, resultPromptText;
+    public String promptCombo, promptTextField;
     public Exception exceptionErr;
 
     public AlertMensagem() {
@@ -108,6 +112,22 @@ public class AlertMensagem extends JFrame implements Constants {
 
     public void setResultPromptText(String resultPromptText) {
         this.resultPromptText = resultPromptText;
+    }
+
+    public String getPromptCombo() {
+        return promptCombo;
+    }
+
+    public void setPromptCombo(String promptCombo) {
+        this.promptCombo = promptCombo;
+    }
+
+    public String getPromptTextField() {
+        return promptTextField;
+    }
+
+    public void setPromptTextField(String promptTextField) {
+        this.promptTextField = promptTextField;
     }
 
     public Exception getExceptionErr() {
@@ -203,6 +223,35 @@ public class AlertMensagem extends JFrame implements Constants {
         return vBoxDialog;
     }
 
+    VBox preencheDialogTextBox() {
+        vBoxDialog = new VBox();
+        vBoxDialog.setAlignment(Pos.CENTER_LEFT);
+
+        textField = new JFXTextField();
+
+        vBoxDialog.getChildren().add(textField);
+
+        return vBoxDialog;
+    }
+
+    VBox preencheDialogTextBoxEComboBox() {
+        vBoxDialog = new VBox();
+        vBoxDialog.setSpacing(7);
+        vBoxDialog.setAlignment(Pos.CENTER_LEFT);
+
+        textField = new JFXTextField();
+        textField.setPromptText(getPromptTextField());
+
+        comboBox = new JFXComboBox();
+        comboBox.getItems().setAll(list);
+        comboBox.setPromptText(getPromptCombo());
+        comboBox.getSelectionModel().select(0);
+
+        vBoxDialog.getChildren().addAll(comboBox, textField);
+
+        return vBoxDialog;
+    }
+
     void addImagem(String strImage) {
         imageDialog = new Image(strImage);
         imageViewDialog.setImage(imageDialog);
@@ -231,6 +280,10 @@ public class AlertMensagem extends JFrame implements Constants {
     void closeDialog() {
         dialog.setResult(ButtonType.CANCEL);
         dialog.close();
+    }
+
+    void habilitarBotao() {
+        botaoOk.setDisable((comboBox.getSelectionModel().getSelectedIndex() < 0) || (textField.getText().length() == 0));
     }
 
     public void getProgressBar(Task<?> task, boolean transparente, boolean showAndWait, int qtdTarefas) {
@@ -320,6 +373,83 @@ public class AlertMensagem extends JFrame implements Constants {
         return result;
     }
 
+    public Optional<Pair<String, Object>> getRetornoAlert_TextFieldEComboBox(List listCombo) {
+        list = listCombo;
+        carregaDialog();
+        preparaDialogPane();
+        dialogPane.getStyleClass().add("dialog_text_field_e_combo_box");
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        botaoOk = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+        botaoOk.setDefaultButton(true);
+        botaoOk.setCancelButton(false);
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        botaoCancel = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+        botaoCancel.setCancelButton(true);
+        botaoCancel.setDefaultButton(false);
+
+        dialogPane.setContent(preencheDialogTextBoxEComboBox());
+
+        botaoOk.setDisable(true);
+        comboBox.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
+            if (n != o)
+                habilitarBotao();
+        });
+
+        textField.textProperty().addListener((ov, o, n) -> {
+            if (n != o)
+                habilitarBotao();
+        });
+
+        Platform.runLater(() -> comboBox.requestFocus());
+
+        dialog.setResultConverter(new Callback<ButtonType, Object>() {
+            @Override
+            public Object call(ButtonType param) {
+                if (param.getButtonData().isDefaultButton()) {
+                    return new Pair<>(textField.getText(), comboBox.getSelectionModel().getSelectedItem());
+                }
+                return null;
+            }
+        });
+
+        Optional<Pair<String, Object>> result = dialog.showAndWait();
+        return result;
+    }
+
+    public Optional<String> getRetornoAlert_TextField() {
+        carregaDialog();
+        preparaDialogPane();
+        dialogPane.getStyleClass().add("dialog_text_box");
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        botaoOk = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
+        botaoOk.setDefaultButton(true);
+        botaoOk.setCancelButton(false);
+
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+        botaoCancel = (Button) dialog.getDialogPane().lookupButton(ButtonType.CANCEL);
+        botaoCancel.setCancelButton(true);
+        botaoCancel.setDefaultButton(false);
+
+        dialogPane.setContent(preencheDialogTextBox());
+
+        Platform.runLater(() -> textField.requestFocus());
+
+        dialog.setResultConverter(new Callback<ButtonType, String>() {
+            @Override
+            public String call(ButtonType param) {
+                if (param.getButtonData().isDefaultButton())
+                    return textField.getText();
+                return null;
+            }
+        });
+
+        Optional<String> result = dialog.showAndWait();
+        return result;
+    }
+
     public Optional<Object> getRetornoAlert_ComboBox(List listCombo) {
         list = listCombo;
         carregaDialog();
@@ -346,7 +476,7 @@ public class AlertMensagem extends JFrame implements Constants {
                 if (param.getButtonData().isDefaultButton()) {
                     return comboBox.getSelectionModel().getSelectedItem();
                 }
-                return "";
+                return null;
             }
         });
 
