@@ -15,7 +15,9 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -26,6 +28,8 @@ import javafx.util.Pair;
 import org.apache.velocity.runtime.directive.contrib.For;
 
 import javax.swing.*;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
@@ -380,7 +384,7 @@ public class AlertMensagem extends JFrame implements Constants {
         return result;
     }
 
-    public Optional<Pair<String, Object>> getRetornoAlert_TextFieldEComboBox(List listCombo, String mascara) {
+    public Optional<Pair<String, Object>> getRetornoAlert_TextFieldEComboBox(List listCombo, String mascara, String textoPreLoader) {
         mascaraField = mascara;
         list = listCombo;
         carregaDialog();
@@ -398,6 +402,9 @@ public class AlertMensagem extends JFrame implements Constants {
         botaoCancel.setDefaultButton(false);
 
         dialogPane.setContent(preencheDialogTextBoxEComboBox());
+
+        if (textoPreLoader != "")
+            textField.setText(textoPreLoader);
 
         botaoOk.setDisable(true);
         comboBox.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
@@ -426,7 +433,7 @@ public class AlertMensagem extends JFrame implements Constants {
         return result;
     }
 
-    public Optional<String> getRetornoAlert_TextField(String mascara) {
+    public Optional<String> getRetornoAlert_TextField(String mascara, String textoPreLoader) {
         mascaraField = mascara;
         carregaDialog();
         preparaDialogPane();
@@ -443,6 +450,9 @@ public class AlertMensagem extends JFrame implements Constants {
         botaoCancel.setDefaultButton(false);
 
         dialogPane.setContent(preencheDialogTextBox());
+
+        if (textoPreLoader != "")
+            textField.setText(textoPreLoader);
 
         Platform.runLater(() -> textField.requestFocus());
 
@@ -493,4 +503,48 @@ public class AlertMensagem extends JFrame implements Constants {
         return result;
     }
 
+    public void errorException(Exception exceptionErr) {
+        try {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(getCabecalho());
+            alert.setContentText("Erro ocorrido em: " + promptText);
+
+            Exception ex = exceptionErr;
+
+            // Create expandable Exception.
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            String exceptionText = sw.toString();
+
+            Label label = new Label("The exception stacktrace was:");
+
+            TextArea textArea = new TextArea(exceptionText);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+            GridPane.setVgrow(textArea, Priority.ALWAYS);
+            GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(label, 0, 0);
+            expContent.add(textArea, 0, 1);
+
+            // Set expandable Exception into the dialog pane.
+            alert.getDialogPane().setExpandableContent(expContent);
+
+            alert.showAndWait();
+        } catch (Exception ex) {
+            if (ex instanceof IllegalStateException) {
+                Platform.runLater(() -> {
+                    errorException(exceptionErr);
+                });
+            } else {
+                //ex.printStackTrace();
+            }
+        }
+    }
 }

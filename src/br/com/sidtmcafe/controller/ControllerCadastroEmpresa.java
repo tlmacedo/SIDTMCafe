@@ -76,13 +76,13 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     public Label lblNaturezaJuridica;
     public JFXTreeTableView ttvDetalheReceita;
     public JFXTabPane tpnContatoPrazosCondicoes;
-    public JFXListView listHomePage;
-    public JFXListView listEmail;
-    public JFXListView listTelefone;
+    public JFXListView<TabEmailHomePageVO> listHomePage;
+    public JFXListView<TabEmailHomePageVO> listEmail;
+    public JFXListView<TabTelefoneVO> listTelefone;
     public JFXListView<TabContatoVO> listContatoNome;
-    public JFXListView listContatoHomePage;
-    public JFXListView listContatoEmail;
-    public JFXListView listContatoTelefone;
+    public JFXListView<TabEmailHomePageVO> listContatoHomePage;
+    public JFXListView<TabEmailHomePageVO> listContatoEmail;
+    public JFXListView<TabTelefoneVO> listContatoTelefone;
     public JFXComboBox cboPrazoTipoPagto;
     public JFXTextField txtPrazoDias;
     public JFXTextField txtPrazoLimite;
@@ -180,13 +180,25 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                             break;
                         case F5:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                            if (!validarDadosCadastrais()) break;
+
+                            if (getTtvContatoTelefoneVO().size() > 0)
+                                for (TabTelefoneVO contatoTel : listContatoTelefone.getItems()) {
+                                    if (contatoTel.getId() == 0)
+                                        new TabTelefoneDAO().updateTelefoneVO(contatoTel);
+                                    if (contatoTel.getId() > 0)
+                                        new TabTelefoneDAO().insertTelefoneVO(contatoTel);
+                                }
 
                             setStatusFormulario("Pesquisa");
+                            break;
+                        case F6:
+                            if (getStatusFormulario().toLowerCase().equals("pesquisa") || (!event.isShiftDown())) break;
+                            keyShiftF6();
                             break;
                         case F7:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
                             txtPesquisa.requestFocus();
-
                             break;
                         case F8:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
@@ -199,93 +211,11 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                             break;
                         case HELP:
                             if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
-                            if (listEndereco.isFocused()) {
-                                guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
-                                TabEnderecoVO endereco;
-                                if ((endereco = addEndereco()) == null) return;
-                                getTtvEnderecoVO().add(endereco);
-                                listEndereco.getItems().add(endereco);
-                                listEndereco.getSelectionModel().selectLast();
-                            }
-                            if (listHomePage.isFocused()) {
-                                TabEmailHomePageVO homePage;
-                                if ((homePage = addEmailHomePage(true, false)) == null) return;
-                                getTtvEmailHomePageVO().add(homePage);
-                                listHomePage.getItems().add(homePage);
-                                listHomePage.getSelectionModel().selectLast();
-                            }
-                            if (listEmail.isFocused()) {
-                                TabEmailHomePageVO email;
-                                if ((email = addEmailHomePage(true, true)) == null) return;
-                                getTtvEmailHomePageVO().add(email);
-                                listEmail.getItems().add(email);
-                                listEmail.getSelectionModel().selectLast();
-                            }
-                            if (listTelefone.isFocused()) {
-                                TabTelefoneVO telefone;
-                                if ((telefone = addTelefone(true)) == null) return;
-                                getTtvTelefoneVO().add(telefone);
-                                listTelefone.getItems().add(telefone);
-                                listTelefone.getSelectionModel().selectLast();
-                            }
-                            if (listContatoNome.isFocused()) {
-                                TabContatoVO contato;
-                                if ((contato = addContato()) == null) return;
-                                getTtvEmpresaVO().getContatoVOList().add(contato);
-                                listContatoNome.getItems().setAll(getTtvEmpresaVO().getContatoVOList());
-                                listContatoNome.getSelectionModel().selectLast();
-                            }
-                            if (listContatoHomePage.isFocused()) {
-                                TabEmailHomePageVO homePage;
-                                if ((homePage = addEmailHomePage(false, false)) == null) return;
-                                getTtvContatoEmailHomePageVO().add(homePage);
-                                listContatoHomePage.getItems().add(homePage);
-                                listContatoHomePage.getSelectionModel().selectLast();
-                            }
-                            if (listContatoEmail.isFocused()) {
-                                TabEmailHomePageVO email;
-                                if ((email = addEmailHomePage(false, true)) == null) return;
-                                getTtvContatoEmailHomePageVO().add(email);
-                                listContatoEmail.getItems().add(email);
-                                listContatoEmail.getSelectionModel().selectLast();
-                            }
-                            if (listContatoTelefone.isFocused()) {
-                                TabTelefoneVO telefone;
-                                if ((telefone = addTelefone(false)) == null) return;
-                                getTtvContatoTelefoneVO().add(telefone);
-                                listContatoTelefone.getItems().add(telefone);
-                                listContatoTelefone.getSelectionModel().selectLast();
-                            }
+                            keyInsert();
                             break;
                         case DELETE:
                             if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
-                            if ((listEndereco.isFocused()) && (listEndereco.getSelectionModel().getSelectedItem().getTipoEnderecoVO().getId() != 1))
-                                listEndereco.getItems().remove(listEndereco.getSelectionModel().getSelectedIndex());
-                            if ((listHomePage.isFocused()) && (listHomePage.getSelectionModel().getSelectedIndex() >= 0))
-                                listHomePage.getItems().remove(listHomePage.getSelectionModel().getSelectedIndex());
-                            if ((listEmail.isFocused()) && (listEmail.getSelectionModel().getSelectedIndex() >= 0))
-                                listEmail.getItems().remove(listEmail.getSelectionModel().getSelectedIndex());
-                            if ((listTelefone.isFocused()) && (listTelefone.getSelectionModel().getSelectedIndex() >= 0))
-                                listTelefone.getItems().remove(listTelefone.getSelectionModel().getSelectedIndex());
-                            if ((listContatoNome.isFocused()) && (listContatoNome.getSelectionModel().getSelectedIndex() >= 0)) {
-                                getTtvEmpresaVO().getContatoVOList().remove(listContatoNome.getSelectionModel().getSelectedItem());
-                                listContatoNome.getItems().remove(listContatoNome.getSelectionModel().getSelectedItem());
-                                listContatoHomePage.getItems().clear();
-                                listContatoEmail.getItems().clear();
-                                listContatoTelefone.getItems().clear();
-                            }
-                            if ((listContatoHomePage.isFocused()) && (listContatoHomePage.getSelectionModel().getSelectedIndex() >= 0)) {
-                                getTtvContatoEmailHomePageVO().remove(listContatoHomePage.getSelectionModel().getSelectedItem());
-                                listContatoHomePage.getItems().remove(listContatoHomePage.getSelectionModel().getSelectedItem());
-                            }
-                            if ((listContatoEmail.isFocused()) && (listContatoEmail.getSelectionModel().getSelectedIndex() >= 0)) {
-                                getTtvContatoEmailHomePageVO().remove(listContatoEmail.getSelectionModel().getSelectedItem());
-                                listContatoEmail.getItems().remove(listContatoEmail.getSelectionModel().getSelectedItem());
-                            }
-                            if ((listContatoTelefone.isFocused()) && (listContatoTelefone.getSelectionModel().getSelectedIndex() >= 0)) {
-                                getTtvContatoTelefoneVO().remove(listContatoTelefone.getSelectionModel().getSelectedItem());
-                                listContatoTelefone.getItems().remove(listContatoTelefone.getSelectionModel().getSelectedItem());
-                            }
+                            keyDelete();
                             break;
                     }
                 });
@@ -1125,8 +1055,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     }
 
     TabEmailHomePageVO addEmailHomePage(boolean isEmpresa, boolean isEmail) {
-        String empresa = "a empresa " + txtRazao.getText();
-        if (!isEmpresa) empresa = "o contato " + listContatoNome.getSelectionModel().getSelectedItem().toString();
+        String empresa = "a empresa: " + txtRazao.getText();
+        if (!isEmpresa) empresa = "o contato: " + listContatoNome.getSelectionModel().getSelectedItem().toString();
         String tipDado = "email";
         String ico = "ic_web_email_white_24dp.png";
         if (!isEmail) {
@@ -1137,13 +1067,18 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         try {
             strEmailHomePage = new AlertMensagem("Adicionar dados [" + tipDado + "]",
                     USUARIO_LOGADO_APELIDO + ", qual " + tipDado + " a ser adicionada para " + empresa + " ?",
-                    ico).getRetornoAlert_TextField(FormatadorDeDados.gerarMascara("", 80, "?")).get();
+                    ico).getRetornoAlert_TextField(FormatadorDeDados.gerarMascara("", 80, "?"), "").get();
         } catch (Exception ex) {
             if (!(ex instanceof NoSuchElementException))
                 ex.printStackTrace();
             return null;
         }
         if (strEmailHomePage == null) return null;
+        if ((isEmail) && (!strEmailHomePage.contains("@"))) {
+            new AlertMensagem("Dados inválidos", USUARIO_LOGADO_APELIDO
+                    + ", o email informado é inválido!", "ic_msg_alerta_triangulo_white_24dp.png").getRetornoAlert_OK();
+            return null;
+        }
         TabEmailHomePageVO emailHomePageVO = new TabEmailHomePageVO();
         emailHomePageVO.setId(0);
         emailHomePageVO.setDescricao(strEmailHomePage);
@@ -1154,9 +1089,40 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         return emailHomePageVO;
     }
 
+    TabEmailHomePageVO editEmailHomePage(boolean isEmpresa, TabEmailHomePageVO emailHomePageVO) {
+        String empresa = "a empresa: " + txtRazao.getText();
+        if (!isEmpresa) empresa = "o contato: " + listContatoNome.getSelectionModel().getSelectedItem().toString();
+        String tipDado = "email";
+        String ico = "ic_web_email_white_24dp.png";
+        if (!(emailHomePageVO.getIsEmail() == 1)) {
+            tipDado = "home page";
+            ico = "ic_web_home_page_white_24dp.png";
+        }
+        String strEmailHomePage;
+        try {
+            strEmailHomePage = new AlertMensagem("Editar informações [" + tipDado + "]",
+                    USUARIO_LOGADO_APELIDO + ", qual alteração será feita no " + tipDado + " d" + empresa + " ?",
+                    ico).getRetornoAlert_TextField(FormatadorDeDados.gerarMascara("", 80, "?"),
+                    emailHomePageVO.getDescricao()).get();
+        } catch (Exception ex) {
+            if (!(ex instanceof NoSuchElementException))
+                ex.printStackTrace();
+            return null;
+        }
+        if (strEmailHomePage == null) return emailHomePageVO;
+        if ((emailHomePageVO.getIsEmail() == 1) && (!strEmailHomePage.contains("@"))) {
+            new AlertMensagem("Dados inválidos", USUARIO_LOGADO_APELIDO
+                    + ", o email informado é inválido!", "ic_msg_alerta_triangulo_white_24dp.png").getRetornoAlert_OK();
+            return emailHomePageVO;
+        }
+        emailHomePageVO.setDescricao(strEmailHomePage);
+
+        return emailHomePageVO;
+    }
+
     TabTelefoneVO addTelefone(boolean isEmpresa) {
-        String empresa = "a empresa " + txtRazao.getText();
-        if (!isEmpresa) empresa = "o contato " + listContatoNome.getSelectionModel().getSelectedItem().toString();
+        String empresa = "a empresa: " + txtRazao.getText();
+        if (!isEmpresa) empresa = "o contato: " + listContatoNome.getSelectionModel().getSelectedItem().toString();
 
         Pair<String, Object> pairTelefone;
         AlertMensagem alertMensagem = new AlertMensagem();
@@ -1166,13 +1132,19 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         alertMensagem.setPromptText(USUARIO_LOGADO_APELIDO + ", qual telefone a ser adicionado para " + empresa + " ?");
         alertMensagem.setStrIco("ic_telefone_white_24dp.png");
         try {
-            pairTelefone = alertMensagem.getRetornoAlert_TextFieldEComboBox(telefoneOperadoraVOList, FormatadorDeDados.gerarMascara("", 9, "#")).get();
+            pairTelefone = alertMensagem.getRetornoAlert_TextFieldEComboBox(telefoneOperadoraVOList,
+                    FormatadorDeDados.gerarMascara("", 9, "#"), "").get();
         } catch (Exception ex) {
             if (!(ex instanceof NoSuchElementException))
                 ex.printStackTrace();
             return null;
         }
         if (pairTelefone == null) return null;
+        if (pairTelefone.getKey().toString().length() < 8 || pairTelefone.getKey().toString().length() > 9) {
+            new AlertMensagem("Dados inválidos", USUARIO_LOGADO_APELIDO
+                    + ", o número de telefone informado é inválido!", "ic_msg_alerta_triangulo_white_24dp.png").getRetornoAlert_OK();
+            return null;
+        }
         TabTelefoneVO telefoneVO = new TabTelefoneVO();
         telefoneVO.setId(0);
         telefoneVO.setDescricao(pairTelefone.getKey().toString());
@@ -1180,6 +1152,38 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         telefoneVO.setTelefoneOperadora_id(telefoneVO.getTelefoneOperadoraVO().getId());
 
         return telefoneVO;
+    }
+
+    TabTelefoneVO editTelefone(boolean isEmpresa, TabTelefoneVO telefone) {
+        String empresa = "a empresa: " + txtRazao.getText();
+        if (!isEmpresa) empresa = "o contato: " + listContatoNome.getSelectionModel().getSelectedItem().toString();
+
+        Pair<String, Object> pairTelefone;
+        AlertMensagem alertMensagem = new AlertMensagem();
+        alertMensagem.setPromptTextField("telefone");
+        alertMensagem.setPromptCombo("Operadora");
+        alertMensagem.setCabecalho("Editar informações [telefone]");
+        alertMensagem.setPromptText(USUARIO_LOGADO_APELIDO + ", qual alteração será feita no telefone d" + empresa + " ?");
+        alertMensagem.setStrIco("ic_telefone_white_24dp.png");
+        try {
+            pairTelefone = alertMensagem.getRetornoAlert_TextFieldEComboBox(telefoneOperadoraVOList,
+                    FormatadorDeDados.gerarMascara("", 9, "#"), telefone.getDescricao()).get();
+        } catch (Exception ex) {
+            if (!(ex instanceof NoSuchElementException))
+                ex.printStackTrace();
+            return null;
+        }
+        if (pairTelefone == null) return telefone;
+        if (pairTelefone.getKey().toString().length() < 8 || pairTelefone.getKey().toString().length() > 9) {
+            new AlertMensagem("Dados inválidos", USUARIO_LOGADO_APELIDO
+                    + ", o número de telefone informado é inválido!", "ic_msg_alerta_triangulo_white_24dp.png").getRetornoAlert_OK();
+            return telefone;
+        }
+        telefone.setDescricao(pairTelefone.getKey().toString());
+        telefone.setTelefoneOperadoraVO((SisTelefoneOperadoraVO) pairTelefone.getValue());
+        telefone.setTelefoneOperadora_id(telefone.getTelefoneOperadoraVO().getId());
+
+        return telefone;
     }
 
     TabContatoVO addContato() {
@@ -1192,7 +1196,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                 + txtRazao.getText() + "?");
         alertMensagem.setStrIco("ic_contato_add_white_24dp.png");
         try {
-            pairContato = alertMensagem.getRetornoAlert_TextFieldEComboBox(cargoVOList, FormatadorDeDados.gerarMascara("", 80, "@")).get();
+            pairContato = alertMensagem.getRetornoAlert_TextFieldEComboBox(cargoVOList,
+                    FormatadorDeDados.gerarMascara("", 80, "@"), "").get();
         } catch (Exception ex) {
             if (!(ex instanceof NoSuchElementException)) {
                 ex.printStackTrace();
@@ -1210,6 +1215,33 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         contatoVO.setEmailHomePage_ids("");
         contatoVO.setEmailHomePageVOList(new ArrayList<>());
         return contatoVO;
+    }
+
+    TabContatoVO editContato(TabContatoVO contato) {
+        Pair<String, Object> pairContato;
+        AlertMensagem alertMensagem = new AlertMensagem();
+        alertMensagem.setPromptTextField("Contato");
+        alertMensagem.setPromptCombo("Cargo");
+        alertMensagem.setCabecalho("Editar informações [contato]");
+        alertMensagem.setPromptText(USUARIO_LOGADO_APELIDO + ", qual alteração será feita no contato da empresa "
+                + txtRazao.getText() + "?");
+        alertMensagem.setStrIco("ic_contato_add_white_24dp.png");
+        try {
+            pairContato = alertMensagem.getRetornoAlert_TextFieldEComboBox(cargoVOList,
+                    FormatadorDeDados.gerarMascara("", 80, "@"),
+                    contato.getDescricao()).get();
+        } catch (Exception ex) {
+            if (!(ex instanceof NoSuchElementException)) {
+                ex.printStackTrace();
+            }
+            return null;
+        }
+        if (pairContato == null) return contato;
+        contato.setDescricao(pairContato.getKey().toString());
+        contato.setCargoVO((TabCargoVO) pairContato.getValue());
+        contato.setCargo_id(contato.getId());
+
+        return contato;
     }
 
     boolean validarDadosCadastrais() {
@@ -1351,4 +1383,154 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
     }
 
+    void keyInsert() {
+        if (listEndereco.isFocused()) {
+            guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
+            TabEnderecoVO endereco;
+            if ((endereco = addEndereco()) == null) return;
+            getTtvEnderecoVO().add(endereco);
+            listEndereco.getItems().add(endereco);
+            listEndereco.getSelectionModel().selectLast();
+        }
+        if (listHomePage.isFocused()) {
+            TabEmailHomePageVO homePage;
+            if ((homePage = addEmailHomePage(true, false)) == null) return;
+            getTtvEmailHomePageVO().add(homePage);
+            listHomePage.getItems().add(homePage);
+            listHomePage.getSelectionModel().selectLast();
+        }
+        if (listEmail.isFocused()) {
+            TabEmailHomePageVO email;
+            if ((email = addEmailHomePage(true, true)) == null) return;
+            getTtvEmailHomePageVO().add(email);
+            listEmail.getItems().add(email);
+            listEmail.getSelectionModel().selectLast();
+        }
+        if (listTelefone.isFocused()) {
+            TabTelefoneVO telefone;
+            if ((telefone = addTelefone(true)) == null) return;
+            getTtvTelefoneVO().add(telefone);
+            listTelefone.getItems().add(telefone);
+            listTelefone.getSelectionModel().selectLast();
+        }
+        if (listContatoNome.isFocused()) {
+            TabContatoVO contato;
+            if ((contato = addContato()) == null) return;
+            getTtvEmpresaVO().getContatoVOList().add(contato);
+            listContatoNome.getItems().setAll(getTtvEmpresaVO().getContatoVOList());
+            listContatoNome.getSelectionModel().selectLast();
+        }
+        if (listContatoHomePage.isFocused()) {
+            TabEmailHomePageVO homePage;
+            if ((homePage = addEmailHomePage(false, false)) == null) return;
+            getTtvContatoEmailHomePageVO().add(homePage);
+            listContatoHomePage.getItems().add(homePage);
+            listContatoHomePage.getSelectionModel().selectLast();
+        }
+        if (listContatoEmail.isFocused()) {
+            TabEmailHomePageVO email;
+            if ((email = addEmailHomePage(false, true)) == null) return;
+            getTtvContatoEmailHomePageVO().add(email);
+            listContatoEmail.getItems().add(email);
+            listContatoEmail.getSelectionModel().selectLast();
+        }
+        if (listContatoTelefone.isFocused()) {
+            TabTelefoneVO telefone;
+            if ((telefone = addTelefone(false)) == null) return;
+            getTtvContatoTelefoneVO().add(telefone);
+            listContatoTelefone.getItems().add(telefone);
+            listContatoTelefone.getSelectionModel().selectLast();
+        }
+    }
+
+    void keyDelete() {
+        if ((listEndereco.isFocused()) && (listEndereco.getSelectionModel().getSelectedItem().getTipoEnderecoVO().getId() != 1))
+            listEndereco.getItems().remove(listEndereco.getSelectionModel().getSelectedIndex());
+        if ((listHomePage.isFocused()) && (listHomePage.getSelectionModel().getSelectedIndex() >= 0))
+            listHomePage.getItems().remove(listHomePage.getSelectionModel().getSelectedIndex());
+        if ((listEmail.isFocused()) && (listEmail.getSelectionModel().getSelectedIndex() >= 0))
+            listEmail.getItems().remove(listEmail.getSelectionModel().getSelectedIndex());
+        if ((listTelefone.isFocused()) && (listTelefone.getSelectionModel().getSelectedIndex() >= 0))
+            listTelefone.getItems().remove(listTelefone.getSelectionModel().getSelectedIndex());
+        if ((listContatoNome.isFocused()) && (listContatoNome.getSelectionModel().getSelectedIndex() >= 0)) {
+            getTtvEmpresaVO().getContatoVOList().remove(listContatoNome.getSelectionModel().getSelectedItem());
+            listContatoNome.getItems().remove(listContatoNome.getSelectionModel().getSelectedItem());
+            listContatoHomePage.getItems().clear();
+            listContatoEmail.getItems().clear();
+            listContatoTelefone.getItems().clear();
+        }
+        if ((listContatoHomePage.isFocused()) && (listContatoHomePage.getSelectionModel().getSelectedIndex() >= 0)) {
+            getTtvContatoEmailHomePageVO().remove(listContatoHomePage.getSelectionModel().getSelectedItem());
+            listContatoHomePage.getItems().remove(listContatoHomePage.getSelectionModel().getSelectedItem());
+        }
+        if ((listContatoEmail.isFocused()) && (listContatoEmail.getSelectionModel().getSelectedIndex() >= 0)) {
+            getTtvContatoEmailHomePageVO().remove(listContatoEmail.getSelectionModel().getSelectedItem());
+            listContatoEmail.getItems().remove(listContatoEmail.getSelectionModel().getSelectedItem());
+        }
+        if ((listContatoTelefone.isFocused()) && (listContatoTelefone.getSelectionModel().getSelectedIndex() >= 0)) {
+            getTtvContatoTelefoneVO().remove(listContatoTelefone.getSelectionModel().getSelectedItem());
+            listContatoTelefone.getItems().remove(listContatoTelefone.getSelectionModel().getSelectedItem());
+        }
+    }
+
+    void keyShiftF6() {
+        if ((listHomePage.isFocused()) && (listHomePage.getSelectionModel().getSelectedIndex() >= 0)) {
+            TabEmailHomePageVO homePage = listHomePage.getSelectionModel().getSelectedItem();
+            int index = getTtvEmailHomePageVO().indexOf(homePage);
+            homePage = editEmailHomePage(true, homePage);
+            getTtvEmailHomePageVO().set(index, homePage);
+            listHomePage.getItems().set(listHomePage.getSelectionModel().getSelectedIndex(), homePage);
+            listHomePage.getSelectionModel().selectLast();
+        }
+        if ((listEmail.isFocused()) && (listEmail.getSelectionModel().getSelectedIndex() >= 0)) {
+            TabEmailHomePageVO email;
+            email = listEmail.getSelectionModel().getSelectedItem();
+            int index = getTtvEmailHomePageVO().indexOf(email);
+            email = editEmailHomePage(true, email);
+            getTtvEmailHomePageVO().set(index, email);
+            listEmail.getItems().set(listEmail.getSelectionModel().getSelectedIndex(), email);
+            listEmail.getSelectionModel().selectLast();
+        }
+        if ((listTelefone.isFocused()) && (listTelefone.getSelectionModel().getSelectedIndex() >= 0)) {
+            TabTelefoneVO telefone = listTelefone.getSelectionModel().getSelectedItem();
+            int index = listTelefone.getSelectionModel().getSelectedIndex();
+            telefone = editTelefone(true, telefone);
+            getTtvTelefoneVO().set(index, telefone);
+            listTelefone.getItems().set(index, telefone);
+            listTelefone.getSelectionModel().selectLast();
+        }
+        if ((listContatoNome.isFocused()) && (listContatoNome.getSelectionModel().getSelectedIndex() >= 0)) {
+            TabContatoVO contato = listContatoNome.getSelectionModel().getSelectedItem();
+            int index = getTtvEmpresaVO().getContatoVOList().indexOf(contato);
+            contato = editContato(contato);
+            getTtvEmpresaVO().getContatoVOList().set(index, contato);
+            listContatoNome.getItems().setAll(getTtvEmpresaVO().getContatoVOList());
+            listContatoNome.getSelectionModel().selectLast();
+        }
+        if ((listContatoHomePage.isFocused()) && (listContatoHomePage.getSelectionModel().getSelectedIndex() >= 0)) {
+            TabEmailHomePageVO homePage = listContatoHomePage.getSelectionModel().getSelectedItem();
+            int index = getTtvContatoEmailHomePageVO().indexOf(homePage);
+            homePage = editEmailHomePage(false, homePage);
+            getTtvEmailHomePageVO().set(index, homePage);
+            listContatoHomePage.getItems().set(listContatoHomePage.getSelectionModel().getSelectedIndex(), homePage);
+            listContatoHomePage.getSelectionModel().selectLast();
+        }
+        if ((listContatoEmail.isFocused()) && (listContatoEmail.getSelectionModel().getSelectedIndex() >= 0)) {
+            TabEmailHomePageVO email = listContatoEmail.getSelectionModel().getSelectedItem();
+            int index = getTtvContatoEmailHomePageVO().indexOf(email);
+            email = editEmailHomePage(false, email);
+            getTtvContatoEmailHomePageVO().set(index, email);
+            listContatoEmail.getItems().set(listContatoEmail.getSelectionModel().getSelectedIndex(), email);
+            listContatoEmail.getSelectionModel().selectLast();
+        }
+        if ((listContatoTelefone.isFocused()) && (listContatoTelefone.getSelectionModel().getSelectedIndex() >= 0)) {
+            TabTelefoneVO telefone = listContatoTelefone.getSelectionModel().getSelectedItem();
+            int index = getTtvContatoTelefoneVO().indexOf(telefone);
+            telefone = editTelefone(false, telefone);
+            if ((telefone = addTelefone(false)) == null) return;
+            getTtvContatoTelefoneVO().set(index, telefone);
+            listContatoTelefone.getItems().set(listContatoTelefone.getSelectionModel().getSelectedIndex(), telefone);
+            listContatoTelefone.getSelectionModel().selectLast();
+        }
+    }
 }
