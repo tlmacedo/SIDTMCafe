@@ -36,22 +36,28 @@ public class FormatadorDeDados implements Constants {
     }
 
     public static String getCampoFormatado(String value, String tipMascOrMascara) {
+        String strValue = null;
         String ms = "#@?", digt = tipMascOrMascara.substring(0, 1);
         if (!ms.contains(digt)) {
             tipMascOrMascara = gerarMascara(tipMascOrMascara, value.length(), "");
+            strValue = value.replaceAll("[\\-/. \\[\\]]", "");
+            String mascTmp = tipMascOrMascara.replaceAll("[\\-/. \\[\\]]", "");
+            if (strValue.length() > mascTmp.length()) {
+                strValue = strValue.substring(0, mascTmp.length());
+            }
         }
         Matcher matcher = PATTERN.matcher(tipMascOrMascara);
         if (matcher.find())
-            value = value.replaceAll("[\\-/.\\[\\]]", "");
-        if (value.length() > 0)
+            strValue = strValue.replaceAll("[\\-/. \\[\\]]", "");
+        if (strValue.length() > 0)
             try {
                 MaskFormatter mf = new MaskFormatter(tipMascOrMascara);
                 mf.setValueContainsLiteralCharacters(false);
-                return mf.valueToString(value);
+                return mf.valueToString(strValue);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        return value;
+        return strValue;
     }
 
     public static String gerarMascara(String tipMasc, int qtd, String caractere) {
@@ -138,11 +144,7 @@ public class FormatadorDeDados implements Constants {
                 return "###########";
             default:
                 return "############";
-
-
         }
-
-
     }
 
     public void maskField(JFXTextField textField, String strMascara) {

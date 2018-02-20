@@ -1,6 +1,8 @@
 package br.com.sidtmcafe.componentes;
 
 import br.com.sidtmcafe.interfaces.Constants;
+import br.com.sidtmcafe.service.FormatadorDeDados;
+import br.com.sidtmcafe.service.PersonalizarCampos;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -21,6 +23,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import javafx.util.Pair;
+import org.apache.velocity.runtime.directive.contrib.For;
 
 import javax.swing.*;
 import java.util.List;
@@ -51,7 +54,7 @@ public class AlertMensagem extends JFrame implements Constants {
     JFXComboBox comboBox;
     JFXTextField textField;
     List list;
-    String strContagem;
+    String strContagem, mascaraField;
     Button botaoOk, botaoApply, botaoYes, botaoClose, botaoFinish, botaoNo, botaoCancel;
 
     Timeline tlRegressiva, tlLoop;
@@ -228,6 +231,8 @@ public class AlertMensagem extends JFrame implements Constants {
         vBoxDialog.setAlignment(Pos.CENTER_LEFT);
 
         textField = new JFXTextField();
+        FormatadorDeDados formatTextField = new FormatadorDeDados();
+        formatTextField.maskField(textField, mascaraField);
 
         vBoxDialog.getChildren().add(textField);
 
@@ -236,11 +241,13 @@ public class AlertMensagem extends JFrame implements Constants {
 
     VBox preencheDialogTextBoxEComboBox() {
         vBoxDialog = new VBox();
-        vBoxDialog.setSpacing(7);
+        vBoxDialog.setSpacing(9);
         vBoxDialog.setAlignment(Pos.CENTER_LEFT);
 
         textField = new JFXTextField();
         textField.setPromptText(getPromptTextField());
+        FormatadorDeDados formatTextField = new FormatadorDeDados();
+        formatTextField.maskField(textField, mascaraField);
 
         comboBox = new JFXComboBox();
         comboBox.getItems().setAll(list);
@@ -373,7 +380,8 @@ public class AlertMensagem extends JFrame implements Constants {
         return result;
     }
 
-    public Optional<Pair<String, Object>> getRetornoAlert_TextFieldEComboBox(List listCombo) {
+    public Optional<Pair<String, Object>> getRetornoAlert_TextFieldEComboBox(List listCombo, String mascara) {
+        mascaraField = mascara;
         list = listCombo;
         carregaDialog();
         preparaDialogPane();
@@ -418,7 +426,8 @@ public class AlertMensagem extends JFrame implements Constants {
         return result;
     }
 
-    public Optional<String> getRetornoAlert_TextField() {
+    public Optional<String> getRetornoAlert_TextField(String mascara) {
+        mascaraField = mascara;
         carregaDialog();
         preparaDialogPane();
         dialogPane.getStyleClass().add("dialog_text_box");

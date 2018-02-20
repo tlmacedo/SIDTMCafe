@@ -185,10 +185,14 @@
     -fx-font-weight: bold; }
   .dialog-pane .button-bar {
     -fx-background-color: transparent; }
-  .dialog-pane.dialog_yes_no, .dialog-pane.dialog_ok, .dialog-pane.dialog_combo_box, .dialog-pane.dialog_text_box, .dialog-pane.dialog_text_field_e_combo_box {
+  .dialog-pane.dialog_yes_no, .dialog-pane.dialog_ok, .dialog-pane.dialog_combo_box, .dialog-pane.dialog_text_box {
     -fx-pref-width: 570px;
     -fx-pref-height: 150px;
     -fx-background-image: url("/images/paineis/dialogPane.png"); }
+  .dialog-pane.dialog_text_field_e_combo_box {
+    -fx-pref-width: 570px;
+    -fx-pref-height: 166px;
+    -fx-background-image: url("/images/paineis/dialogPane_text_field_e_combo_box.png"); }
   .dialog-pane.dialog-pane-transparent {
     -fx-pref-width: 450px;
     -fx-pref-height: 320px;

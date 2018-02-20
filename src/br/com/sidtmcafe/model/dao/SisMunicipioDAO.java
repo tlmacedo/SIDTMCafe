@@ -17,14 +17,14 @@ public class SisMunicipioDAO extends BuscaBandoDados {
     List<SisMunicipioVO> municipioVOList;
 
     public SisMunicipioVO getMunicipioVO(int idSisMunicipioVO) {
-        buscaSisMunicipioVO(idSisMunicipioVO, "");
+        buscaSisMunicipioVO(idSisMunicipioVO, -1, "");
         if (municipioVO == null)
             municipioVO = new SisMunicipioVO();
         return municipioVO;
     }
 
     public SisMunicipioVO getMunicipioVO(String strMunicipio) {
-        buscaSisMunicipioVO(-1, strMunicipio);
+        buscaSisMunicipioVO(-1, -1, strMunicipio);
         if (municipioVO == null)
             municipioVO = new SisMunicipioVO();
         return municipioVO;
@@ -38,23 +38,30 @@ public class SisMunicipioDAO extends BuscaBandoDados {
 //    }
 
     public List<SisMunicipioVO> getMunicipioVOList() {
-        buscaSisMunicipioVO(-1, "");
+        buscaSisMunicipioVO(-1, -1, "");
         if (municipioVOList == null)
             municipioVOList.add(new SisMunicipioVO());
         return municipioVOList;
     }
 
-    void buscaSisMunicipioVO(int idSisMunicipioVO, String strMunicipio) {
+    public List<SisMunicipioVO> getMunicipioVOList(int idUf_id) {
+        buscaSisMunicipioVO(-1, idUf_id, "");
+        if (municipioVOList == null)
+            municipioVOList.add(new SisMunicipioVO());
+        return municipioVOList;
+    }
+
+    void buscaSisMunicipioVO(int idSisMunicipioVO, int idUf_id, String strMunicipio) {
         comandoSql = "SELECT * FROM sisMunicipio ";
         if (idSisMunicipioVO >= 0) comandoSql += "WHERE id = '" + idSisMunicipioVO + "' ";
-//        if (municipioIbge_id != "") {
-//            if (!comandoSql.contains("WHERE")) {
-//                comandoSql += "WHERE ";
-//            } else {
-//                comandoSql += "AND ";
-//            }
-//            comandoSql += "ibge_id = '" + municipioIbge_id + "' ";
-//        }
+        if (idUf_id > 0) {
+            if (!comandoSql.contains("WHERE")) {
+                comandoSql += "WHERE ";
+            } else {
+                comandoSql += "AND ";
+            }
+            comandoSql += "uf_id = '" + idUf_id + "' ";
+        }
         if (strMunicipio != "") {
             if (!comandoSql.contains("WHERE")) {
                 comandoSql += "WHERE ";

@@ -263,68 +263,6 @@
                                 </AnchorPane>
                             </content>
                         </TitledPane>
-                        <TitledPane collapsible="false" focusTraversable="false" layoutX="5.0" layoutY="425.0"
-                                    maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                                    minWidth="-Infinity" prefHeight="132.0" prefWidth="1280.0"
-                                    text="Detalhes Receita Federal">
-                            <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="200.0">
-                                    <children>
-                                        <TitledPane collapsible="false" focusTraversable="false" layoutY="35.0"
-                                                    maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                                                    minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0"
-                                                    text="Atividade principal">
-                                            <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="5.0"
-                                                            prefWidth="400.0">
-                                                    <children>
-                                                        <JFXListView fx:id="listAtividadePrincipal"
-                                                                     accessibleText="LIST" prefHeight="52.0"
-                                                                     prefWidth="448.0"/>
-                                                    </children>
-                                                </AnchorPane>
-                                            </content>
-                                            <font>
-                                                <Font name="SansSerif Bold Italic" size="11.0"/>
-                                            </font>
-                                        </TitledPane>
-                                        <TitledPane collapsible="false" focusTraversable="false" layoutX="450.0"
-                                                    maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-                                                    minWidth="-Infinity" prefHeight="109.0" prefWidth="450.0"
-                                                    text="Atividade secundaria">
-                                            <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="122.0"
-                                                            prefWidth="1268.0">
-                                                    <children>
-                                                        <JFXListView fx:id="listAtividadeSecundaria"
-                                                                     accessibleText="LIST" prefHeight="86.0"
-                                                                     prefWidth="448.0"/>
-                                                    </children>
-                                                </AnchorPane>
-                                            </content>
-                                            <font>
-                                                <Font name="SansSerif Bold Italic" size="11.0"/>
-                                            </font>
-                                        </TitledPane>
-                                        <Label fx:id="lblDataAbertura" accessibleText="LBL_" layoutX="5.0" layoutY="2.0"
-                                               prefHeight="10.0" prefWidth="440.0"
-                                               styleClass="lbl-informacoes"/>
-                                        <Label fx:id="lblDataAberturaDiff" accessibleText="LBL_" layoutX="5.0"
-                                               layoutY="12.0" prefHeight="10.0" prefWidth="440.0"
-                                               styleClass="lbl-informacoes"/>
-                                        <Label fx:id="lblNaturezaJuridica" accessibleText="LBL_" layoutX="5.0"
-                                               layoutY="22.0" prefHeight="10.0" prefWidth="440.0"
-                                               styleClass="lbl-informacoes"/>
-                                        <JFXTreeTableView fx:id="ttvDetalheReceita" accessibleText="TTV" layoutX="900.0"
-                                                          nodeOrientation="LEFT_TO_RIGHT" prefHeight="109.0"
-                                                          prefWidth="378.0"/>
-                                    </children>
-                                </AnchorPane>
-                            </content>
-                            <font>
-                                <Font name="SansSerif Bold Italic" size="11.0"/>
-                            </font>
-                        </TitledPane>
                         <JFXTabPane fx:id="tpnContatoPrazosCondicoes" layoutX="5.0" layoutY="165.0"
                                     maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                                     minWidth="-Infinity" prefHeight="255.0" prefWidth="1280.0" tabMaxHeight="20.0"
@@ -538,6 +476,68 @@
                                 </Tab>
                             </tabs>
                         </JFXTabPane>
+                        <TitledPane collapsible="false" focusTraversable="false" layoutX="5.0" layoutY="425.0"
+                                    maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                    minWidth="-Infinity" prefHeight="132.0" prefWidth="1280.0"
+                                    text="Detalhes Receita Federal">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="200.0">
+                                    <children>
+                                        <TitledPane collapsible="false" focusTraversable="false" layoutY="35.0"
+                                                    maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                                    minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0"
+                                                    text="Atividade principal">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="5.0"
+                                                            prefWidth="400.0">
+                                                    <children>
+                                                        <JFXListView fx:id="listAtividadePrincipal"
+                                                                     accessibleText="LIST" prefHeight="52.0"
+                                                                     prefWidth="448.0"/>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                            <font>
+                                                <Font name="SansSerif Bold Italic" size="11.0"/>
+                                            </font>
+                                        </TitledPane>
+                                        <TitledPane collapsible="false" focusTraversable="false" layoutX="450.0"
+                                                    maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                                    minWidth="-Infinity" prefHeight="109.0" prefWidth="450.0"
+                                                    text="Atividade secundaria">
+                                            <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="122.0"
+                                                            prefWidth="1268.0">
+                                                    <children>
+                                                        <JFXListView fx:id="listAtividadeSecundaria"
+                                                                     accessibleText="LIST" prefHeight="86.0"
+                                                                     prefWidth="448.0"/>
+                                                    </children>
+                                                </AnchorPane>
+                                            </content>
+                                            <font>
+                                                <Font name="SansSerif Bold Italic" size="11.0"/>
+                                            </font>
+                                        </TitledPane>
+                                        <Label fx:id="lblDataAbertura" accessibleText="LBL_" layoutX="5.0" layoutY="2.0"
+                                               prefHeight="10.0" prefWidth="440.0"
+                                               styleClass="lbl-informacoes"/>
+                                        <Label fx:id="lblDataAberturaDiff" accessibleText="LBL_" layoutX="5.0"
+                                               layoutY="12.0" prefHeight="10.0" prefWidth="440.0"
+                                               styleClass="lbl-informacoes"/>
+                                        <Label fx:id="lblNaturezaJuridica" accessibleText="LBL_" layoutX="5.0"
+                                               layoutY="22.0" prefHeight="10.0" prefWidth="440.0"
+                                               styleClass="lbl-informacoes"/>
+                                        <JFXTreeTableView fx:id="ttvDetalheReceita" accessibleText="TTV" layoutX="900.0"
+                                                          nodeOrientation="LEFT_TO_RIGHT" prefHeight="109.0"
+                                                          prefWidth="378.0"/>
+                                    </children>
+                                </AnchorPane>
+                            </content>
+                            <font>
+                                <Font name="SansSerif Bold Italic" size="11.0"/>
+                            </font>
+                        </TitledPane>
                     </children>
                 </AnchorPane>
             </content>
