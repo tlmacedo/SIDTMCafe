@@ -70,4 +70,24 @@ public class TabEmailHomePageDAO extends BuscaBandoDados {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+
+    public void updateTabEmailHomaPageVO(TabEmailHomePageVO emailHomePageVO) {
+        comandoSql = "UPDATE tabEmailHomePage SET ";
+        comandoSql += "descricao = '" + emailHomePageVO.getDescricao() + "', ";
+        comandoSql += "isEmail = " + emailHomePageVO.getIsEmail() + " ";
+        comandoSql += "WHERE id = " + emailHomePageVO.getId();
+
+        if (getUpdateBancoDados(comandoSql)) ;
+    }
+
+    public int insertTabEmailHomaPageVO(TabEmailHomePageVO emailHomePageVO) {
+        comandoSql = "INSERT INTO tabEmailHomePage ";
+        comandoSql += "(descricao, isEmail) ";
+        comandoSql += "VALUES(";
+        comandoSql += "'" + emailHomePageVO.getDescricao() + "', ";
+        comandoSql += emailHomePageVO.getIsEmail();
+        comandoSql += ") ";
+
+        return getInsertBancoDados(comandoSql);
+    }
 }

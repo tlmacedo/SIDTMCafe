@@ -69,4 +69,39 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         enderecoVO.setUfVO(new SisUFDAO().getUfVO(enderecoVO.getUf_id()));
         enderecoVO.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(enderecoVO.getMunicipio_id()));
     }
+
+    public void updateTabEnderecoVO(TabEnderecoVO enderecoVO) {
+        comandoSql = "UPDATE tabEndereco SET ";
+        comandoSql += "tipoEndereco_id = " + enderecoVO.getTipoEndereco_id() + ", ";
+        comandoSql += "cep = '" + enderecoVO.getCep() + "', ";
+        comandoSql += "logradouro = '" + enderecoVO.getLogradouro() + "', ";
+        comandoSql += "numero = '" + enderecoVO.getNumero() + "', ";
+        comandoSql += "complemento = '" + enderecoVO.getComplemento() + "', ";
+        comandoSql += "bairro = '" + enderecoVO.getBairro() + "', ";
+        comandoSql += "uf_id = " + enderecoVO.getUf_id() + ", ";
+        comandoSql += "municipio_id = " + enderecoVO.getMunicipio_id() + ", ";
+        comandoSql += "pontoReferencia = '" + enderecoVO.getPontoReferencia() + "' ";
+        comandoSql += "WHERE id = " + enderecoVO.getId();
+
+        if (getUpdateBancoDados(comandoSql)) ;
+    }
+
+    public int insertTabEnderecoVO(TabEnderecoVO enderecoVO) {
+        comandoSql = "INSERT INTO tabEndereco ";
+        comandoSql += "(tipoEndereco_id, cep, logradouro, numero, complemento, bairro, uf_id, municipio_id, pontoReferencia) ";
+        comandoSql += "VALUES(";
+        comandoSql += enderecoVO.getTipoEndereco_id() + ", ";
+        comandoSql += "'" + enderecoVO.getCep() + "', ";
+        comandoSql += "'" + enderecoVO.getLogradouro() + "', ";
+        comandoSql += "'" + enderecoVO.getNumero() + "', ";
+        comandoSql += "'" + enderecoVO.getComplemento() + "', ";
+        comandoSql += "'" + enderecoVO.getBairro() + "', ";
+        comandoSql += enderecoVO.getUf_id() + ", ";
+        comandoSql += enderecoVO.getMunicipio_id() + ", ";
+        comandoSql += "'" + enderecoVO.getPontoReferencia() + "'";
+        comandoSql += ") ";
+
+        return getInsertBancoDados(comandoSql);
+    }
+
 }

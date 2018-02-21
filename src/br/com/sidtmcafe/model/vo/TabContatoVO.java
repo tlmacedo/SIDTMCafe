@@ -111,6 +111,8 @@ public class TabContatoVO extends RecursiveTreeObject<TabContatoVO> {
 
     @Override
     public String toString() {
+        if (descricaoProperty().get().equals(""))
+            return "";
         return descricaoProperty().get() + " [" + cargoVO.descricaoProperty().get() + "]";
     }
 }

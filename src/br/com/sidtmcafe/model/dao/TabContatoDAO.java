@@ -80,4 +80,28 @@ public class TabContatoDAO extends BuscaBandoDados {
         contatoVO.setEmailHomePageVOList(emailHomePageVOList);
     }
 
+    public void updateTabContatoVO(TabContatoVO contatoVO) {
+        comandoSql = "UPDATE tabContato SET ";
+        comandoSql += "descricao = '" + contatoVO.getDescricao() + "', ";
+        comandoSql += "cargo_id = " + contatoVO.getCargo_id() + ", ";
+        comandoSql += "telefone_ids = '" + contatoVO.getTelefone_ids() + "', ";
+        comandoSql += "emailHomePage_ids = '" + contatoVO.getEmailHomePage_ids() + "' ";
+        comandoSql += "WHERE id = " + contatoVO.getId();
+
+        if (getUpdateBancoDados(comandoSql)) ;
+    }
+
+    public int insertTabContatoVO(TabContatoVO contatoVO) {
+        comandoSql = "INSERT INTO tabContato ";
+        comandoSql += "(descricao, cargo_id, telefone_ids, emailHomePage_ids) ";
+        comandoSql += "VALUES(";
+        comandoSql += "'" + contatoVO.getDescricao() + "', ";
+        comandoSql += contatoVO.getCargo_id() + ", ";
+        comandoSql += "'" + contatoVO.getTelefone_ids() + "', ";
+        comandoSql += "'" + contatoVO.getEmailHomePage_ids() + "'";
+        comandoSql += ") ";
+
+        return getInsertBancoDados(comandoSql);
+    }
+
 }

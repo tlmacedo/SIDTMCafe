@@ -13,6 +13,7 @@ public class BuscaBandoDados {
     Connection con;
     PreparedStatement stmt;
     ResultSet rs;
+    int idInclusao = 0;
 
     ResultSet getResultadosBandoDados(String instrucaoSql) {
         con = ConnectionFactory.getConnection();
@@ -25,14 +26,15 @@ public class BuscaBandoDados {
         return rs;
     }
 
-    boolean getUpdateBancoDados(String tabela, String comandoSql) {
+    boolean getUpdateBancoDados(String comandoSql) {
         con = ConnectionFactory.getConnection();
         try {
+            System.out.println("comandoSql: " + comandoSql);
             stmt = con.prepareStatement(comandoSql);
             stmt.execute();
             stmt.close();
         } catch (Exception ex) {
-            new AlertMensagem("Erro. [" + tabela + "].", new Exception().getStackTrace()[0].getClassName() + ".",
+            new AlertMensagem("Erro.", new Exception().getStackTrace()[0].getClassName() + ".",
                     "ic_msg_erro_circulo_white_24dp.png").errorException(ex);
             ex.printStackTrace();
             return false;
@@ -42,21 +44,27 @@ public class BuscaBandoDados {
         return true;
     }
 
-    boolean getInsertBancoDados(String instrucaoSql, String tabela) {
+    int getInsertBancoDados(String comandoSql) {
         con = ConnectionFactory.getConnection();
         try {
-            stmt = con.prepareStatement(instrucaoSql);
-            //inserindo no bando de dados
+            System.out.print("comandoSql: " + comandoSql);
+            stmt = con.prepareStatement(comandoSql);
             stmt.execute();
             stmt.close();
+
+            rs = con.prepareStatement("SELECT LAST_INSERT_ID()").executeQuery();
+            if (rs.next())
+                idInclusao = rs.getInt("LAST_INSERT_ID()");
+            System.out.print("     idInclusao: " + idInclusao + "\n");
+
         } catch (Exception ex) {
-            new AlertMensagem("Erro. [" + tabela + "]", new Exception().getStackTrace()[0].getClassName() + ".",
+            new AlertMensagem("Erro.", new Exception().getStackTrace()[0].getClassName() + ".",
                     "ic_msg_erro_circulo_white_24dp.png").errorException(ex);
             ex.printStackTrace();
-            return false;
+            return 0;
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-        return true;
+        return idInclusao;
     }
 }

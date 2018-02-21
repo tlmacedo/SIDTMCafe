@@ -59,24 +59,23 @@ public class TabTelefoneDAO extends BuscaBandoDados {
         telefoneVO.setTelefoneOperadoraVO(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVO(telefoneVO.getTelefoneOperadora_id()));
     }
 
-    public void updateTelefoneVO(TabTelefoneVO telefoneVO) {
+    public void updateTabTelefoneVO(TabTelefoneVO telefoneVO) {
         comandoSql = "UPDATE tabTelefone SET ";
-        comandoSql += "descricao = " + telefoneVO.getDescricao() + ", ";
-        comandoSql += "telefoneOperadora_id = " + telefoneVO.getTelefoneOperadora_id() + ", ";
-        comandoSql += "WHERE = " + telefoneVO.getId() + " ";
+        comandoSql += "descricao = '" + telefoneVO.getDescricao() + "', ";
+        comandoSql += "telefoneOperadora_id = " + telefoneVO.getTelefoneOperadora_id() + " ";
+        comandoSql += "WHERE id = " + telefoneVO.getId();
 
-        if (getUpdateBancoDados("tabTelefone", comandoSql)) ;
+        if (getUpdateBancoDados(comandoSql)) ;
     }
 
-    public void insertTelefoneVO(TabTelefoneVO telefoneVO) {
+    public int insertTabTelefoneVO(TabTelefoneVO telefoneVO) {
         comandoSql = "INSERT INTO tabTelefone ";
         comandoSql += "(descricao, telefoneOperadora_id) ";
-        comandoSql += "VALUES(";
-        comandoSql += telefoneVO.getDescricao() + ", ";
+        comandoSql += "VALUES (";
+        comandoSql += "'" + telefoneVO.getDescricao() + "', ";
         comandoSql += telefoneVO.getTelefoneOperadora_id();
-        comandoSql += ") ";
+        comandoSql += ")";
 
-        if (getInsertBancoDados("tabTelefone", comandoSql)) ;
-
+        return getInsertBancoDados(comandoSql);
     }
 }

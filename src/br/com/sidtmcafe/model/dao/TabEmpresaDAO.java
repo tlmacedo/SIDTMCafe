@@ -76,71 +76,6 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         }
     }
 
-//    public TabEmpresaVO getEmpresaVO(WsCnpjReceitaWsVO receitaWsVO, TabEmpresaVO empresaAnt) {
-//        buscaTabEmpresaVO(empresaAnt.getId());
-//
-//        if (receitaWsVO == null)
-//            return empresaAnt;
-//
-//        empresaVO.setIsPessoaJuridica(1);
-//        empresaVO.setCnpj(receitaWsVO.getCnpj());
-//        empresaVO.setRazao(receitaWsVO.getNome());
-//        empresaVO.setFantasia(receitaWsVO.getFantasia());
-//
-//        LocalDate dtTemp = LocalDate.parse(receitaWsVO.getAbertura(), DTFORMAT_DATA);
-//        LocalDateTime dtAbertura = LocalDateTime.of(dtTemp.getYear(), dtTemp.getMonth(), dtTemp.getDayOfMonth(), 0, 0, 0);
-//        empresaVO.setDataAbertura(Timestamp.valueOf(dtAbertura));
-//
-//        empresaVO.setNaturezaJuridica(receitaWsVO.getNaturezaJuridica());
-//
-//        TabEnderecoVO enderecoVO = empresaVO.getEnderecoVOList().get(0);
-//
-//        enderecoVO.setCep(receitaWsVO.getCep().replaceAll("[\\-/. \\[\\]]", ""));
-//        enderecoVO.setLogradouro(receitaWsVO.getLogradouro());
-//        enderecoVO.setNumero(receitaWsVO.getNumero());
-//        enderecoVO.setComplemento(receitaWsVO.getComplemento());
-//        enderecoVO.setBairro(receitaWsVO.getBairro());
-//        if (receitaWsVO.getUf().equals("")) receitaWsVO.setUf("AM");
-//        enderecoVO.setUfVO(new SisUFDAO().getUfVO(receitaWsVO.getUf()));
-//        enderecoVO.setUf_id(enderecoVO.getUfVO().getId());
-//        if (receitaWsVO.getMunicipio().equals("")) receitaWsVO.setMunicipio("MANAUS");
-//        enderecoVO.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(receitaWsVO.getMunicipio()));
-//        enderecoVO.setMunicipio_id(enderecoVO.getMunicipioVO().getId());
-//        empresaVO.getEnderecoVOList().set(0, enderecoVO);
-//
-//        List<TabTelefoneVO> telefoneVOList = empresaVO.getTelefoneVOList();
-//        if (receitaWsVO.getTelefone() != "") {
-//            List<String> telefonesReceitaWsVOList = new ArrayList<>();
-//            for (String strCodTelefone : receitaWsVO.getTelefone().split(" / ")) {
-//                strCodTelefone = strCodTelefone.substring(strCodTelefone.length() - 10).replaceAll("[\\-/. \\[\\]]", "");
-//                if (strCodTelefone.length() == 8 & Integer.parseInt(strCodTelefone.substring(0, 1)) >= 8)
-//                    strCodTelefone = "9" + strCodTelefone;
-//                telefonesReceitaWsVOList.add(strCodTelefone);
-//            }
-//            for (int i = 0; i < telefonesReceitaWsVOList.size(); i++) {
-//                TabTelefoneVO tel = new TabTelefoneVO();
-//                tel.setDescricao(telefonesReceitaWsVOList.get(i));
-//                tel.setTelefoneOperadora_id(2);
-//                tel.setTelefoneOperadoraVO(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVO(2));
-//                if (telefoneVOList.size() > i) {
-//                    telefoneVOList.set(i, tel);
-//                } else {
-//                    tel = new TabTelefoneVO();
-//                    tel.setId(0);
-//                    telefoneVOList.add(tel);
-//                }
-//            }
-//            empresaVO.setTelefoneVOList(telefoneVOList);
-//        }
-//
-//
-////        empresaVO.setTelefone_ids(rs.getString("telefone_ids"));
-////        empresaVO.setContato_ids(rs.getString("contato_ids"));
-////        empresaVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));
-//
-//        return empresaVO;
-//    }
-
     void addObjetosPesquisa() {
         List<TabEnderecoVO> enderecoVOList = new ArrayList<>();
         for (String strCodEndereco : empresaVO.getEndereco_ids().split(";")) {
@@ -175,6 +110,56 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         empresaVO.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(empresaVO.getSituacaoSistema_id()));
 
         empresaVO.setDetalheReceitaFederalVOList(new TabEmpresa_DetalheReceitaFederalDAO().getDetalheReceitaFederalVOList(empresaVO.getId()));
+    }
+
+    public void updateTabEmpresaVO(TabEmpresaVO empresaVO) {
+        comandoSql = "UPDATE tabEmpresa SET ";
+        comandoSql += "isPessoaJuridica = " + empresaVO.getIsPessoaJuridica() + ", ";
+        comandoSql += "cnpj = '" + empresaVO.getCnpj() + "', ";
+        comandoSql += "ie = '" + empresaVO.getIe() + "', ";
+        comandoSql += "razao = '" + empresaVO.getRazao() + "', ";
+        comandoSql += "fantasia = '" + empresaVO.getFantasia() + "', ";
+        comandoSql += "isCliente = " + empresaVO.getIsCliente() + ", ";
+        comandoSql += "isFornecedor = " + empresaVO.getIsFornecedor() + ", ";
+        comandoSql += "isTransportadora = " + empresaVO.getIsTransportadora() + ", ";
+        comandoSql += "endereco_ids = '" + empresaVO.getEndereco_ids() + "', ";
+        comandoSql += "telefone_ids = '" + empresaVO.getTelefone_ids() + "', ";
+        comandoSql += "contato_ids = '" + empresaVO.getContato_ids() + "', ";
+        comandoSql += "emailHomePage_ids = '" + empresaVO.getEmailHomePage_ids() + "', ";
+        comandoSql += "usuarioCadastro_id = " + empresaVO.getUsuarioCadastro_id() + ", ";
+        comandoSql += "situacaoSistema_id = " + empresaVO.getSituacaoSistema_id() + ", ";
+        comandoSql += "dataAbertura = '" + empresaVO.getDataAbertura() + "', ";
+        comandoSql += "naturezaJuridica = '" + empresaVO.getNaturezaJuridica() + "' ";
+        comandoSql += "WHERE id = " + empresaVO.getId();
+
+        if (getUpdateBancoDados(comandoSql)) ;
+    }
+
+    public int insertTabEmpresaVO(TabEmpresaVO empresaVO) {
+        comandoSql = "INSERT INTO tabEmpresa ";
+        comandoSql += "(isPessoaJuridica, cnpj, ie, razao, fantasia, isCliente, isFornecedor, ";
+        comandoSql += "isTransportadora, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids, ";
+        comandoSql += "usuarioAtualizacao_id, situacaoSistema_id, dataAbertura, naturezaJuridica) ";
+        comandoSql += "VALUES(";
+        comandoSql += empresaVO.getIsPessoaJuridica() + ", ";
+        comandoSql += "'" + empresaVO.getCnpj() + "', ";
+        comandoSql += "'" + empresaVO.getIe() + "', ";
+        comandoSql += "'" + empresaVO.getRazao() + "', ";
+        comandoSql += "'" + empresaVO.getFantasia() + "', ";
+        comandoSql += empresaVO.getIsCliente() + ", ";
+        comandoSql += empresaVO.getIsFornecedor() + ", ";
+        comandoSql += empresaVO.getIsTransportadora() + ", ";
+        comandoSql += "'" + empresaVO.getEndereco_ids() + "', ";
+        comandoSql += "'" + empresaVO.getTelefone_ids() + "', ";
+        comandoSql += "'" + empresaVO.getContato_ids() + "', ";
+        comandoSql += "'" + empresaVO.getEmailHomePage_ids() + "', ";
+        comandoSql += empresaVO.getUsuarioAtualizacao_id() + ", ";
+        comandoSql += empresaVO.getSituacaoSistema_id() + ", ";
+        comandoSql += empresaVO.getDataAbertura() + ", ";
+        comandoSql += "'" + empresaVO.getNaturezaJuridica() + "'";
+        comandoSql += ") ";
+
+        return getInsertBancoDados(comandoSql);
     }
 
 }
