@@ -148,18 +148,12 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
                             if (!validarDadosCadastrais()) break;
 
-                            listaTarefas = new ArrayList<>();
-                            listaTarefas.add(new Pair("salvarEmpresa", "incluindo a empresa [" + txtRazao.getText() + "]."));
-                            listaTarefas.add(new Pair("carregarListaEmpresa", "validando informações da empresa [" + txtRazao.getText() + "]."));
-                            //listaTarefas.add(new Pair("preencherTabelaEmpresa", "atualizando cadastro"));
-
-                            if (!new Tarefa().tarefaSalvaEmpresa(this, listaTarefas)) break;
+                            salvarEmpresa();
+                            setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
+                            empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
 
                             setStatusFormulario("Pesquisa");
-                            txtPesquisa.setText("");
-                            Platform.runLater(() -> {
-                                carregarPesquisaEmpresas(txtPesquisa.getText());
-                            });
+                            carregarPesquisaEmpresas(txtPesquisa.getText());
                             break;
                         case F3:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
@@ -185,24 +179,21 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                         case F4:
                             if ((!getStatusBarFormulario().contains(event.getCode().toString())) || (getTtvEmpresaVO() == null))
                                 break;
+                            indexObservableEmpresa = empresaVOObservableList.indexOf(getTtvEmpresaVO());
+                            System.out.print("index01 [" + indexObservableEmpresa + "] - ");
+                            System.out.print(empresaVOObservableList.get(indexObservableEmpresa).toString() + "\n");
                             setStatusFormulario("Editar");
                             break;
                         case F5:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
                             if (!validarDadosCadastrais()) break;
 
-                            listaTarefas = new ArrayList<>();
-                            listaTarefas.add(new Pair("salvarEmpresa", "salvando a empresa [" + txtRazao.getText() + "]."));
-                            listaTarefas.add(new Pair("carregarListaEmpresa", "validando alterções na empresa [" + txtRazao.getText() + "]."));
-                            //listaTarefas.add(new Pair("preencherTabelaEmpresa", "atualizando cadastro"));
-
-                            if (!new Tarefa().tarefaSalvaEmpresa(this, listaTarefas)) break;
+                            salvarEmpresa();
+                            setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
+                            empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
 
                             setStatusFormulario("Pesquisa");
-                            Platform.runLater(() -> {
-                                carregarPesquisaEmpresas(txtPesquisa.getText());
-                                txtPesquisa.requestFocus();
-                            });
+                            carregarPesquisaEmpresas(txtPesquisa.getText());
                             break;
                         case F6:
                             if (getStatusFormulario().toLowerCase().equals("pesquisa") || (!event.isShiftDown())) break;
@@ -365,6 +356,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         });
     }
 
+    int indexObservableEmpresa = 0;
     TabEmpresaVO ttvEmpresaVO;
     List<TabEnderecoVO> ttvEnderecoVO;
     List<TabEmailHomePageVO> ttvEmailHomePageVO;
