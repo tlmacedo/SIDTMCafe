@@ -18,23 +18,19 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
 
     public TabEmpresa_DetalheReceitaFederalVO getDetalheReceitaFederalVO(int idTabEmpresa_DetalheReceitaFederalVO) {
         buscaTabEmpresa_DetalheReceitaFederal(idTabEmpresa_DetalheReceitaFederalVO, -1);
-        if (detalheReceitaFederalVO == null)
-            detalheReceitaFederalVO = new TabEmpresa_DetalheReceitaFederalVO();
         return detalheReceitaFederalVO;
     }
 
     public List<TabEmpresa_DetalheReceitaFederalVO> getDetalheReceitaFederalVOList(int idTabEmpresaVO) {
         buscaTabEmpresa_DetalheReceitaFederal(-1, idTabEmpresaVO);
-        if (detalheReceitaFederalVOList == null)
-            detalheReceitaFederalVOList.add(new TabEmpresa_DetalheReceitaFederalVO());
         return detalheReceitaFederalVOList;
     }
 
     void buscaTabEmpresa_DetalheReceitaFederal(int idTabEmpresa_DetalheReceitaFederalVO, int idTabEmpresaVO) {
         comandoSql = "SELECT * FROM tabEmpresa_DetalheReceitaFederal ";
-        if (idTabEmpresa_DetalheReceitaFederalVO >= 0)
+        if (idTabEmpresa_DetalheReceitaFederalVO > 0)
             comandoSql += "WHERE id = '" + idTabEmpresa_DetalheReceitaFederalVO + "' ";
-        if (idTabEmpresaVO >= 0) {
+        if (idTabEmpresaVO > 0) {
             if (!comandoSql.contains("WHERE")) {
                 comandoSql += "WHERE ";
             } else {

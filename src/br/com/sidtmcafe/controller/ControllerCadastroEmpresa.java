@@ -102,11 +102,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     public void preencherObjetos() {
         listaTarefas = new ArrayList<>();
         criarTabelas();
-        Thread thread = new Thread(() -> {
-            carregarTodosMunicipios();
-        });
         carregaListas();
-        //thread.start();
         preencherCombos();
         preencherTabelas();
 
@@ -150,8 +146,20 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                             break;
                         case F2:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                            setStatusFormulario("Pesquisa");
+                            if (!validarDadosCadastrais()) break;
 
+                            listaTarefas = new ArrayList<>();
+                            listaTarefas.add(new Pair("salvarEmpresa", "incluindo a empresa [" + txtRazao.getText() + "]."));
+                            listaTarefas.add(new Pair("carregarListaEmpresa", "validando informações da empresa [" + txtRazao.getText() + "]."));
+                            //listaTarefas.add(new Pair("preencherTabelaEmpresa", "atualizando cadastro"));
+
+                            if (!new Tarefa().tarefaSalvaEmpresa(this, listaTarefas)) break;
+
+                            setStatusFormulario("Pesquisa");
+                            txtPesquisa.setText("");
+                            Platform.runLater(() -> {
+                                carregarPesquisaEmpresas(txtPesquisa.getText());
+                            });
                             break;
                         case F3:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
@@ -182,8 +190,19 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                         case F5:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
                             if (!validarDadosCadastrais()) break;
-                            salvarEmpresa();
+
+                            listaTarefas = new ArrayList<>();
+                            listaTarefas.add(new Pair("salvarEmpresa", "salvando a empresa [" + txtRazao.getText() + "]."));
+                            listaTarefas.add(new Pair("carregarListaEmpresa", "validando alterções na empresa [" + txtRazao.getText() + "]."));
+                            //listaTarefas.add(new Pair("preencherTabelaEmpresa", "atualizando cadastro"));
+
+                            if (!new Tarefa().tarefaSalvaEmpresa(this, listaTarefas)) break;
+
                             setStatusFormulario("Pesquisa");
+                            Platform.runLater(() -> {
+                                carregarPesquisaEmpresas(txtPesquisa.getText());
+                                txtPesquisa.requestFocus();
+                            });
                             break;
                         case F6:
                             if (getStatusFormulario().toLowerCase().equals("pesquisa") || (!event.isShiftDown())) break;
@@ -320,7 +339,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         });
 
         listContatoNome.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
-            if (!getStatusFormulario().toLowerCase().equals("pesquisa"))
+//            if (!getStatusFormulario().toLowerCase().equals("pesquisa"))
 //                if ((o.intValue() >= 0) && (n.intValue() != o.intValue()) && (n.intValue() >= 0))
 //                    try {
 //                        guardarContato(o.intValue());
@@ -328,7 +347,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 //                        if (!(ex instanceof IndexOutOfBoundsException))
 //                            ex.printStackTrace();
 //                    }
-                if (n == null || n.intValue() < 0) return;
+            if (n == null || n.intValue() < 0) return;
             exiberDadosContato();
         });
 
@@ -574,9 +593,13 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             colunaIe.setPrefWidth(75);
             colunaIe.setStyle("-fx-alignment: center-right;");
             colunaIe.setCellValueFactory(param -> {
-                if (param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty().get() != "")
-                    return new SimpleStringProperty(FormatadorDeDados.getCampoFormatado(param.getValue().getValue().ieProperty().getValue(), "ie" + param.getValue().getValue().getEnderecoVOList().get(0).getUfVO().getSigla()));
-                return new SimpleStringProperty(FormatadorDeDados.getCampoFormatado(param.getValue().getValue().ieProperty().getValue(), "ie"));
+                try {
+                    if (param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty().get() != "")
+                        return new SimpleStringProperty(FormatadorDeDados.getCampoFormatado(param.getValue().getValue().ieProperty().getValue(), "ie" + param.getValue().getValue().getEnderecoVOList().get(0).getUfVO().getSigla()));
+                    return param.getValue().getValue().ieProperty();
+                } catch (Exception ex) {
+                    return param.getValue().getValue().ieProperty();
+                }
             });
 
             Label lblRazao = new Label("Razão / Nome");
@@ -922,12 +945,12 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             lblDataAberturaDiff.setText("tempo de abertura: " + DatasTrabalhadas.getStrIntervaloDatas(getTtvEmpresaVO().getDataAbertura().toLocalDateTime(), null));
         }
 
-        lblDataCadastro.setText("data cadastro: " + getTtvEmpresaVO().getDataCadastro().toLocalDateTime().format(DTFORMAT_DATAHORA));
+        lblDataCadastro.setText("data cadastro: " + getTtvEmpresaVO().getDataCadastro().toLocalDateTime().format(DTFORMAT_DATAHORA) + " [" + getTtvEmpresaVO().getUsuarioCadastroVO().getApelido() + "]");
         lblDataCadastroDiff.setText("tempo de cadastro: " + DatasTrabalhadas.getStrIntervaloDatas(getTtvEmpresaVO().getDataCadastro().toLocalDateTime(), null));
-        lblDataAtualizacao.setText("data atualização: ");
-        lblDataAtualizacaoDiff.setText("tempo de atualização: ");
+        lblDataAtualizacao.setText("");
+        lblDataAtualizacaoDiff.setText("");
         if (getTtvEmpresaVO().getDataAtualizacao() != null) {
-            lblDataAtualizacao.setText("data atualização: " + getTtvEmpresaVO().getDataAtualizacao().toLocalDateTime().format(DTFORMAT_DATAHORA));
+            lblDataAtualizacao.setText("data atualização: " + getTtvEmpresaVO().getDataAtualizacao().toLocalDateTime().format(DTFORMAT_DATAHORA) + " [" + getTtvEmpresaVO().getUsuarioAtualizacaoVO().getApelido() + "]");
             lblDataAtualizacaoDiff.setText("tempo de atualização: " + DatasTrabalhadas.getStrIntervaloDatas(getTtvEmpresaVO().getDataAtualizacao().toLocalDateTime(), null));
         }
 
@@ -953,16 +976,21 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     }
 
     void exiberDadosContato() {
-        int index = listContatoNome.getSelectionModel().getSelectedIndex();
-        if (index < 0) index = 0;
-        try {
-            //System.out.print("index: " + index + "\n");
-            setTtvContatoVO(getTtvEmpresaVO().getContatoVOList().get(index));
-            carregarContatoEmailHomePage();
-            preencherListaTelefoneContato();
-        } catch (Exception ex) {
-            //if (!(ex instanceof IndexOutOfBoundsException))
-            ex.printStackTrace();
+        if (listContatoNome.getItems().size() <= 0) {
+            listContatoHomePage.getItems().clear();
+            listContatoEmail.getItems().clear();
+            listContatoTelefone.getItems().clear();
+        } else {
+            int index = listContatoNome.getSelectionModel().getSelectedIndex();
+            if (index < 0) index = 0;
+            try {
+                setTtvContatoVO(getTtvEmpresaVO().getContatoVOList().get(index));
+                carregarContatoEmailHomePage();
+                preencherListaTelefoneContato();
+            } catch (Exception ex) {
+                if (!(ex instanceof IndexOutOfBoundsException))
+                    ex.printStackTrace();
+            }
         }
     }
 
@@ -994,7 +1022,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         LocalDateTime dtAbertura = LocalDateTime.of(dtTemp.getYear(), dtTemp.getMonth(), dtTemp.getDayOfMonth(), 0, 0, 0);
         emp.setDataAbertura(Timestamp.valueOf(dtAbertura));
 
-        emp.setNaturezaJuridica(lblNaturezaJuridica.getText().substring(20));
+        emp.setNaturezaJuridica(lblNaturezaJuridica.getText().substring(19));
         return emp;
     }
 
@@ -1017,54 +1045,49 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         listEndereco.getItems().set(index, endVO);
     }
 
-//    void guardarContato(int index) {
-//        if (index < 0) return;
-//        TabContatoVO contVO = getTtvContatoVO();
-//        contVO.setDescricao(listContatoNome.getItems().get(index).getDescricao());
-//        contVO.setCargoVO(listContatoNome.getItems().get(index).getCargoVO());
-//        contVO.setCargo_id(contVO.getCargo_id());
-//        contVO.setTelefoneVOList(listContatoTelefone.getItems());
-//
-//        List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
-//        emailHomePageVOList.addAll(listContatoHomePage.getItems());
-//        emailHomePageVOList.addAll(listContatoEmail.getItems());
-//        contVO.setEmailHomePageVOList(emailHomePageVOList);
-//    }
-
     TabEnderecoVO addEndereco() {
         int tipEnd = 1;
-        if (listEndereco.getItems().get(0).getTipoEndereco_id() == 1) {
-            if (!validarEnd()) {
-                new AlertMensagem("Endereço invalido",
-                        USUARIO_LOGADO_APELIDO + ", para adicionar endereço 1˚ informe endereço principal valido",
-                        "ic_endereco_add_white_24dp.png").getRetornoAlert_OK();
-                return null;
-            } else {
-                List<SisTipoEnderecoVO> list = getTipoEnderecoDisponivel();
-                if (list.size() <= 0) {
-                    new AlertMensagem("Endereço não disponivél",
-                            USUARIO_LOGADO_APELIDO + ", a empresa " + txtRazao.getText()
-                                    + " não tem disponibilidade de endereço!\nAtualize algum endereço já existente!",
+        try {
+            if (getTtvEnderecoVO().get(0).getTipoEndereco_id() == 1) {
+                if (!validarEnd()) {
+                    new AlertMensagem("Endereço invalido",
+                            USUARIO_LOGADO_APELIDO + ", para adicionar endereço 1˚ informe endereço principal valido",
                             "ic_endereco_add_white_24dp.png").getRetornoAlert_OK();
                     return null;
+                } else {
+                    List<SisTipoEnderecoVO> list = getTipoEnderecoDisponivel();
+                    if (list.size() <= 0) {
+                        new AlertMensagem("Endereço não disponivél",
+                                USUARIO_LOGADO_APELIDO + ", a empresa " + txtRazao.getText()
+                                        + " não tem disponibilidade de endereço!\nAtualize algum endereço já existente!",
+                                "ic_endereco_add_white_24dp.png").getRetornoAlert_OK();
+                        return null;
+                    }
+                    Object o = new AlertMensagem("Adicionar dados [endereço]",
+                            USUARIO_LOGADO_APELIDO + ", selecione o tipo endereço",
+                            "ic_endereco_add_white_24dp.png").getRetornoAlert_ComboBox(list).get();
+                    if (o == null) return null;
+                    tipEnd = ((SisTipoEnderecoVO) o).getId();
                 }
-                Object o = new AlertMensagem("Adicionar dados [endereço]",
-                        USUARIO_LOGADO_APELIDO + ", selecione o tipo endereço",
-                        "ic_endereco_add_white_24dp.png").getRetornoAlert_ComboBox(list).get();
-                if (o == null) return null;
-                tipEnd = ((SisTipoEnderecoVO) o).getId();
+                txtEndCEP.requestFocus();
             }
-            txtEndCEP.requestFocus();
+        } catch (Exception ex) {
+            if (!(ex instanceof IndexOutOfBoundsException)) {
+                ex.printStackTrace();
+                return null;
+            }
+        } finally {
+            TabEnderecoVO newEndereco = new TabEnderecoVO();
+            newEndereco.setId(0);
+            newEndereco.setTipoEndereco_id(tipEnd);
+            newEndereco.setTipoEnderecoVO(new SisTipoEnderecoDAO().getTipoEnderecoVO(tipEnd));
+            newEndereco.setUf_id(3);
+            newEndereco.setUfVO(new SisUFDAO().getUfVO(newEndereco.getUf_id()));
+            newEndereco.setMunicipio_id(112);
+            newEndereco.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(newEndereco.getMunicipio_id()));
+            return newEndereco;
         }
-        TabEnderecoVO newEndereco = new TabEnderecoVO();
-        newEndereco.setId(0);
-        newEndereco.setTipoEndereco_id(tipEnd);
-        newEndereco.setTipoEnderecoVO(new SisTipoEnderecoDAO().getTipoEnderecoVO(tipEnd));
-        newEndereco.setUf_id(3);
-        newEndereco.setUfVO(new SisUFDAO().getUfVO(newEndereco.getUf_id()));
-        newEndereco.setMunicipio_id(112);
-        newEndereco.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(newEndereco.getMunicipio_id()));
-        return newEndereco;
+
     }
 
     List<SisTipoEnderecoVO> getTipoEnderecoDisponivel() {
@@ -1344,6 +1367,12 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             lblDataAberturaDiff.setText("tempo de abertura: " + DatasTrabalhadas.getStrIntervaloDatas(dtAbertura, null));
         }
 
+        if (getTtvEnderecoVO().size() == 0) {
+            TabEnderecoVO end = addEndereco();
+            getTtvEnderecoVO().add(end);
+            listEndereco.getItems().add(end);
+        }
+        listEndereco.getSelectionModel().select(0);
         String valCep = receitaWsVO.getCep().replaceAll("[\\-/. \\[\\]]", "");
         txtEndCEP.setText(FormatadorDeDados.getCampoFormatado(valCep, "cep"));
         txtEndLogradouro.setText(receitaWsVO.getLogradouro());
@@ -1588,8 +1617,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         }
     }
 
-    void salvarEmpresa() {
-//        guardarContato(listContatoNome.getSelectionModel().getSelectedIndex());
+    public void salvarEmpresa() {
         String cont_ids = "";
         if (getTtvEmpresaVO().getContatoVOList().size() > 0) {
             for (TabContatoVO contatoVO : getTtvEmpresaVO().getContatoVOList()) {

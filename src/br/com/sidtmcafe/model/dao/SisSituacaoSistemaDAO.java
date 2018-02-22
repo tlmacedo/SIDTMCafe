@@ -18,21 +18,17 @@ public class SisSituacaoSistemaDAO extends BuscaBandoDados {
 
     public SisSituacaoSistemaVO getSituacaoSistemaVO(int idSisSituacaoSistemaVO) {
         buscaSisSituacaoSistemaVO(idSisSituacaoSistemaVO);
-        if (situacaoSistemaVO == null)
-            situacaoSistemaVO = new SisSituacaoSistemaVO();
         return situacaoSistemaVO;
     }
 
     public List<SisSituacaoSistemaVO> getSituacaoSistemaVOList() {
         buscaSisSituacaoSistemaVO(-1);
-        if (situacaoSistemaVOList == null)
-            situacaoSistemaVOList.add(new SisSituacaoSistemaVO());
         return situacaoSistemaVOList;
     }
 
     void buscaSisSituacaoSistemaVO(int idSisSituacaoSistemaVO) {
         comandoSql = "SELECT * FROM sisSituacaoSistema ";
-        if (idSisSituacaoSistemaVO >= 0) comandoSql += "WHERE id = '" + idSisSituacaoSistemaVO + "' ";
+        if (idSisSituacaoSistemaVO > 0) comandoSql += "WHERE id = '" + idSisSituacaoSistemaVO + "' ";
         comandoSql += "ORDER BY descricao ";
 
         situacaoSistemaVOList = new ArrayList<>();
@@ -52,4 +48,5 @@ public class SisSituacaoSistemaDAO extends BuscaBandoDados {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+
 }

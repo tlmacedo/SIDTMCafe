@@ -22,21 +22,23 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
 
     public TabEmpresaVO getEmpresaVO(int idTabEmpresaVO) {
         buscaTabEmpresaVO(idTabEmpresaVO);
-        if (empresaVO == null)
-            empresaVO = new TabEmpresaVO();
+        if (empresaVO != null)
+            addObjetosPesquisa(empresaVO);
         return empresaVO;
     }
 
     public List<TabEmpresaVO> getEmpresaVOList() {
         buscaTabEmpresaVO(-1);
-        if (empresaVOList == null)
-            empresaVOList.add(new TabEmpresaVO());
+        if (empresaVOList != null)
+            for (TabEmpresaVO empresa : empresaVOList) {
+                addObjetosPesquisa(empresa);
+            }
         return empresaVOList;
     }
 
     void buscaTabEmpresaVO(int idTabEmpresaVO) {
         comandoSql = "SELECT * FROM tabEmpresa ";
-        if (idTabEmpresaVO >= 0) comandoSql += "WHERE id = '" + idTabEmpresaVO + "' ";
+        if (idTabEmpresaVO > 0) comandoSql += "WHERE id = '" + idTabEmpresaVO + "' ";
         comandoSql += "ORDER BY razao, fantasia ";
 
         empresaVOList = new ArrayList<>();
@@ -65,8 +67,6 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
                 empresaVO.setDataAbertura(rs.getTimestamp("dataAbertura"));
                 empresaVO.setNaturezaJuridica(rs.getString("naturezaJuridica"));
 
-                addObjetosPesquisa();
-
                 empresaVOList.add(empresaVO);
             }
         } catch (SQLException ex) {
@@ -76,40 +76,36 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         }
     }
 
-    void addObjetosPesquisa() {
+    void addObjetosPesquisa(TabEmpresaVO empresa) {
         List<TabEnderecoVO> enderecoVOList = new ArrayList<>();
-        for (String strCodEndereco : empresaVO.getEndereco_ids().split(";")) {
-            if (strCodEndereco == "") strCodEndereco = "0";
-            enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
-        }
-        empresaVO.setEnderecoVOList(enderecoVOList);
+        for (String strCodEndereco : empresa.getEndereco_ids().split(";"))
+            if (strCodEndereco != "")
+                enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
+        empresa.setEnderecoVOList(enderecoVOList);
 
         List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
-        for (String strCodTelefone : empresaVO.getTelefone_ids().split(";")) {
-            if (strCodTelefone == "") strCodTelefone = "0";
-            telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
-        }
-        empresaVO.setTelefoneVOList(telefoneVOList);
+        for (String strCodTelefone : empresa.getTelefone_ids().split(";"))
+            if (strCodTelefone != "")
+                telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
+        empresa.setTelefoneVOList(telefoneVOList);
 
         List<TabContatoVO> contatoVOList = new ArrayList<>();
-        for (String strCodContato : empresaVO.getContato_ids().split(";")) {
-            if (strCodContato == "") strCodContato = "0";
-            contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
-        }
-        empresaVO.setContatoVOList(contatoVOList);
+        for (String strCodContato : empresa.getContato_ids().split(";"))
+            if (strCodContato != "")
+                contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
+        empresa.setContatoVOList(contatoVOList);
 
         List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
-        for (String strCodEmailHomePage : empresaVO.getEmailHomePage_ids().split(";")) {
-            if (strCodEmailHomePage == "") strCodEmailHomePage = "0";
-            emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
-        }
-        empresaVO.setEmailHomePageVOList(emailHomePageVOList);
+        for (String strCodEmailHomePage : empresa.getEmailHomePage_ids().split(";"))
+            if (strCodEmailHomePage != "")
+                emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
+        empresa.setEmailHomePageVOList(emailHomePageVOList);
 
-        empresaVO.setUsuarioCadastroVO(new TabColaboradorDAO().getColaboradorVO(empresaVO.getUsuarioCadastro_id()));
-        empresaVO.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getColaboradorVO(empresaVO.getUsuarioAtualizacao_id()));
-        empresaVO.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(empresaVO.getSituacaoSistema_id()));
+        empresa.setUsuarioCadastroVO(new TabColaboradorDAO().getColaboradorVO(empresa.getUsuarioCadastro_id()));
+        empresa.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getColaboradorVO(empresa.getUsuarioAtualizacao_id()));
+        empresa.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(empresa.getSituacaoSistema_id()));
 
-        empresaVO.setDetalheReceitaFederalVOList(new TabEmpresa_DetalheReceitaFederalDAO().getDetalheReceitaFederalVOList(empresaVO.getId()));
+        empresa.setDetalheReceitaFederalVOList(new TabEmpresa_DetalheReceitaFederalDAO().getDetalheReceitaFederalVOList(empresa.getId()));
     }
 
     public void updateTabEmpresaVO(TabEmpresaVO empresaVO) {
@@ -126,7 +122,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         comandoSql += "telefone_ids = '" + empresaVO.getTelefone_ids() + "', ";
         comandoSql += "contato_ids = '" + empresaVO.getContato_ids() + "', ";
         comandoSql += "emailHomePage_ids = '" + empresaVO.getEmailHomePage_ids() + "', ";
-        comandoSql += "usuarioCadastro_id = " + empresaVO.getUsuarioCadastro_id() + ", ";
+        comandoSql += "usuarioAtualizacao_id = " + empresaVO.getUsuarioAtualizacao_id() + ", ";
         comandoSql += "situacaoSistema_id = " + empresaVO.getSituacaoSistema_id() + ", ";
         comandoSql += "dataAbertura = '" + empresaVO.getDataAbertura() + "', ";
         comandoSql += "naturezaJuridica = '" + empresaVO.getNaturezaJuridica() + "' ";
@@ -139,7 +135,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         comandoSql = "INSERT INTO tabEmpresa ";
         comandoSql += "(isPessoaJuridica, cnpj, ie, razao, fantasia, isCliente, isFornecedor, ";
         comandoSql += "isTransportadora, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids, ";
-        comandoSql += "usuarioAtualizacao_id, situacaoSistema_id, dataAbertura, naturezaJuridica) ";
+        comandoSql += "usuarioCadastro_id, situacaoSistema_id, dataAbertura, naturezaJuridica) ";
         comandoSql += "VALUES(";
         comandoSql += empresaVO.getIsPessoaJuridica() + ", ";
         comandoSql += "'" + empresaVO.getCnpj() + "', ";
@@ -153,7 +149,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         comandoSql += "'" + empresaVO.getTelefone_ids() + "', ";
         comandoSql += "'" + empresaVO.getContato_ids() + "', ";
         comandoSql += "'" + empresaVO.getEmailHomePage_ids() + "', ";
-        comandoSql += empresaVO.getUsuarioAtualizacao_id() + ", ";
+        comandoSql += empresaVO.getUsuarioCadastro_id() + ", ";
         comandoSql += empresaVO.getSituacaoSistema_id() + ", ";
         comandoSql += empresaVO.getDataAbertura() + ", ";
         comandoSql += "'" + empresaVO.getNaturezaJuridica() + "'";

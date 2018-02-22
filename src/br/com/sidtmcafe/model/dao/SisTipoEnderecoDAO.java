@@ -18,21 +18,17 @@ public class SisTipoEnderecoDAO extends BuscaBandoDados {
 
     public SisTipoEnderecoVO getTipoEnderecoVO(int idSisTipoEnderecoVO) {
         buscaSisTipoEnderecoVO(idSisTipoEnderecoVO);
-        if (tipoEnderecoVO == null)
-            tipoEnderecoVO = new SisTipoEnderecoVO();
         return tipoEnderecoVO;
     }
 
     public List<SisTipoEnderecoVO> getTipoEnderecoVOList() {
         buscaSisTipoEnderecoVO(-1);
-        if (tipoEnderecoVOList == null)
-            tipoEnderecoVOList.add(new SisTipoEnderecoVO());
         return tipoEnderecoVOList;
     }
 
     void buscaSisTipoEnderecoVO(int idSisTipoEnderecoVO) {
         comandoSql = "SELECT * FROM sisTipoEndereco ";
-        if (idSisTipoEnderecoVO >= 0) comandoSql += "WHERE id = '" + idSisTipoEnderecoVO + "' ";
+        if (idSisTipoEnderecoVO > 0) comandoSql += "WHERE id = '" + idSisTipoEnderecoVO + "' ";
         comandoSql += "ORDER BY id ";
 
         tipoEnderecoVOList = new ArrayList<>();
@@ -51,4 +47,5 @@ public class SisTipoEnderecoDAO extends BuscaBandoDados {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+
 }

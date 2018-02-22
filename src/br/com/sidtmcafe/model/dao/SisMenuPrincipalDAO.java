@@ -18,28 +18,22 @@ public class SisMenuPrincipalDAO extends BuscaBandoDados {
 
     public SisMenuPrincipalVO getMenuPrincipalVO(int idSisMenuPrincipalVO) {
         buscaSisMenuPrincipalVO(idSisMenuPrincipalVO, "");
-        if (menuPrincipalVO == null)
-            menuPrincipalVO = new SisMenuPrincipalVO();
         return menuPrincipalVO;
     }
 
     public SisMenuPrincipalVO getMenuPrincipalVO(String teclaAtalho) {
         buscaSisMenuPrincipalVO(-1, teclaAtalho);
-        if (menuPrincipalVO == null)
-            menuPrincipalVO = new SisMenuPrincipalVO();
         return menuPrincipalVO;
     }
 
     public List<SisMenuPrincipalVO> getMenuPrincipalVOList() {
         buscaSisMenuPrincipalVO(-1, "");
-        if (menuPrincipalVOList == null)
-            menuPrincipalVOList.add(new SisMenuPrincipalVO());
         return menuPrincipalVOList;
     }
 
     void buscaSisMenuPrincipalVO(int idSisMenuPrincipalVO, String teclaAtalho) {
         comandoSql = "SELECT * FROM sisMenuPrincipal ";
-        if (idSisMenuPrincipalVO >= 0) comandoSql += "WHERE id '" + idSisMenuPrincipalVO + "' ";
+        if (idSisMenuPrincipalVO > 0) comandoSql += "WHERE id '" + idSisMenuPrincipalVO + "' ";
         if (teclaAtalho != "") {
             if (!comandoSql.contains("WHERE")) {
                 comandoSql += "WHERE ";
@@ -70,6 +64,6 @@ public class SisMenuPrincipalDAO extends BuscaBandoDados {
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-
     }
+
 }

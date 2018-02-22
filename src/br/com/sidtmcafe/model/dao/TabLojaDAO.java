@@ -18,21 +18,22 @@ public class TabLojaDAO extends BuscaBandoDados {
 
     public TabLojaVO getLojaVO(int idTabLoja) {
         buscaTabLojaVO(idTabLoja);
-        if (lojaVO == null)
-            lojaVO = new TabLojaVO();
+        if (lojaVO != null)
+            addObjetosPesquisa(lojaVO);
         return lojaVO;
     }
 
     public List<TabLojaVO> getLojaVOList() {
         buscaTabLojaVO(-1);
-        if (lojaVOList == null)
-            lojaVOList.add(new TabLojaVO());
+        if (lojaVOList != null)
+            for (TabLojaVO loja : lojaVOList)
+                addObjetosPesquisa(loja);
         return lojaVOList;
     }
 
     void buscaTabLojaVO(int idTabLoja) {
         comandoSql = "SELECT * FROM tabLoja ";
-        if (idTabLoja >= 0) comandoSql += "WHERE id = '" + idTabLoja + "' ";
+        if (idTabLoja > 0) comandoSql += "WHERE id = '" + idTabLoja + "' ";
         comandoSql += "ORDER BY id DESC ";
 
         lojaVOList = new ArrayList<>();
@@ -51,8 +52,6 @@ public class TabLojaDAO extends BuscaBandoDados {
                 lojaVO.setContato_ids(rs.getString("contato_ids"));
                 lojaVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));
 
-                addObjetosPesquisa();
-
                 lojaVOList.add(lojaVO);
             }
         } catch (SQLException ex) {
@@ -62,36 +61,32 @@ public class TabLojaDAO extends BuscaBandoDados {
         }
     }
 
-    void addObjetosPesquisa() {
-        lojaVO.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(lojaVO.getSituacaoSistema_id()));
+    void addObjetosPesquisa(TabLojaVO loja) {
+        loja.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(loja.getSituacaoSistema_id()));
 
         List<TabEnderecoVO> enderecoVOList = new ArrayList<>();
-        for (String strCodEndereco : lojaVO.getEndereco_ids().split(";")) {
-            if (strCodEndereco == "") strCodEndereco = "0";
-            enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
-        }
-        lojaVO.setEnderecoVOList(enderecoVOList);
+        for (String strCodEndereco : loja.getEndereco_ids().split(";"))
+            if (strCodEndereco != "")
+                enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
+        loja.setEnderecoVOList(enderecoVOList);
 
         List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
-        for (String strCodTelefone : lojaVO.getTelefone_ids().split(";")) {
-            if (strCodTelefone == "") strCodTelefone = "0";
-            telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
-        }
-        lojaVO.setTelefoneVOList(telefoneVOList);
+        for (String strCodTelefone : loja.getTelefone_ids().split(";"))
+            if (strCodTelefone != "")
+                telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
+        loja.setTelefoneVOList(telefoneVOList);
 
         List<TabContatoVO> contatoVOList = new ArrayList<>();
-        for (String strCodContato : lojaVO.getContato_ids().split(";")) {
-            if (strCodContato == "") strCodContato = "0";
-            contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
-        }
-        lojaVO.setContatoVOList(contatoVOList);
+        for (String strCodContato : loja.getContato_ids().split(";"))
+            if (strCodContato != "")
+                contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
+        loja.setContatoVOList(contatoVOList);
 
         List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
-        for (String strCodEmailHomePage : lojaVO.getEmailHomePage_ids().split(";")) {
-            if (strCodEmailHomePage == "") strCodEmailHomePage = "0";
-            emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
-        }
-        lojaVO.setEmailHomePageVOList(emailHomePageVOList);
+        for (String strCodEmailHomePage : loja.getEmailHomePage_ids().split(";"))
+            if (strCodEmailHomePage != "")
+                emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
+        loja.setEmailHomePageVOList(emailHomePageVOList);
     }
 
 }

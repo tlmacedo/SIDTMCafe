@@ -18,25 +18,20 @@ public class SisTelefoneOperadoraDAO extends BuscaBandoDados {
 
     public SisTelefoneOperadoraVO getTelefoneOperadoraVO(int idSisTelefoneOperadoraVO) {
         buscaSisTelefoneOperadoraVO(idSisTelefoneOperadoraVO);
-        if (telefoneOperadoraVO == null)
-            telefoneOperadoraVO = new SisTelefoneOperadoraVO();
         return telefoneOperadoraVO;
     }
 
     public List<SisTelefoneOperadoraVO> getTelefoneOperadoraVOList() {
         buscaSisTelefoneOperadoraVO(-1);
-        if (telefoneOperadoraVOList == null)
-            telefoneOperadoraVOList.add(new SisTelefoneOperadoraVO());
         return telefoneOperadoraVOList;
     }
 
     void buscaSisTelefoneOperadoraVO(int idSisTelefoneOperadoraVO) {
         comandoSql = "SELECT * FROM sisTelefoneOperadora ";
-        if (idSisTelefoneOperadoraVO >= 0) comandoSql += "WHERE id ='" + idSisTelefoneOperadoraVO + "' ";
+        if (idSisTelefoneOperadoraVO > 0) comandoSql += "WHERE id ='" + idSisTelefoneOperadoraVO + "' ";
         comandoSql += "ORDER BY tipo DESC, descricao ";
 
         telefoneOperadoraVOList = new ArrayList<>();
-//        System.out.println("comandoSql: " + comandoSql);
         rs = getResultadosBandoDados(comandoSql);
         try {
             while (rs.next()) {
@@ -54,4 +49,5 @@ public class SisTelefoneOperadoraDAO extends BuscaBandoDados {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+
 }

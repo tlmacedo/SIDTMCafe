@@ -18,42 +18,37 @@ public class SisMunicipioDAO extends BuscaBandoDados {
 
     public SisMunicipioVO getMunicipioVO(int idSisMunicipioVO) {
         buscaSisMunicipioVO(idSisMunicipioVO, -1, "");
-        if (municipioVO == null)
-            municipioVO = new SisMunicipioVO();
+        if (municipioVO != null)
+            addObjetosPesquisa(municipioVO);
         return municipioVO;
     }
 
     public SisMunicipioVO getMunicipioVO(String strMunicipio) {
         buscaSisMunicipioVO(-1, -1, strMunicipio);
-        if (municipioVO == null)
-            municipioVO = new SisMunicipioVO();
+        if (municipioVO != null)
+            addObjetosPesquisa(municipioVO);
         return municipioVO;
     }
 
-//    public SisMunicipioVO getMunicipioVO(String municipioIbge_id) {
-//        buscaSisMunicipioVO(0, municipioIbge_id, "");
-//        if (municipioVO == null)
-//            municipioVO = new SisMunicipioVO();
-//        return municipioVO;
-//    }
-
     public List<SisMunicipioVO> getMunicipioVOList() {
         buscaSisMunicipioVO(-1, -1, "");
-        if (municipioVOList == null)
-            municipioVOList.add(new SisMunicipioVO());
+        if (municipioVOList != null)
+            for (SisMunicipioVO municipio : municipioVOList)
+                addObjetosPesquisa(municipio);
         return municipioVOList;
     }
 
     public List<SisMunicipioVO> getMunicipioVOList(int idUf_id) {
         buscaSisMunicipioVO(-1, idUf_id, "");
-        if (municipioVOList == null)
-            municipioVOList.add(new SisMunicipioVO());
+        if (municipioVOList != null)
+            for (SisMunicipioVO municipio : municipioVOList)
+                addObjetosPesquisa(municipio);
         return municipioVOList;
     }
 
     void buscaSisMunicipioVO(int idSisMunicipioVO, int idUf_id, String strMunicipio) {
         comandoSql = "SELECT * FROM sisMunicipio ";
-        if (idSisMunicipioVO >= 0) comandoSql += "WHERE id = '" + idSisMunicipioVO + "' ";
+        if (idSisMunicipioVO > 0) comandoSql += "WHERE id = '" + idSisMunicipioVO + "' ";
         if (idUf_id > 0) {
             if (!comandoSql.contains("WHERE")) {
                 comandoSql += "WHERE ";
@@ -82,7 +77,6 @@ public class SisMunicipioDAO extends BuscaBandoDados {
                 municipioVO.setUf_id(rs.getInt("uf_id"));
                 municipioVO.setIsCapital(rs.getInt("isCapital"));
                 municipioVO.setIbge_id(rs.getInt("ibge_id"));
-                addObjetosPesquisa();
 
                 municipioVOList.add(municipioVO);
             }
@@ -93,8 +87,8 @@ public class SisMunicipioDAO extends BuscaBandoDados {
         }
     }
 
-    void addObjetosPesquisa() {
-        municipioVO.setUfVO(new SisUFDAO().getUfVO(municipioVO.getUf_id()));
+    void addObjetosPesquisa(SisMunicipioVO municipio) {
+        municipioVO.setUfVO(new SisUFDAO().getUfVO(municipio.getUf_id()));
     }
 
 }

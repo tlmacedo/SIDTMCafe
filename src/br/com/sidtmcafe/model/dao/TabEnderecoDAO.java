@@ -20,21 +20,22 @@ public class TabEnderecoDAO extends BuscaBandoDados {
 
     public TabEnderecoVO getEnderecoVO(int idTabEnderecoVO) {
         buscaTabEnderecoVO(idTabEnderecoVO);
-        if (enderecoVO == null)
-            enderecoVO = new TabEnderecoVO();
+        if (enderecoVO != null)
+            addObjetosPesquisa(enderecoVO);
         return enderecoVO;
     }
 
     public List<TabEnderecoVO> getEnderecoVOList() {
         buscaTabEnderecoVO(-1);
-        if (enderecoVOList == null)
-            enderecoVOList.add(new TabEnderecoVO());
+        if (enderecoVOList != null)
+            for (TabEnderecoVO endereco : enderecoVOList)
+                addObjetosPesquisa(endereco);
         return enderecoVOList;
     }
 
     void buscaTabEnderecoVO(int idTabEnderecoVO) {
         comandoSql = "SELECT * FROM tabEndereco ";
-        if (idTabEnderecoVO >= 0) comandoSql += "WHERE id = '" + idTabEnderecoVO + "' ";
+        if (idTabEnderecoVO > 0) comandoSql += "WHERE id = '" + idTabEnderecoVO + "' ";
         comandoSql += "ORDER BY tipoEndereco_id, id ";
 
         enderecoVOList = new ArrayList<>();
@@ -53,8 +54,6 @@ public class TabEnderecoDAO extends BuscaBandoDados {
                 enderecoVO.setMunicipio_id(rs.getInt("municipio_id"));
                 enderecoVO.setPontoReferencia(rs.getString("pontoReferencia"));
 
-                addObjetosPesquisa();
-
                 enderecoVOList.add(enderecoVO);
             }
         } catch (SQLException ex) {
@@ -64,10 +63,10 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         }
     }
 
-    void addObjetosPesquisa() {
-        enderecoVO.setTipoEnderecoVO(new SisTipoEnderecoDAO().getTipoEnderecoVO(enderecoVO.getTipoEndereco_id()));
-        enderecoVO.setUfVO(new SisUFDAO().getUfVO(enderecoVO.getUf_id()));
-        enderecoVO.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(enderecoVO.getMunicipio_id()));
+    void addObjetosPesquisa(TabEnderecoVO endereco) {
+        endereco.setTipoEnderecoVO(new SisTipoEnderecoDAO().getTipoEnderecoVO(endereco.getTipoEndereco_id()));
+        endereco.setUfVO(new SisUFDAO().getUfVO(endereco.getUf_id()));
+        endereco.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(endereco.getMunicipio_id()));
     }
 
     public void updateTabEnderecoVO(TabEnderecoVO enderecoVO) {

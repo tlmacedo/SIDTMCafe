@@ -192,5 +192,36 @@ public class Tarefa implements Constants {
                 .getProgressBar(voidTask, true, false, qtdTarefas);
     }
 
+    public boolean tarefaSalvaEmpresa(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {
+        qtdTarefas = tarefas.size();
+        Task<Void> voidTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                updateMessage("carregando");
+                for (Pair tarefaAtual : tarefas) {
+                    updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
+                    Thread.sleep(200);
+                    updateMessage(tarefaAtual.getValue().toString());
+                    switch (tarefaAtual.getKey().toString()) {
+                        case "carregarListaEmpresa":
+                            cadastroEmpresa.carregarListaEmpresa();
+                            break;
+                        case "salvarEmpresa":
+                            cadastroEmpresa.salvarEmpresa();
+                            break;
+                        case "preencherTabelaEmpresa":
+                            cadastroEmpresa.preencherTabelaEmpresa();
+                            break;
+                    }
+                }
+                updateProgress(qtdTarefas, qtdTarefas);
+                return null;
+            }
+        };
+        new AlertMensagem("Aguarde carregando dados do sistema...", "",
+                "ic_aguarde_sentado_orange_32dp.png")
+                .getProgressBar(voidTask, true, false, qtdTarefas);
+        return true;
+    }
 
 }

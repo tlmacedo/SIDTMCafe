@@ -18,21 +18,22 @@ public class TabColaboradorDAO extends BuscaBandoDados {
 
     public TabColaboradorVO getColaboradorVO(int idTabColaboradorVO) {
         buscaTabColaboradorVO(idTabColaboradorVO);
-        if (colaboradorVO == null)
-            colaboradorVO = new TabColaboradorVO();
+        if (colaboradorVO != null)
+            addObjetosPesquisa(colaboradorVO);
         return colaboradorVO;
     }
 
     public List<TabColaboradorVO> getColaboradorVOList() {
         buscaTabColaboradorVO(-1);
-        if (colaboradorVOList == null)
-            colaboradorVOList.add(new TabColaboradorVO());
+        if (colaboradorVOList != null)
+            for (TabColaboradorVO colaborador : colaboradorVOList)
+                addObjetosPesquisa(colaborador);
         return colaboradorVOList;
     }
 
     void buscaTabColaboradorVO(int idTabColaboradorVO) {
         comandoSql = "SELECT * FROM tabColaborador ";
-        if (idTabColaboradorVO >= 0) comandoSql += " WHERE id = '" + idTabColaboradorVO + "' ";
+        if (idTabColaboradorVO > 0) comandoSql += " WHERE id = '" + idTabColaboradorVO + "' ";
         comandoSql += "ORDER BY nome ";
 
         colaboradorVOList = new ArrayList<>();
@@ -53,8 +54,6 @@ public class TabColaboradorDAO extends BuscaBandoDados {
                 colaboradorVO.setContato_ids(rs.getString("contato_ids"));
                 colaboradorVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));
 
-                addObjetosPesquisa();
-
                 colaboradorVOList.add(colaboradorVO);
             }
         } catch (SQLException ex) {
@@ -64,38 +63,34 @@ public class TabColaboradorDAO extends BuscaBandoDados {
         }
     }
 
-    void addObjetosPesquisa() {
-        colaboradorVO.setCargoVO(new TabCargoDAO().getCargoVO(colaboradorVO.getCargo_id()));
-        colaboradorVO.setLojaVO(new TabLojaDAO().getLojaVO(colaboradorVO.getLoja_id()));
-        colaboradorVO.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(colaboradorVO.getSituacaoSistema_id()));
+    void addObjetosPesquisa(TabColaboradorVO colaborador) {
+        colaborador.setCargoVO(new TabCargoDAO().getCargoVO(colaborador.getCargo_id()));
+        colaborador.setLojaVO(new TabLojaDAO().getLojaVO(colaborador.getLoja_id()));
+        colaborador.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(colaborador.getSituacaoSistema_id()));
 
         List<TabEnderecoVO> enderecoVOList = new ArrayList<>();
-        for (String strCodEndereco : colaboradorVO.getEndereco_ids().split(";")) {
-            if (strCodEndereco == "") strCodEndereco = "0";
-            enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
-        }
-        colaboradorVO.setEnderecoVOList(enderecoVOList);
+        for (String strCodEndereco : colaborador.getEndereco_ids().split(";"))
+            if (strCodEndereco != "")
+                enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
+        colaborador.setEnderecoVOList(enderecoVOList);
 
         List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
-        for (String strCodTelefone : colaboradorVO.getTelefone_ids().split(";")) {
-            if (strCodTelefone == "") strCodTelefone = "0";
-            telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
-        }
-        colaboradorVO.setTelefoneVOList(telefoneVOList);
+        for (String strCodTelefone : colaborador.getTelefone_ids().split(";"))
+            if (strCodTelefone != "")
+                telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
+        colaborador.setTelefoneVOList(telefoneVOList);
 
         List<TabContatoVO> contatoVOList = new ArrayList<>();
-        for (String strCodContato : colaboradorVO.getContato_ids().split(";")) {
-            if (strCodContato == "") strCodContato = "0";
-            contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
-        }
-        colaboradorVO.setContatoVOList(contatoVOList);
+        for (String strCodContato : colaborador.getContato_ids().split(";"))
+            if (strCodContato != "")
+                contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
+        colaborador.setContatoVOList(contatoVOList);
 
         List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
-        for (String strCodEmailHomePage : colaboradorVO.getEmailHomePage_ids().split(";")) {
-            if (strCodEmailHomePage == "") strCodEmailHomePage = "0";
-            emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
-        }
-        colaboradorVO.setEmailHomePageVOList(emailHomePageVOList);
+        for (String strCodEmailHomePage : colaborador.getEmailHomePage_ids().split(";"))
+            if (strCodEmailHomePage != "")
+                emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
+        colaborador.setEmailHomePageVOList(emailHomePageVOList);
     }
 
 }

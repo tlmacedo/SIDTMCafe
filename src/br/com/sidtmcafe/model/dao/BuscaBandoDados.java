@@ -29,7 +29,7 @@ public class BuscaBandoDados {
     boolean getUpdateBancoDados(String comandoSql) {
         con = ConnectionFactory.getConnection();
         try {
-            System.out.println("comandoSql: " + comandoSql);
+            //System.out.println("comandoSql: " + comandoSql);
             stmt = con.prepareStatement(comandoSql);
             stmt.execute();
             stmt.close();
@@ -47,7 +47,7 @@ public class BuscaBandoDados {
     int getInsertBancoDados(String comandoSql) {
         con = ConnectionFactory.getConnection();
         try {
-            System.out.print("comandoSql: " + comandoSql);
+            //System.out.print("comandoSql: " + comandoSql);
             stmt = con.prepareStatement(comandoSql);
             stmt.execute();
             stmt.close();
@@ -55,7 +55,7 @@ public class BuscaBandoDados {
             rs = con.prepareStatement("SELECT LAST_INSERT_ID()").executeQuery();
             if (rs.next())
                 idInclusao = rs.getInt("LAST_INSERT_ID()");
-            System.out.print("     idInclusao: " + idInclusao + "\n");
+            //System.out.print("     idInclusao: " + idInclusao + "\n");
 
         } catch (Exception ex) {
             new AlertMensagem("Erro.", new Exception().getStackTrace()[0].getClassName() + ".",

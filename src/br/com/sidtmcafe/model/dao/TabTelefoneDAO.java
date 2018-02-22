@@ -18,21 +18,22 @@ public class TabTelefoneDAO extends BuscaBandoDados {
 
     public TabTelefoneVO getTelefoneVO(int idTabTelefoneVO) {
         buscaTabTelefoneVO(idTabTelefoneVO);
-        if (telefoneVO == null)
-            telefoneVO = new TabTelefoneVO();
+        if (telefoneVO != null)
+            addObjetosPesquisa(telefoneVO);
         return telefoneVO;
     }
 
     public List<TabTelefoneVO> getTelefoneVOList() {
         buscaTabTelefoneVO(-1);
-        if (telefoneVOList == null)
-            telefoneVOList.add(new TabTelefoneVO());
+        if (telefoneVOList != null)
+            for (TabTelefoneVO telefone : telefoneVOList)
+                addObjetosPesquisa(telefone);
         return telefoneVOList;
     }
 
     void buscaTabTelefoneVO(int idTabTelefoneVO) {
         comandoSql = "SELECT * FROM tabTelefone ";
-        if (idTabTelefoneVO >= 0) comandoSql += "WHERE id = '" + idTabTelefoneVO + "' ";
+        if (idTabTelefoneVO > 0) comandoSql += "WHERE id = '" + idTabTelefoneVO + "' ";
         comandoSql += "ORDER BY id DESC ";
 
         telefoneVOList = new ArrayList<>();
@@ -44,8 +45,6 @@ public class TabTelefoneDAO extends BuscaBandoDados {
                 telefoneVO.setDescricao(rs.getString("descricao"));
                 telefoneVO.setTelefoneOperadora_id(rs.getInt("telefoneOperadora_id"));
 
-                addObjetosPesquisa();
-
                 telefoneVOList.add(telefoneVO);
             }
         } catch (SQLException ex) {
@@ -55,8 +54,8 @@ public class TabTelefoneDAO extends BuscaBandoDados {
         }
     }
 
-    void addObjetosPesquisa() {
-        telefoneVO.setTelefoneOperadoraVO(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVO(telefoneVO.getTelefoneOperadora_id()));
+    void addObjetosPesquisa(TabTelefoneVO telefone) {
+        telefoneVO.setTelefoneOperadoraVO(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVO(telefone.getTelefoneOperadora_id()));
     }
 
     public void updateTabTelefoneVO(TabTelefoneVO telefoneVO) {
@@ -78,4 +77,5 @@ public class TabTelefoneDAO extends BuscaBandoDados {
 
         return getInsertBancoDados(comandoSql);
     }
+
 }
