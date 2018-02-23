@@ -25,7 +25,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 
-import javax.xml.crypto.Data;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -180,8 +179,6 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                             if ((!getStatusBarFormulario().contains(event.getCode().toString())) || (getTtvEmpresaVO() == null))
                                 break;
                             indexObservableEmpresa = empresaVOObservableList.indexOf(getTtvEmpresaVO());
-                            System.out.print("index01 [" + indexObservableEmpresa + "] - ");
-                            System.out.print(empresaVOObservableList.get(indexObservableEmpresa).toString() + "\n");
                             setStatusFormulario("Editar");
                             break;
                         case F5:
@@ -194,6 +191,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
                             setStatusFormulario("Pesquisa");
                             carregarPesquisaEmpresas(txtPesquisa.getText());
+                            exibirDadosEmpresa();
                             break;
                         case F6:
                             if (getStatusFormulario().toLowerCase().equals("pesquisa") || (!event.isShiftDown())) break;
@@ -206,7 +204,6 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                         case F8:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
                             cboFiltroPesquisa.requestFocus();
-
                             break;
                         case F12:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
@@ -330,14 +327,6 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         });
 
         listContatoNome.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
-//            if (!getStatusFormulario().toLowerCase().equals("pesquisa"))
-//                if ((o.intValue() >= 0) && (n.intValue() != o.intValue()) && (n.intValue() >= 0))
-//                    try {
-//                        guardarContato(o.intValue());
-//                    } catch (Exception ex) {
-//                        if (!(ex instanceof IndexOutOfBoundsException))
-//                            ex.printStackTrace();
-//                    }
             if (n == null || n.intValue() < 0) return;
             exiberDadosContato();
         });
@@ -364,6 +353,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     TabContatoVO ttvContatoVO;
     List<TabEmailHomePageVO> ttvContatoEmailHomePageVO;
     List<TabTelefoneVO> ttvContatoTelefoneVO;
+    List<TabEmpresa_DetalheReceitaFederalVO> ttvDetalheReceitaFederalVO;
 
     List<Pair> listaTarefas;
 
@@ -382,6 +372,10 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     List<SisTelefoneOperadoraVO> telefoneOperadoraVOList;
     List<TabCargoVO> cargoVOList;
     List<SisMunicipioVO> municipioVOList;
+    ObservableList<TabEmpresa_DetalheReceitaFederalVO> empresa_detalheReceitaFederalVOObservableList;
+    FilteredList<TabEmpresa_DetalheReceitaFederalVO> atividadePrincipal_detalheReceitaFederalVOFilteredList;
+    FilteredList<TabEmpresa_DetalheReceitaFederalVO> atividadeSecundaria_detalheReceitaFederalVOFilteredList;
+    FilteredList<TabEmpresa_DetalheReceitaFederalVO> qsa_detalheReceitaFederalVOFilteredList;
 
     JFXTreeTableColumn<TabEmpresaVO, Integer> colunaId;
     JFXTreeTableColumn<TabEmpresaVO, String> colunaCnpj;
@@ -397,6 +391,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsCliente;
     JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsFornecedor;
     JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsTransportadora;
+    JFXTreeTableColumn<TabEmpresa_DetalheReceitaFederalVO, String> colunaQsaKey;
+    JFXTreeTableColumn<TabEmpresa_DetalheReceitaFederalVO, String> colunaQsaValue;
 
     int qtdRegistrosLocalizados = 0;
     String statusFormulario, statusBarFormulario;
@@ -417,6 +413,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         setTtvEnderecoVO(getTtvEmpresaVO().getEnderecoVOList());
         setTtvEmailHomePageVO(getTtvEmpresaVO().getEmailHomePageVOList());
         setTtvTelefoneVO(getTtvEmpresaVO().getTelefoneVOList());
+        setTtvDetalheReceitaFederalVO(getTtvEmpresaVO().getDetalheReceitaFederalVOList());
     }
 
     public List<TabEnderecoVO> getTtvEnderecoVO() {
@@ -482,6 +479,14 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         this.ttvContatoTelefoneVO = ttvContatoTelefoneVO;
     }
 
+    public List<TabEmpresa_DetalheReceitaFederalVO> getTtvDetalheReceitaFederalVO() {
+        return ttvDetalheReceitaFederalVO;
+    }
+
+    public void setTtvDetalheReceitaFederalVO(List<TabEmpresa_DetalheReceitaFederalVO> ttvDetalheReceitaFederalVO) {
+        this.ttvDetalheReceitaFederalVO = ttvDetalheReceitaFederalVO;
+    }
+
     public int getQtdRegistrosLocalizados() {
         return qtdRegistrosLocalizados;
     }
@@ -534,6 +539,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     void criarTabelas() {
         listaTarefas.add(new Pair("criarTabelaEmpresa", "criando tabela empresas"));
+        criarTabelaQsaReceita();
     }
 
     void carregaListas() {
@@ -557,7 +563,6 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     public void criarTabelaEmpresa() {
         try {
-
             Label lblId = new Label("id");
             lblId.setPrefWidth(30);
             colunaId = new JFXTreeTableColumn<TabEmpresaVO, Integer>();
@@ -727,6 +732,32 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         }
     }
 
+    void criarTabelaQsaReceita() {
+        try {
+            Label lblQsaKey = new Label("Item");
+            lblQsaKey.setPrefWidth(100);
+            colunaQsaKey = new JFXTreeTableColumn<TabEmpresa_DetalheReceitaFederalVO, String>();
+            colunaQsaKey.setGraphic(lblQsaKey);
+            colunaQsaKey.setPrefWidth(100);
+            colunaQsaKey.setStyle("-fx-alignment: center-right;");
+            colunaQsaKey.setCellValueFactory(param -> {
+                return param.getValue().getValue().str_keyProperty();
+            });
+
+            Label lblQsaValue = new Label("Detalhe");
+            lblQsaValue.setPrefWidth(250);
+            colunaQsaValue = new JFXTreeTableColumn<TabEmpresa_DetalheReceitaFederalVO, String>();
+            colunaQsaValue.setGraphic(lblQsaValue);
+            colunaQsaValue.setPrefWidth(250);
+            colunaQsaValue.setStyle("-fx-alignment: center-right;");
+            colunaQsaValue.setCellValueFactory(param -> {
+                return param.getValue().getValue().str_valueProperty();
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void carregarSisTipoEndereco() {
         tipoEnderecoVOList = new ArrayList<SisTipoEnderecoVO>(new SisTipoEnderecoDAO().getTipoEnderecoVOList());
     }
@@ -803,6 +834,15 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    void preencherTabelaQsa() {
+        final TreeItem<TabEmpresa_DetalheReceitaFederalVO> root = new RecursiveTreeItem<TabEmpresa_DetalheReceitaFederalVO>
+                (qsa_detalheReceitaFederalVOFilteredList, RecursiveTreeObject::getChildren);
+        ttvDetalheReceita.getColumns().setAll(colunaQsaKey, colunaQsaValue);
+        ttvDetalheReceita.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        ttvDetalheReceita.setRoot(root);
+        ttvDetalheReceita.setShowRoot(false);
     }
 
     void preencherCboEndMunicipio() {
@@ -913,9 +953,35 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         exiberDadosContato();
     }
 
+    void preencherListaDetalhesReceita() {
+        listAtividadePrincipal.getItems().clear();
+        listAtividadeSecundaria.getItems().clear();
+
+        empresa_detalheReceitaFederalVOObservableList = FXCollections.observableArrayList(getTtvDetalheReceitaFederalVO());
+        atividadePrincipal_detalheReceitaFederalVOFilteredList = new FilteredList<TabEmpresa_DetalheReceitaFederalVO>(empresa_detalheReceitaFederalVOObservableList, principal -> true);
+        atividadePrincipal_detalheReceitaFederalVOFilteredList.setPredicate(principal -> {
+            if (principal.getIsAtividadePrincipal() == 1) return true;
+            return false;
+        });
+        listAtividadePrincipal.getItems().setAll(atividadePrincipal_detalheReceitaFederalVOFilteredList);
+
+        atividadeSecundaria_detalheReceitaFederalVOFilteredList = new FilteredList<TabEmpresa_DetalheReceitaFederalVO>(empresa_detalheReceitaFederalVOObservableList, principal -> true);
+        atividadeSecundaria_detalheReceitaFederalVOFilteredList.setPredicate(principal -> {
+            if (principal.getIsAtividadePrincipal() == 0) return true;
+            return false;
+        });
+        listAtividadeSecundaria.getItems().setAll(atividadeSecundaria_detalheReceitaFederalVOFilteredList);
+
+        qsa_detalheReceitaFederalVOFilteredList = new FilteredList<TabEmpresa_DetalheReceitaFederalVO>(empresa_detalheReceitaFederalVOObservableList, principal -> true);
+        qsa_detalheReceitaFederalVOFilteredList.setPredicate(principal -> {
+            if (principal.getIsAtividadePrincipal() == 2) return true;
+            return false;
+        });
+        preencherTabelaQsa();
+    }
+
     void exibirDadosEmpresa() {
         if (getTtvEmpresaVO() == null) return;
-        //setTtvEmpresaVO(new TabEmpresaVO());
         cboClassificacaoJuridica.getSelectionModel().select(getTtvEmpresaVO().getIsPessoaJuridica());
         String tipFormat = "cnpj";
         if (cboClassificacaoJuridica.getSelectionModel().getSelectedIndex() == 0)
@@ -950,6 +1016,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         preencherListaTelefoneEmpresa();
         carregarEmailHomePage();
         preencherListaContatoEmpresa();
+        preencherListaDetalhesReceita();
     }
 
     void exibirDadosEndereco() {
@@ -1294,18 +1361,19 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     }
 
     boolean validarDadosEmpresa() {
+        boolean result = true;
         String valCnpj = txtCNPJ.getText().replaceAll("[\\-/. \\[\\]]", "");
         if ((valCnpj.length() != 11 && valCnpj.length() != 14) & (!ValidadorDeDados.isCnpjCpfValido(valCnpj))) {
             txtCNPJ.requestFocus();
-            return false;
+            result = false;
         }
-        if (txtRazao.getText().length() == 0) {
+        if (txtRazao.getText().length() == 0 & result == true) {
             txtRazao.requestFocus();
-            return false;
+            result = false;
         }
-        if (txtFantasia.getText().length() == 0) {
+        if (txtFantasia.getText().length() == 0 & result == true) {
             txtFantasia.requestFocus();
-            return false;
+            result = false;
         }
 
         int tipEmpresa = 0;
@@ -1313,33 +1381,47 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         if (chkIsFornecedor.isSelected()) tipEmpresa++;
         if (chkIsTransportadora.isSelected()) tipEmpresa++;
 
-        if (tipEmpresa == 0) {
+        if (tipEmpresa == 0 & result == true) {
             chkIsCliente.requestFocus();
-            return false;
+            result = false;
         }
 
+        if (!result)
+            new AlertMensagem("Dados inválido!",
+                    USUARIO_LOGADO_APELIDO + ", precisa de dados válidos para empresa",
+                    "ic_dados_invalidos_white_24dp.png").getRetornoAlert_OK();
 
-        return true;
+        return result;
     }
 
     boolean validarEnd() {
+        boolean result = true;
+        if (getTtvEnderecoVO().size() == 0) {
+            getTtvEnderecoVO().add(addEndereco());
+            listEndereco.getItems().add(getTtvEnderecoVO().get(0));
+        }
+        listEndereco.getSelectionModel().select(0);
         if (txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "").length() != 8 || txtEndCEP.getText().equals("")) {
             txtEndCEP.requestFocus();
-            return false;
+            result = false;
         }
-        if (txtEndLogradouro.getText().equals("")) {
+        if (txtEndLogradouro.getText().length() == 0 & result == true) {
             txtEndLogradouro.requestFocus();
-            return false;
+            result = false;
         }
-        if (txtEndNumero.getText().equals("")) {
+        if (txtEndNumero.getText().length() == 0 & result == true) {
             txtEndNumero.requestFocus();
-            return false;
+            result = false;
         }
-        if (txtEndBairro.getText().equals("")) {
+        if (txtEndBairro.getText().length() == 0 & result == true) {
             txtEndBairro.requestFocus();
-            return false;
+            result = false;
         }
-        return true;
+        if (!result)
+            new AlertMensagem("Endereço inválido!",
+                    USUARIO_LOGADO_APELIDO + ", precisa endereço válido para empresa",
+                    "ic_endereco_invalido_white_24dp.png").getRetornoAlert_OK();
+        return result;
     }
 
     void exibirRetorno_WsCnpjReceitaWs(WsCnpjReceitaWsVO receitaWsVO) {
@@ -1426,7 +1508,40 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             }
         }
 
+        if (receitaWsVO.getAtividadePrincipal().size() > 0)
+            for (Pair<String, String> pair : receitaWsVO.getAtividadePrincipal()) {
+                TabEmpresa_DetalheReceitaFederalVO atividadePrincipal = new TabEmpresa_DetalheReceitaFederalVO();
+                atividadePrincipal.setId(0);
+                atividadePrincipal.setEmpresa_id(0);
+                atividadePrincipal.setIsAtividadePrincipal(1);
+                atividadePrincipal.setStr_key(pair.getKey());
+                atividadePrincipal.setStr_value(pair.getValue());
+                getTtvDetalheReceitaFederalVO().add(atividadePrincipal);
+            }
 
+        if (receitaWsVO.getAtividadesSecundarias().size() > 0)
+            for (Pair<String, String> pair : receitaWsVO.getAtividadesSecundarias()) {
+                TabEmpresa_DetalheReceitaFederalVO atividadeSecundaria = new TabEmpresa_DetalheReceitaFederalVO();
+                atividadeSecundaria.setEmpresa_id(0);
+                atividadeSecundaria.setId(0);
+                atividadeSecundaria.setIsAtividadePrincipal(0);
+                atividadeSecundaria.setStr_key(pair.getKey());
+                atividadeSecundaria.setStr_value(pair.getValue());
+                getTtvDetalheReceitaFederalVO().add(atividadeSecundaria);
+            }
+
+        if (receitaWsVO.getQsa().size() > 0)
+            for (Pair<String, String> pair : receitaWsVO.getQsa()) {
+                TabEmpresa_DetalheReceitaFederalVO qsa = new TabEmpresa_DetalheReceitaFederalVO();
+                qsa.setEmpresa_id(0);
+                qsa.setId(0);
+                qsa.setIsAtividadePrincipal(2);
+                qsa.setStr_key(pair.getKey());
+                qsa.setStr_value(pair.getValue());
+                getTtvDetalheReceitaFederalVO().add(qsa);
+            }
+
+        preencherListaDetalhesReceita();
     }
 
     void exibirRetorno_WsCepPostmon(WsCepPostmonVO cepPostmonVO) {
@@ -1690,7 +1805,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             }
         }
         guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
-        if (getTtvEnderecoVO().size() > 0) {
+        if (getTtvEnderecoVO().size() > 0)
             for (TabEnderecoVO endereco : getTtvEnderecoVO()) {
                 int id = 0;
                 if (endereco.getId() == 0) {
@@ -1703,13 +1818,22 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                     end_ids += ";";
                 end_ids += id;
             }
-        }
+
         setTtvEmpresaVO(guardarEmpresa(end_ids, tel_ids, cont_ids, emailHome_ids));
-        if (getTtvEmpresaVO().getId() == 0) {
-            int id = new TabEmpresaDAO().insertTabEmpresaVO(getTtvEmpresaVO());
+        int idEmpresa = 0;
+        if ((idEmpresa = getTtvEmpresaVO().getId()) == 0) {
+            idEmpresa = new TabEmpresaDAO().insertTabEmpresaVO(getTtvEmpresaVO());
         } else {
             new TabEmpresaDAO().updateTabEmpresaVO(getTtvEmpresaVO());
         }
+
+        if (getTtvDetalheReceitaFederalVO().size() > 0)
+            for (TabEmpresa_DetalheReceitaFederalVO detReceita : getTtvDetalheReceitaFederalVO())
+                if (detReceita.getId() == 0) {
+                    detReceita.setEmpresa_id(idEmpresa);
+                    new TabEmpresa_DetalheReceitaFederalDAO().insertTabEmpresa_DetalheReceitaFederalVO(detReceita);
+                }
+
     }
 
 }

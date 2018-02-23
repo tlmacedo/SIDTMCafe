@@ -59,4 +59,29 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
         }
     }
 
+    public void updateTabEmpresa_DetalheReceitaFederalVO(TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO) {
+        comandoSql = "UPDATE tabEmpresa_DetalheReceitaFederal SET ";
+        comandoSql += "empresa_id = " + detalheReceitaFederalVO.getEmpresa_id() + ", ";
+        comandoSql += "isAtividadePrincipal = " + detalheReceitaFederalVO.getIsAtividadePrincipal() + ", ";
+        comandoSql += "str_Key = '" + detalheReceitaFederalVO.str_keyProperty() + "', ";
+        comandoSql += "str_Value = '" + detalheReceitaFederalVO.str_valueProperty() + "' ";
+        comandoSql += "WHERE id = " + detalheReceitaFederalVO.getId();
+
+        if (getUpdateBancoDados(comandoSql)) ;
+    }
+
+    public int insertTabEmpresa_DetalheReceitaFederalVO(TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO) {
+        comandoSql = "INSERT INTO tabEmpresa_DetalheReceitaFederal ";
+        comandoSql += "(empresa_id, isAtividadePrincipal, str_Key, str_Value) ";
+        comandoSql += "VALUES(";
+        comandoSql += detalheReceitaFederalVO.getEmpresa_id() + ", ";
+        comandoSql += detalheReceitaFederalVO.getIsAtividadePrincipal() + ", ";
+        comandoSql += "'" + detalheReceitaFederalVO.getStr_key() + "', ";
+        comandoSql += "'" + detalheReceitaFederalVO.getStr_value() + "'";
+        comandoSql += ") ";
+
+        return getInsertBancoDados(comandoSql);
+    }
+
+
 }

@@ -78,4 +78,9 @@ public class TabEmpresa_DetalheReceitaFederalVO extends RecursiveTreeObject<TabE
     public void setStr_value(String str_value) {
         str_valueProperty().set(str_value);
     }
+
+    @Override
+    public String toString() {
+        return str_keyProperty().get() + " - " + str_valueProperty().get();
+    }
 }
