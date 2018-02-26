@@ -3,6 +3,7 @@ package br.com.sidtmcafe.model.dao;
 import br.com.sidtmcafe.database.ConnectionFactory;
 import br.com.sidtmcafe.model.vo.TabEmailHomePageVO;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -64,16 +65,16 @@ public class TabEmailHomePageDAO extends BuscaBandoDados {
         }
     }
 
-    public void updateTabEmailHomaPageVO(TabEmailHomePageVO emailHomePageVO) {
+    public void updateTabEmailHomaPageVO(Connection conn, TabEmailHomePageVO emailHomePageVO) {
         comandoSql = "UPDATE tabEmailHomePage SET ";
         comandoSql += "descricao = '" + emailHomePageVO.getDescricao() + "', ";
         comandoSql += "isEmail = " + emailHomePageVO.getIsEmail() + " ";
         comandoSql += "WHERE id = " + emailHomePageVO.getId();
 
-        if (getUpdateBancoDados(comandoSql)) ;
+        if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabEmailHomaPageVO(TabEmailHomePageVO emailHomePageVO) {
+    public int insertTabEmailHomaPageVO(Connection conn, TabEmailHomePageVO emailHomePageVO) {
         comandoSql = "INSERT INTO tabEmailHomePage ";
         comandoSql += "(descricao, isEmail) ";
         comandoSql += "VALUES(";
@@ -81,6 +82,6 @@ public class TabEmailHomePageDAO extends BuscaBandoDados {
         comandoSql += emailHomePageVO.getIsEmail();
         comandoSql += ") ";
 
-        return getInsertBancoDados(comandoSql);
+        return getInsertBancoDados(conn, comandoSql);
     }
 }

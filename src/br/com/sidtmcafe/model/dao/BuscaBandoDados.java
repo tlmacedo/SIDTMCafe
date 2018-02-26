@@ -26,33 +26,33 @@ public class BuscaBandoDados {
         return rs;
     }
 
-    boolean getUpdateBancoDados(String comandoSql) {
-        con = ConnectionFactory.getConnection();
+    boolean getUpdateBancoDados(Connection conn, String comandoSql) {
+        //con = ConnectionFactory.getConnection();
         try {
             //System.out.println("comandoSql: " + comandoSql);
-            stmt = con.prepareStatement(comandoSql);
+            stmt = conn.prepareStatement(comandoSql);
             stmt.execute();
-            stmt.close();
+            //stmt.close();
         } catch (Exception ex) {
             new AlertMensagem("Erro.", new Exception().getStackTrace()[0].getClassName() + ".",
                     "ic_msg_erro_circulo_white_24dp.png").errorException(ex);
             ex.printStackTrace();
             return false;
         } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
+            //ConnectionFactory.closeConnection(conn, stmt, rs);
         }
         return true;
     }
 
-    int getInsertBancoDados(String comandoSql) {
-        con = ConnectionFactory.getConnection();
+    int getInsertBancoDados(Connection conn, String comandoSql) {
+        //con = ConnectionFactory.getConnection();
         try {
             //System.out.print("comandoSql: " + comandoSql);
-            stmt = con.prepareStatement(comandoSql);
+            stmt = conn.prepareStatement(comandoSql);
             stmt.execute();
-            stmt.close();
+            //stmt.close();
 
-            rs = con.prepareStatement("SELECT LAST_INSERT_ID()").executeQuery();
+            rs = conn.prepareStatement("SELECT LAST_INSERT_ID()").executeQuery();
             if (rs.next())
                 idInclusao = rs.getInt("LAST_INSERT_ID()");
             //System.out.print("     idInclusao: " + idInclusao + "\n");
@@ -63,7 +63,7 @@ public class BuscaBandoDados {
             ex.printStackTrace();
             return 0;
         } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
+            //ConnectionFactory.closeConnection(conn, stmt, rs);
         }
         return idInclusao;
     }

@@ -3,6 +3,7 @@ package br.com.sidtmcafe.model.dao;
 import br.com.sidtmcafe.database.ConnectionFactory;
 import br.com.sidtmcafe.model.vo.TabTelefoneVO;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -58,16 +59,16 @@ public class TabTelefoneDAO extends BuscaBandoDados {
         telefoneVO.setTelefoneOperadoraVO(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVO(telefone.getTelefoneOperadora_id()));
     }
 
-    public void updateTabTelefoneVO(TabTelefoneVO telefoneVO) {
+    public void updateTabTelefoneVO(Connection conn, TabTelefoneVO telefoneVO) {
         comandoSql = "UPDATE tabTelefone SET ";
         comandoSql += "descricao = '" + telefoneVO.getDescricao() + "', ";
         comandoSql += "telefoneOperadora_id = " + telefoneVO.getTelefoneOperadora_id() + " ";
         comandoSql += "WHERE id = " + telefoneVO.getId();
 
-        if (getUpdateBancoDados(comandoSql)) ;
+        if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabTelefoneVO(TabTelefoneVO telefoneVO) {
+    public int insertTabTelefoneVO(Connection conn, TabTelefoneVO telefoneVO) {
         comandoSql = "INSERT INTO tabTelefone ";
         comandoSql += "(descricao, telefoneOperadora_id) ";
         comandoSql += "VALUES (";
@@ -75,7 +76,7 @@ public class TabTelefoneDAO extends BuscaBandoDados {
         comandoSql += telefoneVO.getTelefoneOperadora_id();
         comandoSql += ")";
 
-        return getInsertBancoDados(comandoSql);
+        return getInsertBancoDados(conn, comandoSql);
     }
 
 }

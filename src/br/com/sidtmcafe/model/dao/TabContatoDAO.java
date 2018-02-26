@@ -6,6 +6,7 @@ import br.com.sidtmcafe.model.vo.TabContatoVO;
 import br.com.sidtmcafe.model.vo.TabEmailHomePageVO;
 import br.com.sidtmcafe.model.vo.TabTelefoneVO;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class TabContatoDAO extends BuscaBandoDados {
         contato.setEmailHomePageVOList(emailHomePageVOList);
     }
 
-    public void updateTabContatoVO(TabContatoVO contatoVO) {
+    public void updateTabContatoVO(Connection conn, TabContatoVO contatoVO) {
         comandoSql = "UPDATE tabContato SET ";
         comandoSql += "descricao = '" + contatoVO.getDescricao() + "', ";
         comandoSql += "cargo_id = " + contatoVO.getCargo_id() + ", ";
@@ -83,10 +84,10 @@ public class TabContatoDAO extends BuscaBandoDados {
         comandoSql += "emailHomePage_ids = '" + contatoVO.getEmailHomePage_ids() + "' ";
         comandoSql += "WHERE id = " + contatoVO.getId();
 
-        if (getUpdateBancoDados(comandoSql)) ;
+        if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabContatoVO(TabContatoVO contatoVO) {
+    public int insertTabContatoVO(Connection conn, TabContatoVO contatoVO) {
         comandoSql = "INSERT INTO tabContato ";
         comandoSql += "(descricao, cargo_id, telefone_ids, emailHomePage_ids) ";
         comandoSql += "VALUES(";
@@ -96,7 +97,7 @@ public class TabContatoDAO extends BuscaBandoDados {
         comandoSql += "'" + contatoVO.getEmailHomePage_ids() + "'";
         comandoSql += ") ";
 
-        return getInsertBancoDados(comandoSql);
+        return getInsertBancoDados(conn, comandoSql);
     }
 
 }

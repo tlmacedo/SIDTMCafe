@@ -5,6 +5,7 @@ import br.com.sidtmcafe.model.vo.TabEmpresaVO;
 import br.com.sidtmcafe.model.vo.TabEnderecoVO;
 import br.com.sidtmcafe.model.vo.WsCepPostmonVO;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -69,7 +70,7 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         endereco.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(endereco.getMunicipio_id()));
     }
 
-    public void updateTabEnderecoVO(TabEnderecoVO enderecoVO) {
+    public void updateTabEnderecoVO(Connection conn, TabEnderecoVO enderecoVO) {
         comandoSql = "UPDATE tabEndereco SET ";
         comandoSql += "tipoEndereco_id = " + enderecoVO.getTipoEndereco_id() + ", ";
         comandoSql += "cep = '" + enderecoVO.getCep() + "', ";
@@ -82,10 +83,10 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         comandoSql += "pontoReferencia = '" + enderecoVO.getPontoReferencia() + "' ";
         comandoSql += "WHERE id = " + enderecoVO.getId();
 
-        if (getUpdateBancoDados(comandoSql)) ;
+        if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabEnderecoVO(TabEnderecoVO enderecoVO) {
+    public int insertTabEnderecoVO(Connection conn, TabEnderecoVO enderecoVO) {
         comandoSql = "INSERT INTO tabEndereco ";
         comandoSql += "(tipoEndereco_id, cep, logradouro, numero, complemento, bairro, uf_id, municipio_id, pontoReferencia) ";
         comandoSql += "VALUES(";
@@ -100,7 +101,7 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         comandoSql += "'" + enderecoVO.getPontoReferencia() + "'";
         comandoSql += ") ";
 
-        return getInsertBancoDados(comandoSql);
+        return getInsertBancoDados(conn, comandoSql);
     }
 
 }

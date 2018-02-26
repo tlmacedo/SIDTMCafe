@@ -3,6 +3,7 @@ package br.com.sidtmcafe.model.dao;
 import br.com.sidtmcafe.database.ConnectionFactory;
 import br.com.sidtmcafe.model.vo.TabEmpresa_DetalheReceitaFederalVO;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -59,7 +60,7 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
         }
     }
 
-    public void updateTabEmpresa_DetalheReceitaFederalVO(TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO) {
+    public void updateTabEmpresa_DetalheReceitaFederalVO(Connection conn, TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO) {
         comandoSql = "UPDATE tabEmpresa_DetalheReceitaFederal SET ";
         comandoSql += "empresa_id = " + detalheReceitaFederalVO.getEmpresa_id() + ", ";
         comandoSql += "isAtividadePrincipal = " + detalheReceitaFederalVO.getIsAtividadePrincipal() + ", ";
@@ -67,10 +68,10 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
         comandoSql += "str_Value = '" + detalheReceitaFederalVO.str_valueProperty() + "' ";
         comandoSql += "WHERE id = " + detalheReceitaFederalVO.getId();
 
-        if (getUpdateBancoDados(comandoSql)) ;
+        if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabEmpresa_DetalheReceitaFederalVO(TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO) {
+    public int insertTabEmpresa_DetalheReceitaFederalVO(Connection conn, TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO) {
         comandoSql = "INSERT INTO tabEmpresa_DetalheReceitaFederal ";
         comandoSql += "(empresa_id, isAtividadePrincipal, str_Key, str_Value) ";
         comandoSql += "VALUES(";
@@ -80,7 +81,7 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
         comandoSql += "'" + detalheReceitaFederalVO.getStr_value() + "'";
         comandoSql += ") ";
 
-        return getInsertBancoDados(comandoSql);
+        return getInsertBancoDados(conn, comandoSql);
     }
 
 

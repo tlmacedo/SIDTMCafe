@@ -4,6 +4,7 @@ import br.com.sidtmcafe.database.ConnectionFactory;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.model.vo.*;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -108,7 +109,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         empresa.setDetalheReceitaFederalVOList(new TabEmpresa_DetalheReceitaFederalDAO().getDetalheReceitaFederalVOList(empresa.getId()));
     }
 
-    public void updateTabEmpresaVO(TabEmpresaVO empresaVO) {
+    public void updateTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) {
         comandoSql = "UPDATE tabEmpresa SET ";
         comandoSql += "isPessoaJuridica = " + empresaVO.getIsPessoaJuridica() + ", ";
         comandoSql += "cnpj = '" + empresaVO.getCnpj() + "', ";
@@ -128,10 +129,10 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         comandoSql += "naturezaJuridica = '" + empresaVO.getNaturezaJuridica() + "' ";
         comandoSql += "WHERE id = " + empresaVO.getId();
 
-        if (getUpdateBancoDados(comandoSql)) ;
+        if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabEmpresaVO(TabEmpresaVO empresaVO) {
+    public int insertTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) {
         comandoSql = "INSERT INTO tabEmpresa ";
         comandoSql += "(isPessoaJuridica, cnpj, ie, razao, fantasia, isCliente, isFornecedor, ";
         comandoSql += "isTransportadora, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids, ";
@@ -155,7 +156,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         comandoSql += "'" + empresaVO.getNaturezaJuridica() + "'";
         comandoSql += ") ";
 
-        return getInsertBancoDados(comandoSql);
+        return getInsertBancoDados(conn, comandoSql);
     }
 
 }
