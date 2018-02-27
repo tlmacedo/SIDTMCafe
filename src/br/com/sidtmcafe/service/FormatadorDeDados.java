@@ -36,22 +36,18 @@ public class FormatadorDeDados implements Constants {
     }
 
     public static String getCampoFormatado(String value, String tipMascOrMascara) {
-        String strValue = null;
+        String strValue = value.replaceAll("[\\-/. \\[\\]]", "");
+        String mascara = tipMascOrMascara;
         String ms = "#@?", digt = tipMascOrMascara.substring(0, 1);
-        if (!ms.contains(digt)) {
-            tipMascOrMascara = gerarMascara(tipMascOrMascara, value.length(), "");
-            strValue = value.replaceAll("[\\-/. \\[\\]]", "");
-            String mascTmp = tipMascOrMascara.replaceAll("[\\-/. \\[\\]]", "");
-            if (strValue.length() > mascTmp.length()) {
-                strValue = strValue.substring(0, mascTmp.length());
-            }
-        }
-        Matcher matcher = PATTERN.matcher(tipMascOrMascara);
-        if (matcher.find())
-            strValue = strValue.replaceAll("[\\-/. \\[\\]]", "");
+        if (!ms.contains(digt))
+            mascara = gerarMascara(tipMascOrMascara, value.length(), "");
+        String mascTmp = mascara.replaceAll("[\\-/. \\[\\]]", "");
+        if (strValue.length() > mascTmp.length())
+            strValue = strValue.substring(0, mascTmp.length());
+
         if (strValue.length() > 0)
             try {
-                MaskFormatter mf = new MaskFormatter(tipMascOrMascara);
+                MaskFormatter mf = new MaskFormatter(mascara);
                 mf.setValueContainsLiteralCharacters(false);
                 return mf.valueToString(strValue);
             } catch (ParseException e) {

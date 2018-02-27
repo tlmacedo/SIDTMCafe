@@ -1,6 +1,7 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.database.ConnectionFactory;
+import br.com.sidtmcafe.model.vo.SisMunicipioVO;
 import br.com.sidtmcafe.model.vo.SisUFVO;
 
 import java.sql.ResultSet;
@@ -18,16 +19,23 @@ public class SisUFDAO extends BuscaBandoDados {
 
     public SisUFVO getUfVO(int idSisUFVO) {
         buscaSisUFVO(idSisUFVO, "");
+//        if (ufVO != null)
+//            addObjetosPesquisa(ufVO);
         return ufVO;
     }
 
     public SisUFVO getUfVO(String siglaUF) {
         buscaSisUFVO(-1, siglaUF);
+//        if (ufVO != null)
+//            addObjetosPesquisa(ufVO);
         return ufVO;
     }
 
     public List<SisUFVO> getUfVOList() {
         buscaSisUFVO(-1, "");
+        if (ufVOList != null)
+            for (SisUFVO uf : ufVOList)
+                addObjetosPesquisa(uf);
         return ufVOList;
     }
 
@@ -61,6 +69,10 @@ public class SisUFDAO extends BuscaBandoDados {
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
+    }
+
+    void addObjetosPesquisa(SisUFVO uf) {
+        uf.setMunicipioVOList(new SisMunicipioDAO().getMunicipioVOList(uf.getId()));
     }
 
 }

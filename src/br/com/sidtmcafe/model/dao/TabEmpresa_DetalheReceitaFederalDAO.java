@@ -64,8 +64,8 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
         comandoSql = "UPDATE tabEmpresa_DetalheReceitaFederal SET ";
         comandoSql += "empresa_id = " + detalheReceitaFederalVO.getEmpresa_id() + ", ";
         comandoSql += "isAtividadePrincipal = " + detalheReceitaFederalVO.getIsAtividadePrincipal() + ", ";
-        comandoSql += "str_Key = '" + detalheReceitaFederalVO.str_keyProperty() + "', ";
-        comandoSql += "str_Value = '" + detalheReceitaFederalVO.str_valueProperty() + "' ";
+        comandoSql += "str_Key = '" + detalheReceitaFederalVO.getStr_key() + "', ";
+        comandoSql += "str_Value = '" + detalheReceitaFederalVO.getStr_value() + "' ";
         comandoSql += "WHERE id = " + detalheReceitaFederalVO.getId();
 
         if (getUpdateBancoDados(conn, comandoSql)) ;

@@ -6,7 +6,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.List;
+
 public class SisUFVO extends RecursiveTreeObject<SisUFVO> {
+
+    List<SisMunicipioVO> municipioVOList;
 
     IntegerProperty id, ibge_id;
     StringProperty descricao, sigla;
@@ -14,6 +18,13 @@ public class SisUFVO extends RecursiveTreeObject<SisUFVO> {
     public SisUFVO() {
     }
 
+    public List<SisMunicipioVO> getMunicipioVOList() {
+        return municipioVOList;
+    }
+
+    public void setMunicipioVOList(List<SisMunicipioVO> municipioVOList) {
+        this.municipioVOList = municipioVOList;
+    }
 
     public int getId() {
         return idProperty().get();
