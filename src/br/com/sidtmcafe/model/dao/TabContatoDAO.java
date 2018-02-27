@@ -76,7 +76,7 @@ public class TabContatoDAO extends BuscaBandoDados {
         contato.setEmailHomePageVOList(emailHomePageVOList);
     }
 
-    public void updateTabContatoVO(Connection conn, TabContatoVO contatoVO) {
+    public void updateTabContatoVO(Connection conn, TabContatoVO contatoVO) throws SQLException {
         comandoSql = "UPDATE tabContato SET ";
         comandoSql += "descricao = '" + contatoVO.getDescricao() + "', ";
         comandoSql += "cargo_id = " + contatoVO.getCargo_id() + ", ";
@@ -87,7 +87,7 @@ public class TabContatoDAO extends BuscaBandoDados {
         if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabContatoVO(Connection conn, TabContatoVO contatoVO) {
+    public int insertTabContatoVO(Connection conn, TabContatoVO contatoVO) throws SQLException {
         comandoSql = "INSERT INTO tabContato ";
         comandoSql += "(descricao, cargo_id, telefone_ids, emailHomePage_ids) ";
         comandoSql += "VALUES(";

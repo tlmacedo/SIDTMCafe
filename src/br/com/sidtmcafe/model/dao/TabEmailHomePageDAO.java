@@ -65,7 +65,7 @@ public class TabEmailHomePageDAO extends BuscaBandoDados {
         }
     }
 
-    public void updateTabEmailHomaPageVO(Connection conn, TabEmailHomePageVO emailHomePageVO) {
+    public void updateTabEmailHomaPageVO(Connection conn, TabEmailHomePageVO emailHomePageVO) throws SQLException {
         comandoSql = "UPDATE tabEmailHomePage SET ";
         comandoSql += "descricao = '" + emailHomePageVO.getDescricao() + "', ";
         comandoSql += "isEmail = " + emailHomePageVO.getIsEmail() + " ";
@@ -74,7 +74,7 @@ public class TabEmailHomePageDAO extends BuscaBandoDados {
         if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabEmailHomaPageVO(Connection conn, TabEmailHomePageVO emailHomePageVO) {
+    public int insertTabEmailHomaPageVO(Connection conn, TabEmailHomePageVO emailHomePageVO) throws SQLException {
         comandoSql = "INSERT INTO tabEmailHomePage ";
         comandoSql += "(descricao, isEmail) ";
         comandoSql += "VALUES(";

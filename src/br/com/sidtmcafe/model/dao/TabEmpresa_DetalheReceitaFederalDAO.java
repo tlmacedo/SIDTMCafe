@@ -60,7 +60,7 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
         }
     }
 
-    public void updateTabEmpresa_DetalheReceitaFederalVO(Connection conn, TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO) {
+    public void updateTabEmpresa_DetalheReceitaFederalVO(Connection conn, TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO) throws SQLException {
         comandoSql = "UPDATE tabEmpresa_DetalheReceitaFederal SET ";
         comandoSql += "empresa_id = " + detalheReceitaFederalVO.getEmpresa_id() + ", ";
         comandoSql += "isAtividadePrincipal = " + detalheReceitaFederalVO.getIsAtividadePrincipal() + ", ";
@@ -71,7 +71,7 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
         if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabEmpresa_DetalheReceitaFederalVO(Connection conn, TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO) {
+    public int insertTabEmpresa_DetalheReceitaFederalVO(Connection conn, TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO) throws SQLException {
         comandoSql = "INSERT INTO tabEmpresa_DetalheReceitaFederal ";
         comandoSql += "(empresa_id, isAtividadePrincipal, str_Key, str_Value) ";
         comandoSql += "VALUES(";

@@ -59,7 +59,7 @@ public class TabTelefoneDAO extends BuscaBandoDados {
         telefoneVO.setTelefoneOperadoraVO(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVO(telefone.getTelefoneOperadora_id()));
     }
 
-    public void updateTabTelefoneVO(Connection conn, TabTelefoneVO telefoneVO) {
+    public void updateTabTelefoneVO(Connection conn, TabTelefoneVO telefoneVO) throws SQLException {
         comandoSql = "UPDATE tabTelefone SET ";
         comandoSql += "descricao = '" + telefoneVO.getDescricao() + "', ";
         comandoSql += "telefoneOperadora_id = " + telefoneVO.getTelefoneOperadora_id() + " ";
@@ -68,7 +68,7 @@ public class TabTelefoneDAO extends BuscaBandoDados {
         if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabTelefoneVO(Connection conn, TabTelefoneVO telefoneVO) {
+    public int insertTabTelefoneVO(Connection conn, TabTelefoneVO telefoneVO) throws SQLException {
         comandoSql = "INSERT INTO tabTelefone ";
         comandoSql += "(descricao, telefoneOperadora_id) ";
         comandoSql += "VALUES (";

@@ -4,10 +4,10 @@ import br.com.sidtmcafe.componentes.AlertMensagem;
 import br.com.sidtmcafe.componentes.Tarefa;
 import br.com.sidtmcafe.componentes.Variaveis;
 import br.com.sidtmcafe.database.ConnectionFactory;
-import br.com.sidtmcafe.service.*;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.*;
 import br.com.sidtmcafe.model.vo.*;
+import br.com.sidtmcafe.service.*;
 import br.com.sidtmcafe.view.ViewCadastroEmpresa;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
@@ -27,19 +27,16 @@ import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 
 import java.net.URL;
+import java.sql.Date;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.ResourceBundle;
+import java.util.*;
 
-import static br.com.sidtmcafe.interfaces.Constants.DTFORMAT_DATA;
-import static br.com.sidtmcafe.interfaces.Constants.DTFORMAT_DATAHORA;
-import static br.com.sidtmcafe.interfaces.Constants.DTFORMAT_HORA;
+import static br.com.sidtmcafe.interfaces.Constants.*;
 
 public class ControllerCadastroEmpresa extends Variaveis implements Initializable, FormularioModelo {
 
@@ -908,11 +905,9 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     void preencherListaEnderecoEmpresa() {
         listEndereco.getItems().clear();
-        if (getTtvEnderecoVO() != null) {
+        limparEndereco();
+        if (getTtvEnderecoVO() != null)
             listEndereco.getItems().setAll(getTtvEnderecoVO());
-        } else {
-            limparEndereco();
-        }
         listEndereco.getSelectionModel().select(0);
     }
 
@@ -1005,17 +1000,19 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         lblDataAbertura.setText("data abertura: ");
         lblDataAberturaDiff.setText("tempo de abertura: ");
         if (getTtvEmpresaVO().getDataAbertura() != null) {
-            lblDataAbertura.setText("data abertura: " + getTtvEmpresaVO().getDataAbertura().toLocalDateTime().format(DTFORMAT_DATA));
-            lblDataAberturaDiff.setText("tempo de abertura: " + DatasTrabalhadas.getStrIntervaloDatas(getTtvEmpresaVO().getDataAbertura().toLocalDateTime(), null));
+            LocalDate ldAbertura = getTtvEmpresaVO().getDataAbertura().toLocalDate();
+            lblDataAbertura.setText("data abertura: " + ldAbertura.format(DTF_DATA));
+            lblDataAberturaDiff.setText("tempo de abertura: " + DatasTrabalhadas.getStrIntervaloDatas(ldAbertura, null));
         }
-
-        lblDataCadastro.setText("data cadastro: " + getTtvEmpresaVO().getDataCadastro().toLocalDateTime().format(DTFORMAT_DATAHORA) + " [" + getTtvEmpresaVO().getUsuarioCadastroVO().getApelido() + "]");
-        lblDataCadastroDiff.setText("tempo de cadastro: " + DatasTrabalhadas.getStrIntervaloDatas(getTtvEmpresaVO().getDataCadastro().toLocalDateTime(), null));
+        LocalDateTime ldtCadastro = getTtvEmpresaVO().getDataCadastro().toLocalDateTime().atZone(MY_ZONE_TIME).toLocalDateTime();
+        lblDataCadastro.setText("data cadastro: " + ldtCadastro.format(DTF_DATAHORA) + " [" + getTtvEmpresaVO().getUsuarioCadastroVO().getApelido() + "]");
+        lblDataCadastroDiff.setText("tempo de cadastro: " + DatasTrabalhadas.getStrIntervaloDatas(ldtCadastro.toLocalDate(), null));
         lblDataAtualizacao.setText("");
         lblDataAtualizacaoDiff.setText("");
         if (getTtvEmpresaVO().getDataAtualizacao() != null) {
-            lblDataAtualizacao.setText("data atualização: " + getTtvEmpresaVO().getDataAtualizacao().toLocalDateTime().format(DTFORMAT_DATAHORA) + " [" + getTtvEmpresaVO().getUsuarioAtualizacaoVO().getApelido() + "]");
-            lblDataAtualizacaoDiff.setText("tempo de atualização: " + DatasTrabalhadas.getStrIntervaloDatas(getTtvEmpresaVO().getDataAtualizacao().toLocalDateTime(), null));
+            LocalDateTime ldtAtualizacao = getTtvEmpresaVO().getDataAtualizacao().toLocalDateTime().atZone(MY_ZONE_TIME).toLocalDateTime();
+            lblDataAtualizacao.setText("data atualização: " + ldtAtualizacao.format(DTF_DATAHORA) + " [" + getTtvEmpresaVO().getUsuarioAtualizacaoVO().getApelido() + "]");
+            lblDataAtualizacaoDiff.setText("tempo de atualização: " + DatasTrabalhadas.getStrIntervaloDatas(ldtAtualizacao.toLocalDate(), null));
         }
 
         preencherListaEnderecoEmpresa();
@@ -1095,9 +1092,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         emp.setUsuarioAtualizacao_id(Integer.parseInt(USUARIO_LOGADO_ID));
         emp.setSituacaoSistema_id(((SisSituacaoSistemaVO) cboSituacaoSistema.getSelectionModel().getSelectedItem()).getId());
 
-        LocalDate dtTemp = LocalDate.parse(lblDataAbertura.getText().substring(15), DTFORMAT_DATA);
-        LocalDateTime dtAbertura = LocalDateTime.of(dtTemp.getYear(), dtTemp.getMonth(), dtTemp.getDayOfMonth(), 0, 0, 0);
-        emp.setDataAbertura(Timestamp.valueOf(dtAbertura));
+        LocalDate ldAbertura = LocalDate.parse(lblDataAbertura.getText().substring(15, 25), DTF_DATA);
+        emp.setDataAbertura(Date.valueOf(ldAbertura));
 
         emp.setNaturezaJuridica(lblNaturezaJuridica.getText().substring(19));
         return emp;
@@ -1126,34 +1122,33 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         int tipEnd = 1;
         try {
             if (getTtvEnderecoVO().get(0).getTipoEndereco_id() == 1) {
-                if (!validarEnd()) {
-                    new AlertMensagem("Endereço invalido",
-                            USUARIO_LOGADO_APELIDO + ", para adicionar endereço 1˚ informe endereço principal valido",
+                if (!validarEnd()) return null;
+                List<SisTipoEnderecoVO> list = getTipoEnderecoDisponivel();
+                if (list.size() <= 0) {
+                    new AlertMensagem("Endereço não disponivél",
+                            USUARIO_LOGADO_APELIDO + ", a empresa " + txtRazao.getText()
+                                    + " não tem disponibilidade de endereço!\nAtualize algum endereço já existente!",
                             "ic_endereco_add_white_24dp.png").getRetornoAlert_OK();
                     return null;
-                } else {
-                    List<SisTipoEnderecoVO> list = getTipoEnderecoDisponivel();
-                    if (list.size() <= 0) {
-                        new AlertMensagem("Endereço não disponivél",
-                                USUARIO_LOGADO_APELIDO + ", a empresa " + txtRazao.getText()
-                                        + " não tem disponibilidade de endereço!\nAtualize algum endereço já existente!",
-                                "ic_endereco_add_white_24dp.png").getRetornoAlert_OK();
-                        return null;
-                    }
-                    Object o = new AlertMensagem("Adicionar dados [endereço]",
-                            USUARIO_LOGADO_APELIDO + ", selecione o tipo endereço",
-                            "ic_endereco_add_white_24dp.png").getRetornoAlert_ComboBox(list).get();
-                    if (o == null) return null;
-                    tipEnd = ((SisTipoEnderecoVO) o).getId();
                 }
+                Object o = new AlertMensagem("Adicionar dados [endereço]",
+                        USUARIO_LOGADO_APELIDO + ", selecione o tipo endereço",
+                        "ic_endereco_add_white_24dp.png").getRetornoAlert_ComboBox(list).get();
+                if (o == null) return null;
+                tipEnd = ((SisTipoEnderecoVO) o).getId();
                 txtEndCEP.requestFocus();
             }
-        } catch (Exception ex) {
+        } catch (
+                Exception ex)
+
+        {
             if (!(ex instanceof IndexOutOfBoundsException)) {
                 ex.printStackTrace();
                 return null;
             }
-        } finally {
+        } finally
+
+        {
             TabEnderecoVO newEndereco = new TabEnderecoVO();
             newEndereco.setId(0);
             newEndereco.setTipoEndereco_id(tipEnd);
@@ -1414,26 +1409,31 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     boolean validarEnd() {
         boolean result = true;
+        listEndereco.getSelectionModel().select(0);
         if (getTtvEnderecoVO().size() == 0) {
             getTtvEnderecoVO().add(addEndereco());
             listEndereco.getItems().add(getTtvEnderecoVO().get(0));
+            System.out.println("errou aqui 00");
         }
-        listEndereco.getSelectionModel().select(0);
-        if (txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "").length() != 8 || txtEndCEP.getText().equals("")) {
+        if (txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "").length() != 8 || txtEndCEP.getText().length() == 0) {
             txtEndCEP.requestFocus();
             result = false;
+            System.out.println("errou aqui 01");
         }
         if (txtEndLogradouro.getText().length() == 0 & result == true) {
             txtEndLogradouro.requestFocus();
             result = false;
+            System.out.println("errou aqui 02");
         }
         if (txtEndNumero.getText().length() == 0 & result == true) {
             txtEndNumero.requestFocus();
             result = false;
+            System.out.println("errou aqui 03");
         }
         if (txtEndBairro.getText().length() == 0 & result == true) {
             txtEndBairro.requestFocus();
             result = false;
+            System.out.println("errou aqui 04");
         }
         if (!result)
             new AlertMensagem("Endereço inválido!",
@@ -1452,11 +1452,11 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         lblDataAbertura.setText("data abertura: ");
         lblDataAberturaDiff.setText("tempo de abertura: ");
         if (receitaWsVO.getAbertura() != null) {
-            LocalDate dtTemp = LocalDate.parse(receitaWsVO.getAbertura(), DTFORMAT_DATA);
-            LocalDateTime dtAbertura = LocalDateTime.of(dtTemp.getYear(), dtTemp.getMonth(), dtTemp.getDayOfMonth(), 0, 0, 0);
 
-            lblDataAbertura.setText("data abertura: " + dtAbertura.format(DTFORMAT_DATA));
-            lblDataAberturaDiff.setText("tempo de abertura: " + DatasTrabalhadas.getStrIntervaloDatas(dtAbertura, null));
+            LocalDate ldAbertura = LocalDate.parse(receitaWsVO.getAbertura(), DTF_DATA);
+
+            lblDataAbertura.setText("data abertura: " + ldAbertura.format(DTF_DATA));
+            lblDataAberturaDiff.setText("tempo de abertura: " + DatasTrabalhadas.getStrIntervaloDatas(ldAbertura, null));
         }
 
         if (getTtvEnderecoVO().size() == 0) {
@@ -1893,13 +1893,19 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                         detReceita.setEmpresa_id(idEmpresa);
                         new TabEmpresa_DetalheReceitaFederalDAO().insertTabEmpresa_DetalheReceitaFederalVO(conn, detReceita);
                     } else {
+                        detReceita.setEmpresa_id(idEmpresa);
                         new TabEmpresa_DetalheReceitaFederalDAO().updateTabEmpresa_DetalheReceitaFederalVO(conn, detReceita);
                     }
             conn.commit();
         } catch (Exception ex) {
+            //1966-08-08 00:00:00.0
+            System.out.println("Exception ex:");
+            ex.printStackTrace();
             try {
                 conn.rollback();
+                System.out.println("rollback:");
             } catch (SQLException e) {
+                System.out.println("SQLException e:");
                 e.printStackTrace();
             }
         } finally {

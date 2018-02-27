@@ -7,13 +7,14 @@ import sun.jvm.hotspot.memory.LoaderConstraintEntry;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.Date;
 
 public class DatasTrabalhadas implements Constants {
 
-    public static String getStrIntervaloDatas(LocalDateTime data1, LocalDateTime data2) {
+    public static String getStrIntervaloDatas(LocalDate data1, LocalDate data2) {
         if (data2 == null)
-            data2 = LocalDateTime.now();
-        Period period = Period.between(data1.toLocalDate(), data2.toLocalDate());
+            data2 = LocalDate.now();
+        Period period = Period.between(data1, data2);
         String periodoTemp = "";
         if (period.getYears() > 0)
             periodoTemp += period.getYears() + " Anos ";
@@ -25,4 +26,5 @@ public class DatasTrabalhadas implements Constants {
             periodoTemp = " hoje ";
         return periodoTemp;
     }
+
 }

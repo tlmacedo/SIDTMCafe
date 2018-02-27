@@ -40,7 +40,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
     void buscaTabEmpresaVO(int idTabEmpresaVO) {
         comandoSql = "SELECT * FROM tabEmpresa ";
         if (idTabEmpresaVO > 0) comandoSql += "WHERE id = '" + idTabEmpresaVO + "' ";
-        comandoSql += "ORDER BY razao, fantasia ";
+        comandoSql += "ORDER BY id, razao, fantasia ";
 
         empresaVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);
@@ -65,7 +65,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
                 empresaVO.setUsuarioAtualizacao_id(rs.getInt("usuarioAtualizacao_id"));
                 empresaVO.setDataAtualizacao(rs.getTimestamp("dataAtualizacao"));
                 empresaVO.setSituacaoSistema_id(rs.getInt("situacaoSistema_id"));
-                empresaVO.setDataAbertura(rs.getTimestamp("dataAbertura"));
+                empresaVO.setDataAbertura(rs.getDate("dataAbertura"));
                 empresaVO.setNaturezaJuridica(rs.getString("naturezaJuridica"));
 
                 empresaVOList.add(empresaVO);
@@ -109,7 +109,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         empresa.setDetalheReceitaFederalVOList(new TabEmpresa_DetalheReceitaFederalDAO().getDetalheReceitaFederalVOList(empresa.getId()));
     }
 
-    public void updateTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) {
+    public void updateTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) throws SQLException {
         comandoSql = "UPDATE tabEmpresa SET ";
         comandoSql += "isPessoaJuridica = " + empresaVO.getIsPessoaJuridica() + ", ";
         comandoSql += "cnpj = '" + empresaVO.getCnpj() + "', ";
@@ -132,7 +132,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) {
+    public int insertTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) throws SQLException {
         comandoSql = "INSERT INTO tabEmpresa ";
         comandoSql += "(isPessoaJuridica, cnpj, ie, razao, fantasia, isCliente, isFornecedor, ";
         comandoSql += "isTransportadora, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids, ";

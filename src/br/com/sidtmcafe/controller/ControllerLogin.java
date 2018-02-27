@@ -18,14 +18,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class ControllerLogin extends Variaveis implements Initializable, FormularioModelo, Constants {
@@ -150,11 +148,11 @@ public class ControllerLogin extends Variaveis implements Initializable, Formula
         USUARIO_LOGADO_NOME = colaboradorVO.getNome();
         USUARIO_LOGADO_APELIDO = colaboradorVO.getApelido();
         DATA_HORA = LocalDateTime.now();
-        DATA_HORA_STR = DATA_HORA.format(DTFORMAT_DATAHORA);
+        DATA_HORA_STR = DATA_HORA.format(DTF_DATAHORA);
         USUARIO_LOGADO_DATA = LocalDate.now();
-        USUARIO_LOGADO_DATA_STR = USUARIO_LOGADO_DATA.format(DTFORMAT_DATA);
+        USUARIO_LOGADO_DATA_STR = USUARIO_LOGADO_DATA.format(DTF_DATA);
         USUARIO_LOGADO_HORA = LocalTime.now();
-        USUARIO_LOGADO_HORA_STR = USUARIO_LOGADO_HORA.format(DTFORMAT_HORA);
+        USUARIO_LOGADO_HORA_STR = USUARIO_LOGADO_HORA.format(DTF_HORA);
 
     }
 }

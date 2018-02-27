@@ -70,7 +70,7 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         endereco.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(endereco.getMunicipio_id()));
     }
 
-    public void updateTabEnderecoVO(Connection conn, TabEnderecoVO enderecoVO) {
+    public void updateTabEnderecoVO(Connection conn, TabEnderecoVO enderecoVO) throws SQLException {
         comandoSql = "UPDATE tabEndereco SET ";
         comandoSql += "tipoEndereco_id = " + enderecoVO.getTipoEndereco_id() + ", ";
         comandoSql += "cep = '" + enderecoVO.getCep() + "', ";
@@ -86,7 +86,7 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabEnderecoVO(Connection conn, TabEnderecoVO enderecoVO) {
+    public int insertTabEnderecoVO(Connection conn, TabEnderecoVO enderecoVO) throws SQLException {
         comandoSql = "INSERT INTO tabEndereco ";
         comandoSql += "(tipoEndereco_id, cep, logradouro, numero, complemento, bairro, uf_id, municipio_id, pontoReferencia) ";
         comandoSql += "VALUES(";

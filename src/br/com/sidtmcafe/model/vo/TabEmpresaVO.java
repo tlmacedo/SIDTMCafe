@@ -5,8 +5,10 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import org.joda.time.DateTime;
 
 import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.List;
 
 public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
@@ -20,7 +22,8 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     SisSituacaoSistemaVO situacaoSistemaVO;
     List<TabEmpresa_DetalheReceitaFederalVO> detalheReceitaFederalVOList;
 
-    Timestamp dataCadastro, dataAtualizacao, dataAbertura;
+    Date dataAbertura;
+    Timestamp dataCadastro, dataAtualizacao;
     IntegerProperty id, isPessoaJuridica, isCliente, isFornecedor, isTransportadora, usuarioCadastro_id, usuarioAtualizacao_id, situacaoSistema_id;
     StringProperty cnpj, ie, razao, fantasia, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids, naturezaJuridica;
 
@@ -107,11 +110,11 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
         this.dataAtualizacao = dataAtualizacao;
     }
 
-    public Timestamp getDataAbertura() {
+    public Date getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(Timestamp dataAbertura) {
+    public void setDataAbertura(Date dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 

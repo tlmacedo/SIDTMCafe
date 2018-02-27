@@ -12,7 +12,6 @@ import br.com.sidtmcafe.view.ViewCadastroEmpresa;
 import br.com.sidtmcafe.view.ViewPrincipal;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXToolbar;
-import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.JFXTreeView;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -24,13 +23,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.util.Duration;
 
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -194,7 +191,7 @@ public class ControllerPrincipal extends Variaveis implements Initializable, For
 
         timeline = new Timeline(new KeyFrame(
                 Duration.millis(1000), event -> {
-            String hora = LocalTime.now().format(DTFORMAT_HORA);
+            String hora = LocalTime.now().format(DTF_HORA);
             stbHora.setText(hora);
             statusBar_ViewPrincipal.getRightItems().set(1, stbHora);
         }));
