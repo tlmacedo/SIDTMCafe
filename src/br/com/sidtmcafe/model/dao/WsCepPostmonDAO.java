@@ -1,7 +1,5 @@
 package br.com.sidtmcafe.model.dao;
 
-import br.com.sidtmcafe.componentes.AlertMensagem;
-import br.com.sidtmcafe.componentes.Variaveis;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.model.vo.WsCepPostmonVO;
 import org.json.JSONObject;

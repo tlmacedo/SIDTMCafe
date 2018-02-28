@@ -1,8 +1,7 @@
 package br.com.sidtmcafe.componentes;
 
 import br.com.sidtmcafe.interfaces.Constants;
-import br.com.sidtmcafe.service.FormatadorDeDados;
-import br.com.sidtmcafe.service.PersonalizarCampos;
+import br.com.sidtmcafe.service.FormatarDado;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -25,7 +24,6 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import javafx.util.Pair;
-import org.apache.velocity.runtime.directive.contrib.For;
 
 import javax.swing.*;
 import java.io.PrintWriter;
@@ -235,7 +233,7 @@ public class AlertMensagem extends JFrame implements Constants {
         vBoxDialog.setAlignment(Pos.CENTER_LEFT);
 
         textField = new JFXTextField();
-        FormatadorDeDados formatTextField = new FormatadorDeDados();
+        FormatarDado formatTextField = new FormatarDado();
         formatTextField.maskField(textField, mascaraField);
 
         vBoxDialog.getChildren().add(textField);
@@ -250,7 +248,7 @@ public class AlertMensagem extends JFrame implements Constants {
 
         textField = new JFXTextField();
         textField.setPromptText(getPromptTextField());
-        FormatadorDeDados formatTextField = new FormatadorDeDados();
+        FormatarDado formatTextField = new FormatarDado();
         formatTextField.maskField(textField, mascaraField);
 
         comboBox = new JFXComboBox();

@@ -8,7 +8,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
 
-public class PersonalizarCampos implements Constants {
+public class PersonalizarCampo implements Constants {
 
     //999@_CNPJ
     //(0, 3) qtdMax
@@ -26,7 +26,7 @@ public class PersonalizarCampos implements Constants {
                 if (node.getAccessibleText() != null) {
                     textFormatador = node.getAccessibleText();
                     int qtdMax = Integer.parseInt(textFormatador.substring(0, 3));
-                    FormatadorDeDados.maxField((JFXTextField) node, qtdMax);
+                    FormatarDado.maxField((JFXTextField) node, qtdMax);
                 }
             } else if (node instanceof AnchorPane) {
                 fieldMaxLen((AnchorPane) node);
@@ -54,8 +54,8 @@ public class PersonalizarCampos implements Constants {
                         if (textFormatador.length() > 5)
                             mask = textFormatador.substring(5);
 
-                        String mascara = FormatadorDeDados.gerarMascara(mask, qtdMax, tipoDados);
-                        new FormatadorDeDados().maskField((JFXTextField) node, mascara);
+                        String mascara = FormatarDado.gerarMascara(mask, qtdMax, tipoDados);
+                        new FormatarDado().maskField((JFXTextField) node, mascara);
                     }
             } else if (node instanceof AnchorPane) {
                 maskFields((AnchorPane) node);

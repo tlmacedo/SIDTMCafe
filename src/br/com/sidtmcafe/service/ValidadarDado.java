@@ -2,7 +2,7 @@ package br.com.sidtmcafe.service;
 
 import br.com.sidtmcafe.interfaces.Constants;
 
-public class ValidadorDeDados implements Constants {
+public class ValidadarDado implements Constants {
     private static final int[] pesoCpf = {11, 10, 9, 8, 7, 6, 5, 4, 3, 2};
     private static final int[] pesoCnpj = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
 

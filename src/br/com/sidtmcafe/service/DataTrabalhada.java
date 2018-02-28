@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.Date;
 
-public class DatasTrabalhadas implements Constants {
+public class DataTrabalhada implements Constants {
 
     public static String getStrIntervaloDatas(LocalDate data1, LocalDate data2) {
         if (data2 == null)

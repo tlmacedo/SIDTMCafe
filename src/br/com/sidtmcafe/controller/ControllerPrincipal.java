@@ -2,7 +2,7 @@ package br.com.sidtmcafe.controller;
 
 import br.com.sidtmcafe.componentes.AlertMensagem;
 import br.com.sidtmcafe.componentes.Tarefa;
-import br.com.sidtmcafe.componentes.Variaveis;
+import br.com.sidtmcafe.componentes.Variavel;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.SisMenuPrincipalDAO;
@@ -32,7 +32,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ControllerPrincipal extends Variaveis implements Initializable, FormularioModelo, Constants {
+public class ControllerPrincipal extends Variavel implements Initializable, FormularioModelo, Constants {
 
     public static ControllerPrincipal ctrlPrincipal;
 

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class Variaveis {
+public class Variavel {
     public static String USUARIO_LOGADO_ID;
     public static String USUARIO_LOGADO_NOME;
     public static String USUARIO_LOGADO_APELIDO;

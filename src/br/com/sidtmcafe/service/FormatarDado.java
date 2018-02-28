@@ -18,7 +18,7 @@ import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class FormatadorDeDados implements Constants {
+public class FormatarDado implements Constants {
 
     String mascara;
     Matcher matcher;

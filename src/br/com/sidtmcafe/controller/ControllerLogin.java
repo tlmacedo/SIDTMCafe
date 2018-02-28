@@ -1,11 +1,11 @@
 package br.com.sidtmcafe.controller;
 
-import br.com.sidtmcafe.componentes.Variaveis;
+import br.com.sidtmcafe.componentes.Variavel;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.TabColaboradorDAO;
 import br.com.sidtmcafe.model.vo.TabColaboradorVO;
-import br.com.sidtmcafe.service.PasswordUtils;
+import br.com.sidtmcafe.service.PasswordUtil;
 import br.com.sidtmcafe.service.ServiceError;
 import br.com.sidtmcafe.view.ViewLogin;
 import br.com.sidtmcafe.view.ViewPrincipal;
@@ -26,7 +26,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-public class ControllerLogin extends Variaveis implements Initializable, FormularioModelo, Constants {
+public class ControllerLogin extends Variavel implements Initializable, FormularioModelo, Constants {
     public AnchorPane painelViewLogin;
     public JFXComboBox cboUsuarioLogin;
     public JFXPasswordField pswUsuarioSenha;
@@ -125,7 +125,7 @@ public class ControllerLogin extends Variaveis implements Initializable, Formula
     }
 
     void executaLogin(TabColaboradorVO colaboradorVO) {
-        boolean passwordMatch = PasswordUtils.verifyUserPassword(pswUsuarioSenha.getText(),
+        boolean passwordMatch = PasswordUtil.verifyUserPassword(pswUsuarioSenha.getText(),
                 colaboradorVO.getSenha(), colaboradorVO.getSenhaSalt());
         if (passwordMatch) {
             criarVariaveisSistema_UsuarioLogado(colaboradorVO);

@@ -2,7 +2,7 @@ package br.com.sidtmcafe.controller;
 
 import br.com.sidtmcafe.componentes.AlertMensagem;
 import br.com.sidtmcafe.componentes.Tarefa;
-import br.com.sidtmcafe.componentes.Variaveis;
+import br.com.sidtmcafe.componentes.Variavel;
 import br.com.sidtmcafe.database.ConnectionFactory;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.*;
@@ -30,15 +30,13 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 
 import static br.com.sidtmcafe.interfaces.Constants.*;
 
-public class ControllerCadastroEmpresa extends Variaveis implements Initializable, FormularioModelo {
+public class ControllerCadastroEmpresa extends Variavel implements Initializable, FormularioModelo {
 
     public AnchorPane painelViewCadastroEmpresa;
     public TitledPane tpnCadastroEmpresa;
@@ -90,7 +88,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     public JFXCheckBox chkPrazoRecibo;
 
 
-    FormatadorDeDados formatCNPJ_CPF, formatIE;
+    FormatarDado formatCNPJ_CPF, formatIE;
 
     @Override
     public void fechar() {
@@ -107,21 +105,21 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
         new Tarefa().tarefaAbreCadastroEmpresa(this, listaTarefas);
 
-        PersonalizarCampos.fieldMaxLen(painelViewCadastroEmpresa);
-        PersonalizarCampos.maskFields(painelViewCadastroEmpresa);
+        PersonalizarCampo.fieldMaxLen(painelViewCadastroEmpresa);
+        PersonalizarCampo.maskFields(painelViewCadastroEmpresa);
 
-        formatCNPJ_CPF = new FormatadorDeDados();
-        formatCNPJ_CPF.maskField(txtCNPJ, FormatadorDeDados.gerarMascara("cnpj", 0, "#"));
-        formatIE = new FormatadorDeDados();
-        formatIE.maskField(txtIE, FormatadorDeDados.gerarMascara("ie", 0, "#"));
+        formatCNPJ_CPF = new FormatarDado();
+        formatCNPJ_CPF.maskField(txtCNPJ, FormatarDado.gerarMascara("cnpj", 0, "#"));
+        formatIE = new FormatarDado();
+        formatIE.maskField(txtIE, FormatarDado.gerarMascara("ie", 0, "#"));
         txtPesquisa.requestFocus();
     }
 
     @Override
     public void fatorarObjetos() {
-        FormatadorDeDados.fatorarColunaCheckBox(colunaIsCliente);
-        FormatadorDeDados.fatorarColunaCheckBox(colunaIsFornecedor);
-        FormatadorDeDados.fatorarColunaCheckBox(colunaIsTransportadora);
+        FormatarDado.fatorarColunaCheckBox(colunaIsCliente);
+        FormatarDado.fatorarColunaCheckBox(colunaIsFornecedor);
+        FormatarDado.fatorarColunaCheckBox(colunaIsTransportadora);
     }
 
     @Override
@@ -162,7 +160,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                                             + ", deseja cancelar inclusão no cadastro de empresa?",
                                             "ic_cadastro_empresas_white_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
                                         return;
-                                    PersonalizarCampos.clearField((AnchorPane) tpnDadosCadastrais.getContent());
+                                    PersonalizarCampo.clearField((AnchorPane) tpnDadosCadastrais.getContent());
                                     break;
                                 case "editar":
                                     if (new AlertMensagem("Cancelar edição", USUARIO_LOGADO_APELIDO
@@ -243,14 +241,14 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                 txtFantasia.setPromptText("Fantasia");
                 txtCNPJ.setPromptText("C.N.P.J.");
                 formatCNPJ_CPF.setMascara("cnpj");
-                txtCNPJ.setText(FormatadorDeDados.getCampoFormatado(txtCNPJ.getText(), "cnpj"));
+                txtCNPJ.setText(FormatarDado.getCampoFormatado(txtCNPJ.getText(), "cnpj"));
             } else {
                 txtIE.setPromptText("RG");
                 txtRazao.setPromptText("Nome");
                 txtFantasia.setPromptText("Apelido");
                 txtCNPJ.setPromptText("C.P.F.");
                 formatCNPJ_CPF.setMascara("cpf");
-                txtCNPJ.setText(FormatadorDeDados.getCampoFormatado(txtCNPJ.getText(), "cpf"));
+                txtCNPJ.setText(FormatarDado.getCampoFormatado(txtCNPJ.getText(), "cpf"));
             }
         });
 
@@ -261,7 +259,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                 String tipBusca = "C.N.P.J.";
                 if (idTipBusca == 0) tipBusca = "C.P.F.";
 
-                if ((valCnpj.length() != 11 && valCnpj.length() != 14) & (!ValidadorDeDados.isCnpjCpfValido(valCnpj))) {
+                if ((valCnpj.length() != 11 && valCnpj.length() != 14) & (!ValidadarDado.isCnpjCpfValido(valCnpj))) {
                     new AlertMensagem("Dado inválido!", USUARIO_LOGADO_APELIDO + ", o " + tipBusca + ": " + txtCNPJ.getText() + " é inválido!",
                             "ic_web_service_err_white_24dp").getRetornoAlert_OK();
                     txtCNPJ.requestFocus();
@@ -279,11 +277,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                         txtCNPJ.selectAll();
                     } else {
                         exibirRetorno_WsCnpjReceitaWs(wsCnpjReceitaWsVO);
-                        //ttvEmpresaVO = new TabEmpresaDAO().getEmpresaVO(wsCnpjReceitaWsVO, ttvEmpresaVO);
                     }
-                    //exibirDadosEmpresa();
                     listEndereco.getSelectionModel().select(0);
-                    //exibirDadosEndereco();
                 }
             }
         });
@@ -328,9 +323,14 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                     if (listEndereco.getSelectionModel().getSelectedIndex() == 0) {
                         String uf = cboEndUF.getItems().get(n.intValue()).getSigla();
                         formatIE.setMascara("ie" + uf);
-                        txtIE.setText(FormatadorDeDados.getCampoFormatado(txtIE.getText(), "ie" + uf));
+                        txtIE.setText(FormatarDado.getCampoFormatado(txtIE.getText(), "ie" + uf));
+                    } else {
+                        formatIE.setMascara("ie");
+                        txtIE.setText(FormatarDado.getCampoFormatado(txtIE.getText(), "ie"));
                     }
                 } catch (Exception ex) {
+                    formatIE.setMascara("ie");
+                    txtIE.setText(FormatarDado.getCampoFormatado(txtIE.getText(), "ie"));
                     if (!(ex instanceof IndexOutOfBoundsException))
                         ex.printStackTrace();
                 }
@@ -525,21 +525,21 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     public void setStatusBarFormulario(String statusFormulario) {
         if (statusFormulario.toLowerCase().contains("incluir")) {
-            PersonalizarCampos.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
-            PersonalizarCampos.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), false);
-            PersonalizarCampos.clearField((AnchorPane) tpnDadosCadastrais.getContent());
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), false);
+            PersonalizarCampo.clearField((AnchorPane) tpnDadosCadastrais.getContent());
             cboClassificacaoJuridica.requestFocus();
             cboClassificacaoJuridica.getSelectionModel().select(0);
             cboClassificacaoJuridica.getSelectionModel().select(1);
             this.statusBarFormulario = STATUSBARINCLUIR;
         } else if (statusFormulario.toLowerCase().contains("editar")) {
-            PersonalizarCampos.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
-            PersonalizarCampos.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), false);
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), false);
             txtCNPJ.requestFocus();
             this.statusBarFormulario = STATUSBAREDITAR;
         } else if (statusFormulario.toLowerCase().contains("pesquisa")) {
-            PersonalizarCampos.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), false);
-            PersonalizarCampos.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), true);
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), false);
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), true);
             txtPesquisa.requestFocus();
             this.statusBarFormulario = STATUSBARPESQUISA;
         }
@@ -592,8 +592,8 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             colunaCnpj.setStyle("-fx-alignment: center-right;");
             colunaCnpj.setCellValueFactory(param -> {
                 if (param.getValue().getValue().isPessoaJuridicaProperty().get() == 0)
-                    return new SimpleStringProperty(FormatadorDeDados.getCampoFormatado(param.getValue().getValue().cnpjProperty().getValue(), "cpf"));
-                return new SimpleStringProperty(FormatadorDeDados.getCampoFormatado(param.getValue().getValue().cnpjProperty().getValue(), "cnpj"));
+                    return new SimpleStringProperty(FormatarDado.getCampoFormatado(param.getValue().getValue().cnpjProperty().getValue(), "cpf"));
+                return new SimpleStringProperty(FormatarDado.getCampoFormatado(param.getValue().getValue().cnpjProperty().getValue(), "cnpj"));
             });
 
             Label lblIe = new Label(("IE / RG"));
@@ -605,7 +605,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             colunaIe.setCellValueFactory(param -> {
                 try {
                     if (param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty().get() != "")
-                        return new SimpleStringProperty(FormatadorDeDados.getCampoFormatado(param.getValue().getValue().ieProperty().getValue(), "ie" + param.getValue().getValue().getEnderecoVOList().get(0).getUfVO().getSigla()));
+                        return new SimpleStringProperty(FormatarDado.getCampoFormatado(param.getValue().getValue().ieProperty().getValue(), "ie" + param.getValue().getValue().getEnderecoVOList().get(0).getUfVO().getSigla()));
                     return param.getValue().getValue().ieProperty();
                 } catch (Exception ex) {
                     return param.getValue().getValue().ieProperty();
@@ -998,14 +998,14 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         String tipFormat = "cnpj";
         if (cboClassificacaoJuridica.getSelectionModel().getSelectedIndex() == 0)
             tipFormat = "cpf";
-        txtCNPJ.setText(FormatadorDeDados.getCampoFormatado(getTtvEmpresaVO().getCnpj(), tipFormat));
+        txtCNPJ.setText(FormatarDado.getCampoFormatado(getTtvEmpresaVO().getCnpj(), tipFormat));
 
 //        try {
 //            if (getTtvEmpresaVO().getEnderecoVOList().get(0).logradouroProperty().get() != "") {
 //                String uf = cboEndUF.getSelectionModel().getSelectedItem().getSigla();
 //                String ie = getTtvEmpresaVO().getIe().replaceAll("[\\-/. \\[\\]]", "");
 //                formatIE.setMascara("ie" + uf);
-//                txtIE.setText(FormatadorDeDados.getCampoFormatado(ie, formatIE.getMascara()));
+//                txtIE.setText(FormatarDado.getCampoFormatado(ie, formatIE.getMascara()));
 //            }
 //        } catch (Exception ex) {
         txtIE.setText(getTtvEmpresaVO().getIe());
@@ -1023,17 +1023,17 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         if (getTtvEmpresaVO().getDataAbertura() != null) {
             LocalDate ldAbertura = getTtvEmpresaVO().getDataAbertura().toLocalDate();
             lblDataAbertura.setText("data abertura: " + ldAbertura.format(DTF_DATA));
-            lblDataAberturaDiff.setText("tempo de abertura: " + DatasTrabalhadas.getStrIntervaloDatas(ldAbertura, null));
+            lblDataAberturaDiff.setText("tempo de abertura: " + DataTrabalhada.getStrIntervaloDatas(ldAbertura, null));
         }
         LocalDateTime ldtCadastro = getTtvEmpresaVO().getDataCadastro().toLocalDateTime().atZone(MY_ZONE_TIME).toLocalDateTime();
         lblDataCadastro.setText("data cadastro: " + ldtCadastro.format(DTF_DATAHORA) + " [" + getTtvEmpresaVO().getUsuarioCadastroVO().getApelido() + "]");
-        lblDataCadastroDiff.setText("tempo de cadastro: " + DatasTrabalhadas.getStrIntervaloDatas(ldtCadastro.toLocalDate(), null));
+        lblDataCadastroDiff.setText("tempo de cadastro: " + DataTrabalhada.getStrIntervaloDatas(ldtCadastro.toLocalDate(), null));
         lblDataAtualizacao.setText("");
         lblDataAtualizacaoDiff.setText("");
         if (getTtvEmpresaVO().getDataAtualizacao() != null) {
             LocalDateTime ldtAtualizacao = getTtvEmpresaVO().getDataAtualizacao().toLocalDateTime().atZone(MY_ZONE_TIME).toLocalDateTime();
             lblDataAtualizacao.setText("data atualização: " + ldtAtualizacao.format(DTF_DATAHORA) + " [" + getTtvEmpresaVO().getUsuarioAtualizacaoVO().getApelido() + "]");
-            lblDataAtualizacaoDiff.setText("tempo de atualização: " + DatasTrabalhadas.getStrIntervaloDatas(ldtAtualizacao.toLocalDate(), null));
+            lblDataAtualizacaoDiff.setText("tempo de atualização: " + DataTrabalhada.getStrIntervaloDatas(ldtAtualizacao.toLocalDate(), null));
         }
 
         preencherListaEnderecoEmpresa();
@@ -1060,7 +1060,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             index = 0;
         //limparEndereco();
         TabEnderecoVO enderecoVO = listEndereco.getItems().get(index);
-        txtEndCEP.setText(FormatadorDeDados.getCampoFormatado(enderecoVO.getCep(), "cep"));
+        txtEndCEP.setText(FormatarDado.getCampoFormatado(enderecoVO.getCep(), "cep"));
         txtEndLogradouro.setText(enderecoVO.getLogradouro());
         txtEndNumero.setText(enderecoVO.getNumero());
         txtEndComplemento.setText(enderecoVO.getComplemento());
@@ -1188,16 +1188,16 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     }
 
     List<SisTipoEnderecoVO> getTipoEnderecoDisponivel() {
-        List<SisTipoEnderecoVO> endDisponiveis = new ArrayList<>();
+        List<SisTipoEnderecoVO> endDisponivel = new ArrayList<>();
         for (SisTipoEnderecoVO tipEnd : tipoEnderecoVOList) {
             int exite = 0;
             for (int i = 0; i < listEndereco.getItems().size(); i++) {
                 if (tipEnd.getDescricao().equals(listEndereco.getItems().get(i).getTipoEnderecoVO().getDescricao()))
                     exite = 1;
             }
-            if (exite == 0) endDisponiveis.add(tipEnd);
+            if (exite == 0) endDisponivel.add(tipEnd);
         }
-        return endDisponiveis;
+        return endDisponivel;
     }
 
     TabEmailHomePageVO addEmailHomePage(boolean isEmpresa, boolean isEmail) {
@@ -1213,7 +1213,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         try {
             strEmailHomePage = new AlertMensagem("Adicionar dados [" + tipDado + "]",
                     USUARIO_LOGADO_APELIDO + ", qual " + tipDado + " a ser adicionada para " + empresa + " ?",
-                    ico).getRetornoAlert_TextField(FormatadorDeDados.gerarMascara("", 80, "?"), "").get();
+                    ico).getRetornoAlert_TextField(FormatarDado.gerarMascara("", 80, "?"), "").get();
         } catch (Exception ex) {
             if (!(ex instanceof NoSuchElementException))
                 ex.printStackTrace();
@@ -1248,7 +1248,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         try {
             strEmailHomePage = new AlertMensagem("Editar informações [" + tipDado + "]",
                     USUARIO_LOGADO_APELIDO + ", qual alteração será feita no " + tipDado + " d" + empresa + " ?",
-                    ico).getRetornoAlert_TextField(FormatadorDeDados.gerarMascara("", 80, "?"),
+                    ico).getRetornoAlert_TextField(FormatarDado.gerarMascara("", 80, "?"),
                     emailHomePageVO.getDescricao()).get();
         } catch (Exception ex) {
             if (!(ex instanceof NoSuchElementException))
@@ -1279,7 +1279,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         alertMensagem.setStrIco("ic_telefone_white_24dp.png");
         try {
             pairTelefone = alertMensagem.getRetornoAlert_TextFieldEComboBox(telefoneOperadoraVOList,
-                    FormatadorDeDados.gerarMascara("", 9, "#"), "").get();
+                    FormatarDado.gerarMascara("", 9, "#"), "").get();
         } catch (Exception ex) {
             if (!(ex instanceof NoSuchElementException))
                 ex.printStackTrace();
@@ -1313,7 +1313,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         alertMensagem.setStrIco("ic_telefone_white_24dp.png");
         try {
             pairTelefone = alertMensagem.getRetornoAlert_TextFieldEComboBox(telefoneOperadoraVOList,
-                    FormatadorDeDados.gerarMascara("", 9, "#"), telefone.getDescricao()).get();
+                    FormatarDado.gerarMascara("", 9, "#"), telefone.getDescricao()).get();
         } catch (Exception ex) {
             if (!(ex instanceof NoSuchElementException))
                 ex.printStackTrace();
@@ -1343,7 +1343,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         alertMensagem.setStrIco("ic_contato_add_white_24dp.png");
         try {
             pairContato = alertMensagem.getRetornoAlert_TextFieldEComboBox(cargoVOList,
-                    FormatadorDeDados.gerarMascara("", 80, "@"), "").get();
+                    FormatarDado.gerarMascara("", 80, "@"), "").get();
         } catch (Exception ex) {
             if (!(ex instanceof NoSuchElementException)) {
                 ex.printStackTrace();
@@ -1374,7 +1374,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         alertMensagem.setStrIco("ic_contato_add_white_24dp.png");
         try {
             pairContato = alertMensagem.getRetornoAlert_TextFieldEComboBox(cargoVOList,
-                    FormatadorDeDados.gerarMascara("", 80, "@"),
+                    FormatarDado.gerarMascara("", 80, "@"),
                     contato.getDescricao()).get();
         } catch (Exception ex) {
             if (!(ex instanceof NoSuchElementException)) {
@@ -1401,7 +1401,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
     boolean validarDadosEmpresa() {
         boolean result = true;
         String valCnpj = txtCNPJ.getText().replaceAll("[\\-/. \\[\\]]", "");
-        if ((valCnpj.length() != 11 && valCnpj.length() != 14) & (!ValidadorDeDados.isCnpjCpfValido(valCnpj))) {
+        if ((valCnpj.length() != 11 && valCnpj.length() != 14) & (!ValidadarDado.isCnpjCpfValido(valCnpj))) {
             txtCNPJ.requestFocus();
             result = false;
         }
@@ -1471,6 +1471,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         cboClassificacaoJuridica.getSelectionModel().select(1);
         txtCNPJ.setText(receitaWsVO.getCnpj());
         txtRazao.setText(receitaWsVO.getNome());
+        if (receitaWsVO.getFantasia().equals("")) receitaWsVO.setFantasia("***");
         txtFantasia.setText(receitaWsVO.getFantasia());
 
         lblNaturezaJuridica.setText("Natureza Júridica: " + receitaWsVO.getNaturezaJuridica());
@@ -1479,7 +1480,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         if (receitaWsVO.getAbertura() != null) {
             LocalDate ldAbertura = LocalDate.parse(receitaWsVO.getAbertura(), DTF_DATA);
             lblDataAbertura.setText("data abertura: " + ldAbertura.format(DTF_DATA));
-            lblDataAberturaDiff.setText("tempo de abertura: " + DatasTrabalhadas.getStrIntervaloDatas(ldAbertura, null));
+            lblDataAberturaDiff.setText("tempo de abertura: " + DataTrabalhada.getStrIntervaloDatas(ldAbertura, null));
         }
 
         if (getTtvEnderecoVO().size() == 0) {
@@ -1488,8 +1489,9 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
         }
         listEndereco.getSelectionModel().select(0);
         String valCep = receitaWsVO.getCep().replaceAll("[\\-/. \\[\\]]", "");
-        txtEndCEP.setText(FormatadorDeDados.getCampoFormatado(valCep, "cep"));
+        txtEndCEP.setText(FormatarDado.getCampoFormatado(valCep, "cep"));
         txtEndLogradouro.setText(receitaWsVO.getLogradouro());
+        if (receitaWsVO.getNumero().equals("")) receitaWsVO.setNumero("0");
         txtEndNumero.setText(receitaWsVO.getNumero());
         txtEndComplemento.setText(receitaWsVO.getComplemento());
         txtEndBairro.setText(receitaWsVO.getBairro());
@@ -1504,7 +1506,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
             List<String> receitaWsTelefone = new ArrayList<>();
             for (String strCodTelefone : receitaWsVO.getTelefone().replaceAll("[-]", "").split("/")) {
                 boolean telExiste = false;
-                strCodTelefone = strCodTelefone.substring(strCodTelefone.length() - 9).replaceAll("[\\-/. \\[\\]]", "");
+                strCodTelefone = strCodTelefone.substring(strCodTelefone.length() - 9).replaceAll("[\\-/.() \\[\\]]", "");
                 if (strCodTelefone.length() == 8 & Integer.parseInt(strCodTelefone.substring(0, 1)) >= 8)
                     strCodTelefone = "9" + strCodTelefone;
                 for (int i = 0; i < getTtvTelefoneVO().size(); i++) {
@@ -1527,11 +1529,10 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
         if (receitaWsVO.getEmail() != "") {
             List<String> receitaWsEmail = new ArrayList<>();
-            String emails = receitaWsVO.getEmail().replaceAll("@", "");
-            int qtdEmails = receitaWsVO.getEmail().length() - emails.length();
+            int qtdEmail = receitaWsVO.getEmail().length() - receitaWsVO.getEmail().replaceAll("@", "").length();
             String strEmail = null;
-            if (qtdEmails > 1) {
-                System.out.print(qtdEmails + " emails no wsReceitaWsVO\n" + qtdEmails + " emails no wsReceitaWsVO\n" + qtdEmails + " emails no wsReceitaWsVO\n" + qtdEmails + " emails no wsReceitaWsVO\n" + qtdEmails + " emails no wsReceitaWsVO\n" + qtdEmails + " emails no wsReceitaWsVO\n");
+            if (qtdEmail > 1) {
+                System.out.print(qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n");
             } else {
                 strEmail = receitaWsVO.getEmail();
             }
@@ -1625,7 +1626,7 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     void exibirRetorno_WsCepPostmon(WsCepPostmonVO cepPostmonVO) {
         String valCep = cepPostmonVO.getCep().replaceAll("[\\-/. \\[\\]]", "");
-        txtEndCEP.setText(FormatadorDeDados.getCampoFormatado(valCep, "cep"));
+        txtEndCEP.setText(FormatarDado.getCampoFormatado(valCep, "cep"));
         txtEndLogradouro.setText(cepPostmonVO.getLogradouro());
         txtEndNumero.setText("");
         txtEndComplemento.setText("");
@@ -1805,14 +1806,14 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
 
     public void salvarEmpresa() {
         Connection conn = ConnectionFactory.getConnection();
-        String cont_ids = "";
+        String cont_id = "";
         try {
             conn.setAutoCommit(false);
             if (getTtvEmpresaVO().getContatoVOList().size() > 0) {
                 for (TabContatoVO contatoVO : getTtvEmpresaVO().getContatoVOList()) {
                     setTtvContatoVO(contatoVO);
-                    String contTel_ids = "";
-                    String contEmailHome_ids = "";
+                    String contTel_id = "";
+                    String contEmailHome_id = "";
                     if (getTtvContatoTelefoneVO().size() > 0) {
                         for (TabTelefoneVO contTel : getTtvContatoTelefoneVO()) {
                             int id = 0;
@@ -1822,11 +1823,11 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                                 id = contTel.getId();
                                 new TabTelefoneDAO().updateTabTelefoneVO(conn, contTel);
                             }
-                            if ((!contTel_ids.equals("")) & id > 0)
-                                contTel_ids += ";";
-                            contTel_ids += id;
+                            if ((!contTel_id.equals("")) & id > 0)
+                                contTel_id += ";";
+                            contTel_id += id;
                         }
-                        contatoVO.setTelefone_ids(contTel_ids);
+                        contatoVO.setTelefone_ids(contTel_id);
                     }
                     if (getTtvContatoEmailHomePageVO().size() > 0) {
                         for (TabEmailHomePageVO contEmailHome : getTtvContatoEmailHomePageVO()) {
@@ -1837,11 +1838,11 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                                 id = contEmailHome.getId();
                                 new TabEmailHomePageDAO().updateTabEmailHomaPageVO(conn, contEmailHome);
                             }
-                            if ((!contEmailHome_ids.equals("")) & id > 0)
-                                contEmailHome_ids += ";";
-                            contEmailHome_ids += id;
+                            if ((!contEmailHome_id.equals("")) & id > 0)
+                                contEmailHome_id += ";";
+                            contEmailHome_id += id;
                         }
-                        contatoVO.setEmailHomePage_ids(contEmailHome_ids);
+                        contatoVO.setEmailHomePage_ids(contEmailHome_id);
                     }
                     int id = 0;
                     if (contatoVO.getId() == 0) {
@@ -1850,14 +1851,14 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                         id = contatoVO.getId();
                         new TabContatoDAO().updateTabContatoVO(conn, contatoVO);
                     }
-                    if ((!cont_ids.equals("")) & id > 0)
-                        cont_ids += ";";
-                    cont_ids += id;
+                    if ((!cont_id.equals("")) & id > 0)
+                        cont_id += ";";
+                    cont_id += id;
                 }
             }
-            String tel_ids = "";
-            String emailHome_ids = "";
-            String end_ids = "";
+            String tel_id = "";
+            String emailHome_id = "";
+            String end_id = "";
             if (getTtvTelefoneVO().size() > 0) {
                 for (TabTelefoneVO tel : getTtvTelefoneVO()) {
                     int id = 0;
@@ -1867,9 +1868,9 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                         id = tel.getId();
                         new TabTelefoneDAO().updateTabTelefoneVO(conn, tel);
                     }
-                    if ((!tel_ids.equals("")) & id > 0)
-                        tel_ids += ";";
-                    tel_ids += id;
+                    if ((!tel_id.equals("")) & id > 0)
+                        tel_id += ";";
+                    tel_id += id;
                 }
             }
             if (getTtvEmailHomePageVO().size() > 0) {
@@ -1881,9 +1882,9 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                         id = emailHome.getId();
                         new TabEmailHomePageDAO().updateTabEmailHomaPageVO(conn, emailHome);
                     }
-                    if ((!emailHome_ids.equals("")) & id > 0)
-                        emailHome_ids += ";";
-                    emailHome_ids += id;
+                    if ((!emailHome_id.equals("")) & id > 0)
+                        emailHome_id += ";";
+                    emailHome_id += id;
                 }
             }
             guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
@@ -1896,12 +1897,12 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                         id = endereco.getId();
                         new TabEnderecoDAO().updateTabEnderecoVO(conn, endereco);
                     }
-                    if ((!end_ids.equals("")) & id > 0)
-                        end_ids += ";";
-                    end_ids += id;
+                    if ((!end_id.equals("")) & id > 0)
+                        end_id += ";";
+                    end_id += id;
                 }
 
-            setTtvEmpresaVO(guardarEmpresa(end_ids, tel_ids, cont_ids, emailHome_ids));
+            setTtvEmpresaVO(guardarEmpresa(end_id, tel_id, cont_id, emailHome_id));
             int idEmpresa = 0;
             if ((idEmpresa = getTtvEmpresaVO().getId()) == 0) {
                 idEmpresa = new TabEmpresaDAO().insertTabEmpresaVO(conn, getTtvEmpresaVO());
@@ -1920,7 +1921,6 @@ public class ControllerCadastroEmpresa extends Variaveis implements Initializabl
                     }
             conn.commit();
         } catch (Exception ex) {
-            //1966-08-08 00:00:00.0
             System.out.println("Exception ex:");
             ex.printStackTrace();
             try {

@@ -1,12 +1,11 @@
 package br.com.sidtmcafe.model.vo;
 
-import br.com.sidtmcafe.service.FormatadorDeDados;
+import br.com.sidtmcafe.service.FormatarDado;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.apache.velocity.runtime.directive.contrib.For;
 
 public class TabTelefoneVO extends RecursiveTreeObject<TabTelefoneVO> {
 
@@ -75,7 +74,7 @@ public class TabTelefoneVO extends RecursiveTreeObject<TabTelefoneVO> {
     @Override
     public String toString() {
         String telefone = descricaoProperty().get();
-        if (telefone.length()>0) telefone = FormatadorDeDados.getCampoFormatado(telefone,"telefone");
+        if (telefone.length()>0) telefone = FormatarDado.getCampoFormatado(telefone,"telefone");
         if (telefoneOperadoraVO != null)
             if (telefoneOperadoraVO.getTipo() == 0 || (Integer.parseInt(telefone.substring(0, 1)) < 8)) {
                 telefone += " fixo (" + telefoneOperadoraVO.getDescricao() + ")";

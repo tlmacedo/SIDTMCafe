@@ -257,7 +257,7 @@
   .jfx-check-box:selected .lbl_ico_fornecedor {
     -fx-background-image: url("/images/icos/ic_fornecedor_orange_24dp.png"); }
   .jfx-check-box:selected .lbl_ico_transportadora {
-    -fx-background-image: url("/images/icos/ic_fornecedor_orange_24dp.png"); }
+    -fx-background-image: url("/images/icos/ic_transportadora_caminhao_orange_24dp.png"); }
   .jfx-check-box :disabled {
     -fx-opacity: 1.0; }
 

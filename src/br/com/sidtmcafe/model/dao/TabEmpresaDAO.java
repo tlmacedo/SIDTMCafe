@@ -112,10 +112,10 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
     public void updateTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) throws SQLException {
         comandoSql = "UPDATE tabEmpresa SET ";
         comandoSql += "isPessoaJuridica = " + empresaVO.getIsPessoaJuridica() + ", ";
-        comandoSql += "cnpj = '" + empresaVO.getCnpj() + "', ";
-        comandoSql += "ie = '" + empresaVO.getIe() + "', ";
-        comandoSql += "razao = '" + empresaVO.getRazao() + "', ";
-        comandoSql += "fantasia = '" + empresaVO.getFantasia() + "', ";
+        comandoSql += "cnpj = '" + empresaVO.getCnpj().replaceAll("'", "") + "', ";
+        comandoSql += "ie = '" + empresaVO.getIe().replaceAll("'", "") + "', ";
+        comandoSql += "razao = '" + empresaVO.getRazao().replaceAll("'", "") + "', ";
+        comandoSql += "fantasia = '" + empresaVO.getFantasia().replaceAll("'", "") + "', ";
         comandoSql += "isCliente = " + empresaVO.getIsCliente() + ", ";
         comandoSql += "isFornecedor = " + empresaVO.getIsFornecedor() + ", ";
         comandoSql += "isTransportadora = " + empresaVO.getIsTransportadora() + ", ";
@@ -126,7 +126,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         comandoSql += "usuarioAtualizacao_id = " + empresaVO.getUsuarioAtualizacao_id() + ", ";
         comandoSql += "situacaoSistema_id = " + empresaVO.getSituacaoSistema_id() + ", ";
         comandoSql += "dataAbertura = '" + empresaVO.getDataAbertura() + "', ";
-        comandoSql += "naturezaJuridica = '" + empresaVO.getNaturezaJuridica() + "' ";
+        comandoSql += "naturezaJuridica = '" + empresaVO.getNaturezaJuridica().replaceAll("'", "") + "' ";
         comandoSql += "WHERE id = " + empresaVO.getId();
 
         if (getUpdateBancoDados(conn, comandoSql)) ;
@@ -139,10 +139,10 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         comandoSql += "usuarioCadastro_id, situacaoSistema_id, dataAbertura, naturezaJuridica) ";
         comandoSql += "VALUES(";
         comandoSql += empresaVO.getIsPessoaJuridica() + ", ";
-        comandoSql += "'" + empresaVO.getCnpj() + "', ";
-        comandoSql += "'" + empresaVO.getIe() + "', ";
-        comandoSql += "'" + empresaVO.getRazao() + "', ";
-        comandoSql += "'" + empresaVO.getFantasia() + "', ";
+        comandoSql += "'" + empresaVO.getCnpj().replaceAll("'", "") + "', ";
+        comandoSql += "'" + empresaVO.getIe().replaceAll("'", "") + "', ";
+        comandoSql += "'" + empresaVO.getRazao().replaceAll("'", "") + "', ";
+        comandoSql += "'" + empresaVO.getFantasia().replaceAll("'", "") + "', ";
         comandoSql += empresaVO.getIsCliente() + ", ";
         comandoSql += empresaVO.getIsFornecedor() + ", ";
         comandoSql += empresaVO.getIsTransportadora() + ", ";
@@ -153,7 +153,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         comandoSql += empresaVO.getUsuarioCadastro_id() + ", ";
         comandoSql += empresaVO.getSituacaoSistema_id() + ", ";
         comandoSql += empresaVO.getDataAbertura() + ", ";
-        comandoSql += "'" + empresaVO.getNaturezaJuridica() + "'";
+        comandoSql += "'" + empresaVO.getNaturezaJuridica().replaceAll("'", "") + "'";
         comandoSql += ") ";
 
         return getInsertBancoDados(conn, comandoSql);
