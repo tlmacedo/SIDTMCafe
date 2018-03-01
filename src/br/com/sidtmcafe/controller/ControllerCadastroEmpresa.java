@@ -320,17 +320,14 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             //if (!getStatusFormulario().toLowerCase().equals("pesquisa"))
             if ((o.intValue() >= 0) && (n.intValue() != o.intValue()) && (n.intValue() >= 0))
                 try {
+                    formatIE.setMascara("ie");
+                    txtIE.setText(FormatarDado.getCampoFormatado(txtIE.getText(), "ie"));
                     if (listEndereco.getSelectionModel().getSelectedIndex() == 0) {
                         String uf = cboEndUF.getItems().get(n.intValue()).getSigla();
                         formatIE.setMascara("ie" + uf);
                         txtIE.setText(FormatarDado.getCampoFormatado(txtIE.getText(), "ie" + uf));
-                    } else {
-                        formatIE.setMascara("ie");
-                        txtIE.setText(FormatarDado.getCampoFormatado(txtIE.getText(), "ie"));
                     }
                 } catch (Exception ex) {
-                    formatIE.setMascara("ie");
-                    txtIE.setText(FormatarDado.getCampoFormatado(txtIE.getText(), "ie"));
                     if (!(ex instanceof IndexOutOfBoundsException))
                         ex.printStackTrace();
                 }
@@ -577,18 +574,18 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     public void criarTabelaEmpresa() {
         try {
             Label lblId = new Label("id");
-            lblId.setPrefWidth(30);
+            lblId.setPrefWidth(28);
             colunaId = new JFXTreeTableColumn<TabEmpresaVO, Integer>();
             colunaId.setGraphic(lblId);
-            colunaId.setPrefWidth(30);
+            colunaId.setPrefWidth(28);
             colunaId.setStyle("-fx-alignment: center-right;");
             colunaId.setCellValueFactory(param -> param.getValue().getValue().idProperty().asObject());
 
             Label lblCnpj = new Label("C.N.P.J / C.P.F.");
-            lblCnpj.setPrefWidth(120);
+            lblCnpj.setPrefWidth(110);
             colunaCnpj = new JFXTreeTableColumn<TabEmpresaVO, String>();
             colunaCnpj.setGraphic(lblCnpj);
-            colunaCnpj.setPrefWidth(120);
+            colunaCnpj.setPrefWidth(110);
             colunaCnpj.setStyle("-fx-alignment: center-right;");
             colunaCnpj.setCellValueFactory(param -> {
                 if (param.getValue().getValue().isPessoaJuridicaProperty().get() == 0)
@@ -597,10 +594,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             });
 
             Label lblIe = new Label(("IE / RG"));
-            lblIe.setPrefWidth(75);
+            lblIe.setPrefWidth(90);
             colunaIe = new JFXTreeTableColumn<TabEmpresaVO, String>();
             colunaIe.setGraphic(lblIe);
-            colunaIe.setPrefWidth(75);
+            colunaIe.setPrefWidth(90);
             colunaIe.setStyle("-fx-alignment: center-right;");
             colunaIe.setCellValueFactory(param -> {
                 try {
@@ -613,27 +610,27 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             });
 
             Label lblRazao = new Label("Razão / Nome");
-            lblRazao.setPrefWidth(200);
+            lblRazao.setPrefWidth(250);
             colunaRazao = new JFXTreeTableColumn<TabEmpresaVO, String>();
             colunaRazao.setGraphic(lblRazao);
-            colunaRazao.setPrefWidth(200);
+            colunaRazao.setPrefWidth(250);
             colunaRazao.setCellValueFactory(param -> param.getValue().getValue().razaoProperty());
 
             Label lblFantasia = new Label("Fantasia / Apelido");
-            lblFantasia.setPrefWidth(110);
+            lblFantasia.setPrefWidth(150);
             colunaFantasia = new JFXTreeTableColumn<TabEmpresaVO, String>();
             colunaFantasia.setGraphic(lblFantasia);
-            colunaFantasia.setPrefWidth(110);
+            colunaFantasia.setPrefWidth(150);
             colunaFantasia.setCellValueFactory(param -> param.getValue().getValue().fantasiaProperty());
 
             colunaEndereco = new JFXTreeTableColumn<TabEmpresaVO, String>("Endereço");
             colunaEndereco.setStyle("-fx-alignment: center;");
 
             Label lblEndLogradouro = new Label("Logradouro");
-            lblEndLogradouro.setPrefWidth(140);
+            lblEndLogradouro.setPrefWidth(170);
             colunaEndLogradouro = new JFXTreeTableColumn<TabEmpresaVO, String>();
             colunaEndLogradouro.setGraphic(lblEndLogradouro);
-            colunaEndLogradouro.setPrefWidth(140);
+            colunaEndLogradouro.setPrefWidth(170);
             colunaEndLogradouro.setCellValueFactory(param -> {
                 if (param.getValue().getValue().getEnderecoVOList().size() > 0)
                     if (param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty() != null)
@@ -642,10 +639,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             });
 
             Label lblEndNumero = new Label("Número");
-            lblEndNumero.setPrefWidth(50);
+            lblEndNumero.setPrefWidth(40);
             colunaEndNumero = new JFXTreeTableColumn<TabEmpresaVO, String>();
             colunaEndNumero.setGraphic(lblEndNumero);
-            colunaEndNumero.setPrefWidth(50);
+            colunaEndNumero.setPrefWidth(40);
             colunaEndNumero.setStyle("-fx-alignment: center-right;");
             colunaEndNumero.setCellValueFactory(param -> {
                 if (param.getValue().getValue().getEnderecoVOList().size() > 0)
@@ -667,10 +664,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             });
 
             Label lblEndBairro = new Label("Bairro");
-            lblEndBairro.setPrefWidth(85);
+            lblEndBairro.setPrefWidth(95);
             colunaEndBairro = new JFXTreeTableColumn<TabEmpresaVO, String>();
             colunaEndBairro.setGraphic(lblEndBairro);
-            colunaEndBairro.setPrefWidth(85);
+            colunaEndBairro.setPrefWidth(95);
             colunaEndBairro.setCellValueFactory(param -> {
                 if (param.getValue().getValue().getEnderecoVOList().size() > 0)
                     if (param.getValue().getValue().getEnderecoVOList().get(0).bairroProperty() != null)
@@ -703,7 +700,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             vBoxIsCliente.setAlignment(Pos.CENTER);
             vBoxIsCliente.getChildren().addAll(lblImgIsCliente, lblIsCliente);
             colunaIsCliente = new JFXTreeTableColumn<TabEmpresaVO, Boolean>();
-            colunaIsCliente.setPrefWidth(65);
+            colunaIsCliente.setPrefWidth(55);
             colunaIsCliente.setGraphic(vBoxIsCliente);
             colunaIsCliente.setCellValueFactory(param -> {
                 if (param.getValue().getValue().getIsCliente() == 0) return new SimpleBooleanProperty(false);
@@ -718,7 +715,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             vBoxIsFornecedor.setAlignment(Pos.CENTER);
             vBoxIsFornecedor.getChildren().addAll(lblImgIsFornecedor, lblIsFornecedor);
             colunaIsFornecedor = new JFXTreeTableColumn<TabEmpresaVO, Boolean>();
-            colunaIsFornecedor.setPrefWidth(65);
+            colunaIsFornecedor.setPrefWidth(55);
             colunaIsFornecedor.setGraphic(vBoxIsFornecedor);
             colunaIsFornecedor.setCellValueFactory(param -> {
                 if (param.getValue().getValue().getIsFornecedor() == 0) return new SimpleBooleanProperty(false);
@@ -733,7 +730,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             vBoxIsTransportadora.setAlignment(Pos.CENTER);
             vBoxIsTransportadora.getChildren().addAll(lblImgIsTransportadora, lblIsTransportadora);
             colunaIsTransportadora = new JFXTreeTableColumn<TabEmpresaVO, Boolean>();
-            colunaIsTransportadora.setPrefWidth(65);
+            colunaIsTransportadora.setPrefWidth(55);
             colunaIsTransportadora.setGraphic(vBoxIsTransportadora);
             colunaIsTransportadora.setCellValueFactory(param -> {
                 if (param.getValue().getValue().getIsTransportadora() == 0) return new SimpleBooleanProperty(false);
@@ -1136,7 +1133,8 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         endVO.setBairro(txtEndBairro.getText());
         endVO.setUf_id(cboEndUF.getSelectionModel().getSelectedItem().getId());
         endVO.setUfVO(cboEndUF.getSelectionModel().getSelectedItem());
-        endVO.setMunicipio_id(cboEndMunicipio.getSelectionModel().getSelectedItem().getId());
+        if (cboEndMunicipio.getSelectionModel().getSelectedItem() != null)
+            endVO.setMunicipio_id(cboEndMunicipio.getSelectionModel().getSelectedItem().getId());
         endVO.setMunicipioVO(cboEndMunicipio.getSelectionModel().getSelectedItem());
         endVO.setPontoReferencia(txtEndPontoReferencia.getText());
         getTtvEnderecoVO().set(index, endVO);
@@ -1491,14 +1489,16 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         String valCep = receitaWsVO.getCep().replaceAll("[\\-/. \\[\\]]", "");
         txtEndCEP.setText(FormatarDado.getCampoFormatado(valCep, "cep"));
         txtEndLogradouro.setText(receitaWsVO.getLogradouro());
-        if (receitaWsVO.getNumero().equals("")) receitaWsVO.setNumero("0");
         txtEndNumero.setText(receitaWsVO.getNumero());
+        if (receitaWsVO.getNumero().equals("")) txtEndNumero.setText("0");
         txtEndComplemento.setText(receitaWsVO.getComplemento());
         txtEndBairro.setText(receitaWsVO.getBairro());
-        if (receitaWsVO.getUf().equals("")) receitaWsVO.setUf("AM");
-        cboEndUF.getSelectionModel().select(new SisUFDAO().getUfVO(receitaWsVO.getUf()));
-        if (receitaWsVO.getMunicipio().equals("")) receitaWsVO.setMunicipio("MANAUS");
-        cboEndMunicipio.getSelectionModel().select(new SisMunicipioDAO().getMunicipioVO(receitaWsVO.getMunicipio()));
+        if (receitaWsVO.getUf().equals("")) {
+            cboEndUF.getSelectionModel().select(0);
+        } else {
+            cboEndUF.getSelectionModel().select(new SisUFDAO().getUfVO(receitaWsVO.getUf()));
+            cboEndMunicipio.getSelectionModel().select(new SisMunicipioDAO().getMunicipioVO(receitaWsVO.getMunicipio()));
+        }
         txtEndPontoReferencia.setText("");
         guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
 
