@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public interface Constants {
@@ -55,8 +56,8 @@ public interface Constants {
     String TOKEN_EXTENSAO_ARQUIVO = "cfg";
 
     /* Constants para utilizacao de datas e horas */
-    String LOCAL_TIME_ZONE = "America/Manaus";
-    ZoneId MY_ZONE_TIME = ZoneId.systemDefault();//.of(LOCAL_TIME_ZONE);
+    String LOCAL_TIME_ZONE = "-04:00";
+    ZoneId MY_ZONE_TIME = ZoneId.of(LOCAL_TIME_ZONE);
     LocalDateTime DATAHORA_LOCAL = LocalDateTime.now().atZone(MY_ZONE_TIME).toLocalDateTime();
     DataFormat DT_DATA = new DataFormat("dd/MM/yyyy");
     DateTimeFormatter DTF_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");

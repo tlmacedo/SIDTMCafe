@@ -1022,13 +1022,13 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             lblDataAbertura.setText("data abertura: " + ldAbertura.format(DTF_DATA));
             lblDataAberturaDiff.setText("tempo de abertura: " + DataTrabalhada.getStrIntervaloDatas(ldAbertura, null));
         }
-        LocalDateTime ldtCadastro = getTtvEmpresaVO().getDataCadastro().toLocalDateTime().atZone(MY_ZONE_TIME).toLocalDateTime();
+        LocalDateTime ldtCadastro = getTtvEmpresaVO().getDataCadastro().toLocalDateTime();
         lblDataCadastro.setText("data cadastro: " + ldtCadastro.format(DTF_DATAHORA) + " [" + getTtvEmpresaVO().getUsuarioCadastroVO().getApelido() + "]");
         lblDataCadastroDiff.setText("tempo de cadastro: " + DataTrabalhada.getStrIntervaloDatas(ldtCadastro.toLocalDate(), null));
         lblDataAtualizacao.setText("");
         lblDataAtualizacaoDiff.setText("");
         if (getTtvEmpresaVO().getDataAtualizacao() != null) {
-            LocalDateTime ldtAtualizacao = getTtvEmpresaVO().getDataAtualizacao().toLocalDateTime().atZone(MY_ZONE_TIME).toLocalDateTime();
+            LocalDateTime ldtAtualizacao = getTtvEmpresaVO().getDataAtualizacao().toLocalDateTime();
             lblDataAtualizacao.setText("data atualização: " + ldtAtualizacao.format(DTF_DATAHORA) + " [" + getTtvEmpresaVO().getUsuarioAtualizacaoVO().getApelido() + "]");
             lblDataAtualizacaoDiff.setText("tempo de atualização: " + DataTrabalhada.getStrIntervaloDatas(ldtAtualizacao.toLocalDate(), null));
         }
