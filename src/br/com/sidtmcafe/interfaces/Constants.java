@@ -56,7 +56,7 @@ public interface Constants {
     String TOKEN_EXTENSAO_ARQUIVO = "cfg";
 
     /* Constants para utilizacao de datas e horas */
-    String LOCAL_TIME_ZONE = "-04:00";
+    String LOCAL_TIME_ZONE = "America/Manaus";
     ZoneId MY_ZONE_TIME = ZoneId.of(LOCAL_TIME_ZONE);
     LocalDateTime DATAHORA_LOCAL = LocalDateTime.now().atZone(MY_ZONE_TIME).toLocalDateTime();
     DataFormat DT_DATA = new DataFormat("dd/MM/yyyy");
