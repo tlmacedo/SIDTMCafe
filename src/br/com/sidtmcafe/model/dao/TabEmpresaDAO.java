@@ -40,7 +40,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
     void buscaTabEmpresaVO(int idTabEmpresaVO) {
         comandoSql = "SELECT * FROM tabEmpresa ";
         if (idTabEmpresaVO > 0) comandoSql += "WHERE id = '" + idTabEmpresaVO + "' ";
-        comandoSql += "ORDER BY id, razao, fantasia ";
+        comandoSql += "ORDER BY razao, fantasia ";
 
         empresaVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);

@@ -6,7 +6,7 @@
   -jfx-focus-color: #FF6600;
   -jfx-unfocus-color: #000000;
   -jfx-label-float: true; }
-  .view-cadastro-empresa .jfx-combo-box {
+  .view-cadastro-empresa .jfx-combo-box, .view-cadastro-produto .jfx-combo-box {
     -fx-font-size: 10px; }
 
 .view-login {
@@ -70,7 +70,7 @@
     -fx-background-size: cover;
     -fx-background-image: url("/images/paineis/principal.png"); }
   .label.copyright {
-    -fx-alignment: center-right;
+    -fx-alignment: bottom-right;
     -fx-padding: 0 10;
     -fx-font-family: sans-serif;
     -fx-text-fill: #FF6600;

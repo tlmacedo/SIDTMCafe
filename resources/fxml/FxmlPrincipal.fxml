@@ -39,7 +39,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Label>
-            <Label fx:id="lblCopyRight" layoutY="765.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" />
+            <Label fx:id="lblCopyRight" layoutY="765.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="250.0" />
                 <Label fx:id="lblBotaoExpandeMenuViewPrincipal" layoutX="193.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="true" prefHeight="24.0" prefWidth="24.0" styleClass="lbl_btn_expande_menu_view_principal" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="1.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />

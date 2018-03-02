@@ -143,6 +143,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                             break;
                         case F2:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                            guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
                             if (!validarDadosCadastrais()) break;
 
                             salvarEmpresa();
@@ -183,6 +184,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                             break;
                         case F5:
                             if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                            guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
                             if (!validarDadosCadastrais()) break;
 
                             salvarEmpresa();
@@ -192,6 +194,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                             setStatusFormulario("Pesquisa");
                             carregarPesquisaEmpresas(txtPesquisa.getText());
                             exibirDadosEmpresa();
+                            ttvEmpresa.requestFocus();
                             break;
                         case F6:
                             if (getStatusFormulario().toLowerCase().equals("pesquisa") || (!event.isShiftDown())) break;
@@ -1436,27 +1439,22 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         if (getTtvEnderecoVO().size() == 0) {
             getTtvEnderecoVO().add(addEndereco());
             listEndereco.getItems().add(getTtvEnderecoVO().get(0));
-            System.out.println("errou aqui 00");
         }
         if (txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "").length() != 8 || txtEndCEP.getText().length() == 0) {
             txtEndCEP.requestFocus();
             result = false;
-            System.out.println("errou aqui 01");
         }
         if (txtEndLogradouro.getText().length() == 0 & result == true) {
             txtEndLogradouro.requestFocus();
             result = false;
-            System.out.println("errou aqui 02");
         }
         if (txtEndNumero.getText().length() == 0 & result == true) {
             txtEndNumero.requestFocus();
             result = false;
-            System.out.println("errou aqui 03");
         }
         if (txtEndBairro.getText().length() == 0 & result == true) {
             txtEndBairro.requestFocus();
             result = false;
-            System.out.println("errou aqui 04");
         }
         if (!result)
             new AlertMensagem("Endereço inválido!",
@@ -1887,7 +1885,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                     emailHome_id += id;
                 }
             }
-            guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
             if (getTtvEnderecoVO().size() > 0)
                 for (TabEnderecoVO endereco : getTtvEnderecoVO()) {
                     int id = 0;
@@ -1921,13 +1918,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                     }
             conn.commit();
         } catch (Exception ex) {
-            System.out.println("Exception ex:");
             ex.printStackTrace();
             try {
                 conn.rollback();
-                System.out.println("rollback:");
             } catch (SQLException e) {
-                System.out.println("SQLException e:");
                 e.printStackTrace();
             }
         } finally {

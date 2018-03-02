@@ -8,7 +8,7 @@
   -jfx-unfocus-color: $corJFX-Unforcus;
   -jfx-label-float: true;
 
-  .view-cadastro-empresa & {
+  .view-cadastro-empresa &, .view-cadastro-produto & {
     -fx-font-size: $fontSizeh6;
   }
 }
