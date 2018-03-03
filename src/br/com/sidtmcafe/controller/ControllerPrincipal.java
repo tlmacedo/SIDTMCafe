@@ -9,6 +9,7 @@ import br.com.sidtmcafe.model.dao.SisMenuPrincipalDAO;
 import br.com.sidtmcafe.model.vo.SisMenuPrincipalVO;
 import br.com.sidtmcafe.service.ExecutaComandoTecladoMouse;
 import br.com.sidtmcafe.view.ViewCadastroEmpresa;
+import br.com.sidtmcafe.view.ViewCadastroProduto;
 import br.com.sidtmcafe.view.ViewPrincipal;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXToolbar;
@@ -29,6 +30,7 @@ import javafx.util.Duration;
 
 import java.net.URL;
 import java.time.LocalTime;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -44,15 +46,6 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
     public Label lblImageLogoViewPrincipal;
     public Label lblBotaoExpandeMenuViewPrincipal;
     public Label lblBotaoRetraiMenuViewPrincipal;
-
-    TreeTableColumn<SisMenuPrincipalVO, String> colunaItem;
-    TreeTableColumn<SisMenuPrincipalVO, String> colunaAtalho;
-
-    String horarioLog = USUARIO_LOGADO_HORA_STR;
-    Label stbUsuarioLogado, stbTeclasTela, stbDataBase, stbIcoRelogio, stbHora;
-
-    Timeline timeline;
-    int tabSelecionadaId = 0;
 
     @Override
     public void fechar() {
@@ -75,6 +68,8 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
     @Override
     public void escutarTeclas() {
         painelViewPrincipal.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
+            SisMenuPrincipalVO item = null;
+
             if (CODE_KEY_SHIFT_CTRL_POSITIVO.match(event) || CHAR_KEY_SHIFT_CTRL_POSITIVO.match(event))
                 lblBotaoExpandeMenuViewPrincipal.fireEvent(ExecutaComandoTecladoMouse.clickMouse(1));
 
@@ -84,17 +79,25 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
             if (event.getCode() == KeyCode.F11 && event.isControlDown() && event.isShiftDown()) {
                 new Tarefa().tarefaWsFonteDeDados_ConstulaSaldo();
             }
-            if (event.getCode() == KeyCode.E && event.isControlDown() && event.isShiftDown()) {
-                SisMenuPrincipalVO item = new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+E");
-                if (item == null) return;
+            if (event.getCode() == KeyCode.E && event.isControlDown() && event.isShiftDown())
+                item = new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+E");
+            if (event.getCode() == KeyCode.P && event.isControlDown() && event.isShiftDown())
+                item = new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+P");
+
+            if (item != null) {
                 adicionaNovaTab(item);
             }
-
 
             if ((event.getCode() == KeyCode.F12 && event.isControlDown()) || (event.getCode() == KeyCode.F12 && tabPaneViewPrincipal.getTabs().size() <= 0)) {
                 if (sairSistema())
                     fechar();
             }
+
+
+//            if (event.getCode()==KeyCode.F12 & (event.getCode() == KeyCode.F12 && tabPaneViewPrincipal.getTabs().size() > 0))
+//                if (perguntaFecharTab())
+//                    tabPaneViewPrincipal.getTabs().remove(tabPaneViewPrincipal.getSelectionModel().getSelectedItem());
+
         });
 
         tabPaneViewPrincipal.getTabs().addListener(new ListChangeListener<Tab>() {
@@ -110,6 +113,18 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
             }
         });
 
+//        tabPaneViewPrincipal.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
+//            if ((n != null) & (n != o))
+//                setTabAtual(n.getText());
+//        });
+
+        tabPaneViewPrincipal.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
+            if ((n.intValue() >= 0) & (n.intValue() != o.intValue()))
+                setTabAtual(tabPaneViewPrincipal.getTabs().get(n.intValue()).getText());
+            if (n.intValue() < 0)
+                atualizarTeclasStatusBar("");
+        });
+
         lblBotaoExpandeMenuViewPrincipal.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             for (int i = 0; i < treeMenuViewPrincipal.getExpandedItemCount(); i++) {
                 treeMenuViewPrincipal.getTreeItem(i).setExpanded(true);
@@ -123,6 +138,7 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
         });
 
         treeMenuViewPrincipal.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
+            if (treeMenuViewPrincipal.getSelectionModel().getSelectedIndex() < 0) return;
             SisMenuPrincipalVO item = treeMenuViewPrincipal.getSelectionModel().getSelectedItem().getValue();
             if (item == null) return;
             if (event.getCode() == KeyCode.ENTER)
@@ -130,6 +146,7 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
         });
 
         treeMenuViewPrincipal.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            if (treeMenuViewPrincipal.getSelectionModel().getSelectedIndex() < 0) return;
             SisMenuPrincipalVO item = treeMenuViewPrincipal.getSelectionModel().getSelectedItem().getValue();
             if (item == null) return;
             if (item.getDescricao().equals("Sair") || event.getClickCount() == 2)
@@ -143,6 +160,22 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
         preencherObjetos();
         fatorarObjetos();
         escutarTeclas();
+    }
+
+    String horarioLog = USUARIO_LOGADO_HORA_STR;
+    Label stbUsuarioLogado, stbTeclasTela, stbDataBase, stbIcoRelogio, stbHora;
+
+    Timeline timeline;
+    int tabSelecionadaId = 0;
+
+    String tabAtual = "";
+
+    public String getTabAtual() {
+        return tabAtual;
+    }
+
+    public void setTabAtual(String tabAtual) {
+        this.tabAtual = tabAtual;
     }
 
     void preencheMenuItem() {
@@ -222,15 +255,24 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
                 //Abrir formulario em janela!
             } else {
                 String menuprincipal = menuPrincipalVO.getDescricao();
+                boolean add = false;
                 switch (menuprincipal.toLowerCase()) {
                     case "sair":
                         fechar();
                         break;
-                    case "empresas":
+                    case "empresa":
                         tabPaneViewPrincipal.getTabs().add(new ViewCadastroEmpresa().openTabViewCadastroEmpresa(menuPrincipalVO.getTituloTab()));
+                        //controllerCadastroEmpresa = ViewCadastroEmpresa.getControllerEmpresa();
+                        add = true;
+                        break;
+                    case "produto":
+                        tabPaneViewPrincipal.getTabs().add(new ViewCadastroProduto().openTabViewCadastroProduto(menuPrincipalVO.getTituloTab()));
+                        //controllerCadastroProduto = ViewCadastroProduto.getControllerProduto();
+                        add = true;
                         break;
                 }
-                tabPaneViewPrincipal.getSelectionModel().select(tabSelecionadaId);
+                if (add)
+                    tabPaneViewPrincipal.getSelectionModel().select(tabSelecionadaId);
             }
         }
     }
@@ -246,11 +288,16 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
         return false;
     }
 
-    boolean perguntaFecharTab() {
-        if (new AlertMensagem("Fechar guia", USUARIO_LOGADO_APELIDO + ", deseja fechar a guia "
-                + tabPaneViewPrincipal.getSelectionModel().getSelectedItem().getText() + "?",
-                "ic_sair_tab_principal_white_32dp.png").getRetornoAlert_YES_NO().get() == ButtonType.YES)
-            return true;
-        return false;
+    void perguntaFecharTab() {
+        if (tabPaneViewPrincipal.getTabs().size() > 0)
+            if (new AlertMensagem("Fechar guia", USUARIO_LOGADO_APELIDO + ", deseja fechar a guia "
+                    + tabPaneViewPrincipal.getSelectionModel().getSelectedItem().getText() + "?",
+                    "ic_sair_tab_principal_white_32dp.png").getRetornoAlert_YES_NO().get() == ButtonType.YES)
+                tabPaneViewPrincipal.getTabs().remove(tabPaneViewPrincipal.getSelectionModel().getSelectedItem());
     }
+
+    void fecharTab(int tabInt) {
+        tabPaneViewPrincipal.getTabs().remove(tabInt);
+    }
+
 }

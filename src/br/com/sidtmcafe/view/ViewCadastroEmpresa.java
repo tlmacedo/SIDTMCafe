@@ -1,5 +1,6 @@
 package br.com.sidtmcafe.view;
 
+import br.com.sidtmcafe.controller.ControllerCadastroEmpresa;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.service.OpenView;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,15 @@ import java.io.IOException;
 public class ViewCadastroEmpresa implements Constants {
 
     private static String tituloJanela;
+    private static ControllerCadastroEmpresa controllerEmpresa;
+
+    public static ControllerCadastroEmpresa getControllerEmpresa() {
+        return controllerEmpresa;
+    }
+
+    public static void setControllerEmpresa(ControllerCadastroEmpresa controllerEmpresa) {
+        ViewCadastroEmpresa.controllerEmpresa = controllerEmpresa;
+    }
 
     public static String getTituloJanela() {
         return tituloJanela;
@@ -26,6 +36,7 @@ public class ViewCadastroEmpresa implements Constants {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             Parent root = fxmlLoader.load(getClass().getResource(PATH_FXML + "FxmlCadastroEmpresa.fxml"));
+            setControllerEmpresa(fxmlLoader.getController());
             root.getStylesheets().setAll(STYLE_SHEETS);
             root.getStyleClass().add("view-cadastro-empresa");
 

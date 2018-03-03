@@ -17,6 +17,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -124,6 +125,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
     @Override
     public void escutarTeclas() {
+        String tituloTab = ViewCadastroEmpresa.getTituloJanela();
 
         ttvEmpresa.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
             if (n == null) return;
@@ -132,98 +134,107 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         });
 
         ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
-            if (ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().size() <= 0) return;
-            if (n.getText().equals(ViewCadastroEmpresa.getTituloJanela())) {
-                ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
-                    switch (event.getCode()) {
-                        case F1:
-                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                            setStatusFormulario("Incluir");
-                            setTtvEmpresaVO(new TabEmpresaVO());
-                            break;
-                        case F2:
-                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                            guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
-                            if (!validarDadosCadastrais()) break;
-
-                            salvarEmpresa();
-                            setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
-                            empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
-
-                            setStatusFormulario("Pesquisa");
-                            carregarPesquisaEmpresas(txtPesquisa.getText());
-                            break;
-                        case F3:
-                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                            switch (getStatusFormulario().toLowerCase()) {
-                                case "incluir":
-                                    if (new AlertMensagem("Cancelar inclusão", USUARIO_LOGADO_APELIDO
-                                            + ", deseja cancelar inclusão no cadastro de empresa?",
-                                            "ic_cadastro_empresas_white_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
-                                        return;
-                                    PersonalizarCampo.clearField((AnchorPane) tpnDadosCadastrais.getContent());
-                                    break;
-                                case "editar":
-                                    if (new AlertMensagem("Cancelar edição", USUARIO_LOGADO_APELIDO
-                                            + ", deseja cancelar edição do cadastro de empresa?",
-                                            "ic_cadastro_empresas_white_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
-                                        return;
-                                    setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
-                                    empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
-                                    break;
-                            }
-                            setStatusFormulario("Pesquisa");
-                            carregarPesquisaEmpresas(txtPesquisa.getText());
-                            exibirDadosEmpresa();
-                            break;
-                        case F4:
-                            if ((!getStatusBarFormulario().contains(event.getCode().toString())) || (getTtvEmpresaVO() == null))
-                                break;
-                            indexObservableEmpresa = empresaVOObservableList.indexOf(getTtvEmpresaVO());
-                            setStatusFormulario("Editar");
-                            break;
-                        case F5:
-                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                            guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
-                            if (!validarDadosCadastrais()) break;
-
-                            salvarEmpresa();
-                            setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
-                            empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
-
-                            setStatusFormulario("Pesquisa");
-                            carregarPesquisaEmpresas(txtPesquisa.getText());
-                            exibirDadosEmpresa();
-                            ttvEmpresa.requestFocus();
-                            break;
-                        case F6:
-                            if (getStatusFormulario().toLowerCase().equals("pesquisa") || (!event.isShiftDown())) break;
-                            keyShiftF6();
-                            break;
-                        case F7:
-                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                            txtPesquisa.requestFocus();
-                            break;
-                        case F8:
-                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                            cboFiltroPesquisa.requestFocus();
-                            break;
-                        case F12:
-                            if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                            ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().remove(ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getSelectionModel().getSelectedItem());
-                            break;
-                        case HELP:
-                            if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
-                            keyInsert();
-                            break;
-                        case DELETE:
-                            if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
-                            keyDelete();
-                            break;
-                    }
-                });
-            }
+            if (!(ControllerPrincipal.ctrlPrincipal.getTabAtual().equals(tituloTab)))
+                return;
+            if ((n != null) & (n != o))
+                setStatusBarFormulario(getStatusFormulario());
         });
+
+        eventCadastroEmpresa = new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (!(ControllerPrincipal.ctrlPrincipal.getTabAtual().equals(tituloTab)))
+                    return;
+                switch (event.getCode()) {
+                    case F1:
+                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                        setStatusFormulario("Incluir");
+                        setTtvEmpresaVO(new TabEmpresaVO());
+                        break;
+                    case F2:
+                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                        guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
+                        if (!validarDadosCadastrais()) break;
+
+                        salvarEmpresa();
+                        setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
+                        empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
+
+                        setStatusFormulario("Pesquisa");
+                        carregarPesquisaEmpresas(txtPesquisa.getText());
+                        break;
+                    case F3:
+                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                        switch (getStatusFormulario().toLowerCase()) {
+                            case "incluir":
+                                if (new AlertMensagem("Cancelar inclusão", USUARIO_LOGADO_APELIDO
+                                        + ", deseja cancelar inclusão no cadastro de empresa?",
+                                        "ic_cadastro_empresas_white_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
+                                    return;
+                                PersonalizarCampo.clearField((AnchorPane) tpnDadosCadastrais.getContent());
+                                break;
+                            case "editar":
+                                if (new AlertMensagem("Cancelar edição", USUARIO_LOGADO_APELIDO
+                                        + ", deseja cancelar edição do cadastro de empresa?",
+                                        "ic_cadastro_empresas_white_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
+                                    return;
+                                setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
+                                empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
+                                break;
+                        }
+                        setStatusFormulario("Pesquisa");
+                        carregarPesquisaEmpresas(txtPesquisa.getText());
+                        exibirDadosEmpresa();
+                        break;
+                    case F4:
+                        if ((!getStatusBarFormulario().contains(event.getCode().toString())) || (getTtvEmpresaVO() == null))
+                            break;
+                        indexObservableEmpresa = empresaVOObservableList.indexOf(getTtvEmpresaVO());
+                        setStatusFormulario("Editar");
+                        break;
+                    case F5:
+                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                        guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
+                        if (!validarDadosCadastrais()) break;
+
+                        salvarEmpresa();
+                        setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
+                        empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
+
+                        setStatusFormulario("Pesquisa");
+                        carregarPesquisaEmpresas(txtPesquisa.getText());
+                        exibirDadosEmpresa();
+                        ttvEmpresa.requestFocus();
+                        break;
+                    case F6:
+                        if (getStatusFormulario().toLowerCase().equals("pesquisa") || (!event.isShiftDown())) break;
+                        keyShiftF6();
+                        break;
+                    case F7:
+                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                        txtPesquisa.requestFocus();
+                        break;
+                    case F8:
+                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                        cboFiltroPesquisa.requestFocus();
+                        break;
+                    case F12:
+                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                        fecharTab(tituloTab);
+                        break;
+                    case HELP:
+                        if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
+                        keyInsert();
+                        break;
+                    case DELETE:
+                        if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
+                        keyDelete();
+                        break;
+                }
+            }
+        };
+
+        ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.addEventHandler(KeyEvent.KEY_RELEASED, eventCadastroEmpresa);
 
         txtPesquisa.textProperty().addListener((ov, o, n) -> {
             carregarPesquisaEmpresas(n);
@@ -357,6 +368,8 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             painelViewCadastroEmpresa.fireEvent(ExecutaComandoTecladoMouse.pressTecla(KeyCode.F7));
         });
     }
+
+    EventHandler<KeyEvent> eventCadastroEmpresa;
 
     int indexObservableEmpresa = 0;
     TabEmpresaVO ttvEmpresaVO;
@@ -1927,6 +1940,16 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         } finally {
             ConnectionFactory.closeConnection(conn);
         }
+    }
+
+    void fecharTab(String tituloTab) {
+        ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.removeEventHandler(KeyEvent.KEY_RELEASED, eventCadastroEmpresa);
+        //System.out.println("qtdTabs: " + ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().size());
+        for (int i = 0; i < ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().size(); i++)
+            if (ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().get(i).getText().toLowerCase().equals(tituloTab.toLowerCase())) {
+                //System.out.println("tab: " + ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().get(i).getText().toLowerCase());
+                ControllerPrincipal.ctrlPrincipal.fecharTab(i);
+            }
     }
 
 }

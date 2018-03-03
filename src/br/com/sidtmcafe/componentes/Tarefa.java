@@ -1,6 +1,7 @@
 package br.com.sidtmcafe.componentes;
 
 import br.com.sidtmcafe.controller.ControllerCadastroEmpresa;
+import br.com.sidtmcafe.controller.ControllerCadastroProduto;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.model.dao.WsCepPostmonDAO;
 import br.com.sidtmcafe.model.dao.WsCnpjReceitaWsDAO;
@@ -190,6 +191,9 @@ public class Tarefa implements Constants {
         new AlertMensagem("Aguarde carregando dados do sistema...", "",
                 "ic_aguarde_sentado_orange_32dp.png")
                 .getProgressBar(voidTask, true, false, qtdTarefas);
+    }
+
+    public void tarefaAbreCadastroProduto(ControllerCadastroProduto cadastroProduto, List<Pair> tarefas) {
     }
 
     public boolean tarefaSalvaEmpresa(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {
