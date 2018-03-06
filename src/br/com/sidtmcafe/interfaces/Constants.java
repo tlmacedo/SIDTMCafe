@@ -2,10 +2,12 @@ package br.com.sidtmcafe.interfaces;
 
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
+import org.apache.axis2.databinding.types.xsd.Decimal;
 
 import javax.swing.text.Element;
 import javax.swing.text.html.ImageView;
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -56,6 +58,7 @@ public interface Constants {
     String TOKEN_EXTENSAO_ARQUIVO = "cfg";
 
     /* Constants para utilizacao de datas e horas */
+    DecimalFormat DECIMAL_FORMAT = new DecimalFormat(".00");
     String LOCAL_TIME_ZONE = "America/Manaus";
     ZoneId MY_ZONE_TIME = ZoneId.of(LOCAL_TIME_ZONE);
     LocalDateTime DATAHORA_LOCAL = LocalDateTime.now().atZone(MY_ZONE_TIME).toLocalDateTime();

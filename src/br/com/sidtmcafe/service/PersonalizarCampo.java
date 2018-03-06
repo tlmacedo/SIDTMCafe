@@ -54,8 +54,12 @@ public class PersonalizarCampo implements Constants {
                         if (textFormatador.length() > 5)
                             mask = textFormatador.substring(5);
 
-                        String mascara = FormatarDado.gerarMascara(mask, qtdMax, tipoDados);
-                        new FormatarDado().maskField((JFXTextField) node, mascara);
+                        if (textFormatador.contains("$")) {
+                            String mascara = FormatarDado.gerarMascara(mask, qtdMax, tipoDados);
+                            new FormatarDado().maskField((JFXTextField) node, mascara);
+                        } else {
+                            new FormatarDado().maskFieldMoeda((JFXTextField) node);
+                        }
                     }
             } else if (node instanceof AnchorPane) {
                 maskFields((AnchorPane) node);
