@@ -19,7 +19,7 @@ public class TabEmpresa_DetalheReceitaFederalVO extends RecursiveTreeObject<TabE
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 
@@ -32,7 +32,7 @@ public class TabEmpresa_DetalheReceitaFederalVO extends RecursiveTreeObject<TabE
     }
 
     public IntegerProperty empresa_idProperty() {
-        if (empresa_id == null) empresa_id = new SimpleIntegerProperty(-1);
+        if (empresa_id == null) empresa_id = new SimpleIntegerProperty(0);
         return empresa_id;
     }
 
@@ -45,7 +45,7 @@ public class TabEmpresa_DetalheReceitaFederalVO extends RecursiveTreeObject<TabE
     }
 
     public IntegerProperty isAtividadePrincipalProperty() {
-        if (isAtividadePrincipal == null) isAtividadePrincipal = new SimpleIntegerProperty(-1);
+        if (isAtividadePrincipal == null) isAtividadePrincipal = new SimpleIntegerProperty(0);
         return isAtividadePrincipal;
     }
 

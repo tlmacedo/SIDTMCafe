@@ -49,7 +49,7 @@ public class TabContatoVO extends RecursiveTreeObject<TabContatoVO> {
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 
@@ -62,7 +62,7 @@ public class TabContatoVO extends RecursiveTreeObject<TabContatoVO> {
     }
 
     public IntegerProperty cargo_idProperty() {
-        if (cargo_id == null) cargo_id = new SimpleIntegerProperty(-1);
+        if (cargo_id == null) cargo_id = new SimpleIntegerProperty(0);
         return cargo_id;
     }
 

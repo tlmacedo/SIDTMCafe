@@ -6,12 +6,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class TabEmailHomePageVO extends RecursiveTreeObject<TabEmailHomePageVO> {
+public class TabProdutoEanVO extends RecursiveTreeObject<TabProdutoEanVO> {
 
-    IntegerProperty id, isEmail;
+    IntegerProperty id, produto_id;
     StringProperty descricao;
 
-    public TabEmailHomePageVO() {
+    public TabProdutoEanVO() {
     }
 
     public int getId() {
@@ -27,17 +27,17 @@ public class TabEmailHomePageVO extends RecursiveTreeObject<TabEmailHomePageVO> 
         idProperty().set(id);
     }
 
-    public int getIsEmail() {
-        return isEmailProperty().get();
+    public int getProduto_id() {
+        return produto_idProperty().get();
     }
 
-    public IntegerProperty isEmailProperty() {
-        if (isEmail == null) isEmail = new SimpleIntegerProperty(0);
-        return isEmail;
+    public IntegerProperty produto_idProperty() {
+        if (produto_id == null) produto_id = new SimpleIntegerProperty(0);
+        return produto_id;
     }
 
-    public void setIsEmail(int isEmail) {
-        isEmailProperty().set(isEmail);
+    public void setProduto_id(int produto_id) {
+        produto_idProperty().set(produto_id);
     }
 
     public String getDescricao() {

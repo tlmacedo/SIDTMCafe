@@ -31,7 +31,7 @@ public class SisUFVO extends RecursiveTreeObject<SisUFVO> {
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 
@@ -44,7 +44,7 @@ public class SisUFVO extends RecursiveTreeObject<SisUFVO> {
     }
 
     public IntegerProperty ibge_idProperty() {
-        if (ibge_id == null) ibge_id = new SimpleIntegerProperty(-1);
+        if (ibge_id == null) ibge_id = new SimpleIntegerProperty(0);
         return ibge_id;
     }
 

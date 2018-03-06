@@ -67,7 +67,7 @@ public class TabLojaVO extends RecursiveTreeObject<TabLojaVO> {
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 
@@ -80,7 +80,7 @@ public class TabLojaVO extends RecursiveTreeObject<TabLojaVO> {
     }
 
     public IntegerProperty situacaoSistema_idProperty() {
-        if (situacaoSistema_id == null) situacaoSistema_id = new SimpleIntegerProperty(-1);
+        if (situacaoSistema_id == null) situacaoSistema_id = new SimpleIntegerProperty(0);
         return situacaoSistema_id;
     }
 

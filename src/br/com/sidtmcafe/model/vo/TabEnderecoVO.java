@@ -54,7 +54,7 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 
@@ -67,7 +67,7 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
     }
 
     public IntegerProperty tipoEndereco_idProperty() {
-        if (tipoEndereco_id == null) tipoEndereco_id = new SimpleIntegerProperty(-1);
+        if (tipoEndereco_id == null) tipoEndereco_id = new SimpleIntegerProperty(0);
         return tipoEndereco_id;
     }
 
@@ -80,7 +80,7 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
     }
 
     public IntegerProperty uf_idProperty() {
-        if (uf_id == null) uf_id = new SimpleIntegerProperty(-1);
+        if (uf_id == null) uf_id = new SimpleIntegerProperty(0);
         return uf_id;
     }
 
@@ -93,7 +93,7 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
     }
 
     public IntegerProperty municipio_idProperty() {
-        if (municipio_id == null) municipio_id = new SimpleIntegerProperty(-1);
+        if (municipio_id == null) municipio_id = new SimpleIntegerProperty(0);
         return municipio_id;
     }
 

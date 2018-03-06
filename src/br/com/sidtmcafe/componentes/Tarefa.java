@@ -9,7 +9,6 @@ import br.com.sidtmcafe.model.vo.WsCepPostmonVO;
 import br.com.sidtmcafe.model.vo.WsCnpjReceitaWsVO;
 import javafx.concurrent.Task;
 import javafx.util.Pair;
-import webService.correios.atende.EnderecoERP;
 import webService.fonteDeDados.ConsultaStub;
 import webService.fonteDeDados.ConsultaStub.*;
 
@@ -194,6 +193,34 @@ public class Tarefa implements Constants {
     }
 
     public void tarefaAbreCadastroProduto(ControllerCadastroProduto cadastroProduto, List<Pair> tarefas) {
+        qtdTarefas = tarefas.size();
+        Task<Void> voidTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                updateMessage("carregando");
+                for (Pair tarefaAtual : tarefas) {
+                    updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
+                    Thread.sleep(200);
+                    updateMessage(tarefaAtual.getValue().toString());
+                    switch (tarefaAtual.getKey().toString()) {
+                        case "criarTabelaProduto":
+                            cadastroProduto.criarTabelaProduto();
+                            break;
+                        case "carregarListaProduto":
+                            cadastroProduto.carregarListaProduto();
+                            break;
+                        case "preencherTabelaProduto":
+                            cadastroProduto.preencherTabelaProduto();
+                            break;
+                    }
+                }
+                updateProgress(qtdTarefas, qtdTarefas);
+                return null;
+            }
+        };
+        new AlertMensagem("Aguarde carregando dados do sistema...", "",
+                "ic_aguarde_sentado_orange_32dp.png")
+                .getProgressBar(voidTask, true, false, qtdTarefas);
     }
 
     public boolean tarefaSalvaEmpresa(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {

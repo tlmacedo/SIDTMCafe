@@ -64,6 +64,8 @@ public class FormatarDado implements Constants {
             return "###.###.###-##";
         } else if (tipM.contains("cep")) {
             return "##.###-###";
+        } else if (tipM.contains("moeda")) {
+            return "###.###,##";
         } else if (tipM.contains("telefone")) {
             if (qtd < 9)
                 return "####-####";

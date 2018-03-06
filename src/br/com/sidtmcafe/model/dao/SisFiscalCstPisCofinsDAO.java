@@ -33,11 +33,13 @@ public class SisFiscalCstPisCofinsDAO extends BuscaBandoDados {
         rs = getResultadosBandoDados(comandoSql);
         fiscalCstPisCofinsVOList = new ArrayList<>();
         try {
-            fiscalCstPisCofinsVO = new SisFiscalCstPisCofinsVO();
-            fiscalCstPisCofinsVO.setId(rs.getInt("id"));
-            fiscalCstPisCofinsVO.setDescricao(rs.getString("descricao"));
+            while (rs.next()) {
+                fiscalCstPisCofinsVO = new SisFiscalCstPisCofinsVO();
+                fiscalCstPisCofinsVO.setId(rs.getInt("id"));
+                fiscalCstPisCofinsVO.setDescricao(rs.getString("descricao"));
 
-            fiscalCstPisCofinsVOList.add(fiscalCstPisCofinsVO);
+                fiscalCstPisCofinsVOList.add(fiscalCstPisCofinsVO);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

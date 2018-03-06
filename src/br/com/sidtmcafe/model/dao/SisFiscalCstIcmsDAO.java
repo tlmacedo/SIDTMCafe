@@ -30,14 +30,16 @@ public class SisFiscalCstIcmsDAO extends BuscaBandoDados {
         if (idSisFiscalCstIcmsVO > 0) comandoSql += "WHERE id = '" + idSisFiscalCstIcmsVO + "' ";
         comandoSql += "ORDER BY descricao ";
 
-        rs = getResultadosBandoDados(comandoSql);
         fiscalCstIcmsVOList = new ArrayList<>();
+        rs = getResultadosBandoDados(comandoSql);
         try {
-            fiscalCstIcmsVO = new SisFiscalCstIcmsVO();
-            fiscalCstIcmsVO.setId(rs.getInt("id"));
-            fiscalCstIcmsVO.setDescricao(rs.getString("descricao"));
+            while (rs.next()) {
+                fiscalCstIcmsVO = new SisFiscalCstIcmsVO();
+                fiscalCstIcmsVO.setId(rs.getInt("id"));
+                fiscalCstIcmsVO.setDescricao(rs.getString("descricao"));
 
-            fiscalCstIcmsVOList.add(fiscalCstIcmsVO);
+                fiscalCstIcmsVOList.add(fiscalCstIcmsVO);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {

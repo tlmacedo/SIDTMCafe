@@ -19,7 +19,7 @@ public class SisTelefoneOperadoraVO extends RecursiveTreeObject<SisTelefoneOpera
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 
@@ -32,7 +32,7 @@ public class SisTelefoneOperadoraVO extends RecursiveTreeObject<SisTelefoneOpera
     }
 
     public IntegerProperty tipoProperty() {
-        if (tipo == null) tipo = new SimpleIntegerProperty(-1);
+        if (tipo == null) tipo = new SimpleIntegerProperty(0);
         return tipo;
     }
 
@@ -45,7 +45,7 @@ public class SisTelefoneOperadoraVO extends RecursiveTreeObject<SisTelefoneOpera
     }
 
     public IntegerProperty codigoDDDProperty() {
-        if (codigoDDD == null) codigoDDD = new SimpleIntegerProperty(-1);
+        if (codigoDDD == null) codigoDDD = new SimpleIntegerProperty(0);
         return codigoDDD;
     }
 

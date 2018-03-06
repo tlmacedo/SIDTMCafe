@@ -19,7 +19,7 @@ public class SisFiscalCstPisCofinsVO extends RecursiveTreeObject<SisFiscalCstPis
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 

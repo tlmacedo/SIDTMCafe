@@ -37,7 +37,7 @@ public class TabTelefoneVO extends RecursiveTreeObject<TabTelefoneVO> {
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 
@@ -50,7 +50,7 @@ public class TabTelefoneVO extends RecursiveTreeObject<TabTelefoneVO> {
     }
 
     public IntegerProperty telefoneOperadora_idProperty() {
-        if (telefoneOperadora_id == null) telefoneOperadora_id = new SimpleIntegerProperty(-1);
+        if (telefoneOperadora_id == null) telefoneOperadora_id = new SimpleIntegerProperty(0);
         return telefoneOperadora_id;
     }
 

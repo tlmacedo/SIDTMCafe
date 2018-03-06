@@ -86,7 +86,7 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 
@@ -99,7 +99,7 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
     }
 
     public IntegerProperty cargo_idProperty() {
-        if (cargo_id == null) cargo_id = new SimpleIntegerProperty(-1);
+        if (cargo_id == null) cargo_id = new SimpleIntegerProperty(0);
         return cargo_id;
     }
 
@@ -112,7 +112,7 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
     }
 
     public IntegerProperty loja_idProperty() {
-        if (loja_id == null) loja_id = new SimpleIntegerProperty(-1);
+        if (loja_id == null) loja_id = new SimpleIntegerProperty(0);
         return loja_id;
     }
 
@@ -125,7 +125,7 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
     }
 
     public IntegerProperty situacaoSistema_idProperty() {
-        if (situacaoSistema_id == null) situacaoSistema_id = new SimpleIntegerProperty(-1);
+        if (situacaoSistema_id == null) situacaoSistema_id = new SimpleIntegerProperty(0);
         return situacaoSistema_id;
     }
 

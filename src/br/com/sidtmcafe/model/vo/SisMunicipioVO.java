@@ -29,7 +29,7 @@ public class SisMunicipioVO extends RecursiveTreeObject<SisMunicipioVO> {
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 
@@ -42,7 +42,7 @@ public class SisMunicipioVO extends RecursiveTreeObject<SisMunicipioVO> {
     }
 
     public IntegerProperty uf_idProperty() {
-        if (uf_id == null) uf_id = new SimpleIntegerProperty(-1);
+        if (uf_id == null) uf_id = new SimpleIntegerProperty(0);
         return uf_id;
     }
 
@@ -55,7 +55,7 @@ public class SisMunicipioVO extends RecursiveTreeObject<SisMunicipioVO> {
     }
 
     public IntegerProperty isCapitalProperty() {
-        if (isCapital == null) isCapital = new SimpleIntegerProperty(-1);
+        if (isCapital == null) isCapital = new SimpleIntegerProperty(0);
         return isCapital;
     }
 
@@ -68,7 +68,7 @@ public class SisMunicipioVO extends RecursiveTreeObject<SisMunicipioVO> {
     }
 
     public IntegerProperty ibge_idProperty() {
-        if (ibge_id == null) ibge_id = new SimpleIntegerProperty(-1);
+        if (ibge_id == null) ibge_id = new SimpleIntegerProperty(0);
         return ibge_id;
     }
 

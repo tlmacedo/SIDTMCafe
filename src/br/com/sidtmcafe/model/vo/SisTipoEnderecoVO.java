@@ -19,7 +19,7 @@ public class SisTipoEnderecoVO extends RecursiveTreeObject<SisTipoEnderecoVO> {
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 

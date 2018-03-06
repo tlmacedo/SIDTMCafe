@@ -123,7 +123,7 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 
@@ -136,7 +136,7 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     }
 
     public IntegerProperty isPessoaJuridicaProperty() {
-        if (isPessoaJuridica == null) isPessoaJuridica = new SimpleIntegerProperty(-1);
+        if (isPessoaJuridica == null) isPessoaJuridica = new SimpleIntegerProperty(0);
         return isPessoaJuridica;
     }
 
@@ -149,7 +149,7 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     }
 
     public IntegerProperty isClienteProperty() {
-        if (isCliente == null) isCliente = new SimpleIntegerProperty(-1);
+        if (isCliente == null) isCliente = new SimpleIntegerProperty(0);
         return isCliente;
     }
 
@@ -162,7 +162,7 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     }
 
     public IntegerProperty isFornecedorProperty() {
-        if (isFornecedor == null) isFornecedor = new SimpleIntegerProperty(-1);
+        if (isFornecedor == null) isFornecedor = new SimpleIntegerProperty(0);
         return isFornecedor;
     }
 
@@ -175,7 +175,7 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     }
 
     public IntegerProperty isTransportadoraProperty() {
-        if (isTransportadora == null) isTransportadora = new SimpleIntegerProperty(-1);
+        if (isTransportadora == null) isTransportadora = new SimpleIntegerProperty(0);
         return isTransportadora;
     }
 
@@ -188,7 +188,7 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     }
 
     public IntegerProperty usuarioCadastro_idProperty() {
-        if (usuarioCadastro_id == null) usuarioCadastro_id = new SimpleIntegerProperty(-1);
+        if (usuarioCadastro_id == null) usuarioCadastro_id = new SimpleIntegerProperty(0);
         return usuarioCadastro_id;
     }
 
@@ -201,7 +201,7 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     }
 
     public IntegerProperty usuarioAtualizacao_idProperty() {
-        if (usuarioAtualizacao_id == null) usuarioAtualizacao_id = new SimpleIntegerProperty(-1);
+        if (usuarioAtualizacao_id == null) usuarioAtualizacao_id = new SimpleIntegerProperty(0);
         return usuarioAtualizacao_id;
     }
 
@@ -214,7 +214,7 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     }
 
     public IntegerProperty situacaoSistema_idProperty() {
-        if (situacaoSistema_id == null) situacaoSistema_id = new SimpleIntegerProperty(-1);
+        if (situacaoSistema_id == null) situacaoSistema_id = new SimpleIntegerProperty(0);
         return situacaoSistema_id;
     }
 

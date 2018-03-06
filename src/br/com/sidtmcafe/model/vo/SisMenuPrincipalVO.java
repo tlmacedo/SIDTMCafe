@@ -19,7 +19,7 @@ public class SisMenuPrincipalVO extends RecursiveTreeObject<SisMenuPrincipalVO> 
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 
@@ -32,7 +32,7 @@ public class SisMenuPrincipalVO extends RecursiveTreeObject<SisMenuPrincipalVO> 
     }
 
     public IntegerProperty filho_idProperty() {
-        if (filho_id == null) filho_id = new SimpleIntegerProperty(-1);
+        if (filho_id == null) filho_id = new SimpleIntegerProperty(0);
         return filho_id;
     }
 
@@ -45,7 +45,7 @@ public class SisMenuPrincipalVO extends RecursiveTreeObject<SisMenuPrincipalVO> 
     }
 
     public IntegerProperty tabPaneProperty() {
-        if (tabPane == null) tabPane = new SimpleIntegerProperty(-1);
+        if (tabPane == null) tabPane = new SimpleIntegerProperty(0);
         return tabPane;
     }
 

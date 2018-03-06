@@ -19,7 +19,7 @@ public class SisSituacaoSistemaVO extends RecursiveTreeObject<SisSituacaoSistema
     }
 
     public IntegerProperty idProperty() {
-        if (id == null) id = new SimpleIntegerProperty(-1);
+        if (id == null) id = new SimpleIntegerProperty(0);
         return id;
     }
 
@@ -32,7 +32,7 @@ public class SisSituacaoSistemaVO extends RecursiveTreeObject<SisSituacaoSistema
     }
 
     public IntegerProperty classificacaoProperty() {
-        if (classificacao == null) classificacao = new SimpleIntegerProperty(-1);
+        if (classificacao == null) classificacao = new SimpleIntegerProperty(0);
         return classificacao;
     }
 
