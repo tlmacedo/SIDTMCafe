@@ -3,7 +3,9 @@ package br.com.sidtmcafe.model.dao;
 import br.com.sidtmcafe.database.ConnectionFactory;
 import br.com.sidtmcafe.model.vo.TabProdutoEanVO;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +57,26 @@ public class TabProdutoEanDAO extends BuscaBandoDados {
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-
     }
+
+    public void updateTabProdutoEanVO(Connection conn, TabProdutoEanVO produtoEanVO) throws SQLException {
+        comandoSql = "UPDATE tabProdutoEan SET ";
+        comandoSql += "produto_id = " + produtoEanVO.getProduto_id() + ", ";
+        comandoSql += "descricao = '" + produtoEanVO.getDescricao() + "' ";
+        comandoSql += "WHERE id = " + produtoEanVO.getId();
+
+        if (getUpdateBancoDados(conn, comandoSql)) ;
+    }
+
+    public int insertTabProdutoEanVO(Connection conn, TabProdutoEanVO produtoEanVO) throws SQLException {
+        comandoSql = "INSERT INTO tabProdutoEan ";
+        comandoSql += "(produto_id, descricao) ";
+        comandoSql += "VALUES(";
+        comandoSql += produtoEanVO.getProduto_id() + ", ";
+        comandoSql += "'" + produtoEanVO.getDescricao() + "' ";
+        comandoSql += ") ";
+
+        return getInsertBancoDados(conn, comandoSql);
+    }
+
 }

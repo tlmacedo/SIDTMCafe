@@ -42,7 +42,7 @@ public class SisFiscalCstIcmsVO extends RecursiveTreeObject<SisFiscalCstIcmsVO> 
 
     @Override
     public String toString() {
-        return descricaoProperty().get();
+        return idProperty().get() + " - " + descricaoProperty().get();
     }
 
 }

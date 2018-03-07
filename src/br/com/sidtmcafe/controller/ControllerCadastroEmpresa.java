@@ -45,7 +45,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     public JFXTreeTableView<TabEmpresaVO> ttvEmpresa;
     public JFXComboBox cboFiltroPesquisa;
     public Label lblRegistrosLocalizados;
-    public TitledPane tpnDadosCadastrais;
+    public TitledPane tpnDadoCadastral;
     public JFXComboBox cboClassificacaoJuridica;
     public JFXTextField txtCNPJ;
     public JFXTextField txtIE;
@@ -113,7 +113,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         formatCNPJ_CPF.maskField(txtCNPJ, FormatarDado.gerarMascara("cnpj", 0, "#"));
         formatIE = new FormatarDado();
         formatIE.maskField(txtIE, FormatarDado.gerarMascara("ie", 0, "#"));
-        txtPesquisa.requestFocus();
     }
 
     @Override
@@ -171,7 +170,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                                         + ", deseja cancelar inclusão no cadastro de empresa?",
                                         "ic_cadastro_empresas_white_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
                                     return;
-                                PersonalizarCampo.clearField((AnchorPane) tpnDadosCadastrais.getContent());
+                                PersonalizarCampo.clearField((AnchorPane) tpnDadoCadastral.getContent());
                                 break;
                             case "editar":
                                 if (new AlertMensagem("Cancelar edição", USUARIO_LOGADO_APELIDO
@@ -379,7 +378,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     TabContatoVO ttvContatoVO;
     List<TabEmailHomePageVO> ttvContatoEmailHomePageVO;
     List<TabTelefoneVO> ttvContatoTelefoneVO;
-    List<TabEmpresa_DetalheReceitaFederalVO> ttvDetalheReceitaFederalVO;
+    List<TabEmpresaDetalheReceitaFederalVO> ttvDetalheReceitaFederalVO;
 
     List<Pair> listaTarefas;
 
@@ -398,10 +397,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     List<SisTelefoneOperadoraVO> telefoneOperadoraVOList;
     List<TabCargoVO> cargoVOList;
     List<SisMunicipioVO> municipioVOList;
-    ObservableList<TabEmpresa_DetalheReceitaFederalVO> empresa_detalheReceitaFederalVOObservableList;
-    FilteredList<TabEmpresa_DetalheReceitaFederalVO> atividadePrincipal_detalheReceitaFederalVOFilteredList;
-    FilteredList<TabEmpresa_DetalheReceitaFederalVO> atividadeSecundaria_detalheReceitaFederalVOFilteredList;
-    FilteredList<TabEmpresa_DetalheReceitaFederalVO> qsa_detalheReceitaFederalVOFilteredList;
+    ObservableList<TabEmpresaDetalheReceitaFederalVO> empresa_detalheReceitaFederalVOObservableList;
+    FilteredList<TabEmpresaDetalheReceitaFederalVO> atividadePrincipal_detalheReceitaFederalVOFilteredList;
+    FilteredList<TabEmpresaDetalheReceitaFederalVO> atividadeSecundaria_detalheReceitaFederalVOFilteredList;
+    FilteredList<TabEmpresaDetalheReceitaFederalVO> qsa_detalheReceitaFederalVOFilteredList;
 
     JFXTreeTableColumn<TabEmpresaVO, Integer> colunaId;
     JFXTreeTableColumn<TabEmpresaVO, String> colunaCnpj;
@@ -417,8 +416,8 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsCliente;
     JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsFornecedor;
     JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsTransportadora;
-    JFXTreeTableColumn<TabEmpresa_DetalheReceitaFederalVO, String> colunaQsaKey;
-    JFXTreeTableColumn<TabEmpresa_DetalheReceitaFederalVO, String> colunaQsaValue;
+    JFXTreeTableColumn<TabEmpresaDetalheReceitaFederalVO, String> colunaQsaKey;
+    JFXTreeTableColumn<TabEmpresaDetalheReceitaFederalVO, String> colunaQsaValue;
 
     int qtdRegistrosLocalizados = 0;
     String statusFormulario, statusBarFormulario;
@@ -505,11 +504,11 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         this.ttvContatoTelefoneVO = ttvContatoTelefoneVO;
     }
 
-    public List<TabEmpresa_DetalheReceitaFederalVO> getTtvDetalheReceitaFederalVO() {
+    public List<TabEmpresaDetalheReceitaFederalVO> getTtvDetalheReceitaFederalVO() {
         return ttvDetalheReceitaFederalVO;
     }
 
-    public void setTtvDetalheReceitaFederalVO(List<TabEmpresa_DetalheReceitaFederalVO> ttvDetalheReceitaFederalVO) {
+    public void setTtvDetalheReceitaFederalVO(List<TabEmpresaDetalheReceitaFederalVO> ttvDetalheReceitaFederalVO) {
         this.ttvDetalheReceitaFederalVO = ttvDetalheReceitaFederalVO;
     }
 
@@ -539,20 +538,20 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     public void setStatusBarFormulario(String statusFormulario) {
         if (statusFormulario.toLowerCase().contains("incluir")) {
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
-            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), false);
-            PersonalizarCampo.clearField((AnchorPane) tpnDadosCadastrais.getContent());
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoCadastral.getContent(), false);
+            PersonalizarCampo.clearField((AnchorPane) tpnDadoCadastral.getContent());
             cboClassificacaoJuridica.requestFocus();
             cboClassificacaoJuridica.getSelectionModel().select(0);
             cboClassificacaoJuridica.getSelectionModel().select(1);
             this.statusBarFormulario = STATUSBARINCLUIR;
         } else if (statusFormulario.toLowerCase().contains("editar")) {
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
-            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), false);
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoCadastral.getContent(), false);
             txtCNPJ.requestFocus();
             this.statusBarFormulario = STATUSBAREDITAR;
         } else if (statusFormulario.toLowerCase().contains("pesquisa")) {
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), false);
-            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadosCadastrais.getContent(), true);
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoCadastral.getContent(), true);
             txtPesquisa.requestFocus();
             this.statusBarFormulario = STATUSBARPESQUISA;
         }
@@ -762,7 +761,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         try {
             Label lblQsaKey = new Label("Item");
             lblQsaKey.setPrefWidth(100);
-            colunaQsaKey = new JFXTreeTableColumn<TabEmpresa_DetalheReceitaFederalVO, String>();
+            colunaQsaKey = new JFXTreeTableColumn<TabEmpresaDetalheReceitaFederalVO, String>();
             colunaQsaKey.setGraphic(lblQsaKey);
             colunaQsaKey.setPrefWidth(100);
             colunaQsaKey.setCellValueFactory(param -> {
@@ -771,7 +770,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
             Label lblQsaValue = new Label("Detalhe");
             lblQsaValue.setPrefWidth(250);
-            colunaQsaValue = new JFXTreeTableColumn<TabEmpresa_DetalheReceitaFederalVO, String>();
+            colunaQsaValue = new JFXTreeTableColumn<TabEmpresaDetalheReceitaFederalVO, String>();
             colunaQsaValue.setGraphic(lblQsaValue);
             colunaQsaValue.setPrefWidth(250);
             colunaQsaValue.setCellValueFactory(param -> {
@@ -823,7 +822,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
     public void preencherCboSituacaoSistema() {
         cboSituacaoSistema.getItems().clear();
-        cboSituacaoSistema.getItems().setAll(new SisSituacaoSistemaDAO().getSituacaoSistemaVOList());
+        cboSituacaoSistema.getItems().addAll(new SisSituacaoSistemaDAO().getSituacaoSistemaVOList());
         cboSituacaoSistema.getSelectionModel().select(0);
     }
 
@@ -861,7 +860,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     }
 
     void preencherTabelaQsa() {
-        final TreeItem<TabEmpresa_DetalheReceitaFederalVO> root = new RecursiveTreeItem<TabEmpresa_DetalheReceitaFederalVO>
+        final TreeItem<TabEmpresaDetalheReceitaFederalVO> root = new RecursiveTreeItem<TabEmpresaDetalheReceitaFederalVO>
                 (qsa_detalheReceitaFederalVOFilteredList, RecursiveTreeObject::getChildren);
         ttvDetalheReceita.getColumns().setAll(colunaQsaKey, colunaQsaValue);
         ttvDetalheReceita.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -983,21 +982,21 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         listAtividadeSecundaria.getItems().clear();
 
         empresa_detalheReceitaFederalVOObservableList = FXCollections.observableArrayList(getTtvDetalheReceitaFederalVO());
-        atividadePrincipal_detalheReceitaFederalVOFilteredList = new FilteredList<TabEmpresa_DetalheReceitaFederalVO>(empresa_detalheReceitaFederalVOObservableList, principal -> true);
+        atividadePrincipal_detalheReceitaFederalVOFilteredList = new FilteredList<TabEmpresaDetalheReceitaFederalVO>(empresa_detalheReceitaFederalVOObservableList, principal -> true);
         atividadePrincipal_detalheReceitaFederalVOFilteredList.setPredicate(principal -> {
             if (principal.getIsAtividadePrincipal() == 1) return true;
             return false;
         });
         listAtividadePrincipal.getItems().setAll(atividadePrincipal_detalheReceitaFederalVOFilteredList);
 
-        atividadeSecundaria_detalheReceitaFederalVOFilteredList = new FilteredList<TabEmpresa_DetalheReceitaFederalVO>(empresa_detalheReceitaFederalVOObservableList, principal -> true);
+        atividadeSecundaria_detalheReceitaFederalVOFilteredList = new FilteredList<TabEmpresaDetalheReceitaFederalVO>(empresa_detalheReceitaFederalVOObservableList, principal -> true);
         atividadeSecundaria_detalheReceitaFederalVOFilteredList.setPredicate(principal -> {
             if (principal.getIsAtividadePrincipal() == 0) return true;
             return false;
         });
         listAtividadeSecundaria.getItems().setAll(atividadeSecundaria_detalheReceitaFederalVOFilteredList);
 
-        qsa_detalheReceitaFederalVOFilteredList = new FilteredList<TabEmpresa_DetalheReceitaFederalVO>(empresa_detalheReceitaFederalVOObservableList, principal -> true);
+        qsa_detalheReceitaFederalVOFilteredList = new FilteredList<TabEmpresaDetalheReceitaFederalVO>(empresa_detalheReceitaFederalVOObservableList, principal -> true);
         qsa_detalheReceitaFederalVOFilteredList.setPredicate(principal -> {
             if (principal.getIsAtividadePrincipal() == 2) return true;
             return false;
@@ -1038,6 +1037,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             lblDataAbertura.setText("data abertura: " + ldAbertura.format(DTF_DATA));
             lblDataAberturaDiff.setText("tempo de abertura: " + DataTrabalhada.getStrIntervaloDatas(ldAbertura, null));
         }
+
         LocalDateTime ldtCadastro = getTtvEmpresaVO().getDataCadastro().toLocalDateTime();
         lblDataCadastro.setText("data cadastro: " + ldtCadastro.format(DTF_DATAHORA) + " [" + getTtvEmpresaVO().getUsuarioCadastroVO().getApelido() + "]");
         lblDataCadastroDiff.setText("tempo de cadastro: " + DataTrabalhada.getStrIntervaloDatas(ldtCadastro.toLocalDate(), null));
@@ -1563,7 +1563,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             }
         }
 
-        for (TabEmpresa_DetalheReceitaFederalVO detalhe : getTtvDetalheReceitaFederalVO())
+        for (TabEmpresaDetalheReceitaFederalVO detalhe : getTtvDetalheReceitaFederalVO())
             detalhe.setEmpresa_id(0);
 
         if (receitaWsVO.getAtividadePrincipal().size() > 0) {
@@ -1571,14 +1571,14 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             for (Pair<String, String> pair : receitaWsVO.getAtividadePrincipal()) {
                 boolean atividadePrincExiste = false;
                 for (int i = 0; i < listAtividadePrincipal.getItems().size(); i++)
-                    if (((TabEmpresa_DetalheReceitaFederalVO) listAtividadePrincipal.getItems().get(i)).getStr_key().equals(pair.getKey()))
+                    if (((TabEmpresaDetalheReceitaFederalVO) listAtividadePrincipal.getItems().get(i)).getStr_key().equals(pair.getKey()))
                         atividadePrincExiste = true;
 
                 if (!atividadePrincExiste)
                     receitaWsAtividadePrincipal.add(pair);
             }
             for (int i = 0; i < receitaWsAtividadePrincipal.size(); i++) {
-                TabEmpresa_DetalheReceitaFederalVO atividadePrincipal = new TabEmpresa_DetalheReceitaFederalVO();
+                TabEmpresaDetalheReceitaFederalVO atividadePrincipal = new TabEmpresaDetalheReceitaFederalVO();
                 atividadePrincipal.setId(0);
                 atividadePrincipal.setEmpresa_id(0);
                 atividadePrincipal.setIsAtividadePrincipal(1);
@@ -1594,13 +1594,13 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             for (Pair<String, String> pair : receitaWsVO.getAtividadesSecundarias()) {
                 boolean atividadeSecunExiste = false;
                 for (int i = 0; i < listAtividadeSecundaria.getItems().size(); i++)
-                    if (((TabEmpresa_DetalheReceitaFederalVO) listAtividadeSecundaria.getItems().get(i)).getStr_key().equals(pair.getKey()))
+                    if (((TabEmpresaDetalheReceitaFederalVO) listAtividadeSecundaria.getItems().get(i)).getStr_key().equals(pair.getKey()))
                         atividadeSecunExiste = true;
                 if (!atividadeSecunExiste)
                     receitaWsAtividadeSecundaria.add(pair);
             }
             for (int i = 0; i < receitaWsAtividadeSecundaria.size(); i++) {
-                TabEmpresa_DetalheReceitaFederalVO atividadeSecundaria = new TabEmpresa_DetalheReceitaFederalVO();
+                TabEmpresaDetalheReceitaFederalVO atividadeSecundaria = new TabEmpresaDetalheReceitaFederalVO();
                 atividadeSecundaria.setEmpresa_id(0);
                 atividadeSecundaria.setId(0);
                 atividadeSecundaria.setIsAtividadePrincipal(0);
@@ -1617,13 +1617,13 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             for (Pair<String, String> pair : receitaWsVO.getQsa()) {
                 boolean qsaExiste = false;
                 for (int i = 0; i < ttvDetalheReceita.getCurrentItemsCount(); i++)
-                    if (((TabEmpresa_DetalheReceitaFederalVO) ttvDetalheReceita.getTreeItem(i).getValue()).getStr_key().equals(pair.getKey()))
+                    if (((TabEmpresaDetalheReceitaFederalVO) ttvDetalheReceita.getTreeItem(i).getValue()).getStr_key().equals(pair.getKey()))
                         qsaExiste = true;
                 if (!qsaExiste)
                     receitaWsQsa.add(pair);
             }
             for (int i = 0; i < receitaWsQsa.size(); i++) {
-                TabEmpresa_DetalheReceitaFederalVO qsa = new TabEmpresa_DetalheReceitaFederalVO();
+                TabEmpresaDetalheReceitaFederalVO qsa = new TabEmpresaDetalheReceitaFederalVO();
                 qsa.setEmpresa_id(0);
                 qsa.setId(0);
                 qsa.setIsAtividadePrincipal(2);
@@ -1921,13 +1921,13 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             }
 
             if (getTtvDetalheReceitaFederalVO().size() > 0)
-                for (TabEmpresa_DetalheReceitaFederalVO detReceita : getTtvDetalheReceitaFederalVO())
+                for (TabEmpresaDetalheReceitaFederalVO detReceita : getTtvDetalheReceitaFederalVO())
                     if (detReceita.getId() == 0) {
                         detReceita.setEmpresa_id(idEmpresa);
-                        new TabEmpresa_DetalheReceitaFederalDAO().insertTabEmpresa_DetalheReceitaFederalVO(conn, detReceita);
+                        new TabEmpresaDetalheReceitaFederalDAO().insertTabEmpresa_DetalheReceitaFederalVO(conn, detReceita);
                     } else {
                         detReceita.setEmpresa_id(idEmpresa);
-                        new TabEmpresa_DetalheReceitaFederalDAO().updateTabEmpresa_DetalheReceitaFederalVO(conn, detReceita);
+                        new TabEmpresaDetalheReceitaFederalDAO().updateTabEmpresa_DetalheReceitaFederalVO(conn, detReceita);
                     }
             conn.commit();
         } catch (Exception ex) {
@@ -1943,12 +1943,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     }
 
     void fecharTab(String tituloTab) {
-        ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.removeEventHandler(KeyEvent.KEY_RELEASED, eventCadastroEmpresa);
-        //System.out.println("qtdTabs: " + ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().size());
         for (int i = 0; i < ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().size(); i++)
             if (ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().get(i).getText().toLowerCase().equals(tituloTab.toLowerCase())) {
-                //System.out.println("tab: " + ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().get(i).getText().toLowerCase());
                 ControllerPrincipal.ctrlPrincipal.fecharTab(i);
+                ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.removeEventHandler(KeyEvent.KEY_RELEASED, eventCadastroEmpresa);
             }
     }
 

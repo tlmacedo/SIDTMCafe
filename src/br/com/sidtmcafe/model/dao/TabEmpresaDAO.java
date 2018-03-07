@@ -7,9 +7,6 @@ import br.com.sidtmcafe.model.vo.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,7 +103,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         empresa.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getColaboradorVO(empresa.getUsuarioAtualizacao_id()));
         empresa.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(empresa.getSituacaoSistema_id()));
 
-        empresa.setDetalheReceitaFederalVOList(new TabEmpresa_DetalheReceitaFederalDAO().getDetalheReceitaFederalVOList(empresa.getId()));
+        empresa.setDetalheReceitaFederalVOList(new TabEmpresaDetalheReceitaFederalDAO().getDetalheReceitaFederalVOList(empresa.getId()));
     }
 
     public void updateTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) throws SQLException {
@@ -126,7 +123,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         comandoSql += "usuarioAtualizacao_id = " + empresaVO.getUsuarioAtualizacao_id() + ", ";
         comandoSql += "situacaoSistema_id = " + empresaVO.getSituacaoSistema_id() + ", ";
         comandoSql += "dataAbertura = '" + empresaVO.getDataAbertura() + "', ";
-        comandoSql += "naturezaJuridica = '" + empresaVO.getNaturezaJuridica().replaceAll("'", "") + "' ";
+        comandoSql += "naturezaJuridica = '" + empresaVO.getNaturezaJuridica().replaceAll("[']", "") + "' ";
         comandoSql += "WHERE id = " + empresaVO.getId();
 
         if (getUpdateBancoDados(conn, comandoSql)) ;

@@ -1,7 +1,7 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.database.ConnectionFactory;
-import br.com.sidtmcafe.model.vo.TabEmpresa_DetalheReceitaFederalVO;
+import br.com.sidtmcafe.model.vo.TabEmpresaDetalheReceitaFederalVO;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,26 +9,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
+public class TabEmpresaDetalheReceitaFederalDAO extends BuscaBandoDados {
 
     ResultSet rs;
 
     String comandoSql = "";
-    TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO;
-    List<TabEmpresa_DetalheReceitaFederalVO> detalheReceitaFederalVOList;
+    TabEmpresaDetalheReceitaFederalVO detalheReceitaFederalVO;
+    List<TabEmpresaDetalheReceitaFederalVO> detalheReceitaFederalVOList;
 
-    public TabEmpresa_DetalheReceitaFederalVO getDetalheReceitaFederalVO(int idTabEmpresa_DetalheReceitaFederalVO) {
+    public TabEmpresaDetalheReceitaFederalVO getDetalheReceitaFederalVO(int idTabEmpresa_DetalheReceitaFederalVO) {
         buscaTabEmpresa_DetalheReceitaFederal(idTabEmpresa_DetalheReceitaFederalVO, -1);
         return detalheReceitaFederalVO;
     }
 
-    public List<TabEmpresa_DetalheReceitaFederalVO> getDetalheReceitaFederalVOList(int idTabEmpresaVO) {
+    public List<TabEmpresaDetalheReceitaFederalVO> getDetalheReceitaFederalVOList(int idTabEmpresaVO) {
         buscaTabEmpresa_DetalheReceitaFederal(-1, idTabEmpresaVO);
         return detalheReceitaFederalVOList;
     }
 
     void buscaTabEmpresa_DetalheReceitaFederal(int idTabEmpresa_DetalheReceitaFederalVO, int idTabEmpresaVO) {
-        comandoSql = "SELECT * FROM tabEmpresa_DetalheReceitaFederal ";
+        comandoSql = "SELECT * FROM tabEmpresaDetalheReceitaFederal ";
         if (idTabEmpresa_DetalheReceitaFederalVO > 0)
             comandoSql += "WHERE id = '" + idTabEmpresa_DetalheReceitaFederalVO + "' ";
         if (idTabEmpresaVO > 0) {
@@ -44,7 +44,7 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
         rs = getResultadosBandoDados(comandoSql);
         try {
             while (rs.next()) {
-                detalheReceitaFederalVO = new TabEmpresa_DetalheReceitaFederalVO();
+                detalheReceitaFederalVO = new TabEmpresaDetalheReceitaFederalVO();
                 detalheReceitaFederalVO.setId(rs.getInt("id"));
                 detalheReceitaFederalVO.setEmpresa_id(rs.getInt("empresa_id"));
                 detalheReceitaFederalVO.setIsAtividadePrincipal(rs.getInt("isAtividadePrincipal"));
@@ -60,8 +60,8 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
         }
     }
 
-    public void updateTabEmpresa_DetalheReceitaFederalVO(Connection conn, TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO) throws SQLException {
-        comandoSql = "UPDATE tabEmpresa_DetalheReceitaFederal SET ";
+    public void updateTabEmpresa_DetalheReceitaFederalVO(Connection conn, TabEmpresaDetalheReceitaFederalVO detalheReceitaFederalVO) throws SQLException {
+        comandoSql = "UPDATE tabEmpresaDetalheReceitaFederal SET ";
         comandoSql += "empresa_id = " + detalheReceitaFederalVO.getEmpresa_id() + ", ";
         comandoSql += "isAtividadePrincipal = " + detalheReceitaFederalVO.getIsAtividadePrincipal() + ", ";
         comandoSql += "str_Key = '" + detalheReceitaFederalVO.getStr_key() + "', ";
@@ -71,8 +71,8 @@ public class TabEmpresa_DetalheReceitaFederalDAO extends BuscaBandoDados {
         if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
-    public int insertTabEmpresa_DetalheReceitaFederalVO(Connection conn, TabEmpresa_DetalheReceitaFederalVO detalheReceitaFederalVO) throws SQLException {
-        comandoSql = "INSERT INTO tabEmpresa_DetalheReceitaFederal ";
+    public int insertTabEmpresa_DetalheReceitaFederalVO(Connection conn, TabEmpresaDetalheReceitaFederalVO detalheReceitaFederalVO) throws SQLException {
+        comandoSql = "INSERT INTO tabEmpresaDetalheReceitaFederal ";
         comandoSql += "(empresa_id, isAtividadePrincipal, str_Key, str_Value) ";
         comandoSql += "VALUES(";
         comandoSql += detalheReceitaFederalVO.getEmpresa_id() + ", ";

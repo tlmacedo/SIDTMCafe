@@ -42,7 +42,7 @@ public class SisFiscalCstPisCofinsVO extends RecursiveTreeObject<SisFiscalCstPis
 
     @Override
     public String toString() {
-        return descricaoProperty().get();
+        return idProperty().get() + " - " + descricaoProperty().get();
     }
 
 }

@@ -42,6 +42,6 @@ public class SisFiscalCstOrigemVO extends RecursiveTreeObject<SisFiscalCstOrigem
 
     @Override
     public String toString() {
-        return descricaoProperty().get();
+        return idProperty().get() + " - " + descricaoProperty().get();
     }
 }

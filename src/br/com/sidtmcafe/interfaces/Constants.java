@@ -58,7 +58,8 @@ public interface Constants {
     String TOKEN_EXTENSAO_ARQUIVO = "cfg";
 
     /* Constants para utilizacao de datas e horas */
-    DecimalFormat DECIMAL_FORMAT = new DecimalFormat(".00");
+    DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.00");
+    DecimalFormat PESO_FORMAT = new DecimalFormat("0.000");
     String LOCAL_TIME_ZONE = "America/Manaus";
     ZoneId MY_ZONE_TIME = ZoneId.of(LOCAL_TIME_ZONE);
     LocalDateTime DATAHORA_LOCAL = LocalDateTime.now().atZone(MY_ZONE_TIME).toLocalDateTime();

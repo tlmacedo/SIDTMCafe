@@ -5,7 +5,6 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import org.joda.time.DateTime;
 
 import java.sql.Timestamp;
 import java.sql.Date;
@@ -20,7 +19,7 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     TabColaboradorVO usuarioCadastroVO;
     TabColaboradorVO usuarioAtualizacaoVO;
     SisSituacaoSistemaVO situacaoSistemaVO;
-    List<TabEmpresa_DetalheReceitaFederalVO> detalheReceitaFederalVOList;
+    List<TabEmpresaDetalheReceitaFederalVO> detalheReceitaFederalVOList;
 
     Date dataAbertura;
     Timestamp dataCadastro, dataAtualizacao;
@@ -86,11 +85,11 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
         this.situacaoSistemaVO = situacaoSistemaVO;
     }
 
-    public List<TabEmpresa_DetalheReceitaFederalVO> getDetalheReceitaFederalVOList() {
+    public List<TabEmpresaDetalheReceitaFederalVO> getDetalheReceitaFederalVOList() {
         return detalheReceitaFederalVOList;
     }
 
-    public void setDetalheReceitaFederalVOList(List<TabEmpresa_DetalheReceitaFederalVO> detalheReceitaFederalVOList) {
+    public void setDetalheReceitaFederalVOList(List<TabEmpresaDetalheReceitaFederalVO> detalheReceitaFederalVOList) {
         this.detalheReceitaFederalVOList = detalheReceitaFederalVOList;
     }
 

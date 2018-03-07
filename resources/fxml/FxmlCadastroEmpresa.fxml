@@ -52,8 +52,8 @@
                 </AnchorPane>
             </content>
         </TitledPane>
-        <TitledPane fx:id="tpnDadosCadastrais" collapsible="false" focusTraversable="false" layoutX="5.0"
-                    layoutY="196.0" prefHeight="585.0" prefWidth="1290.0" text="Dados Cadastrais">
+        <TitledPane fx:id="tpnDadoCadastral" collapsible="false" focusTraversable="false" layoutX="5.0" layoutY="196.0"
+                    prefHeight="585.0" prefWidth="1290.0" text="Dados Cadastrais">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="142.0" prefWidth="1278.0">
                     <children>

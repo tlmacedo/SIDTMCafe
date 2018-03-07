@@ -67,7 +67,7 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
 
     @Override
     public void escutarTeclas() {
-        painelViewPrincipal.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
+        painelViewPrincipal.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
             SisMenuPrincipalVO item = null;
 
             if (CODE_KEY_SHIFT_CTRL_POSITIVO.match(event) || CHAR_KEY_SHIFT_CTRL_POSITIVO.match(event))
@@ -79,14 +79,12 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
             if (event.getCode() == KeyCode.F11 && event.isControlDown() && event.isShiftDown()) {
                 new Tarefa().tarefaWsFonteDeDados_ConstulaSaldo();
             }
-            if (event.getCode() == KeyCode.E && event.isControlDown() && event.isShiftDown())
-                item = new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+E");
-            if (event.getCode() == KeyCode.P && event.isControlDown() && event.isShiftDown())
-                item = new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+P");
 
-            if (item != null) {
-                adicionaNovaTab(item);
-            }
+            if (event.getCode() == KeyCode.E && event.isControlDown() && event.isShiftDown())
+                adicionaNovaTab(new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+e"));
+            if (event.getCode() == KeyCode.P && event.isControlDown() && event.isShiftDown())
+                adicionaNovaTab(new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+p"));
+
 
             if ((event.getCode() == KeyCode.F12 && event.isControlDown()) || (event.getCode() == KeyCode.F12 && tabPaneViewPrincipal.getTabs().size() <= 0)) {
                 if (sairSistema())
@@ -262,12 +260,10 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
                         break;
                     case "empresa":
                         tabPaneViewPrincipal.getTabs().add(new ViewCadastroEmpresa().openTabViewCadastroEmpresa(menuPrincipalVO.getTituloTab()));
-                        //controllerCadastroEmpresa = ViewCadastroEmpresa.getControllerEmpresa();
                         add = true;
                         break;
                     case "produto":
                         tabPaneViewPrincipal.getTabs().add(new ViewCadastroProduto().openTabViewCadastroProduto(menuPrincipalVO.getTituloTab()));
-                        //controllerCadastroProduto = ViewCadastroProduto.getControllerProduto();
                         add = true;
                         break;
                 }

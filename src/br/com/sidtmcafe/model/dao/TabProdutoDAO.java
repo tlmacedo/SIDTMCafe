@@ -3,7 +3,9 @@ package br.com.sidtmcafe.model.dao;
 import br.com.sidtmcafe.database.ConnectionFactory;
 import br.com.sidtmcafe.model.vo.TabProdutoVO;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,4 +86,57 @@ public class TabProdutoDAO extends BuscaBandoDados {
         produto.setProdutoEstoqueVOList(new TabProdutoEstoqueDAO().getProdutoEstoqueVOList(produto.getId()));
         produto.setProdutoEanVOList(new TabProdutoEanDAO().getProdutoEanVOList(produto.getId()));
     }
+
+    public void updateTabProdutoVO(Connection conn, TabProdutoVO produtoVO) throws SQLException {
+        comandoSql = "UPDATE tabProduto SET ";
+        comandoSql += "codigo = '" + produtoVO.getCodigo() + "', ";
+        comandoSql += "descricao = '" + produtoVO.getDescricao() + "', ";
+        comandoSql += "peso = " + produtoVO.getPeso() + ", ";
+        comandoSql += "unidadeComercial_id = " + produtoVO.getUnidadeComercial_id() + ", ";
+        comandoSql += "situacaoSistema_id = " + produtoVO.getSituacaoSistema_id() + ", ";
+        comandoSql += "precoFabrica = " + produtoVO.getPrecoFabrica() + ", ";
+        comandoSql += "precoConsumidor = " + produtoVO.getPrecoConsumidor() + ", ";
+        comandoSql += "varejo = " + produtoVO.getVarejo() + ", ";
+        comandoSql += "comissao = " + produtoVO.getComissao() + ", ";
+        comandoSql += "fiscalCstIcms_id = " + produtoVO.getFiscalCstIcms_id() + ", ";
+        comandoSql += "fiscalCstPis_id = " + produtoVO.getFiscalCstPis_id() + ", ";
+        comandoSql += "fiscalCstCofins_id = " + produtoVO.getFiscalCstCofins_id() + ", ";
+        comandoSql += "fiscalNcm = '" + produtoVO.getFiscalNcm() + "', ";
+        comandoSql += "fiscalCest = '" + produtoVO.getFiscalCest() + "', ";
+        comandoSql += "fiscalOrigem_id = " + produtoVO.getFiscalOrigem_id() + ", ";
+        comandoSql += "fiscalGenero = '" + produtoVO.getFiscalGenero() + "', ";
+        comandoSql += "usuarioAtualizacao_id = " + produtoVO.getUsuarioAtualizacao_id() + " ";
+        comandoSql += "WHERE id = " + produtoVO.getId();
+
+        if (getUpdateBancoDados(conn, comandoSql)) ;
+    }
+
+    public int insertTabProdutoVO(Connection conn, TabProdutoVO produtoVO) throws SQLException {
+        comandoSql = "INSERT INTO tabProduto ";
+        comandoSql += "(codigo, descricao, peso, unidadeComercial_id, situacaoSistema_id, precoFabrica, precoConsumidor, ";
+        comandoSql += "varejo, comissao, fiscalCstIcms_id, fiscalCstPis_id, fiscalCstCofins_id, fiscalNcm, fiscalCest, ";
+        comandoSql += "fiscalOrigem_id, fiscalGenero, usuarioCadastro_id) ";
+        comandoSql += "VALUES(";
+        comandoSql += "'" + produtoVO.getCodigo() + "', ";
+        comandoSql += "'" + produtoVO.getDescricao() + "', ";
+        comandoSql += produtoVO.getPeso() + ", ";
+        comandoSql += produtoVO.getUnidadeComercial_id() + ", ";
+        comandoSql += produtoVO.getSituacaoSistema_id() + ", ";
+        comandoSql += produtoVO.getPrecoFabrica() + ", ";
+        comandoSql += produtoVO.getPrecoConsumidor() + ", ";
+        comandoSql += produtoVO.getVarejo() + ", ";
+        comandoSql += produtoVO.getComissao() + ", ";
+        comandoSql += produtoVO.getFiscalCstIcms_id() + ", ";
+        comandoSql += produtoVO.getFiscalCstPis_id() + ", ";
+        comandoSql += produtoVO.getFiscalCstCofins_id() + ", ";
+        comandoSql += "'" + produtoVO.getFiscalNcm() + "', ";
+        comandoSql += "'" + produtoVO.getFiscalCest() + "', ";
+        comandoSql += produtoVO.getFiscalOrigem_id() + ", ";
+        comandoSql += "'" + produtoVO.getFiscalGenero() + "', ";
+        comandoSql += produtoVO.getUsuarioCadastro_id() + " ";
+        comandoSql += ") ";
+
+        return getInsertBancoDados(conn, comandoSql);
+    }
+
 }

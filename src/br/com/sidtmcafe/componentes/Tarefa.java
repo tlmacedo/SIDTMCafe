@@ -212,6 +212,25 @@ public class Tarefa implements Constants {
                         case "preencherTabelaProduto":
                             cadastroProduto.preencherTabelaProduto();
                             break;
+                        case "preencherCboUndCom":
+                            cadastroProduto.preencherCboUndCom();
+                            break;
+                        case "preencherCboSituacaoSistema":
+                            cadastroProduto.preencherCboSituacaoSistema();
+                            break;
+                        case "preencherCboFiscalOrigem":
+                            cadastroProduto.preencherCboFiscalOrigem();
+                            break;
+                        case "preencherCboFiscalIcms":
+                            cadastroProduto.preencherCboFiscalIcms();
+                            break;
+                        case "preencherCboFiscalPis":
+                            cadastroProduto.preencherCboFiscalPis();
+                            break;
+                        case "preencherCboFiscalCofins":
+                            cadastroProduto.preencherCboFiscalCofins();
+                            break;
+
                     }
                 }
                 updateProgress(qtdTarefas, qtdTarefas);

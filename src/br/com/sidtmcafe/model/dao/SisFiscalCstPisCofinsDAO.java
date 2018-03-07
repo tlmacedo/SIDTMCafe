@@ -28,7 +28,7 @@ public class SisFiscalCstPisCofinsDAO extends BuscaBandoDados {
     void buscaSisFiscalCstPisCofinsVO(int idSisFiscalCstPisCofinsVO) {
         comandoSql = "SELECT * FROM sisFiscalCstPisCofins ";
         if (idSisFiscalCstPisCofinsVO > 0) comandoSql += "WHERE id = '" + idSisFiscalCstPisCofinsVO + "' ";
-        comandoSql += "ORDER BY descricao ";
+        comandoSql += "ORDER BY id ";
 
         rs = getResultadosBandoDados(comandoSql);
         fiscalCstPisCofinsVOList = new ArrayList<>();

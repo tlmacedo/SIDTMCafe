@@ -22,13 +22,13 @@ public class SisFiscalCstOrigemDAO extends BuscaBandoDados {
     }
 
     public List<SisFiscalCstOrigemVO> getFiscalCstOrigemVOList() {
-        buscaSisFiscalCstOrigemVO(0);
+        buscaSisFiscalCstOrigemVO(-1);
         return fiscalCstOrigemVOList;
     }
 
     void buscaSisFiscalCstOrigemVO(int idSisFiscalCstOrigemVO) {
         comandoSql = "SELECT * FROM sisFiscalCstOrigem ";
-        if (idSisFiscalCstOrigemVO > 0) comandoSql += "WHERE id = '" + idSisFiscalCstOrigemVO + "' ";
+        if (idSisFiscalCstOrigemVO >= 0) comandoSql += "WHERE id = '" + idSisFiscalCstOrigemVO + "' ";
         comandoSql += "ORDER BY id ";
 
         rs = getResultadosBandoDados(comandoSql);

@@ -6,12 +6,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class TabEmpresa_DetalheReceitaFederalVO extends RecursiveTreeObject<TabEmpresa_DetalheReceitaFederalVO> {
+public class TabEmpresaDetalheReceitaFederalVO extends RecursiveTreeObject<TabEmpresaDetalheReceitaFederalVO> {
 
     IntegerProperty id, empresa_id, isAtividadePrincipal;
     StringProperty str_key, str_value;
 
-    public TabEmpresa_DetalheReceitaFederalVO() {
+    public TabEmpresaDetalheReceitaFederalVO() {
     }
 
     public int getId() {

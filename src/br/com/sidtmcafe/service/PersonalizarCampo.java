@@ -55,10 +55,10 @@ public class PersonalizarCampo implements Constants {
                             mask = textFormatador.substring(5);
 
                         if (textFormatador.contains("$")) {
+                            new FormatarDado().maskFieldMoeda((JFXTextField) node, Integer.parseInt(textFormatador.substring(5)));
+                        } else {
                             String mascara = FormatarDado.gerarMascara(mask, qtdMax, tipoDados);
                             new FormatarDado().maskField((JFXTextField) node, mascara);
-                        } else {
-                            new FormatarDado().maskFieldMoeda((JFXTextField) node);
                         }
                     }
             } else if (node instanceof AnchorPane) {
@@ -94,6 +94,8 @@ public class PersonalizarCampo implements Constants {
                     String campoLimpo = textFormatador.substring(4, 5);
                     if (campoLimpo.equals("_")) {
                         textCampoLimpo = "";
+                        if (tipoDados.equals("$"))
+                            textCampoLimpo += "0,00";
                     } else {
                         textCampoLimpo = campoLimpo;
                         if (tipoDados.equals("$")) {

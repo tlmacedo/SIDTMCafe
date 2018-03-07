@@ -21,14 +21,14 @@ public class SisFiscalCstIcmsDAO extends BuscaBandoDados {
     }
 
     public List<SisFiscalCstIcmsVO> getFiscalCstIcmsVOList() {
-        buscaSisFiscalCstIcmsVO(0);
+        buscaSisFiscalCstIcmsVO(-1);
         return fiscalCstIcmsVOList;
     }
 
     void buscaSisFiscalCstIcmsVO(int idSisFiscalCstIcmsVO) {
         comandoSql = "SELECT * FROM sisFiscalCstIcms ";
-        if (idSisFiscalCstIcmsVO > 0) comandoSql += "WHERE id = '" + idSisFiscalCstIcmsVO + "' ";
-        comandoSql += "ORDER BY descricao ";
+        if (idSisFiscalCstIcmsVO >= 0) comandoSql += "WHERE id = '" + idSisFiscalCstIcmsVO + "' ";
+        comandoSql += "ORDER BY id ";
 
         fiscalCstIcmsVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);
