@@ -39,6 +39,12 @@ public class BuscaWebService {
             urlConnection = (HttpURLConnection) new URL(strURL).openConnection();
             urlConnection.setConnectTimeout(30000);
             urlConnection.setReadTimeout(30000);
+            if (strURL.contains("cosmos")) {
+                urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("X-Cosmos-Token", token);
+            } else {
+                urlConnection.setRequestProperty("Authorization", "Bearer " + token);
+            }
             urlConnection.connect();
             retorno = urlConnection.getInputStream();
             if (urlConnection.getResponseCode() == 200)
@@ -48,7 +54,12 @@ public class BuscaWebService {
                 urlConnection = (HttpURLConnection) new URL(strURL + compl).openConnection();
                 urlConnection.setConnectTimeout(40000);
                 urlConnection.setReadTimeout(40000);
-                urlConnection.setRequestProperty("Authorization", "Bearer " + token);
+                if (strURL.contains("cosmos")) {
+                    urlConnection.setRequestProperty("Content-Type", "application/json");
+                    urlConnection.setRequestProperty("X-Cosmos-Token", token);
+                } else {
+                    urlConnection.setRequestProperty("Authorization", "Bearer " + token);
+                }
                 urlConnection.connect();
                 retorno = urlConnection.getInputStream();
                 if (urlConnection.getResponseCode() == 200)
@@ -69,9 +80,9 @@ public class BuscaWebService {
         try {
             bufferedReader = new BufferedReader(new InputStreamReader((InputStream) retorno, "UTF-8"));
             stringBuilder = new StringBuilder();
-            //System.out.println("linhaRetorno: ");
+            System.out.println("linhaRetorno: ");
             while ((linhaRetorno = bufferedReader.readLine()) != null) {
-                //System.out.println(linhaRetorno);
+                System.out.println(linhaRetorno);
                 stringBuilder.append(linhaRetorno);
             }
         } catch (Exception ex) {

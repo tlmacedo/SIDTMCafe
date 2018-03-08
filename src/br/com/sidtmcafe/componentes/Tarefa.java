@@ -5,8 +5,10 @@ import br.com.sidtmcafe.controller.ControllerCadastroProduto;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.model.dao.WsCepPostmonDAO;
 import br.com.sidtmcafe.model.dao.WsCnpjReceitaWsDAO;
+import br.com.sidtmcafe.model.dao.WsEanCosmosDAO;
 import br.com.sidtmcafe.model.vo.WsCepPostmonVO;
 import br.com.sidtmcafe.model.vo.WsCnpjReceitaWsVO;
+import br.com.sidtmcafe.model.vo.WsEanCosmosVO;
 import javafx.concurrent.Task;
 import javafx.util.Pair;
 import webService.fonteDeDados.ConsultaStub;
@@ -24,6 +26,7 @@ public class Tarefa implements Constants {
     BigDecimal getSaldo;
     WsCnpjReceitaWsVO wsCnpjReceitaWsVO;
     WsCepPostmonVO wsCepPostmonVO;
+    WsEanCosmosVO wsEanCosmosVO;
     int qtdTarefas = 1;
 
 
@@ -111,6 +114,30 @@ public class Tarefa implements Constants {
                 "ic_aguarde_sentado_orange_32dp.png")
                 .getProgressBar(voidTask, true, false, qtdTarefas);
         return wsCnpjReceitaWsVO;
+    }
+
+    public WsEanCosmosVO tarefaWsEanCosmos(List<Pair> tarefas){
+        qtdTarefas = tarefas.size();
+        Task<Void> voidTask = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                updateMessage("carregando");
+                for (Pair tarefaAtual : tarefas) {
+                    updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
+                    Thread.sleep(200);
+                    updateMessage(tarefaAtual.getValue().toString());
+                    String valEan = tarefaAtual.getValue().toString().replaceAll("[\\-/. \\[\\]]", "");
+                    valEan = valEan.substring(valEan.length() - 13);
+                    wsEanCosmosVO = new WsEanCosmosDAO().getWsEanCosmosVO(valEan);
+                }
+                updateProgress(qtdTarefas, qtdTarefas);
+                return null;
+            }
+        };
+        new AlertMensagem("Aguarde pesquisando código Ean...", "",
+                "ic_aguarde_sentado_orange_32dp.png")
+                .getProgressBar(voidTask, true, false, qtdTarefas);
+        return wsEanCosmosVO;
     }
 
     public WsCepPostmonVO tarefaWsCepPostmon(List<Pair> tarefas) {

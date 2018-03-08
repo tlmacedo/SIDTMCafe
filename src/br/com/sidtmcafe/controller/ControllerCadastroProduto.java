@@ -13,6 +13,8 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -213,6 +215,63 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
             }
         });
 
+        txtPrecoFabrica.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    campoFab = true;
+                    campoMargem = false;
+                    campoCons = false;
+                }
+            }
+        });
+
+        txtMargem.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    campoFab = false;
+                    campoMargem = true;
+                    campoCons = false;
+                }
+            }
+        });
+
+        txtPrecoConsumidor.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue) {
+                    campoFab = false;
+                    campoMargem = false;
+                    campoCons = true;
+                }
+            }
+        });
+
+        txtPrecoFabrica.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String o, String n) {
+                if (campoFab)
+                    vlrConsumidor();
+            }
+        });
+
+        txtMargem.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String o, String n) {
+                if (campoMargem)
+                    vlrConsumidor();
+            }
+        });
+
+        txtPrecoConsumidor.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> ov, String o, String n) {
+                if (campoCons)
+                    vlrMargem();
+            }
+        });
+
     }
 
     @SuppressWarnings("Duplicates")
@@ -248,6 +307,9 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
     JFXTreeTableColumn<TabProdutoVO, String> colunaSituacaoSistema;
     JFXTreeTableColumn<TabProdutoVO, Integer> colunaVarejo;
 
+    boolean campoFab = false;
+    boolean campoMargem = false;
+    boolean campoCons = false;
 
     int qtdRegistrosLocalizados = 0;
     String statusFormulario, statusBarFormulario;
@@ -312,6 +374,8 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         } else if (statusFormulario.toLowerCase().contains("editar")) {
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroProduto.getContent(), true);
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoCadastral.getContent(), false);
+            txtLucroLiquido.setDisable(true);
+            txtLucratividade.setDisable(true);
             txtCodigo.requestFocus();
             txtCodigo.selectAll();
             this.statusBarFormulario = STATUSBAREDITAR;
@@ -524,20 +588,20 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         if (getTtvProdutoVO() == null) return;
         txtCodigo.setText(getTtvProdutoVO().getCodigo());
         txtDescricao.setText(getTtvProdutoVO().getDescricao());
-        txtPeso.setText(PESO_FORMAT.format(getTtvProdutoVO().getPeso()));
+        txtPeso.setText(PESO_FORMAT.format(getTtvProdutoVO().getPeso()).replace(".", ","));
         cboUnidadeComercial.getSelectionModel().select(getTtvProdutoVO().getUnidadeComercialVO());
         cboSituacaoSistema.getSelectionModel().select(getTtvProdutoVO().getSituacaoSistemaVO());
         txtPrecoFabrica.setText(DECIMAL_FORMAT.format(getTtvProdutoVO().getPrecoFabrica()).replace(".", ","));
-        txtMargem.setText("0,00");
         txtPrecoConsumidor.setText(DECIMAL_FORMAT.format(getTtvProdutoVO().getPrecoConsumidor()).replace(".", ","));
+        txtMargem.setText("0,00");
         txtLucroLiquido.setText("0,00");
         txtLucratividade.setText("0,00");
+        vlrMargem();
         txtVarejo.setText(String.valueOf(getTtvProdutoVO().getVarejo()));
-        txtComissao.setText(DECIMAL_FORMAT.format(getTtvProdutoVO().getComissao()));
+        txtComissao.setText(DECIMAL_FORMAT.format(getTtvProdutoVO().getComissao()).replace(".", ","));
         txtFiscalNcm.setText(getTtvProdutoVO().getFiscalNcm());
         txtFiscalCest.setText(getTtvProdutoVO().getFiscalCest());
         txtFiscalGenero.setText(getTtvProdutoVO().getFiscalGenero());
-        System.out.println();
         cboFiscalOrigem.getSelectionModel().select(getTtvProdutoVO().getFiscalCstOrigemVO());
         cboFiscalIcms.getSelectionModel().select(getTtvProdutoVO().getFiscalCstIcmsVO());
         cboFiscalPis.getSelectionModel().select(getTtvProdutoVO().getFiscalCstPisVO());
@@ -600,6 +664,41 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         return produtoEanVO;
     }
 
+    void vlrConsumidor() {
+        Double prcFab, marg, prcCon;
+        prcFab = FormatarDado.getDoubleValorCampo(txtPrecoFabrica.getText());
+        marg = FormatarDado.getDoubleValorCampo(txtMargem.getText());
+        prcCon = ((prcFab * (marg + 100)) / 100);
+        txtPrecoConsumidor.setText(DECIMAL_FORMAT.format(prcCon).replace(".", ","));
+        vlrLucroLiq();
+        vlrLucratividade();
+    }
+
+    void vlrMargem() {
+        Double prcFab, marg, prcCon;
+        prcFab = FormatarDado.getDoubleValorCampo(txtPrecoFabrica.getText());
+        prcCon = FormatarDado.getDoubleValorCampo(txtPrecoConsumidor.getText());
+        marg = (((prcCon * 100) / prcFab) - 100);
+        txtMargem.setText(DECIMAL_FORMAT.format(marg).replace(".", ","));
+        vlrLucroLiq();
+        vlrLucratividade();
+    }
+
+    void vlrLucroLiq() {
+        Double prcFab, prcCon, luc;
+        prcFab = FormatarDado.getDoubleValorCampo(txtPrecoFabrica.getText());
+        prcCon = FormatarDado.getDoubleValorCampo(txtPrecoConsumidor.getText());
+        luc = prcCon - prcFab;
+        txtLucroLiquido.setText(DECIMAL_FORMAT.format(luc).replace(".", ","));
+    }
+
+    void vlrLucratividade() {
+        Double prcCon, luc, lucratividade;
+        prcCon = FormatarDado.getDoubleValorCampo(txtPrecoConsumidor.getText());
+        luc = FormatarDado.getDoubleValorCampo(txtLucroLiquido.getText());
+        lucratividade = ((luc * 100) / prcCon);
+        txtLucratividade.setText(DECIMAL_FORMAT.format(lucratividade).replace(".", ","));
+    }
 
     void keyInsert() {
         if (listCodigoBarras.isFocused()) {
@@ -608,6 +707,15 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
             getTtvProdutoEanVO().add(produtoEanVO);
             listCodigoBarras.getItems().add(produtoEanVO);
             listCodigoBarras.getSelectionModel().selectLast();
+
+            listaTarefas = new ArrayList<>();
+            listaTarefas.add(new Pair("pesquisaEan", "Pesquisando dados Ean: [" + produtoEanVO.getDescricao() + "]"));
+
+            WsEanCosmosVO wsEanCosmosVO = new Tarefa().tarefaWsEanCosmos(listaTarefas);
+
+            if (wsEanCosmosVO == null) return;
+            txtDescricao.setText(wsEanCosmosVO.getDescricao());
+            txtFiscalNcm.setText(wsEanCosmosVO.getNcm());
         }
     }
 

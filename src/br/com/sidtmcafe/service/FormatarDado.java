@@ -37,12 +37,12 @@ public class FormatarDado implements Constants {
     }
 
     public static String getCampoFormatado(String value, String tipMascOrMascara) {
-        String strValue = value.replaceAll("[\\-/. \\[\\]]", "");
+        String strValue = value.replaceAll("[\\-/., \\[\\]]", "");
         String mascara = tipMascOrMascara;
         String ms = "#@?", digt = tipMascOrMascara.substring(0, 1);
         if (!ms.contains(digt))
             mascara = gerarMascara(tipMascOrMascara, value.length(), "");
-        String mascTmp = mascara.replaceAll("[\\-/. \\[\\]]", "");
+        String mascTmp = mascara.replaceAll("[\\-/., \\[\\]]", "");
         if (strValue.length() > mascTmp.length())
             strValue = strValue.substring(0, mascTmp.length());
 
@@ -57,6 +57,13 @@ public class FormatarDado implements Constants {
         return strValue;
     }
 
+    public static Double getDoubleValorCampo(String value) {
+        value = value.replaceAll("[^0-9]", "");
+        if (value.isEmpty())
+            value = "000";
+        return Double.parseDouble(value.replaceAll("([0-9]{1})([0-9]{2})$", "$1.$2"));
+    }
+
     public static String gerarMascara(String tipMasc, int qtd, String caractere) {
         String tipM = tipMasc.toLowerCase();
         if (tipM.contains("cnpj")) {
@@ -66,7 +73,7 @@ public class FormatarDado implements Constants {
         } else if (tipM.contains("cep")) {
             return "##.###-###";
         } else if (tipM.contains("moeda")) {
-            return "###.###,##";
+            return "0.00";
         } else if (tipM.contains("telefone")) {
             if (qtd < 9)
                 return "####-####";
@@ -190,33 +197,24 @@ public class FormatarDado implements Constants {
     }
 
     public void maskFieldMoeda(final JFXTextField textField, int casasDecimal) {
-        try {
-            textField.setAlignment(Pos.CENTER_RIGHT);
-            textField.lengthProperty().addListener(new ChangeListener<Number>() {
-                @Override
-                public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                    String value = textField.getText();
-                    value = value.replaceAll("[^0-9]", "");
-                    value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 11) + "})$", "$1.$2");
-                    value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 9) + "})$", "$1.$2");
-                    value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 6) + "})$", "$1.$2");
-                    value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 3) + "})$", "$1.$2");
-                    value = value.replaceAll("([0-9]{1})([0-9]{" + casasDecimal + "})$", "$1,$2");
-                    textField.setText(value);
-                    positionCaret(textField);
-
-                    textField.textProperty().addListener(new ChangeListener<String>() {
-                        @Override
-                        public void changed(ObservableValue<? extends String> ov, String o, String n) {
-                            if (n.length() > 17)
-                                textField.setText(o);
-                        }
-                    });
+        textField.setAlignment(Pos.CENTER_RIGHT);
+        textField.lengthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> ov, Number o, Number n) {
+                String value = String.valueOf(Integer.parseInt(textField.getText().replaceAll("[^0-9]", "")));
+                for (int i = value.length(); i < (casasDecimal + 1); i++) {
+                    value = "0" + value;
                 }
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+                value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 11) + "})$", "$1.$2");
+                value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 9) + "})$", "$1.$2");
+                value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 6) + "})$", "$1.$2");
+                value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 3) + "})$", "$1.$2");
+                value = value.replaceAll("([0-9]{1})([0-9]{" + casasDecimal + "})$", "$1,$2");
+                textField.setText(value);
+                positionCaret(textField);
+
+            }
+        });
     }
 
     private static void positionCaret(final TextField textField) {
