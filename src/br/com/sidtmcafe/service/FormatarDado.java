@@ -45,7 +45,6 @@ public class FormatarDado implements Constants {
         String mascTmp = mascara.replaceAll("[\\-/., \\[\\]]", "");
         if (strValue.length() > mascTmp.length())
             strValue = strValue.substring(0, mascTmp.length());
-
         if (strValue.length() > 0)
             try {
                 MaskFormatter mf = new MaskFormatter(mascara);
@@ -74,6 +73,16 @@ public class FormatarDado implements Constants {
             return "##.###-###";
         } else if (tipM.contains("moeda")) {
             return "0.00";
+        } else if (tipM.contains("ncm")) {
+            return "####.##.##";
+        } else if (tipM.contains("cest")) {
+            return "##.###.##";
+        } else if (tipM.contains("nfechave")) {
+            return "#### #### #### #### #### #### #### #### #### #### ####";
+        } else if (tipM.contains("nfenumero")) {
+            return "###.###.###";
+        } else if (tipM.contains("nfedocorigem")) {
+            return "###########-#";
         } else if (tipM.contains("telefone")) {
             if (qtd < 9)
                 return "####-####";

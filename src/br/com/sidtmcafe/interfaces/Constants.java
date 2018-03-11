@@ -81,7 +81,8 @@ public interface Constants {
 
 
     /* cosmos */
-    String WS_COSMOS_URL = "https://api.cosmos.bluesoft.com.br/gtins/";
+    String WS_COSMOS_URL = "https://api.cosmos.bluesoft.com.br";
+    String WS_COSMOS_SER_NCM = "/ncms/";
     String WS_COSMOS_SER_GTINS = "/gtins/";
     String WS_COSMOS_SER_GPCS = "/gpcs/";
     String WS_COSMOS_TOKEN = "o65EDRPgFu7mFNuv5vj5Aw";

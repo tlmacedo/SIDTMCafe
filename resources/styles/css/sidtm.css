@@ -319,4 +319,13 @@
     .tree-table-view .tree-table-row-cell:empty .table-cell {
       -fx-border-width: 0; }
 
+.jfx-date-picker, .date-picker {
+  -fx-font-family: sans-serif;
+  -fx-text-fill: #000000;
+  -fx-font-size: 12px;
+  -fx-font-style: normal;
+  -jfx-focus-color: #FF6600;
+  -jfx-unfocus-color: #000000;
+  -jfx-label-float: true; }
+
 /*# sourceMappingURL=sidtm.css.map */

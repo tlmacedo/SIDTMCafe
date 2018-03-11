@@ -192,7 +192,7 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="70.0" prefWidth="200.0">
                                     <children>
-                                        <JFXTextField fx:id="txtFiscalNcm" accessibleText="008#_" layoutX="5.0"
+                                        <JFXTextField fx:id="txtFiscalNcm" accessibleText="010#_ncm" layoutX="5.0"
                                                       layoutY="10.0"
                                                       maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                                                       minWidth="-Infinity" prefHeight="20.0" prefWidth="90.0"
@@ -210,7 +210,7 @@
                                                 <Tooltip text="género fiscal do produto"/>
                                             </tooltip>
                                         </JFXTextField>
-                                        <JFXTextField fx:id="txtFiscalCest" accessibleText="008#_" layoutX="210.0"
+                                        <JFXTextField fx:id="txtFiscalCest" accessibleText="009#_cest" layoutX="210.0"
                                                       layoutY="10.0"
                                                       maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                                                       minWidth="-Infinity" prefHeight="20.0" prefWidth="90.0"

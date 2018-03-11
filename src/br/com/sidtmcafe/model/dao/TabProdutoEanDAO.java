@@ -79,4 +79,11 @@ public class TabProdutoEanDAO extends BuscaBandoDados {
         return getInsertBancoDados(conn, comandoSql);
     }
 
+    public void deleteTabProdutoEanVO(Connection conn, TabProdutoEanVO produtoEanVO) throws SQLException {
+        comandoSql = "DELETE FROM tabProdutoEan ";
+        comandoSql += "WHERE id = " + produtoEanVO.getId();
+
+        if (getDeleteBancoDados(conn, comandoSql)) ;
+    }
+
 }

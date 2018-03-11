@@ -4,6 +4,7 @@ import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.model.vo.WsEanCosmosVO;
 import javafx.util.Pair;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -18,21 +19,16 @@ public class WsEanCosmosDAO extends BuscaWebService implements Constants {
 
 
     public WsEanCosmosVO getWsEanCosmosVO(String codEan) {
-        jsonObject = getJsonObjectHttpUrlConnection(WS_COSMOS_URL + codEan + ".json", WS_COSMOS_TOKEN, "");
+        jsonObject = getJsonObjectHttpUrlConnection(WS_COSMOS_URL + WS_COSMOS_SER_GTINS + codEan + ".json", WS_COSMOS_TOKEN, "");
         if (jsonObject == null)
             return wsEanCosmosVO = null;
         try {
             wsEanCosmosVO = new WsEanCosmosVO();
-
-//            if (jsonObject.getString("message") != null) {
-//                wsEanCosmosVO.setMessage(jsonObject.getString("message"));
-//                return wsEanCosmosVO;
-//            }
-//
             wsEanCosmosVO.setDescricao(jsonObject.getString("description"));
             wsEanCosmosVO.setNcm(jsonObject.getJSONObject("ncm").getString("code"));
         } catch (Exception ex) {
-            ex.printStackTrace();
+            if (!(ex instanceof JSONException))
+                ex.printStackTrace();
         }
         return wsEanCosmosVO;
     }

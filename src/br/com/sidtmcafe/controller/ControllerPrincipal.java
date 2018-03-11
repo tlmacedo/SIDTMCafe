@@ -10,6 +10,7 @@ import br.com.sidtmcafe.model.vo.SisMenuPrincipalVO;
 import br.com.sidtmcafe.service.ExecutaComandoTecladoMouse;
 import br.com.sidtmcafe.view.ViewCadastroEmpresa;
 import br.com.sidtmcafe.view.ViewCadastroProduto;
+import br.com.sidtmcafe.view.ViewEntradaProduto;
 import br.com.sidtmcafe.view.ViewPrincipal;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXToolbar;
@@ -84,6 +85,8 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
                 adicionaNovaTab(new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+e"));
             if (event.getCode() == KeyCode.P && event.isControlDown() && event.isShiftDown())
                 adicionaNovaTab(new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+p"));
+            if (event.getCode() == KeyCode.I && event.isControlDown() && event.isShiftDown())
+                adicionaNovaTab(new SisMenuPrincipalDAO().getMenuPrincipalVO("ctrl+shift+i"));
 
 
             if ((event.getCode() == KeyCode.F12 && event.isControlDown()) || (event.getCode() == KeyCode.F12 && tabPaneViewPrincipal.getTabs().size() <= 0)) {
@@ -264,6 +267,10 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
                         break;
                     case "produto":
                         tabPaneViewPrincipal.getTabs().add(new ViewCadastroProduto().openTabViewCadastroProduto(menuPrincipalVO.getTituloTab()));
+                        add = true;
+                        break;
+                    case "entradaproduto":
+                        tabPaneViewPrincipal.getTabs().add(new ViewEntradaProduto().openTabViewEntradaProduto(menuPrincipalVO.getTituloTab()));
                         add = true;
                         break;
                 }

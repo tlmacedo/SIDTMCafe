@@ -296,6 +296,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
 
     ObservableList<TabProdutoVO> produtoVOObservableList;
     FilteredList<TabProdutoVO> produtoVOFilteredList;
+    List<TabProdutoEanVO> deletadosProdutoEanVOList;
 
     JFXTreeTableColumn<TabProdutoVO, Integer> colunaId;
     JFXTreeTableColumn<TabProdutoVO, String> colunaCodigo;
@@ -564,6 +565,8 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
 
     void preencherListaProdutoEan() {
         listCodigoBarras.getItems().clear();
+        if (deletadosProdutoEanVOList != null)
+            deletadosProdutoEanVOList.clear();
         if (getTtvProdutoEanVO() != null)
             listCodigoBarras.getItems().setAll(getTtvProdutoEanVO());
         listCodigoBarras.getSelectionModel().select(0);
@@ -599,8 +602,8 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         vlrMargem();
         txtVarejo.setText(String.valueOf(getTtvProdutoVO().getVarejo()));
         txtComissao.setText(DECIMAL_FORMAT.format(getTtvProdutoVO().getComissao()).replace(".", ","));
-        txtFiscalNcm.setText(getTtvProdutoVO().getFiscalNcm());
-        txtFiscalCest.setText(getTtvProdutoVO().getFiscalCest());
+        txtFiscalNcm.setText(FormatarDado.getCampoFormatado(getTtvProdutoVO().getFiscalNcm(), "ncm"));
+        txtFiscalCest.setText(FormatarDado.getCampoFormatado(getTtvProdutoVO().getFiscalCest(), "cest"));
         txtFiscalGenero.setText(getTtvProdutoVO().getFiscalGenero());
         cboFiscalOrigem.getSelectionModel().select(getTtvProdutoVO().getFiscalCstOrigemVO());
         cboFiscalIcms.getSelectionModel().select(getTtvProdutoVO().getFiscalCstIcmsVO());
@@ -636,7 +639,6 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         }
         if (codigoBarras == null) return null;
         TabProdutoEanVO produtoEanVO = new TabProdutoEanVO();
-        TabEmailHomePageVO emailHomePageVO = new TabEmailHomePageVO();
         produtoEanVO.setId(0);
         produtoEanVO.setProduto_id(0);
         produtoEanVO.setDescricao(codigoBarras);
@@ -715,12 +717,15 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
 
             if (wsEanCosmosVO == null) return;
             txtDescricao.setText(wsEanCosmosVO.getDescricao());
-            txtFiscalNcm.setText(wsEanCosmosVO.getNcm());
+            txtFiscalNcm.setText(FormatarDado.getCampoFormatado(wsEanCosmosVO.getNcm(), "ncm"));
         }
     }
 
     void keyDelete() {
         if ((listCodigoBarras.isFocused()) && (listCodigoBarras.getSelectionModel().getSelectedIndex() >= 0)) {
+            if (deletadosProdutoEanVOList == null)
+                deletadosProdutoEanVOList = new ArrayList<>();
+            deletadosProdutoEanVOList.add(listCodigoBarras.getSelectionModel().getSelectedItem());
             getTtvProdutoEanVO().remove(listCodigoBarras.getSelectionModel().getSelectedItem());
             listCodigoBarras.getItems().remove(listCodigoBarras.getSelectionModel().getSelectedItem());
         }
@@ -756,8 +761,8 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         prod.setFiscalCstPisVO(cboFiscalPis.getSelectionModel().getSelectedItem());
         prod.setFiscalCstCofins_id(((SisFiscalCstPisCofinsVO) cboFiscalCofins.getSelectionModel().getSelectedItem()).getId());
         prod.setFiscalCstCofinsVO(cboFiscalCofins.getSelectionModel().getSelectedItem());
-        prod.setFiscalNcm(txtFiscalNcm.getText());
-        prod.setFiscalCest(txtFiscalCest.getText());
+        prod.setFiscalNcm(txtFiscalNcm.getText().replaceAll("[.]", ""));
+        prod.setFiscalCest(txtFiscalCest.getText().replaceAll("[.]", ""));
         prod.setFiscalOrigem_id(((SisFiscalCstOrigemVO) cboFiscalOrigem.getSelectionModel().getSelectedItem()).getId());
         prod.setFiscalCstOrigemVO(cboFiscalOrigem.getSelectionModel().getSelectedItem());
         prod.setFiscalGenero(txtFiscalGenero.getText());
@@ -789,6 +794,13 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
                         prodEanVO.setProduto_id(idProduto);
                         new TabProdutoEanDAO().updateTabProdutoEanVO(conn, prodEanVO);
                     }
+
+            if (deletadosProdutoEanVOList != null)
+                if (deletadosProdutoEanVOList.size() > 0)
+                    for (TabProdutoEanVO prodEanVO : deletadosProdutoEanVOList)
+                        if (prodEanVO.getId() > 0)
+                            new TabProdutoEanDAO().deleteTabProdutoEanVO(conn, prodEanVO);
+
             conn.commit();
         } catch (Exception ex) {
             ex.printStackTrace();
