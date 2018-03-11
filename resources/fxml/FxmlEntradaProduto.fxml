@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="painelViewEntradaProduto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="785.0" prefWidth="1300.0" stylesheets="@../styles/min/sidtm.min.css"
-            xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="br.com.sidtmcafe.controller.ControllerEntradaProduto">
     <children>
         <TitledPane fx:id="tpnDadoNfe" collapsible="false" focusTraversable="false" layoutX="5.0" layoutY="5.0"
@@ -463,7 +463,7 @@
                 <Font name="SansSerif Bold Italic" size="11.0"/>
             </font>
         </TitledPane>
-        <TitledPane fx:id="tpnItensNfe" collapsible="false" focusTraversable="false" layoutX="5.0" layoutY="325.0"
+        <TitledPane fx:id="tpnItensTotaisNfe" collapsible="false" focusTraversable="false" layoutX="5.0" layoutY="325.0"
                     prefHeight="455.0" prefWidth="1290.0" text="Itens e totais da nf-e">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="142.0" prefWidth="1278.0">
@@ -500,7 +500,7 @@
                                 </AnchorPane>
                             </content>
                         </TitledPane>
-                        <TitledPane fx:id="tpnCadastroProduto1" collapsible="false" focusTraversable="false"
+                        <TitledPane fx:id="tpnItensNfe" collapsible="false" focusTraversable="false"
                                     layoutX="5.0" layoutY="185.0" prefHeight="240.0" prefWidth="1280.0"
                                     text="Itens da nf-e">
                             <content>

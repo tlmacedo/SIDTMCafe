@@ -2,10 +2,12 @@ package br.com.sidtmcafe.componentes;
 
 import br.com.sidtmcafe.controller.ControllerCadastroEmpresa;
 import br.com.sidtmcafe.controller.ControllerCadastroProduto;
+import br.com.sidtmcafe.controller.ControllerEntradaProduto;
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.model.dao.WsCepPostmonDAO;
 import br.com.sidtmcafe.model.dao.WsCnpjReceitaWsDAO;
 import br.com.sidtmcafe.model.dao.WsEanCosmosDAO;
+import br.com.sidtmcafe.model.model.TabModel;
 import br.com.sidtmcafe.model.vo.WsCepPostmonVO;
 import br.com.sidtmcafe.model.vo.WsCnpjReceitaWsVO;
 import br.com.sidtmcafe.model.vo.WsEanCosmosVO;
@@ -176,16 +178,14 @@ public class Tarefa implements Constants {
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
                         case "criarTabelaEmpresa":
-                            cadastroEmpresa.criarTabelaEmpresa();
+                            TabModel.tabelaEmpresa();
+                            TabModel.tabelaQsaReceita();
                             break;
                         case "carregarSisTipoEndereco":
                             cadastroEmpresa.carregarSisTipoEndereco();
                             break;
                         case "carregarSisTelefoneOperadora":
                             cadastroEmpresa.carregarSisTelefoneOperadora();
-                            break;
-                        case "carregarTodosMunicipios":
-                            cadastroEmpresa.carregarTodosMunicipios();
                             break;
                         case "carregarListaEmpresa":
                             cadastroEmpresa.carregarListaEmpresa();
@@ -231,7 +231,7 @@ public class Tarefa implements Constants {
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
                         case "criarTabelaProduto":
-                            cadastroProduto.criarTabelaProduto();
+                            TabModel.tabelaProduto();
                             break;
                         case "carregarListaProduto":
                             cadastroProduto.carregarListaProduto();
@@ -269,25 +269,27 @@ public class Tarefa implements Constants {
                 .getProgressBar(voidTask, true, false, qtdTarefas);
     }
 
-    public boolean tarefaSalvaEmpresa(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {
+    public void tarefaAbreEntradaProduto(ControllerEntradaProduto entradaProduto, List<Pair> tarefas) {
         qtdTarefas = tarefas.size();
         Task<Void> voidTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
+//                listaTarefas.add(new Pair("carregarLojaDestino", "carregando lista lojas"));
+//                listaTarefas.add(new Pair("carregarFornecedor", "carregando lista fornecedor"));
+//                listaTarefas.add(new Pair("carregarTributo", "carregando lista tributo"));
+//                listaTarefas.add(new Pair("carregarTomadorServico", "carregando lista tomador serviço"));
+//                listaTarefas.add(new Pair("carregarModelo", "carregando lista modelo"));
+//                listaTarefas.add(new Pair("carregarSituacaoTributaria", "carregando lista situação tributária"));
+//                listaTarefas.add(new Pair("carregarTransportadora", "carregando lista transportadora"));
+//                listaTarefas.add(new Pair("carregarListaProduto", "carregando lista de produtos"));
                 updateMessage("carregando");
                 for (Pair tarefaAtual : tarefas) {
                     updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
                     Thread.sleep(200);
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
-                        case "carregarListaEmpresa":
-                            cadastroEmpresa.carregarListaEmpresa();
-                            break;
-                        case "salvarEmpresa":
-                            cadastroEmpresa.salvarEmpresa();
-                            break;
-                        case "preencherTabelaEmpresa":
-                            cadastroEmpresa.preencherTabelaEmpresa();
+                        case "criarTabelaProduto":
+                            TabModel.tabelaProduto();
                             break;
                     }
                 }
@@ -298,7 +300,38 @@ public class Tarefa implements Constants {
         new AlertMensagem("Aguarde carregando dados do sistema...", "",
                 "ic_aguarde_sentado_orange_32dp.png")
                 .getProgressBar(voidTask, true, false, qtdTarefas);
-        return true;
     }
+
+//    public boolean tarefaSalvaEmpresa(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {
+//        qtdTarefas = tarefas.size();
+//        Task<Void> voidTask = new Task<Void>() {
+//            @Override
+//            protected Void call() throws Exception {
+//                updateMessage("carregando");
+//                for (Pair tarefaAtual : tarefas) {
+//                    updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
+//                    Thread.sleep(200);
+//                    updateMessage(tarefaAtual.getValue().toString());
+//                    switch (tarefaAtual.getKey().toString()) {
+//                        case "carregarListaEmpresa":
+//                            cadastroEmpresa.carregarListaEmpresa();
+//                            break;
+//                        case "salvarEmpresa":
+//                            cadastroEmpresa.salvarEmpresa();
+//                            break;
+//                        case "preencherTabelaEmpresa":
+//                            cadastroEmpresa.preencherTabelaEmpresa();
+//                            break;
+//                    }
+//                }
+//                updateProgress(qtdTarefas, qtdTarefas);
+//                return null;
+//            }
+//        };
+//        new AlertMensagem("Aguarde carregando dados do sistema...", "",
+//                "ic_aguarde_sentado_orange_32dp.png")
+//                .getProgressBar(voidTask, true, false, qtdTarefas);
+//        return true;
+//    }
 
 }

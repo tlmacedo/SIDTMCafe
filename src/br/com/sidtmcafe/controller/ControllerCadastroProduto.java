@@ -6,13 +6,13 @@ import br.com.sidtmcafe.componentes.Variavel;
 import br.com.sidtmcafe.database.ConnectionFactory;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.*;
+import br.com.sidtmcafe.model.model.TabModel;
 import br.com.sidtmcafe.model.vo.*;
 import br.com.sidtmcafe.service.*;
 import br.com.sidtmcafe.view.ViewCadastroProduto;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -28,9 +28,7 @@ import javafx.util.Pair;
 
 import java.net.URL;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -298,15 +296,15 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
     FilteredList<TabProdutoVO> produtoVOFilteredList;
     List<TabProdutoEanVO> deletadosProdutoEanVOList;
 
-    JFXTreeTableColumn<TabProdutoVO, Integer> colunaId;
-    JFXTreeTableColumn<TabProdutoVO, String> colunaCodigo;
-    JFXTreeTableColumn<TabProdutoVO, String> colunaDescricao;
-    JFXTreeTableColumn<TabProdutoVO, String> colunaUndCom;
-    JFXTreeTableColumn<TabProdutoVO, String> colunaPrecoFabrica;
-    JFXTreeTableColumn<TabProdutoVO, String> colunaPrecoConsumidor;
-    JFXTreeTableColumn<TabProdutoVO, Integer> colunaQtdEstoque;
-    JFXTreeTableColumn<TabProdutoVO, String> colunaSituacaoSistema;
-    JFXTreeTableColumn<TabProdutoVO, Integer> colunaVarejo;
+//    JFXTreeTableColumn<TabProdutoVO, Integer> colunaId;
+//    JFXTreeTableColumn<TabProdutoVO, String> colunaCodigo;
+//    JFXTreeTableColumn<TabProdutoVO, String> colunaDescricao;
+//    JFXTreeTableColumn<TabProdutoVO, String> colunaUndCom;
+//    JFXTreeTableColumn<TabProdutoVO, String> colunaPrecoFabrica;
+//    JFXTreeTableColumn<TabProdutoVO, String> colunaPrecoConsumidor;
+//    JFXTreeTableColumn<TabProdutoVO, Integer> colunaQtdEstoque;
+//    JFXTreeTableColumn<TabProdutoVO, String> colunaSituacaoSistema;
+//    JFXTreeTableColumn<TabProdutoVO, Integer> colunaVarejo;
 
     boolean campoFab = false;
     boolean campoMargem = false;
@@ -414,94 +412,6 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         listaTarefas.add(new Pair("preencherTabelaProduto", "preenchendo tabela produto"));
     }
 
-    public void criarTabelaProduto() {
-        try {
-            Label lblId = new Label("id");
-            lblId.setPrefWidth(28);
-            colunaId = new JFXTreeTableColumn<TabProdutoVO, Integer>();
-            colunaId.setGraphic(lblId);
-            colunaId.setPrefWidth(28);
-            colunaId.setStyle("-fx-alignment: center-right;");
-            colunaId.setCellValueFactory(param -> param.getValue().getValue().idProperty().asObject());
-
-            Label lblCodigo = new Label("Código");
-            lblCodigo.setPrefWidth(60);
-            colunaCodigo = new JFXTreeTableColumn<TabProdutoVO, String>();
-            colunaCodigo.setGraphic(lblCodigo);
-            colunaCodigo.setPrefWidth(60);
-            colunaCodigo.setStyle("-fx-alignment: center-right;");
-            colunaCodigo.setCellValueFactory(param -> param.getValue().getValue().codigoProperty());
-
-            Label lblDescricao = new Label("Descrição");
-            lblDescricao.setPrefWidth(350);
-            colunaDescricao = new JFXTreeTableColumn<TabProdutoVO, String>();
-            colunaDescricao.setGraphic(lblDescricao);
-            colunaDescricao.setPrefWidth(350);
-            colunaDescricao.setCellValueFactory(param -> param.getValue().getValue().descricaoProperty());
-
-            Label lblUndComercial = new Label("Und Com");
-            lblUndComercial.setPrefWidth(70);
-            colunaUndCom = new JFXTreeTableColumn<TabProdutoVO, String>();
-            colunaUndCom.setGraphic(lblUndComercial);
-            colunaUndCom.setPrefWidth(70);
-            colunaUndCom.setCellValueFactory(param -> param.getValue().getValue().getUnidadeComercialVO().siglaProperty());
-
-            Label lblVarejo = new Label("Varejo");
-            lblVarejo.setPrefWidth(50);
-            colunaVarejo = new JFXTreeTableColumn<TabProdutoVO, Integer>();
-            colunaVarejo.setGraphic(lblVarejo);
-            colunaVarejo.setPrefWidth(50);
-            colunaVarejo.setStyle("-fx-alignment: center-right;");
-            colunaVarejo.setCellValueFactory(param -> param.getValue().getValue().varejoProperty().asObject());
-
-            Label lblPrecoFab = new Label("Preço Fab.");
-            lblPrecoFab.setPrefWidth(90);
-            colunaPrecoFabrica = new JFXTreeTableColumn<TabProdutoVO, String>();
-            colunaPrecoFabrica.setGraphic(lblPrecoFab);
-            colunaPrecoFabrica.setPrefWidth(90);
-            colunaPrecoFabrica.setStyle("-fx-alignment: center-right;");
-            colunaPrecoFabrica.setCellValueFactory(param -> {
-                try {
-                    return new SimpleStringProperty(DECIMAL_FORMAT.format(param.getValue().getValue().precoFabricaProperty().getValue()).replace(".", ","));
-                } catch (Exception ex) {
-                    return new SimpleStringProperty("0");
-                }
-            });
-
-            Label lblPrecoCons = new Label("Preço Cons.");
-            lblPrecoCons.setPrefWidth(90);
-            colunaPrecoConsumidor = new JFXTreeTableColumn<TabProdutoVO, String>();
-            colunaPrecoConsumidor.setGraphic(lblPrecoCons);
-            colunaPrecoConsumidor.setPrefWidth(90);
-            colunaPrecoConsumidor.setStyle("-fx-alignment: center-right;");
-            colunaPrecoConsumidor.setCellValueFactory(param -> {
-                try {
-                    return new SimpleStringProperty(DECIMAL_FORMAT.format(param.getValue().getValue().precoConsumidorProperty().getValue()).replace(".", ","));
-                } catch (Exception ex) {
-                    return new SimpleStringProperty("0");
-                }
-            });
-
-            Label lblSituacaoSistema = new Label("Situação");
-            lblSituacaoSistema.setPrefWidth(100);
-            colunaSituacaoSistema = new JFXTreeTableColumn<TabProdutoVO, String>();
-            colunaSituacaoSistema.setGraphic(lblSituacaoSistema);
-            colunaSituacaoSistema.setPrefWidth(100);
-            colunaSituacaoSistema.setCellValueFactory(param -> param.getValue().getValue().getSituacaoSistemaVO().descricaoProperty());
-
-            Label lblEstoque = new Label("Estoque");
-            lblEstoque.setPrefWidth(65);
-            colunaQtdEstoque = new JFXTreeTableColumn<TabProdutoVO, Integer>();
-            colunaQtdEstoque.setGraphic(lblEstoque);
-            colunaQtdEstoque.setPrefWidth(65);
-            colunaQtdEstoque.setStyle("-fx-alignment: center-right;");
-            colunaQtdEstoque.setCellValueFactory(param -> param.getValue().getValue().estoqueProperty().asObject());
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
     public void carregarListaProduto() {
         produtoVOObservableList = FXCollections.observableArrayList(new TabProdutoDAO().getProdutoVOList());
     }
@@ -553,8 +463,10 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
                 carregarPesquisaProduto(txtPesquisaProduto.getText());
             setQtdRegistrosLocalizados(produtoVOFilteredList.size());
             final TreeItem<TabProdutoVO> root = new RecursiveTreeItem<TabProdutoVO>(produtoVOFilteredList, RecursiveTreeObject::getChildren);
-            ttvProduto.getColumns().setAll(colunaId, colunaCodigo, colunaDescricao, colunaUndCom, colunaVarejo, colunaPrecoFabrica,
-                    colunaPrecoConsumidor, colunaSituacaoSistema, colunaQtdEstoque);
+            ttvProduto.getColumns().setAll(TabModel.getColunaIdProduto(), TabModel.getColunaCodigo(),
+                    TabModel.getColunaDescricao(), TabModel.getColunaUndCom(), TabModel.getColunaVarejo(),
+                    TabModel.getColunaPrecoFabrica(), TabModel.getColunaPrecoConsumidor(),
+                    TabModel.getColunaSituacaoSistema(), TabModel.getColunaQtdEstoque());
             ttvProduto.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             ttvProduto.setRoot(root);
             ttvProduto.setShowRoot(false);
