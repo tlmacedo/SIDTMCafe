@@ -118,7 +118,7 @@ public class Tarefa implements Constants {
         return wsCnpjReceitaWsVO;
     }
 
-    public WsEanCosmosVO tarefaWsEanCosmos(List<Pair> tarefas){
+    public WsEanCosmosVO tarefaWsEanCosmos(List<Pair> tarefas) {
         qtdTarefas = tarefas.size();
         Task<Void> voidTask = new Task<Void>() {
             @Override
@@ -274,21 +274,34 @@ public class Tarefa implements Constants {
         Task<Void> voidTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-//                listaTarefas.add(new Pair("carregarLojaDestino", "carregando lista lojas"));
-//                listaTarefas.add(new Pair("carregarFornecedor", "carregando lista fornecedor"));
-//                listaTarefas.add(new Pair("carregarTributo", "carregando lista tributo"));
-//                listaTarefas.add(new Pair("carregarTomadorServico", "carregando lista tomador serviço"));
-//                listaTarefas.add(new Pair("carregarModelo", "carregando lista modelo"));
-//                listaTarefas.add(new Pair("carregarSituacaoTributaria", "carregando lista situação tributária"));
-//                listaTarefas.add(new Pair("carregarTransportadora", "carregando lista transportadora"));
-//                listaTarefas.add(new Pair("carregarListaProduto", "carregando lista de produtos"));
                 updateMessage("carregando");
                 for (Pair tarefaAtual : tarefas) {
                     updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
                     Thread.sleep(200);
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
-                        case "criarTabelaProduto":
+                        case "carregarLojaDestino":
+                            entradaProduto.carregarLojaDestino();
+                            break;
+                        case "carregarFornecedor":
+                            entradaProduto.carregarFornecedor();
+                            break;
+                        case "carregarTributo":
+                            entradaProduto.carregarTributo();
+                            break;
+                        case "carregarTomadorServico":
+                            entradaProduto.carregarTomadorServico();
+                            break;
+                        case "carregarModelo":
+                            entradaProduto.carregarModelo();
+                            break;
+                        case "carregarSituacaoTributaria":
+                            entradaProduto.carregarSituacaoTributaria();
+                            break;
+                        case "carregarTransportadora":
+                            entradaProduto.carregarTransportadora();
+                            break;
+                        case "carregarListaProduto":
                             TabModel.tabelaProduto();
                             break;
                     }

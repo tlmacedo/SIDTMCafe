@@ -19,14 +19,14 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
     List<TabEmpresaVO> empresaVOList;
 
     public TabEmpresaVO getEmpresaVO(int idTabEmpresaVO) {
-        buscaTabEmpresaVO(idTabEmpresaVO);
+        buscaTabEmpresaVO(idTabEmpresaVO, false, false, false);
         if (empresaVO != null)
             addObjetosPesquisa(empresaVO);
         return empresaVO;
     }
 
-    public List<TabEmpresaVO> getEmpresaVOList() {
-        buscaTabEmpresaVO(-1);
+    public List<TabEmpresaVO> getEmpresaVOList(boolean isCliente, boolean isFornecedor, boolean isTransportadora) {
+        buscaTabEmpresaVO(-1, isCliente, isFornecedor, isTransportadora);
         if (empresaVOList != null)
             for (TabEmpresaVO empresa : empresaVOList) {
                 addObjetosPesquisa(empresa);
@@ -34,9 +34,34 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         return empresaVOList;
     }
 
-    void buscaTabEmpresaVO(int idTabEmpresaVO) {
+    void buscaTabEmpresaVO(int idTabEmpresaVO, boolean isCliente, boolean isFornecedor, boolean isTransportadora) {
         comandoSql = "SELECT * FROM tabEmpresa ";
         if (idTabEmpresaVO > 0) comandoSql += "WHERE id = '" + idTabEmpresaVO + "' ";
+        if (isCliente) {
+            if (!comandoSql.contains("WHERE")) {
+                comandoSql += "WHERE ";
+            } else {
+                comandoSql += "AND ";
+            }
+            comandoSql += "isCliente = 1 ";
+        }
+        if (isFornecedor) {
+            if (!comandoSql.contains("WHERE")) {
+                comandoSql += "WHERE ";
+            } else {
+                comandoSql += "AND ";
+            }
+            comandoSql += "isFornecedor = 1 ";
+        }
+        if (isTransportadora) {
+            if (!comandoSql.contains("WHERE")) {
+                comandoSql += "WHERE ";
+            } else {
+                comandoSql += "AND ";
+            }
+            comandoSql += "isTransportadora = 1 ";
+        }
+
         comandoSql += "ORDER BY razao, fantasia ";
 
         empresaVOList = new ArrayList<>();

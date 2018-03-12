@@ -2,13 +2,20 @@ package br.com.sidtmcafe.model.model;
 
 import br.com.sidtmcafe.model.vo.TabEmpresaDetalheReceitaFederalVO;
 import br.com.sidtmcafe.model.vo.TabEmpresaVO;
+import br.com.sidtmcafe.model.vo.TabProdutoEanVO;
 import br.com.sidtmcafe.model.vo.TabProdutoVO;
 import br.com.sidtmcafe.service.FormatarDado;
 import com.jfoenix.controls.JFXTreeTableColumn;
+import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TreeItem;
 import javafx.scene.layout.VBox;
 
 import static br.com.sidtmcafe.interfaces.Constants.DECIMAL_FORMAT;

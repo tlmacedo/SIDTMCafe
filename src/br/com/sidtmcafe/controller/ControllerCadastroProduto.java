@@ -296,16 +296,6 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
     FilteredList<TabProdutoVO> produtoVOFilteredList;
     List<TabProdutoEanVO> deletadosProdutoEanVOList;
 
-//    JFXTreeTableColumn<TabProdutoVO, Integer> colunaId;
-//    JFXTreeTableColumn<TabProdutoVO, String> colunaCodigo;
-//    JFXTreeTableColumn<TabProdutoVO, String> colunaDescricao;
-//    JFXTreeTableColumn<TabProdutoVO, String> colunaUndCom;
-//    JFXTreeTableColumn<TabProdutoVO, String> colunaPrecoFabrica;
-//    JFXTreeTableColumn<TabProdutoVO, String> colunaPrecoConsumidor;
-//    JFXTreeTableColumn<TabProdutoVO, Integer> colunaQtdEstoque;
-//    JFXTreeTableColumn<TabProdutoVO, String> colunaSituacaoSistema;
-//    JFXTreeTableColumn<TabProdutoVO, Integer> colunaVarejo;
-
     boolean campoFab = false;
     boolean campoMargem = false;
     boolean campoCons = false;
@@ -461,7 +451,6 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         try {
             if (produtoVOFilteredList == null)
                 carregarPesquisaProduto(txtPesquisaProduto.getText());
-            setQtdRegistrosLocalizados(produtoVOFilteredList.size());
             final TreeItem<TabProdutoVO> root = new RecursiveTreeItem<TabProdutoVO>(produtoVOFilteredList, RecursiveTreeObject::getChildren);
             ttvProduto.getColumns().setAll(TabModel.getColunaIdProduto(), TabModel.getColunaCodigo(),
                     TabModel.getColunaDescricao(), TabModel.getColunaUndCom(), TabModel.getColunaVarejo(),
@@ -470,6 +459,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
             ttvProduto.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             ttvProduto.setRoot(root);
             ttvProduto.setShowRoot(false);
+            setQtdRegistrosLocalizados(produtoVOFilteredList.size());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -489,8 +479,8 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
 
         produtoVOFilteredList = new FilteredList<TabProdutoVO>(produtoVOObservableList, produto -> true);
         produtoVOFilteredList.setPredicate(produto -> {
-            if (produto.getCodigo().toLowerCase().contains(busca)) return true;
             if (produto.getDescricao().toLowerCase().contains(busca)) return true;
+            if (produto.getCodigo().toLowerCase().contains(busca)) return true;
             if (produto.getProdutoEanVOList().size() > 0)
                 for (TabProdutoEanVO prodEan : produto.getProdutoEanVOList())
                     if (prodEan.getDescricao().toLowerCase().contains(busca)) return true;

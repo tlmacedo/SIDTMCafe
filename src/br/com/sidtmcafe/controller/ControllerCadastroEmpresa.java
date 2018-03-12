@@ -581,7 +581,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     }
 
     public void carregarListaEmpresa() {
-        empresaVOObservableList = FXCollections.observableArrayList(new TabEmpresaDAO().getEmpresaVOList());
+        empresaVOObservableList = FXCollections.observableArrayList(new TabEmpresaDAO().getEmpresaVOList(false, false, false));
     }
 
     public void preencherCboEndUF() {
