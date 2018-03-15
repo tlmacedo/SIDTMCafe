@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.util.concurrent.TimeoutException;
 
 public class BuscaWebService {
     Object retorno;
@@ -65,7 +66,8 @@ public class BuscaWebService {
                 if (urlConnection.getResponseCode() == 200)
                     jsonObject = new JSONObject(getStringBuilder(retorno));
             } catch (Exception ex1) {
-                ex1.printStackTrace();
+                if (!(ex1 instanceof TimeoutException))
+                    ex1.printStackTrace();
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();

@@ -338,8 +338,32 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
         naturezaJuridicaProperty().set(naturezaJuridica);
     }
 
+    public String getDetalheTransportadora() {
+        if ((razaoProperty().get() != "") & enderecoVOList.size() > 0)
+            return "[Transp]: " + razaoProperty().get() + " (" + fantasiaProperty().get() + ") "
+                    + ";[End.]: " + enderecoVOList.get(0).getLogradouro() + ", "
+                    + enderecoVOList.get(0).getNumero() + " - " + enderecoVOList.get(0).getBairro();
+        return "";
+    }
+
+    public String getDetalheFornecedor() {
+        if ((razaoProperty().get() != "") & enderecoVOList.size() > 0)
+            return "[Fornec]: " + razaoProperty().get() + " (" + fantasiaProperty().get() + ") "
+                    + ";[End.]: " + enderecoVOList.get(0).getLogradouro() + ", "
+                    + enderecoVOList.get(0).getNumero() + " - " + enderecoVOList.get(0).getBairro();
+        return "";
+    }
+
+    public String getDetalheCliente() {
+        if ((razaoProperty().get() != "") & enderecoVOList.size() > 0)
+            return "[Cliente]: " + razaoProperty().get() + " (" + fantasiaProperty().get() + ") "
+                    + ";[End.]: " + enderecoVOList.get(0).getLogradouro() + ", "
+                    + enderecoVOList.get(0).getNumero() + " - " + enderecoVOList.get(0).getBairro();
+        return "";
+    }
+
     @Override
     public String toString() {
-        return razaoProperty().get();
+        return razaoProperty().get() + " (" + fantasiaProperty().get() + ")";
     }
 }

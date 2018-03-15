@@ -88,6 +88,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
 
         PersonalizarCampo.fieldMaxLen(painelViewCadastroProduto);
         PersonalizarCampo.maskFields(painelViewCadastroProduto);
+        PersonalizarCampo.clearField(painelViewCadastroProduto);
     }
 
     @Override
@@ -200,13 +201,13 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
             }
         };
 
-        ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.addEventHandler(KeyEvent.KEY_RELEASED, eventCadastroProduto);
+        ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.addEventHandler(KeyEvent.KEY_PRESSED, eventCadastroProduto);
 
         txtPesquisaProduto.textProperty().addListener((ov, o, n) -> {
             carregarPesquisaProduto(n);
         });
 
-        txtPesquisaProduto.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+        txtPesquisaProduto.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 ttvProduto.requestFocus();
                 ttvProduto.getSelectionModel().select(0);
@@ -720,7 +721,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         for (int i = 0; i < ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().size(); i++)
             if (ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().get(i).getText().toLowerCase().equals(tituloTab.toLowerCase())) {
                 ControllerPrincipal.ctrlPrincipal.fecharTab(i);
-                ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.removeEventHandler(KeyEvent.KEY_RELEASED, eventCadastroProduto);
+                ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.removeEventHandler(KeyEvent.KEY_PRESSED, eventCadastroProduto);
             }
     }
 

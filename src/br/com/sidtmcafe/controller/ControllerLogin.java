@@ -12,6 +12,7 @@ import br.com.sidtmcafe.view.ViewPrincipal;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -24,6 +25,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ControllerLogin extends Variavel implements Initializable, FormularioModelo, Constants {
@@ -78,7 +80,7 @@ public class ControllerLogin extends Variavel implements Initializable, Formular
 
     @Override
     public void escutarTeclas() {
-        painelViewLogin.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+        painelViewLogin.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER & btnOK.isDisable()) {
                 if (cboUsuarioLogin.isFocused()) {
                     pswUsuarioSenha.requestFocus();
@@ -116,6 +118,9 @@ public class ControllerLogin extends Variavel implements Initializable, Formular
         preencherObjetos();
         fatorarObjetos();
         escutarTeclas();
+        Platform.runLater(()->{
+            Locale.setDefault(MY_LOCALE);
+        });
 
     }
 

@@ -3,10 +3,13 @@ package br.com.sidtmcafe.service;
 import br.com.sidtmcafe.interfaces.Constants;
 import com.jfoenix.controls.*;
 import javafx.scene.Node;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.AnchorPane;
+
+import java.time.LocalDate;
 
 public class PersonalizarCampo implements Constants {
 
@@ -14,20 +17,20 @@ public class PersonalizarCampo implements Constants {
     //(0, 3) qtdMax
     //(3, 4) Tipo [Numero] [AlfaNumerico]
     //(4, 5) Vlr campo Limpo
-    //(5   ) Mascara
+    //(5, 6) Deshabilitado
+    //(6   ) Mascara
     // # -> numero
+    // $ -> moeda
     // @ -> alfanum Maiusculo
     // ? -> alfanum Minusculo
 
     public static void fieldMaxLen(AnchorPane anchorPane) {
         for (Node node : anchorPane.getChildren()) {
-            String textFormatador;
             if (node instanceof JFXTextField) {
-                if (node.getAccessibleText() != null) {
-                    textFormatador = node.getAccessibleText();
-                    int qtdMax = Integer.parseInt(textFormatador.substring(0, 3));
-                    FormatarDado.maxField((JFXTextField) node, qtdMax);
-                }
+                String accessibleText = null, newTextCampo = "";
+                if (node.getAccessibleText() != null)
+                    if ((accessibleText = node.getAccessibleText().toLowerCase()) != null)
+                        FormatarDado.maxField((JFXTextField) node, Integer.parseInt(accessibleText.substring(0, 3)));
             } else if (node instanceof AnchorPane) {
                 fieldMaxLen((AnchorPane) node);
             } else if (node instanceof TitledPane) {
@@ -43,22 +46,27 @@ public class PersonalizarCampo implements Constants {
     public static void maskFields(AnchorPane anchorPane) {
         for (Node node : anchorPane.getChildren()) {
             if (node instanceof JFXTextField) {
-                String textFormatador;
+                int qtdMax;
+                String accessibleText = null, tipoDado, mascara;
                 if (node.getAccessibleText() != null)
-                    if (node.getAccessibleText() != null) {
-                        textFormatador = node.getAccessibleText();
-                        int qtdMax = Integer.parseInt(textFormatador.substring(0, 3));
-                        String tipoDados = textFormatador.substring(3, 4);
-                        //String campoLimpo = textFormatador.substring(4, 5);
-                        String mask = "";
-                        if (textFormatador.length() > 5)
-                            mask = textFormatador.substring(5);
-
-                        if (textFormatador.contains("$")) {
-                            new FormatarDado().maskFieldMoeda((JFXTextField) node, Integer.parseInt(textFormatador.substring(5)));
-                        } else {
-                            String mascara = FormatarDado.gerarMascara(mask, qtdMax, tipoDados);
-                            new FormatarDado().maskField((JFXTextField) node, mascara);
+                    if ((accessibleText = node.getAccessibleText().toLowerCase()) != null) {
+                        qtdMax = Integer.parseInt(accessibleText.substring(0, 3));
+                        tipoDado = accessibleText.substring(3, 4);
+                        try {
+                            mascara = accessibleText.substring(6).toLowerCase();
+                        } catch (Exception ex) {
+                            mascara = "";
+                        }
+                        switch (tipoDado) {
+                            case "#":
+                            case "@":
+                            case "?":
+                                mascara = FormatarDado.gerarMascara(mascara, qtdMax, tipoDado);
+                                new FormatarDado().maskField((JFXTextField) node, mascara);
+                                break;
+                            case "$":
+                                new FormatarDado().maskFieldMoeda((JFXTextField) node, Integer.parseInt(mascara));
+                                break;
                         }
                     }
             } else if (node instanceof AnchorPane) {
@@ -71,85 +79,107 @@ public class PersonalizarCampo implements Constants {
                 }
             }
         }
+
     }
 
     public static void clearField(AnchorPane anchorPane) {
         for (Node node : anchorPane.getChildren()) {
-            String textFormatador, textCampoLimpo = "";
-            if (node.getAccessibleText() != null) {
-                textFormatador = node.getAccessibleText().toLowerCase();
-                if (!Character.isDigit(textFormatador.charAt(0))) {
-                    textCampoLimpo = textFormatador;
-                    if (textFormatador.equals("lblregistroslocalizados")) {
-                        textCampoLimpo = "[pesquisa]  0 registro(s) localizado(s).";
-                    } else if (textFormatador.equals("lbl")) {
-                        textCampoLimpo = "";
-                    } else if (textFormatador.equals("verdadeiro")) {
-                        textCampoLimpo = "verdadeiro";
-                    } else if (textFormatador.equals("falso")) {
-                        textCampoLimpo = "falso";
-                    }
-                } else {
-                    String tipoDados = textFormatador.substring(3, 4);
-                    String campoLimpo = textFormatador.substring(4, 5);
-                    if (campoLimpo.equals("_")) {
-                        textCampoLimpo = "";
-                        if (tipoDados.equals("$"))
-                            textCampoLimpo += "0,00";
+            String accessibleText = null, tipoDado, vlrPadrao, qtdCasaDecimal, newTextCampo = "";
+            if (node.getAccessibleText() != null)
+                if ((accessibleText = node.getAccessibleText().toLowerCase()) != null)
+                    if (Character.isDigit(accessibleText.charAt(0))) {
+                        tipoDado = accessibleText.substring(3, 4);
+                        vlrPadrao = accessibleText.substring(4, 5);
+                        switch (tipoDado) {
+                            case "#":
+                                newTextCampo = vlrPadrao;
+                                break;
+                            case "@":
+                            case "?":
+                                if (!vlrPadrao.equals("_"))
+                                    newTextCampo = vlrPadrao;
+                                break;
+                            case "$":
+                                qtdCasaDecimal = accessibleText.substring(5, 6);
+                                newTextCampo = vlrPadrao;
+                                if (Integer.parseInt(qtdCasaDecimal) > 0)
+                                    newTextCampo += ".";
+                                for (int i = 0; i < Integer.parseInt(qtdCasaDecimal); i++) {
+                                    newTextCampo += "0";
+                                }
+                                break;
+                        }
                     } else {
-                        textCampoLimpo = campoLimpo;
-                        if (tipoDados.equals("$")) {
-                            textCampoLimpo += ".0";
+                        if (accessibleText.equals("lbl")) {
+                            newTextCampo = "";
+                        } else if (accessibleText.equals("verdadeiro")) {
+                            newTextCampo = "verdadeiro";
+                        } else if (accessibleText.equals("falso")) {
+                            newTextCampo = "falso";
                         }
                     }
+            if (node instanceof JFXTextField) {
+                ((JFXTextField) node).setText(newTextCampo);
+            } else if (node instanceof DatePicker) {
+                //if (newTextCampo.equals(""))
+                ((DatePicker) node).setValue(LocalDate.now());
+            } else if (node instanceof Label) {
+                ((Label) node).setText(newTextCampo);
+            } else if (node instanceof JFXTextArea) {
+                ((JFXTextArea) node).setText(newTextCampo);
+            } else if (node instanceof JFXCheckBox) {
+                ((JFXCheckBox) node).setSelected(newTextCampo == "verdadeiro");
+                //} else if (node instanceof JFXComboBox) {
+                //    ((JFXComboBox) node).getSelectionModel().select(0);
+            } else if (node instanceof JFXTreeTableView) {
+                if (newTextCampo.equals("ttv")) ((JFXTreeTableView) node).getColumns().clear();
+            } else if (node instanceof JFXListView) {
+                if (newTextCampo.equals("list")) ((JFXListView) node).getItems().clear();
+            } else if (node instanceof AnchorPane) {
+                clearField((AnchorPane) node);
+            } else if (node instanceof TitledPane) {
+                clearField((AnchorPane) ((TitledPane) node).getContent());
+            } else if (node instanceof JFXTabPane) {
+                for (Tab tab : ((JFXTabPane) node).getTabs()) {
+                    clearField((AnchorPane) tab.getContent());
                 }
-
-                if (node instanceof JFXTextField) {
-                    ((JFXTextField) node).setText(textCampoLimpo);
-                } else if (node instanceof Label) {
-                    ((Label) node).setText(textCampoLimpo);
-                } else if (node instanceof JFXTextArea) {
-                    ((JFXTextArea) node).setText(textCampoLimpo);
-                } else if (node instanceof JFXCheckBox) {
-                    ((JFXCheckBox) node).setSelected(textCampoLimpo == "verdadeiro");
-                } else if (node instanceof JFXComboBox) {
-                    ((JFXComboBox) node).getSelectionModel().select(0);
-                } else if (node instanceof JFXTreeTableView) {
-                    if (textCampoLimpo.equals("ttv")) ((JFXTreeTableView) node).getColumns().clear();
-                } else if (node instanceof JFXListView) {
-                    if (textCampoLimpo.equals("list")) ((JFXListView) node).getItems().clear();
-                } else if (node instanceof AnchorPane) {
-                    clearField((AnchorPane) node);
-                } else if (node instanceof TitledPane) {
-                    clearField((AnchorPane) ((TitledPane) node).getContent());
-                } else if (node instanceof JFXTabPane) {
-                    for (Tab tab : ((JFXTabPane) node).getTabs()) {
-                        clearField((AnchorPane) tab.getContent());
-                    }
-                }
-
-
             }
+
+
         }
     }
 
     public static void desabilitaCampos(AnchorPane anchorPane, boolean setDisable) {
         for (Node node : anchorPane.getChildren()) {
-            if (node instanceof TitledPane) {
-                desabilitaCampos((AnchorPane) ((TitledPane) node).getContent(), setDisable);
+            String accessibleText = null;
+            boolean deshabilitado = true;
+            if (node.getAccessibleText() != null)
+                if ((accessibleText = node.getAccessibleText().toLowerCase()) != null)
+                    if (accessibleText.length() > 5)
+                        if (accessibleText.substring(5, 6).equals("1"))
+                            if (!setDisable)
+                                deshabilitado = false;
+            if (node instanceof DatePicker) {
+                //((DatePicker) node).setEditable(setDisable & deshabilitado);
+                ((DatePicker) node).setDisable(setDisable & deshabilitado);
             } else if (node instanceof JFXTextField) {
-                ((JFXTextField) node).setDisable(setDisable);
+                //((JFXTextField) node).setEditable(setDisable & deshabilitado);
+                ((JFXTextField) node).setDisable(setDisable & deshabilitado);
             } else if (node instanceof JFXTextArea) {
-                ((JFXTextArea) node).setDisable(setDisable);
+                //((JFXTextArea) node).setEditable(setDisable & deshabilitado);
+                ((JFXTextArea) node).setDisable(setDisable & deshabilitado);
             } else if (node instanceof JFXComboBox) {
-                ((JFXComboBox) node).setDisable(setDisable);
+                //((JFXComboBox) node).setEditable(setDisable & deshabilitado);
+                ((JFXComboBox) node).setDisable(setDisable & deshabilitado);
             } else if (node instanceof JFXCheckBox) {
-                ((JFXCheckBox) node).setDisable(setDisable);
+                ((JFXCheckBox) node).setDisable(setDisable & deshabilitado);
             } else if (node instanceof JFXTreeTableView) {
-                //((JFXTreeTableView) node).setEditable(setDisable);
-                ((JFXTreeTableView) node).setDisable(setDisable);
+                //((JFXTreeTableView) node).setEditable(setDisable & deshabilitado);
+                ((JFXTreeTableView) node).setDisable(setDisable & deshabilitado);
             } else if (node instanceof AnchorPane) {
                 desabilitaCampos((AnchorPane) node, setDisable);
+            } else if (node instanceof TitledPane) {
+                desabilitaCampos((AnchorPane) ((TitledPane) node).getContent(), setDisable);
             } else if (node instanceof JFXTabPane) {
                 for (Tab tab : ((JFXTabPane) node).getTabs()) {
                     desabilitaCampos((AnchorPane) tab.getContent(), setDisable);

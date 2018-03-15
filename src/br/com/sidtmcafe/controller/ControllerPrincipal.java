@@ -68,7 +68,7 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
 
     @Override
     public void escutarTeclas() {
-        painelViewPrincipal.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+        painelViewPrincipal.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             SisMenuPrincipalVO item = null;
 
             if (CODE_KEY_SHIFT_CTRL_POSITIVO.match(event) || CHAR_KEY_SHIFT_CTRL_POSITIVO.match(event))
@@ -138,7 +138,7 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
             }
         });
 
-        treeMenuViewPrincipal.addEventFilter(KeyEvent.KEY_RELEASED, event -> {
+        treeMenuViewPrincipal.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
             if (treeMenuViewPrincipal.getSelectionModel().getSelectedIndex() < 0) return;
             SisMenuPrincipalVO item = treeMenuViewPrincipal.getSelectionModel().getSelectedItem().getValue();
             if (item == null) return;

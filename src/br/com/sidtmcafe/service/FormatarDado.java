@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
@@ -67,6 +68,8 @@ public class FormatarDado implements Constants {
         String tipM = tipMasc.toLowerCase();
         if (tipM.contains("cnpj")) {
             return "##.###.###/####-##";
+        } else if (tipM.contains("!dt")) {
+            return "##/##/####";
         } else if (tipM.contains("cpf")) {
             return "###.###.###-##";
         } else if (tipM.contains("cep")) {
@@ -169,7 +172,7 @@ public class FormatarDado implements Constants {
             String alphaAndDigits = textField.getText();
             matcher = PATTERN.matcher(getMascara());
             if (matcher.find())
-                alphaAndDigits = textField.getText().replaceAll("[\\-/.\\[\\]]", "");
+                alphaAndDigits = textField.getText().replaceAll("[\\-/. \\[\\]]", "");
             StringBuilder resultado = new StringBuilder();
             int i = 0;
             int quant = 0;
@@ -186,7 +189,7 @@ public class FormatarDado implements Constants {
                                 resultado.append(alphaAndDigits.substring(quant, quant + 1).toLowerCase());
                                 quant++;
                             } else if ("#".equals(mascara.substring(i, i + 1))) {
-                                if (Character.isDigit(alphaAndDigits.charAt(quant))) //{
+                                if (Character.isDigit(alphaAndDigits.charAt(quant)))
                                     resultado.append(alphaAndDigits.substring(quant, quant + 1));
                                 quant++;
                             } else {
@@ -218,7 +221,8 @@ public class FormatarDado implements Constants {
                 value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 9) + "})$", "$1.$2");
                 value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 6) + "})$", "$1.$2");
                 value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 3) + "})$", "$1.$2");
-                value = value.replaceAll("([0-9]{1})([0-9]{" + casasDecimal + "})$", "$1,$2");
+                if (casasDecimal > 0)
+                    value = value.replaceAll("([0-9]{1})([0-9]{" + casasDecimal + "})$", "$1,$2");
                 textField.setText(value);
                 positionCaret(textField);
 

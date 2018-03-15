@@ -195,13 +195,13 @@ public class TabLojaVO extends RecursiveTreeObject<TabLojaVO> {
     public String getDetalheLoja() {
         if ((razaoProperty().get() != "") & enderecoVOList.size() > 0)
             return "[Loja]: " + razaoProperty().get() + " (" + fantasiaProperty().get() + ") "
-                    + ";[End. Loja]: " + enderecoVOList.get(0).getLogradouro() + ", "
+                    + ";[End.]: " + enderecoVOList.get(0).getLogradouro() + ", "
                     + enderecoVOList.get(0).getNumero() + " - " + enderecoVOList.get(0).getBairro();
         return "";
     }
 
     @Override
     public String toString() {
-        return razaoProperty().get() + " (" + fantasiaProperty().get() + ")";
+        return fantasiaProperty().get();
     }
 }

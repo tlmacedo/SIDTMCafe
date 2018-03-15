@@ -174,7 +174,7 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         comandoSql += "'" + empresaVO.getEmailHomePage_ids() + "', ";
         comandoSql += empresaVO.getUsuarioCadastro_id() + ", ";
         comandoSql += empresaVO.getSituacaoSistema_id() + ", ";
-        comandoSql += empresaVO.getDataAbertura() + ", ";
+        comandoSql += "'" + empresaVO.getDataAbertura() + "', ";
         comandoSql += "'" + empresaVO.getNaturezaJuridica().replaceAll("'", "") + "'";
         comandoSql += ") ";
 

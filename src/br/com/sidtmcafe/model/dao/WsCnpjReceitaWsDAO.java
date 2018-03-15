@@ -24,8 +24,10 @@ public class WsCnpjReceitaWsDAO extends BuscaWebService implements Constants {
             wsCnpjReceitaWsVO = new WsCnpjReceitaWsVO();
 
             wsCnpjReceitaWsVO.setStatus(jsonObject.getString("status"));
-            if (wsCnpjReceitaWsVO.getStatus().equals("ERROR"))
+            if (wsCnpjReceitaWsVO.getStatus().equals("ERROR")) {
                 wsCnpjReceitaWsVO.setMessage(jsonObject.getString("message"));
+                return wsCnpjReceitaWsVO = null;
+            }
             wsCnpjReceitaWsVO.setCnpj(jsonObject.getString("cnpj"));
             wsCnpjReceitaWsVO.setTipo(jsonObject.getString("tipo"));
             wsCnpjReceitaWsVO.setAbertura(jsonObject.getString("abertura"));

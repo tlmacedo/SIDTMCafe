@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -62,6 +63,7 @@ public interface Constants {
     DecimalFormat PESO_FORMAT = new DecimalFormat("0.000");
     String LOCAL_TIME_ZONE = "America/Manaus";
     ZoneId MY_ZONE_TIME = ZoneId.of(LOCAL_TIME_ZONE);
+    Locale MY_LOCALE = new Locale("pt", "BR");
     LocalDateTime DATAHORA_LOCAL = LocalDateTime.now().atZone(MY_ZONE_TIME).toLocalDateTime();
     DataFormat DT_DATA = new DataFormat("dd/MM/yyyy");
     DateTimeFormatter DTF_DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");

@@ -1,16 +1,16 @@
 package br.com.sidtmcafe.controller;
 
+import br.com.sidtmcafe.componentes.AlertMensagem;
 import br.com.sidtmcafe.componentes.Tarefa;
 import br.com.sidtmcafe.componentes.Variavel;
 import br.com.sidtmcafe.interfaces.FormularioModelo;
 import br.com.sidtmcafe.model.dao.*;
 import br.com.sidtmcafe.model.model.TabModel;
-import br.com.sidtmcafe.model.vo.SisFiscalSefazTributoVO;
-import br.com.sidtmcafe.model.vo.TabLojaVO;
-import br.com.sidtmcafe.model.vo.TabProdutoEanVO;
-import br.com.sidtmcafe.model.vo.TabProdutoVO;
+import br.com.sidtmcafe.model.vo.*;
 import br.com.sidtmcafe.service.ExecutaComandoTecladoMouse;
+import br.com.sidtmcafe.service.FormatarDado;
 import br.com.sidtmcafe.service.PersonalizarCampo;
+import br.com.sidtmcafe.view.ViewEntradaProduto;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.application.Platform;
@@ -18,19 +18,23 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import javafx.util.Pair;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static br.com.sidtmcafe.interfaces.Constants.DECIMAL_FORMAT;
+import static br.com.sidtmcafe.interfaces.Constants.*;
 
 public class ControllerEntradaProduto extends Variavel implements Initializable, FormularioModelo {
     public AnchorPane painelViewEntradaProduto;
@@ -40,13 +44,13 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
     public JFXTextField txtChaveNfe;
     public JFXTextField txtNumeroNfe;
     public JFXTextField txtNumeroSerie;
-    public JFXComboBox cboFornecedor;
-    public JFXDatePicker dtpEmissaoNfe;
-    public JFXDatePicker dtpEntradaNfe;
+    public JFXComboBox<TabEmpresaVO> cboFornecedor;
+    public DatePicker dtpEmissaoNfe;
+    public DatePicker dtpEntradaNfe;
     public TitledPane tpnImpostoNfe;
     public JFXTextField txtFiscalNumeroControle;
     public JFXTextField txtFiscalDocumentoOrigem;
-    public JFXComboBox cboFiscalTributo;
+    public JFXComboBox<SisFiscalSefazTributoVO> cboFiscalTributo;
     public JFXTextField txtFiscalVlrTributo;
     public JFXTextField txtFiscalVlrMulta;
     public JFXTextField txtFiscalVlrJuros;
@@ -55,13 +59,13 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
     public JFXTextField txtFiscalVlrPercentualTributo;
     public TitledPane tpnDetalheFrete;
     public JFXTextField txtFreteChaveCte;
-    public JFXComboBox cboFreteTomadorServico;
+    public JFXComboBox<SisFreteTomadorVO> cboFreteTomadorServico;
     public JFXTextField txtFreteNumeroCte;
     public JFXTextField txtFreteSerieCte;
-    public JFXComboBox cboFreteModeloCte;
-    public JFXComboBox cboFreteSistuacaoTributaria;
-    public JFXComboBox cboFreteTransportadora;
-    public JFXDatePicker dtpFreteEmissao;
+    public JFXComboBox<SisFiscalModeloNfeCteVO> cboFreteModeloCte;
+    public JFXComboBox<SisFreteSituacaoTributariaVO> cboFreteSistuacaoTributaria;
+    public JFXComboBox<TabEmpresaVO> cboFreteTransportadora;
+    public DatePicker dtpFreteEmissao;
     public JFXTextField txtFreteVlrNfe;
     public JFXTextField txtFreteQtdVolume;
     public JFXTextField txtFretePesoBruto;
@@ -71,7 +75,7 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
     public TitledPane tpnFreteImposto;
     public JFXTextField txtFreteFiscalNumeroControle;
     public JFXTextField txtFreteFiscalImpostoDocumentoOrigem;
-    public JFXComboBox cboFreteFiscalTributo;
+    public JFXComboBox<SisFiscalSefazTributoVO> cboFreteFiscalTributo;
     public JFXTextField txtFreteFiscalVlrTributo;
     public JFXTextField txtFreteFiscalVlrMulta;
     public JFXTextField txtFreteFiscalVlrJuros;
@@ -135,10 +139,163 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
                         return cell;
                     }
                 });
+        cboFornecedor.setCellFactory(
+                new Callback<ListView<TabEmpresaVO>, ListCell<TabEmpresaVO>>() {
+                    @Override
+                    public ListCell<TabEmpresaVO> call(ListView<TabEmpresaVO> param) {
+                        final ListCell<TabEmpresaVO> cell = new ListCell<TabEmpresaVO>() {
+                            @Override
+                            public void updateItem(TabEmpresaVO item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (item != null) {
+                                    if (getIndex() == -1) {
+                                        setText(item.toString());
+                                    } else {
+                                        String textoCombo = "";
+                                        for (String detalheFornecedor : item.getDetalheFornecedor().split(";")) {
+                                            if (textoCombo != "")
+                                                textoCombo += "\r\n";
+                                            textoCombo += detalheFornecedor;
+                                        }
+                                        setText(textoCombo);
+                                    }
+                                } else {
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                });
+        cboFreteTransportadora.setCellFactory(
+                new Callback<ListView<TabEmpresaVO>, ListCell<TabEmpresaVO>>() {
+                    @Override
+                    public ListCell<TabEmpresaVO> call(ListView<TabEmpresaVO> param) {
+                        final ListCell<TabEmpresaVO> cell = new ListCell<TabEmpresaVO>() {
+                            @Override
+                            public void updateItem(TabEmpresaVO item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (item != null) {
+                                    if (getIndex() == -1) {
+                                        setText(item.toString());
+                                    } else {
+                                        String textoCombo = "";
+                                        for (String detalheTransportadora : item.getDetalheTransportadora().split(";")) {
+                                            if (textoCombo != "")
+                                                textoCombo += "\r\n";
+                                            textoCombo += detalheTransportadora;
+                                        }
+                                        setText(textoCombo);
+                                    }
+                                } else {
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                });
     }
 
     @Override
     public void escutarTeclas() {
+        String tituloTab = ViewEntradaProduto.getTituloJanela();
+
+        eventEntradaProduto = new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (!(ControllerPrincipal.ctrlPrincipal.getTabAtual().equals(tituloTab)))
+                    return;
+                switch (event.getCode()) {
+//                    case F1:
+//                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+//                        setStatusFormulario("Incluir");
+//                        setTtvEmpresaVO(new TabEmpresaVO());
+//                        break;
+//                    case F2:
+//                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+//                        guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
+//                        if (!validarDadosCadastrais()) break;
+//
+//                        salvarEmpresa();
+//                        setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
+//                        empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
+//
+//                        setStatusFormulario("Pesquisa");
+//                        carregarPesquisaEmpresas(txtPesquisa.getText());
+//                        break;
+//                    case F3:
+//                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+//                        switch (getStatusFormulario().toLowerCase()) {
+//                            case "incluir":
+//                                if (new AlertMensagem("Cancelar inclusão", USUARIO_LOGADO_APELIDO
+//                                        + ", deseja cancelar inclusão no cadastro de empresa?",
+//                                        "ic_cadastro_empresas_white_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
+//                                    return;
+//                                PersonalizarCampo.clearField((AnchorPane) tpnDadoCadastral.getContent());
+//                                break;
+//                            case "editar":
+//                                if (new AlertMensagem("Cancelar edição", USUARIO_LOGADO_APELIDO
+//                                        + ", deseja cancelar edição do cadastro de empresa?",
+//                                        "ic_cadastro_empresas_white_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
+//                                    return;
+//                                setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
+//                                empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
+//                                break;
+//                        }
+//                        setStatusFormulario("Pesquisa");
+//                        carregarPesquisaEmpresas(txtPesquisa.getText());
+//                        exibirDadosEmpresa();
+//                        break;
+//                    case F4:
+//                        if ((!getStatusBarFormulario().contains(event.getCode().toString())) || (getTtvEmpresaVO() == null))
+//                            break;
+//                        indexObservableEmpresa = empresaVOObservableList.indexOf(getTtvEmpresaVO());
+//                        setStatusFormulario("Editar");
+//                        break;
+//                    case F5:
+//                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+//                        guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
+//                        if (!validarDadosCadastrais()) break;
+//
+//                        salvarEmpresa();
+//                        setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
+//                        empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
+//
+//                        setStatusFormulario("Pesquisa");
+//                        carregarPesquisaEmpresas(txtPesquisa.getText());
+//                        exibirDadosEmpresa();
+//                        ttvEmpresa.requestFocus();
+//                        break;
+                    case F6:
+                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                        txtChaveNfe.requestFocus();
+                        break;
+                    case F7:
+                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                        txtPesquisaProduto.requestFocus();
+                        break;
+//                    case F8:
+//                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+//                        cboFiltroPesquisa.requestFocus();
+//                        break;
+                    case F12:
+                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
+                        fecharTab(tituloTab);
+                        break;
+//                    case HELP:
+//                        if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
+//                        keyInsert();
+//                        break;
+//                    case DELETE:
+//                        if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
+//                        keyDelete();
+//                        break;
+                }
+            }
+        };
+
+        ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.addEventHandler(KeyEvent.KEY_PRESSED, eventEntradaProduto);
 
     }
 
@@ -147,18 +304,27 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
         preencherObjetos();
         fatorarObjetos();
         escutarTeclas();
+        setStatusFormulario("Nf-e");
         Platform.runLater(() -> {
-            //painelViewEntradaProduto.fireEvent(ExecutaComandoTecladoMouse.pressTecla(KeyCode.F7));
+            cboLojaDestino.requestFocus();
         });
 
     }
 
+    EventHandler<KeyEvent> eventEntradaProduto;
+
     int indexObservableEntradaProduto = 0;
-    int qtdRegistrosLocalizados = 0;
+
     ObservableList<TabProdutoVO> produtoVOObservableList;
     FilteredList<TabProdutoVO> produtoVOFilteredList;
 
     List<Pair> listaTarefas;
+
+    int qtdRegistrosLocalizados = 0;
+    String statusFormulario, statusBarFormulario;
+
+    static String STATUSBARNFE = "[F1-Novo]  [F4-Lancar itens]  [F6-Chave nfe]  [F12-Sair]  ";
+    static String STATUSBARLANCANDO = "[F2-Finaliza nfe]  [F3-Excluir nfe]  [F5-Salvar nfe temporariamente]  [F7-Pesquisar produto]  [F8-Itens da nfe]  [F12-Sair]  ";
 
     public int getQtdRegistrosLocalizados() {
         return qtdRegistrosLocalizados;
@@ -169,8 +335,38 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
         atualizaLblRegistrosLocalizados();
     }
 
+    public String getStatusFormulario() {
+        return statusFormulario;
+    }
+
+    public void setStatusFormulario(String statusFormulario) {
+        this.statusFormulario = statusFormulario;
+        atualizaLblRegistrosLocalizados();
+        setStatusBarFormulario(statusFormulario);
+    }
+
+    public String getStatusBarFormulario() {
+        return statusBarFormulario;
+    }
+
+    public void setStatusBarFormulario(String statusFormulario) {
+        if (statusFormulario.toLowerCase().contains("nf-e")) {
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoNfe.getContent(), false);
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnItensTotaisNfe.getContent(), true);
+            PersonalizarCampo.clearField(painelViewEntradaProduto);
+            cboLojaDestino.requestFocus();
+            this.statusBarFormulario = STATUSBARNFE;
+        } else if (statusFormulario.toLowerCase().contains("lancando")) {
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoNfe.getContent(), true);
+            PersonalizarCampo.desabilitaCampos((AnchorPane) tpnItensTotaisNfe.getContent(), false);
+            txtPesquisaProduto.requestFocus();
+            this.statusBarFormulario = STATUSBARLANCANDO;
+        }
+        ControllerPrincipal.ctrlPrincipal.atualizarTeclasStatusBar(statusBarFormulario);
+    }
+
     void atualizaLblRegistrosLocalizados() {
-        lblRegistrosLocalizados.setText(String.valueOf(getQtdRegistrosLocalizados()) + " registro(s) localizado(s).");
+        lblRegistrosLocalizados.setText("[" + getStatusFormulario() + "]  " + String.valueOf(getQtdRegistrosLocalizados()) + " registro(s) localizado(s).");
     }
 
     void criarTabelas() {
@@ -264,6 +460,7 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
             ex.printStackTrace();
         }
     }
+
     void carregarPesquisaProduto(String strPesq) {
         String busca = strPesq.toLowerCase().trim();
 
@@ -279,4 +476,19 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
         preencherTabelaProduto();
     }
 
+    boolean validarDadoNfe() {
+        boolean result = true;
+        if (cboLojaDestino.getSelectionModel().getSelectedIndex() < 0)
+            result = false;
+
+        return result;
+    }
+
+    void fecharTab(String tituloTab) {
+        for (int i = 0; i < ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().size(); i++)
+            if (ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().get(i).getText().toLowerCase().equals(tituloTab.toLowerCase())) {
+                ControllerPrincipal.ctrlPrincipal.fecharTab(i);
+                ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.removeEventHandler(KeyEvent.KEY_PRESSED, eventEntradaProduto);
+            }
+    }
 }

@@ -12,8 +12,14 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -26,6 +32,7 @@ import javafx.util.Duration;
 import javafx.util.Pair;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
@@ -341,6 +348,13 @@ public class AlertMensagem extends JFrame implements Constants {
         preparaDialogPane();
         dialogPane.getStyleClass().add("dialog_ok");
 
+//        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+//            @Override
+//            public boolean dispatchKeyEvent(java.awt.event.KeyEvent e) {
+//                return true;
+//            }
+//        });
+
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         botaoOk = (Button) dialog.getDialogPane().lookupButton(ButtonType.OK);
         botaoOk.setDefaultButton(true);
@@ -352,7 +366,6 @@ public class AlertMensagem extends JFrame implements Constants {
         });
 
         dialog.showAndWait();
-
     }
 
     public Optional<ButtonType> getRetornoAlert_YES_NO() {

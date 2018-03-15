@@ -23,6 +23,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Pair;
+import org.apache.velocity.runtime.directive.contrib.For;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -152,7 +153,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
                         salvarEmpresa();
                         setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
-                        empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
+                        empresaVOObservableList.add(getTtvEmpresaVO());
 
                         setStatusFormulario("Pesquisa");
                         carregarPesquisaEmpresas(txtPesquisa.getText());
@@ -178,7 +179,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                         }
                         setStatusFormulario("Pesquisa");
                         carregarPesquisaEmpresas(txtPesquisa.getText());
-                        exibirDadosEmpresa();
+                        PersonalizarCampo.clearField((AnchorPane) tpnDadoCadastral.getContent());
                         break;
                     case F4:
                         if ((!getStatusBarFormulario().contains(event.getCode().toString())) || (getTtvEmpresaVO() == null))
@@ -234,7 +235,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             carregarPesquisaEmpresas(n);
         });
 
-        txtPesquisa.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+        txtPesquisa.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 ttvEmpresa.requestFocus();
                 ttvEmpresa.getSelectionModel().select(0);
@@ -260,18 +261,19 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             }
         });
 
-        txtCNPJ.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+        txtCNPJ.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if ((event.getCode() == KeyCode.ENTER)) {
                 String valCnpj = txtCNPJ.getText().replaceAll("[\\-/. \\[\\]]", "");
                 int idTipBusca = cboClassificacaoJuridica.getSelectionModel().getSelectedIndex();
                 String tipBusca = "C.N.P.J.";
                 if (idTipBusca == 0) tipBusca = "C.P.F.";
 
-                if ((valCnpj.length() != 11 && valCnpj.length() != 14) & (!ValidadarDado.isCnpjCpfValido(valCnpj))) {
+                if ((valCnpj.length() != 11 && valCnpj.length() != 14) || (!ValidadarDado.isCnpjCpfValido(valCnpj))) {
                     new AlertMensagem("Dado inválido!", USUARIO_LOGADO_APELIDO + ", o " + tipBusca + ": " + txtCNPJ.getText() + " é inválido!",
                             "ic_web_service_err_white_24dp").getRetornoAlert_OK();
                     txtCNPJ.requestFocus();
                     txtCNPJ.selectAll();
+                    return;
                 }
 
                 if (idTipBusca == 1) {
@@ -304,7 +306,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             exibirDadosEndereco();
         });
 
-        txtEndCEP.addEventHandler(KeyEvent.KEY_RELEASED, event -> {
+        txtEndCEP.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 String valCep = txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "");
                 if (valCep.length() != 8) {
@@ -346,8 +348,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             if (n == null || n.intValue() < 0) return;
             exiberDadosContato();
         });
-
-
     }
 
     @Override
@@ -512,6 +512,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoCadastral.getContent(), false);
             PersonalizarCampo.clearField((AnchorPane) tpnDadoCadastral.getContent());
+            List<TabEnderecoVO> listEnd = new ArrayList<>();
+            listEnd.add(addEndereco());
+            setTtvEnderecoVO(listEnd);
+            preencherListaEnderecoEmpresa();
             cboClassificacaoJuridica.requestFocus();
             cboClassificacaoJuridica.getSelectionModel().select(0);
             cboClassificacaoJuridica.getSelectionModel().select(1);
@@ -525,6 +529,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), false);
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoCadastral.getContent(), true);
             txtPesquisa.requestFocus();
+            cboClassificacaoJuridica.getSelectionModel().select(1);
             this.statusBarFormulario = STATUSBARPESQUISA;
         }
         ControllerPrincipal.ctrlPrincipal.atualizarTeclasStatusBar(statusBarFormulario);
@@ -930,17 +935,12 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                 tipEnd = ((SisTipoEnderecoVO) o).getId();
                 txtEndCEP.requestFocus();
             }
-        } catch (
-                Exception ex)
-
-        {
-            if (!(ex instanceof IndexOutOfBoundsException)) {
-                ex.printStackTrace();
-                return null;
-            }
-        } finally
-
-        {
+        } catch (Exception ex) {
+//            if ((!(ex instanceof IndexOutOfBoundsException)) || (!(ex instanceof NullPointerException))) {
+//                ex.printStackTrace();
+//                return null;
+//            }
+        } finally {
             TabEnderecoVO newEndereco = new TabEnderecoVO();
             newEndereco.setId(0);
             newEndereco.setTipoEndereco_id(tipEnd);
@@ -949,7 +949,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             newEndereco.setMunicipio_id(0);
             return newEndereco;
         }
-
     }
 
     List<SisTipoEnderecoVO> getTipoEnderecoDisponivel() {
@@ -1314,8 +1313,11 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             }
         }
 
+        if (getTtvDetalheReceitaFederalVO() == null)
+            setTtvDetalheReceitaFederalVO(new ArrayList<>());
         for (TabEmpresaDetalheReceitaFederalVO detalhe : getTtvDetalheReceitaFederalVO())
             detalhe.setEmpresa_id(0);
+
 
         if (receitaWsVO.getAtividadePrincipal().size() > 0) {
             List<Pair<String, String>> receitaWsAtividadePrincipal = new ArrayList<>();
@@ -1569,53 +1571,54 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         String cont_id = "";
         try {
             conn.setAutoCommit(false);
-            if (getTtvEmpresaVO().getContatoVOList().size() > 0) {
-                for (TabContatoVO contatoVO : getTtvEmpresaVO().getContatoVOList()) {
-                    setTtvContatoVO(contatoVO);
-                    String contTel_id = "";
-                    String contEmailHome_id = "";
-                    if (getTtvContatoTelefoneVO().size() > 0) {
-                        for (TabTelefoneVO contTel : getTtvContatoTelefoneVO()) {
-                            int id = 0;
-                            if (contTel.getId() == 0) {
-                                id = new TabTelefoneDAO().insertTabTelefoneVO(conn, contTel);
-                            } else {
-                                id = contTel.getId();
-                                new TabTelefoneDAO().updateTabTelefoneVO(conn, contTel);
+            if (getTtvEmpresaVO().getContatoVOList() != null)
+                if (getTtvEmpresaVO().getContatoVOList().size() > 0) {
+                    for (TabContatoVO contatoVO : getTtvEmpresaVO().getContatoVOList()) {
+                        setTtvContatoVO(contatoVO);
+                        String contTel_id = "";
+                        String contEmailHome_id = "";
+                        if (getTtvContatoTelefoneVO().size() > 0) {
+                            for (TabTelefoneVO contTel : getTtvContatoTelefoneVO()) {
+                                int id = 0;
+                                if (contTel.getId() == 0) {
+                                    id = new TabTelefoneDAO().insertTabTelefoneVO(conn, contTel);
+                                } else {
+                                    id = contTel.getId();
+                                    new TabTelefoneDAO().updateTabTelefoneVO(conn, contTel);
+                                }
+                                if ((!contTel_id.equals("")) & id > 0)
+                                    contTel_id += ";";
+                                contTel_id += id;
                             }
-                            if ((!contTel_id.equals("")) & id > 0)
-                                contTel_id += ";";
-                            contTel_id += id;
+                            contatoVO.setTelefone_ids(contTel_id);
                         }
-                        contatoVO.setTelefone_ids(contTel_id);
-                    }
-                    if (getTtvContatoEmailHomePageVO().size() > 0) {
-                        for (TabEmailHomePageVO contEmailHome : getTtvContatoEmailHomePageVO()) {
-                            int id = 0;
-                            if (contEmailHome.getId() == 0) {
-                                id = new TabEmailHomePageDAO().insertTabEmailHomaPageVO(conn, contEmailHome);
-                            } else {
-                                id = contEmailHome.getId();
-                                new TabEmailHomePageDAO().updateTabEmailHomaPageVO(conn, contEmailHome);
+                        if (getTtvContatoEmailHomePageVO().size() > 0) {
+                            for (TabEmailHomePageVO contEmailHome : getTtvContatoEmailHomePageVO()) {
+                                int id = 0;
+                                if (contEmailHome.getId() == 0) {
+                                    id = new TabEmailHomePageDAO().insertTabEmailHomaPageVO(conn, contEmailHome);
+                                } else {
+                                    id = contEmailHome.getId();
+                                    new TabEmailHomePageDAO().updateTabEmailHomaPageVO(conn, contEmailHome);
+                                }
+                                if ((!contEmailHome_id.equals("")) & id > 0)
+                                    contEmailHome_id += ";";
+                                contEmailHome_id += id;
                             }
-                            if ((!contEmailHome_id.equals("")) & id > 0)
-                                contEmailHome_id += ";";
-                            contEmailHome_id += id;
+                            contatoVO.setEmailHomePage_ids(contEmailHome_id);
                         }
-                        contatoVO.setEmailHomePage_ids(contEmailHome_id);
+                        int id = 0;
+                        if (contatoVO.getId() == 0) {
+                            id = new TabContatoDAO().insertTabContatoVO(conn, contatoVO);
+                        } else {
+                            id = contatoVO.getId();
+                            new TabContatoDAO().updateTabContatoVO(conn, contatoVO);
+                        }
+                        if ((!cont_id.equals("")) & id > 0)
+                            cont_id += ";";
+                        cont_id += id;
                     }
-                    int id = 0;
-                    if (contatoVO.getId() == 0) {
-                        id = new TabContatoDAO().insertTabContatoVO(conn, contatoVO);
-                    } else {
-                        id = contatoVO.getId();
-                        new TabContatoDAO().updateTabContatoVO(conn, contatoVO);
-                    }
-                    if ((!cont_id.equals("")) & id > 0)
-                        cont_id += ";";
-                    cont_id += id;
                 }
-            }
             String tel_id = "";
             String emailHome_id = "";
             String end_id = "";
@@ -1669,7 +1672,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                 new TabEmpresaDAO().updateTabEmpresaVO(conn, getTtvEmpresaVO());
             }
 
-            if (getTtvDetalheReceitaFederalVO().size() > 0)
+            if (getTtvDetalheReceitaFederalVO() != null)
                 for (TabEmpresaDetalheReceitaFederalVO detReceita : getTtvDetalheReceitaFederalVO())
                     if (detReceita.getId() == 0) {
                         detReceita.setEmpresa_id(idEmpresa);
@@ -1695,7 +1698,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         for (int i = 0; i < ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().size(); i++)
             if (ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().get(i).getText().toLowerCase().equals(tituloTab.toLowerCase())) {
                 ControllerPrincipal.ctrlPrincipal.fecharTab(i);
-                ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.removeEventHandler(KeyEvent.KEY_RELEASED, eventCadastroEmpresa);
+                ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.removeEventHandler(KeyEvent.KEY_PRESSED, eventCadastroEmpresa);
             }
     }
 
