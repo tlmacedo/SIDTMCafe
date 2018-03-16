@@ -153,10 +153,13 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
                         salvarEmpresa();
                         setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
-                        empresaVOObservableList.add(getTtvEmpresaVO());
+                        carregarListaEmpresa();
 
                         setStatusFormulario("Pesquisa");
                         carregarPesquisaEmpresas(txtPesquisa.getText());
+                        exibirDadosEmpresa();
+                        ttvEmpresa.requestFocus();
+
                         break;
                     case F3:
                         if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
@@ -512,10 +515,16 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoCadastral.getContent(), false);
             PersonalizarCampo.clearField((AnchorPane) tpnDadoCadastral.getContent());
-            List<TabEnderecoVO> listEnd = new ArrayList<>();
-            listEnd.add(addEndereco());
-            setTtvEnderecoVO(listEnd);
-            preencherListaEnderecoEmpresa();
+            TabEmpresaVO emp = new TabEmpresaVO();
+            List<TabEnderecoVO> listEndereco = new ArrayList<>();
+            listEndereco.add(new TabEnderecoVO());
+            emp.setEnderecoVOList(listEndereco);
+            setTtvEmpresaVO(emp);
+            exibirDadosAdicionais();
+//            List<TabEnderecoVO> listEnd = new ArrayList<>();
+//            listEnd.add(addEndereco());
+//            setTtvEnderecoVO(listEnd);
+//            preencherListaEnderecoEmpresa();
             cboClassificacaoJuridica.requestFocus();
             cboClassificacaoJuridica.getSelectionModel().select(0);
             cboClassificacaoJuridica.getSelectionModel().select(1);
@@ -808,12 +817,15 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             lblDataAtualizacao.setText("data atualização: " + ldtAtualizacao.format(DTF_DATAHORA) + " [" + getTtvEmpresaVO().getUsuarioAtualizacaoVO().getApelido() + "]");
             lblDataAtualizacaoDiff.setText("tempo de atualização: " + DataTrabalhada.getStrIntervaloDatas(ldtAtualizacao.toLocalDate(), null));
         }
+        exibirDadosAdicionais();
+        preencherListaDetalhesReceita();
+    }
 
+    void exibirDadosAdicionais() {
         preencherListaEnderecoEmpresa();
         preencherListaTelefoneEmpresa();
         carregarEmailHomePage();
         preencherListaContatoEmpresa();
-        preencherListaDetalhesReceita();
     }
 
     void limparEndereco() {
