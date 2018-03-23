@@ -42,9 +42,14 @@ public class SisFiscalCstIcmsVO extends RecursiveTreeObject<SisFiscalCstIcmsVO> 
 
     @Override
     public String toString() {
-        if (descricaoProperty().get() != "")
-            return idProperty().get() + " - " + descricaoProperty().get();
-        return null;
+        if (descricaoProperty().get() == "") return null;
+
+        String formatId = "";
+        for (int i = idProperty().toString().length(); i < 2; i++) {
+            formatId += "0";
+        }
+        formatId += idProperty().get();
+        return idProperty().get() + " - " + descricaoProperty().get();
     }
 
 }
