@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
 
-    TabCargoVO cargoVO;
+    SisCargoVO cargoVO;
     TabLojaVO lojaVO;
     SisSituacaoSistemaVO situacaoSistemaVO;
     List<TabEnderecoVO> enderecoVOList;
@@ -19,17 +19,17 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
     List<TabEmailHomePageVO> emailHomePageVOList;
 
 
-    IntegerProperty id, cargo_id, loja_id, situacaoSistema_id;
-    StringProperty nome, apelido, senha, senhaSalt, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids;
+    IntegerProperty id, sisCargo_id, tabLoja_id, sisSituacaoSistema_id;
+    StringProperty nome, apelido, senha, senhaSalt;
 
     public TabColaboradorVO() {
     }
 
-    public TabCargoVO getCargoVO() {
+    public SisCargoVO getCargoVO() {
         return cargoVO;
     }
 
-    public void setCargoVO(TabCargoVO cargoVO) {
+    public void setCargoVO(SisCargoVO cargoVO) {
         this.cargoVO = cargoVO;
     }
 
@@ -94,43 +94,43 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
         idProperty().set(id);
     }
 
-    public int getCargo_id() {
-        return cargo_idProperty().get();
+    public int getSisCargo_id() {
+        return sisCargo_idProperty().get();
     }
 
-    public IntegerProperty cargo_idProperty() {
-        if (cargo_id == null) cargo_id = new SimpleIntegerProperty(0);
-        return cargo_id;
+    public IntegerProperty sisCargo_idProperty() {
+        if (sisCargo_id == null) sisCargo_id = new SimpleIntegerProperty(0);
+        return sisCargo_id;
     }
 
-    public void setCargo_id(int cargo_id) {
-        cargo_idProperty().set(cargo_id);
+    public void setSisCargo_id(int sisCargo_id) {
+        sisCargo_idProperty().set(sisCargo_id);
     }
 
-    public int getLoja_id() {
-        return loja_idProperty().get();
+    public int getTabLoja_id() {
+        return tabLoja_idProperty().get();
     }
 
-    public IntegerProperty loja_idProperty() {
-        if (loja_id == null) loja_id = new SimpleIntegerProperty(0);
-        return loja_id;
+    public IntegerProperty tabLoja_idProperty() {
+        if (tabLoja_id == null) tabLoja_id = new SimpleIntegerProperty(0);
+        return tabLoja_id;
     }
 
-    public void setLoja_id(int loja_id) {
-        loja_idProperty().set(loja_id);
+    public void setTabLoja_id(int tabLoja_id) {
+        tabLoja_idProperty().set(tabLoja_id);
     }
 
-    public int getSituacaoSistema_id() {
-        return situacaoSistema_idProperty().get();
+    public int getSisSituacaoSistema_id() {
+        return sisSituacaoSistema_idProperty().get();
     }
 
-    public IntegerProperty situacaoSistema_idProperty() {
-        if (situacaoSistema_id == null) situacaoSistema_id = new SimpleIntegerProperty(0);
-        return situacaoSistema_id;
+    public IntegerProperty sisSituacaoSistema_idProperty() {
+        if (sisSituacaoSistema_id == null) sisSituacaoSistema_id = new SimpleIntegerProperty(0);
+        return sisSituacaoSistema_id;
     }
 
-    public void setSituacaoSistema_id(int situacaoSistema_id) {
-        situacaoSistema_idProperty().set(situacaoSistema_id);
+    public void setSisSituacaoSistema_id(int sisSituacaoSistema_id) {
+        sisSituacaoSistema_idProperty().set(sisSituacaoSistema_id);
     }
 
     public String getNome() {
@@ -185,62 +185,10 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
         senhaSaltProperty().set(senhaSalt);
     }
 
-    public String getEndereco_ids() {
-        return endereco_idsProperty().get();
-    }
-
-    public StringProperty endereco_idsProperty() {
-        if (endereco_ids == null) endereco_ids = new SimpleStringProperty("");
-        return endereco_ids;
-    }
-
-    public void setEndereco_ids(String endereco_ids) {
-        endereco_idsProperty().set(endereco_ids);
-    }
-
-    public String getTelefone_ids() {
-        return telefone_idsProperty().get();
-    }
-
-    public StringProperty telefone_idsProperty() {
-        if (telefone_ids == null) telefone_ids = new SimpleStringProperty("");
-        return telefone_ids;
-    }
-
-    public void setTelefone_ids(String telefone_ids) {
-        telefone_idsProperty().set(telefone_ids);
-    }
-
-    public String getContato_ids() {
-        return contato_idsProperty().get();
-    }
-
-    public StringProperty contato_idsProperty() {
-        if (contato_ids == null) contato_ids = new SimpleStringProperty("");
-        return contato_ids;
-    }
-
-    public void setContato_ids(String contato_ids) {
-        contato_idsProperty().set(contato_ids);
-    }
-
-    public String getEmailHomePage_ids() {
-        return emailHomePage_idsProperty().get();
-    }
-
-    public StringProperty emailHomePage_idsProperty() {
-        if (emailHomePage_ids == null) emailHomePage_ids = new SimpleStringProperty("");
-        return emailHomePage_ids;
-    }
-
-    public void setEmailHomePage_ids(String emailHomePage_ids) {
-        emailHomePage_idsProperty().set(emailHomePage_ids);
-    }
-
     public String getDetalheColaborador() {
         if (nomeProperty().get() != "")
             return "[Usuário]: " + nomeProperty().get() + " (" + apelidoProperty().get() + ") "
-                    + ";[Cargo]: " + cargoVO.getDescricao() + "  |  [Loja]: " + lojaVO.getFantasia();
+                    + ";[Cargo]: " + cargoVO.getDescricao() + "  |  [Loja]: " + lojaVO.getEmpresaVO().getFantasia();
 //                    + ";[End. Loja]: " + lojaVO.getEnderecoVOList().get(0).getLogradouro() + ", "
 //                    + lojaVO.getEnderecoVOList().get(0).getNumero();
 

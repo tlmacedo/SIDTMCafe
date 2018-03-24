@@ -1,7 +1,7 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.database.ConnectionFactory;
-import br.com.sidtmcafe.model.vo.TabCargoVO;
+import br.com.sidtmcafe.model.vo.SisCargoVO;
 import br.com.sidtmcafe.model.vo.TabContatoVO;
 import br.com.sidtmcafe.model.vo.TabEmailHomePageVO;
 import br.com.sidtmcafe.model.vo.TabTelefoneVO;
@@ -61,7 +61,7 @@ public class TabContatoDAO extends BuscaBandoDados {
     }
 
     void addObjetosPesquisa(TabContatoVO contato) {
-        contato.setCargoVO(new TabCargoDAO().getCargoVO(contato.getId()));
+        contato.setCargoVO(new SisCargoDAO().getCargoVO(contato.getId()));
 
         List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
         for (String strCodTelefone : contato.getTelefone_ids().split(";"))

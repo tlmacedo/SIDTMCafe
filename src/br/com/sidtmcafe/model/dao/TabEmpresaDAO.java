@@ -19,14 +19,14 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
     List<TabEmpresaVO> empresaVOList;
 
     public TabEmpresaVO getEmpresaVO(int idTabEmpresaVO) {
-        buscaTabEmpresaVO(idTabEmpresaVO, false, false, false);
+        buscaTabEmpresaVO(idTabEmpresaVO);
         if (empresaVO != null)
             addObjetosPesquisa(empresaVO);
         return empresaVO;
     }
 
-    public List<TabEmpresaVO> getEmpresaVOList(boolean isCliente, boolean isFornecedor, boolean isTransportadora) {
-        buscaTabEmpresaVO(-1, isCliente, isFornecedor, isTransportadora);
+    public List<TabEmpresaVO> getEmpresaVOList() {
+        buscaTabEmpresaVO(-1);
         if (empresaVOList != null)
             for (TabEmpresaVO empresa : empresaVOList) {
                 addObjetosPesquisa(empresa);
@@ -34,34 +34,9 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
         return empresaVOList;
     }
 
-    void buscaTabEmpresaVO(int idTabEmpresaVO, boolean isCliente, boolean isFornecedor, boolean isTransportadora) {
+    void buscaTabEmpresaVO(int idTabEmpresaVO) {
         comandoSql = "SELECT * FROM tabEmpresa ";
         if (idTabEmpresaVO > 0) comandoSql += "WHERE id = '" + idTabEmpresaVO + "' ";
-        if (isCliente) {
-            if (!comandoSql.contains("WHERE")) {
-                comandoSql += "WHERE ";
-            } else {
-                comandoSql += "AND ";
-            }
-            comandoSql += "isCliente = 1 ";
-        }
-        if (isFornecedor) {
-            if (!comandoSql.contains("WHERE")) {
-                comandoSql += "WHERE ";
-            } else {
-                comandoSql += "AND ";
-            }
-            comandoSql += "isFornecedor = 1 ";
-        }
-        if (isTransportadora) {
-            if (!comandoSql.contains("WHERE")) {
-                comandoSql += "WHERE ";
-            } else {
-                comandoSql += "AND ";
-            }
-            comandoSql += "isTransportadora = 1 ";
-        }
-
         comandoSql += "ORDER BY razao, fantasia ";
 
         empresaVOList = new ArrayList<>();
@@ -70,23 +45,16 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
             while (rs.next()) {
                 empresaVO = new TabEmpresaVO();
                 empresaVO.setId(rs.getInt("id"));
-                empresaVO.setIsPessoaJuridica(rs.getInt("isPessoaJuridica"));
+                empresaVO.setIsEmpresa(rs.getInt("isEmpresa"));
                 empresaVO.setCnpj(rs.getString("cnpj"));
                 empresaVO.setIe(rs.getString("ie"));
                 empresaVO.setRazao(rs.getString("razao"));
                 empresaVO.setFantasia(rs.getString("fantasia"));
-                empresaVO.setIsCliente(rs.getInt("isCliente"));
-                empresaVO.setIsFornecedor(rs.getInt("isFornecedor"));
-                empresaVO.setIsTransportadora(rs.getInt("isTransportadora"));
-                empresaVO.setEndereco_ids(rs.getString("endereco_ids"));
-                empresaVO.setTelefone_ids(rs.getString("telefone_ids"));
-                empresaVO.setContato_ids(rs.getString("contato_ids"));
-                empresaVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));
+                empresaVO.setSituacaoSistema_id(rs.getInt("situacaoSistema_id"));
                 empresaVO.setUsuarioCadastro_id(rs.getInt("usuarioCadastro_id"));
                 empresaVO.setDataCadastro(rs.getTimestamp("dataCadastro"));
                 empresaVO.setUsuarioAtualizacao_id(rs.getInt("usuarioAtualizacao_id"));
                 empresaVO.setDataAtualizacao(rs.getTimestamp("dataAtualizacao"));
-                empresaVO.setSituacaoSistema_id(rs.getInt("situacaoSistema_id"));
                 empresaVO.setDataAbertura(rs.getDate("dataAbertura"));
                 empresaVO.setNaturezaJuridica(rs.getString("naturezaJuridica"));
 
@@ -100,32 +68,9 @@ public class TabEmpresaDAO extends BuscaBandoDados implements Constants {
     }
 
     void addObjetosPesquisa(TabEmpresaVO empresa) {
-        List<TabEnderecoVO> enderecoVOList = new ArrayList<>();
-        for (String strCodEndereco : empresa.getEndereco_ids().split(";"))
-            if (strCodEndereco != "")
-                enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
-        empresa.setEnderecoVOList(enderecoVOList);
 
-        List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
-        for (String strCodTelefone : empresa.getTelefone_ids().split(";"))
-            if (strCodTelefone != "")
-                telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
-        empresa.setTelefoneVOList(telefoneVOList);
-
-        List<TabContatoVO> contatoVOList = new ArrayList<>();
-        for (String strCodContato : empresa.getContato_ids().split(";"))
-            if (strCodContato != "")
-                contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
-        empresa.setContatoVOList(contatoVOList);
-
-        List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
-        for (String strCodEmailHomePage : empresa.getEmailHomePage_ids().split(";"))
-            if (strCodEmailHomePage != "")
-                emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
-        empresa.setEmailHomePageVOList(emailHomePageVOList);
-
-        empresa.setUsuarioCadastroVO(new TabColaboradorDAO().getColaboradorVO(empresa.getUsuarioCadastro_id()));
-        empresa.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getColaboradorVO(empresa.getUsuarioAtualizacao_id()));
+        empresa.setUsuarioCadastroVO(new TabColaboradorDAO().getColaboradorVO(empresa.getUsuarioCadastro_id(), false));
+        empresa.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getColaboradorVO(empresa.getUsuarioAtualizacao_id(), false));
         empresa.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(empresa.getSituacaoSistema_id()));
 
         empresa.setDetalheReceitaFederalVOList(new TabEmpresaDetalheReceitaFederalDAO().getDetalheReceitaFederalVOList(empresa.getId()));

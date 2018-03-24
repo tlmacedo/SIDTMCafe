@@ -1,33 +1,34 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.database.ConnectionFactory;
-import br.com.sidtmcafe.model.vo.TabCargoVO;
+import br.com.sidtmcafe.model.vo.SisCargoVO;
+import br.com.sidtmcafe.model.vo.SisCargoVO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabCargoDAO extends BuscaBandoDados {
+public class SisCargoDAO extends BuscaBandoDados {
 
     ResultSet rs;
 
     String comandoSql = "";
-    TabCargoVO cargoVO;
-    List<TabCargoVO> cargoVOList;
+    SisCargoVO cargoVO;
+    List<SisCargoVO> cargoVOList;
 
-    public TabCargoVO getCargoVO(int idTabCargoVO) {
+    public SisCargoVO getCargoVO(int idTabCargoVO) {
         buscaTabCargoVO(idTabCargoVO);
         return cargoVO;
     }
 
-    public List<TabCargoVO> getCargoVOList() {
+    public List<SisCargoVO> getCargoVOList() {
         buscaTabCargoVO(-1);
         return cargoVOList;
     }
 
     void buscaTabCargoVO(int idTabCargoVO) {
-        comandoSql = "SELECT * FROM tabCargo ";
+        comandoSql = "SELECT id, descricao FROM SisCargo ";
         if (idTabCargoVO > 0) comandoSql += "WHERE id = '" + idTabCargoVO + "' ";
         comandoSql += "ORDER BY descricao ";
 
@@ -35,7 +36,7 @@ public class TabCargoDAO extends BuscaBandoDados {
         rs = getResultadosBandoDados(comandoSql);
         try {
             while (rs.next()) {
-                cargoVO = new TabCargoVO();
+                cargoVO = new SisCargoVO();
                 cargoVO.setId(rs.getInt("id"));
                 cargoVO.setDescricao(rs.getString("descricao"));
 

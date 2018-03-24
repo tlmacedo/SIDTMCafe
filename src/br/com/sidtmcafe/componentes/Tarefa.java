@@ -206,7 +206,7 @@ public class Tarefa implements Constants {
                             cadastroEmpresa.preencherTabelaEmpresa();
                             break;
                         case "carregarTabCargo":
-                            cadastroEmpresa.carregarTabCargo();
+//*                            cadastroEmpresa.carregarTabCargo();
                             break;
                     }
                 }

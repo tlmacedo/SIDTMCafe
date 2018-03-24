@@ -10,56 +10,18 @@ import java.util.List;
 
 public class TabLojaVO extends RecursiveTreeObject<TabLojaVO> {
 
-    List<TabEnderecoVO> enderecoVOList;
-    List<TabTelefoneVO> telefoneVOList;
-    List<TabContatoVO> contatoVOList;
-    List<TabEmailHomePageVO> emailHomePageVOList;
-    SisSituacaoSistemaVO situacaoSistemaVO;
-
-    IntegerProperty id, situacaoSistema_id;
-    StringProperty cnpj, ie, razao, fantasia, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids;
+    TabEmpresaVO empresaVO;
+    IntegerProperty id, tabEmpresa_id;
 
     public TabLojaVO() {
     }
 
-    public List<TabEnderecoVO> getEnderecoVOList() {
-        return enderecoVOList;
+    public TabEmpresaVO getEmpresaVO() {
+        return empresaVO;
     }
 
-    public void setEnderecoVOList(List<TabEnderecoVO> enderecoVOList) {
-        this.enderecoVOList = enderecoVOList;
-    }
-
-    public List<TabTelefoneVO> getTelefoneVOList() {
-        return telefoneVOList;
-    }
-
-    public void setTelefoneVOList(List<TabTelefoneVO> telefoneVOList) {
-        this.telefoneVOList = telefoneVOList;
-    }
-
-    public List<TabContatoVO> getContatoVOList() {
-        return contatoVOList;
-    }
-
-    public void setContatoVOList(List<TabContatoVO> contatoVOList) {
-        this.contatoVOList = contatoVOList;
-    }
-
-    public List<TabEmailHomePageVO> getEmailHomePageVOList() {
-        return emailHomePageVOList;
-    }
-
-    public void setEmailHomePageVOList(List<TabEmailHomePageVO> emailHomePageVOList) {
-        this.emailHomePageVOList = emailHomePageVOList;
-    }
-
-    public SisSituacaoSistemaVO getSituacaoSistemaVO() {
-        return situacaoSistemaVO;
-    }
-
-    public void setSituacaoSistemaVO(SisSituacaoSistemaVO situacaoSistemaVO) {
-        this.situacaoSistemaVO = situacaoSistemaVO;
+    public void setEmpresaVO(TabEmpresaVO empresaVO) {
+        this.empresaVO = empresaVO;
     }
 
     public int getId() {
@@ -75,133 +37,17 @@ public class TabLojaVO extends RecursiveTreeObject<TabLojaVO> {
         idProperty().set(id);
     }
 
-    public int getSituacaoSistema_id() {
-        return situacaoSistema_idProperty().get();
+    public int getTabEmpresa_id() {
+        return tabEmpresa_idProperty().get();
     }
 
-    public IntegerProperty situacaoSistema_idProperty() {
-        if (situacaoSistema_id == null) situacaoSistema_id = new SimpleIntegerProperty(0);
-        return situacaoSistema_id;
+    public IntegerProperty tabEmpresa_idProperty() {
+        if (tabEmpresa_id == null) tabEmpresa_id = new SimpleIntegerProperty(0);
+        return tabEmpresa_id;
     }
 
-    public void setSituacaoSistema_id(int situacaoSistema_id) {
-        situacaoSistema_idProperty().set(situacaoSistema_id);
+    public void setTabEmpresa_id(int tabEmpresa_id) {
+        tabEmpresa_idProperty().set(tabEmpresa_id);
     }
 
-    public String getCnpj() {
-        return cnpjProperty().get();
-    }
-
-    public StringProperty cnpjProperty() {
-        if (cnpj == null) cnpj = new SimpleStringProperty("");
-        return cnpj;
-    }
-
-    public void setCnpj(String cnpj) {
-        cnpjProperty().set(cnpj);
-    }
-
-    public String getIe() {
-        return ieProperty().get();
-    }
-
-    public StringProperty ieProperty() {
-        if (ie == null) ie = new SimpleStringProperty("");
-        return ie;
-    }
-
-    public void setIe(String ie) {
-        ieProperty().set(ie);
-    }
-
-    public String getRazao() {
-        return razaoProperty().get();
-    }
-
-    public StringProperty razaoProperty() {
-        if (razao == null) razao = new SimpleStringProperty("");
-        return razao;
-    }
-
-    public void setRazao(String razao) {
-        razaoProperty().set(razao);
-    }
-
-    public String getFantasia() {
-        return fantasiaProperty().get();
-    }
-
-    public StringProperty fantasiaProperty() {
-        if (fantasia == null) fantasia = new SimpleStringProperty("");
-        return fantasia;
-    }
-
-    public void setFantasia(String fantasia) {
-        fantasiaProperty().set(fantasia);
-    }
-
-    public String getEndereco_ids() {
-        return endereco_idsProperty().get();
-    }
-
-    public StringProperty endereco_idsProperty() {
-        if (endereco_ids == null) endereco_ids = new SimpleStringProperty("");
-        return endereco_ids;
-    }
-
-    public void setEndereco_ids(String endereco_ids) {
-        endereco_idsProperty().set(endereco_ids);
-    }
-
-    public String getTelefone_ids() {
-        return telefone_idsProperty().get();
-    }
-
-    public StringProperty telefone_idsProperty() {
-        if (telefone_ids == null) telefone_ids = new SimpleStringProperty("");
-        return telefone_ids;
-    }
-
-    public void setTelefone_ids(String telefone_ids) {
-        telefone_idsProperty().set(telefone_ids);
-    }
-
-    public String getContato_ids() {
-        return contato_idsProperty().get();
-    }
-
-    public StringProperty contato_idsProperty() {
-        if (contato_ids == null) contato_ids = new SimpleStringProperty("");
-        return contato_ids;
-    }
-
-    public void setContato_ids(String contato_ids) {
-        contato_idsProperty().set(contato_ids);
-    }
-
-    public String getEmailHomePage_ids() {
-        return emailHomePage_idsProperty().get();
-    }
-
-    public StringProperty emailHomePage_idsProperty() {
-        if (emailHomePage_ids == null) emailHomePage_ids = new SimpleStringProperty("");
-        return emailHomePage_ids;
-    }
-
-    public void setEmailHomePage_ids(String emailHomePage_ids) {
-        emailHomePage_idsProperty().set(emailHomePage_ids);
-    }
-
-    public String getDetalheLoja() {
-        if ((razaoProperty().get() != "") & enderecoVOList.size() > 0)
-            return "[Loja]: " + razaoProperty().get() + " (" + fantasiaProperty().get() + ") "
-                    + ";[End.]: " + enderecoVOList.get(0).getLogradouro() + ", "
-                    + enderecoVOList.get(0).getNumero() + " - " + enderecoVOList.get(0).getBairro();
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        return fantasiaProperty().get();
-    }
 }

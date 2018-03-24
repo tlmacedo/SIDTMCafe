@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TabContatoVO extends RecursiveTreeObject<TabContatoVO> {
 
-    TabCargoVO cargoVO;
+    SisCargoVO cargoVO;
     List<TabTelefoneVO> telefoneVOList;
     List<TabEmailHomePageVO> emailHomePageVOList;
 
@@ -20,11 +20,11 @@ public class TabContatoVO extends RecursiveTreeObject<TabContatoVO> {
     public TabContatoVO() {
     }
 
-    public TabCargoVO getCargoVO() {
+    public SisCargoVO getCargoVO() {
         return cargoVO;
     }
 
-    public void setCargoVO(TabCargoVO cargoVO) {
+    public void setCargoVO(SisCargoVO cargoVO) {
         this.cargoVO = cargoVO;
     }
 

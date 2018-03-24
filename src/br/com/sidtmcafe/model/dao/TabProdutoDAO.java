@@ -80,8 +80,8 @@ public class TabProdutoDAO extends BuscaBandoDados {
         produto.setFiscalCstPisVO(new SisFiscalCstPisCofinsDAO().getSisFiscalCstPisCofinsVO(produto.getFiscalCstPis_id()));
         produto.setFiscalCstCofinsVO(new SisFiscalCstPisCofinsDAO().getSisFiscalCstPisCofinsVO(produto.getFiscalCstCofins_id()));
         produto.setFiscalCstOrigemVO(new SisFiscalCstOrigemDAO().getFiscalCstOrigemVO(produto.getFiscalOrigem_id()));
-        produto.setUsuarioCadastroVO(new TabColaboradorDAO().getColaboradorVO(produto.getUsuarioCadastro_id()));
-        produto.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getColaboradorVO(produto.getUsuarioAtualizacao_id()));
+        produto.setUsuarioCadastroVO(new TabColaboradorDAO().getColaboradorVO(produto.getUsuarioCadastro_id(),false));
+        produto.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getColaboradorVO(produto.getUsuarioAtualizacao_id(),false));
         produto.setEstoque(new TabProdutoEstoqueDAO().getProdutoEstoqueVOSUM(produto.getId()));
         produto.setProdutoEstoqueVOList(new TabProdutoEstoqueDAO().getProdutoEstoqueVOList(produto.getId()));
         produto.setProdutoEanVOList(new TabProdutoEanDAO().getProdutoEanVOList(produto.getId()));

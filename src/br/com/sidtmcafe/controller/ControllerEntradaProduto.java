@@ -111,34 +111,34 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
 
     @Override
     public void fatorarObjetos() {
-        cboLojaDestino.setCellFactory(
-                new Callback<ListView<TabLojaVO>, ListCell<TabLojaVO>>() {
-                    @Override
-                    public ListCell<TabLojaVO> call(ListView<TabLojaVO> param) {
-                        final ListCell<TabLojaVO> cell = new ListCell<TabLojaVO>() {
-                            @Override
-                            public void updateItem(TabLojaVO item, boolean empty) {
-                                super.updateItem(item, empty);
-                                if (item != null) {
-                                    if (getIndex() == -1) {
-                                        setText(item.toString());
-                                    } else {
-                                        String textoCombo = "";
-                                        for (String detalheLoja : item.getDetalheLoja().split(";")) {
-                                            if (textoCombo != "")
-                                                textoCombo += "\r\n";
-                                            textoCombo += detalheLoja;
-                                        }
-                                        setText(textoCombo);
-                                    }
-                                } else {
-                                    setText(null);
-                                }
-                            }
-                        };
-                        return cell;
-                    }
-                });
+//        cboLojaDestino.setCellFactory(
+//                new Callback<ListView<TabLojaVO>, ListCell<TabLojaVO>>() {
+//                    @Override
+//                    public ListCell<TabLojaVO> call(ListView<TabLojaVO> param) {
+//                        final ListCell<TabLojaVO> cell = new ListCell<TabLojaVO>() {
+//                            @Override
+//                            public void updateItem(TabLojaVO item, boolean empty) {
+//                                super.updateItem(item, empty);
+//                                if (item != null) {
+//                                    if (getIndex() == -1) {
+//                                        setText(item.toString());
+//                                    } else {
+//                                        String textoCombo = "";
+//                                        for (String detalheLoja : item.getDetalheLoja().split(";")) {
+//                                            if (textoCombo != "")
+//                                                textoCombo += "\r\n";
+//                                            textoCombo += detalheLoja;
+//                                        }
+//                                        setText(textoCombo);
+//                                    }
+//                                } else {
+//                                    setText(null);
+//                                }
+//                            }
+//                        };
+//                        return cell;
+//                    }
+//                });
         cboFornecedor.setCellFactory(
                 new Callback<ListView<TabEmpresaVO>, ListCell<TabEmpresaVO>>() {
                     @Override
@@ -399,7 +399,7 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
 
     public void carregarFornecedor() {
         cboFornecedor.getItems().clear();
-        cboFornecedor.getItems().setAll(new TabEmpresaDAO().getEmpresaVOList(false, true, false));
+        cboFornecedor.getItems().setAll(new TabEmpresaDAO().getEmpresaVOList());
         //cboFornecedor.getSelectionModel().select(0);
     }
 
@@ -435,7 +435,7 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
 
     public void carregarTransportadora() {
         cboFreteTransportadora.getItems().clear();
-        cboFreteTransportadora.getItems().setAll(new TabEmpresaDAO().getEmpresaVOList(false, false, true));
+        cboFreteTransportadora.getItems().setAll(new TabEmpresaDAO().getEmpresaVOList());
         //cboFreteTransportadora.getSelectionModel().select(0);
     }
 

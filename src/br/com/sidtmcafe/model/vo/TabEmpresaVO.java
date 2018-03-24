@@ -23,8 +23,8 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
 
     Date dataAbertura;
     Timestamp dataCadastro, dataAtualizacao;
-    IntegerProperty id, isPessoaJuridica, isCliente, isFornecedor, isTransportadora, usuarioCadastro_id, usuarioAtualizacao_id, situacaoSistema_id;
-    StringProperty cnpj, ie, razao, fantasia, endereco_ids, telefone_ids, contato_ids, emailHomePage_ids, naturezaJuridica;
+    IntegerProperty id, isEmpresa, usuarioCadastro_id, usuarioAtualizacao_id, situacaoSistema_id;
+    StringProperty cnpj, ie, razao, fantasia, naturezaJuridica;
 
     public TabEmpresaVO() {
     }
@@ -130,56 +130,17 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
         idProperty().set(id);
     }
 
-    public int getIsPessoaJuridica() {
-        return isPessoaJuridicaProperty().get();
+    public int getIsEmpresa() {
+        return isEmpresaProperty().get();
     }
 
-    public IntegerProperty isPessoaJuridicaProperty() {
-        if (isPessoaJuridica == null) isPessoaJuridica = new SimpleIntegerProperty(0);
-        return isPessoaJuridica;
+    public IntegerProperty isEmpresaProperty() {
+        if (isEmpresa==null)isEmpresa=new SimpleIntegerProperty(0);
+        return isEmpresa;
     }
 
-    public void setIsPessoaJuridica(int isPessoaJuridica) {
-        isPessoaJuridicaProperty().set(isPessoaJuridica);
-    }
-
-    public int getIsCliente() {
-        return isClienteProperty().get();
-    }
-
-    public IntegerProperty isClienteProperty() {
-        if (isCliente == null) isCliente = new SimpleIntegerProperty(0);
-        return isCliente;
-    }
-
-    public void setIsCliente(int isCliente) {
-        isClienteProperty().set(isCliente);
-    }
-
-    public int getIsFornecedor() {
-        return isFornecedorProperty().get();
-    }
-
-    public IntegerProperty isFornecedorProperty() {
-        if (isFornecedor == null) isFornecedor = new SimpleIntegerProperty(0);
-        return isFornecedor;
-    }
-
-    public void setIsFornecedor(int isFornecedor) {
-        isFornecedorProperty().set(isFornecedor);
-    }
-
-    public int getIsTransportadora() {
-        return isTransportadoraProperty().get();
-    }
-
-    public IntegerProperty isTransportadoraProperty() {
-        if (isTransportadora == null) isTransportadora = new SimpleIntegerProperty(0);
-        return isTransportadora;
-    }
-
-    public void setIsTransportadora(int isTransportadora) {
-        isTransportadoraProperty().set(isTransportadora);
+    public void setIsEmpresa(int isEmpresa) {
+        isEmpresaProperty().set(isEmpresa);
     }
 
     public int getUsuarioCadastro_id() {
@@ -271,58 +232,6 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
 
     public void setFantasia(String fantasia) {
         fantasiaProperty().set(fantasia);
-    }
-
-    public String getEndereco_ids() {
-        return endereco_idsProperty().get();
-    }
-
-    public StringProperty endereco_idsProperty() {
-        if (endereco_ids == null) endereco_ids = new SimpleStringProperty("");
-        return endereco_ids;
-    }
-
-    public void setEndereco_ids(String endereco_ids) {
-        endereco_idsProperty().set(endereco_ids);
-    }
-
-    public String getTelefone_ids() {
-        return telefone_idsProperty().get();
-    }
-
-    public StringProperty telefone_idsProperty() {
-        if (telefone_ids == null) telefone_ids = new SimpleStringProperty("");
-        return telefone_ids;
-    }
-
-    public void setTelefone_ids(String telefone_ids) {
-        telefone_idsProperty().set(telefone_ids);
-    }
-
-    public String getContato_ids() {
-        return contato_idsProperty().get();
-    }
-
-    public StringProperty contato_idsProperty() {
-        if (contato_ids == null) contato_ids = new SimpleStringProperty("");
-        return contato_ids;
-    }
-
-    public void setContato_ids(String contato_ids) {
-        contato_idsProperty().set(contato_ids);
-    }
-
-    public String getEmailHomePage_ids() {
-        return emailHomePage_idsProperty().get();
-    }
-
-    public StringProperty emailHomePage_idsProperty() {
-        if (emailHomePage_ids == null) emailHomePage_ids = new SimpleStringProperty("");
-        return emailHomePage_ids;
-    }
-
-    public void setEmailHomePage_ids(String emailHomePage_ids) {
-        emailHomePage_idsProperty().set(emailHomePage_ids);
     }
 
     public String getNaturezaJuridica() {

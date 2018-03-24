@@ -32,7 +32,7 @@ public class TabLojaDAO extends BuscaBandoDados {
     }
 
     void buscaTabLojaVO(int idTabLoja) {
-        comandoSql = "SELECT * FROM tabLoja ";
+        comandoSql = "SELECT id, tabEmpresa_id FROM tabLoja ";
         if (idTabLoja > 0) comandoSql += "WHERE id = '" + idTabLoja + "' ";
         comandoSql += "ORDER BY id DESC ";
 
@@ -42,15 +42,7 @@ public class TabLojaDAO extends BuscaBandoDados {
             while (rs.next()) {
                 lojaVO = new TabLojaVO();
                 lojaVO.setId(rs.getInt("id"));
-                lojaVO.setCnpj(rs.getString("cnpj"));
-                lojaVO.setIe(rs.getString("ie"));
-                lojaVO.setRazao(rs.getString("razao"));
-                lojaVO.setFantasia(rs.getString("fantasia"));
-                lojaVO.setSituacaoSistema_id(rs.getInt("situacaoSistema_id"));
-                lojaVO.setEndereco_ids(rs.getString("endereco_ids"));
-                lojaVO.setTelefone_ids(rs.getString("telefone_ids"));
-                lojaVO.setContato_ids(rs.getString("contato_ids"));
-                lojaVO.setEmailHomePage_ids(rs.getString("emailHomePage_ids"));
+                lojaVO.setTabEmpresa_id(rs.getInt("tabEmpresa_id"));
 
                 lojaVOList.add(lojaVO);
             }
@@ -62,31 +54,9 @@ public class TabLojaDAO extends BuscaBandoDados {
     }
 
     void addObjetosPesquisa(TabLojaVO loja) {
-        loja.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSituacaoSistemaVO(loja.getSituacaoSistema_id()));
 
-        List<TabEnderecoVO> enderecoVOList = new ArrayList<>();
-        for (String strCodEndereco : loja.getEndereco_ids().split(";"))
-            if (strCodEndereco != "")
-                enderecoVOList.add(new TabEnderecoDAO().getEnderecoVO(Integer.parseInt(strCodEndereco)));
-        loja.setEnderecoVOList(enderecoVOList);
+        loja.setEmpresaVO(new TabEmpresaDAO().getEmpresaVO(loja.getTabEmpresa_id()));
 
-        List<TabTelefoneVO> telefoneVOList = new ArrayList<>();
-        for (String strCodTelefone : loja.getTelefone_ids().split(";"))
-            if (strCodTelefone != "")
-                telefoneVOList.add(new TabTelefoneDAO().getTelefoneVO(Integer.parseInt(strCodTelefone)));
-        loja.setTelefoneVOList(telefoneVOList);
-
-        List<TabContatoVO> contatoVOList = new ArrayList<>();
-        for (String strCodContato : loja.getContato_ids().split(";"))
-            if (strCodContato != "")
-                contatoVOList.add(new TabContatoDAO().getContatoVO(Integer.parseInt(strCodContato)));
-        loja.setContatoVOList(contatoVOList);
-
-        List<TabEmailHomePageVO> emailHomePageVOList = new ArrayList<>();
-        for (String strCodEmailHomePage : loja.getEmailHomePage_ids().split(";"))
-            if (strCodEmailHomePage != "")
-                emailHomePageVOList.add(new TabEmailHomePageDAO().getEmailHomePageVO(Integer.parseInt(strCodEmailHomePage)));
-        loja.setEmailHomePageVOList(emailHomePageVOList);
     }
 
 }
