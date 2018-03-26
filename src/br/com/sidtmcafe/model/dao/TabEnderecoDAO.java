@@ -35,7 +35,8 @@ public class TabEnderecoDAO extends BuscaBandoDados {
     }
 
     void buscaTabEnderecoVO(int idTabEnderecoVO) {
-        comandoSql = "SELECT * FROM tabEndereco ";
+        comandoSql = "SELECT id, sisTipoEndereco_id, cep, logradouro, numero, complemento, bairro, " +
+                "sisMunicipio_id, pontoReferencia FROM tabEndereco ";
         if (idTabEnderecoVO > 0) comandoSql += "WHERE id = '" + idTabEnderecoVO + "' ";
         comandoSql += "ORDER BY tipoEndereco_id, id ";
 
@@ -45,14 +46,13 @@ public class TabEnderecoDAO extends BuscaBandoDados {
             while (rs.next()) {
                 enderecoVO = new TabEnderecoVO();
                 enderecoVO.setId(rs.getInt("id"));
-                enderecoVO.setTipoEndereco_id(rs.getInt("tipoEndereco_id"));
+                enderecoVO.setSisTipoEndereco_id(rs.getInt("sisTipoEndereco_id"));
                 enderecoVO.setCep(rs.getString("cep"));
                 enderecoVO.setLogradouro(rs.getString("logradouro"));
                 enderecoVO.setNumero(rs.getString("numero"));
                 enderecoVO.setComplemento(rs.getString("complemento"));
                 enderecoVO.setBairro(rs.getString("bairro"));
-                enderecoVO.setUf_id(rs.getInt("uf_id"));
-                enderecoVO.setMunicipio_id(rs.getInt("municipio_id"));
+                enderecoVO.setSisMunicipio_id(rs.getInt("sisMunicipio_id"));
                 enderecoVO.setPontoReferencia(rs.getString("pontoReferencia"));
 
                 enderecoVOList.add(enderecoVO);
@@ -65,43 +65,45 @@ public class TabEnderecoDAO extends BuscaBandoDados {
     }
 
     void addObjetosPesquisa(TabEnderecoVO endereco) {
-        endereco.setTipoEnderecoVO(new SisTipoEnderecoDAO().getTipoEnderecoVO(endereco.getTipoEndereco_id()));
-        endereco.setUfVO(new SisUFDAO().getUfVO(endereco.getUf_id()));
-        endereco.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(endereco.getMunicipio_id()));
+
+        endereco.setTipoEnderecoVO(new SisTipoEnderecoDAO().getTipoEnderecoVO(endereco.getSisTipoEndereco_id()));
+        endereco.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(endereco.getSisMunicipio_id()));
+
     }
 
     public void updateTabEnderecoVO(Connection conn, TabEnderecoVO enderecoVO) throws SQLException {
-        comandoSql = "UPDATE tabEndereco SET ";
-        comandoSql += "tipoEndereco_id = " + enderecoVO.getTipoEndereco_id() + ", ";
-        comandoSql += "cep = '" + enderecoVO.getCep() + "', ";
-        comandoSql += "logradouro = '" + enderecoVO.getLogradouro() + "', ";
-        comandoSql += "numero = '" + enderecoVO.getNumero() + "', ";
-        comandoSql += "complemento = '" + enderecoVO.getComplemento() + "', ";
-        comandoSql += "bairro = '" + enderecoVO.getBairro() + "', ";
-        comandoSql += "uf_id = " + enderecoVO.getUf_id() + ", ";
-        comandoSql += "municipio_id = " + enderecoVO.getMunicipio_id() + ", ";
-        comandoSql += "pontoReferencia = '" + enderecoVO.getPontoReferencia() + "' ";
-        comandoSql += "WHERE id = " + enderecoVO.getId();
-
-        if (getUpdateBancoDados(conn, comandoSql)) ;
+//        comandoSql = "UPDATE tabEndereco SET ";
+//        comandoSql += "tipoEndereco_id = " + enderecoVO.getTipoEndereco_id() + ", ";
+//        comandoSql += "cep = '" + enderecoVO.getCep() + "', ";
+//        comandoSql += "logradouro = '" + enderecoVO.getLogradouro() + "', ";
+//        comandoSql += "numero = '" + enderecoVO.getNumero() + "', ";
+//        comandoSql += "complemento = '" + enderecoVO.getComplemento() + "', ";
+//        comandoSql += "bairro = '" + enderecoVO.getBairro() + "', ";
+//        comandoSql += "uf_id = " + enderecoVO.getUf_id() + ", ";
+//        comandoSql += "municipio_id = " + enderecoVO.getMunicipio_id() + ", ";
+//        comandoSql += "pontoReferencia = '" + enderecoVO.getPontoReferencia() + "' ";
+//        comandoSql += "WHERE id = " + enderecoVO.getId();
+//
+//        if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
     public int insertTabEnderecoVO(Connection conn, TabEnderecoVO enderecoVO) throws SQLException {
-        comandoSql = "INSERT INTO tabEndereco ";
-        comandoSql += "(tipoEndereco_id, cep, logradouro, numero, complemento, bairro, uf_id, municipio_id, pontoReferencia) ";
-        comandoSql += "VALUES(";
-        comandoSql += enderecoVO.getTipoEndereco_id() + ", ";
-        comandoSql += "'" + enderecoVO.getCep() + "', ";
-        comandoSql += "'" + enderecoVO.getLogradouro() + "', ";
-        comandoSql += "'" + enderecoVO.getNumero() + "', ";
-        comandoSql += "'" + enderecoVO.getComplemento() + "', ";
-        comandoSql += "'" + enderecoVO.getBairro() + "', ";
-        comandoSql += enderecoVO.getUf_id() + ", ";
-        comandoSql += enderecoVO.getMunicipio_id() + ", ";
-        comandoSql += "'" + enderecoVO.getPontoReferencia() + "'";
-        comandoSql += ") ";
-
-        return getInsertBancoDados(conn, comandoSql);
+//        comandoSql = "INSERT INTO tabEndereco ";
+//        comandoSql += "(tipoEndereco_id, cep, logradouro, numero, complemento, bairro, uf_id, municipio_id, pontoReferencia) ";
+//        comandoSql += "VALUES(";
+//        comandoSql += enderecoVO.getTipoEndereco_id() + ", ";
+//        comandoSql += "'" + enderecoVO.getCep() + "', ";
+//        comandoSql += "'" + enderecoVO.getLogradouro() + "', ";
+//        comandoSql += "'" + enderecoVO.getNumero() + "', ";
+//        comandoSql += "'" + enderecoVO.getComplemento() + "', ";
+//        comandoSql += "'" + enderecoVO.getBairro() + "', ";
+//        comandoSql += enderecoVO.getUf_id() + ", ";
+//        comandoSql += enderecoVO.getMunicipio_id() + ", ";
+//        comandoSql += "'" + enderecoVO.getPontoReferencia() + "'";
+//        comandoSql += ") ";
+//
+//        return getInsertBancoDados(conn, comandoSql);
+        return 0;
     }
 
 }

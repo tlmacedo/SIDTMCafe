@@ -55,7 +55,7 @@ public class SisMunicipioDAO extends BuscaBandoDados {
             } else {
                 comandoSql += "AND ";
             }
-            comandoSql += "uf_id = '" + idUf_id + "' ";
+            comandoSql += "sisUF_id = '" + idUf_id + "' ";
         }
         if (strMunicipio != "") {
             if (!comandoSql.contains("WHERE")) {
@@ -74,7 +74,7 @@ public class SisMunicipioDAO extends BuscaBandoDados {
                 municipioVO = new SisMunicipioVO();
                 municipioVO.setId(rs.getInt("id"));
                 municipioVO.setDescricao(rs.getString("descricao"));
-                municipioVO.setUf_id(rs.getInt("uf_id"));
+                municipioVO.setUf_id(rs.getInt("sisUF_id"));
                 municipioVO.setIsCapital(rs.getInt("isCapital"));
                 municipioVO.setIbge_id(rs.getInt("ibge_id"));
 

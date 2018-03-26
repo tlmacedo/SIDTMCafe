@@ -10,19 +10,17 @@ import javafx.beans.property.StringProperty;
 public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
 
     SisTipoEnderecoVO tipoEnderecoVO;
-    SisUFVO ufVO;
     SisMunicipioVO municipioVO;
 
-    IntegerProperty id, tipoEndereco_id, uf_id, municipio_id;
+    IntegerProperty id, sisTipoEndereco_id, sisMunicipio_id;
     StringProperty cep, logradouro, numero, complemento, bairro, pontoReferencia;
 
     public TabEnderecoVO() {
     }
 
     public TabEnderecoVO(int tipoEndereco_id, int uf_id, int municipio_id) {
-        this.tipoEndereco_id = new SimpleIntegerProperty(tipoEndereco_id);
-        this.uf_id = new SimpleIntegerProperty(uf_id);
-        this.municipio_id = new SimpleIntegerProperty(municipio_id);
+        this.sisTipoEndereco_id = new SimpleIntegerProperty(tipoEndereco_id);
+        this.sisMunicipio_id = new SimpleIntegerProperty(municipio_id);
     }
 
     public SisTipoEnderecoVO getTipoEnderecoVO() {
@@ -31,14 +29,6 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
 
     public void setTipoEnderecoVO(SisTipoEnderecoVO tipoEnderecoVO) {
         this.tipoEnderecoVO = tipoEnderecoVO;
-    }
-
-    public SisUFVO getUfVO() {
-        return ufVO;
-    }
-
-    public void setUfVO(SisUFVO ufVO) {
-        this.ufVO = ufVO;
     }
 
     public SisMunicipioVO getMunicipioVO() {
@@ -62,43 +52,30 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
         idProperty().set(id);
     }
 
-    public int getTipoEndereco_id() {
-        return tipoEndereco_idProperty().get();
+    public int getSisTipoEndereco_id() {
+        return sisTipoEndereco_idProperty().get();
     }
 
-    public IntegerProperty tipoEndereco_idProperty() {
-        if (tipoEndereco_id == null) tipoEndereco_id = new SimpleIntegerProperty(0);
-        return tipoEndereco_id;
+    public IntegerProperty sisTipoEndereco_idProperty() {
+        if (sisTipoEndereco_id == null) sisTipoEndereco_id = new SimpleIntegerProperty(0);
+        return sisTipoEndereco_id;
     }
 
-    public void setTipoEndereco_id(int tipoEndereco_id) {
-        tipoEndereco_idProperty().set(tipoEndereco_id);
+    public void setSisTipoEndereco_id(int sisTipoEndereco_id) {
+        sisTipoEndereco_idProperty().set(sisTipoEndereco_id);
     }
 
-    public int getUf_id() {
-        return uf_idProperty().get();
+    public int getSisMunicipio_id() {
+        return sisMunicipio_idProperty().get();
     }
 
-    public IntegerProperty uf_idProperty() {
-        if (uf_id == null) uf_id = new SimpleIntegerProperty(0);
-        return uf_id;
+    public IntegerProperty sisMunicipio_idProperty() {
+        if (sisMunicipio_id == null) sisMunicipio_id = new SimpleIntegerProperty(0);
+        return sisMunicipio_id;
     }
 
-    public void setUf_id(int uf_id) {
-        uf_idProperty().set(uf_id);
-    }
-
-    public int getMunicipio_id() {
-        return municipio_idProperty().get();
-    }
-
-    public IntegerProperty municipio_idProperty() {
-        if (municipio_id == null) municipio_id = new SimpleIntegerProperty(0);
-        return municipio_id;
-    }
-
-    public void setMunicipio_id(int municipio_id) {
-        municipio_idProperty().set(municipio_id);
+    public void setSisMunicipio_id(int sisMunicipio_id) {
+        sisMunicipio_idProperty().set(sisMunicipio_id);
     }
 
     public String getCep() {

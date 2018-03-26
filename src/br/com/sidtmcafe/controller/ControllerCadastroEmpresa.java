@@ -818,7 +818,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             lblDataAtualizacaoDiff.setText("tempo de atualização: " + DataTrabalhada.getStrIntervaloDatas(ldtAtualizacao.toLocalDate(), null));
         }
         exibirDadosAdicionais();
-        preencherListaDetalhesReceita();
+        //preencherListaDetalhesReceita();
     }
 
     void exibirDadosAdicionais() {
@@ -849,10 +849,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         txtEndComplemento.setText(enderecoVO.getComplemento());
         txtEndBairro.setText(enderecoVO.getBairro());
         txtEndPontoReferencia.setText(enderecoVO.getPontoReferencia());
-        cboEndUF.getSelectionModel().select(enderecoVO.getUf_id());
-        cboEndMunicipio.getSelectionModel().select(enderecoVO.getMunicipio_id());
-        if (enderecoVO.getUf_id() > 0) {
-            cboEndUF.getSelectionModel().select(enderecoVO.getUfVO());
+//        cboEndUF.getSelectionModel().select(enderecoVO.getMunicipioVO().getUf_id());
+//        cboEndMunicipio.getSelectionModel().select(enderecoVO.getSisTipoEndereco_id());
+        if (enderecoVO.getMunicipioVO().getUf_id() > 0) {
+            cboEndUF.getSelectionModel().select(enderecoVO.getMunicipioVO().getUfVO());
             cboEndMunicipio.getSelectionModel().select(enderecoVO.getMunicipioVO());
         }
     }
@@ -878,7 +878,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
     TabEmpresaVO guardarEmpresa(String end_ids, String tel_ids, String cont_ids, String emailHome_ids) {
         TabEmpresaVO emp = getTtvEmpresaVO();
-        emp.setIsPessoaJuridica(cboClassificacaoJuridica.getSelectionModel().getSelectedIndex());
+        emp.setIsEmpresa(cboClassificacaoJuridica.getSelectionModel().getSelectedIndex());
         emp.setCnpj(txtCNPJ.getText().replaceAll("[\\-/. \\[\\]]", ""));
         emp.setIe(txtIE.getText().replaceAll("[\\-/. \\[\\]]", ""));
         emp.setRazao(txtRazao.getText());
@@ -889,13 +889,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         if (chkIsCliente.isSelected()) isCli = 1;
         if (chkIsFornecedor.isSelected()) isFor = 1;
         if (chkIsTransportadora.isSelected()) isTransp = 1;
-        emp.setIsCliente(isCli);
-        emp.setIsFornecedor(isFor);
-        emp.setIsTransportadora(isTransp);
-        emp.setEndereco_ids(end_ids);
-        emp.setTelefone_ids(tel_ids);
-        emp.setContato_ids(cont_ids);
-        emp.setEmailHomePage_ids(emailHome_ids);
         emp.setUsuarioCadastro_id(Integer.parseInt(USUARIO_LOGADO_ID));
         emp.setUsuarioAtualizacao_id(Integer.parseInt(USUARIO_LOGADO_ID));
         emp.setSituacaoSistema_id(((SisSituacaoSistemaVO) cboSituacaoSistema.getSelectionModel().getSelectedItem()).getId());
@@ -911,16 +904,14 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         if (index < 0) return;
         TabEnderecoVO endVO = getTtvEnderecoVO().get(index);
         endVO.setTipoEnderecoVO(listEndereco.getItems().get(index).getTipoEnderecoVO());
-        endVO.setTipoEndereco_id(endVO.getTipoEnderecoVO().getId());
+        endVO.setSisTipoEndereco_id(endVO.getTipoEnderecoVO().getId());
         endVO.setCep(txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", ""));
         endVO.setLogradouro(txtEndLogradouro.getText());
         endVO.setNumero(txtEndNumero.getText());
         endVO.setComplemento(txtEndComplemento.getText());
         endVO.setBairro(txtEndBairro.getText());
-        endVO.setUf_id(cboEndUF.getSelectionModel().getSelectedItem().getId());
-        endVO.setUfVO(cboEndUF.getSelectionModel().getSelectedItem());
         if (cboEndMunicipio.getSelectionModel().getSelectedItem() != null)
-            endVO.setMunicipio_id(cboEndMunicipio.getSelectionModel().getSelectedItem().getId());
+            endVO.setSisMunicipio_id(cboEndMunicipio.getSelectionModel().getSelectedItem().getId());
         endVO.setMunicipioVO(cboEndMunicipio.getSelectionModel().getSelectedItem());
         endVO.setPontoReferencia(txtEndPontoReferencia.getText());
         getTtvEnderecoVO().set(index, endVO);
@@ -930,7 +921,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     TabEnderecoVO addEndereco() {
         int tipEnd = 1;
         try {
-            if (getTtvEnderecoVO().get(0).getTipoEndereco_id() == 1) {
+            if (getTtvEnderecoVO().get(0).getSisTipoEndereco_id() == 1) {
                 if (!validarEnd()) return null;
                 List<SisTipoEnderecoVO> list = getTipoEnderecoDisponivel();
                 if (list.size() <= 0) {
@@ -955,10 +946,9 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         } finally {
             TabEnderecoVO newEndereco = new TabEnderecoVO();
             newEndereco.setId(0);
-            newEndereco.setTipoEndereco_id(tipEnd);
+            newEndereco.setSisTipoEndereco_id(tipEnd);
             newEndereco.setTipoEnderecoVO(new SisTipoEnderecoDAO().getTipoEnderecoVO(tipEnd));
-            newEndereco.setUf_id(0);
-            newEndereco.setMunicipio_id(0);
+            newEndereco.setSisMunicipio_id(0);
             return newEndereco;
         }
     }

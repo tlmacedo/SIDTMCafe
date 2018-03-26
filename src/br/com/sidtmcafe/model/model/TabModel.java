@@ -256,7 +256,7 @@ public class TabModel {
             colunaCnpj.setPrefWidth(110);
             colunaCnpj.setStyle("-fx-alignment: center-right;");
             colunaCnpj.setCellValueFactory(param -> {
-                if (param.getValue().getValue().isPessoaJuridicaProperty().get() == 0)
+                if (param.getValue().getValue().isEmpresaProperty().get() == 0)
                     return new SimpleStringProperty(FormatarDado.getCampoFormatado(param.getValue().getValue().cnpjProperty().getValue(), "cpf"));
                 return new SimpleStringProperty(FormatarDado.getCampoFormatado(param.getValue().getValue().cnpjProperty().getValue(), "cnpj"));
             });
@@ -270,7 +270,7 @@ public class TabModel {
             colunaIe.setCellValueFactory(param -> {
                 try {
                     if (param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty().get() != "")
-                        return new SimpleStringProperty(FormatarDado.getCampoFormatado(param.getValue().getValue().ieProperty().getValue(), "ie" + param.getValue().getValue().getEnderecoVOList().get(0).getUfVO().getSigla()));
+                        return new SimpleStringProperty(FormatarDado.getCampoFormatado(param.getValue().getValue().ieProperty().getValue(), "ie" + param.getValue().getValue().getEnderecoVOList().get(0).getMunicipioVO().getUfVO().getSigla()));
                     return param.getValue().getValue().ieProperty();
                 } catch (Exception ex) {
                     return param.getValue().getValue().ieProperty();
@@ -300,7 +300,7 @@ public class TabModel {
             colunaEndLogradouro.setGraphic(lblEndLogradouro);
             colunaEndLogradouro.setPrefWidth(170);
             colunaEndLogradouro.setCellValueFactory(param -> {
-                if (param.getValue().getValue().getEnderecoVOList().size() > 0)
+                if (param.getValue().getValue().getEnderecoVOList() != null)
                     if (param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty() != null)
                         return param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty();
                 return new SimpleStringProperty("");
@@ -313,7 +313,7 @@ public class TabModel {
             colunaEndNumero.setPrefWidth(40);
             colunaEndNumero.setStyle("-fx-alignment: center-right;");
             colunaEndNumero.setCellValueFactory(param -> {
-                if (param.getValue().getValue().getEnderecoVOList().size() > 0)
+                if (param.getValue().getValue().getEnderecoVOList() != null)
                     if (param.getValue().getValue().getEnderecoVOList().get(0).numeroProperty() != null)
                         return param.getValue().getValue().getEnderecoVOList().get(0).numeroProperty();
                 return new SimpleStringProperty("");
@@ -325,7 +325,7 @@ public class TabModel {
             colunaEndComplemento.setGraphic(lblEndComplemento);
             colunaEndComplemento.setPrefWidth(150);
             colunaEndComplemento.setCellValueFactory(param -> {
-                if (param.getValue().getValue().getEnderecoVOList().size() > 0)
+                if (param.getValue().getValue().getEnderecoVOList() != null)
                     if (param.getValue().getValue().getEnderecoVOList().get(0).complementoProperty() != null)
                         return param.getValue().getValue().getEnderecoVOList().get(0).complementoProperty();
                 return new SimpleStringProperty("");
@@ -337,7 +337,7 @@ public class TabModel {
             colunaEndBairro.setGraphic(lblEndBairro);
             colunaEndBairro.setPrefWidth(95);
             colunaEndBairro.setCellValueFactory(param -> {
-                if (param.getValue().getValue().getEnderecoVOList().size() > 0)
+                if (param.getValue().getValue().getEnderecoVOList() != null)
                     if (param.getValue().getValue().getEnderecoVOList().get(0).bairroProperty() != null)
                         return param.getValue().getValue().getEnderecoVOList().get(0).bairroProperty();
                 return new SimpleStringProperty("");
@@ -350,9 +350,9 @@ public class TabModel {
             colunaEndUFMunicipio.setPrefWidth(75);
             colunaEndUFMunicipio.setCellValueFactory(param -> {
                 if (param.getValue().getValue().getEnderecoVOList().size() > 0)
-                    if (param.getValue().getValue().getEnderecoVOList().get(0) != null)
+                    if (param.getValue().getValue().getEnderecoVOList() != null)
                         return new SimpleStringProperty(
-                                param.getValue().getValue().getEnderecoVOList().get(0).getUfVO().siglaProperty() + " - " +
+                                param.getValue().getValue().getEnderecoVOList().get(0).getMunicipioVO().getUfVO().siglaProperty() + " - " +
                                         param.getValue().getValue().getEnderecoVOList().get(0).getMunicipioVO().descricaoProperty());
                 return new SimpleStringProperty("");
             });
@@ -371,8 +371,9 @@ public class TabModel {
             colunaIsCliente.setPrefWidth(55);
             colunaIsCliente.setGraphic(vBoxIsCliente);
             colunaIsCliente.setCellValueFactory(param -> {
-                if (param.getValue().getValue().getIsCliente() == 0) return new SimpleBooleanProperty(false);
-                else return new SimpleBooleanProperty(true);
+//                if (param.getValue().getValue().getIsCliente() == 0) return new SimpleBooleanProperty(false);
+//                else return new SimpleBooleanProperty(true);
+                return new SimpleBooleanProperty(true);
             });
 
             VBox vBoxIsFornecedor = new VBox();
@@ -386,8 +387,9 @@ public class TabModel {
             colunaIsFornecedor.setPrefWidth(55);
             colunaIsFornecedor.setGraphic(vBoxIsFornecedor);
             colunaIsFornecedor.setCellValueFactory(param -> {
-                if (param.getValue().getValue().getIsFornecedor() == 0) return new SimpleBooleanProperty(false);
-                else return new SimpleBooleanProperty(true);
+//                if (param.getValue().getValue().getIsFornecedor() == 0) return new SimpleBooleanProperty(false);
+//                else return new SimpleBooleanProperty(true);
+                return new SimpleBooleanProperty(true);
             });
 
             VBox vBoxIsTransportadora = new VBox();
@@ -401,8 +403,9 @@ public class TabModel {
             colunaIsTransportadora.setPrefWidth(55);
             colunaIsTransportadora.setGraphic(vBoxIsTransportadora);
             colunaIsTransportadora.setCellValueFactory(param -> {
-                if (param.getValue().getValue().getIsTransportadora() == 0) return new SimpleBooleanProperty(false);
-                else return new SimpleBooleanProperty(true);
+//                if (param.getValue().getValue().getIsTransportadora() == 0) return new SimpleBooleanProperty(false);
+//                else return new SimpleBooleanProperty(true);
+                return new SimpleBooleanProperty(true);
             });
 
         } catch (Exception ex) {

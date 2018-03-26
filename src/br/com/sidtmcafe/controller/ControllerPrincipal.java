@@ -187,7 +187,7 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
             int idTemp = principalVO.getId();
             int filhoTemp = principalVO.getFilho_id();
             String icoMenu = principalVO.getIcoMenu();
-            if (icoMenu.equals("")) {
+            if (icoMenu == null) {
                 treeItems[idTemp] = new TreeItem(principalVO);
             } else {
                 treeItems[idTemp] = new TreeItem(principalVO, new ImageView(PATH_IMAGENS + icoMenu));

@@ -39,7 +39,7 @@ public class TabColaboradorDAO extends BuscaBandoDados {
                 "colab.sisSituacaoSistema_id FROM tabColaborador as colab LEFT JOIN sisCargo as cargo ON " +
                 "colab.sisCargo_id = cargo.id LEFT JOIN tabLoja as loja ON colab.tabLoja_id = loja.id " +
                 "LEFT JOIN tabEmpresa as emp ON loja.tabEmpresa_id = emp.id ";
-        if (idTabColaboradorVO > 0) comandoSql += " WHERE id = '" + idTabColaboradorVO + "' ";
+        if (idTabColaboradorVO > 0) comandoSql += " WHERE colab.id = '" + idTabColaboradorVO + "' ";
         comandoSql += "ORDER BY nome ";
 
         colaboradorVOList = new ArrayList<>();

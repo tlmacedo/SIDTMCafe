@@ -39,7 +39,7 @@ public class SisTelefoneOperadoraDAO extends BuscaBandoDados {
                 telefoneOperadoraVO.setId(rs.getInt("id"));
                 telefoneOperadoraVO.setDescricao(rs.getString("descricao"));
                 telefoneOperadoraVO.setTipo(rs.getInt("tipo"));
-                telefoneOperadoraVO.setCodigoDDD(rs.getInt("codigoDDD"));
+                telefoneOperadoraVO.setCodigoDDD(rs.getInt("ddd"));
 
                 telefoneOperadoraVOList.add(telefoneOperadoraVO);
             }
