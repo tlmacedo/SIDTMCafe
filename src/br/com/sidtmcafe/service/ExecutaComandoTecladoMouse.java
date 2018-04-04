@@ -8,7 +8,7 @@ import javafx.scene.input.MouseEvent;
 public class ExecutaComandoTecladoMouse {
 
     public static KeyEvent pressTecla(KeyCode keyCode) {
-        return new KeyEvent(KeyEvent.KEY_RELEASED, "", "", keyCode, true, true, true, true);
+        return new KeyEvent(KeyEvent.KEY_PRESSED, "", "", keyCode, true, true, true, true);
     }
 
     public static MouseEvent clickMouse(int qtdClicks) {

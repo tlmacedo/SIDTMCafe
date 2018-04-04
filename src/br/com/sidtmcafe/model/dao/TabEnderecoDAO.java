@@ -38,7 +38,7 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         comandoSql = "SELECT id, sisTipoEndereco_id, cep, logradouro, numero, complemento, bairro, " +
                 "sisMunicipio_id, pontoReferencia FROM tabEndereco ";
         if (idTabEnderecoVO > 0) comandoSql += "WHERE id = '" + idTabEnderecoVO + "' ";
-        comandoSql += "ORDER BY tipoEndereco_id, id ";
+        comandoSql += "ORDER BY sistipoEndereco_id, id ";
 
         enderecoVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);
@@ -72,38 +72,35 @@ public class TabEnderecoDAO extends BuscaBandoDados {
     }
 
     public void updateTabEnderecoVO(Connection conn, TabEnderecoVO enderecoVO) throws SQLException {
-//        comandoSql = "UPDATE tabEndereco SET ";
-//        comandoSql += "tipoEndereco_id = " + enderecoVO.getTipoEndereco_id() + ", ";
-//        comandoSql += "cep = '" + enderecoVO.getCep() + "', ";
-//        comandoSql += "logradouro = '" + enderecoVO.getLogradouro() + "', ";
-//        comandoSql += "numero = '" + enderecoVO.getNumero() + "', ";
-//        comandoSql += "complemento = '" + enderecoVO.getComplemento() + "', ";
-//        comandoSql += "bairro = '" + enderecoVO.getBairro() + "', ";
-//        comandoSql += "uf_id = " + enderecoVO.getUf_id() + ", ";
-//        comandoSql += "municipio_id = " + enderecoVO.getMunicipio_id() + ", ";
-//        comandoSql += "pontoReferencia = '" + enderecoVO.getPontoReferencia() + "' ";
-//        comandoSql += "WHERE id = " + enderecoVO.getId();
-//
-//        if (getUpdateBancoDados(conn, comandoSql)) ;
+        comandoSql = "UPDATE tabEndereco SET ";
+        comandoSql += "sisTipoEndereco_id = " + enderecoVO.getSisTipoEndereco_id() + ", ";
+        comandoSql += "cep = '" + enderecoVO.getCep() + "', ";
+        comandoSql += "logradouro = '" + enderecoVO.getLogradouro() + "', ";
+        comandoSql += "numero = '" + enderecoVO.getNumero() + "', ";
+        comandoSql += "complemento = '" + enderecoVO.getComplemento() + "', ";
+        comandoSql += "bairro = '" + enderecoVO.getBairro() + "', ";
+        comandoSql += "sisMunicipio_id = " + enderecoVO.getSisMunicipio_id() + ", ";
+        comandoSql += "pontoReferencia = '" + enderecoVO.getPontoReferencia() + "' ";
+        comandoSql += "WHERE id = " + enderecoVO.getId();
+
+        if (getUpdateBancoDados(conn, comandoSql)) ;
     }
 
     public int insertTabEnderecoVO(Connection conn, TabEnderecoVO enderecoVO) throws SQLException {
-//        comandoSql = "INSERT INTO tabEndereco ";
-//        comandoSql += "(tipoEndereco_id, cep, logradouro, numero, complemento, bairro, uf_id, municipio_id, pontoReferencia) ";
-//        comandoSql += "VALUES(";
-//        comandoSql += enderecoVO.getTipoEndereco_id() + ", ";
-//        comandoSql += "'" + enderecoVO.getCep() + "', ";
-//        comandoSql += "'" + enderecoVO.getLogradouro() + "', ";
-//        comandoSql += "'" + enderecoVO.getNumero() + "', ";
-//        comandoSql += "'" + enderecoVO.getComplemento() + "', ";
-//        comandoSql += "'" + enderecoVO.getBairro() + "', ";
-//        comandoSql += enderecoVO.getUf_id() + ", ";
-//        comandoSql += enderecoVO.getMunicipio_id() + ", ";
-//        comandoSql += "'" + enderecoVO.getPontoReferencia() + "'";
-//        comandoSql += ") ";
-//
-//        return getInsertBancoDados(conn, comandoSql);
-        return 0;
+        comandoSql = "INSERT INTO tabEndereco ";
+        comandoSql += "(sisTipoEndereco_id, cep, logradouro, numero, complemento, bairro, sisMunicipio_id, pontoReferencia) ";
+        comandoSql += "VALUES(";
+        comandoSql += enderecoVO.getSisTipoEndereco_id() + ", ";
+        comandoSql += "'" + enderecoVO.getCep() + "', ";
+        comandoSql += "'" + enderecoVO.getLogradouro() + "', ";
+        comandoSql += "'" + enderecoVO.getNumero() + "', ";
+        comandoSql += "'" + enderecoVO.getComplemento() + "', ";
+        comandoSql += "'" + enderecoVO.getBairro() + "', ";
+        comandoSql += enderecoVO.getSisMunicipio_id() + ", ";
+        comandoSql += "'" + enderecoVO.getPontoReferencia() + "'";
+        comandoSql += ") ";
+
+        return getInsertBancoDados(conn, comandoSql);
     }
 
 }

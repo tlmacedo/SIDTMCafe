@@ -32,7 +32,7 @@ public class SisUFDAO extends BuscaBandoDados {
     }
 
     public List<SisUFVO> getUfVOList() {
-        buscaSisUFVO(-1, "");
+        buscaSisUFVO(0, "");
         if (ufVOList != null)
             for (SisUFVO uf : ufVOList)
                 addObjetosPesquisa(uf);

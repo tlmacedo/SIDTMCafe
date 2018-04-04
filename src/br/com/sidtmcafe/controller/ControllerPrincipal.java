@@ -138,7 +138,7 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
             }
         });
 
-        treeMenuViewPrincipal.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+        treeMenuViewPrincipal.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (treeMenuViewPrincipal.getSelectionModel().getSelectedIndex() < 0) return;
             SisMenuPrincipalVO item = treeMenuViewPrincipal.getSelectionModel().getSelectedItem().getValue();
             if (item == null) return;

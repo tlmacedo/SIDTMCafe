@@ -18,12 +18,12 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     List<TabEmailHomePageVO> emailHomePageVOList;
     TabColaboradorVO usuarioCadastroVO;
     TabColaboradorVO usuarioAtualizacaoVO;
-    SisSituacaoSistemaVO situacaoSistemaVO;
+    SisSituacaoSistemaVO sisSituacaoSistemaVO;
     List<TabEmpresaDetalheReceitaFederalVO> detalheReceitaFederalVOList;
 
     Date dataAbertura;
     Timestamp dataCadastro, dataAtualizacao;
-    IntegerProperty id, isEmpresa, usuarioCadastro_id, usuarioAtualizacao_id, situacaoSistema_id;
+    IntegerProperty id, isEmpresa, sisSituacaoSistema_id, usuarioCadastro_id, usuarioAtualizacao_id;
     StringProperty cnpj, ie, razao, fantasia, naturezaJuridica;
 
     public TabEmpresaVO() {
@@ -77,12 +77,12 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
         this.usuarioAtualizacaoVO = usuarioAtualizacaoVO;
     }
 
-    public SisSituacaoSistemaVO getSituacaoSistemaVO() {
-        return situacaoSistemaVO;
+    public SisSituacaoSistemaVO getSisSituacaoSistemaVO() {
+        return sisSituacaoSistemaVO;
     }
 
-    public void setSituacaoSistemaVO(SisSituacaoSistemaVO situacaoSistemaVO) {
-        this.situacaoSistemaVO = situacaoSistemaVO;
+    public void setSisSituacaoSistemaVO(SisSituacaoSistemaVO sisSituacaoSistemaVO) {
+        this.sisSituacaoSistemaVO = sisSituacaoSistemaVO;
     }
 
     public List<TabEmpresaDetalheReceitaFederalVO> getDetalheReceitaFederalVOList() {
@@ -135,7 +135,7 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     }
 
     public IntegerProperty isEmpresaProperty() {
-        if (isEmpresa==null)isEmpresa=new SimpleIntegerProperty(0);
+        if (isEmpresa == null) isEmpresa = new SimpleIntegerProperty(0);
         return isEmpresa;
     }
 
@@ -169,17 +169,17 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
         usuarioAtualizacao_idProperty().set(usuarioAtualizacao_id);
     }
 
-    public int getSituacaoSistema_id() {
-        return situacaoSistema_idProperty().get();
+    public int getSisSituacaoSistema_id() {
+        return sisSituacaoSistema_idProperty().get();
     }
 
-    public IntegerProperty situacaoSistema_idProperty() {
-        if (situacaoSistema_id == null) situacaoSistema_id = new SimpleIntegerProperty(0);
-        return situacaoSistema_id;
+    public IntegerProperty sisSituacaoSistema_idProperty() {
+        if (sisSituacaoSistema_id == null) sisSituacaoSistema_id = new SimpleIntegerProperty(0);
+        return sisSituacaoSistema_id;
     }
 
-    public void setSituacaoSistema_id(int situacaoSistema_id) {
-        situacaoSistema_idProperty().set(situacaoSistema_id);
+    public void setSisSituacaoSistema_id(int sisSituacaoSistema_id) {
+        sisSituacaoSistema_idProperty().set(sisSituacaoSistema_id);
     }
 
     public String getCnpj() {

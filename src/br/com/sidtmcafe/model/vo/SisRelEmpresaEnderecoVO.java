@@ -4,11 +4,21 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-public class SisRelacaoEmpresaEnderecoVO extends RecursiveTreeObject<SisRelacaoEmpresaEnderecoVO> {
+public class SisRelEmpresaEnderecoVO extends RecursiveTreeObject<SisRelEmpresaEnderecoVO> {
+
+    TabEnderecoVO enderecoVO;
 
     IntegerProperty id, tabEmpresa_id, tabEndereco_id;
 
-    public SisRelacaoEmpresaEnderecoVO() {
+    public SisRelEmpresaEnderecoVO() {
+    }
+
+    public TabEnderecoVO getEnderecoVO() {
+        return enderecoVO;
+    }
+
+    public void setEnderecoVO(TabEnderecoVO enderecoVO) {
+        this.enderecoVO = enderecoVO;
     }
 
     public int getId() {
@@ -49,5 +59,5 @@ public class SisRelacaoEmpresaEnderecoVO extends RecursiveTreeObject<SisRelacaoE
     public void setTabEndereco_id(int tabEndereco_id) {
         tabEndereco_idProperty().set(tabEndereco_id);
     }
-    
+
 }

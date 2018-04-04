@@ -143,8 +143,8 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                 switch (event.getCode()) {
                     case F1:
                         if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                        setStatusFormulario("Incluir");
                         setTtvEmpresaVO(new TabEmpresaVO());
+                        setStatusFormulario("Incluir");
                         break;
                     case F2:
                         if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
@@ -360,7 +360,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         fatorarObjetos();
         setStatusFormulario("Pesquisa");
         Platform.runLater(() -> {
-            painelViewCadastroEmpresa.fireEvent(ExecutaComandoTecladoMouse.pressTecla(KeyCode.F7));
+            ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.fireEvent(ExecutaComandoTecladoMouse.pressTecla(KeyCode.F7));
         });
     }
 
@@ -424,6 +424,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         if (ttvEnderecoVO == null)
             ttvEnderecoVO = new ArrayList<>();
         this.ttvEnderecoVO = ttvEnderecoVO;
+        listEndereco.getItems().setAll(ttvEnderecoVO);
     }
 
     public List<TabEmailHomePageVO> getTtvEmailHomePageVO() {
@@ -515,16 +516,12 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoCadastral.getContent(), false);
             PersonalizarCampo.clearField((AnchorPane) tpnDadoCadastral.getContent());
-            TabEmpresaVO emp = new TabEmpresaVO();
+
             List<TabEnderecoVO> listEndereco = new ArrayList<>();
             listEndereco.add(new TabEnderecoVO());
-            emp.setEnderecoVOList(listEndereco);
-            setTtvEmpresaVO(emp);
-            exibirDadosAdicionais();
-//            List<TabEnderecoVO> listEnd = new ArrayList<>();
-//            listEnd.add(addEndereco());
-//            setTtvEnderecoVO(listEnd);
-//            preencherListaEnderecoEmpresa();
+            setTtvEnderecoVO(listEndereco);
+            //exibirDadosAdicionais();
+
             cboClassificacaoJuridica.requestFocus();
             cboClassificacaoJuridica.getSelectionModel().select(0);
             cboClassificacaoJuridica.getSelectionModel().select(1);
@@ -532,14 +529,13 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         } else if (statusFormulario.toLowerCase().contains("editar")) {
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoCadastral.getContent(), false);
-            txtCNPJ.requestFocus();
             this.statusBarFormulario = STATUSBAREDITAR;
+            txtCNPJ.requestFocus();
         } else if (statusFormulario.toLowerCase().contains("pesquisa")) {
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), false);
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoCadastral.getContent(), true);
-            txtPesquisa.requestFocus();
-            cboClassificacaoJuridica.getSelectionModel().select(1);
             this.statusBarFormulario = STATUSBARPESQUISA;
+            txtPesquisa.requestFocus();
         }
         ControllerPrincipal.ctrlPrincipal.atualizarTeclasStatusBar(statusBarFormulario);
     }
@@ -791,12 +787,9 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             tipFormat = "cpf";
         txtCNPJ.setText(FormatarDado.getCampoFormatado(getTtvEmpresaVO().getCnpj(), tipFormat));
         txtIE.setText(getTtvEmpresaVO().getIe());
-        cboSituacaoSistema.getSelectionModel().select(getTtvEmpresaVO().getSituacaoSistemaVO());
+        cboSituacaoSistema.getSelectionModel().select(getTtvEmpresaVO().getSisSituacaoSistemaVO());
         txtRazao.setText(getTtvEmpresaVO().getRazao());
         txtFantasia.setText(getTtvEmpresaVO().getFantasia());
-//        chkIsCliente.setSelected(getTtvEmpresaVO().getIsCliente() == 1);
-//        chkIsFornecedor.setSelected(getTtvEmpresaVO().getIsFornecedor() == 1);
-//        chkIsTransportadora.setSelected(getTtvEmpresaVO().getIsTransportadora() == 1);
 
         lblNaturezaJuridica.setText("Natureza Júridica: " + getTtvEmpresaVO().getNaturezaJuridica());
         lblDataAbertura.setText("data abertura: ");
@@ -849,12 +842,8 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         txtEndComplemento.setText(enderecoVO.getComplemento());
         txtEndBairro.setText(enderecoVO.getBairro());
         txtEndPontoReferencia.setText(enderecoVO.getPontoReferencia());
-//        cboEndUF.getSelectionModel().select(enderecoVO.getMunicipioVO().getUf_id());
-//        cboEndMunicipio.getSelectionModel().select(enderecoVO.getSisTipoEndereco_id());
-        if (enderecoVO.getMunicipioVO().getUf_id() > 0) {
-            cboEndUF.getSelectionModel().select(enderecoVO.getMunicipioVO().getUfVO());
-            cboEndMunicipio.getSelectionModel().select(enderecoVO.getMunicipioVO());
-        }
+        cboEndUF.getSelectionModel().select(enderecoVO.getMunicipioVO().getUfVO());
+        cboEndMunicipio.getSelectionModel().select(enderecoVO.getMunicipioVO());
     }
 
     void exiberDadosContato() {
@@ -876,7 +865,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         }
     }
 
-    TabEmpresaVO guardarEmpresa(String end_ids, String tel_ids, String cont_ids, String emailHome_ids) {
+    TabEmpresaVO guardarEmpresa() {
         TabEmpresaVO emp = getTtvEmpresaVO();
         emp.setIsEmpresa(cboClassificacaoJuridica.getSelectionModel().getSelectedIndex());
         emp.setCnpj(txtCNPJ.getText().replaceAll("[\\-/. \\[\\]]", ""));
@@ -891,7 +880,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         if (chkIsTransportadora.isSelected()) isTransp = 1;
         emp.setUsuarioCadastro_id(Integer.parseInt(USUARIO_LOGADO_ID));
         emp.setUsuarioAtualizacao_id(Integer.parseInt(USUARIO_LOGADO_ID));
-        emp.setSituacaoSistema_id(((SisSituacaoSistemaVO) cboSituacaoSistema.getSelectionModel().getSelectedItem()).getId());
+        emp.setSisSituacaoSistema_id(((SisSituacaoSistemaVO) cboSituacaoSistema.getSelectionModel().getSelectedItem()).getId());
 
         LocalDate ldAbertura = LocalDate.parse(lblDataAbertura.getText().substring(15, 25), DTF_DATA);
         emp.setDataAbertura(Date.valueOf(ldAbertura));
@@ -948,7 +937,8 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             newEndereco.setId(0);
             newEndereco.setSisTipoEndereco_id(tipEnd);
             newEndereco.setTipoEnderecoVO(new SisTipoEnderecoDAO().getTipoEnderecoVO(tipEnd));
-            newEndereco.setSisMunicipio_id(0);
+            newEndereco.setSisMunicipio_id(112);
+            newEndereco.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(newEndereco.getSisMunicipio_id()));
             return newEndereco;
         }
     }
@@ -1256,11 +1246,12 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         if (receitaWsVO.getNumero().equals("")) txtEndNumero.setText("0");
         txtEndComplemento.setText(receitaWsVO.getComplemento());
         txtEndBairro.setText(receitaWsVO.getBairro());
-        if (receitaWsVO.getUf().equals("")) {
+        if (receitaWsVO.getMunicipio().equals("")) {
             cboEndUF.getSelectionModel().select(0);
         } else {
-            cboEndUF.getSelectionModel().select(new SisUFDAO().getUfVO(receitaWsVO.getUf()));
-            cboEndMunicipio.getSelectionModel().select(new SisMunicipioDAO().getMunicipioVO(receitaWsVO.getMunicipio()));
+            SisMunicipioVO receitaMunicipio = new SisMunicipioDAO().getMunicipioVO(receitaWsVO.getMunicipio());
+            cboEndUF.getSelectionModel().select(receitaMunicipio.getUfVO());
+            cboEndMunicipio.getSelectionModel().select(receitaMunicipio);
         }
         txtEndPontoReferencia.setText("");
         guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
@@ -1570,123 +1561,121 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
     public void salvarEmpresa() {
         Connection conn = ConnectionFactory.getConnection();
-        String cont_id = "";
         try {
             conn.setAutoCommit(false);
-            if (getTtvEmpresaVO().getContatoVOList() != null)
-                if (getTtvEmpresaVO().getContatoVOList().size() > 0) {
-                    for (TabContatoVO contatoVO : getTtvEmpresaVO().getContatoVOList()) {
-                        setTtvContatoVO(contatoVO);
-                        String contTel_id = "";
-                        String contEmailHome_id = "";
-                        if (getTtvContatoTelefoneVO().size() > 0) {
-                            for (TabTelefoneVO contTel : getTtvContatoTelefoneVO()) {
-                                int id = 0;
-                                if (contTel.getId() == 0) {
-                                    id = new TabTelefoneDAO().insertTabTelefoneVO(conn, contTel);
-                                } else {
-                                    id = contTel.getId();
-                                    new TabTelefoneDAO().updateTabTelefoneVO(conn, contTel);
-                                }
-                                if ((!contTel_id.equals("")) & id > 0)
-                                    contTel_id += ";";
-                                contTel_id += id;
-                            }
-                            contatoVO.setTelefone_ids(contTel_id);
-                        }
-                        if (getTtvContatoEmailHomePageVO().size() > 0) {
-                            for (TabEmailHomePageVO contEmailHome : getTtvContatoEmailHomePageVO()) {
-                                int id = 0;
-                                if (contEmailHome.getId() == 0) {
-                                    id = new TabEmailHomePageDAO().insertTabEmailHomaPageVO(conn, contEmailHome);
-                                } else {
-                                    id = contEmailHome.getId();
-                                    new TabEmailHomePageDAO().updateTabEmailHomaPageVO(conn, contEmailHome);
-                                }
-                                if ((!contEmailHome_id.equals("")) & id > 0)
-                                    contEmailHome_id += ";";
-                                contEmailHome_id += id;
-                            }
-                            contatoVO.setEmailHomePage_ids(contEmailHome_id);
-                        }
-                        int id = 0;
-                        if (contatoVO.getId() == 0) {
-                            id = new TabContatoDAO().insertTabContatoVO(conn, contatoVO);
-                        } else {
-                            id = contatoVO.getId();
-                            new TabContatoDAO().updateTabContatoVO(conn, contatoVO);
-                        }
-                        if ((!cont_id.equals("")) & id > 0)
-                            cont_id += ";";
-                        cont_id += id;
-                    }
-                }
-            String tel_id = "";
-            String emailHome_id = "";
-            String end_id = "";
-            if (getTtvTelefoneVO().size() > 0) {
-                for (TabTelefoneVO tel : getTtvTelefoneVO()) {
-                    int id = 0;
-                    if (tel.getId() == 0) {
-                        id = new TabTelefoneDAO().insertTabTelefoneVO(conn, tel);
-                    } else {
-                        id = tel.getId();
-                        new TabTelefoneDAO().updateTabTelefoneVO(conn, tel);
-                    }
-                    if ((!tel_id.equals("")) & id > 0)
-                        tel_id += ";";
-                    tel_id += id;
-                }
-            }
-            if (getTtvEmailHomePageVO().size() > 0) {
-                for (TabEmailHomePageVO emailHome : getTtvEmailHomePageVO()) {
-                    int id = 0;
-                    if (emailHome.getId() == 0) {
-                        id = new TabEmailHomePageDAO().insertTabEmailHomaPageVO(conn, emailHome);
-                    } else {
-                        id = emailHome.getId();
-                        new TabEmailHomePageDAO().updateTabEmailHomaPageVO(conn, emailHome);
-                    }
-                    if ((!emailHome_id.equals("")) & id > 0)
-                        emailHome_id += ";";
-                    emailHome_id += id;
-                }
-            }
-            if (getTtvEnderecoVO().size() > 0)
-                for (TabEnderecoVO endereco : getTtvEnderecoVO()) {
-                    int id = 0;
-                    if (endereco.getId() == 0) {
-                        id = new TabEnderecoDAO().insertTabEnderecoVO(conn, endereco);
-                    } else {
-                        id = endereco.getId();
-                        new TabEnderecoDAO().updateTabEnderecoVO(conn, endereco);
-                    }
-                    if ((!end_id.equals("")) & id > 0)
-                        end_id += ";";
-                    end_id += id;
-                }
+//            if (getTtvEmpresaVO().getContatoVOList() != null) {
+//                for (TabContatoVO contatoVO : getTtvEmpresaVO().getContatoVOList()) {
+//                    setTtvContatoVO(contatoVO);
+//                    String contTel_id = "";
+//                    String contEmailHome_id = "";
+//                    if (getTtvContatoTelefoneVO().size() > 0) {
+//                        for (TabTelefoneVO contTel : getTtvContatoTelefoneVO()) {
+//                            int id = 0;
+//                            if (contTel.getId() == 0) {
+//                                id = new TabTelefoneDAO().insertTabTelefoneVO(conn, contTel);
+//                            } else {
+//                                id = contTel.getId();
+//                                new TabTelefoneDAO().updateTabTelefoneVO(conn, contTel);
+//                            }
+//                            if ((!contTel_id.equals("")) & id > 0)
+//                                contTel_id += ";";
+//                            contTel_id += id;
+//                        }
+//                        contatoVO.setTelefone_ids(contTel_id);
+//                    }
+//                    if (getTtvContatoEmailHomePageVO().size() > 0) {
+//                        for (TabEmailHomePageVO contEmailHome : getTtvContatoEmailHomePageVO()) {
+//                            int id = 0;
+//                            if (contEmailHome.getId() == 0) {
+//                                id = new TabEmailHomePageDAO().insertTabEmailHomaPageVO(conn, contEmailHome);
+//                            } else {
+//                                id = contEmailHome.getId();
+//                                new TabEmailHomePageDAO().updateTabEmailHomaPageVO(conn, contEmailHome);
+//                            }
+//                            if ((!contEmailHome_id.equals("")) & id > 0)
+//                                contEmailHome_id += ";";
+//                            contEmailHome_id += id;
+//                        }
+//                        contatoVO.setEmailHomePage_ids(contEmailHome_id);
+//                    }
+//                    int id = 0;
+//                    if (contatoVO.getId() == 0) {
+//                        id = new TabContatoDAO().insertTabContatoVO(conn, contatoVO);
+//                    } else {
+//                        id = contatoVO.getId();
+//                        new TabContatoDAO().updateTabContatoVO(conn, contatoVO);
+//                    }
+////                    if ((!cont_id.equals("")) & id > 0)
+////                        cont_id += ";";
+////                    cont_id += id;
+//                }
+//            }
+//            String tel_id = "";
+//            String emailHome_id = "";
+//            String end_id = "";
+//            if (getTtvTelefoneVO().size() > 0) {
+//                for (TabTelefoneVO tel : getTtvTelefoneVO()) {
+//                    int id = 0;
+//                    if (tel.getId() == 0) {
+//                        id = new TabTelefoneDAO().insertTabTelefoneVO(conn, tel);
+//                    } else {
+//                        id = tel.getId();
+//                        new TabTelefoneDAO().updateTabTelefoneVO(conn, tel);
+//                    }
+//                    if ((!tel_id.equals("")) & id > 0)
+//                        tel_id += ";";
+//                    tel_id += id;
+//                }
+//            }
+//            if (getTtvEmailHomePageVO().size() > 0) {
+//                for (TabEmailHomePageVO emailHome : getTtvEmailHomePageVO()) {
+//                    int id = 0;
+//                    if (emailHome.getId() == 0) {
+//                        id = new TabEmailHomePageDAO().insertTabEmailHomaPageVO(conn, emailHome);
+//                    } else {
+//                        id = emailHome.getId();
+//                        new TabEmailHomePageDAO().updateTabEmailHomaPageVO(conn, emailHome);
+//                    }
+//                    if ((!emailHome_id.equals("")) & id > 0)
+//                        emailHome_id += ";";
+//                    emailHome_id += id;
+//                }
+//            }
 
-            setTtvEmpresaVO(guardarEmpresa(end_id, tel_id, cont_id, emailHome_id));
+            setTtvEmpresaVO(guardarEmpresa());
             int idEmpresa = 0;
             if ((idEmpresa = getTtvEmpresaVO().getId()) == 0) {
                 idEmpresa = new TabEmpresaDAO().insertTabEmpresaVO(conn, getTtvEmpresaVO());
             } else {
                 new TabEmpresaDAO().updateTabEmpresaVO(conn, getTtvEmpresaVO());
+                idEmpresa = getTtvEmpresaVO().getId();
             }
 
-            if (getTtvDetalheReceitaFederalVO() != null)
-                for (TabEmpresaDetalheReceitaFederalVO detReceita : getTtvDetalheReceitaFederalVO())
-                    if (detReceita.getId() == 0) {
-                        detReceita.setEmpresa_id(idEmpresa);
-                        new TabEmpresaDetalheReceitaFederalDAO().insertTabEmpresa_DetalheReceitaFederalVO(conn, detReceita);
-                    } else {
-                        detReceita.setEmpresa_id(idEmpresa);
-                        new TabEmpresaDetalheReceitaFederalDAO().updateTabEmpresa_DetalheReceitaFederalVO(conn, detReceita);
-                    }
+            for (TabEnderecoVO endereco : getTtvEnderecoVO()) {
+                int id = 0;
+                if (endereco.getId() == 0) {
+                    id = new TabEnderecoDAO().insertTabEnderecoVO(conn, endereco);
+                    new SisRelEmpresaEnderecoDAO().insertRelEmpresaEnderecoVO(conn, getTtvEmpresaVO().getId(), id);
+                } else {
+                    id = endereco.getId();
+                    new TabEnderecoDAO().updateTabEnderecoVO(conn, endereco);
+                }
+            }
+
+//            if (getTtvDetalheReceitaFederalVO() != null)
+//                for (TabEmpresaDetalheReceitaFederalVO detReceita : getTtvDetalheReceitaFederalVO())
+//                    if (detReceita.getId() == 0) {
+//                        detReceita.setEmpresa_id(idEmpresa);
+//                        new TabEmpresaDetalheReceitaFederalDAO().insertTabEmpresa_DetalheReceitaFederalVO(conn, detReceita);
+//                    } else {
+//                        detReceita.setEmpresa_id(idEmpresa);
+//                        new TabEmpresaDetalheReceitaFederalDAO().updateTabEmpresa_DetalheReceitaFederalVO(conn, detReceita);
+//                    }
             conn.commit();
         } catch (Exception ex) {
             ex.printStackTrace();
             try {
+                ex.printStackTrace();
                 conn.rollback();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -1694,6 +1683,27 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         } finally {
             ConnectionFactory.closeConnection(conn);
         }
+//        Connection conn1 = ConnectionFactory.getConnection();
+//        try {
+//            conn1.setAutoCommit(false);
+//            for (TabEnderecoVO endereco : getTtvEnderecoVO()) {
+//                int empresa_id = getTtvEmpresaVO().getId();
+//                int endereco_id = endereco.getId();
+//                if ((new SisRelEmpresaEnderecoDAO().getRelEmpresaEnderecoVO(empresa_id, endereco_id)) == null)
+//                    new SisRelEmpresaEnderecoDAO().insertRelEmpresaEnderecoVO(conn1, empresa_id, endereco_id);
+//            }
+//            conn1.commit();
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            try {
+//                ex.printStackTrace();
+//                conn1.rollback();
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        } finally {
+//            ConnectionFactory.closeConnection(conn1);
+//        }
     }
 
     void fecharTab(String tituloTab) {
