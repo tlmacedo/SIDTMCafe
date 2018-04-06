@@ -13,35 +13,36 @@ public class SisTelefoneOperadoraDAO extends BuscaBandoDados {
     ResultSet rs;
 
     String comandoSql = "";
-    SisTelefoneOperadoraVO telefoneOperadoraVO;
-    List<SisTelefoneOperadoraVO> telefoneOperadoraVOList;
+    SisTelefoneOperadoraVO sisTelefoneOperadoraVO;
+    List<SisTelefoneOperadoraVO> sisTelefoneOperadoraVOList;
 
-    public SisTelefoneOperadoraVO getTelefoneOperadoraVO(int idSisTelefoneOperadoraVO) {
-        buscaSisTelefoneOperadoraVO(idSisTelefoneOperadoraVO);
-        return telefoneOperadoraVO;
+    public SisTelefoneOperadoraVO getSisTelefoneOperadoraVO(int id) {
+        buscaSisTelefoneOperadoraVO(id);
+        return sisTelefoneOperadoraVO;
     }
 
-    public List<SisTelefoneOperadoraVO> getTelefoneOperadoraVOList() {
-        buscaSisTelefoneOperadoraVO(-1);
-        return telefoneOperadoraVOList;
+    public List<SisTelefoneOperadoraVO> getSisTelefoneOperadoraVOList() {
+        buscaSisTelefoneOperadoraVO(0);
+        return sisTelefoneOperadoraVOList;
     }
 
-    void buscaSisTelefoneOperadoraVO(int idSisTelefoneOperadoraVO) {
-        comandoSql = "SELECT * FROM sisTelefoneOperadora ";
-        if (idSisTelefoneOperadoraVO > 0) comandoSql += "WHERE id ='" + idSisTelefoneOperadoraVO + "' ";
+    void buscaSisTelefoneOperadoraVO(int id) {
+        comandoSql = "SELECT id, descricao, tipo, ddd " +
+                "FROM sisTelefoneOperadora ";
+        if (id > 0) comandoSql += "WHERE id ='" + id + "' ";
         comandoSql += "ORDER BY tipo DESC, descricao ";
 
-        telefoneOperadoraVOList = new ArrayList<>();
+        if (id == 0) sisTelefoneOperadoraVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);
         try {
             while (rs.next()) {
-                telefoneOperadoraVO = new SisTelefoneOperadoraVO();
-                telefoneOperadoraVO.setId(rs.getInt("id"));
-                telefoneOperadoraVO.setDescricao(rs.getString("descricao"));
-                telefoneOperadoraVO.setTipo(rs.getInt("tipo"));
-                telefoneOperadoraVO.setCodigoDDD(rs.getInt("ddd"));
+                sisTelefoneOperadoraVO = new SisTelefoneOperadoraVO();
+                sisTelefoneOperadoraVO.setId(rs.getInt("id"));
+                sisTelefoneOperadoraVO.setDescricao(rs.getString("descricao"));
+                sisTelefoneOperadoraVO.setTipo(rs.getInt("tipo"));
+                sisTelefoneOperadoraVO.setCodigoDDD(rs.getInt("ddd"));
 
-                telefoneOperadoraVOList.add(telefoneOperadoraVO);
+                if (id == 0) sisTelefoneOperadoraVOList.add(sisTelefoneOperadoraVO);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

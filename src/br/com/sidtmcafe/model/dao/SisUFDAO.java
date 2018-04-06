@@ -14,55 +14,56 @@ public class SisUFDAO extends BuscaBandoDados {
     ResultSet rs;
 
     String comandoSql = "";
-    SisUFVO ufVO;
-    List<SisUFVO> ufVOList;
+    SisUFVO sisUFVO;
+    List<SisUFVO> sisUFVOList;
 
-    public SisUFVO getUfVO(int idSisUFVO) {
-        buscaSisUFVO(idSisUFVO, "");
-//        if (ufVO != null)
-//            addObjetosPesquisa(ufVO);
-        return ufVO;
+    public SisUFVO getSisUFVO(int id) {
+        buscaSisUFVO(id, "");
+        return sisUFVO;
     }
 
-    public SisUFVO getUfVO(String siglaUF) {
-        buscaSisUFVO(-1, siglaUF);
-//        if (ufVO != null)
-//            addObjetosPesquisa(ufVO);
-        return ufVO;
+    public SisUFVO getSisUFVO(String sigla) {
+        buscaSisUFVO(0, sigla);
+        return sisUFVO;
     }
 
-    public List<SisUFVO> getUfVOList() {
+    public List<SisUFVO> getSisUFVOList() {
         buscaSisUFVO(0, "");
-        if (ufVOList != null)
-            for (SisUFVO uf : ufVOList)
-                addObjetosPesquisa(uf);
-        return ufVOList;
+        return sisUFVOList;
     }
 
-    void buscaSisUFVO(int idSisUFVO, String siglaUF) {
-        comandoSql = "SELECT * FROM sisUF ";
-        if (idSisUFVO > 0) comandoSql += "WHERE id = '" + idSisUFVO + "' ";
-        if (siglaUF != "") {
+    public List<SisUFVO> getSisUFVOList_DetMunicipios() {
+        buscaSisUFVO(0, "");
+        if (sisUFVOList != null)
+            for (SisUFVO uf : sisUFVOList)
+                addObjetosPesquisa(uf);
+        return sisUFVOList;
+    }
+
+    void buscaSisUFVO(int id, String sigla) {
+        comandoSql = "SELECT id, descricao, sigla " +
+                "FROM sisUF ";
+        if (id > 0) comandoSql += "WHERE id = '" + id + "' ";
+        if (sigla != "") {
             if (!comandoSql.contains("WHERE")) {
                 comandoSql += "WHERE ";
             } else {
                 comandoSql += "AND ";
             }
-            comandoSql += "sigla = '" + siglaUF + "' ";
+            comandoSql += "sigla = '" + sigla + "' ";
         }
         comandoSql += "ORDER BY sigla ";
 
-        ufVOList = new ArrayList<>();
+        if (id == 0 && sigla == "") sisUFVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);
         try {
             while (rs.next()) {
-                ufVO = new SisUFVO();
-                ufVO.setId(rs.getInt("id"));
-                ufVO.setDescricao(rs.getString("descricao"));
-                ufVO.setSigla(rs.getString("sigla"));
-                ufVO.setIbge_id(rs.getInt("ibge_id"));
+                sisUFVO = new SisUFVO();
+                sisUFVO.setId(rs.getInt("id"));
+                sisUFVO.setDescricao(rs.getString("descricao"));
+                sisUFVO.setSigla(rs.getString("sigla"));
 
-                ufVOList.add(ufVO);
+                if (id == 0 && sigla == "") sisUFVOList.add(sisUFVO);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

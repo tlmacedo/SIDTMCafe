@@ -13,33 +13,34 @@ public class SisTipoEnderecoDAO extends BuscaBandoDados {
     ResultSet rs;
 
     String comandoSql = "";
-    SisTipoEnderecoVO tipoEnderecoVO;
-    List<SisTipoEnderecoVO> tipoEnderecoVOList;
+    SisTipoEnderecoVO sisTipoEnderecoVO;
+    List<SisTipoEnderecoVO> sisTipoEnderecoVOList;
 
-    public SisTipoEnderecoVO getTipoEnderecoVO(int idSisTipoEnderecoVO) {
-        buscaSisTipoEnderecoVO(idSisTipoEnderecoVO);
-        return tipoEnderecoVO;
+    public SisTipoEnderecoVO getSisTipoEnderecoVO(int id) {
+        buscaSisTipoEnderecoVO(id);
+        return sisTipoEnderecoVO;
     }
 
-    public List<SisTipoEnderecoVO> getTipoEnderecoVOList() {
-        buscaSisTipoEnderecoVO(-1);
-        return tipoEnderecoVOList;
+    public List<SisTipoEnderecoVO> getSisTipoEnderecoVOList() {
+        buscaSisTipoEnderecoVO(0);
+        return sisTipoEnderecoVOList;
     }
 
-    void buscaSisTipoEnderecoVO(int idSisTipoEnderecoVO) {
-        comandoSql = "SELECT * FROM sisTipoEndereco ";
-        if (idSisTipoEnderecoVO > 0) comandoSql += "WHERE id = '" + idSisTipoEnderecoVO + "' ";
+    void buscaSisTipoEnderecoVO(int id) {
+        comandoSql = "SELECT id, descricao " +
+                "FROM sisTipoEndereco ";
+        if (id > 0) comandoSql += "WHERE id = '" + id + "' ";
         comandoSql += "ORDER BY id ";
 
-        tipoEnderecoVOList = new ArrayList<>();
+        if (id == 0) sisTipoEnderecoVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);
         try {
             while (rs.next()) {
-                tipoEnderecoVO = new SisTipoEnderecoVO();
-                tipoEnderecoVO.setId(rs.getInt("id"));
-                tipoEnderecoVO.setDescricao(rs.getString("descricao"));
+                sisTipoEnderecoVO = new SisTipoEnderecoVO();
+                sisTipoEnderecoVO.setId(rs.getInt("id"));
+                sisTipoEnderecoVO.setDescricao(rs.getString("descricao"));
 
-                tipoEnderecoVOList.add(tipoEnderecoVO);
+                if (id == 0) sisTipoEnderecoVOList.add(sisTipoEnderecoVO);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

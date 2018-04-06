@@ -12,14 +12,9 @@ import java.util.List;
 
 public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
 
-    List<TabEnderecoVO> enderecoVOList;
-    List<TabTelefoneVO> telefoneVOList;
-    List<TabContatoVO> contatoVOList;
-    List<TabEmailHomePageVO> emailHomePageVOList;
+    SisSituacaoSistemaVO sisSituacaoSistemaVO;
     TabColaboradorVO usuarioCadastroVO;
     TabColaboradorVO usuarioAtualizacaoVO;
-    SisSituacaoSistemaVO sisSituacaoSistemaVO;
-    List<TabEmpresaDetalheReceitaFederalVO> detalheReceitaFederalVOList;
 
     Date dataAbertura;
     Timestamp dataCadastro, dataAtualizacao;
@@ -29,36 +24,12 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     public TabEmpresaVO() {
     }
 
-    public List<TabEnderecoVO> getEnderecoVOList() {
-        return enderecoVOList;
+    public SisSituacaoSistemaVO getSisSituacaoSistemaVO() {
+        return sisSituacaoSistemaVO;
     }
 
-    public void setEnderecoVOList(List<TabEnderecoVO> enderecoVOList) {
-        this.enderecoVOList = enderecoVOList;
-    }
-
-    public List<TabTelefoneVO> getTelefoneVOList() {
-        return telefoneVOList;
-    }
-
-    public void setTelefoneVOList(List<TabTelefoneVO> telefoneVOList) {
-        this.telefoneVOList = telefoneVOList;
-    }
-
-    public List<TabContatoVO> getContatoVOList() {
-        return contatoVOList;
-    }
-
-    public void setContatoVOList(List<TabContatoVO> contatoVOList) {
-        this.contatoVOList = contatoVOList;
-    }
-
-    public List<TabEmailHomePageVO> getEmailHomePageVOList() {
-        return emailHomePageVOList;
-    }
-
-    public void setEmailHomePageVOList(List<TabEmailHomePageVO> emailHomePageVOList) {
-        this.emailHomePageVOList = emailHomePageVOList;
+    public void setSisSituacaoSistemaVO(SisSituacaoSistemaVO sisSituacaoSistemaVO) {
+        this.sisSituacaoSistemaVO = sisSituacaoSistemaVO;
     }
 
     public TabColaboradorVO getUsuarioCadastroVO() {
@@ -77,20 +48,12 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
         this.usuarioAtualizacaoVO = usuarioAtualizacaoVO;
     }
 
-    public SisSituacaoSistemaVO getSisSituacaoSistemaVO() {
-        return sisSituacaoSistemaVO;
+    public Date getDataAbertura() {
+        return dataAbertura;
     }
 
-    public void setSisSituacaoSistemaVO(SisSituacaoSistemaVO sisSituacaoSistemaVO) {
-        this.sisSituacaoSistemaVO = sisSituacaoSistemaVO;
-    }
-
-    public List<TabEmpresaDetalheReceitaFederalVO> getDetalheReceitaFederalVOList() {
-        return detalheReceitaFederalVOList;
-    }
-
-    public void setDetalheReceitaFederalVOList(List<TabEmpresaDetalheReceitaFederalVO> detalheReceitaFederalVOList) {
-        this.detalheReceitaFederalVOList = detalheReceitaFederalVOList;
+    public void setDataAbertura(Date dataAbertura) {
+        this.dataAbertura = dataAbertura;
     }
 
     public Timestamp getDataCadastro() {
@@ -107,14 +70,6 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
 
     public void setDataAtualizacao(Timestamp dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
-    }
-
-    public Date getDataAbertura() {
-        return dataAbertura;
-    }
-
-    public void setDataAbertura(Date dataAbertura) {
-        this.dataAbertura = dataAbertura;
     }
 
     public int getId() {
@@ -247,32 +202,28 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
         naturezaJuridicaProperty().set(naturezaJuridica);
     }
 
-    public String getDetalheTransportadora() {
-        if ((razaoProperty().get() != "") & enderecoVOList.size() > 0)
-            return "[Transp]: " + razaoProperty().get() + " (" + fantasiaProperty().get() + ") "
-                    + ";[End.]: " + enderecoVOList.get(0).getLogradouro() + ", "
-                    + enderecoVOList.get(0).getNumero() + " - " + enderecoVOList.get(0).getBairro();
-        return "";
-    }
+//    public String getDetalheTransportadora() {
+//        if ((razaoProperty().get() != "") & enderecoVOList.size() > 0)
+//            return "[Transp]: " + razaoProperty().get() + " (" + fantasiaProperty().get() + ") "
+//                    + ";[End.]: " + enderecoVOList.get(0).getLogradouro() + ", "
+//                    + enderecoVOList.get(0).getNumero() + " - " + enderecoVOList.get(0).getBairro();
+//        return "";
+//    }
+//
+//    public String getDetalheFornecedor() {
+//        if ((razaoProperty().get() != "") & enderecoVOList.size() > 0)
+//            return "[Fornec]: " + razaoProperty().get() + " (" + fantasiaProperty().get() + ") "
+//                    + ";[End.]: " + enderecoVOList.get(0).getLogradouro() + ", "
+//                    + enderecoVOList.get(0).getNumero() + " - " + enderecoVOList.get(0).getBairro();
+//        return "";
+//    }
+//
+//    public String getDetalheCliente() {
+//        if ((razaoProperty().get() != "") & enderecoVOList.size() > 0)
+//            return "[Cliente]: " + razaoProperty().get() + " (" + fantasiaProperty().get() + ") "
+//                    + ";[End.]: " + enderecoVOList.get(0).getLogradouro() + ", "
+//                    + enderecoVOList.get(0).getNumero() + " - " + enderecoVOList.get(0).getBairro();
+//        return "";
+//    }
 
-    public String getDetalheFornecedor() {
-        if ((razaoProperty().get() != "") & enderecoVOList.size() > 0)
-            return "[Fornec]: " + razaoProperty().get() + " (" + fantasiaProperty().get() + ") "
-                    + ";[End.]: " + enderecoVOList.get(0).getLogradouro() + ", "
-                    + enderecoVOList.get(0).getNumero() + " - " + enderecoVOList.get(0).getBairro();
-        return "";
-    }
-
-    public String getDetalheCliente() {
-        if ((razaoProperty().get() != "") & enderecoVOList.size() > 0)
-            return "[Cliente]: " + razaoProperty().get() + " (" + fantasiaProperty().get() + ") "
-                    + ";[End.]: " + enderecoVOList.get(0).getLogradouro() + ", "
-                    + enderecoVOList.get(0).getNumero() + " - " + enderecoVOList.get(0).getBairro();
-        return "";
-    }
-
-    @Override
-    public String toString() {
-        return razaoProperty().get() + " (" + fantasiaProperty().get() + ")";
-    }
 }

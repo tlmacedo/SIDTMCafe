@@ -107,6 +107,6 @@ public class SisMenuPrincipalVO extends RecursiveTreeObject<SisMenuPrincipalVO> 
 
     @Override
     public String toString() {
-        return descricaoProperty().get();
+        return tituloTabProperty().get();
     }
 }

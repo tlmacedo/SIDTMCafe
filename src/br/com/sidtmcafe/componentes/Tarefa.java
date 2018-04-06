@@ -177,37 +177,37 @@ public class Tarefa implements Constants {
                     Thread.sleep(200);
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
-                        case "criarTabelaEmpresa":
-                            TabModel.tabelaEmpresa();
-                            TabModel.tabelaQsaReceita();
-                            break;
-                        case "carregarSisTipoEndereco":
-                            cadastroEmpresa.carregarSisTipoEndereco();
-                            break;
-                        case "carregarSisTelefoneOperadora":
-                            cadastroEmpresa.carregarSisTelefoneOperadora();
-                            break;
-                        case "carregarListaEmpresa":
-                            cadastroEmpresa.carregarListaEmpresa();
-                            break;
-                        case "preencherCboEndUF":
-                            cadastroEmpresa.preencherCboEndUF();
-                            break;
-                        case "preencherCboSituacaoSistema":
-                            cadastroEmpresa.preencherCboSituacaoSistema();
-                            break;
-                        case "preencherCboFiltroPesquisa":
-                            cadastroEmpresa.preencherCboFiltroPesquisa();
-                            break;
-                        case "preencherCboClassificacaoJuridica":
-                            cadastroEmpresa.preencherCboClassificacaoJuridica();
-                            break;
-                        case "preencherTabelaEmpresa":
-                            cadastroEmpresa.preencherTabelaEmpresa();
-                            break;
-                        case "carregarTabCargo":
-//*                            cadastroEmpresa.carregarTabCargo();
-                            break;
+//                        case "criarTabelaEmpresa":
+//                            TabModel.tabelaEmpresa();
+//                            TabModel.tabelaQsaReceita();
+//                            break;
+//                        case "carregarSisTipoEndereco":
+//                            cadastroEmpresa.carregarSisTipoEndereco();
+//                            break;
+//                        case "carregarSisTelefoneOperadora":
+//                            cadastroEmpresa.carregarSisTelefoneOperadora();
+//                            break;
+//                        case "carregarListaEmpresa":
+//                            cadastroEmpresa.carregarListaEmpresa();
+//                            break;
+//                        case "preencherCboEndUF":
+//                            cadastroEmpresa.preencherCboEndUF();
+//                            break;
+//                        case "preencherCboSituacaoSistema":
+//                            cadastroEmpresa.preencherCboSituacaoSistema();
+//                            break;
+//                        case "preencherCboFiltroPesquisa":
+//                            cadastroEmpresa.preencherCboFiltroPesquisa();
+//                            break;
+//                        case "preencherCboClassificacaoJuridica":
+//                            cadastroEmpresa.preencherCboClassificacaoJuridica();
+//                            break;
+//                        case "preencherTabelaEmpresa":
+//                            cadastroEmpresa.preencherTabelaEmpresa();
+//                            break;
+//                        case "carregarTabCargo":
+////*                            cadastroEmpresa.carregarTabCargo();
+//                            break;
                     }
                 }
                 updateProgress(qtdTarefas, qtdTarefas);
@@ -230,34 +230,34 @@ public class Tarefa implements Constants {
                     Thread.sleep(200);
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
-                        case "criarTabelaProduto":
-                            TabModel.tabelaProduto();
-                            break;
-                        case "carregarListaProduto":
-                            cadastroProduto.carregarListaProduto();
-                            break;
-                        case "preencherTabelaProduto":
-                            cadastroProduto.preencherTabelaProduto();
-                            break;
-                        case "preencherCboUndCom":
-                            cadastroProduto.preencherCboUndCom();
-                            break;
-                        case "preencherCboSituacaoSistema":
-                            cadastroProduto.preencherCboSituacaoSistema();
-                            break;
-                        case "preencherCboFiscalOrigem":
-                            cadastroProduto.preencherCboFiscalOrigem();
-                            break;
-                        case "preencherCboFiscalIcms":
-                            cadastroProduto.preencherCboFiscalIcms();
-                            break;
-                        case "preencherCboFiscalPis":
-                            cadastroProduto.preencherCboFiscalPis();
-                            break;
-                        case "preencherCboFiscalCofins":
-                            cadastroProduto.preencherCboFiscalCofins();
-                            break;
-
+//                        case "criarTabelaProduto":
+//                            TabModel.tabelaProduto();
+//                            break;
+//                        case "carregarListaProduto":
+//                            cadastroProduto.carregarListaProduto();
+//                            break;
+//                        case "preencherTabelaProduto":
+//                            cadastroProduto.preencherTabelaProduto();
+//                            break;
+//                        case "preencherCboUndCom":
+//                            cadastroProduto.preencherCboUndCom();
+//                            break;
+//                        case "preencherCboSituacaoSistema":
+//                            cadastroProduto.preencherCboSituacaoSistema();
+//                            break;
+//                        case "preencherCboFiscalOrigem":
+//                            cadastroProduto.preencherCboFiscalOrigem();
+//                            break;
+//                        case "preencherCboFiscalIcms":
+//                            cadastroProduto.preencherCboFiscalIcms();
+//                            break;
+//                        case "preencherCboFiscalPis":
+//                            cadastroProduto.preencherCboFiscalPis();
+//                            break;
+//                        case "preencherCboFiscalCofins":
+//                            cadastroProduto.preencherCboFiscalCofins();
+//                            break;
+//
                     }
                 }
                 updateProgress(qtdTarefas, qtdTarefas);
@@ -280,30 +280,30 @@ public class Tarefa implements Constants {
                     Thread.sleep(200);
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
-                        case "carregarLojaDestino":
-                            entradaProduto.carregarLojaDestino();
-                            break;
-                        case "carregarFornecedor":
-                            entradaProduto.carregarFornecedor();
-                            break;
-                        case "carregarTributo":
-                            entradaProduto.carregarTributo();
-                            break;
-                        case "carregarTomadorServico":
-                            entradaProduto.carregarTomadorServico();
-                            break;
-                        case "carregarModelo":
-                            entradaProduto.carregarModelo();
-                            break;
-                        case "carregarSituacaoTributaria":
-                            entradaProduto.carregarSituacaoTributaria();
-                            break;
-                        case "carregarTransportadora":
-                            entradaProduto.carregarTransportadora();
-                            break;
-                        case "carregarListaProduto":
-                            TabModel.tabelaProduto();
-                            break;
+//                        case "carregarLojaDestino":
+//                            entradaProduto.carregarLojaDestino();
+//                            break;
+//                        case "carregarFornecedor":
+//                            entradaProduto.carregarFornecedor();
+//                            break;
+//                        case "carregarTributo":
+//                            entradaProduto.carregarTributo();
+//                            break;
+//                        case "carregarTomadorServico":
+//                            entradaProduto.carregarTomadorServico();
+//                            break;
+//                        case "carregarModelo":
+//                            entradaProduto.carregarModelo();
+//                            break;
+//                        case "carregarSituacaoTributaria":
+//                            entradaProduto.carregarSituacaoTributaria();
+//                            break;
+//                        case "carregarTransportadora":
+//                            entradaProduto.carregarTransportadora();
+//                            break;
+//                        case "carregarListaProduto":
+//                            TabModel.tabelaProduto();
+//                            break;
                     }
                 }
                 updateProgress(qtdTarefas, qtdTarefas);

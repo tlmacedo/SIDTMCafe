@@ -13,72 +13,62 @@ public class SisMunicipioDAO extends BuscaBandoDados {
     ResultSet rs;
 
     String comandoSql = "";
-    SisMunicipioVO municipioVO;
-    List<SisMunicipioVO> municipioVOList;
+    SisMunicipioVO sisMunicipioVO;
+    List<SisMunicipioVO> sisMunicipioVOList;
 
-    public SisMunicipioVO getMunicipioVO(int idSisMunicipioVO) {
-        buscaSisMunicipioVO(idSisMunicipioVO, -1, "");
-        if (municipioVO != null)
-            addObjetosPesquisa(municipioVO);
-        return municipioVO;
+    public SisMunicipioVO getSisMunicipioVO(int id) {
+        buscaSisMunicipioVO(id, "", 0);
+        if (sisMunicipioVO != null)
+            addObjetosPesquisa(sisMunicipioVO);
+        return sisMunicipioVO;
     }
 
-    public SisMunicipioVO getMunicipioVO(String strMunicipio) {
-        buscaSisMunicipioVO(-1, -1, strMunicipio);
-        if (municipioVO != null)
-            addObjetosPesquisa(municipioVO);
-        return municipioVO;
+    public SisMunicipioVO getSisMunicipioVO(String municipio) {
+        buscaSisMunicipioVO(0, municipio, 0);
+        if (sisMunicipioVO != null)
+            addObjetosPesquisa(sisMunicipioVO);
+        return sisMunicipioVO;
     }
 
-    public List<SisMunicipioVO> getMunicipioVOList() {
-        buscaSisMunicipioVO(-1, -1, "");
-        if (municipioVOList != null)
-            for (SisMunicipioVO municipio : municipioVOList)
-                addObjetosPesquisa(municipio);
-        return municipioVOList;
+    public List<SisMunicipioVO> getMunicipioVOList(int uf_id) {
+        buscaSisMunicipioVO(0, "", uf_id);
+        return sisMunicipioVOList;
     }
 
-    public List<SisMunicipioVO> getMunicipioVOList(int idUf_id) {
-        buscaSisMunicipioVO(-1, idUf_id, "");
-        if (municipioVOList != null)
-            for (SisMunicipioVO municipio : municipioVOList)
-                addObjetosPesquisa(municipio);
-        return municipioVOList;
-    }
-
-    void buscaSisMunicipioVO(int idSisMunicipioVO, int idUf_id, String strMunicipio) {
-        comandoSql = "SELECT * FROM sisMunicipio ";
-        if (idSisMunicipioVO > 0) comandoSql += "WHERE id = '" + idSisMunicipioVO + "' ";
-        if (idUf_id > 0) {
+    void buscaSisMunicipioVO(int id, String municipio, int uf_id) {
+        comandoSql = "SELECT id, descricao, sisUF_id, isCapital, ibge_id " +
+                "FROM sisMunicipio ";
+        if (id > 0) comandoSql += "WHERE id = '" + id + "' ";
+        if (uf_id > 0) {
             if (!comandoSql.contains("WHERE")) {
                 comandoSql += "WHERE ";
             } else {
                 comandoSql += "AND ";
             }
-            comandoSql += "sisUF_id = '" + idUf_id + "' ";
+            comandoSql += "sisUF_id = '" + uf_id + "' ";
         }
-        if (strMunicipio != "") {
+        if (municipio != "") {
             if (!comandoSql.contains("WHERE")) {
                 comandoSql += "WHERE ";
             } else {
                 comandoSql += "AND ";
             }
-            comandoSql += "descricao = '" + strMunicipio + "' ";
+            comandoSql += "descricao = '" + municipio + "' ";
         }
         comandoSql += "ORDER BY isCapital DESC, descricao ";
 
-        municipioVOList = new ArrayList<>();
+        if (id == 0 && uf_id > 0) sisMunicipioVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);
         try {
             while (rs.next()) {
-                municipioVO = new SisMunicipioVO();
-                municipioVO.setId(rs.getInt("id"));
-                municipioVO.setDescricao(rs.getString("descricao"));
-                municipioVO.setUf_id(rs.getInt("sisUF_id"));
-                municipioVO.setIsCapital(rs.getInt("isCapital"));
-                municipioVO.setIbge_id(rs.getInt("ibge_id"));
+                sisMunicipioVO = new SisMunicipioVO();
+                sisMunicipioVO.setId(rs.getInt("id"));
+                sisMunicipioVO.setDescricao(rs.getString("descricao"));
+                sisMunicipioVO.setSisUF_id(rs.getInt("sisUF_id"));
+                sisMunicipioVO.setIsCapital(rs.getInt("isCapital"));
+                sisMunicipioVO.setIbge_id(rs.getInt("ibge_id"));
 
-                municipioVOList.add(municipioVO);
+                if (id == 0 && uf_id > 0) sisMunicipioVOList.add(sisMunicipioVO);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -88,7 +78,7 @@ public class SisMunicipioDAO extends BuscaBandoDados {
     }
 
     void addObjetosPesquisa(SisMunicipioVO municipio) {
-        municipioVO.setUfVO(new SisUFDAO().getUfVO(municipio.getUf_id()));
+        sisMunicipioVO.setUfVO(new SisUFDAO().getSisUFVO(municipio.getSisUF_id()));
     }
 
 }

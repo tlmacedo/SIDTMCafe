@@ -11,15 +11,10 @@ import java.util.List;
 public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
 
     SisCargoVO cargoVO;
-    TabLojaVO lojaVO;
     SisSituacaoSistemaVO situacaoSistemaVO;
-    List<TabEnderecoVO> enderecoVOList;
-    List<TabTelefoneVO> telefoneVOList;
-    List<TabContatoVO> contatoVOList;
-    List<TabEmailHomePageVO> emailHomePageVOList;
+    TabEmpresaVO lojaVO;
 
-
-    IntegerProperty id, sisCargo_id, tabLoja_id, sisSituacaoSistema_id;
+    IntegerProperty id, sisCargo_id, sisSituacaoSistema_id, tabLoja_id;
     StringProperty nome, apelido, senha, senhaSalt;
 
     public TabColaboradorVO() {
@@ -33,14 +28,6 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
         this.cargoVO = cargoVO;
     }
 
-    public TabLojaVO getLojaVO() {
-        return lojaVO;
-    }
-
-    public void setLojaVO(TabLojaVO lojaVO) {
-        this.lojaVO = lojaVO;
-    }
-
     public SisSituacaoSistemaVO getSituacaoSistemaVO() {
         return situacaoSistemaVO;
     }
@@ -49,36 +36,12 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
         this.situacaoSistemaVO = situacaoSistemaVO;
     }
 
-    public List<TabEnderecoVO> getEnderecoVOList() {
-        return enderecoVOList;
+    public TabEmpresaVO getLojaVO() {
+        return lojaVO;
     }
 
-    public void setEnderecoVOList(List<TabEnderecoVO> enderecoVOList) {
-        this.enderecoVOList = enderecoVOList;
-    }
-
-    public List<TabTelefoneVO> getTelefoneVOList() {
-        return telefoneVOList;
-    }
-
-    public void setTelefoneVOList(List<TabTelefoneVO> telefoneVOList) {
-        this.telefoneVOList = telefoneVOList;
-    }
-
-    public List<TabContatoVO> getContatoVOList() {
-        return contatoVOList;
-    }
-
-    public void setContatoVOList(List<TabContatoVO> contatoVOList) {
-        this.contatoVOList = contatoVOList;
-    }
-
-    public List<TabEmailHomePageVO> getEmailHomePageVOList() {
-        return emailHomePageVOList;
-    }
-
-    public void setEmailHomePageVOList(List<TabEmailHomePageVO> emailHomePageVOList) {
-        this.emailHomePageVOList = emailHomePageVOList;
+    public void setLojaVO(TabEmpresaVO lojaVO) {
+        this.lojaVO = lojaVO;
     }
 
     public int getId() {
@@ -188,7 +151,7 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
     public String getDetalheColaborador() {
         if (nomeProperty().get() != "")
             return "[Usuário]: " + nomeProperty().get() + " (" + apelidoProperty().get() + ") "
-                    + ";[Cargo]: " + cargoVO.getDescricao() + "  |  [Loja]: " + lojaVO.getEmpresaVO().getFantasia();
+                    + ";[Cargo]: " + cargoVO.getDescricao() + "  |  [Loja]: " + lojaVO.getFantasia();
 //                    + ";[End. Loja]: " + lojaVO.getEnderecoVOList().get(0).getLogradouro() + ", "
 //                    + lojaVO.getEnderecoVOList().get(0).getNumero();
 

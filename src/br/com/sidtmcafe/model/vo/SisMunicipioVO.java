@@ -10,7 +10,7 @@ public class SisMunicipioVO extends RecursiveTreeObject<SisMunicipioVO> {
 
     SisUFVO ufVO;
 
-    IntegerProperty id, uf_id, isCapital, ibge_id;
+    IntegerProperty id, sisUF_id, isCapital, ibge_id;
     StringProperty descricao;
 
     public SisMunicipioVO() {
@@ -37,17 +37,17 @@ public class SisMunicipioVO extends RecursiveTreeObject<SisMunicipioVO> {
         idProperty().set(id);
     }
 
-    public int getUf_id() {
-        return uf_idProperty().get();
+    public int getSisUF_id() {
+        return sisUF_idProperty().get();
     }
 
-    public IntegerProperty uf_idProperty() {
-        if (uf_id == null) uf_id = new SimpleIntegerProperty(0);
-        return uf_id;
+    public IntegerProperty sisUF_idProperty() {
+        if (sisUF_id == null) sisUF_id = new SimpleIntegerProperty(0);
+        return sisUF_id;
     }
 
-    public void setUf_id(int uf_id) {
-        uf_idProperty().set(uf_id);
+    public void setSisUF_id(int sisUF_id) {
+        sisUF_idProperty().set(sisUF_id);
     }
 
     public int getIsCapital() {
@@ -89,8 +89,4 @@ public class SisMunicipioVO extends RecursiveTreeObject<SisMunicipioVO> {
         descricaoProperty().set(descricao);
     }
 
-    @Override
-    public String toString() {
-        return descricaoProperty().get();
-    }
 }

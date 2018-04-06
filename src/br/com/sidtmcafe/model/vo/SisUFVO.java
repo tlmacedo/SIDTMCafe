@@ -12,7 +12,7 @@ public class SisUFVO extends RecursiveTreeObject<SisUFVO> {
 
     List<SisMunicipioVO> municipioVOList;
 
-    IntegerProperty id, ibge_id;
+    IntegerProperty id;
     StringProperty descricao, sigla;
 
     public SisUFVO() {
@@ -37,19 +37,6 @@ public class SisUFVO extends RecursiveTreeObject<SisUFVO> {
 
     public void setId(int id) {
         idProperty().set(id);
-    }
-
-    public int getIbge_id() {
-        return ibge_idProperty().get();
-    }
-
-    public IntegerProperty ibge_idProperty() {
-        if (ibge_id == null) ibge_id = new SimpleIntegerProperty(0);
-        return ibge_id;
-    }
-
-    public void setIbge_id(int ibge_id) {
-        ibge_idProperty().set(ibge_id);
     }
 
     public String getDescricao() {
@@ -78,8 +65,4 @@ public class SisUFVO extends RecursiveTreeObject<SisUFVO> {
         siglaProperty().set(sigla);
     }
 
-    @Override
-    public String toString() {
-        return siglaProperty().get();
-    }
 }

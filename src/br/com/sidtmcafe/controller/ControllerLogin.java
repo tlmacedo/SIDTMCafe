@@ -43,7 +43,7 @@ public class ControllerLogin extends Variavel implements Initializable, Formular
     @Override
     public void preencherObjetos() {
         cboUsuarioLogin.setPromptText("Selecione usuário");
-        cboUsuarioLogin.getItems().addAll(new TabColaboradorDAO().getColaboradorVOList(true));
+        cboUsuarioLogin.getItems().addAll(new TabColaboradorDAO().getTabColaboradorVOList());
     }
 
     @Override

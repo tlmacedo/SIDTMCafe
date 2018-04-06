@@ -13,34 +13,35 @@ public class SisSituacaoSistemaDAO extends BuscaBandoDados {
     ResultSet rs;
 
     String comandoSql = "";
-    SisSituacaoSistemaVO situacaoSistemaVO;
-    List<SisSituacaoSistemaVO> situacaoSistemaVOList;
+    SisSituacaoSistemaVO sisSituacaoSistemaVO;
+    List<SisSituacaoSistemaVO> sisSituacaoSistemaVOList;
 
-    public SisSituacaoSistemaVO getSituacaoSistemaVO(int idSisSituacaoSistemaVO) {
-        buscaSisSituacaoSistemaVO(idSisSituacaoSistemaVO);
-        return situacaoSistemaVO;
+    public SisSituacaoSistemaVO getSisSituacaoSistemaVO(int id) {
+        buscaSisSituacaoSistemaVO(id);
+        return sisSituacaoSistemaVO;
     }
 
-    public List<SisSituacaoSistemaVO> getSituacaoSistemaVOList() {
-        buscaSisSituacaoSistemaVO(-1);
-        return situacaoSistemaVOList;
+    public List<SisSituacaoSistemaVO> getSisSituacaoSistemaVOList() {
+        buscaSisSituacaoSistemaVO(0);
+        return sisSituacaoSistemaVOList;
     }
 
-    void buscaSisSituacaoSistemaVO(int idSisSituacaoSistemaVO) {
-        comandoSql = "SELECT * FROM sisSituacaoSistema ";
-        if (idSisSituacaoSistemaVO > 0) comandoSql += "WHERE id = '" + idSisSituacaoSistemaVO + "' ";
+    void buscaSisSituacaoSistemaVO(int id) {
+        comandoSql = "SELECT id, descricao, classificacao " +
+                "FROM sisSituacaoSistema ";
+        if (id > 0) comandoSql += "WHERE id = '" + id + "' ";
         comandoSql += "ORDER BY descricao ";
 
-        situacaoSistemaVOList = new ArrayList<>();
+        if (id == 0) sisSituacaoSistemaVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);
         try {
             while (rs.next()) {
-                situacaoSistemaVO = new SisSituacaoSistemaVO();
-                situacaoSistemaVO.setId(rs.getInt("id"));
-                situacaoSistemaVO.setDescricao(rs.getString("descricao"));
-                situacaoSistemaVO.setClassificacao(rs.getInt("classificacao"));
+                sisSituacaoSistemaVO = new SisSituacaoSistemaVO();
+                sisSituacaoSistemaVO.setId(rs.getInt("id"));
+                sisSituacaoSistemaVO.setDescricao(rs.getString("descricao"));
+                sisSituacaoSistemaVO.setClassificacao(rs.getInt("classificacao"));
 
-                situacaoSistemaVOList.add(situacaoSistemaVO);
+                if (id == 0) sisSituacaoSistemaVOList.add(sisSituacaoSistemaVO);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
