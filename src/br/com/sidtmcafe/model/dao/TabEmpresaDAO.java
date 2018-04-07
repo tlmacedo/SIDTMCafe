@@ -1,7 +1,9 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.database.ConnectionFactory;
+import br.com.sidtmcafe.model.vo.RelEmpresaEnderecoVO;
 import br.com.sidtmcafe.model.vo.TabEmpresaVO;
+import br.com.sidtmcafe.model.vo.TabEnderecoVO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,11 +20,16 @@ public class TabEmpresaDAO extends BuscaBandoDados {
 
     public TabEmpresaVO getTabEmpresaVO(int id) {
         buscaTabEmpresaVO(id);
+        if (tabEmpresaVO != null)
+            addObjetosPesquisa(tabEmpresaVO);
         return tabEmpresaVO;
     }
 
     public List<TabEmpresaVO> getTabEmpresaVOList() {
         buscaTabEmpresaVO(0);
+        if (tabEmpresaVOList != null)
+            for (TabEmpresaVO empresaVO : tabEmpresaVOList)
+                addObjetosPesquisa(empresaVO);
         return tabEmpresaVOList;
     }
 
@@ -59,6 +66,17 @@ public class TabEmpresaDAO extends BuscaBandoDados {
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-
     }
+
+    void addObjetosPesquisa(TabEmpresaVO empresaVO) {
+        empresaVO.setTabEmpresaReceitaFederalVOList(
+                new TabEmpresaReceitaFederalDAO().getTabEmpresaReceitaFederalVOList(empresaVO.getId(), 0));
+        List<RelEmpresaEnderecoVO> relEmpresaEnderecoVOList =
+                new ArrayList<>(new RelEmpresaEnderecoDAO().getRelEmpresaEnderecoVOList(empresaVO.getId()));
+        List<TabEnderecoVO> tabEnderecoVOList = new ArrayList<>();
+        for (RelEmpresaEnderecoVO relEmpresaEnderecoVO : relEmpresaEnderecoVOList)
+            tabEnderecoVOList.add(new TabEnderecoDAO().getTabEnderecoVO(relEmpresaEnderecoVO.getTabEndereco_id()));
+        empresaVO.setTabEnderecoVOList(tabEnderecoVOList);
+    }
+
 }

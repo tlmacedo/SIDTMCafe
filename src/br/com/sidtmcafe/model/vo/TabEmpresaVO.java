@@ -15,6 +15,8 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     SisSituacaoSistemaVO sisSituacaoSistemaVO;
     TabColaboradorVO usuarioCadastroVO;
     TabColaboradorVO usuarioAtualizacaoVO;
+    List<TabEmpresaReceitaFederalVO> tabEmpresaReceitaFederalVOList;
+    List<TabEnderecoVO> tabEnderecoVOList;
 
     Date dataAbertura;
     Timestamp dataCadastro, dataAtualizacao;
@@ -46,6 +48,22 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
 
     public void setUsuarioAtualizacaoVO(TabColaboradorVO usuarioAtualizacaoVO) {
         this.usuarioAtualizacaoVO = usuarioAtualizacaoVO;
+    }
+
+    public List<TabEmpresaReceitaFederalVO> getTabEmpresaReceitaFederalVOList() {
+        return tabEmpresaReceitaFederalVOList;
+    }
+
+    public void setTabEmpresaReceitaFederalVOList(List<TabEmpresaReceitaFederalVO> tabEmpresaReceitaFederalVOList) {
+        this.tabEmpresaReceitaFederalVOList = tabEmpresaReceitaFederalVOList;
+    }
+
+    public List<TabEnderecoVO> getTabEnderecoVOList() {
+        return tabEnderecoVOList;
+    }
+
+    public void setTabEnderecoVOList(List<TabEnderecoVO> tabEnderecoVOList) {
+        this.tabEnderecoVOList = tabEnderecoVOList;
     }
 
     public Date getDataAbertura() {
