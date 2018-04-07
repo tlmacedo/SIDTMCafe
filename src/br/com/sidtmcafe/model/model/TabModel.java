@@ -1,5 +1,6 @@
 package br.com.sidtmcafe.model.model;
 
+import br.com.sidtmcafe.model.vo.TabEmpresaReceitaFederalVO;
 import br.com.sidtmcafe.model.vo.TabEmpresaVO;
 import br.com.sidtmcafe.service.FormatarDado;
 import com.jfoenix.controls.JFXTreeTableColumn;
@@ -37,8 +38,8 @@ public class TabModel {
     static JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsCliente;
     static JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsFornecedor;
     static JFXTreeTableColumn<TabEmpresaVO, Boolean> colunaIsTransportadora;
-//    static JFXTreeTableColumn<TabEmpresaDetalheReceitaFederalVO, String> colunaQsaKey;
-//    static JFXTreeTableColumn<TabEmpresaDetalheReceitaFederalVO, String> colunaQsaValue;
+    static JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String> colunaQsaKey;
+    static JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String> colunaQsaValue;
 
 
 //    public static JFXTreeTableColumn<TabProdutoVO, Integer> getColunaIdProduto() {
@@ -134,13 +135,13 @@ public class TabModel {
         return colunaIsTransportadora;
     }
 
-//    public static JFXTreeTableColumn<TabEmpresaDetalheReceitaFederalVO, String> getColunaQsaKey() {
-//        return colunaQsaKey;
-//    }
-//
-//    public static JFXTreeTableColumn<TabEmpresaDetalheReceitaFederalVO, String> getColunaQsaValue() {
-//        return colunaQsaValue;
-//    }
+    public static JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String> getColunaQsaKey() {
+        return colunaQsaKey;
+    }
+
+    public static JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String> getColunaQsaValue() {
+        return colunaQsaValue;
+    }
 
 //    public static void tabelaProduto() {
 //        try {
@@ -258,15 +259,15 @@ public class TabModel {
             colunaIe.setGraphic(lblIe);
             colunaIe.setPrefWidth(90);
             colunaIe.setStyle("-fx-alignment: center-right;");
-//            colunaIe.setCellValueFactory(param -> {
-//                try {
-//                    if (param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty().get() != "")
-//                        return new SimpleStringProperty(FormatarDado.getCampoFormatado(param.getValue().getValue().ieProperty().getValue(), "ie" + param.getValue().getValue().getEnderecoVOList().get(0).getMunicipioVO().getUfVO().getSigla()));
-//                    return param.getValue().getValue().ieProperty();
-//                } catch (Exception ex) {
-//                    return param.getValue().getValue().ieProperty();
-//                }
-//            });
+            colunaIe.setCellValueFactory(param -> {
+                try {
+                    if (param.getValue().getValue().getTabEnderecoVOList() != null)
+                        return new SimpleStringProperty(FormatarDado.getCampoFormatado(param.getValue().getValue().ieProperty().getValue(), "ie" + param.getValue().getValue().getTabEnderecoVOList().get(0).getSisMunicipioVO().getUfVO().getSigla()));
+                    return param.getValue().getValue().ieProperty();
+                } catch (Exception ex) {
+                    return param.getValue().getValue().ieProperty();
+                }
+            });
 
             Label lblRazao = new Label("Razão / Nome");
             lblRazao.setPrefWidth(250);
@@ -290,12 +291,11 @@ public class TabModel {
             colunaEndLogradouro = new JFXTreeTableColumn<TabEmpresaVO, String>();
             colunaEndLogradouro.setGraphic(lblEndLogradouro);
             colunaEndLogradouro.setPrefWidth(170);
-//            colunaEndLogradouro.setCellValueFactory(param -> {
-//                if (param.getValue().getValue().getEnderecoVOList() != null)
-//                    if (param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty() != null)
-//                        return param.getValue().getValue().getEnderecoVOList().get(0).logradouroProperty();
-//                return new SimpleStringProperty("");
-//            });
+            colunaEndLogradouro.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getTabEnderecoVOList() != null)
+                    return param.getValue().getValue().getTabEnderecoVOList().get(0).logradouroProperty();
+                return new SimpleStringProperty("");
+            });
 
             Label lblEndNumero = new Label("Número");
             lblEndNumero.setPrefWidth(40);
@@ -303,50 +303,48 @@ public class TabModel {
             colunaEndNumero.setGraphic(lblEndNumero);
             colunaEndNumero.setPrefWidth(40);
             colunaEndNumero.setStyle("-fx-alignment: center-right;");
-//            colunaEndNumero.setCellValueFactory(param -> {
-//                if (param.getValue().getValue().getEnderecoVOList() != null)
-//                    if (param.getValue().getValue().getEnderecoVOList().get(0).numeroProperty() != null)
-//                        return param.getValue().getValue().getEnderecoVOList().get(0).numeroProperty();
-//                return new SimpleStringProperty("");
-//            });
+            colunaEndNumero.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getTabEnderecoVOList() != null)
+                    return param.getValue().getValue().getTabEnderecoVOList().get(0).numeroProperty();
+                return new SimpleStringProperty("");
+            });
 
             Label lblEndComplemento = new Label("Complemento");
             lblEndComplemento.setPrefWidth(150);
             colunaEndComplemento = new JFXTreeTableColumn<TabEmpresaVO, String>();
             colunaEndComplemento.setGraphic(lblEndComplemento);
             colunaEndComplemento.setPrefWidth(150);
-//            colunaEndComplemento.setCellValueFactory(param -> {
-//                if (param.getValue().getValue().getEnderecoVOList() != null)
-//                    if (param.getValue().getValue().getEnderecoVOList().get(0).complementoProperty() != null)
-//                        return param.getValue().getValue().getEnderecoVOList().get(0).complementoProperty();
-//                return new SimpleStringProperty("");
-//            });
+            colunaEndComplemento.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getTabEnderecoVOList() != null)
+                    if (param.getValue().getValue().getTabEnderecoVOList().get(0).complementoProperty() != null)
+                        return param.getValue().getValue().getTabEnderecoVOList().get(0).complementoProperty();
+                return new SimpleStringProperty("");
+            });
 
             Label lblEndBairro = new Label("Bairro");
             lblEndBairro.setPrefWidth(95);
             colunaEndBairro = new JFXTreeTableColumn<TabEmpresaVO, String>();
             colunaEndBairro.setGraphic(lblEndBairro);
             colunaEndBairro.setPrefWidth(95);
-//            colunaEndBairro.setCellValueFactory(param -> {
-//                if (param.getValue().getValue().getEnderecoVOList() != null)
-//                    if (param.getValue().getValue().getEnderecoVOList().get(0).bairroProperty() != null)
-//                        return param.getValue().getValue().getEnderecoVOList().get(0).bairroProperty();
-//                return new SimpleStringProperty("");
-//            });
+            colunaEndBairro.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getTabEnderecoVOList() != null)
+                    if (param.getValue().getValue().getTabEnderecoVOList().get(0).bairroProperty() != null)
+                        return param.getValue().getValue().getTabEnderecoVOList().get(0).bairroProperty();
+                return new SimpleStringProperty("");
+            });
 
             Label lblEndUFMunicipio = new Label("UF - Cidade");
             lblEndUFMunicipio.setPrefWidth(75);
             colunaEndUFMunicipio = new JFXTreeTableColumn<TabEmpresaVO, String>();
             colunaEndUFMunicipio.setGraphic(lblEndUFMunicipio);
             colunaEndUFMunicipio.setPrefWidth(75);
-//            colunaEndUFMunicipio.setCellValueFactory(param -> {
-//                if (param.getValue().getValue().getEnderecoVOList().size() > 0)
-//                    if (param.getValue().getValue().getEnderecoVOList() != null)
-//                        return new SimpleStringProperty(
-//                                param.getValue().getValue().getEnderecoVOList().get(0).getMunicipioVO().getUfVO().siglaProperty() + " - " +
-//                                        param.getValue().getValue().getEnderecoVOList().get(0).getMunicipioVO().descricaoProperty());
-//                return new SimpleStringProperty("");
-//            });
+            colunaEndUFMunicipio.setCellValueFactory(param -> {
+                if (param.getValue().getValue().getTabEnderecoVOList() != null)
+                    return new SimpleStringProperty(
+                            param.getValue().getValue().getTabEnderecoVOList().get(0).getSisMunicipioVO().descricaoProperty() + " - " +
+                                    param.getValue().getValue().getTabEnderecoVOList().get(0).getSisMunicipioVO().getUfVO().siglaProperty());
+                return new SimpleStringProperty("");
+            });
 
             colunaEndereco.getColumns().addAll(colunaEndLogradouro, colunaEndNumero,
                     colunaEndComplemento, colunaEndBairro);
@@ -362,9 +360,9 @@ public class TabModel {
             colunaIsCliente.setPrefWidth(55);
             colunaIsCliente.setGraphic(vBoxIsCliente);
             colunaIsCliente.setCellValueFactory(param -> {
-//                if (param.getValue().getValue().getIsCliente() == 0) return new SimpleBooleanProperty(false);
-//                else return new SimpleBooleanProperty(true);
-                return new SimpleBooleanProperty(true);
+                if (param.getValue().getValue().getIsCliente() == 0) return new SimpleBooleanProperty(false);
+                else return new SimpleBooleanProperty(true);
+//                return new SimpleBooleanProperty(true);
             });
 
             VBox vBoxIsFornecedor = new VBox();
@@ -378,9 +376,9 @@ public class TabModel {
             colunaIsFornecedor.setPrefWidth(55);
             colunaIsFornecedor.setGraphic(vBoxIsFornecedor);
             colunaIsFornecedor.setCellValueFactory(param -> {
-//                if (param.getValue().getValue().getIsFornecedor() == 0) return new SimpleBooleanProperty(false);
-//                else return new SimpleBooleanProperty(true);
-                return new SimpleBooleanProperty(true);
+                if (param.getValue().getValue().getIsFornecedor() == 0) return new SimpleBooleanProperty(false);
+                else return new SimpleBooleanProperty(true);
+//                return new SimpleBooleanProperty(true);
             });
 
             VBox vBoxIsTransportadora = new VBox();
@@ -394,9 +392,9 @@ public class TabModel {
             colunaIsTransportadora.setPrefWidth(55);
             colunaIsTransportadora.setGraphic(vBoxIsTransportadora);
             colunaIsTransportadora.setCellValueFactory(param -> {
-//                if (param.getValue().getValue().getIsTransportadora() == 0) return new SimpleBooleanProperty(false);
-//                else return new SimpleBooleanProperty(true);
-                return new SimpleBooleanProperty(true);
+                if (param.getValue().getValue().getIsTransportadora() == 0) return new SimpleBooleanProperty(false);
+                else return new SimpleBooleanProperty(true);
+//                return new SimpleBooleanProperty(true);
             });
 
         } catch (Exception ex) {
@@ -404,27 +402,28 @@ public class TabModel {
         }
     }
 
-//    public static void tabelaQsaReceita() {
-//        try {
-//            Label lblQsaKey = new Label("Item");
-//            lblQsaKey.setPrefWidth(100);
-//            colunaQsaKey = new JFXTreeTableColumn<TabEmpresaDetalheReceitaFederalVO, String>();
-//            colunaQsaKey.setGraphic(lblQsaKey);
-//            colunaQsaKey.setPrefWidth(100);
-//            colunaQsaKey.setCellValueFactory(param -> {
-//                return param.getValue().getValue().str_keyProperty();
-//            });
-//
-//            Label lblQsaValue = new Label("Detalhe");
-//            lblQsaValue.setPrefWidth(250);
-//            colunaQsaValue = new JFXTreeTableColumn<TabEmpresaDetalheReceitaFederalVO, String>();
-//            colunaQsaValue.setGraphic(lblQsaValue);
-//            colunaQsaValue.setPrefWidth(250);
-//            colunaQsaValue.setCellValueFactory(param -> {
-//                return param.getValue().getValue().str_valueProperty();
-//            });
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
+    public static void tabelaQsaReceita() {
+        try {
+            Label lblQsaKey = new Label("Item");
+            lblQsaKey.setPrefWidth(100);
+            colunaQsaKey = new JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String>();
+            colunaQsaKey.setGraphic(lblQsaKey);
+            colunaQsaKey.setPrefWidth(100);
+            colunaQsaKey.setCellValueFactory(param -> {
+                return param.getValue().getValue().str_KeyProperty();
+            });
+
+            Label lblQsaValue = new Label("Detalhe");
+            lblQsaValue.setPrefWidth(250);
+            colunaQsaValue = new JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String>();
+            colunaQsaValue.setGraphic(lblQsaValue);
+            colunaQsaValue.setPrefWidth(250);
+            colunaQsaValue.setCellValueFactory(param -> {
+                return param.getValue().getValue().str_ValueProperty();
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }

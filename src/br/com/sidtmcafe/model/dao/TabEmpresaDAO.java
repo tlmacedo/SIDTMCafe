@@ -2,6 +2,7 @@ package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.database.ConnectionFactory;
 import br.com.sidtmcafe.model.vo.RelEmpresaEnderecoVO;
+import br.com.sidtmcafe.model.vo.SisSituacaoSistemaVO;
 import br.com.sidtmcafe.model.vo.TabEmpresaVO;
 import br.com.sidtmcafe.model.vo.TabEnderecoVO;
 
@@ -17,6 +18,11 @@ public class TabEmpresaDAO extends BuscaBandoDados {
     String comandoSql = "";
     TabEmpresaVO tabEmpresaVO;
     List<TabEmpresaVO> tabEmpresaVOList;
+
+    public TabEmpresaVO getTabEmpresaVO_Simples(int id) {
+        buscaTabEmpresaVO(id);
+        return tabEmpresaVO;
+    }
 
     public TabEmpresaVO getTabEmpresaVO(int id) {
         buscaTabEmpresaVO(id);
@@ -34,10 +40,12 @@ public class TabEmpresaDAO extends BuscaBandoDados {
     }
 
     void buscaTabEmpresaVO(int id) {
-        comandoSql = "SELECT id, isEmpresa, cnpj, ie, razao, fantasia, sisSituacaoSistema_id, usarioCadastro_id, " +
-                "dataCadastro, usuarioAtualizacao_id, dataAtualizacao, dataAbertura, naturezaJuridica " +
-                "FROM tabEmpresa ";
-        if (id > 0) comandoSql += " WHERE id = '" + id + "' ";
+        comandoSql = "SELECT id, isEmpresa, cnpj, ie, razao, fantasia, isLoja, isCliente, isFornecedor, " +
+                "isTransportadora, sisSituacaoSistema_id, usarioCadastro_id, dataCadastro, " +
+                "usuarioAtualizacao_id, dataAtualizacao, dataAbertura, naturezaJuridica " +
+                "FROM tabEmpresa " +
+                "WHERE (isCliente = '1' OR isFornecedor= '1' OR isTransportadora = '1') ";
+        if (id > 0) comandoSql += " AND id = '" + id + "' ";
         comandoSql += "ORDER BY razao ";
 
         if (id == 0) tabEmpresaVOList = new ArrayList<>();
@@ -51,6 +59,10 @@ public class TabEmpresaDAO extends BuscaBandoDados {
                 tabEmpresaVO.setIe(rs.getString("ie"));
                 tabEmpresaVO.setRazao(rs.getString("razao"));
                 tabEmpresaVO.setFantasia(rs.getString("fantasia"));
+                tabEmpresaVO.setIsLoja(rs.getInt("isLoja"));
+                tabEmpresaVO.setIsCliente(rs.getInt("isCliente"));
+                tabEmpresaVO.setIsFornecedor(rs.getInt("isFornecedor"));
+                tabEmpresaVO.setIsTransportadora(rs.getInt("isTransportadora"));
                 tabEmpresaVO.setSisSituacaoSistema_id(rs.getInt("sisSituacaoSistema_id"));
                 tabEmpresaVO.setUsuarioCadastro_id(rs.getInt("usarioCadastro_id"));
                 tabEmpresaVO.setDataCadastro(rs.getTimestamp("dataCadastro"));
@@ -68,15 +80,20 @@ public class TabEmpresaDAO extends BuscaBandoDados {
         }
     }
 
-    void addObjetosPesquisa(TabEmpresaVO empresaVO) {
-        empresaVO.setTabEmpresaReceitaFederalVOList(
-                new TabEmpresaReceitaFederalDAO().getTabEmpresaReceitaFederalVOList(empresaVO.getId(), 0));
+    void addObjetosPesquisa(TabEmpresaVO empresa) {
+        empresa.setSisSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSisSituacaoSistemaVO(empresa.getSisSituacaoSistema_id()));
+
+        empresa.setTabEmpresaReceitaFederalVOList(
+                new TabEmpresaReceitaFederalDAO().getTabEmpresaReceitaFederalVOList(empresa.getId(), 0));
         List<RelEmpresaEnderecoVO> relEmpresaEnderecoVOList =
-                new ArrayList<>(new RelEmpresaEnderecoDAO().getRelEmpresaEnderecoVOList(empresaVO.getId()));
+                new ArrayList<>(new RelEmpresaEnderecoDAO().getRelEmpresaEnderecoVOList(empresa.getId()));
         List<TabEnderecoVO> tabEnderecoVOList = new ArrayList<>();
         for (RelEmpresaEnderecoVO relEmpresaEnderecoVO : relEmpresaEnderecoVOList)
             tabEnderecoVOList.add(new TabEnderecoDAO().getTabEnderecoVO(relEmpresaEnderecoVO.getTabEndereco_id()));
-        empresaVO.setTabEnderecoVOList(tabEnderecoVOList);
+        empresa.setTabEnderecoVOList(tabEnderecoVOList);
+
+        empresa.setUsuarioCadastroVO(new TabColaboradorDAO().getTabColaboradorVO_Simples(empresa.getUsuarioCadastro_id()));
+        empresa.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getTabColaboradorVO_Simples(empresa.getUsuarioAtualizacao_id()));
     }
 
 }

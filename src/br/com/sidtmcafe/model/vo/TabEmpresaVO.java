@@ -20,7 +20,8 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
 
     Date dataAbertura;
     Timestamp dataCadastro, dataAtualizacao;
-    IntegerProperty id, isEmpresa, sisSituacaoSistema_id, usuarioCadastro_id, usuarioAtualizacao_id;
+    IntegerProperty id, isEmpresa, isLoja, isCliente, isFornecedor, isTransportadora,
+            sisSituacaoSistema_id, usuarioCadastro_id, usuarioAtualizacao_id;
     StringProperty cnpj, ie, razao, fantasia, naturezaJuridica;
 
     public TabEmpresaVO() {
@@ -114,6 +115,58 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
 
     public void setIsEmpresa(int isEmpresa) {
         isEmpresaProperty().set(isEmpresa);
+    }
+
+    public int getIsLoja() {
+        return isLojaProperty().get();
+    }
+
+    public IntegerProperty isLojaProperty() {
+        if (isLoja == null) isLoja = new SimpleIntegerProperty(0);
+        return isLoja;
+    }
+
+    public void setIsLoja(int isLoja) {
+        isLojaProperty().set(isLoja);
+    }
+
+    public int getIsCliente() {
+        return isClienteProperty().get();
+    }
+
+    public IntegerProperty isClienteProperty() {
+        if (isCliente == null) isCliente = new SimpleIntegerProperty(0);
+        return isCliente;
+    }
+
+    public void setIsCliente(int isCliente) {
+        isClienteProperty().set(isCliente);
+    }
+
+    public int getIsFornecedor() {
+        return isFornecedorProperty().get();
+    }
+
+    public IntegerProperty isFornecedorProperty() {
+        if (isFornecedor == null) isFornecedor = new SimpleIntegerProperty(0);
+        return isFornecedor;
+    }
+
+    public void setIsFornecedor(int isFornecedor) {
+        isFornecedorProperty().set(isFornecedor);
+    }
+
+    public int getIsTransportadora() {
+        return isTransportadoraProperty().get();
+    }
+
+    public IntegerProperty isTransportadoraProperty() {
+        if (isTransportadora == null) isTransportadora = new SimpleIntegerProperty(0);
+        return isTransportadora;
+    }
+
+    public void setIsTransportadora(int isTransportadora) {
+        isTransportadoraProperty().set(isTransportadora);
     }
 
     public int getUsuarioCadastro_id() {

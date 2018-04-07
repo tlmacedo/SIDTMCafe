@@ -35,8 +35,8 @@ public class SisUFDAO extends BuscaBandoDados {
     public List<SisUFVO> getSisUFVOList_DetMunicipios() {
         buscaSisUFVO(0, "");
         if (sisUFVOList != null)
-            for (SisUFVO uf : sisUFVOList)
-                addObjetosPesquisa(uf);
+            for (SisUFVO ufvo : sisUFVOList)
+                addMunicipiosEmUF(ufvo);
         return sisUFVOList;
     }
 
@@ -72,7 +72,7 @@ public class SisUFDAO extends BuscaBandoDados {
         }
     }
 
-    void addObjetosPesquisa(SisUFVO uf) {
+    void addMunicipiosEmUF(SisUFVO uf) {
         uf.setMunicipioVOList(new SisMunicipioDAO().getMunicipioVOList(uf.getId()));
     }
 

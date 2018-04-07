@@ -1,6 +1,7 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.database.ConnectionFactory;
+import br.com.sidtmcafe.model.vo.SisTipoEnderecoVO;
 import br.com.sidtmcafe.model.vo.TabEnderecoVO;
 
 import java.sql.ResultSet;
@@ -15,6 +16,8 @@ public class TabEnderecoDAO extends BuscaBandoDados {
 
     public TabEnderecoVO getTabEnderecoVO(int id) {
         buscaTabEnderecoVO(id);
+        if (tabEnderecoVO != null)
+            addObjetosPesquisa(tabEnderecoVO);
         return tabEnderecoVO;
     }
 
@@ -45,5 +48,9 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         }
     }
 
+    void addObjetosPesquisa(TabEnderecoVO endereco) {
+        endereco.setSisMunicipioVO(new SisMunicipioDAO().getSisMunicipioVO(endereco.getSisMunicipio_id()));
+        endereco.setSisTipoEnderecoVO(new SisTipoEnderecoDAO().getSisTipoEnderecoVO(endereco.getSisTipoEndereco_id()));
+    }
 
 }

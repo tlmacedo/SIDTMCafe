@@ -45,7 +45,7 @@ public class TabEmpresaReceitaFederalDAO extends BuscaBandoDados {
         }
 
         comandoSql += "ORDER BY isAtividadePrincipal, id ";
-    }
 
+    }
 
 }

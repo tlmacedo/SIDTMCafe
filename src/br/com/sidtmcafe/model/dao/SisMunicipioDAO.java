@@ -18,20 +18,23 @@ public class SisMunicipioDAO extends BuscaBandoDados {
 
     public SisMunicipioVO getSisMunicipioVO(int id) {
         buscaSisMunicipioVO(id, "", 0);
-        if (sisMunicipioVO != null)
-            addObjetosPesquisa(sisMunicipioVO);
+        if (sisMunicipioVO!=null)
+            addDetalheObjeto(sisMunicipioVO);
         return sisMunicipioVO;
     }
 
     public SisMunicipioVO getSisMunicipioVO(String municipio) {
         buscaSisMunicipioVO(0, municipio, 0);
-        if (sisMunicipioVO != null)
-            addObjetosPesquisa(sisMunicipioVO);
+        if (sisMunicipioVO!=null)
+            addDetalheObjeto(sisMunicipioVO);
         return sisMunicipioVO;
     }
 
     public List<SisMunicipioVO> getMunicipioVOList(int uf_id) {
         buscaSisMunicipioVO(0, "", uf_id);
+//        if (sisMunicipioVOList!=null)
+//            for (SisMunicipioVO municipioVO : sisMunicipioVOList)
+//                addDetalheObjeto(municipioVO);
         return sisMunicipioVOList;
     }
 
@@ -77,8 +80,8 @@ public class SisMunicipioDAO extends BuscaBandoDados {
         }
     }
 
-    void addObjetosPesquisa(SisMunicipioVO municipio) {
-        sisMunicipioVO.setUfVO(new SisUFDAO().getSisUFVO(municipio.getSisUF_id()));
+    void addDetalheObjeto(SisMunicipioVO municipio){
+        municipio.setUfVO(new SisUFDAO().getSisUFVO(municipio.getSisUF_id()));
     }
 
 }

@@ -89,4 +89,9 @@ public class SisMunicipioVO extends RecursiveTreeObject<SisMunicipioVO> {
         descricaoProperty().set(descricao);
     }
 
+    @Override
+    public String toString() {
+        return descricaoProperty().get();
+    }
+    
 }

@@ -18,22 +18,23 @@ public class SisCargoDAO extends BuscaBandoDados {
     List<SisCargoVO> sisCargoVOList;
 
     public SisCargoVO getSisCargoVO(int id) {
-        buscaTabCargoVO(id);
+        buscaSisCargoVO(id);
         return sisCargoVO;
     }
 
     public List<SisCargoVO> getSisCargoVOList() {
-        buscaTabCargoVO(0);
+        buscaSisCargoVO(0);
         return sisCargoVOList;
     }
 
-    void buscaTabCargoVO(int id) {
+    void buscaSisCargoVO(int id) {
         comandoSql = "SELECT id, descricao " +
                 "FROM SisCargo ";
         if (id > 0) comandoSql += "WHERE id = '" + id + "' ";
         comandoSql += "ORDER BY descricao ";
 
         if (id == 0) sisCargoVOList = new ArrayList<>();
+        //System.out.println("SisCargoVO_comandoSql: " + comandoSql);
         rs = getResultadosBandoDados(comandoSql);
         try {
             while (rs.next()) {

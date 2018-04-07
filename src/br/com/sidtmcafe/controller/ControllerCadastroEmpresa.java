@@ -61,7 +61,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     public Label lblDataCadastroDiff;
     public Label lblDataAtualizacao;
     public Label lblDataAtualizacaoDiff;
-    public JFXListView listEndereco;
+    public JFXListView<TabEnderecoVO> listEndereco;
     public JFXTextField txtEndCEP;
     public JFXTextField txtEndLogradouro;
     public JFXTextField txtEndNumero;
@@ -70,12 +70,12 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     public JFXComboBox<SisUFVO> cboEndUF;
     public JFXComboBox<SisMunicipioVO> cboEndMunicipio;
     public JFXTextField txtEndPontoReferencia;
-    public JFXListView listAtividadePrincipal;
-    public JFXListView listAtividadeSecundaria;
+    public JFXListView<TabEmpresaReceitaFederalVO> listAtividadePrincipal;
+    public JFXListView<TabEmpresaReceitaFederalVO> listAtividadeSecundaria;
     public Label lblDataAbertura;
     public Label lblDataAberturaDiff;
     public Label lblNaturezaJuridica;
-    public JFXTreeTableView ttvDetalheReceita;
+    public JFXTreeTableView<TabEmpresaReceitaFederalVO> ttvDetalheReceita;
     public JFXTabPane tpnContatoPrazosCondicoes;
     public JFXListView listHomePage;
     public JFXListView listEmail;
@@ -85,23 +85,45 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     public JFXListView listContatoEmail;
     public JFXListView listContatoTelefone;
 
-    FormatarDado formatCNPJ_CPF, formatIE;
-
     @Override
     public void fechar() {
 
     }
 
     @Override
+    public void criarObjetos() {
+        listaTarefas.add(new Pair("criarTabelaEmpresa", "criando tabela empresas"));
+
+    }
+
+    @Override
     public void preencherObjetos() {
-        preenchendoObjetos();
+        listaTarefas.add(new Pair("preencherCboFiltroPesquisa", "preenchendo filtros pesquisa"));
+        listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo classificações jurídicas"));
+        listaTarefas.add(new Pair("preencherCboSituacaoSistema", "preenchendo situações do sistema"));
+        listaTarefas.add(new Pair("preencherCboEndUF", "preenchendo dados UF"));
+
+
+        listaTarefas.add(new Pair("carregarListaEmpresa", "carregando lista de empresas"));
+        listaTarefas.add(new Pair("preencherTabelaEmpresa", "preenchendo tabela empresa"));
+
+        new Tarefa().tarefaAbreCadastroEmpresa(this, listaTarefas);
+
+        PersonalizarCampo.fieldMaxLen(painelViewCadastroEmpresa);
+        PersonalizarCampo.maskFields(painelViewCadastroEmpresa);
+
+        formatCNPJ_CPF = new FormatarDado();
+        formatCNPJ_CPF.maskField(txtCNPJ, FormatarDado.gerarMascara("cnpj", 0, "#"));
+        formatIE = new FormatarDado();
+        formatIE.maskField(txtIE, FormatarDado.gerarMascara("ie", 0, "#"));
+
     }
 
     @Override
     public void fatorarObjetos() {
-//        FormatarDado.fatorarColunaCheckBox(TabModel.getColunaIsCliente());
-//        FormatarDado.fatorarColunaCheckBox(TabModel.getColunaIsFornecedor());
-//        FormatarDado.fatorarColunaCheckBox(TabModel.getColunaIsTransportadora());
+        FormatarDado.fatorarColunaCheckBox(TabModel.getColunaIsCliente());
+        FormatarDado.fatorarColunaCheckBox(TabModel.getColunaIsFornecedor());
+        FormatarDado.fatorarColunaCheckBox(TabModel.getColunaIsTransportadora());
     }
 
     @Override
@@ -315,7 +337,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 //            }
 //        });
 //
-//        cboEndUF.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
+        cboEndUF.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
 //            if ((o.intValue() >= 0) && (n.intValue() != o.intValue()) && (n.intValue() >= 0))
 //                try {
 //                    formatIE.setMascara("ie");
@@ -329,9 +351,9 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 //                    if (!(ex instanceof IndexOutOfBoundsException))
 //                        ex.printStackTrace();
 //                }
-//            if (n == null || n.intValue() < 0) return;
-//            preencherCboEndMunicipio(cboEndUF.getSelectionModel().getSelectedItem());
-//        });
+            if (n == null || n.intValue() < 0) return;
+            preencherCboEndMunicipio(cboEndUF.getSelectionModel().getSelectedItem());
+        });
 //
 //        listContatoNome.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
 //            if (n == null || n.intValue() < 0) return;
@@ -341,34 +363,109 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        preencherObjetos();
-//        escutarTeclas();
-//        fatorarObjetos();
+        listaTarefas = new ArrayList<>();
+        criarObjetos();
+        preencherObjetos();
+        fatorarObjetos();
+        escutarTeclas();
 //        setStatusFormulario("Pesquisa");
 //        Platform.runLater(() -> {
 //            ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.fireEvent(ExecutaComandoTecladoMouse.pressTecla(KeyCode.F7));
 //        });
     }
 
+    FormatarDado formatCNPJ_CPF, formatIE;
+    List<Pair> listaTarefas;
+    ObservableList<TabEmpresaVO> empresaVOObservableList;
+    FilteredList<TabEmpresaVO> empresaVOFilteredList;
 
-    void preenchendoObjetos() {
-//        listaTarefas = new ArrayList<>();
-//        criarTabelas();
-//        carregaListas();
-//        preencherCombos();
-//        preencherTabelas();
-//
-//        new Tarefa().tarefaAbreCadastroEmpresa(this, listaTarefas);
-//
-//        PersonalizarCampo.fieldMaxLen(painelViewCadastroEmpresa);
-//        PersonalizarCampo.maskFields(painelViewCadastroEmpresa);
-//
-//        formatCNPJ_CPF = new FormatarDado();
-//        formatCNPJ_CPF.maskField(txtCNPJ, FormatarDado.gerarMascara("cnpj", 0, "#"));
-//        formatIE = new FormatarDado();
-//        formatIE.maskField(txtIE, FormatarDado.gerarMascara("ie", 0, "#"));
+    public void preencherCboFiltroPesquisa() {
+        cboFiltroPesquisa.getItems().clear();
+        cboFiltroPesquisa.getItems().add(0, "");
+        cboFiltroPesquisa.getItems().add(1, "Clientes");
+        cboFiltroPesquisa.getItems().add(2, "Fornecedores");
+        cboFiltroPesquisa.getItems().add(3, "Transportadoras");
+        cboFiltroPesquisa.getSelectionModel().select(0);
     }
 
+    public void preencherCboClassificacaoJuridica() {
+        cboClassificacaoJuridica.getItems().clear();
+        cboClassificacaoJuridica.getItems().add(0, "FÍSICA");
+        cboClassificacaoJuridica.getItems().add(1, "JURÍDICA");
+        cboClassificacaoJuridica.getSelectionModel().select(1);
+    }
+
+    public void preencherCboSituacaoSistema() {
+        cboSituacaoSistema.getItems().clear();
+        cboSituacaoSistema.getItems().addAll(new SisSituacaoSistemaDAO().getSisSituacaoSistemaVOList());
+        cboSituacaoSistema.getSelectionModel().select(0);
+    }
+
+    public void preencherCboEndUF() {
+        cboEndUF.getItems().clear();
+        cboEndUF.getItems().add(new SisUFVO());
+        cboEndUF.getItems().addAll(new SisUFDAO().getSisUFVOList_DetMunicipios());
+        cboEndUF.getSelectionModel().select(0);
+    }
+
+    public void preencherTabelaEmpresa() {
+        try {
+            if (empresaVOFilteredList == null)
+                carregarPesquisaEmpresas(txtPesquisa.getText());
+//            setQtdRegistrosLocalizados(empresaVOFilteredList.size());
+            final TreeItem<TabEmpresaVO> root = new RecursiveTreeItem<TabEmpresaVO>(empresaVOFilteredList, RecursiveTreeObject::getChildren);
+            ttvEmpresa.getColumns().setAll(TabModel.getColunaIdEmpresa(), TabModel.getColunaCnpj(), TabModel.getColunaIe(),
+                    TabModel.getColunaRazao(), TabModel.getColunaFantasia(), TabModel.getColunaEndereco(),
+                    TabModel.getColunaIsCliente(), TabModel.getColunaIsFornecedor(), TabModel.getColunaIsTransportadora());
+            ttvEmpresa.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            ttvEmpresa.setRoot(root);
+            ttvEmpresa.setShowRoot(false);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    void carregarPesquisaEmpresas(String strPesq) {
+        String busca = strPesq.toLowerCase().trim();
+
+        empresaVOFilteredList = new FilteredList<TabEmpresaVO>(empresaVOObservableList, empresa -> true);
+        int filtro = cboFiltroPesquisa.getSelectionModel().getSelectedIndex();
+        empresaVOFilteredList.setPredicate(empresa -> {
+            if (filtro > 0) {
+                switch (filtro) {
+                    case 1:
+                        if (empresa.getIsCliente() == 0) return false;
+                        break;
+                    case 2:
+                        if (empresa.getIsFornecedor() == 0) return false;
+                        break;
+                    case 3:
+                        if (empresa.getIsTransportadora() == 0) return false;
+                        break;
+                }
+            }
+            if (busca.length() <= 0) return true;
+
+            if (empresa.getCnpj().toLowerCase().contains(busca)) return true;
+            if (empresa.getIe().toLowerCase().contains(busca)) return true;
+            if (empresa.getRazao().toLowerCase().contains(busca)) return true;
+            if (empresa.getFantasia().toLowerCase().contains(busca)) return true;
+
+            return false;
+        });
+        preencherTabelaEmpresa();
+    }
+
+    public void carregarListaEmpresa() {
+        empresaVOObservableList = FXCollections.observableArrayList(new TabEmpresaDAO().getTabEmpresaVOList());
+    }
+
+    void preencherCboEndMunicipio(SisUFVO ufVo) {
+        cboEndMunicipio.getItems().clear();
+        if (ufVo.getMunicipioVOList() != null)
+            cboEndMunicipio.getItems().setAll(ufVo.getMunicipioVOList());
+        cboEndMunicipio.getSelectionModel().select(0);
+    }
 
 //    EventHandler<KeyEvent> eventCadastroEmpresa;
 //
@@ -382,10 +479,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 //    List<TabTelefoneVO> ttvContatoTelefoneVO;
 //    List<TabEmpresaDetalheReceitaFederalVO> ttvDetalheReceitaFederalVO;
 //
-//    List<Pair> listaTarefas;
-//
-//    ObservableList<TabEmpresaVO> empresaVOObservableList;
-//    FilteredList<TabEmpresaVO> empresaVOFilteredList;
 //    ObservableList<TabEmailHomePageVO> emailHomePageVOObservableList;
 //    FilteredList<TabEmailHomePageVO> emailVOFilteredList;
 //    FilteredList<TabEmailHomePageVO> homePageVOFilteredList;
@@ -561,17 +654,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 //        listaTarefas.add(new Pair("carregarListaEmpresa", "carregando lista de empresas"));
 //    }
 //
-//    void preencherCombos() {
-//        listaTarefas.add(new Pair("preencherCboEndUF", "preenchendo dados UF"));
-//        listaTarefas.add(new Pair("preencherCboSituacaoSistema", "preenchendo situações do sistema"));
-//        listaTarefas.add(new Pair("preencherCboFiltroPesquisa", "preenchendo filtros pesquisa"));
-//        listaTarefas.add(new Pair("preencherCboClassificacaoJuridica", "preenchendo classificações jurídicas"));
-//    }
-//
-//    void preencherTabelas() {
-//        listaTarefas.add(new Pair("preencherTabelaEmpresa", "preenchendo tabela empresa"));
-//    }
-//
 //    public void carregarSisTipoEndereco() {
 //        tipoEnderecoVOList = new ArrayList<SisTipoEnderecoVO>(new SisTipoEnderecoDAO().getTipoEnderecoVOList());
 //    }
@@ -596,9 +678,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 //        preencherEmailEmpresa();
 //    }
 //
-//    public void carregarListaEmpresa() {
-//        empresaVOObservableList = FXCollections.observableArrayList(new TabEmpresaDAO().getTabEmpresaVOList());
-//    }
 //
 //    public void preencherCboEndUF() {
 //        cboEndUF.getItems().clear();
@@ -607,45 +686,8 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 //        cboEndUF.getSelectionModel().select(0);
 //    }
 //
-//    public void preencherCboSituacaoSistema() {
-//        cboSituacaoSistema.getItems().clear();
-//        cboSituacaoSistema.getItems().addAll(new SisSituacaoSistemaDAO().getSituacaoSistemaVOList());
-//        cboSituacaoSistema.getSelectionModel().select(0);
-//    }
 //
-//    public void preencherCboFiltroPesquisa() {
-//        cboFiltroPesquisa.getItems().clear();
-//        cboFiltroPesquisa.getItems().add(0, "");
-//        cboFiltroPesquisa.getItems().add(1, "Clientes");
-//        cboFiltroPesquisa.getItems().add(2, "Fornecedores");
-//        cboFiltroPesquisa.getItems().add(3, "Transportadoras");
-//        cboFiltroPesquisa.getSelectionModel().select(0);
 //
-//    }
-//
-//    public void preencherCboClassificacaoJuridica() {
-//        cboClassificacaoJuridica.getItems().clear();
-//        cboClassificacaoJuridica.getItems().add(0, "FÍSICA");
-//        cboClassificacaoJuridica.getItems().add(1, "JURÍDICA");
-//        cboClassificacaoJuridica.getSelectionModel().select(0);
-//    }
-//
-//    public void preencherTabelaEmpresa() {
-//        try {
-//            if (empresaVOFilteredList == null)
-//                carregarPesquisaEmpresas(txtPesquisa.getText());
-//            setQtdRegistrosLocalizados(empresaVOFilteredList.size());
-//            final TreeItem<TabEmpresaVO> root = new RecursiveTreeItem<TabEmpresaVO>(empresaVOFilteredList, RecursiveTreeObject::getChildren);
-//            ttvEmpresa.getColumns().setAll(TabModel.getColunaIdEmpresa(), TabModel.getColunaCnpj(), TabModel.getColunaIe(),
-//                    TabModel.getColunaRazao(), TabModel.getColunaFantasia(), TabModel.getColunaEndereco(),
-//                    TabModel.getColunaIsCliente(), TabModel.getColunaIsFornecedor(), TabModel.getColunaIsTransportadora());
-//            ttvEmpresa.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-//            ttvEmpresa.setRoot(root);
-//            ttvEmpresa.setShowRoot(false);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
 //
 //    void preencherTabelaQsa() {
 //        final TreeItem<TabEmpresaDetalheReceitaFederalVO> root = new RecursiveTreeItem<TabEmpresaDetalheReceitaFederalVO>
@@ -656,43 +698,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 //        ttvDetalheReceita.setShowRoot(false);
 //    }
 //
-//    void preencherCboEndMunicipio(SisUFVO ufVo) {
-//        cboEndMunicipio.getItems().clear();
-//        if (ufVo.getMunicipioVOList() != null)
-//            cboEndMunicipio.getItems().setAll(ufVo.getMunicipioVOList());
-//        cboEndMunicipio.getSelectionModel().select(0);
-//    }
 //
-//    void carregarPesquisaEmpresas(String strPesq) {
-//        String busca = strPesq.toLowerCase().trim();
-//        int filtro = cboFiltroPesquisa.getSelectionModel().getSelectedIndex();
-//
-//        empresaVOFilteredList = new FilteredList<TabEmpresaVO>(empresaVOObservableList, empresa -> true);
-//        empresaVOFilteredList.setPredicate(empresa -> {
-////            if (filtro > 0) {
-////                switch (filtro) {
-////                    case 1:
-////                        if (empresa.getIsCliente() == 0) return false;
-////                        break;
-////                    case 2:
-////                        if (empresa.getIsFornecedor() == 0) return false;
-////                        break;
-////                    case 3:
-////                        if (empresa.getIsTransportadora() == 0) return false;
-////                        break;
-////                }
-////            }
-//            if (busca.length() <= 0) return true;
-//
-//            if (empresa.getCnpj().toLowerCase().contains(busca)) return true;
-//            if (empresa.getIe().toLowerCase().contains(busca)) return true;
-//            if (empresa.getRazao().toLowerCase().contains(busca)) return true;
-//            if (empresa.getFantasia().toLowerCase().contains(busca)) return true;
-//
-//            return false;
-//        });
-//        preencherTabelaEmpresa();
-//    }
 //
 //    void carregarContatoEmailHomePage() {
 //        contatoEmailHomePageVOObservableList = FXCollections.observableArrayList(getTtvContatoEmailHomePageVO());

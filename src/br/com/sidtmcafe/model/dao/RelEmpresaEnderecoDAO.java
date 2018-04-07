@@ -48,4 +48,5 @@ public class RelEmpresaEnderecoDAO extends BuscaBandoDados {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
     }
+
 }

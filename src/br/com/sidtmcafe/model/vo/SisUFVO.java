@@ -65,4 +65,8 @@ public class SisUFVO extends RecursiveTreeObject<SisUFVO> {
         siglaProperty().set(sigla);
     }
 
+    @Override
+    public String toString() {
+        return siglaProperty().get();
+    }
 }

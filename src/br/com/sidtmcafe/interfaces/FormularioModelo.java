@@ -6,6 +6,8 @@ public interface FormularioModelo {
 
     public void fechar();
 
+    public void criarObjetos();
+
     public void preencherObjetos();
 
     public void fatorarObjetos();

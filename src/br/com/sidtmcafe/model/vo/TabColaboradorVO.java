@@ -10,8 +10,8 @@ import java.util.List;
 
 public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
 
-    SisCargoVO cargoVO;
-    SisSituacaoSistemaVO situacaoSistemaVO;
+    SisCargoVO sisCargoVO;
+    SisSituacaoSistemaVO sisSituacaoSistemaVO;
     TabEmpresaVO lojaVO;
 
     IntegerProperty id, sisCargo_id, sisSituacaoSistema_id, tabLoja_id;
@@ -20,20 +20,20 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
     public TabColaboradorVO() {
     }
 
-    public SisCargoVO getCargoVO() {
-        return cargoVO;
+    public SisCargoVO getSisCargoVO() {
+        return sisCargoVO;
     }
 
-    public void setCargoVO(SisCargoVO cargoVO) {
-        this.cargoVO = cargoVO;
+    public void setSisCargoVO(SisCargoVO sisCargoVO) {
+        this.sisCargoVO = sisCargoVO;
     }
 
-    public SisSituacaoSistemaVO getSituacaoSistemaVO() {
-        return situacaoSistemaVO;
+    public SisSituacaoSistemaVO getSisSituacaoSistemaVO() {
+        return sisSituacaoSistemaVO;
     }
 
-    public void setSituacaoSistemaVO(SisSituacaoSistemaVO situacaoSistemaVO) {
-        this.situacaoSistemaVO = situacaoSistemaVO;
+    public void setSisSituacaoSistemaVO(SisSituacaoSistemaVO sisSituacaoSistemaVO) {
+        this.sisSituacaoSistemaVO = sisSituacaoSistemaVO;
     }
 
     public TabEmpresaVO getLojaVO() {
@@ -151,7 +151,7 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
     public String getDetalheColaborador() {
         if (nomeProperty().get() != "")
             return "[Usuário]: " + nomeProperty().get() + " (" + apelidoProperty().get() + ") " +
-                    ";[Cargo]: " + cargoVO.getDescricao() + "  |  [Loja]: " + lojaVO.getFantasia() +
+                    ";[Cargo]: " + sisCargoVO.getDescricao() + "  |  [Loja]: " + lojaVO.getFantasia() +
                     ";[End]: " + lojaVO.getTabEnderecoVOList().get(0).getLogradouro() + ", " +
                     lojaVO.getTabEnderecoVOList().get(0).getNumero() + " - " +
                     lojaVO.getTabEnderecoVOList().get(0).getBairro();
@@ -162,4 +162,5 @@ public class TabColaboradorVO extends RecursiveTreeObject<TabColaboradorVO> {
     public String toString() {
         return apelidoProperty().get();
     }
+
 }

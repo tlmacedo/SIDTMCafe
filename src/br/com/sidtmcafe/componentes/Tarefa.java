@@ -177,34 +177,34 @@ public class Tarefa implements Constants {
                     Thread.sleep(200);
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
-//                        case "criarTabelaEmpresa":
-//                            TabModel.tabelaEmpresa();
-//                            TabModel.tabelaQsaReceita();
-//                            break;
+                        case "preencherCboFiltroPesquisa":
+                            cadastroEmpresa.preencherCboFiltroPesquisa();
+                            break;
+                        case "preencherCboClassificacaoJuridica":
+                            cadastroEmpresa.preencherCboClassificacaoJuridica();
+                            break;
+                        case "preencherCboSituacaoSistema":
+                            cadastroEmpresa.preencherCboSituacaoSistema();
+                            break;
+                        case "preencherCboEndUF":
+                            cadastroEmpresa.preencherCboEndUF();
+                            break;
+                        case "criarTabelaEmpresa":
+                            TabModel.tabelaEmpresa();
+                            TabModel.tabelaQsaReceita();
+                            break;
 //                        case "carregarSisTipoEndereco":
 //                            cadastroEmpresa.carregarSisTipoEndereco();
 //                            break;
 //                        case "carregarSisTelefoneOperadora":
 //                            cadastroEmpresa.carregarSisTelefoneOperadora();
 //                            break;
-//                        case "carregarListaEmpresa":
-//                            cadastroEmpresa.carregarListaEmpresa();
-//                            break;
-//                        case "preencherCboEndUF":
-//                            cadastroEmpresa.preencherCboEndUF();
-//                            break;
-//                        case "preencherCboSituacaoSistema":
-//                            cadastroEmpresa.preencherCboSituacaoSistema();
-//                            break;
-//                        case "preencherCboFiltroPesquisa":
-//                            cadastroEmpresa.preencherCboFiltroPesquisa();
-//                            break;
-//                        case "preencherCboClassificacaoJuridica":
-//                            cadastroEmpresa.preencherCboClassificacaoJuridica();
-//                            break;
-//                        case "preencherTabelaEmpresa":
-//                            cadastroEmpresa.preencherTabelaEmpresa();
-//                            break;
+                        case "carregarListaEmpresa":
+                            cadastroEmpresa.carregarListaEmpresa();
+                            break;
+                        case "preencherTabelaEmpresa":
+                            cadastroEmpresa.preencherTabelaEmpresa();
+                            break;
 //                        case "carregarTabCargo":
 ////*                            cadastroEmpresa.carregarTabCargo();
 //                            break;

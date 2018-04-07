@@ -16,18 +16,23 @@ public class TabColaboradorDAO extends BuscaBandoDados {
     TabColaboradorVO tabColaboradorVO;
     List<TabColaboradorVO> tabColaboradorVOList;
 
+    public TabColaboradorVO getTabColaboradorVO_Simples(int id) {
+        buscaTabColaboradorVO(id);
+        return tabColaboradorVO;
+    }
+
     public TabColaboradorVO getTabColaboradorVO(int id) {
         buscaTabColaboradorVO(id);
         if (tabColaboradorVO != null)
-            addObjetosPesquisa(tabColaboradorVO);
+            addDetalheObjeto(tabColaboradorVO);
         return tabColaboradorVO;
     }
 
     public List<TabColaboradorVO> getTabColaboradorVOList() {
         buscaTabColaboradorVO(0);
         if (tabColaboradorVOList != null)
-            for (TabColaboradorVO colaborador : tabColaboradorVOList)
-                addObjetosPesquisa(colaborador);
+            for (TabColaboradorVO colaboradorVO : tabColaboradorVOList)
+                addDetalheObjeto(colaboradorVO);
         return tabColaboradorVOList;
     }
 
@@ -60,9 +65,9 @@ public class TabColaboradorDAO extends BuscaBandoDados {
         }
     }
 
-    void addObjetosPesquisa(TabColaboradorVO colaborador) {
-        colaborador.setCargoVO(new SisCargoDAO().getSisCargoVO(colaborador.getSisCargo_id()));
-        colaborador.setSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSisSituacaoSistemaVO(colaborador.getSisSituacaoSistema_id()));
+    void addDetalheObjeto(TabColaboradorVO colaborador) {
+        colaborador.setSisCargoVO(new SisCargoDAO().getSisCargoVO(colaborador.getSisCargo_id()));
+        colaborador.setSisSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSisSituacaoSistemaVO(colaborador.getSisSituacaoSistema_id()));
         colaborador.setLojaVO(new TabEmpresaDAO().getTabEmpresaVO(colaborador.getTabLoja_id()));
     }
 

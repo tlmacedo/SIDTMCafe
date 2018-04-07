@@ -54,6 +54,11 @@ public class ControllerPrincipal extends Variavel implements Initializable, Form
     }
 
     @Override
+    public void criarObjetos() {
+
+    }
+
+    @Override
     public void preencherObjetos() {
         lblCopyRight.setText(COPYRIGHT);
         lblCopyRight.getStyleClass().add("copyright");

@@ -77,6 +77,11 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
     }
 
     @Override
+    public void criarObjetos() {
+
+    }
+
+    @Override
     public void preencherObjetos() {
 //        listaTarefas = new ArrayList<>();
 //        criarTabelas();
