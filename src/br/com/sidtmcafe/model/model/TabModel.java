@@ -360,8 +360,7 @@ public class TabModel {
             colunaIsCliente.setPrefWidth(55);
             colunaIsCliente.setGraphic(vBoxIsCliente);
             colunaIsCliente.setCellValueFactory(param -> {
-                if (param.getValue().getValue().getIsCliente() == 0) return new SimpleBooleanProperty(false);
-                else return new SimpleBooleanProperty(true);
+                return param.getValue().getValue().isClienteProperty();
 //                return new SimpleBooleanProperty(true);
             });
 
@@ -376,9 +375,8 @@ public class TabModel {
             colunaIsFornecedor.setPrefWidth(55);
             colunaIsFornecedor.setGraphic(vBoxIsFornecedor);
             colunaIsFornecedor.setCellValueFactory(param -> {
-                if (param.getValue().getValue().getIsFornecedor() == 0) return new SimpleBooleanProperty(false);
-                else return new SimpleBooleanProperty(true);
-//                return new SimpleBooleanProperty(true);
+                return param.getValue().getValue().isFornecedorProperty();
+                //                return new SimpleBooleanProperty(true);
             });
 
             VBox vBoxIsTransportadora = new VBox();
@@ -392,8 +390,7 @@ public class TabModel {
             colunaIsTransportadora.setPrefWidth(55);
             colunaIsTransportadora.setGraphic(vBoxIsTransportadora);
             colunaIsTransportadora.setCellValueFactory(param -> {
-                if (param.getValue().getValue().getIsTransportadora() == 0) return new SimpleBooleanProperty(false);
-                else return new SimpleBooleanProperty(true);
+                return param.getValue().getValue().isTransportadoraProperty();
 //                return new SimpleBooleanProperty(true);
             });
 

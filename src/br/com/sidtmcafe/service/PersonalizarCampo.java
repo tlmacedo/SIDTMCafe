@@ -169,7 +169,7 @@ public class PersonalizarCampo implements Constants {
                 //((JFXTextArea) node).setEditable(setDisable & deshabilitado);
                 ((JFXTextArea) node).setDisable(setDisable & deshabilitado);
             } else if (node instanceof JFXComboBox) {
-                //((JFXComboBox) node).setEditable(setDisable & deshabilitado);
+//                ((JFXComboBox) node).setEditable(setDisable & deshabilitado);
                 ((JFXComboBox) node).setDisable(setDisable & deshabilitado);
             } else if (node instanceof JFXCheckBox) {
                 ((JFXCheckBox) node).setDisable(setDisable & deshabilitado);

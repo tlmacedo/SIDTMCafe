@@ -3,7 +3,9 @@ package br.com.sidtmcafe.model.dao;
 import br.com.sidtmcafe.database.ConnectionFactory;
 import br.com.sidtmcafe.model.vo.RelEmpresaEnderecoVO;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,4 +51,10 @@ public class RelEmpresaEnderecoDAO extends BuscaBandoDados {
         }
     }
 
+    void dedeteRelEmpresaEnderecoVO(Connection conn, int empresa_id) throws SQLException {
+        comandoSql = "DELETE " +
+                "FROM relEmpresaEndereco " +
+                "WHERE tabEmpresa_id = '" + empresa_id + "' ";
+        if (getDeleteBancoDados(conn, comandoSql));
+    }
 }

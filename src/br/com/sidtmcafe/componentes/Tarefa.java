@@ -177,6 +177,10 @@ public class Tarefa implements Constants {
                     Thread.sleep(200);
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
+                        case "criarTabelaEmpresa":
+                            TabModel.tabelaEmpresa();
+                            TabModel.tabelaQsaReceita();
+                            break;
                         case "preencherCboFiltroPesquisa":
                             cadastroEmpresa.preencherCboFiltroPesquisa();
                             break;
@@ -189,25 +193,21 @@ public class Tarefa implements Constants {
                         case "preencherCboEndUF":
                             cadastroEmpresa.preencherCboEndUF();
                             break;
-                        case "criarTabelaEmpresa":
-                            TabModel.tabelaEmpresa();
-                            TabModel.tabelaQsaReceita();
+                        case "carregarTabCargo":
+                            cadastroEmpresa.carregarTabCargo();
                             break;
-//                        case "carregarSisTipoEndereco":
-//                            cadastroEmpresa.carregarSisTipoEndereco();
-//                            break;
-//                        case "carregarSisTelefoneOperadora":
-//                            cadastroEmpresa.carregarSisTelefoneOperadora();
-//                            break;
+                        case "carregarSisTipoEndereco":
+                            cadastroEmpresa.carregarSisTipoEndereco();
+                            break;
+                        case "carregarSisTelefoneOperadora":
+                            cadastroEmpresa.carregarSisTelefoneOperadora();
+                            break;
                         case "carregarListaEmpresa":
                             cadastroEmpresa.carregarListaEmpresa();
                             break;
                         case "preencherTabelaEmpresa":
                             cadastroEmpresa.preencherTabelaEmpresa();
                             break;
-//                        case "carregarTabCargo":
-////*                            cadastroEmpresa.carregarTabCargo();
-//                            break;
                     }
                 }
                 updateProgress(qtdTarefas, qtdTarefas);

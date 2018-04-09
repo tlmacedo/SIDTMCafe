@@ -1,10 +1,7 @@
 package br.com.sidtmcafe.model.vo;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.sql.Timestamp;
 import java.sql.Date;
@@ -20,8 +17,8 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
 
     Date dataAbertura;
     Timestamp dataCadastro, dataAtualizacao;
-    IntegerProperty id, isEmpresa, isLoja, isCliente, isFornecedor, isTransportadora,
-            sisSituacaoSistema_id, usuarioCadastro_id, usuarioAtualizacao_id;
+    IntegerProperty id, isEmpresa, sisSituacaoSistema_id, usuarioCadastro_id, usuarioAtualizacao_id;
+    BooleanProperty isLoja, isCliente, isFornecedor, isTransportadora;
     StringProperty cnpj, ie, razao, fantasia, naturezaJuridica;
 
     public TabEmpresaVO() {
@@ -117,58 +114,6 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
         isEmpresaProperty().set(isEmpresa);
     }
 
-    public int getIsLoja() {
-        return isLojaProperty().get();
-    }
-
-    public IntegerProperty isLojaProperty() {
-        if (isLoja == null) isLoja = new SimpleIntegerProperty(0);
-        return isLoja;
-    }
-
-    public void setIsLoja(int isLoja) {
-        isLojaProperty().set(isLoja);
-    }
-
-    public int getIsCliente() {
-        return isClienteProperty().get();
-    }
-
-    public IntegerProperty isClienteProperty() {
-        if (isCliente == null) isCliente = new SimpleIntegerProperty(0);
-        return isCliente;
-    }
-
-    public void setIsCliente(int isCliente) {
-        isClienteProperty().set(isCliente);
-    }
-
-    public int getIsFornecedor() {
-        return isFornecedorProperty().get();
-    }
-
-    public IntegerProperty isFornecedorProperty() {
-        if (isFornecedor == null) isFornecedor = new SimpleIntegerProperty(0);
-        return isFornecedor;
-    }
-
-    public void setIsFornecedor(int isFornecedor) {
-        isFornecedorProperty().set(isFornecedor);
-    }
-
-    public int getIsTransportadora() {
-        return isTransportadoraProperty().get();
-    }
-
-    public IntegerProperty isTransportadoraProperty() {
-        if (isTransportadora == null) isTransportadora = new SimpleIntegerProperty(0);
-        return isTransportadora;
-    }
-
-    public void setIsTransportadora(int isTransportadora) {
-        isTransportadoraProperty().set(isTransportadora);
-    }
-
     public int getUsuarioCadastro_id() {
         return usuarioCadastro_idProperty().get();
     }
@@ -206,6 +151,58 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
 
     public void setSisSituacaoSistema_id(int sisSituacaoSistema_id) {
         sisSituacaoSistema_idProperty().set(sisSituacaoSistema_id);
+    }
+
+    public boolean isIsLoja() {
+        return isLojaProperty().get();
+    }
+
+    public BooleanProperty isLojaProperty() {
+        if (isLoja == null) isLoja = new SimpleBooleanProperty(false);
+        return isLoja;
+    }
+
+    public void setIsLoja(boolean isLoja) {
+        isLojaProperty().set(isLoja);
+    }
+
+    public boolean isIsCliente() {
+        return isClienteProperty().get();
+    }
+
+    public BooleanProperty isClienteProperty() {
+        if (isCliente == null) isCliente = new SimpleBooleanProperty(false);
+        return isCliente;
+    }
+
+    public void setIsCliente(boolean isCliente) {
+        isClienteProperty().set(isCliente);
+    }
+
+    public boolean isIsFornecedor() {
+        return isFornecedorProperty().get();
+    }
+
+    public BooleanProperty isFornecedorProperty() {
+        if (isFornecedor == null) isFornecedor = new SimpleBooleanProperty(false);
+        return isFornecedor;
+    }
+
+    public void setIsFornecedor(boolean isFornecedor) {
+        isFornecedorProperty().set(isFornecedor);
+    }
+
+    public boolean isIsTransportadora() {
+        return isTransportadoraProperty().get();
+    }
+
+    public BooleanProperty isTransportadoraProperty() {
+        if (isTransportadora == null) isTransportadora = new SimpleBooleanProperty(false);
+        return isTransportadora;
+    }
+
+    public void setIsTransportadora(boolean isTransportadora) {
+        isTransportadoraProperty().set(isTransportadora);
     }
 
     public String getCnpj() {

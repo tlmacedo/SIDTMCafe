@@ -6,6 +6,7 @@ import br.com.sidtmcafe.model.vo.SisSituacaoSistemaVO;
 import br.com.sidtmcafe.model.vo.TabEmpresaVO;
 import br.com.sidtmcafe.model.vo.TabEnderecoVO;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -59,10 +60,10 @@ public class TabEmpresaDAO extends BuscaBandoDados {
                 tabEmpresaVO.setIe(rs.getString("ie"));
                 tabEmpresaVO.setRazao(rs.getString("razao"));
                 tabEmpresaVO.setFantasia(rs.getString("fantasia"));
-                tabEmpresaVO.setIsLoja(rs.getInt("isLoja"));
-                tabEmpresaVO.setIsCliente(rs.getInt("isCliente"));
-                tabEmpresaVO.setIsFornecedor(rs.getInt("isFornecedor"));
-                tabEmpresaVO.setIsTransportadora(rs.getInt("isTransportadora"));
+                tabEmpresaVO.setIsLoja(rs.getBoolean("isLoja"));
+                tabEmpresaVO.setIsCliente(rs.getBoolean("isCliente"));
+                tabEmpresaVO.setIsFornecedor(rs.getBoolean("isFornecedor"));
+                tabEmpresaVO.setIsTransportadora(rs.getBoolean("isTransportadora"));
                 tabEmpresaVO.setSisSituacaoSistema_id(rs.getInt("sisSituacaoSistema_id"));
                 tabEmpresaVO.setUsuarioCadastro_id(rs.getInt("usarioCadastro_id"));
                 tabEmpresaVO.setDataCadastro(rs.getTimestamp("dataCadastro"));
@@ -95,5 +96,47 @@ public class TabEmpresaDAO extends BuscaBandoDados {
         empresa.setUsuarioCadastroVO(new TabColaboradorDAO().getTabColaboradorVO_Simples(empresa.getUsuarioCadastro_id()));
         empresa.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getTabColaboradorVO_Simples(empresa.getUsuarioAtualizacao_id()));
     }
+
+    public void updateTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) throws SQLException {
+        comandoSql = "UPDATE tabEmpresa SET ";
+        comandoSql += "isEmpresa = " + empresaVO.getIsEmpresa() + ", ";
+        comandoSql += "cnpj = '" + empresaVO.getCnpj().replaceAll("'", "") + "', ";
+        comandoSql += "ie = '" + empresaVO.getIe().replaceAll("'", "") + "', ";
+        comandoSql += "razao = '" + empresaVO.getRazao().replaceAll("'", "") + "', ";
+        comandoSql += "fantasia = '" + empresaVO.getFantasia().replaceAll("'", "") + "', ";
+        comandoSql += "isLoja = " + empresaVO.isIsLoja() + ", ";
+        comandoSql += "isCliente = " + empresaVO.isIsCliente() + ", ";
+        comandoSql += "isFornecedor = " + empresaVO.isIsFornecedor() + ", ";
+        comandoSql += "isTransportadora = " + empresaVO.isIsTransportadora() + ", ";
+        comandoSql += "sisSituacaoSistema_id = " + empresaVO.getSisSituacaoSistema_id() + ", ";
+        comandoSql += "usuarioAtualizacao_id = " + empresaVO.getUsuarioAtualizacao_id() + ", ";
+        comandoSql += "dataAbertura = '" + empresaVO.getDataAbertura() + "', ";
+        comandoSql += "naturezaJuridica = '" + empresaVO.getNaturezaJuridica().replaceAll("[']", "") + "' ";
+        comandoSql += "WHERE id = " + empresaVO.getId();
+
+        if (getUpdateBancoDados(conn, comandoSql)) ;
+
+    }
+
+    public int insertTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) throws SQLException {
+        comandoSql = "INSERT INTO tabEmpresa ";
+        comandoSql += "(isEmpresa, cnpj, ie, razao, fantasia, sisSituacaoSistema_id, ";
+        comandoSql += "usuarioCadastro_id, dataAbertura, naturezaJuridica) ";
+        comandoSql += "VALUES(";
+        comandoSql += empresaVO.getIsEmpresa() + ", ";
+        comandoSql += "'" + empresaVO.getCnpj().replaceAll("'", "") + "', ";
+        comandoSql += "'" + empresaVO.getIe().replaceAll("'", "") + "', ";
+        comandoSql += "'" + empresaVO.getRazao().replaceAll("'", "") + "', ";
+        comandoSql += "'" + empresaVO.getFantasia().replaceAll("'", "") + "', ";
+        comandoSql += empresaVO.getSisSituacaoSistema_id() + ", ";
+        comandoSql += empresaVO.getUsuarioCadastro_id() + ", ";
+        comandoSql += "'" + empresaVO.getDataAbertura() + "', ";
+        comandoSql += "'" + empresaVO.getNaturezaJuridica().replaceAll("'", "") + "'";
+        comandoSql += ") ";
+
+        return getInsertBancoDados(conn, comandoSql);
+
+    }
+
 
 }

@@ -27,6 +27,13 @@ public class SisUFDAO extends BuscaBandoDados {
         return sisUFVO;
     }
 
+    public SisUFVO getSisUFVO_DetMunicipios(int id) {
+        buscaSisUFVO(id, "");
+        if (sisUFVO!=null)
+            addMunicipiosEmUF(sisUFVO);
+        return sisUFVO;
+    }
+
     public List<SisUFVO> getSisUFVOList() {
         buscaSisUFVO(0, "");
         return sisUFVOList;

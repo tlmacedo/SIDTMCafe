@@ -1,5 +1,7 @@
 package br.com.sidtmcafe.model.vo;
 
+import br.com.sidtmcafe.model.dao.SisMunicipioDAO;
+import br.com.sidtmcafe.model.dao.SisTipoEnderecoDAO;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -15,6 +17,13 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
     StringProperty cep, logradouro, numero, complemento, bairro, pontoReferencia;
 
     public TabEnderecoVO() {
+    }
+
+    public TabEnderecoVO(int sisTipoEnd_id) {
+        this.sisTipoEndereco_id = new SimpleIntegerProperty(sisTipoEnd_id);
+        this.sisTipoEnderecoVO = new SisTipoEnderecoDAO().getSisTipoEnderecoVO(sisTipoEnd_id);
+        this.sisMunicipio_id = new SimpleIntegerProperty(112);
+        this.sisMunicipioVO = new SisMunicipioDAO().getSisMunicipioVO(112);
     }
 
     public SisTipoEnderecoVO getSisTipoEnderecoVO() {
@@ -148,6 +157,11 @@ public class TabEnderecoVO extends RecursiveTreeObject<TabEnderecoVO> {
 
     public void setPontoReferencia(String pontoReferencia) {
         pontoReferenciaProperty().set(pontoReferencia);
+    }
+
+    @Override
+    public String toString() {
+        return getSisTipoEnderecoVO().descricaoProperty().get();
     }
 
 }
