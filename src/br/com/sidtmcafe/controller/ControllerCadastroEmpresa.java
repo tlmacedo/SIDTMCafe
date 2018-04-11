@@ -158,24 +158,25 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                 switch (event.getCode()) {
                     case F1:
                         if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-//                        TabEnderecoVO enderecoVO = new TabEnderecoVO(1);
-//                        setTabEmpresaVO(new TabEmpresaVO());
+                        TabEnderecoVO enderecoVO = new TabEnderecoVO(1);
+                        TabEmpresaVO empresaVO = new TabEmpresaVO();
+                        empresaVO.setTabEnderecoVOList(new ArrayList<>());
+                        empresaVO.getTabEnderecoVOList().add(enderecoVO);
+
+                        setTabEmpresaVO(empresaVO);
                         setStatusFormulario("Incluir");
                         break;
                     case F2:
+                    case F5:
                         if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-//                        guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
-//                        if (!validarDadosCadastrais()) break;
-//
-//                        salvarEmpresa();
-//                        setTtvEmpresaVO(new TabEmpresaDAO().getTabEmpresaVO(getTtvEmpresaVO().getId()));
-//                        carregarListaEmpresa();
-//
-//                        setStatusFormulario("Pesquisa");
-//                        carregarPesquisaEmpresas(txtPesquisa.getText());
-//                        exibirDadosEmpresa();
-//                        ttvEmpresa.requestFocus();
+                        if (!validarDadosCadastrais()) break;
 
+                        salvarEmpresa();
+                        setStatusFormulario("Pesquisa");
+                        carregarListaEmpresa();
+                        preencherTabelaEmpresa();
+                        carregarPesquisaEmpresas(txtPesquisa.getText());
+                        txtPesquisa.requestFocus();
                         break;
                     case F3:
                         if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
@@ -192,32 +193,16 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                                         + ", deseja cancelar edição do cadastro de empresa?",
                                         "ic_cadastro_empresas_white_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
                                     return;
-//                                setTtvEmpresaVO(new TabEmpresaDAO().getTabEmpresaVO(getTtvEmpresaVO().getId()));
-//                                empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
+                                setTabEmpresaVO(ttvEmpresa.getSelectionModel().getSelectedItem().getValue());
                                 break;
                         }
                         setStatusFormulario("Pesquisa");
-//                        carregarPesquisaEmpresas(txtPesquisa.getText());
-//                        PersonalizarCampo.clearField((AnchorPane) tpnDadoCadastral.getContent());
                         break;
                     case F4:
                         if ((!getStatusBarFormulario().contains(event.getCode().toString())) || (getTabEmpresaVO() == null))
                             break;
                         indexObservableEmpresa = empresaVOObservableList.indexOf(getTabEmpresaVO());
                         setStatusFormulario("Editar");
-                        break;
-                    case F5:
-                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                        if (!validarDadosCadastrais()) break;
-
-                        salvarEmpresa();
-//                        setTtvEmpresaVO(new TabEmpresaDAO().getTabEmpresaVO(getTtvEmpresaVO().getId()));
-//                        empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
-//
-//                        setStatusFormulario("Pesquisa");
-//                        carregarPesquisaEmpresas(txtPesquisa.getText());
-//                        exibirDadosEmpresa();
-//                        ttvEmpresa.requestFocus();
                         break;
                     case F6:
                         if (getStatusFormulario().toLowerCase().equals("pesquisa") || (!event.isShiftDown())) break;
@@ -237,7 +222,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                         break;
                     case HELP:
                         if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
-//                        keyInsert();
+                        keyInsert();
                         break;
                     case DELETE:
                         if (getStatusFormulario().toLowerCase().equals("pesquisa")) return;
@@ -251,6 +236,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
         txtPesquisa.textProperty().addListener((ov, o, n) -> {
             carregarPesquisaEmpresas(n);
+        });
+
+        cboFiltroPesquisa.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
+            carregarPesquisaEmpresas(txtPesquisa.getText());
         });
 
         txtPesquisa.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
@@ -279,37 +268,28 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             }
         });
 
-//        txtCNPJ.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-//            if ((event.getCode() == KeyCode.ENTER)) {
-//                String valCnpj = txtCNPJ.getText().replaceAll("[\\-/. \\[\\]]", "");
-//                int idTipBusca = cboClassificacaoJuridica.getSelectionModel().getSelectedIndex();
-//                String tipBusca = "C.N.P.J.";
-//                if (idTipBusca == 0) tipBusca = "C.P.F.";
-//
-//                if ((valCnpj.length() != 11 && valCnpj.length() != 14) || (!ValidadarDado.isCnpjCpfValido(valCnpj))) {
-//                    new AlertMensagem("Dado inválido!", USUARIO_LOGADO_APELIDO + ", o " + tipBusca + ": " + txtCNPJ.getText() + " é inválido!",
-//                            "ic_web_service_err_white_24dp").getRetornoAlert_OK();
-//                    txtCNPJ.requestFocus();
-//                    txtCNPJ.selectAll();
-//                    return;
-//                }
-//
-//                if (idTipBusca == 1) {
-//                    listaTarefas = new ArrayList<>();
-//                    listaTarefas.add(new Pair("pesquisa cnpj", "Pesquisando C.N.P.J: [" + txtCNPJ.getText() + "]"));
-//
-//                    WsCnpjReceitaWsVO wsCnpjReceitaWsVO = new Tarefa().tarefaWsCnpjReceitaWs(listaTarefas);
-//
-//                    if (wsCnpjReceitaWsVO == null) {
-//                        txtCNPJ.requestFocus();
-//                        txtCNPJ.selectAll();
-//                    } else {
-//                        exibirRetorno_WsCnpjReceitaWs(wsCnpjReceitaWsVO);
-//                    }
-//                    listEndereco.getSelectionModel().select(0);
-//                }
-//            }
-//        });
+        txtCNPJ.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                String cnpjValue = txtCNPJ.getText().replaceAll("[\\-/., \\[\\]\\(\\)]", "");
+                if ((cnpjValue.length() != 11 && cnpjValue.length() != 14) || (!ValidadarDado.isCnpjCpfValido(cnpjValue))) {
+                    new AlertMensagem("Dado inválido!", USUARIO_LOGADO_APELIDO + ", o "
+                            + cboClassificacaoJuridica.getPromptText() + ": " + txtCNPJ.getText() + " é inválido!",
+                            "ic_web_service_err_white_24dp").getRetornoAlert_OK();
+                    txtCNPJ.requestFocus();
+                    return;
+                }
+                if (cboClassificacaoJuridica.getSelectionModel().getSelectedIndex() == 1) {
+                    listaTarefas = new ArrayList<>();
+                    listaTarefas.add(new Pair("buscarCNPJ", cnpjValue));
+
+                    TabEmpresaVO tabEmpresaVO = new Tarefa().tarefaWsCnpjReceitaWs(listaTarefas);
+                    if (tabEmpresaVO == null)
+                        return;
+                    setTabEmpresaVO(tabEmpresaVO);
+                    exibirDadosEmpresa();
+                }
+            }
+        });
 
         listEndereco.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
             if (!getStatusFormulario().toLowerCase().equals("pesquisa"))
@@ -323,27 +303,32 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             if (n == null || n.intValue() < 0) return;
             exibirDadosEndereco();
         });
-//
-//        txtEndCEP.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-//            if (event.getCode() == KeyCode.ENTER) {
-//                String valCep = txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "");
-//                if (valCep.length() != 8) {
-//                    return;
-//                }
-//                listaTarefas = new ArrayList<>();
-//                listaTarefas.add(new Pair("pesquisa cep", "Pesquisando C.E.P.: [" + txtEndCEP.getText() + "]"));
-//
-//                WsCepPostmonVO wsCepPostmonVO = new Tarefa().tarefaWsCepPostmon(listaTarefas);
-//                if (wsCepPostmonVO == null) {
-//                    txtEndCEP.requestFocus();
-//                    txtEndCEP.selectAll();
-//                } else {
-//                    exibirRetorno_WsCepPostmon(wsCepPostmonVO);
-//                    txtEndNumero.requestFocus();
-//                }
-//            }
-//        });
-//
+
+        txtEndCEP.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                String cepValue = txtEndCEP.getText().replaceAll("[\\-/., \\[\\]\\(\\)]", "");
+                if (cepValue.length() != 8) {
+                    new AlertMensagem("Dado inválido!", USUARIO_LOGADO_APELIDO + ", o "
+                            + "CEP: " + txtEndCEP.getText() + " é inválido!",
+                            "ic_web_service_err_white_24dp").getRetornoAlert_OK();
+                    txtEndCEP.requestFocus();
+                    return;
+                }
+                listaTarefas = new ArrayList<>();
+                listaTarefas.add(new Pair("buscarCEP", cepValue));
+
+                TabEnderecoVO tabEnderecoVO = new Tarefa().tarefaWsCepPostmon(listaTarefas);
+                if (tabEnderecoVO == null)
+                    return;
+                int idEnd = listEndereco.getSelectionModel().getSelectedIndex();
+                tabEnderecoVO.setSisTipoEnderecoVO(new SisTipoEnderecoDAO().getSisTipoEnderecoVO(getTabEnderecoVOList().get(idEnd).getSisTipoEndereco_id()));
+                tabEnderecoVO.setSisTipoEndereco_id(tabEnderecoVO.getSisTipoEnderecoVO().getId());
+                getTabEnderecoVOList().set(idEnd, tabEnderecoVO);
+                exibirDadosEndereco();
+                txtEndNumero.requestFocus();
+            }
+        });
+
         cboEndUF.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
             if ((o.intValue() >= 0) && (n.intValue() != o.intValue()) && (n.intValue() >= 0))
                 try {
@@ -382,6 +367,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         });
     }
 
+    int idEnderecoAtual = 0;
     int qtdRegistrosLocalizados = 0;
     int indexObservableEmpresa = 0;
     String tituloTab = ViewCadastroEmpresa.getTituloJanela();
@@ -469,13 +455,13 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             if (filtro > 0) {
                 switch (filtro) {
                     case 1:
-                        if (empresa.isIsCliente()) return true;
+                        if (!empresa.isIsCliente()) return false;
                         break;
                     case 2:
-                        if (empresa.isIsFornecedor()) return true;
+                        if (!empresa.isIsFornecedor()) return false;
                         break;
                     case 3:
-                        if (empresa.isIsTransportadora()) return true;
+                        if (!empresa.isIsTransportadora()) return false;
                         break;
                 }
             }
@@ -492,7 +478,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     }
 
     public void carregarListaEmpresa() {
-        empresaVOObservableList = FXCollections.observableArrayList(new TabEmpresaDAO().getTabEmpresaVOList());
+        empresaVOObservableList = FXCollections.observableArrayList(new TabEmpresaDAO().getTabEmpresaVOList(false));
     }
 
     void preencherCboEndMunicipio() {
@@ -575,6 +561,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             tabEmpresaVO = new TabEmpresaVO();
         this.tabEmpresaVO = tabEmpresaVO;
         setTabEnderecoVOList(getTabEmpresaVO().getTabEnderecoVOList());
+        //exibirDadosEmpresa();
     }
 
     public List<TabEnderecoVO> getTabEnderecoVOList() {
@@ -598,7 +585,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         if (cboClassificacaoJuridica.getSelectionModel().getSelectedIndex() == 0)
             tipFormat = "cpf";
         txtCNPJ.setText(FormatarDado.getCampoFormatado(getTabEmpresaVO().getCnpj(), tipFormat));
-        txtIE.setText(getTabEmpresaVO().getIe());
+        txtIE.setText(FormatarDado.getCampoFormatado(getTabEmpresaVO().getIe(), "ie" + getTabEnderecoVOList().get(0).getSisMunicipioVO().getUfVO().getSigla()));
         cboSituacaoSistema.getSelectionModel().select(getTabEmpresaVO().getSisSituacaoSistemaVO());
         txtRazao.setText(getTabEmpresaVO().getRazao());
         txtFantasia.setText(getTabEmpresaVO().getFantasia());
@@ -615,15 +602,17 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             lblDataAberturaDiff.setText("tempo de abertura: " + DataTrabalhada.getStrIntervaloDatas(ldAbertura, null));
         }
 
-        LocalDateTime ldtCadastro = getTabEmpresaVO().getDataCadastro().toLocalDateTime();
-        lblDataCadastro.setText("data cadastro: " + ldtCadastro.format(DTF_DATAHORA) + " [" + getTabEmpresaVO().getUsuarioCadastroVO().getApelido() + "]");
-        lblDataCadastroDiff.setText("tempo de cadastro: " + DataTrabalhada.getStrIntervaloDatas(ldtCadastro.toLocalDate(), null));
-        lblDataAtualizacao.setText("");
-        lblDataAtualizacaoDiff.setText("");
-        if (getTabEmpresaVO().getDataAtualizacao() != null) {
-            LocalDateTime ldtAtualizacao = getTabEmpresaVO().getDataAtualizacao().toLocalDateTime();
-            lblDataAtualizacao.setText("data atualização: " + ldtAtualizacao.format(DTF_DATAHORA) + " [" + getTabEmpresaVO().getUsuarioAtualizacaoVO().getApelido() + "]");
-            lblDataAtualizacaoDiff.setText("tempo de atualização: " + DataTrabalhada.getStrIntervaloDatas(ldtAtualizacao.toLocalDate(), null));
+        if (!getStatusFormulario().toLowerCase().equals("incluir")) {
+            LocalDateTime ldtCadastro = getTabEmpresaVO().getDataCadastro().toLocalDateTime();
+            lblDataCadastro.setText("data cadastro: " + ldtCadastro.format(DTF_DATAHORA) + " [" + getTabEmpresaVO().getUsuarioCadastroVO().getApelido() + "]");
+            lblDataCadastroDiff.setText("tempo de cadastro: " + DataTrabalhada.getStrIntervaloDatas(ldtCadastro.toLocalDate(), null));
+            lblDataAtualizacao.setText("");
+            lblDataAtualizacaoDiff.setText("");
+            if (getTabEmpresaVO().getDataAtualizacao() != null) {
+                LocalDateTime ldtAtualizacao = getTabEmpresaVO().getDataAtualizacao().toLocalDateTime();
+                lblDataAtualizacao.setText("data atualização: " + ldtAtualizacao.format(DTF_DATAHORA) + " [" + getTabEmpresaVO().getUsuarioAtualizacaoVO().getApelido() + "]");
+                lblDataAtualizacaoDiff.setText("tempo de atualização: " + DataTrabalhada.getStrIntervaloDatas(ldtAtualizacao.toLocalDate(), null));
+            }
         }
         //exibirDadosAdicionais();
         //preencherListaDetalhesReceita();
@@ -634,7 +623,8 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             limparEndereco();
             return;
         }
-        TabEnderecoVO enderecoVO = getTabEnderecoVOList().get(getTabEnderecoVOList().indexOf(listEndereco.getSelectionModel().getSelectedItem()));
+        idEnderecoAtual = listEndereco.getSelectionModel().getSelectedIndex();
+        TabEnderecoVO enderecoVO = getTabEnderecoVOList().get(idEnderecoAtual);
         txtEndCEP.setText(FormatarDado.getCampoFormatado(enderecoVO.getCep(), "cep"));
         txtEndLogradouro.setText(enderecoVO.getLogradouro());
         txtEndNumero.setText(enderecoVO.getNumero());
@@ -728,7 +718,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
     boolean validarDadosEndPrincipal() {
         boolean result = true;
-        listEndereco.getSelectionModel().select(0);
+        guardarEndereco(idEnderecoAtual);
         if (txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "").length() != 8 || txtEndCEP.getText().length() == 0) {
             txtEndCEP.requestFocus();
             result = false;
@@ -749,15 +739,15 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             new AlertMensagem("Endereço inválido!",
                     USUARIO_LOGADO_APELIDO + ", precisa endereço válido para empresa",
                     "ic_endereco_invalido_white_24dp.png").getRetornoAlert_OK();
-        else result = guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
+        //else result = guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
         return result;
     }
 
     boolean guardarEndereco(int index) {
         try {
             if (index < 0) return false;
-            int idEnd = getTabEnderecoVOList().indexOf(listEndereco.getItems().get(index));
-            TabEnderecoVO endAntVO = getTabEnderecoVOList().get(idEnd);
+            //int idEnd = getTabEnderecoVOList().indexOf(listEndereco.getItems().get(index));
+            TabEnderecoVO endAntVO = getTabEnderecoVOList().get(index);
             endAntVO.setSisTipoEnderecoVO(listEndereco.getItems().get(index).getSisTipoEnderecoVO());
             endAntVO.setSisTipoEndereco_id(listEndereco.getItems().get(index).getSisTipoEndereco_id());
             endAntVO.setCep(txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", ""));
@@ -768,9 +758,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             endAntVO.setPontoReferencia(txtEndPontoReferencia.getText());
             endAntVO.setSisMunicipio_id(cboEndMunicipio.getSelectionModel().getSelectedItem().getId());
             endAntVO.setSisMunicipioVO(new SisMunicipioDAO().getSisMunicipioVO(cboEndMunicipio.getSelectionModel().getSelectedItem().getId()));
-            getTabEnderecoVOList().set(idEnd, endAntVO);
+            getTabEnderecoVOList().set(index, endAntVO);
             listEndereco.getItems().set(index, endAntVO);
         } catch (Exception ex) {
+            ex.printStackTrace();
             return false;
         }
         return true;
@@ -800,6 +791,166 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         return true;
     }
 
+//    void exibirRetorno_WsCnpjReceitaWs(WsCnpjReceitaWsVO receitaWsVO) {
+//        cboClassificacaoJuridica.getSelectionModel().select(1);
+//        txtCNPJ.setText(receitaWsVO.getCnpj());
+//        txtRazao.setText(receitaWsVO.getNome());
+//        if (receitaWsVO.getFantasia().equals("")) receitaWsVO.setFantasia("***");
+//        txtFantasia.setText(receitaWsVO.getFantasia());
+//
+//        lblNaturezaJuridica.setText("Natureza Júridica: " + receitaWsVO.getNaturezaJuridica());
+//        lblDataAbertura.setText("data abertura: ");
+//        lblDataAberturaDiff.setText("tempo de abertura: ");
+//        if (receitaWsVO.getAbertura() != null) {
+//            LocalDate ldAbertura = LocalDate.parse(receitaWsVO.getAbertura(), DTF_DATA);
+//            lblDataAbertura.setText("data abertura: " + ldAbertura.format(DTF_DATA));
+//            lblDataAberturaDiff.setText("tempo de abertura: " + DataTrabalhada.getStrIntervaloDatas(ldAbertura, null));
+//        }
+//
+//        if (getTtvEnderecoVO().size() == 0) {
+//            getTtvEnderecoVO().add(addEndereco());
+//            listEndereco.getItems().setAll(getTtvEnderecoVO());
+//        }
+//        listEndereco.getSelectionModel().select(0);
+//        String valCep = receitaWsVO.getCep().replaceAll("[\\-/. \\[\\]]", "");
+//        txtEndCEP.setText(FormatarDado.getCampoFormatado(valCep, "cep"));
+//        txtEndLogradouro.setText(receitaWsVO.getLogradouro());
+//        txtEndNumero.setText(receitaWsVO.getNumero());
+//        if (receitaWsVO.getNumero().equals("")) txtEndNumero.setText("0");
+//        txtEndComplemento.setText(receitaWsVO.getComplemento());
+//        txtEndBairro.setText(receitaWsVO.getBairro());
+//        if (receitaWsVO.getMunicipio().equals("")) {
+//            cboEndUF.getSelectionModel().select(0);
+//        } else {
+//            SisMunicipioVO receitaMunicipio = new SisMunicipioDAO().getMunicipioVO(receitaWsVO.getMunicipio());
+//            cboEndUF.getSelectionModel().select(receitaMunicipio.getUfVO());
+//            cboEndMunicipio.getSelectionModel().select(receitaMunicipio);
+//        }
+//        txtEndPontoReferencia.setText("");
+//        guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
+//
+//        if (receitaWsVO.getTelefone() != "") {
+//            List<String> receitaWsTelefone = new ArrayList<>();
+//            for (String strCodTelefone : receitaWsVO.getTelefone().replaceAll("[-]", "").split("/")) {
+//                boolean telExiste = false;
+//                strCodTelefone = strCodTelefone.substring(strCodTelefone.length() - 9).replaceAll("[\\-/.() \\[\\]]", "");
+//                if (strCodTelefone.length() == 8 & Integer.parseInt(strCodTelefone.substring(0, 1)) >= 8)
+//                    strCodTelefone = "9" + strCodTelefone;
+//                for (int i = 0; i < getTtvTelefoneVO().size(); i++) {
+//                    if (getTtvTelefoneVO().get(i).getDescricao().equals(strCodTelefone.replaceAll("[\\-/. \\[\\]]", "")))
+//                        telExiste = true;
+//                }
+//                if (!telExiste)
+//                    receitaWsTelefone.add(strCodTelefone);
+//            }
+//            for (int i = 0; i < receitaWsTelefone.size(); i++) {
+//                TabTelefoneVO tel = new TabTelefoneVO();
+//                tel.setDescricao(receitaWsTelefone.get(i));
+//                tel.setTelefoneOperadora_id(2);
+//                tel.setTelefoneOperadoraVO(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVO(2));
+//                tel.setId(0);
+//                getTtvTelefoneVO().add(tel);
+//            }
+//            listTelefone.getItems().setAll(getTtvTelefoneVO());
+//        }
+//
+//        if (receitaWsVO.getEmail() != "") {
+//            List<String> receitaWsEmail = new ArrayList<>();
+//            int qtdEmail = receitaWsVO.getEmail().length() - receitaWsVO.getEmail().replaceAll("@", "").length();
+//            String strEmail = null;
+//            if (qtdEmail > 1) {
+//                System.out.print(qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n");
+//            } else {
+//                strEmail = receitaWsVO.getEmail();
+//            }
+//            boolean emailExiste = false;
+//            for (int i = 0; i < listEmail.getItems().size(); i++)
+//                if (receitaWsVO.getEmail().toLowerCase().equals(listEmail.getItems().get(i).getDescricao().toLowerCase()))
+//                    emailExiste = true;
+//            if (!emailExiste)
+//                receitaWsEmail.add(strEmail);
+//            for (int i = 0; i < receitaWsEmail.size(); i++) {
+//                TabEmailHomePageVO email = new TabEmailHomePageVO();
+//                email.setId(0);
+//                email.setDescricao(receitaWsEmail.get(i));
+//                email.setIsEmail(1);
+//                getTtvEmailHomePageVO().add(email);
+//                listEmail.getItems().add(email);
+//            }
+//        }
+//
+//        if (getTtvDetalheReceitaFederalVO() == null)
+//            setTtvDetalheReceitaFederalVO(new ArrayList<>());
+//        for (TabEmpresaDetalheReceitaFederalVO detalhe : getTtvDetalheReceitaFederalVO())
+//            detalhe.setEmpresa_id(0);
+//
+//
+//        if (receitaWsVO.getAtividadePrincipal().size() > 0) {
+//            List<Pair<String, String>> receitaWsAtividadePrincipal = new ArrayList<>();
+//            for (Pair<String, String> pair : receitaWsVO.getAtividadePrincipal()) {
+//                boolean atividadePrincExiste = false;
+//                for (int i = 0; i < listAtividadePrincipal.getItems().size(); i++)
+//                    if (((TabEmpresaDetalheReceitaFederalVO) listAtividadePrincipal.getItems().get(i)).getStr_key().equals(pair.getKey()))
+//                        atividadePrincExiste = true;
+//
+//                if (!atividadePrincExiste)
+//                    receitaWsAtividadePrincipal.add(pair);
+//            }
+//            for (int i = 0; i < receitaWsAtividadePrincipal.size(); i++) {
+//                TabEmpresaDetalheReceitaFederalVO atividadePrincipal = new TabEmpresaDetalheReceitaFederalVO();
+//                atividadePrincipal.setId(0);
+//                atividadePrincipal.setEmpresa_id(0);
+//                atividadePrincipal.setIsAtividadePrincipal(1);
+//                atividadePrincipal.setStr_key(receitaWsAtividadePrincipal.get(i).getKey());
+//                atividadePrincipal.setStr_value(receitaWsAtividadePrincipal.get(i).getValue());
+//                getTtvDetalheReceitaFederalVO().add(atividadePrincipal);
+//            }
+//        }
+//
+//        if (receitaWsVO.getAtividadesSecundarias().size() > 0) {
+//            List<Pair<String, String>> receitaWsAtividadeSecundaria = new ArrayList<>();
+//            for (Pair<String, String> pair : receitaWsVO.getAtividadesSecundarias()) {
+//                boolean atividadeSecunExiste = false;
+//                for (int i = 0; i < listAtividadeSecundaria.getItems().size(); i++)
+//                    if (((TabEmpresaDetalheReceitaFederalVO) listAtividadeSecundaria.getItems().get(i)).getStr_key().equals(pair.getKey()))
+//                        atividadeSecunExiste = true;
+//                if (!atividadeSecunExiste)
+//                    receitaWsAtividadeSecundaria.add(pair);
+//            }
+//            for (int i = 0; i < receitaWsAtividadeSecundaria.size(); i++) {
+//                TabEmpresaDetalheReceitaFederalVO atividadeSecundaria = new TabEmpresaDetalheReceitaFederalVO();
+//                atividadeSecundaria.setEmpresa_id(0);
+//                atividadeSecundaria.setId(0);
+//                atividadeSecundaria.setIsAtividadePrincipal(0);
+//                atividadeSecundaria.setStr_key(receitaWsAtividadeSecundaria.get(i).getKey());
+//                atividadeSecundaria.setStr_value(receitaWsAtividadeSecundaria.get(i).getValue());
+//                getTtvDetalheReceitaFederalVO().add(atividadeSecundaria);
+//            }
+//
+//        }
+//
+//        if (receitaWsVO.getQsa().size() > 0) {
+//            List<Pair<String, String>> receitaWsQsa = new ArrayList<>();
+//            for (Pair<String, String> pair : receitaWsVO.getQsa()) {
+//                boolean qsaExiste = false;
+//                for (int i = 0; i < ttvDetalheReceita.getCurrentItemsCount(); i++)
+//                    if (((TabEmpresaDetalheReceitaFederalVO) ttvDetalheReceita.getTreeItem(i).getValue()).getStr_key().equals(pair.getKey()))
+//                        qsaExiste = true;
+//                if (!qsaExiste)
+//                    receitaWsQsa.add(pair);
+//            }
+//            for (int i = 0; i < receitaWsQsa.size(); i++) {
+//                TabEmpresaDetalheReceitaFederalVO qsa = new TabEmpresaDetalheReceitaFederalVO();
+//                qsa.setEmpresa_id(0);
+//                qsa.setId(0);
+//                qsa.setIsAtividadePrincipal(2);
+//                qsa.setStr_key(receitaWsQsa.get(i).getKey());
+//                qsa.setStr_value(receitaWsQsa.get(i).getValue());
+//                getTtvDetalheReceitaFederalVO().add(qsa);
+//            }
+//        }
+//        preencherListaDetalhesReceita();
+//    }
 
     //    int indexObservableEmpresa = 0;
 //    TabEmpresaVO ttvEmpresaVO;
@@ -1097,54 +1248,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 //        return emp;
 //    }
 //
-//    TabEnderecoVO addEndereco() {
-//        int tipEnd = 1;
-//        try {
-//            if (getTtvEnderecoVO().get(0).getSisTipoEndereco_id() == 1) {
-//                if (!validarEnd()) return null;
-//                List<SisTipoEnderecoVO> list = getTipoEnderecoDisponivel();
-//                if (list.size() <= 0) {
-//                    new AlertMensagem("Endereço não disponivél",
-//                            USUARIO_LOGADO_APELIDO + ", a empresa " + txtRazao.getText()
-//                                    + " não tem disponibilidade de endereço!\nAtualize algum endereço já existente!",
-//                            "ic_endereco_add_white_24dp.png").getRetornoAlert_OK();
-//                    return null;
-//                }
-//                Object o = new AlertMensagem("Adicionar dados [endereço]",
-//                        USUARIO_LOGADO_APELIDO + ", selecione o tipo endereço",
-//                        "ic_endereco_add_white_24dp.png").getRetornoAlert_ComboBox(list).get();
-//                if (o == null) return null;
-//                tipEnd = ((SisTipoEnderecoVO) o).getId();
-//                txtEndCEP.requestFocus();
-//            }
-//        } catch (Exception ex) {
-////            if ((!(ex instanceof IndexOutOfBoundsException)) || (!(ex instanceof NullPointerException))) {
-////                ex.printStackTrace();
-////                return null;
-////            }
-//        } finally {
-//            TabEnderecoVO newEndereco = new TabEnderecoVO();
-//            newEndereco.setId(0);
-//            newEndereco.setSisTipoEndereco_id(tipEnd);
-//            newEndereco.setTipoEnderecoVO(new SisTipoEnderecoDAO().getTipoEnderecoVO(tipEnd));
-//            newEndereco.setSisMunicipio_id(112);
-//            newEndereco.setMunicipioVO(new SisMunicipioDAO().getMunicipioVO(newEndereco.getSisMunicipio_id()));
-//            return newEndereco;
-//        }
-//    }
-//
-//    List<SisTipoEnderecoVO> getTipoEnderecoDisponivel() {
-//        List<SisTipoEnderecoVO> endDisponivel = new ArrayList<>();
-//        for (SisTipoEnderecoVO tipEnd : tipoEnderecoVOList) {
-//            int exite = 0;
-//            for (int i = 0; i < listEndereco.getItems().size(); i++) {
-//                if (tipEnd.getDescricao().equals(listEndereco.getItems().get(i).getTipoEnderecoVO().getDescricao()))
-//                    exite = 1;
-//            }
-//            if (exite == 0) endDisponivel.add(tipEnd);
-//        }
-//        return endDisponivel;
-//    }
 //
 //    TabEmailHomePageVO addEmailHomePage(boolean isEmpresa, boolean isEmail) {
 //        String empresa = "a empresa: " + txtRazao.getText();
@@ -1337,167 +1440,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 //    }
 //
 //
-//    void exibirRetorno_WsCnpjReceitaWs(WsCnpjReceitaWsVO receitaWsVO) {
-//        cboClassificacaoJuridica.getSelectionModel().select(1);
-//        txtCNPJ.setText(receitaWsVO.getCnpj());
-//        txtRazao.setText(receitaWsVO.getNome());
-//        if (receitaWsVO.getFantasia().equals("")) receitaWsVO.setFantasia("***");
-//        txtFantasia.setText(receitaWsVO.getFantasia());
-//
-//        lblNaturezaJuridica.setText("Natureza Júridica: " + receitaWsVO.getNaturezaJuridica());
-//        lblDataAbertura.setText("data abertura: ");
-//        lblDataAberturaDiff.setText("tempo de abertura: ");
-//        if (receitaWsVO.getAbertura() != null) {
-//            LocalDate ldAbertura = LocalDate.parse(receitaWsVO.getAbertura(), DTF_DATA);
-//            lblDataAbertura.setText("data abertura: " + ldAbertura.format(DTF_DATA));
-//            lblDataAberturaDiff.setText("tempo de abertura: " + DataTrabalhada.getStrIntervaloDatas(ldAbertura, null));
-//        }
-//
-//        if (getTtvEnderecoVO().size() == 0) {
-//            getTtvEnderecoVO().add(addEndereco());
-//            listEndereco.getItems().setAll(getTtvEnderecoVO());
-//        }
-//        listEndereco.getSelectionModel().select(0);
-//        String valCep = receitaWsVO.getCep().replaceAll("[\\-/. \\[\\]]", "");
-//        txtEndCEP.setText(FormatarDado.getCampoFormatado(valCep, "cep"));
-//        txtEndLogradouro.setText(receitaWsVO.getLogradouro());
-//        txtEndNumero.setText(receitaWsVO.getNumero());
-//        if (receitaWsVO.getNumero().equals("")) txtEndNumero.setText("0");
-//        txtEndComplemento.setText(receitaWsVO.getComplemento());
-//        txtEndBairro.setText(receitaWsVO.getBairro());
-//        if (receitaWsVO.getMunicipio().equals("")) {
-//            cboEndUF.getSelectionModel().select(0);
-//        } else {
-//            SisMunicipioVO receitaMunicipio = new SisMunicipioDAO().getMunicipioVO(receitaWsVO.getMunicipio());
-//            cboEndUF.getSelectionModel().select(receitaMunicipio.getUfVO());
-//            cboEndMunicipio.getSelectionModel().select(receitaMunicipio);
-//        }
-//        txtEndPontoReferencia.setText("");
-//        guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
-//
-//        if (receitaWsVO.getTelefone() != "") {
-//            List<String> receitaWsTelefone = new ArrayList<>();
-//            for (String strCodTelefone : receitaWsVO.getTelefone().replaceAll("[-]", "").split("/")) {
-//                boolean telExiste = false;
-//                strCodTelefone = strCodTelefone.substring(strCodTelefone.length() - 9).replaceAll("[\\-/.() \\[\\]]", "");
-//                if (strCodTelefone.length() == 8 & Integer.parseInt(strCodTelefone.substring(0, 1)) >= 8)
-//                    strCodTelefone = "9" + strCodTelefone;
-//                for (int i = 0; i < getTtvTelefoneVO().size(); i++) {
-//                    if (getTtvTelefoneVO().get(i).getDescricao().equals(strCodTelefone.replaceAll("[\\-/. \\[\\]]", "")))
-//                        telExiste = true;
-//                }
-//                if (!telExiste)
-//                    receitaWsTelefone.add(strCodTelefone);
-//            }
-//            for (int i = 0; i < receitaWsTelefone.size(); i++) {
-//                TabTelefoneVO tel = new TabTelefoneVO();
-//                tel.setDescricao(receitaWsTelefone.get(i));
-//                tel.setTelefoneOperadora_id(2);
-//                tel.setTelefoneOperadoraVO(new SisTelefoneOperadoraDAO().getTelefoneOperadoraVO(2));
-//                tel.setId(0);
-//                getTtvTelefoneVO().add(tel);
-//            }
-//            listTelefone.getItems().setAll(getTtvTelefoneVO());
-//        }
-//
-//        if (receitaWsVO.getEmail() != "") {
-//            List<String> receitaWsEmail = new ArrayList<>();
-//            int qtdEmail = receitaWsVO.getEmail().length() - receitaWsVO.getEmail().replaceAll("@", "").length();
-//            String strEmail = null;
-//            if (qtdEmail > 1) {
-//                System.out.print(qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n" + qtdEmail + " emails no wsReceitaWsVO\n");
-//            } else {
-//                strEmail = receitaWsVO.getEmail();
-//            }
-//            boolean emailExiste = false;
-//            for (int i = 0; i < listEmail.getItems().size(); i++)
-//                if (receitaWsVO.getEmail().toLowerCase().equals(listEmail.getItems().get(i).getDescricao().toLowerCase()))
-//                    emailExiste = true;
-//            if (!emailExiste)
-//                receitaWsEmail.add(strEmail);
-//            for (int i = 0; i < receitaWsEmail.size(); i++) {
-//                TabEmailHomePageVO email = new TabEmailHomePageVO();
-//                email.setId(0);
-//                email.setDescricao(receitaWsEmail.get(i));
-//                email.setIsEmail(1);
-//                getTtvEmailHomePageVO().add(email);
-//                listEmail.getItems().add(email);
-//            }
-//        }
-//
-//        if (getTtvDetalheReceitaFederalVO() == null)
-//            setTtvDetalheReceitaFederalVO(new ArrayList<>());
-//        for (TabEmpresaDetalheReceitaFederalVO detalhe : getTtvDetalheReceitaFederalVO())
-//            detalhe.setEmpresa_id(0);
-//
-//
-//        if (receitaWsVO.getAtividadePrincipal().size() > 0) {
-//            List<Pair<String, String>> receitaWsAtividadePrincipal = new ArrayList<>();
-//            for (Pair<String, String> pair : receitaWsVO.getAtividadePrincipal()) {
-//                boolean atividadePrincExiste = false;
-//                for (int i = 0; i < listAtividadePrincipal.getItems().size(); i++)
-//                    if (((TabEmpresaDetalheReceitaFederalVO) listAtividadePrincipal.getItems().get(i)).getStr_key().equals(pair.getKey()))
-//                        atividadePrincExiste = true;
-//
-//                if (!atividadePrincExiste)
-//                    receitaWsAtividadePrincipal.add(pair);
-//            }
-//            for (int i = 0; i < receitaWsAtividadePrincipal.size(); i++) {
-//                TabEmpresaDetalheReceitaFederalVO atividadePrincipal = new TabEmpresaDetalheReceitaFederalVO();
-//                atividadePrincipal.setId(0);
-//                atividadePrincipal.setEmpresa_id(0);
-//                atividadePrincipal.setIsAtividadePrincipal(1);
-//                atividadePrincipal.setStr_key(receitaWsAtividadePrincipal.get(i).getKey());
-//                atividadePrincipal.setStr_value(receitaWsAtividadePrincipal.get(i).getValue());
-//                getTtvDetalheReceitaFederalVO().add(atividadePrincipal);
-//            }
-//        }
-//
-//        if (receitaWsVO.getAtividadesSecundarias().size() > 0) {
-//            List<Pair<String, String>> receitaWsAtividadeSecundaria = new ArrayList<>();
-//            for (Pair<String, String> pair : receitaWsVO.getAtividadesSecundarias()) {
-//                boolean atividadeSecunExiste = false;
-//                for (int i = 0; i < listAtividadeSecundaria.getItems().size(); i++)
-//                    if (((TabEmpresaDetalheReceitaFederalVO) listAtividadeSecundaria.getItems().get(i)).getStr_key().equals(pair.getKey()))
-//                        atividadeSecunExiste = true;
-//                if (!atividadeSecunExiste)
-//                    receitaWsAtividadeSecundaria.add(pair);
-//            }
-//            for (int i = 0; i < receitaWsAtividadeSecundaria.size(); i++) {
-//                TabEmpresaDetalheReceitaFederalVO atividadeSecundaria = new TabEmpresaDetalheReceitaFederalVO();
-//                atividadeSecundaria.setEmpresa_id(0);
-//                atividadeSecundaria.setId(0);
-//                atividadeSecundaria.setIsAtividadePrincipal(0);
-//                atividadeSecundaria.setStr_key(receitaWsAtividadeSecundaria.get(i).getKey());
-//                atividadeSecundaria.setStr_value(receitaWsAtividadeSecundaria.get(i).getValue());
-//                getTtvDetalheReceitaFederalVO().add(atividadeSecundaria);
-//            }
-//
-//        }
-//
-//        if (receitaWsVO.getQsa().size() > 0) {
-//            List<Pair<String, String>> receitaWsQsa = new ArrayList<>();
-//            for (Pair<String, String> pair : receitaWsVO.getQsa()) {
-//                boolean qsaExiste = false;
-//                for (int i = 0; i < ttvDetalheReceita.getCurrentItemsCount(); i++)
-//                    if (((TabEmpresaDetalheReceitaFederalVO) ttvDetalheReceita.getTreeItem(i).getValue()).getStr_key().equals(pair.getKey()))
-//                        qsaExiste = true;
-//                if (!qsaExiste)
-//                    receitaWsQsa.add(pair);
-//            }
-//            for (int i = 0; i < receitaWsQsa.size(); i++) {
-//                TabEmpresaDetalheReceitaFederalVO qsa = new TabEmpresaDetalheReceitaFederalVO();
-//                qsa.setEmpresa_id(0);
-//                qsa.setId(0);
-//                qsa.setIsAtividadePrincipal(2);
-//                qsa.setStr_key(receitaWsQsa.get(i).getKey());
-//                qsa.setStr_value(receitaWsQsa.get(i).getValue());
-//                getTtvDetalheReceitaFederalVO().add(qsa);
-//            }
-//        }
-//        preencherListaDetalhesReceita();
-//    }
-//
 //    void exibirRetorno_WsCepPostmon(WsCepPostmonVO cepPostmonVO) {
 //        String valCep = cepPostmonVO.getCep().replaceAll("[\\-/. \\[\\]]", "");
 //        txtEndCEP.setText(FormatarDado.getCampoFormatado(valCep, "cep"));
@@ -1514,14 +1456,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 //    }
 //
 //    void keyInsert() {
-//        if (listEndereco.isFocused()) {
-//            guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
-//            TabEnderecoVO endereco;
-//            if ((endereco = addEndereco()) == null) return;
-//            getTtvEnderecoVO().add(endereco);
-//            listEndereco.getItems().add(endereco);
-//            listEndereco.getSelectionModel().selectLast();
-//        }
 //        if (listHomePage.isFocused()) {
 //            TabEmailHomePageVO homePage;
 //            if ((homePage = addEmailHomePage(true, false)) == null) return;
@@ -1679,15 +1613,79 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 //    }
 //
 
+    void keyInsert() {
+        if (listEndereco.isFocused()) {
+            guardarEndereco(listEndereco.getSelectionModel().getSelectedIndex());
+            TabEnderecoVO enderecoVO = addEndereco();
+            if (enderecoVO == null) return;
+            getTabEnderecoVOList().add(enderecoVO);
+            atualizaListaEndereco();
+            listEndereco.getSelectionModel().selectLast();
+            txtEndCEP.requestFocus();
+        }
+    }
+
+    TabEnderecoVO addEndereco() {
+        TabEnderecoVO enderecoVO = new TabEnderecoVO(1);
+        if (getTabEmpresaVO().getTabEnderecoVOList().get(0).getSisTipoEndereco_id() == 1) {
+            List<SisTipoEnderecoVO> list = getTipoEnderecoDisponivel();
+            if (list.size() <= 0) {
+                new AlertMensagem("Endereço não disponivél",
+                        USUARIO_LOGADO_APELIDO + ", a empresa " + txtRazao.getText()
+                                + " não tem disponibilidade de endereço!\nAtualize algum endereço já existente!",
+                        "ic_endereco_add_white_24dp.png").getRetornoAlert_OK();
+                return null;
+            }
+            Object o = null;
+            try {
+                o = new AlertMensagem("Adicionar dados [endereço]",
+                        USUARIO_LOGADO_APELIDO + ", selecione o tipo endereço",
+                        "ic_endereco_add_white_24dp.png").getRetornoAlert_ComboBox(list).get();
+            } catch (Exception ex) {
+                if (!(ex instanceof NoSuchElementException)) ex.printStackTrace();
+            }
+            if (o == null) return null;
+            enderecoVO.setSisTipoEnderecoVO(new SisTipoEnderecoDAO().getSisTipoEnderecoVO(((SisTipoEnderecoVO) o).getId()));
+            enderecoVO.setSisTipoEndereco_id(enderecoVO.getSisTipoEnderecoVO().getId());
+        }
+        return enderecoVO;
+    }
+
+    List<SisTipoEnderecoVO> getTipoEnderecoDisponivel() {
+        List<SisTipoEnderecoVO> endDisponivel = new ArrayList<>();
+        for (SisTipoEnderecoVO tipEnd : sisTipoEnderecoVOList) {
+            int exite = 0;
+            for (int i = 0; i < getTabEnderecoVOList().size(); i++) {
+                if (tipEnd.getDescricao().equals(getTabEnderecoVOList().get(i).getSisTipoEnderecoVO().getDescricao()))
+                    exite = 1;
+            }
+            if (exite == 0) endDisponivel.add(tipEnd);
+        }
+        return endDisponivel;
+    }
+
     void salvarEmpresa() {
         Connection conn = ConnectionFactory.getConnection();
         try {
             conn.setAutoCommit(false);
             int idEmpresa = getTabEmpresaVO().getId();
-            if (idEmpresa == 0) {
 
-            } else
+            if (getTabEmpresaVO().getId() == 0) {
+                getTabEmpresaVO().setId(new TabEmpresaDAO().insertTabEmpresaVO(conn, getTabEmpresaVO()));
+            } else {
                 new TabEmpresaDAO().updateTabEmpresaVO(conn, getTabEmpresaVO());
+            }
+
+            new RelEmpresaEnderecoDAO().dedeteRelEmpresaEnderecoVO(conn, getTabEmpresaVO().getId());
+            for (int i = 0; i < getTabEnderecoVOList().size(); i++) {
+                if (getTabEnderecoVOList().get(i).getId() == 0) {
+                    getTabEnderecoVOList().get(i).setId(new TabEnderecoDAO().insertTabEnderecoVO(conn, getTabEnderecoVOList().get(i)));
+                } else {
+                    new TabEnderecoDAO().updateTabEnderecoVO(conn, getTabEnderecoVOList().get(i));
+                }
+                new RelEmpresaEnderecoDAO().insertTabEmpresaVO(conn, getTabEmpresaVO().getId(), getTabEnderecoVOList().get(i).getId());
+            }
+
 
             conn.commit();
         } catch (SQLException ex) {

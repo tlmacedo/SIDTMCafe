@@ -21,32 +21,39 @@ public class TabEmpresaDAO extends BuscaBandoDados {
     List<TabEmpresaVO> tabEmpresaVOList;
 
     public TabEmpresaVO getTabEmpresaVO_Simples(int id) {
-        buscaTabEmpresaVO(id);
+        buscaTabEmpresaVO(id, false);
         return tabEmpresaVO;
     }
 
     public TabEmpresaVO getTabEmpresaVO(int id) {
-        buscaTabEmpresaVO(id);
+        buscaTabEmpresaVO(id, false);
         if (tabEmpresaVO != null)
             addObjetosPesquisa(tabEmpresaVO);
         return tabEmpresaVO;
     }
 
-    public List<TabEmpresaVO> getTabEmpresaVOList() {
-        buscaTabEmpresaVO(0);
+    public List<TabEmpresaVO> getTabEmpresaVOList(boolean isLoja) {
+        buscaTabEmpresaVO(0, isLoja);
         if (tabEmpresaVOList != null)
             for (TabEmpresaVO empresaVO : tabEmpresaVOList)
                 addObjetosPesquisa(empresaVO);
         return tabEmpresaVOList;
     }
 
-    void buscaTabEmpresaVO(int id) {
+    void buscaTabEmpresaVO(int id, boolean isLoja) {
         comandoSql = "SELECT id, isEmpresa, cnpj, ie, razao, fantasia, isLoja, isCliente, isFornecedor, " +
-                "isTransportadora, sisSituacaoSistema_id, usarioCadastro_id, dataCadastro, " +
+                "isTransportadora, sisSituacaoSistema_id, usuarioCadastro_id, dataCadastro, " +
                 "usuarioAtualizacao_id, dataAtualizacao, dataAbertura, naturezaJuridica " +
-                "FROM tabEmpresa " +
-                "WHERE (isCliente = '1' OR isFornecedor= '1' OR isTransportadora = '1') ";
-        if (id > 0) comandoSql += " AND id = '" + id + "' ";
+                "FROM tabEmpresa ";
+        if (id > 0) {
+            comandoSql += "WHERE id = '" + id + "' ";
+        } else {
+            if (isLoja) {
+                comandoSql += "WHERE isLoja = '1' ";
+            } else {
+                comandoSql += "WHERE (isCliente = '1' OR isFornecedor= '1' OR isTransportadora = '1') ";
+            }
+        }
         comandoSql += "ORDER BY razao ";
 
         if (id == 0) tabEmpresaVOList = new ArrayList<>();
@@ -65,7 +72,7 @@ public class TabEmpresaDAO extends BuscaBandoDados {
                 tabEmpresaVO.setIsFornecedor(rs.getBoolean("isFornecedor"));
                 tabEmpresaVO.setIsTransportadora(rs.getBoolean("isTransportadora"));
                 tabEmpresaVO.setSisSituacaoSistema_id(rs.getInt("sisSituacaoSistema_id"));
-                tabEmpresaVO.setUsuarioCadastro_id(rs.getInt("usarioCadastro_id"));
+                tabEmpresaVO.setUsuarioCadastro_id(rs.getInt("usuarioCadastro_id"));
                 tabEmpresaVO.setDataCadastro(rs.getTimestamp("dataCadastro"));
                 tabEmpresaVO.setUsuarioAtualizacao_id(rs.getInt("usuarioAtualizacao_id"));
                 tabEmpresaVO.setDataAtualizacao(rs.getTimestamp("dataAtualizacao"));
@@ -114,20 +121,24 @@ public class TabEmpresaDAO extends BuscaBandoDados {
         comandoSql += "naturezaJuridica = '" + empresaVO.getNaturezaJuridica().replaceAll("[']", "") + "' ";
         comandoSql += "WHERE id = " + empresaVO.getId();
 
-        if (getUpdateBancoDados(conn, comandoSql)) ;
+        getUpdateBancoDados(conn, comandoSql);
 
     }
 
     public int insertTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) throws SQLException {
         comandoSql = "INSERT INTO tabEmpresa ";
-        comandoSql += "(isEmpresa, cnpj, ie, razao, fantasia, sisSituacaoSistema_id, ";
-        comandoSql += "usuarioCadastro_id, dataAbertura, naturezaJuridica) ";
+        comandoSql += "(isEmpresa, cnpj, ie, razao, fantasia, isLoja, isCliente, isFornecedor, isTransportadora, ";
+        comandoSql += "sisSituacaoSistema_id, usuarioCadastro_id, dataAbertura, naturezaJuridica) ";
         comandoSql += "VALUES(";
         comandoSql += empresaVO.getIsEmpresa() + ", ";
         comandoSql += "'" + empresaVO.getCnpj().replaceAll("'", "") + "', ";
         comandoSql += "'" + empresaVO.getIe().replaceAll("'", "") + "', ";
         comandoSql += "'" + empresaVO.getRazao().replaceAll("'", "") + "', ";
         comandoSql += "'" + empresaVO.getFantasia().replaceAll("'", "") + "', ";
+        comandoSql += empresaVO.isIsLoja() + ", ";
+        comandoSql += empresaVO.isIsCliente() + ", ";
+        comandoSql += empresaVO.isIsFornecedor() + ", ";
+        comandoSql += empresaVO.isIsTransportadora() + ", ";
         comandoSql += empresaVO.getSisSituacaoSistema_id() + ", ";
         comandoSql += empresaVO.getUsuarioCadastro_id() + ", ";
         comandoSql += "'" + empresaVO.getDataAbertura() + "', ";

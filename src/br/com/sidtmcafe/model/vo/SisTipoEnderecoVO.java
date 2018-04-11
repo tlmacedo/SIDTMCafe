@@ -40,4 +40,8 @@ public class SisTipoEnderecoVO extends RecursiveTreeObject<SisTipoEnderecoVO> {
         descricaoProperty().set(descricao);
     }
 
+    @Override
+    public String toString() {
+        return descricaoProperty().get();
+    }
 }

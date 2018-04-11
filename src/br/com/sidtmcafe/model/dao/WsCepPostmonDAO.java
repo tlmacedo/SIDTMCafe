@@ -1,6 +1,7 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.interfaces.Constants;
+import br.com.sidtmcafe.model.vo.TabEnderecoVO;
 import br.com.sidtmcafe.model.vo.WsCepPostmonVO;
 import org.json.JSONObject;
 
@@ -21,7 +22,6 @@ public class WsCepPostmonDAO extends BuscaWebService implements Constants {
             wsCepPostmonVO = new WsCepPostmonVO();
 
             wsCepPostmonVO.setBairro(jsonObject.getString("bairro"));
-            wsCepPostmonVO.setBairro(jsonObject.getString("bairro"));
             wsCepPostmonVO.setCidade(jsonObject.getString("cidade"));
             wsCepPostmonVO.setCep(jsonObject.getString("cep"));
             wsCepPostmonVO.setLogradouro(jsonObject.getString("logradouro"));
@@ -39,5 +39,31 @@ public class WsCepPostmonDAO extends BuscaWebService implements Constants {
 
 
         return wsCepPostmonVO;
+    }
+
+    public TabEnderecoVO getTabEnderecoVO(String cep) {
+        TabEnderecoVO enderecoVO = null;
+        jsonObject = getJsonObjectWebService(WS_POSTMON_URL + cep);
+
+        if (jsonObject == null)
+            return enderecoVO;
+
+        try {
+            enderecoVO = new TabEnderecoVO(1);
+            enderecoVO.setCep(jsonObject.getString("cep"));
+            enderecoVO.setLogradouro(jsonObject.getString("logradouro"));
+            enderecoVO.setNumero("");
+            enderecoVO.setComplemento("");
+            enderecoVO.setBairro(jsonObject.getString("bairro"));
+            enderecoVO.setSisMunicipioVO(new SisMunicipioDAO().getSisMunicipioVO(jsonObject.getString("cidade")));
+            enderecoVO.setSisMunicipio_id(enderecoVO.getSisMunicipioVO().getId());
+            enderecoVO.setPontoReferencia("");
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return enderecoVO;
+
     }
 }

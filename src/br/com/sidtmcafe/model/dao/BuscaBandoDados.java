@@ -26,11 +26,10 @@ public class BuscaBandoDados {
         return rs;
     }
 
-    boolean getUpdateBancoDados(Connection conn, String comandoSql) throws SQLException {
+    void getUpdateBancoDados(Connection conn, String comandoSql) throws SQLException {
         stmt = conn.prepareStatement(comandoSql);
         stmt.execute();
 
-        return true;
     }
 
     int getInsertBancoDados(Connection conn, String comandoSql) throws SQLException {
@@ -43,11 +42,10 @@ public class BuscaBandoDados {
         return idInclusao;
     }
 
-    boolean getDeleteBancoDados(Connection conn, String comandoSql) throws SQLException {
+    void getDeleteBancoDados(Connection conn, String comandoSql) throws SQLException {
         stmt = conn.prepareStatement(comandoSql);
         stmt.execute();
 
-        return true;
     }
 
 

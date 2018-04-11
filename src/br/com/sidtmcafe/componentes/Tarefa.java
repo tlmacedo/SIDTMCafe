@@ -8,11 +8,11 @@ import br.com.sidtmcafe.model.dao.WsCepPostmonDAO;
 import br.com.sidtmcafe.model.dao.WsCnpjReceitaWsDAO;
 import br.com.sidtmcafe.model.dao.WsEanCosmosDAO;
 import br.com.sidtmcafe.model.model.TabModel;
-import br.com.sidtmcafe.model.vo.WsCepPostmonVO;
-import br.com.sidtmcafe.model.vo.WsCnpjReceitaWsVO;
-import br.com.sidtmcafe.model.vo.WsEanCosmosVO;
+import br.com.sidtmcafe.model.vo.*;
+import br.com.sidtmcafe.service.FormatarDado;
 import javafx.concurrent.Task;
 import javafx.util.Pair;
+import org.apache.velocity.runtime.directive.contrib.For;
 import webService.fonteDeDados.ConsultaStub;
 import webService.fonteDeDados.ConsultaStub.*;
 
@@ -27,6 +27,8 @@ public class Tarefa implements Constants {
     URL url;
     BigDecimal getSaldo;
     WsCnpjReceitaWsVO wsCnpjReceitaWsVO;
+    TabEmpresaVO tabEmpresaVO;
+    TabEnderecoVO tabEnderecoVO;
     WsCepPostmonVO wsCepPostmonVO;
     WsEanCosmosVO wsEanCosmosVO;
     int qtdTarefas = 1;
@@ -93,20 +95,22 @@ public class Tarefa implements Constants {
         alertMensagem.getProgressBar(voidTask, true, true, qtdTarefas);
     }
 
-    public WsCnpjReceitaWsVO tarefaWsCnpjReceitaWs(List<Pair> tarefas) {
+    public TabEmpresaVO tarefaWsCnpjReceitaWs(List<Pair> tarefas) {
         qtdTarefas = tarefas.size();
         Task<Void> voidTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 updateMessage("carregando");
                 for (Pair tarefaAtual : tarefas) {
-                    updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
-                    Thread.sleep(200);
-                    updateMessage(tarefaAtual.getValue().toString());
-                    String valCnpj = tarefaAtual.getValue().toString().replaceAll("[\\-/. \\[\\]]", "");
-                    valCnpj = valCnpj.substring(valCnpj.length() - 14);
-                    wsCnpjReceitaWsVO = new WsCnpjReceitaWsDAO().getWsCnpjReceitaWsVO(valCnpj);
-
+                    switch (tarefaAtual.getKey().toString()) {
+                        case "buscarCNPJ":
+                            updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
+                            Thread.sleep(200);
+                            String cnpj = FormatarDado.getCampoFormatado(tarefaAtual.getValue().toString(), "cnpj");
+                            updateMessage("Pesquisando C.N.P.J: [" + cnpj + "]");
+                            tabEmpresaVO = new WsCnpjReceitaWsDAO().getTabEmpresaVO(tarefaAtual.getValue().toString());
+                            break;
+                    }
                 }
                 updateProgress(qtdTarefas, qtdTarefas);
                 return null;
@@ -115,7 +119,7 @@ public class Tarefa implements Constants {
         new AlertMensagem("Aguarde pesquisando cnpj na receita federal...", "",
                 "ic_aguarde_sentado_orange_32dp.png")
                 .getProgressBar(voidTask, true, false, qtdTarefas);
-        return wsCnpjReceitaWsVO;
+        return tabEmpresaVO;
     }
 
     public WsEanCosmosVO tarefaWsEanCosmos(List<Pair> tarefas) {
@@ -142,19 +146,22 @@ public class Tarefa implements Constants {
         return wsEanCosmosVO;
     }
 
-    public WsCepPostmonVO tarefaWsCepPostmon(List<Pair> tarefas) {
+    public TabEnderecoVO tarefaWsCepPostmon(List<Pair> tarefas) {
         qtdTarefas = tarefas.size();
         Task<Void> voidTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
                 updateMessage("carregando");
                 for (Pair tarefaAtual : tarefas) {
-                    updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
-                    Thread.sleep(200);
-                    updateMessage(tarefaAtual.getValue().toString());
-                    String valCep = tarefaAtual.getValue().toString().replaceAll("[\\-/. \\[\\]]", "");
-                    valCep = valCep.substring(valCep.length() - 8);
-                    wsCepPostmonVO = new WsCepPostmonDAO().getCepPostmonVO(valCep);
+                    switch (tarefaAtual.getKey().toString()) {
+                        case "buscarCEP":
+                            updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
+                            Thread.sleep(200);
+                            String cep = FormatarDado.getCampoFormatado(tarefaAtual.getValue().toString(), "cep");
+                            updateMessage("Pesquisando CEP: [" + cep + "]");
+                            tabEnderecoVO = new WsCepPostmonDAO().getTabEnderecoVO(tarefaAtual.getValue().toString());
+                            break;
+                    }
                 }
                 updateProgress(qtdTarefas, qtdTarefas);
                 return null;
@@ -163,7 +170,7 @@ public class Tarefa implements Constants {
         new AlertMensagem("Aguarde pesquisando cep nos correios...", "",
                 "ic_aguarde_sentado_orange_32dp.png")
                 .getProgressBar(voidTask, true, false, qtdTarefas);
-        return wsCepPostmonVO;
+        return tabEnderecoVO;
     }
 
     public void tarefaAbreCadastroEmpresa(ControllerCadastroEmpresa cadastroEmpresa, List<Pair> tarefas) {
