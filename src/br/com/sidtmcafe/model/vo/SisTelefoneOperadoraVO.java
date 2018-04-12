@@ -66,4 +66,8 @@ public class SisTelefoneOperadoraVO extends RecursiveTreeObject<SisTelefoneOpera
         descricaoProperty().set(descricao);
     }
 
+    @Override
+    public String toString() {
+        return descricaoProperty().get();
+    }
 }

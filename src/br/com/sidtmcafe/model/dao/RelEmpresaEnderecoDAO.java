@@ -51,7 +51,7 @@ public class RelEmpresaEnderecoDAO extends BuscaBandoDados {
         }
     }
 
-    public int insertTabEmpresaVO(Connection conn, int empresa_id, int endereco_id) throws SQLException {
+    public int insertrelEmpresaEnderecoVO(Connection conn, int empresa_id, int endereco_id) throws SQLException {
         comandoSql = "INSERT INTO relEmpresaEndereco ";
         comandoSql += "(tabEmpresa_id, tabEndereco_id) ";
         comandoSql += "VALUES(";
@@ -62,11 +62,12 @@ public class RelEmpresaEnderecoDAO extends BuscaBandoDados {
         return getInsertBancoDados(conn, comandoSql);
     }
 
-
     public void dedeteRelEmpresaEnderecoVO(Connection conn, int empresa_id) throws SQLException {
         comandoSql = "DELETE " +
                 "FROM relEmpresaEndereco " +
                 "WHERE tabEmpresa_id = '" + empresa_id + "' ";
+
         getDeleteBancoDados(conn, comandoSql);
     }
+
 }

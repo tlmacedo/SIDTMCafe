@@ -1,10 +1,7 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.database.ConnectionFactory;
-import br.com.sidtmcafe.model.vo.RelEmpresaEnderecoVO;
-import br.com.sidtmcafe.model.vo.SisSituacaoSistemaVO;
-import br.com.sidtmcafe.model.vo.TabEmpresaVO;
-import br.com.sidtmcafe.model.vo.TabEnderecoVO;
+import br.com.sidtmcafe.model.vo.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -93,15 +90,32 @@ public class TabEmpresaDAO extends BuscaBandoDados {
 
         empresa.setTabEmpresaReceitaFederalVOList(
                 new TabEmpresaReceitaFederalDAO().getTabEmpresaReceitaFederalVOList(empresa.getId(), 0));
-        List<RelEmpresaEnderecoVO> relEmpresaEnderecoVOList =
-                new ArrayList<>(new RelEmpresaEnderecoDAO().getRelEmpresaEnderecoVOList(empresa.getId()));
-        List<TabEnderecoVO> tabEnderecoVOList = new ArrayList<>();
+        List<RelEmpresaEnderecoVO> relEmpresaEnderecoVOList
+                = new ArrayList<RelEmpresaEnderecoVO>(new RelEmpresaEnderecoDAO().getRelEmpresaEnderecoVOList(empresa.getId()));
+        List<TabEnderecoVO> tabEnderecoVOList = new ArrayList<TabEnderecoVO>();
         for (RelEmpresaEnderecoVO relEmpresaEnderecoVO : relEmpresaEnderecoVOList)
             tabEnderecoVOList.add(new TabEnderecoDAO().getTabEnderecoVO(relEmpresaEnderecoVO.getTabEndereco_id()));
         empresa.setTabEnderecoVOList(tabEnderecoVOList);
 
         empresa.setUsuarioCadastroVO(new TabColaboradorDAO().getTabColaboradorVO_Simples(empresa.getUsuarioCadastro_id()));
         empresa.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getTabColaboradorVO_Simples(empresa.getUsuarioAtualizacao_id()));
+
+        List<RelEmpresaEmailHomePageVO> relEmpresaEmailHomePageVOList
+                = new ArrayList<RelEmpresaEmailHomePageVO>(new RelEmpresaEmailHomePageDAO().getRelEmpresaEmailHomePageVOList(empresa.getId()));
+        List<TabEmailHomePageVO> tabEmailHomePageVOList = new ArrayList<TabEmailHomePageVO>();
+        for (RelEmpresaEmailHomePageVO relEmpresaEmailHomePageVO : relEmpresaEmailHomePageVOList) {
+            tabEmailHomePageVOList.add(new TabEmailHomePageDAO().getTabEmailHomePageVO(relEmpresaEmailHomePageVO.getTabEmailHomePage_id()));
+        }
+        empresa.setTabEmailHomePageVOList(tabEmailHomePageVOList);
+
+        List<RelEmpresaTelefoneVO> relEmpresaTelefoneVOList
+                = new ArrayList<RelEmpresaTelefoneVO>(new RelEmpresaTelefoneDAO().getRelEmpresaTelefoneVOList(empresa.getId()));
+        List<TabTelefoneVO> tabTelefoneVOList = new ArrayList<TabTelefoneVO>();
+        for (RelEmpresaTelefoneVO relEmpresaTelefoneVO : relEmpresaTelefoneVOList) {
+            tabTelefoneVOList.add(new TabTelefoneDAO().getTabTelefoneVO(relEmpresaTelefoneVO.getTabTelefone_id()));
+        }
+        empresa.setTabTelefoneVOList(tabTelefoneVOList);
+
     }
 
     public void updateTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) throws SQLException {
