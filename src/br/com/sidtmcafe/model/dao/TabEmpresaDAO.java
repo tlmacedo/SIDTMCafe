@@ -64,6 +64,7 @@ public class TabEmpresaDAO extends BuscaBandoDados {
 
         if (id == 0) tabEmpresaVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);
+        System.out.println("buscaTabEmpresaVO: [" + comandoSql + "]");
         try {
             while (rs.next()) {
                 tabEmpresaVO = new TabEmpresaVO();
@@ -97,56 +98,38 @@ public class TabEmpresaDAO extends BuscaBandoDados {
     void addObjetosPesquisa(TabEmpresaVO empresa) {
         empresa.setSisSituacaoSistemaVO(new SisSituacaoSistemaDAO().getSisSituacaoSistemaVO(empresa.getSisSituacaoSistema_id()));
 
-        empresa.setTabEmpresaReceitaFederalVOList(
-                new TabEmpresaReceitaFederalDAO().getTabEmpresaReceitaFederalVOList(empresa.getId(), 0));
-        List<RelEmpresaEnderecoVO> relEmpresaEnderecoVOList
-                = new ArrayList<RelEmpresaEnderecoVO>(new RelEmpresaEnderecoDAO().getRelEmpresaEnderecoVOList(empresa.getId()));
-        List<TabEnderecoVO> tabEnderecoVOList = new ArrayList<TabEnderecoVO>();
-        for (RelEmpresaEnderecoVO relEmpresaEnderecoVO : relEmpresaEnderecoVOList)
-            tabEnderecoVOList.add(new TabEnderecoDAO().getTabEnderecoVO(relEmpresaEnderecoVO.getTabEndereco_id()));
-        empresa.setTabEnderecoVOList(tabEnderecoVOList);
-
         empresa.setUsuarioCadastroVO(new TabColaboradorDAO().getTabColaboradorVO_Simples(empresa.getUsuarioCadastro_id()));
         empresa.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getTabColaboradorVO_Simples(empresa.getUsuarioAtualizacao_id()));
 
-        List<RelEmpresaEmailHomePageVO> relEmpresaEmailHomePageVOList
-                = new ArrayList<RelEmpresaEmailHomePageVO>(new RelEmpresaEmailHomePageDAO().getRelEmpresaEmailHomePageVOList(empresa.getId()));
-        List<TabEmailHomePageVO> tabEmailHomePageVOList = new ArrayList<TabEmailHomePageVO>();
-        for (RelEmpresaEmailHomePageVO relEmpresaEmailHomePageVO : relEmpresaEmailHomePageVOList) {
-            tabEmailHomePageVOList.add(new TabEmailHomePageDAO().getTabEmailHomePageVO(relEmpresaEmailHomePageVO.getTabEmailHomePage_id()));
-        }
+        empresa.setTabEmpresaReceitaFederalVOList(
+                new TabEmpresaReceitaFederalDAO().getTabEmpresaReceitaFederalVOList(empresa.getId(), 0));
+        List<RelEmpresaEnderecoVO> relEmpresaEnderecoVOList = new ArrayList<>(new RelEmpresaEnderecoDAO().getRelEmpresaEnderecoVOList(empresa.getId()));
+        List<TabEnderecoVO> tabEnderecoVOList = new ArrayList<>();
+        if (relEmpresaEnderecoVOList != null)
+            for (int i = 0; i < relEmpresaEnderecoVOList.size(); i++)
+                tabEnderecoVOList.add(new TabEnderecoDAO().getTabEnderecoVO(relEmpresaEnderecoVOList.get(i).getTabEndereco_id()));
+        empresa.setTabEnderecoVOList(tabEnderecoVOList);
+
+        List<RelEmpresaEmailHomePageVO> relEmpresaEmailHomePageVOList = new ArrayList<>(new RelEmpresaEmailHomePageDAO().getRelEmpresaEmailHomePageVOList(empresa.getId()));
+        List<TabEmailHomePageVO> tabEmailHomePageVOList = new ArrayList<>();
+        if (relEmpresaEmailHomePageVOList != null)
+            for (int i = 0; i < relEmpresaEmailHomePageVOList.size(); i++)
+                tabEmailHomePageVOList.add(new TabEmailHomePageDAO().getTabEmailHomePageVO(relEmpresaEmailHomePageVOList.get(i).getTabEmailHomePage_id()));
         empresa.setTabEmailHomePageVOList(tabEmailHomePageVOList);
 
-        List<RelEmpresaTelefoneVO> relEmpresaTelefoneVOList
-                = new ArrayList<RelEmpresaTelefoneVO>(new RelEmpresaTelefoneDAO().getRelEmpresaTelefoneVOList(empresa.getId()));
-        List<TabTelefoneVO> tabTelefoneVOList = new ArrayList<TabTelefoneVO>();
-        for (RelEmpresaTelefoneVO relEmpresaTelefoneVO : relEmpresaTelefoneVOList) {
-            tabTelefoneVOList.add(new TabTelefoneDAO().getTabTelefoneVO(relEmpresaTelefoneVO.getTabTelefone_id()));
-        }
+        List<RelEmpresaTelefoneVO> relEmpresaTelefoneVOList = new ArrayList<>(new RelEmpresaTelefoneDAO().getRelEmpresaTelefoneVOList(empresa.getId()));
+        List<TabTelefoneVO> tabTelefoneVOList = new ArrayList<>();
+        if (relEmpresaTelefoneVOList != null)
+            for (int i = 0; i < relEmpresaTelefoneVOList.size(); i++)
+                tabTelefoneVOList.add(new TabTelefoneDAO().getTabTelefoneVO(relEmpresaTelefoneVOList.get(i).getTabTelefone_id()));
         empresa.setTabTelefoneVOList(tabTelefoneVOList);
 
-        List<RelEmpresaContatoVO> relEmpresaContatoVOList
-                = new ArrayList<RelEmpresaContatoVO>(new RelEmpresaContatoDAO().getRelEmpresaContatoVOList(empresa.getId()));
-        List<TabContatoVO> tabContatoVOList = new ArrayList<TabContatoVO>();
-        for (RelEmpresaContatoVO relEmpresaContatoVO : relEmpresaContatoVOList) {
-            tabContatoVOList.add(new TabContatoDAO().getTabContatoVO(relEmpresaContatoVO.getTabContato_id()));
-        }
+        List<RelEmpresaContatoVO> relEmpresaContatoVOList = new ArrayList<>(new RelEmpresaContatoDAO().getRelEmpresaContatoVOList(empresa.getId()));
+        List<TabContatoVO> tabContatoVOList = new ArrayList<>();
+        if (relEmpresaContatoVOList != null)
+            for (int i = 0; i < relEmpresaContatoVOList.size(); i++)
+                tabContatoVOList.add(new TabContatoDAO().getTabContatoVO(relEmpresaContatoVOList.get(i).getTabContato_id()));
         empresa.setTabContatoVOList(tabContatoVOList);
-        for (TabContatoVO contatoVO : tabContatoVOList) {
-            List<RelContatoEmailHomePageVO> relContatoEmailHomePageDAOList
-                    = new ArrayList<RelContatoEmailHomePageVO>(new RelContatoEmailHomePageDAO().getRelContatoEmailHomePageVOList(contatoVO.getId()));
-            List<TabEmailHomePageVO> tabContatoEmailHomePageVOList = new ArrayList<TabEmailHomePageVO>();
-            for (RelContatoEmailHomePageVO relContatoEmailHomePageVO : relContatoEmailHomePageDAOList)
-                tabContatoEmailHomePageVOList.add(new TabEmailHomePageDAO().getTabEmailHomePageVO(relContatoEmailHomePageVO.getTabEmailHomePage_id()));
-            contatoVO.setTabEmailHomePageVOList(tabContatoEmailHomePageVOList);
-
-            List<RelContatoTelefoneVO> relContatoTelefoneVOList
-                    = new ArrayList<RelContatoTelefoneVO>(new RelContatoTelefoneDAO().getRelContatoTelefoneVOVOList(contatoVO.getId()));
-            List<TabTelefoneVO> tabContatoTelefoneVOList = new ArrayList<TabTelefoneVO>();
-            for (RelContatoTelefoneVO relContatoTelefoneVO : relContatoTelefoneVOList)
-                tabContatoTelefoneVOList.add(new TabTelefoneDAO().getTabTelefoneVO(relContatoTelefoneVO.getTabTelefone_id()));
-            contatoVO.setTabTelefoneVOList(tabContatoTelefoneVOList);
-        }
 
     }
 

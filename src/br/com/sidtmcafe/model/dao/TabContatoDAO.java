@@ -29,6 +29,7 @@ public class TabContatoDAO extends BuscaBandoDados {
                 "WHERE id = '" + id + "' ";
 
         rs = getResultadosBandoDados(comandoSql);
+        System.out.println("buscaTabContatoVO: [" + comandoSql + "]");
         try {
             while (rs.next()) {
                 tabContatoVO = new TabContatoVO();
@@ -47,21 +48,18 @@ public class TabContatoDAO extends BuscaBandoDados {
     void addObjetosPesquisa(TabContatoVO contatoVO) {
         contatoVO.setSisCargoVO(new SisCargoDAO().getSisCargoVO(contatoVO.getSisCargo_id()));
 
-        List<RelContatoEmailHomePageVO> relContatoEmailHomePageVOList
-                = new ArrayList<RelContatoEmailHomePageVO>(new RelContatoEmailHomePageDAO().getRelContatoEmailHomePageVOList(contatoVO.getId()));
-        List<TabEmailHomePageVO> tabEmailHomePageVOList = new ArrayList<TabEmailHomePageVO>();
-        for (RelContatoEmailHomePageVO relContatoEmailHomePageVO : relContatoEmailHomePageVOList) {
-            tabEmailHomePageVOList.add(new TabEmailHomePageDAO().getTabEmailHomePageVO(relContatoEmailHomePageVO.getTabContato_id()));
-        }
+        List<RelContatoEmailHomePageVO> relContatoEmailHomePageVOList = new RelContatoEmailHomePageDAO().getRelContatoEmailHomePageVOList(contatoVO.getId());
+        List<TabEmailHomePageVO> tabEmailHomePageVOList = new ArrayList<>();
+        if (relContatoEmailHomePageVOList != null)
+            for (int i = 0; i < relContatoEmailHomePageVOList.size(); i++)
+                tabEmailHomePageVOList.add(new TabEmailHomePageDAO().getTabEmailHomePageVO(relContatoEmailHomePageVOList.get(i).getTabEmailHomePage_id()));
         contatoVO.setTabEmailHomePageVOList(tabEmailHomePageVOList);
 
-
-        List<RelContatoTelefoneVO> relContatoTelefoneVOList
-                = new ArrayList<RelContatoTelefoneVO>(new RelContatoTelefoneDAO().getRelContatoTelefoneVOVOList(contatoVO.getId()));
-        List<TabTelefoneVO> tabTelefoneVOList = new ArrayList<TabTelefoneVO>();
-        for (RelContatoTelefoneVO relContatoTelefoneVO : relContatoTelefoneVOList) {
-            tabTelefoneVOList.add(new TabTelefoneDAO().getTabTelefoneVO(relContatoTelefoneVO.getTabTelefone_id()));
-        }
+        List<RelContatoTelefoneVO> relContatoTelefoneVOList = new RelContatoTelefoneDAO().getRelContatoTelefoneVOList(contatoVO.getId());
+        List<TabTelefoneVO> tabTelefoneVOList = new ArrayList<>();
+        if (relContatoEmailHomePageVOList != null)
+            for (int i = 0; i < relContatoTelefoneVOList.size(); i++)
+                tabTelefoneVOList.add(new TabTelefoneDAO().getTabTelefoneVO(relContatoTelefoneVOList.get(i).getTabTelefone_id()));
         contatoVO.setTabTelefoneVOList(tabTelefoneVOList);
 
     }

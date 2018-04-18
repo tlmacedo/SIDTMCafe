@@ -11,7 +11,6 @@ import java.util.List;
 
 public class RelContatoTelefoneDAO extends BuscaBandoDados {
 
-
     ResultSet rs;
 
     String comandoSql = "";
@@ -23,20 +22,20 @@ public class RelContatoTelefoneDAO extends BuscaBandoDados {
         return relContatoTelefoneVO;
     }
 
-    public List<RelContatoTelefoneVO> getRelContatoTelefoneVOVOList(int contato_id) {
+    public List<RelContatoTelefoneVO> getRelContatoTelefoneVOList(int contato_id) {
         buscaRelContatoTelefoneVO(contato_id, 0);
         return relContatoTelefoneVOList;
     }
 
     void buscaRelContatoTelefoneVO(int contato_id, int telefone_id) {
-        comandoSql = "SELECT tabContato_id, tabTelefone_id " +
-                "FROM relContatoTelefone " +
-                "WHERE tabContato_id = '" + contato_id + "' ";
-        if (telefone_id > 0) comandoSql += "AND tabTelefone_id = '" + telefone_id + "' ";
-        comandoSql += "ORDER BY tabContato_id, tabTelefone_id ";
+        comandoSql = "SELECT tabContato_id, tabTelefone_id ";
+        comandoSql += "FROM relContatoTelefone ";
+        comandoSql += "WHERE tabContato_id = " + contato_id + " ";
+        if (telefone_id > 0) comandoSql += "AND tabTelefone = " + telefone_id + " ";
+        comandoSql += "ORDER BY tabTelefone_id";
 
-        rs = getResultadosBandoDados(comandoSql);
         if (telefone_id == 0) relContatoTelefoneVOList = new ArrayList<>();
+        rs = getResultadosBandoDados(comandoSql);
         try {
             while (rs.next()) {
                 relContatoTelefoneVO = new RelContatoTelefoneVO();
@@ -58,17 +57,16 @@ public class RelContatoTelefoneDAO extends BuscaBandoDados {
         comandoSql += "VALUES (";
         comandoSql += contato_id + ", ";
         comandoSql += telefone_id + " ";
-        comandoSql += ") ";
+        comandoSql += ")";
 
         return getInsertBancoDados(conn, comandoSql);
     }
 
     public void deleteRelContatoTelefoneVO(Connection conn, int contato_id) throws SQLException {
-        comandoSql = "DELETE " +
-                "FROM relContatoTelefone " +
-                "WHERE tabContato_id = '" + contato_id + "' ";
+        comandoSql = "DELETE ";
+        comandoSql += "FROM relContatoTelefone ";
+        comandoSql += "WHERE tabContato_id = " + contato_id + " ";
 
         getDeleteBancoDados(conn, comandoSql);
     }
-
 }

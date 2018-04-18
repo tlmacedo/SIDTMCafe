@@ -28,10 +28,10 @@ public class RelEmpresaEmailHomePageDAO extends BuscaBandoDados {
     }
 
     void buscaRelEmpresaEmailHomePageVO(int empresa_id, int emailHomePage_id) {
-        comandoSql = "SELECT tabEmpresa_id, tabEmailHomePage_id " +
-                "FROM relEmpresaEmailHomePage " +
-                "WHERE tabEmpresa_id = '" + empresa_id + "' ";
-        if (emailHomePage_id > 0) comandoSql += "AND tabEmailHomePage_id = '" + emailHomePage_id + "' ";
+        comandoSql = "SELECT tabEmpresa_id, tabEmailHomePage_id ";
+        comandoSql += "FROM relEmpresaEmailHomePage ";
+        comandoSql += "WHERE tabEmpresa_id = " + empresa_id + " ";
+        if (emailHomePage_id > 0) comandoSql += "AND tabEmailHomePage_id = " + emailHomePage_id + " ";
         comandoSql += "ORDER BY tabEmpresa_id, tabEmailHomePage_id";
 
         if (emailHomePage_id == 0) relEmpresaEmailHomePageVOList = new ArrayList<>();
@@ -64,9 +64,9 @@ public class RelEmpresaEmailHomePageDAO extends BuscaBandoDados {
     }
 
     public void dedeteRelEmpresaEmailHomePageVO(Connection conn, int empresa_id) throws SQLException {
-        comandoSql = "DELETE " +
-                "FROM relEmpresaEmailHomePage " +
-                "WHERE tabEmpresa_id = '" + empresa_id + "' ";
+        comandoSql = "DELETE ";
+        comandoSql += "FROM relEmpresaEmailHomePage ";
+        comandoSql += "WHERE tabEmpresa_id = " + empresa_id + " ";
         getDeleteBancoDados(conn, comandoSql);
     }
 

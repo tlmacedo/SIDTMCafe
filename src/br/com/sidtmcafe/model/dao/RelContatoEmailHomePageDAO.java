@@ -10,14 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RelContatoEmailHomePageDAO extends BuscaBandoDados {
+
     ResultSet rs;
 
     String comandoSql = "";
     RelContatoEmailHomePageVO relContatoEmailHomePageVO;
     List<RelContatoEmailHomePageVO> relContatoEmailHomePageVOList;
 
-    public RelContatoEmailHomePageVO getRelContatoEmailHomePageVO(int contato_id, int emailHoePage_id) {
-        buscaRelContatoEmailHomePageVO(contato_id, emailHoePage_id);
+    public RelContatoEmailHomePageVO getRelContatoEmailHomePageVO(int contato_id, int emailHomePage_id) {
+        buscaRelContatoEmailHomePageVO(contato_id, emailHomePage_id);
         return relContatoEmailHomePageVO;
     }
 
@@ -28,10 +29,10 @@ public class RelContatoEmailHomePageDAO extends BuscaBandoDados {
 
     void buscaRelContatoEmailHomePageVO(int contato_id, int emailHomePage_id) {
         comandoSql = "SELECT tabContato_id, tabEmailHomePage_id " +
-                "FROM relContatoEmailHomePage " +
+                "FROM RelContatoEmailHomePage " +
                 "WHERE tabContato_id = '" + contato_id + "' ";
-        if (emailHomePage_id > 0) comandoSql += "AND tabEmailHomePage_id = '" + emailHomePage_id + "' ";
-        comandoSql += "ORDER BY tabContato_id, tabEmailHomePage_id";
+        if (emailHomePage_id > 0) comandoSql += " AND tabEmailHomePage_id = '" + emailHomePage_id + "' ";
+        comandoSql += "ORDER BY tabEmailHomePage_id ";
 
         if (emailHomePage_id == 0) relContatoEmailHomePageVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);
@@ -48,26 +49,23 @@ public class RelContatoEmailHomePageDAO extends BuscaBandoDados {
         } finally {
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-
     }
 
     public int insertRelContatoEmailHomePageVO(Connection conn, int contato_id, int emailHomePage_id) throws SQLException {
         comandoSql = "INSERT INTO relContatoEmailHomePage ";
         comandoSql += "(tabContato_id, tabEmailHomePage_id) ";
-        comandoSql += "VALUES(";
+        comandoSql += "VALUES (";
         comandoSql += contato_id + ", ";
-        comandoSql += emailHomePage_id + " ";
+        comandoSql += emailHomePage_id;
         comandoSql += ") ";
-
         return getInsertBancoDados(conn, comandoSql);
     }
 
     public void deleteRelContatoEmailHomePageVO(Connection conn, int contato_id) throws SQLException {
-        comandoSql = "DELETE " +
-                "FROM relContatoEmailHomePage " +
-                "WHERE tabContato_id = '" + contato_id + "' ";
+        comandoSql = "DELETE ";
+        comandoSql += "FROM relContatoEmailHomePage ";
+        comandoSql += "WHERE tabContato_id = " + contato_id + " ";
+
         getDeleteBancoDados(conn, comandoSql);
     }
-
-
 }

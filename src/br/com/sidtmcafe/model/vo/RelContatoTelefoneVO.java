@@ -16,7 +16,7 @@ public class RelContatoTelefoneVO extends RecursiveTreeObject<RelContatoTelefone
     }
 
     public IntegerProperty tabContato_idProperty() {
-        if (tabContato_id == null) new SimpleIntegerProperty(0);
+        if (tabContato_id == null) tabContato_id = new SimpleIntegerProperty(0);
         return tabContato_id;
     }
 
@@ -36,6 +36,5 @@ public class RelContatoTelefoneVO extends RecursiveTreeObject<RelContatoTelefone
     public void setTabTelefone_id(int tabTelefone_id) {
         tabTelefone_idProperty().set(tabTelefone_id);
     }
-
 
 }

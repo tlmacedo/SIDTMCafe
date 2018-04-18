@@ -16,7 +16,7 @@ public class RelContatoEmailHomePageVO extends RecursiveTreeObject<RelContatoEma
     }
 
     public IntegerProperty tabContato_idProperty() {
-        if (tabContato_id == null) new SimpleIntegerProperty(0);
+        if (tabContato_id == null) tabContato_id = new SimpleIntegerProperty(0);
         return tabContato_id;
     }
 
