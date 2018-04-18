@@ -18,26 +18,31 @@ public class TabEmpresaDAO extends BuscaBandoDados {
     List<TabEmpresaVO> tabEmpresaVOList;
 
     public TabEmpresaVO getTabEmpresaVO_Simples(int id) {
-        buscaTabEmpresaVO(id, false);
+        buscaTabEmpresaVO(id, false, "");
+        return tabEmpresaVO;
+    }
+
+    public TabEmpresaVO getTabEmpresaVO_Simples(String cnpj) {
+        buscaTabEmpresaVO(0, false, cnpj);
         return tabEmpresaVO;
     }
 
     public TabEmpresaVO getTabEmpresaVO(int id) {
-        buscaTabEmpresaVO(id, false);
+        buscaTabEmpresaVO(id, false, "");
         if (tabEmpresaVO != null)
             addObjetosPesquisa(tabEmpresaVO);
         return tabEmpresaVO;
     }
 
     public List<TabEmpresaVO> getTabEmpresaVOList(boolean isLoja) {
-        buscaTabEmpresaVO(0, isLoja);
+        buscaTabEmpresaVO(0, isLoja, "");
         if (tabEmpresaVOList != null)
             for (TabEmpresaVO empresaVO : tabEmpresaVOList)
                 addObjetosPesquisa(empresaVO);
         return tabEmpresaVOList;
     }
 
-    void buscaTabEmpresaVO(int id, boolean isLoja) {
+    void buscaTabEmpresaVO(int id, boolean isLoja, String cnpj) {
         comandoSql = "SELECT id, isEmpresa, cnpj, ie, razao, fantasia, isLoja, isCliente, isFornecedor, " +
                 "isTransportadora, sisSituacaoSistema_id, usuarioCadastro_id, dataCadastro, " +
                 "usuarioAtualizacao_id, dataAtualizacao, dataAbertura, naturezaJuridica " +
@@ -45,10 +50,14 @@ public class TabEmpresaDAO extends BuscaBandoDados {
         if (id > 0) {
             comandoSql += "WHERE id = '" + id + "' ";
         } else {
-            if (isLoja) {
-                comandoSql += "WHERE isLoja = '1' ";
+            if (!cnpj.equals("")) {
+                comandoSql += "WHERE cnpj = '" + cnpj + "' ";
             } else {
-                comandoSql += "WHERE (isCliente = '1' OR isFornecedor= '1' OR isTransportadora = '1') ";
+                if (isLoja) {
+                    comandoSql += "WHERE isLoja = '1' ";
+                } else {
+                    comandoSql += "WHERE (isCliente = '1' OR isFornecedor= '1' OR isTransportadora = '1') ";
+                }
             }
         }
         comandoSql += "ORDER BY razao ";
@@ -115,6 +124,29 @@ public class TabEmpresaDAO extends BuscaBandoDados {
             tabTelefoneVOList.add(new TabTelefoneDAO().getTabTelefoneVO(relEmpresaTelefoneVO.getTabTelefone_id()));
         }
         empresa.setTabTelefoneVOList(tabTelefoneVOList);
+
+        List<RelEmpresaContatoVO> relEmpresaContatoVOList
+                = new ArrayList<RelEmpresaContatoVO>(new RelEmpresaContatoDAO().getRelEmpresaContatoVOList(empresa.getId()));
+        List<TabContatoVO> tabContatoVOList = new ArrayList<TabContatoVO>();
+        for (RelEmpresaContatoVO relEmpresaContatoVO : relEmpresaContatoVOList) {
+            tabContatoVOList.add(new TabContatoDAO().getTabContatoVO(relEmpresaContatoVO.getTabContato_id()));
+        }
+        empresa.setTabContatoVOList(tabContatoVOList);
+        for (TabContatoVO contatoVO : tabContatoVOList) {
+            List<RelContatoEmailHomePageVO> relContatoEmailHomePageDAOList
+                    = new ArrayList<RelContatoEmailHomePageVO>(new RelContatoEmailHomePageDAO().getRelContatoEmailHomePageVOList(contatoVO.getId()));
+            List<TabEmailHomePageVO> tabContatoEmailHomePageVOList = new ArrayList<TabEmailHomePageVO>();
+            for (RelContatoEmailHomePageVO relContatoEmailHomePageVO : relContatoEmailHomePageDAOList)
+                tabContatoEmailHomePageVOList.add(new TabEmailHomePageDAO().getTabEmailHomePageVO(relContatoEmailHomePageVO.getTabEmailHomePage_id()));
+            contatoVO.setTabEmailHomePageVOList(tabContatoEmailHomePageVOList);
+
+            List<RelContatoTelefoneVO> relContatoTelefoneVOList
+                    = new ArrayList<RelContatoTelefoneVO>(new RelContatoTelefoneDAO().getRelContatoTelefoneVOVOList(contatoVO.getId()));
+            List<TabTelefoneVO> tabContatoTelefoneVOList = new ArrayList<TabTelefoneVO>();
+            for (RelContatoTelefoneVO relContatoTelefoneVO : relContatoTelefoneVOList)
+                tabContatoTelefoneVOList.add(new TabTelefoneDAO().getTabTelefoneVO(relContatoTelefoneVO.getTabTelefone_id()));
+            contatoVO.setTabTelefoneVOList(tabContatoTelefoneVOList);
+        }
 
     }
 

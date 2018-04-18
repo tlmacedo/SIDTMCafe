@@ -16,6 +16,9 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
     List<TabEnderecoVO> tabEnderecoVOList;
     List<TabEmailHomePageVO> tabEmailHomePageVOList;
     List<TabTelefoneVO> tabTelefoneVOList;
+    List<TabContatoVO> tabContatoVOList;
+    List<TabEmailHomePageVO> tabContatoEmailHomePageVOList;
+    List<TabTelefoneVO> tabContatoTelefoneVOList;
 
     Date dataAbertura;
     Timestamp dataCadastro, dataAtualizacao;
@@ -80,6 +83,30 @@ public class TabEmpresaVO extends RecursiveTreeObject<TabEmpresaVO> {
 
     public void setTabTelefoneVOList(List<TabTelefoneVO> tabTelefoneVOList) {
         this.tabTelefoneVOList = tabTelefoneVOList;
+    }
+
+    public List<TabContatoVO> getTabContatoVOList() {
+        return tabContatoVOList;
+    }
+
+    public void setTabContatoVOList(List<TabContatoVO> tabContatoVOList) {
+        this.tabContatoVOList = tabContatoVOList;
+    }
+
+    public List<TabEmailHomePageVO> getTabContatoEmailHomePageVOList() {
+        return tabContatoEmailHomePageVOList;
+    }
+
+    public void setTabContatoEmailHomePageVOList(List<TabEmailHomePageVO> tabContatoEmailHomePageVOList) {
+        this.tabContatoEmailHomePageVOList = tabContatoEmailHomePageVOList;
+    }
+
+    public List<TabTelefoneVO> getTabContatoTelefoneVOList() {
+        return tabContatoTelefoneVOList;
+    }
+
+    public void setTabContatoTelefoneVOList(List<TabTelefoneVO> tabContatoTelefoneVOList) {
+        this.tabContatoTelefoneVOList = tabContatoTelefoneVOList;
     }
 
     public Date getDataAbertura() {

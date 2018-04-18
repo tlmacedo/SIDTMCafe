@@ -40,4 +40,8 @@ public class SisCargoVO extends RecursiveTreeObject<SisCargoVO> {
         descricaoProperty().set(descricao);
     }
 
+    @Override
+    public String toString() {
+        return descricaoProperty().get();
+    }
 }

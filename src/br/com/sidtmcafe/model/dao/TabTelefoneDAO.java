@@ -15,7 +15,6 @@ public class TabTelefoneDAO extends BuscaBandoDados {
 
     String comandoSql = "";
     TabTelefoneVO telefoneVO;
-    List<TabTelefoneVO> tabTelefoneVOList;
 
     public TabTelefoneVO getTabTelefoneVO(int id) {
         buscaTabTelefoneVO(id);
@@ -26,20 +25,16 @@ public class TabTelefoneDAO extends BuscaBandoDados {
 
     void buscaTabTelefoneVO(int id) {
         comandoSql = "SELECT id, descricao, sisTelefoneOperadora_id " +
-                "FROM tabTelefone ";
-        if (id > 0) comandoSql += "WHERE id = '" + id + "' ";
-        comandoSql += "ORDER BY id ";
+                "FROM tabTelefone " +
+                "WHERE id = '" + id + "' ";
 
         rs = getResultadosBandoDados(comandoSql);
-        if (id == 0) tabTelefoneVOList = new ArrayList<>();
         try {
             while (rs.next()) {
                 telefoneVO = new TabTelefoneVO();
                 telefoneVO.setId(rs.getInt("id"));
                 telefoneVO.setDescricao(rs.getString("descricao"));
                 telefoneVO.setSisTelefoneOperadora_id(rs.getInt("sisTelefoneOperadora_id"));
-
-                if (id == 0) tabTelefoneVOList.add(telefoneVO);
             }
         } catch (Exception ex) {
             ex.printStackTrace();

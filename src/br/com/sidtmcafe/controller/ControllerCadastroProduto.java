@@ -341,7 +341,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
 //
 //    public void setQtdRegistrosLocalizados(int qtdRegistrosLocalizados) {
 //        this.qtdRegistrosLocalizados = qtdRegistrosLocalizados;
-//        atualizaLblRegistrosLocalizados();
+//        atualizaLblQtdRegistroLocalizado();
 //    }
 //
 //    public String getStatusFormulario() {
@@ -350,7 +350,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
 //
 //    public void setStatusFormulario(String statusFormulario) {
 //        this.statusFormulario = statusFormulario;
-//        atualizaLblRegistrosLocalizados();
+//        atualizaLblQtdRegistroLocalizado();
 //        setStatusBarFormulario(statusFormulario);
 //    }
 //
@@ -383,7 +383,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
 //        ControllerPrincipal.ctrlPrincipal.atualizarTeclasStatusBar(statusBarFormulario);
 //    }
 //
-//    void atualizaLblRegistrosLocalizados() {
+//    void atualizaLblQtdRegistroLocalizado() {
 //        lblRegistrosLocalizados.setText("[" + getStatusFormulario() + "]  " + String.valueOf(getQtdRegistrosLocalizados()) + " registro(s) localizado(s).");
 //    }
 //
