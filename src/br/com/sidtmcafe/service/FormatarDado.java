@@ -208,22 +208,39 @@ public class FormatarDado implements Constants {
 
     }
 
-    public void maskFieldMoeda(final JFXTextField textField, int casasDecimal) {
+    public static String getValueMoeda(String valor, int casaDecimal) {
+        //String value = String.valueOf(Integer.parseInt(valor.replaceAll("[^0-9]", "")));
+        String value = valor.replaceAll("[^0-9]", "");
+        for (int i = value.length(); i < (casaDecimal + 1); i++) {
+            value = "0" + value;
+        }
+        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 15) + "})$", "$1.$2");
+        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 13) + "})$", "$1.$2");
+        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 11) + "})$", "$1.$2");
+        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 9) + "})$", "$1.$2");
+        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 6) + "})$", "$1.$2");
+        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 3) + "})$", "$1.$2");
+        if (casaDecimal > 0)
+            value = value.replaceAll("([0-9]{1})([0-9]{" + casaDecimal + "})$", "$1,$2");
+        return value;
+    }
+
+    public void maskFieldMoeda(final JFXTextField textField, int casaDecimal) {
         textField.setAlignment(Pos.CENTER_RIGHT);
         textField.lengthProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> ov, Number o, Number n) {
                 String value = String.valueOf(Integer.parseInt(textField.getText().replaceAll("[^0-9]", "")));
-                for (int i = value.length(); i < (casasDecimal + 1); i++) {
-                    value = "0" + value;
-                }
-                value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 11) + "})$", "$1.$2");
-                value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 9) + "})$", "$1.$2");
-                value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 6) + "})$", "$1.$2");
-                value = value.replaceAll("([0-9]{1})([0-9]{" + (casasDecimal + 3) + "})$", "$1.$2");
-                if (casasDecimal > 0)
-                    value = value.replaceAll("([0-9]{1})([0-9]{" + casasDecimal + "})$", "$1,$2");
-                textField.setText(value);
+//                for (int i = value.length(); i < (casaDecimal + 1); i++) {
+//                    value = "0" + value;
+//                }
+//                value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 11) + "})$", "$1.$2");
+//                value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 9) + "})$", "$1.$2");
+//                value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 6) + "})$", "$1.$2");
+//                value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 3) + "})$", "$1.$2");
+//                if (casaDecimal > 0)
+//                    value = value.replaceAll("([0-9]{1})([0-9]{" + casaDecimal + "})$", "$1,$2");
+                textField.setText(getValueMoeda(value, casaDecimal));
                 positionCaret(textField);
 
             }

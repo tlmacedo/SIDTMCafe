@@ -64,7 +64,6 @@ public class TabEmpresaDAO extends BuscaBandoDados {
 
         if (id == 0) tabEmpresaVOList = new ArrayList<>();
         rs = getResultadosBandoDados(comandoSql);
-        System.out.println("buscaTabEmpresaVO: [" + comandoSql + "]");
         try {
             while (rs.next()) {
                 tabEmpresaVO = new TabEmpresaVO();
@@ -102,7 +101,8 @@ public class TabEmpresaDAO extends BuscaBandoDados {
         empresa.setUsuarioAtualizacaoVO(new TabColaboradorDAO().getTabColaboradorVO_Simples(empresa.getUsuarioAtualizacao_id()));
 
         empresa.setTabEmpresaReceitaFederalVOList(
-                new TabEmpresaReceitaFederalDAO().getTabEmpresaReceitaFederalVOList(empresa.getId(), 0));
+                new TabEmpresaReceitaFederalDAO().getTabEmpresaReceitaFederalVOList(empresa.getId()));
+
         List<RelEmpresaEnderecoVO> relEmpresaEnderecoVOList = new ArrayList<>(new RelEmpresaEnderecoDAO().getRelEmpresaEnderecoVOList(empresa.getId()));
         List<TabEnderecoVO> tabEnderecoVOList = new ArrayList<>();
         if (relEmpresaEnderecoVOList != null)

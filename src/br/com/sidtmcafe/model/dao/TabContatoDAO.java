@@ -29,7 +29,6 @@ public class TabContatoDAO extends BuscaBandoDados {
                 "WHERE id = '" + id + "' ";
 
         rs = getResultadosBandoDados(comandoSql);
-        System.out.println("buscaTabContatoVO: [" + comandoSql + "]");
         try {
             while (rs.next()) {
                 tabContatoVO = new TabContatoVO();

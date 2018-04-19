@@ -14,6 +14,14 @@ public class TabEmpresaReceitaFederalVO extends RecursiveTreeObject<TabEmpresaRe
     public TabEmpresaReceitaFederalVO() {
     }
 
+    public TabEmpresaReceitaFederalVO(int id, int tabEmpresa_id, int isAtividadePrincipal, String str_Key, String str_Value) {
+        this.id = new SimpleIntegerProperty(id);
+        this.tabEmpresa_id = new SimpleIntegerProperty(tabEmpresa_id);
+        this.isAtividadePrincipal = new SimpleIntegerProperty(isAtividadePrincipal);
+        this.str_Key = new SimpleStringProperty(str_Key);
+        this.str_Value = new SimpleStringProperty(str_Value);
+    }
+
     public int getId() {
         return idProperty().get();
     }
@@ -79,4 +87,8 @@ public class TabEmpresaReceitaFederalVO extends RecursiveTreeObject<TabEmpresaRe
         str_ValueProperty().set(str_Value);
     }
 
+    @Override
+    public String toString() {
+        return str_KeyProperty().get() + " - " + str_ValueProperty().get();
+    }
 }

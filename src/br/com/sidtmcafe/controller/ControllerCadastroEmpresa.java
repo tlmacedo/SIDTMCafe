@@ -96,7 +96,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     @Override
     public void criarObjetos() {
         listaTarefas.add(new Pair("criarTabelaEmpresa", "criando tabela empresas"));
-
     }
 
     @Override
@@ -135,9 +134,11 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     @Override
     public void escutarTeclas() {
 
-        ttvEmpresa.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
-            if (n == null) return;
-            setTabEmpresaVO(n.getValue());
+        ttvEmpresa.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
+            if (n == null || n.intValue() < 0)
+                setTabEmpresaVO(novaEmpresa());
+            else
+                setTabEmpresaVO(ttvEmpresa.getTreeItem(n.intValue()).getValue());
             exibirDadosEmpresa();
         });
 
@@ -156,12 +157,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                 switch (event.getCode()) {
                     case F1:
                         if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
-                        TabEnderecoVO enderecoVO = new TabEnderecoVO(1);
-                        TabEmpresaVO empresaVO = new TabEmpresaVO();
-                        empresaVO.setTabEnderecoVOList(new ArrayList<>());
-                        empresaVO.getTabEnderecoVOList().add(enderecoVO);
-
-                        setTabEmpresaVO(empresaVO);
+                        setTabEmpresaVO(novaEmpresa());
                         setStatusFormulario("Incluir");
                         break;
                     case F2:
@@ -184,20 +180,24 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                                         + ", deseja cancelar inclusão no cadastro de empresa?",
                                         "ic_cadastro_empresas_white_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
                                     return;
-                                PersonalizarCampo.clearField((AnchorPane) tpnDadoCadastral.getContent());
+                                limparCampoDadoCadastral();
                                 break;
                             case "editar":
                                 if (new AlertMensagem("Cancelar edição", USUARIO_LOGADO_APELIDO
                                         + ", deseja cancelar edição do cadastro de empresa?",
                                         "ic_cadastro_empresas_white_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
                                     return;
-                                setTabEmpresaVO(ttvEmpresa.getSelectionModel().getSelectedItem().getValue());
+                                limparCampoDadoCadastral();
+                                carregarListaEmpresa();
+                                preencherTabelaEmpresa();
+                                carregarPesquisaEmpresas(txtPesquisa.getText());
+                                setTabEmpresaVO(empresaVOObservableList.get(indexObservableEmpresa));
                                 break;
                         }
                         setStatusFormulario("Pesquisa");
                         break;
                     case F4:
-                        if ((!getStatusBarFormulario().contains(event.getCode().toString())) || (getTabEmpresaVO() == null))
+                        if ((!getStatusBarFormulario().contains(event.getCode().toString())) || !(ttvEmpresa.getSelectionModel().getSelectedIndex() >= 0))
                             break;
                         indexObservableEmpresa = empresaVOObservableList.indexOf(getTabEmpresaVO());
                         setStatusFormulario("Editar");
@@ -301,6 +301,19 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                     for (TabTelefoneVO telefoneVO : getTabTelefoneVOList())
                         if (!tabEmpresaVO.getTabTelefoneVOList().contains(telefoneVO))
                             tabEmpresaVO.getTabTelefoneVOList().add(telefoneVO);
+
+                    if (getTabEmpresaReceitaFederalVOList().size() > 0) {
+                        if (deletadosTabEmpresaReceitaFederalVOList == null)
+                            deletadosTabEmpresaReceitaFederalVOList = new ArrayList<>();
+                        for (int i = 0; i < getTabEmpresaReceitaFederalVOList().size(); i++)
+                            for (int j = 0; j < tabEmpresaVO.getTabEmpresaReceitaFederalVOList().size(); j++)
+                                if (getTabEmpresaReceitaFederalVOList().get(i).getStr_Value().toLowerCase().equals(tabEmpresaVO.getTabEmpresaReceitaFederalVOList().get(j).getStr_Value())) {
+                                    tabEmpresaVO.getTabEmpresaReceitaFederalVOList().set(j, getTabEmpresaReceitaFederalVOList().get(i));
+                                } else {
+                                    deletadosTabEmpresaReceitaFederalVOList.add(getTabEmpresaReceitaFederalVOList().get(i));
+                                }
+                    }
+
 
                     if (getStatusFormulario().toLowerCase().equals("editar")) {
                         tabEmpresaVO.setId(getTabEmpresaVO().getId());
@@ -430,6 +443,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     List<TabEmailHomePageVO> deletadosTabContatoEmailHomePageVOList;
     List<TabTelefoneVO> tabContatoTelefoneVOList;
     List<TabTelefoneVO> deletadosTabContatoTelefoneVOList;
+    List<TabEmpresaReceitaFederalVO> tabEmpresaReceitaFederalVOList;
+    List<TabEmpresaReceitaFederalVO> deletadosTabEmpresaReceitaFederalVOList;
+    List<TabEmpresaReceitaFederalVO> receitaFederalQsaVOList;
+    ObservableList<TabEmpresaReceitaFederalVO> receitaFederalQsaVOObservableList;
 
     List<SisUFVO> sisUFVOList;
     List<SisMunicipioVO> sisMunicipioVOList;
@@ -487,6 +504,19 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             ttvEmpresa.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             ttvEmpresa.setRoot(root);
             ttvEmpresa.setShowRoot(false);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    void preencherTabelaQsa() {
+        try {
+            if (receitaFederalQsaVOObservableList == null) return;
+            final TreeItem<TabEmpresaReceitaFederalVO> root = new RecursiveTreeItem<TabEmpresaReceitaFederalVO>(receitaFederalQsaVOObservableList, RecursiveTreeObject::getChildren);
+            ttvDetalheReceita.getColumns().setAll(TabModel.getColunaQsaKey(), TabModel.getColunaQsaValue());
+            ttvDetalheReceita.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            ttvDetalheReceita.setRoot(root);
+            ttvDetalheReceita.setShowRoot(false);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -575,7 +605,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         if (statusFormulario.toLowerCase().contains("incluir")) {
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnCadastroEmpresa.getContent(), true);
             PersonalizarCampo.desabilitaCampos((AnchorPane) tpnDadoCadastral.getContent(), false);
-            PersonalizarCampo.clearField((AnchorPane) tpnDadoCadastral.getContent());
+            limparCampoDadoCadastral();
             cboClassificacaoJuridica.requestFocus();
             cboClassificacaoJuridica.getSelectionModel().select(0);
             cboClassificacaoJuridica.getSelectionModel().select(1);
@@ -610,6 +640,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         setTabEmailHomePageVOList(getTabEmpresaVO().getTabEmailHomePageVOList());
         setTabTelefoneVOList(getTabEmpresaVO().getTabTelefoneVOList());
         setTabContatoVOList(getTabEmpresaVO().getTabContatoVOList());
+        setTabEmpresaReceitaFederalVOList(getTabEmpresaVO().getTabEmpresaReceitaFederalVOList());
         //exibirDadosEmpresa();
     }
 
@@ -697,6 +728,28 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         setTabContatoTelefoneVOList(getTabContatoVO().getTabTelefoneVOList());
     }
 
+    public List<TabEmpresaReceitaFederalVO> getTabEmpresaReceitaFederalVOList() {
+        return tabEmpresaReceitaFederalVOList;
+    }
+
+    public void setTabEmpresaReceitaFederalVOList(List<TabEmpresaReceitaFederalVO> tabEmpresaReceitaFederalVOList) {
+        if (tabEmpresaReceitaFederalVOList == null)
+            tabEmpresaReceitaFederalVOList = new ArrayList<>();
+        if (receitaFederalQsaVOList == null)
+            receitaFederalQsaVOList = new ArrayList<>();
+
+        this.tabEmpresaReceitaFederalVOList = tabEmpresaReceitaFederalVOList;
+        atualizaListaReceitaFederal();
+    }
+
+    TabEmpresaVO novaEmpresa() {
+        TabEnderecoVO enderecoVO = new TabEnderecoVO(1);
+        TabEmpresaVO empresaVO = new TabEmpresaVO();
+        empresaVO.setTabEnderecoVOList(new ArrayList<>());
+        empresaVO.getTabEnderecoVOList().add(enderecoVO);
+        return empresaVO;
+    }
+
     void exibirDadosEmpresa() {
         if (getTabEmpresaVO() == null) return;
         cboClassificacaoJuridica.getSelectionModel().select(getTabEmpresaVO().getIsEmpresa());
@@ -721,7 +774,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             lblDataAberturaDiff.setText("tempo de abertura: " + DataTrabalhada.getStrIntervaloDatas(ldAbertura, null));
         }
 
-        if (!getStatusFormulario().toLowerCase().equals("incluir")) {
+        if (getTabEmpresaVO().getDataCadastro() != null) {//if (!getStatusFormulario().toLowerCase().equals("incluir")) {
             LocalDateTime ldtCadastro = getTabEmpresaVO().getDataCadastro().toLocalDateTime();
             lblDataCadastro.setText("data cadastro: " + ldtCadastro.format(DTF_DATAHORA) + " [" + getTabEmpresaVO().getUsuarioCadastroVO().getApelido() + "]");
             lblDataCadastroDiff.setText("tempo de cadastro: " + DataTrabalhada.getStrIntervaloDatas(ldtCadastro.toLocalDate(), null));
@@ -811,21 +864,19 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             return;
         }
         listContatoNome.getItems().setAll(getTabContatoVOList());
+        listContatoNome.getSelectionModel().select(0);
     }
 
     void atualizaListaContatoEmailHomePage() {
         listContatoHomePage.getItems().clear();
         listContatoEmail.getItems().clear();
-        if (getTabContatoEmailHomePageVOList() == null) {
-            return;
-        }
+        if (getTabContatoEmailHomePageVOList() == null) return;
         getTabContatoVO().setTabEmailHomePageVOList(getTabContatoEmailHomePageVOList());
-        for (TabEmailHomePageVO contatoEmailHomeVO : getTabContatoEmailHomePageVOList()) {
+        for (TabEmailHomePageVO contatoEmailHomeVO : getTabContatoEmailHomePageVOList())
             if (contatoEmailHomeVO.isIsEmail())
                 listContatoEmail.getItems().add(contatoEmailHomeVO);
             else
                 listContatoHomePage.getItems().add(contatoEmailHomeVO);
-        }
     }
 
     void atualizaListaContatoTelefone() {
@@ -835,6 +886,28 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         }
         getTabContatoVO().setTabTelefoneVOList(getTabContatoTelefoneVOList());
         listContatoTelefone.getItems().setAll(getTabContatoTelefoneVOList());
+    }
+
+    void atualizaListaReceitaFederal() {
+        listAtividadePrincipal.getItems().clear();
+        listAtividadeSecundaria.getItems().clear();
+        ttvDetalheReceita.getColumns().clear();
+        if (getTabEmpresaReceitaFederalVOList() == null) return;
+        for (TabEmpresaReceitaFederalVO receitaFederalVO : getTabEmpresaReceitaFederalVOList())
+            if (receitaFederalVO.getIsAtividadePrincipal() == 0)
+                receitaFederalQsaVOList.add(receitaFederalVO);
+            else if (receitaFederalVO.getIsAtividadePrincipal() == 1)
+                listAtividadePrincipal.getItems().add(receitaFederalVO);
+            else
+                listAtividadeSecundaria.getItems().add(receitaFederalVO);
+
+        if (receitaFederalQsaVOObservableList == null)
+            receitaFederalQsaVOObservableList = FXCollections.observableList(receitaFederalQsaVOList);
+        preencherTabelaQsa();
+    }
+
+    void limparCampoDadoCadastral() {
+        PersonalizarCampo.clearField((AnchorPane) tpnDadoCadastral.getContent());
     }
 
     void limparEndereco() {
@@ -980,6 +1053,12 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                 deletadosTabContatoVOList = new ArrayList<>();
             deletadosTabContatoVOList.add(listContatoNome.getSelectionModel().getSelectedItem());
         }
+        if (deletadosTabContatoEmailHomePageVOList != null)
+            for (int i = 0; i < contatoVO.getTabEmailHomePageVOList().size(); i++)
+                deletadosTabContatoEmailHomePageVOList.remove(contatoVO.getTabEmailHomePageVOList().get(i));
+        if (deletadosTabContatoTelefoneVOList != null)
+            for (int i = 0; i < contatoVO.getTabTelefoneVOList().size(); i++)
+                deletadosTabContatoTelefoneVOList.remove(contatoVO.getTabEmailHomePageVOList().get(i));
         getTabContatoVOList().remove(listContatoNome.getSelectionModel().getSelectedItem());
         atualizaListaContato();
     }
@@ -1904,7 +1983,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             if (listContatoNome.getSelectionModel().getSelectedIndex() >= 0)
                 contatoEdit = listContatoNome.getSelectionModel().getSelectedItem();
             if ((contatoEdit == null) || (contatoVO = addEditContato(contatoEdit)) == null) return;
-            getTabContatoVOList().set(getTabTelefoneVOList().indexOf(contatoEdit), contatoVO);
+            getTabContatoVOList().set(getTabContatoVOList().indexOf(contatoEdit), contatoVO);
             atualizaListaContato();
         }
 
@@ -2094,17 +2173,17 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     void salvarEmpresa() {
         Connection conn = ConnectionFactory.getConnection(); // cria conexao com banco de dados
         try {
-            conn.setAutoCommit(false); // deixa para fazer o commit no final se tudo der certo
+            conn.setAutoCommit(false);
 
             if (getTabEmpresaVO().getId() == 0)  // se id empresa==0 (empresa nova) ele inclui no banco
                 getTabEmpresaVO().setId(new TabEmpresaDAO().insertTabEmpresaVO(conn, getTabEmpresaVO()));
             else  // se id empresa != 0 (empresa no cadastro) ele atualiza os dados dela no banco
                 new TabEmpresaDAO().updateTabEmpresaVO(conn, getTabEmpresaVO());
 
+            new RelEmpresaEnderecoDAO().dedeteRelEmpresaEnderecoVO(conn, getTabEmpresaVO().getId()); // apaga todos relacionamentos da empresa com enderecos
             if (deletadosTabEnderecoVOList != null) // se tiver algum endereco deletado abre para percorrer lista de enderecos deletados
                 for (int i = 0; i < deletadosTabEnderecoVOList.size(); i++)  // percorre lista de enderecos deletados
                     new TabEnderecoDAO().deleteTabEnderecoVO(conn, deletadosTabEnderecoVOList.get(i)); // deleta endereco no banco de dados
-            new RelEmpresaEnderecoDAO().dedeteRelEmpresaEnderecoVO(conn, getTabEmpresaVO().getId()); // apaga todos relacionamentos da empresa com enderecos
             for (int i = 0; i < getTabEnderecoVOList().size(); i++) { // percorre lista de enderecos da empresa
                 if (getTabEnderecoVOList().get(i).getId() == 0)  // se id endereco==0 (endereco novo) ele inclui novo endereco no banco
                     getTabEnderecoVOList().get(i).setId(new TabEnderecoDAO().insertTabEnderecoVO(conn, getTabEnderecoVOList().get(i)));
@@ -2114,10 +2193,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                 new RelEmpresaEnderecoDAO().insertrelEmpresaEnderecoVO(conn, getTabEmpresaVO().getId(), getTabEnderecoVOList().get(i).getId());
             }
 
+            new RelEmpresaEmailHomePageDAO().dedeteRelEmpresaEmailHomePageVO(conn, getTabEmpresaVO().getId()); // apaga todos relacionamentos da empresa com email e homePage
             if (deletadosTabEmailHomePageVOList != null) // se tiver algum email ou home page deletado abre para percorrer lista de emails e homePage deletados
                 for (int i = 0; i < deletadosTabEmailHomePageVOList.size(); i++)  // percorre lista de emails e homePage deletados
                     new TabEmailHomePageDAO().deleteTabEmailHomePageVO(conn, deletadosTabEmailHomePageVOList.get(i)); // deleta email e homePage no banco de dados
-            new RelEmpresaEmailHomePageDAO().dedeteRelEmpresaEmailHomePageVO(conn, getTabEmpresaVO().getId()); // apaga todos relacionamentos da empresa com email e homePage
             for (int i = 0; i < getTabEmailHomePageVOList().size(); i++) { // percorre lista de email e homePage da empresa
                 if (getTabEmailHomePageVOList().get(i).getId() == 0)  // se id emailHomePage==0 (emailHomePage novo) ele inclui novo emailHomePage no banco
                     getTabEmailHomePageVOList().get(i).setId(new TabEmailHomePageDAO().insertTabEmailHomePageVO(conn, getTabEmailHomePageVOList().get(i)));
@@ -2127,10 +2206,10 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                 new RelEmpresaEmailHomePageDAO().insertRelEmpresaEmailHomePageVO(conn, getTabEmpresaVO().getId(), getTabEmailHomePageVOList().get(i).getId());
             }
 
+            new RelEmpresaTelefoneDAO().deleteRelEmpresaTelefoneVO(conn, getTabEmpresaVO().getId());
             if (deletadosTabTelefoneVOList != null)
                 for (int i = 0; i < deletadosTabTelefoneVOList.size(); i++)
                     new TabTelefoneDAO().deleteTabTelefoneVO(conn, deletadosTabTelefoneVOList.get(i));
-            new RelEmpresaTelefoneDAO().deleteRelEmpresaTelefoneVO(conn, getTabEmpresaVO().getId());
             for (int i = 0; i < getTabTelefoneVOList().size(); i++) {
                 if (getTabTelefoneVOList().get(i).getId() == 0)
                     getTabTelefoneVOList().get(i).setId(new TabTelefoneDAO().insertTabTelefoneVO(conn, getTabTelefoneVOList().get(i)));
@@ -2139,28 +2218,23 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                 new RelEmpresaTelefoneDAO().insertRelEmpresaTelefoneVO(conn, getTabEmpresaVO().getId(), getTabTelefoneVOList().get(i).getId());
             }
 
+            new RelEmpresaContatoDAO().deleteRelEmpresaContatoVO(conn, getTabEmpresaVO().getId());
             if (deletadosTabContatoVOList != null)
                 for (int i = 0; i < deletadosTabContatoVOList.size(); i++) {
                     setTabContatoVO(deletadosTabContatoVOList.get(i));
+                    new RelContatoEmailHomePageDAO().deleteRelContatoEmailHomePageVO(conn, getTabContatoVO().getId());
+                    new RelContatoTelefoneDAO().deleteRelContatoTelefoneVO(conn, getTabContatoVO().getId());
                     new TabContatoDAO().deleteTabContatoVO(conn, getTabContatoVO());
                     if (getTabContatoEmailHomePageVOList() != null)
                         for (int j = 0; j < getTabContatoEmailHomePageVOList().size(); j++)
                             if (getTabContatoEmailHomePageVOList().get(j).getId() > 0)
                                 new TabEmailHomePageDAO().deleteTabEmailHomePageVO(conn, getTabContatoEmailHomePageVOList().get(j));
-                    new RelContatoEmailHomePageDAO().deleteRelContatoEmailHomePageVO(conn, deletadosTabContatoVOList.get(i).getId());
                     if (getTabContatoTelefoneVOList() != null)
                         for (int j = 0; j < getTabContatoTelefoneVOList().size(); j++)
                             if (getTabContatoTelefoneVOList().get(j).getId() > 0)
                                 new TabTelefoneDAO().deleteTabTelefoneVO(conn, getTabContatoTelefoneVOList().get(j));
-                    new RelContatoTelefoneDAO().deleteRelContatoTelefoneVO(conn, deletadosTabContatoVOList.get(i).getId());
                 }
-            new RelEmpresaContatoDAO().deleteRelEmpresaContatoVO(conn, getTabEmpresaVO().getId());
-            if (deletadosTabContatoEmailHomePageVOList != null)
-                for (int i = 0; i < deletadosTabContatoEmailHomePageVOList.size(); i++)
-                    new TabEmailHomePageDAO().deleteTabEmailHomePageVO(conn, deletadosTabContatoEmailHomePageVOList.get(i));
-            if (deletadosTabContatoTelefoneVOList != null)
-                for (int i = 0; i < deletadosTabContatoTelefoneVOList.size(); i++)
-                    new TabTelefoneDAO().deleteTabTelefoneVO(conn, deletadosTabContatoTelefoneVOList.get(i));
+
             for (int i = 0; i < getTabContatoVOList().size(); i++) {
                 setTabContatoVO(getTabContatoVOList().get(i));
                 if (getTabContatoVO().getId() == 0)
@@ -2170,6 +2244,9 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                 new RelEmpresaContatoDAO().insertRelEmpresaContatoVO(conn, getTabEmpresaVO().getId(), getTabContatoVO().getId());
 
                 new RelContatoEmailHomePageDAO().deleteRelContatoEmailHomePageVO(conn, getTabContatoVO().getId());
+                if (deletadosTabContatoEmailHomePageVOList != null)
+                    for (int j = 0; j < deletadosTabContatoEmailHomePageVOList.size(); j++)
+                        new TabEmailHomePageDAO().deleteTabEmailHomePageVO(conn, deletadosTabContatoEmailHomePageVOList.get(j));
                 for (int j = 0; j < getTabContatoEmailHomePageVOList().size(); j++) {
                     if (getTabContatoEmailHomePageVOList().get(j).getId() == 0)
                         getTabContatoEmailHomePageVOList().get(j).setId(new TabEmailHomePageDAO().insertTabEmailHomePageVO(conn, getTabContatoEmailHomePageVOList().get(j)));
@@ -2177,7 +2254,11 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                         new TabEmailHomePageDAO().updateTabEmailHomePageVO(conn, getTabContatoEmailHomePageVOList().get(j));
                     new RelContatoEmailHomePageDAO().insertRelContatoEmailHomePageVO(conn, getTabContatoVO().getId(), getTabContatoEmailHomePageVOList().get(j).getId());
                 }
+
                 new RelContatoTelefoneDAO().deleteRelContatoTelefoneVO(conn, getTabContatoVO().getId());
+                if (deletadosTabContatoTelefoneVOList != null)
+                    for (int j = 0; j < deletadosTabContatoTelefoneVOList.size(); j++)
+                        new TabTelefoneDAO().deleteTabTelefoneVO(conn, deletadosTabContatoTelefoneVOList.get(j));
                 for (int j = 0; j < getTabContatoTelefoneVOList().size(); j++) {
                     if (getTabContatoTelefoneVOList().get(j).getId() == 0)
                         getTabContatoTelefoneVOList().get(j).setId(new TabTelefoneDAO().insertTabTelefoneVO(conn, getTabContatoTelefoneVOList().get(j)));
@@ -2187,16 +2268,24 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                 }
             }
 
+            if (deletadosTabEmpresaReceitaFederalVOList != null)
+                for (int i = 0; i < deletadosTabEmpresaReceitaFederalVOList.size(); i++)
+                    new TabEmpresaReceitaFederalDAO().deleteTabEmpresaReceitaFederalVO(conn, deletadosTabEmpresaReceitaFederalVOList.get(i));
+            for (int i = 0; i < getTabEmpresaReceitaFederalVOList().size(); i++) {
+                getTabEmpresaReceitaFederalVOList().get(i).setTabEmpresa_id(getTabEmpresaVO().getId());
+                if (getTabEmpresaReceitaFederalVOList().get(i).getId() == 0)
+                    getTabEmpresaReceitaFederalVOList().get(i).setId(new TabEmpresaReceitaFederalDAO().insertTabEmpresaReceitaFederalVO(conn, getTabEmpresaReceitaFederalVOList().get(i)));
+                else
+                    new TabEmpresaReceitaFederalDAO().updateTabEmpresaReceitaFederalVO(conn, getTabEmpresaReceitaFederalVOList().get(i));
+            }
 
             conn.commit();
         } catch (SQLException ex) {
             ex.printStackTrace();
             try {
-                System.out.println("tentando fazer o rollback!!!");
                 conn.rollback();
-                System.out.println("deu algum erro e foi feito o rollback!!!");
-            } catch (SQLException ex1) {
-                ex1.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         }
     }

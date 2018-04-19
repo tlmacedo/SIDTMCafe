@@ -2,6 +2,7 @@ package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.interfaces.Constants;
 import br.com.sidtmcafe.model.vo.*;
+import br.com.sidtmcafe.service.FormatarDado;
 import javafx.util.Pair;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -169,44 +170,8 @@ public class WsCnpjReceitaWsDAO extends BuscaWebService implements Constants {
                 }
 
             }
-//
 
-//            tabEmpresaVO.setEmail(jsonObject.getString("email"));
-//            tabEmpresaVO.setTelefone(jsonObject.getString("telefone"));
-
-//            jsonArray = jsonObject.getJSONArray("atividade_principal");
-//            List<Pair<String, String>> listAtividadePrincipal = new ArrayList<>();
-//            for (int i = 0; i < jsonArray.length(); i++) {
-//                listAtividadePrincipal.add(new Pair<String, String>(jsonArray.getJSONObject(i).getString("code"),
-//                        jsonArray.getJSONObject(i).getString("text")));
-//            }
-
-
-//            tabEmpresaVO.setAtividadePrincipal(listAtividadePrincipal);
-//
-//            jsonArray = jsonObject.getJSONArray("atividades_secundarias");
-//            List<Pair<String, String>> listAtividadesSecundarias = new ArrayList<>();
-//            for (int i = 0; i < jsonArray.length(); i++) {
-//                listAtividadesSecundarias.add(new Pair<String, String>(jsonArray.getJSONObject(i).getString("code"),
-//                        jsonArray.getJSONObject(i).getString("text")));
-//            }
-//            tabEmpresaVO.setAtividadesSecundarias(listAtividadesSecundarias);
-//
-//            jsonArray = jsonObject.getJSONArray("qsa");
-//            List<Pair<String, String>> listQsa = new ArrayList<>();
-//            for (int i = 0; i < jsonArray.length(); i++) {
-//                listQsa.add(new Pair<String, String>(jsonArray.getJSONObject(i).getString("qual"),
-//                        jsonArray.getJSONObject(i).getString("nome")));
-//            }
-//            tabEmpresaVO.setQsa(listQsa);
-//            tabEmpresaVO.setEfr(jsonObject.getString("efr"));
-//            tabEmpresaVO.setSituacao(jsonObject.getString("situacao"));
-//            tabEmpresaVO.setDataSituacao(jsonObject.getString("data_situacao"));
-//            tabEmpresaVO.setMotivoSituacao(jsonObject.getString("motivo_situacao"));
-//            tabEmpresaVO.setSituacaoEspecial(jsonObject.getString("situacao_especial"));
-//            tabEmpresaVO.setDataSituacaoEspecial(jsonObject.getString("data_situacao_especial"));
-//            tabEmpresaVO.setCapitalSocial(jsonObject.getString("capital_social"));
-//            tabEmpresaVO.setExtra("");//jsonObject.getString("extra"));
+            tabEmpresaVO.setTabEmpresaReceitaFederalVOList(getTabEmpresaReceitaFederalVO(jsonObject));
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -214,5 +179,44 @@ public class WsCnpjReceitaWsDAO extends BuscaWebService implements Constants {
         return tabEmpresaVO;
     }
 
+
+    List<TabEmpresaReceitaFederalVO> getTabEmpresaReceitaFederalVO(JSONObject object) {
+        List<TabEmpresaReceitaFederalVO> receitaFederalVOList = new ArrayList<>();
+        jsonArray = jsonObject.getJSONArray("atividade_principal");
+        for (int i = 0; i < jsonArray.length(); i++)
+            receitaFederalVOList.add(new TabEmpresaReceitaFederalVO(0, 0, 1, jsonArray.getJSONObject(i).getString("code"),
+                    jsonArray.getJSONObject(i).getString("text")));
+
+
+        jsonArray = jsonObject.getJSONArray("atividades_secundarias");
+        for (int i = 0; i < jsonArray.length(); i++)
+            receitaFederalVOList.add(new TabEmpresaReceitaFederalVO(0, 0, 2, jsonArray.getJSONObject(i).getString("code"),
+                    jsonArray.getJSONObject(i).getString("text")));
+
+        jsonArray = jsonObject.getJSONArray("qsa");
+        for (int i = 0; i < jsonArray.length(); i++)
+            receitaFederalVOList.add(new TabEmpresaReceitaFederalVO(0, 0, 0, jsonArray.getJSONObject(i).getString("qual"),
+                    jsonArray.getJSONObject(i).getString("nome")));
+
+        receitaFederalVOList.add(new TabEmpresaReceitaFederalVO(0, 0, 0, "situacao",
+                jsonObject.getString("situacao")));
+
+        receitaFederalVOList.add(new TabEmpresaReceitaFederalVO(0, 0, 0, "data_situacao",
+                jsonObject.getString("data_situacao")));
+
+        receitaFederalVOList.add(new TabEmpresaReceitaFederalVO(0, 0, 0, "motivo_situacao",
+                jsonObject.getString("motivo_situacao")));
+
+        receitaFederalVOList.add(new TabEmpresaReceitaFederalVO(0, 0, 0, "situacao_especial",
+                jsonObject.getString("situacao_especial")));
+
+        receitaFederalVOList.add(new TabEmpresaReceitaFederalVO(0, 0, 0, "data_situacao_especial",
+                jsonObject.getString("data_situacao_especial")));
+
+        receitaFederalVOList.add(new TabEmpresaReceitaFederalVO(0, 0, 0, "capital_social",
+                FormatarDado.getValueMoeda(jsonObject.getString("capital_social"),2)));
+
+        return receitaFederalVOList;
+    }
 
 }

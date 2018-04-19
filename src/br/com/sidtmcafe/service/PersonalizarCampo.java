@@ -132,9 +132,11 @@ public class PersonalizarCampo implements Constants {
                 //} else if (node instanceof JFXComboBox) {
                 //    ((JFXComboBox) node).getSelectionModel().select(0);
             } else if (node instanceof JFXTreeTableView) {
-                if (newTextCampo.equals("ttv")) ((JFXTreeTableView) node).getColumns().clear();
+                //if (newTextCampo.toLowerCase().equals("ttv"))
+                    ((JFXTreeTableView) node).getColumns().clear();
             } else if (node instanceof JFXListView) {
-                if (newTextCampo.equals("list")) ((JFXListView) node).getItems().clear();
+                //if (newTextCampo.toLowerCase().equals("list"))
+                    ((JFXListView) node).getItems().clear();
             } else if (node instanceof AnchorPane) {
                 clearField((AnchorPane) node);
             } else if (node instanceof TitledPane) {
