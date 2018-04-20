@@ -186,7 +186,7 @@ public class Tarefa implements Constants {
                     switch (tarefaAtual.getKey().toString()) {
                         case "criarTabelaEmpresa":
                             TabModel.tabelaEmpresa();
-                            TabModel.tabelaQsaReceita();
+                            //TabModel.tabelaQsaReceita();
                             break;
                         case "preencherCboFiltroPesquisa":
                             cadastroEmpresa.preencherCboFiltroPesquisa();

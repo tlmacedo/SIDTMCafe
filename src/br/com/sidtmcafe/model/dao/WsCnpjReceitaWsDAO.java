@@ -213,8 +213,8 @@ public class WsCnpjReceitaWsDAO extends BuscaWebService implements Constants {
         receitaFederalVOList.add(new TabEmpresaReceitaFederalVO(0, 0, 0, "data_situacao_especial",
                 jsonObject.getString("data_situacao_especial")));
 
-        receitaFederalVOList.add(new TabEmpresaReceitaFederalVO(0, 0, 0, "capital_social",
-                FormatarDado.getValueMoeda(jsonObject.getString("capital_social"),2)));
+        receitaFederalVOList.add(new TabEmpresaReceitaFederalVO(0, 0, 0, "capital_social", "R$ " +
+                FormatarDado.getValueMoeda(jsonObject.getString("capital_social"), 2)));
 
         return receitaFederalVOList;
     }

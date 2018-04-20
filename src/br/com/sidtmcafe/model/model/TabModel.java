@@ -135,13 +135,13 @@ public class TabModel {
         return colunaIsTransportadora;
     }
 
-    public static JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String> getColunaQsaKey() {
-        return colunaQsaKey;
-    }
-
-    public static JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String> getColunaQsaValue() {
-        return colunaQsaValue;
-    }
+//    public static JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String> getColunaQsaKey() {
+//        return colunaQsaKey;
+//    }
+//
+//    public static JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String> getColunaQsaValue() {
+//        return colunaQsaValue;
+//    }
 
 //    public static void tabelaProduto() {
 //        try {
@@ -399,28 +399,28 @@ public class TabModel {
         }
     }
 
-    public static void tabelaQsaReceita() {
-        try {
-            Label lblQsaKey = new Label("Item");
-            lblQsaKey.setPrefWidth(100);
-            colunaQsaKey = new JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String>();
-            colunaQsaKey.setGraphic(lblQsaKey);
-            colunaQsaKey.setPrefWidth(100);
-            colunaQsaKey.setCellValueFactory(param -> {
-                return param.getValue().getValue().str_KeyProperty();
-            });
-
-            Label lblQsaValue = new Label("Detalhe");
-            lblQsaValue.setPrefWidth(250);
-            colunaQsaValue = new JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String>();
-            colunaQsaValue.setGraphic(lblQsaValue);
-            colunaQsaValue.setPrefWidth(250);
-            colunaQsaValue.setCellValueFactory(param -> {
-                return param.getValue().getValue().str_ValueProperty();
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+//    public static void tabelaQsaReceita() {
+//        try {
+//            Label lblQsaKey = new Label("Item");
+//            lblQsaKey.setPrefWidth(100);
+//            colunaQsaKey = new JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String>();
+//            colunaQsaKey.setGraphic(lblQsaKey);
+//            colunaQsaKey.setPrefWidth(100);
+//            colunaQsaKey.setCellValueFactory(param -> {
+//                return param.getValue().getValue().str_KeyProperty();
+//            });
+//
+//            Label lblQsaValue = new Label("Detalhe");
+//            lblQsaValue.setPrefWidth(250);
+//            colunaQsaValue = new JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String>();
+//            colunaQsaValue.setGraphic(lblQsaValue);
+//            colunaQsaValue.setPrefWidth(250);
+//            colunaQsaValue.setCellValueFactory(param -> {
+//                return param.getValue().getValue().str_ValueProperty();
+//            });
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//    }
 
 }

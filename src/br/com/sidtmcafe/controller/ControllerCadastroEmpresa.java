@@ -22,6 +22,7 @@ import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 import javafx.util.Pair;
 
 import java.net.URL;
@@ -30,10 +31,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static br.com.sidtmcafe.interfaces.Constants.DTF_DATA;
 import static br.com.sidtmcafe.interfaces.Constants.DTF_DATAHORA;
@@ -74,7 +72,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     public Label lblDataAbertura;
     public Label lblDataAberturaDiff;
     public Label lblNaturezaJuridica;
-    public JFXTreeTableView<TabEmpresaReceitaFederalVO> ttvDetalheReceita;
+    public JFXListView listInformacoesReceita;
     public JFXTabPane tpnContatoPrazosCondicoes;
     public JFXListView<TabEmailHomePageVO> listHomePage;
     public JFXListView<TabEmailHomePageVO> listEmail;
@@ -446,7 +444,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     List<TabEmpresaReceitaFederalVO> tabEmpresaReceitaFederalVOList;
     List<TabEmpresaReceitaFederalVO> deletadosTabEmpresaReceitaFederalVOList;
     List<TabEmpresaReceitaFederalVO> receitaFederalQsaVOList;
-    ObservableList<TabEmpresaReceitaFederalVO> receitaFederalQsaVOObservableList;
+    String[] colunasInformacoesReceita = new String[2];
 
     List<SisUFVO> sisUFVOList;
     List<SisMunicipioVO> sisMunicipioVOList;
@@ -504,19 +502,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             ttvEmpresa.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             ttvEmpresa.setRoot(root);
             ttvEmpresa.setShowRoot(false);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    void preencherTabelaQsa() {
-        try {
-            if (receitaFederalQsaVOObservableList == null) return;
-            final TreeItem<TabEmpresaReceitaFederalVO> root = new RecursiveTreeItem<TabEmpresaReceitaFederalVO>(receitaFederalQsaVOObservableList, RecursiveTreeObject::getChildren);
-            ttvDetalheReceita.getColumns().setAll(TabModel.getColunaQsaKey(), TabModel.getColunaQsaValue());
-            ttvDetalheReceita.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-            ttvDetalheReceita.setRoot(root);
-            ttvDetalheReceita.setShowRoot(false);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -758,6 +743,13 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             tipFormat = "cpf";
         txtCNPJ.setText(FormatarDado.getCampoFormatado(getTabEmpresaVO().getCnpj(), tipFormat));
         txtIE.setText(FormatarDado.getCampoFormatado(getTabEmpresaVO().getIe(), "ie" + getTabEnderecoVOList().get(0).getSisMunicipioVO().getUfVO().getSigla()));
+
+        for (int i = 0; i < cboSituacaoSistema.getItems().size(); i++) {
+            cboSituacaoSistema.getSelectionModel().select(i);
+            if (cboSituacaoSistema.getItems().get(i).getId() == getTabEmpresaVO().getSisSituacaoSistema_id())
+                break;
+        }
+
         cboSituacaoSistema.getSelectionModel().select(getTabEmpresaVO().getSisSituacaoSistemaVO());
         txtRazao.setText(getTabEmpresaVO().getRazao());
         txtFantasia.setText(getTabEmpresaVO().getFantasia());
@@ -786,8 +778,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                 lblDataAtualizacaoDiff.setText("tempo de atualização: " + DataTrabalhada.getStrIntervaloDatas(ldtAtualizacao.toLocalDate(), null));
             }
         }
-        //exibirDadosAdicionais();
-        //preencherListaDetalhesReceita();
+
     }
 
     void exibirDadosEndereco() {
@@ -804,26 +795,17 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         txtEndBairro.setText(enderecoVO.getBairro());
         txtEndPontoReferencia.setText(enderecoVO.getPontoReferencia());
 
-        boolean diferente = true;
-        cboEndUF.getSelectionModel().selectFirst();
-        while (diferente) {
-            if (cboEndUF.getSelectionModel().getSelectedItem().getSigla().equals(enderecoVO.getSisMunicipioVO().getUfVO().getSigla())) {
-                diferente = false;
-            } else {
-                cboEndUF.getSelectionModel().selectNext();
-            }
+        for (int i = 0; i < cboEndUF.getItems().size(); i++) {
+            cboEndUF.getSelectionModel().select(i);
+            if (cboEndUF.getItems().get(i).getId() == enderecoVO.getSisMunicipioVO().getUfVO().getId())
+                break;
         }
-        diferente = true;
-        cboEndMunicipio.getSelectionModel().selectFirst();
-        while (diferente) {
-            if (cboEndMunicipio.getSelectionModel().getSelectedItem().getDescricao().equals(enderecoVO.getSisMunicipioVO().getDescricao())) {
-                diferente = false;
-            } else {
-                cboEndMunicipio.getSelectionModel().selectNext();
-            }
+
+        for (int i = 0; i < cboEndMunicipio.getItems().size(); i++) {
+            cboEndMunicipio.getSelectionModel().select(i);
+            if (cboEndMunicipio.getItems().get(i).getId() == enderecoVO.getSisMunicipio_id())
+                break;
         }
-//        System.out.println("cboMunicipio: id [" + cboEndMunicipio.getSelectionModel().getSelectedItem().getId() +
-//                "] descricao [" + cboEndMunicipio.getSelectionModel().getSelectedItem().getDescricao() + "]");
 
     }
 
@@ -891,19 +873,51 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     void atualizaListaReceitaFederal() {
         listAtividadePrincipal.getItems().clear();
         listAtividadeSecundaria.getItems().clear();
-        ttvDetalheReceita.getColumns().clear();
+        listInformacoesReceita.getItems().clear();
         if (getTabEmpresaReceitaFederalVOList() == null) return;
         for (TabEmpresaReceitaFederalVO receitaFederalVO : getTabEmpresaReceitaFederalVOList())
-            if (receitaFederalVO.getIsAtividadePrincipal() == 0)
-                receitaFederalQsaVOList.add(receitaFederalVO);
-            else if (receitaFederalVO.getIsAtividadePrincipal() == 1)
+            if (receitaFederalVO.getIsAtividadePrincipal() == 0) {
+                listInformacoesReceita.getItems().add(receitaFederalVO);
+            } else if (receitaFederalVO.getIsAtividadePrincipal() == 1) {
                 listAtividadePrincipal.getItems().add(receitaFederalVO);
-            else
+            } else {
                 listAtividadeSecundaria.getItems().add(receitaFederalVO);
+            }
+//        if (receitaFederalQsaVOList.size() > 0)
+            fatorarComboInformacoesReceita();
 
-        if (receitaFederalQsaVOObservableList == null)
-            receitaFederalQsaVOObservableList = FXCollections.observableList(receitaFederalQsaVOList);
-        preencherTabelaQsa();
+    }
+
+    void fatorarComboInformacoesReceita() {
+        listInformacoesReceita.setCellFactory(
+                new Callback<ListView<TabEmpresaReceitaFederalVO>, ListCell<TabEmpresaReceitaFederalVO>>() {
+                    @Override
+                    public ListCell<TabEmpresaReceitaFederalVO> call(ListView<TabEmpresaReceitaFederalVO> param) {
+                        final ListCell<TabEmpresaReceitaFederalVO> cell = new ListCell<TabEmpresaReceitaFederalVO>() {
+                            @Override
+                            public void updateItem(TabEmpresaReceitaFederalVO item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (item != null) {
+                                    if (getIndex() == -1) {
+                                        setText(item.toString());
+                                    } else {
+                                        String textoCombo = "";
+                                        for (String detalheInformacaoReceita : item.getDetalheReceitaFederal().split(";")) {
+                                            if (textoCombo != "")
+                                                textoCombo += "\r\n";
+                                            textoCombo += detalheInformacaoReceita;
+                                        }
+                                        setText(textoCombo);
+                                    }
+                                } else {
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+                });
+
     }
 
     void limparCampoDadoCadastral() {

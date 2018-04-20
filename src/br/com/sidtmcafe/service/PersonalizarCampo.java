@@ -129,14 +129,15 @@ public class PersonalizarCampo implements Constants {
                 ((JFXTextArea) node).setText(newTextCampo);
             } else if (node instanceof JFXCheckBox) {
                 ((JFXCheckBox) node).setSelected(newTextCampo == "verdadeiro");
-                //} else if (node instanceof JFXComboBox) {
-                //    ((JFXComboBox) node).getSelectionModel().select(0);
+            } else if (node instanceof JFXComboBox) {
+//                if (((JFXComboBox) node).getItems().size() > 0)
+//                    ((JFXComboBox) node).getSelectionModel().select(0);
             } else if (node instanceof JFXTreeTableView) {
                 //if (newTextCampo.toLowerCase().equals("ttv"))
-                    ((JFXTreeTableView) node).getColumns().clear();
+                ((JFXTreeTableView) node).getColumns().clear();
             } else if (node instanceof JFXListView) {
                 //if (newTextCampo.toLowerCase().equals("list"))
-                    ((JFXListView) node).getItems().clear();
+                ((JFXListView) node).getItems().clear();
             } else if (node instanceof AnchorPane) {
                 clearField((AnchorPane) node);
             } else if (node instanceof TitledPane) {
@@ -176,7 +177,7 @@ public class PersonalizarCampo implements Constants {
             } else if (node instanceof JFXCheckBox) {
                 ((JFXCheckBox) node).setDisable(setDisable & deshabilitado);
             } else if (node instanceof JFXTreeTableView) {
-                //((JFXTreeTableView) node).setEditable(setDisable & deshabilitado);
+//                ((JFXTreeTableView) node).setEditable(setDisable & deshabilitado);
                 ((JFXTreeTableView) node).setDisable(setDisable & deshabilitado);
             } else if (node instanceof AnchorPane) {
                 desabilitaCampos((AnchorPane) node, setDisable);
