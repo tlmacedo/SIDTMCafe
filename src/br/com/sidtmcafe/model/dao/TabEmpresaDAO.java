@@ -136,8 +136,8 @@ public class TabEmpresaDAO extends BuscaBandoDados {
     public void updateTabEmpresaVO(Connection conn, TabEmpresaVO empresaVO) throws SQLException {
         comandoSql = "UPDATE tabEmpresa SET ";
         comandoSql += "isEmpresa = " + empresaVO.getIsEmpresa() + ", ";
-        comandoSql += "cnpj = '" + empresaVO.getCnpj().replaceAll("'", "") + "', ";
-        comandoSql += "ie = '" + empresaVO.getIe().replaceAll("'", "") + "', ";
+        comandoSql += "cnpj = '" + empresaVO.getCnpj().replaceAll("[\\-/.' \\[\\]]", "") + "', ";
+        comandoSql += "ie = '" + empresaVO.getIe().replaceAll("[\\-/.' \\[\\]]", "") + "', ";
         comandoSql += "razao = '" + empresaVO.getRazao().replaceAll("'", "") + "', ";
         comandoSql += "fantasia = '" + empresaVO.getFantasia().replaceAll("'", "") + "', ";
         comandoSql += "isLoja = " + empresaVO.isIsLoja() + ", ";
@@ -160,8 +160,8 @@ public class TabEmpresaDAO extends BuscaBandoDados {
         comandoSql += "sisSituacaoSistema_id, usuarioCadastro_id, dataAbertura, naturezaJuridica) ";
         comandoSql += "VALUES(";
         comandoSql += empresaVO.getIsEmpresa() + ", ";
-        comandoSql += "'" + empresaVO.getCnpj().replaceAll("'", "") + "', ";
-        comandoSql += "'" + empresaVO.getIe().replaceAll("'", "") + "', ";
+        comandoSql += "'" + empresaVO.getCnpj().replaceAll("[\\-/.' \\[\\]]", "") + "', ";
+        comandoSql += "'" + empresaVO.getIe().replaceAll("[\\-/.' \\[\\]]", "") + "', ";
         comandoSql += "'" + empresaVO.getRazao().replaceAll("'", "") + "', ";
         comandoSql += "'" + empresaVO.getFantasia().replaceAll("'", "") + "', ";
         comandoSql += empresaVO.isIsLoja() + ", ";

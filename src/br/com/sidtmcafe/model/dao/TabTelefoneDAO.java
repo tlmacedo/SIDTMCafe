@@ -49,7 +49,7 @@ public class TabTelefoneDAO extends BuscaBandoDados {
 
     public void updateTabTelefoneVO(Connection conn, TabTelefoneVO telefoneVO) throws SQLException {
         comandoSql = "UPDATE tabTelefone SET ";
-        comandoSql += "descricao = '" + telefoneVO.getDescricao() + "', ";
+        comandoSql += "descricao = '" + telefoneVO.getDescricao().replaceAll("[\\-/.' \\[\\]]", "") + "', ";
         comandoSql += "sisTelefoneOperadora_id = " + telefoneVO.getSisTelefoneOperadora_id() + " ";
         comandoSql += "WHERE id = '" + telefoneVO.getId() + "' ";
 
@@ -61,7 +61,7 @@ public class TabTelefoneDAO extends BuscaBandoDados {
         comandoSql = "INSERT INTO tabTelefone ";
         comandoSql += "(descricao, sisTelefoneOperadora_id) ";
         comandoSql += "VALUES ( ";
-        comandoSql += "'" + telefoneVO.getDescricao() + "', ";
+        comandoSql += "'" + telefoneVO.getDescricao().replaceAll("[\\-/.' \\[\\]]", "") + "', ";
         comandoSql += telefoneVO.getSisTelefoneOperadora_id();
         comandoSql += ") ";
 

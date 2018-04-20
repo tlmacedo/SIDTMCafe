@@ -3,6 +3,7 @@ package br.com.sidtmcafe.model.dao;
 import br.com.sidtmcafe.database.ConnectionFactory;
 import br.com.sidtmcafe.model.vo.SisTipoEnderecoVO;
 import br.com.sidtmcafe.model.vo.TabEnderecoVO;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -75,7 +76,7 @@ public class TabEnderecoDAO extends BuscaBandoDados {
         comandoSql += "(sisTipoEndereco_id, cep, logradouro, numero, complemento, bairro, sisMunicipio_id, pontoReferencia) ";
         comandoSql += "VALUES(";
         comandoSql += enderecoVO.getSisTipoEndereco_id() + ", ";
-        comandoSql += "'" + enderecoVO.getCep() + "', ";
+        comandoSql += "'" + enderecoVO.getCep().replaceAll("[\\-/. \\[\\]]", "") + "', ";
         comandoSql += "'" + enderecoVO.getLogradouro() + "', ";
         comandoSql += "'" + enderecoVO.getNumero() + "', ";
         comandoSql += "'" + enderecoVO.getComplemento() + "', ";

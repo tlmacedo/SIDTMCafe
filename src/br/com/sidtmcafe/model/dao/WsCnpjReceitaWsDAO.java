@@ -119,16 +119,19 @@ public class WsCnpjReceitaWsDAO extends BuscaWebService implements Constants {
             }
             tabEmpresaVO.setNaturezaJuridica(jsonObject.getString("natureza_juridica"));
 
+
             TabEnderecoVO tabEnderecoVO = new TabEnderecoVO(1);
             tabEmpresaVO.setId(0);
-            tabEnderecoVO.setCep(jsonObject.getString("cep"));
-            tabEnderecoVO.setLogradouro(jsonObject.getString("logradouro"));
-            tabEnderecoVO.setNumero(jsonObject.getString("numero"));
-            tabEnderecoVO.setComplemento(jsonObject.getString("complemento"));
-            tabEnderecoVO.setBairro(jsonObject.getString("bairro"));
-            tabEnderecoVO.setSisMunicipioVO(new SisMunicipioDAO().getSisMunicipioVO(jsonObject.getString("municipio")));
-            tabEnderecoVO.setSisMunicipio_id(tabEnderecoVO.getSisMunicipioVO().getId());
-            tabEnderecoVO.setPontoReferencia("");
+            if (jsonObject.getString("situacao").toLowerCase().equals("ativa")) {
+                tabEnderecoVO.setCep(jsonObject.getString("cep"));
+                tabEnderecoVO.setLogradouro(jsonObject.getString("logradouro"));
+                tabEnderecoVO.setNumero(jsonObject.getString("numero"));
+                tabEnderecoVO.setComplemento(jsonObject.getString("complemento"));
+                tabEnderecoVO.setBairro(jsonObject.getString("bairro"));
+                tabEnderecoVO.setSisMunicipioVO(new SisMunicipioDAO().getSisMunicipioVO(jsonObject.getString("municipio")));
+                tabEnderecoVO.setSisMunicipio_id(tabEnderecoVO.getSisMunicipioVO().getId());
+                tabEnderecoVO.setPontoReferencia("");
+            }
 
             if (tabEmpresaVO.getTabEnderecoVOList() == null)
                 tabEmpresaVO.setTabEnderecoVOList(new ArrayList<>());

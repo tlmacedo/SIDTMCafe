@@ -164,6 +164,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                         if (!validarDadosCadastrais()) break;
 
                         salvarEmpresa();
+                        limparCampoDadoCadastral();
                         setStatusFormulario("Pesquisa");
                         carregarListaEmpresa();
                         preencherTabelaEmpresa();
@@ -444,7 +445,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     List<TabEmpresaReceitaFederalVO> tabEmpresaReceitaFederalVOList;
     List<TabEmpresaReceitaFederalVO> deletadosTabEmpresaReceitaFederalVOList;
     List<TabEmpresaReceitaFederalVO> receitaFederalQsaVOList;
-    String[] colunasInformacoesReceita = new String[2];
 
     List<SisUFVO> sisUFVOList;
     List<SisMunicipioVO> sisMunicipioVOList;
@@ -883,8 +883,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
             } else {
                 listAtividadeSecundaria.getItems().add(receitaFederalVO);
             }
-//        if (receitaFederalQsaVOList.size() > 0)
-            fatorarComboInformacoesReceita();
+        fatorarComboInformacoesReceita();
 
     }
 
@@ -979,6 +978,14 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     boolean validarDadosEndPrincipal() {
         boolean result = true;
         guardarEndereco(idEnderecoAtual);
+
+        for (int i = 0; i < getTabEmpresaReceitaFederalVOList().size(); i++)
+            if (getTabEmpresaReceitaFederalVOList().get(i).getStr_Key().toLowerCase().equals("situacao"))
+                if (!getTabEmpresaReceitaFederalVOList().get(i).getStr_Value().equals("ativa")) {
+                    limparEndereco();
+                    return true;
+                }
+
         if (txtEndCEP.getText().replaceAll("[\\-/. \\[\\]]", "").length() != 8 || txtEndCEP.getText().length() == 0) {
             txtEndCEP.requestFocus();
             result = false;
