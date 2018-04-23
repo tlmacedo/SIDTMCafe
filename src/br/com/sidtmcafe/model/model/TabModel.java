@@ -2,6 +2,7 @@ package br.com.sidtmcafe.model.model;
 
 import br.com.sidtmcafe.model.vo.TabEmpresaReceitaFederalVO;
 import br.com.sidtmcafe.model.vo.TabEmpresaVO;
+import br.com.sidtmcafe.model.vo.TabProdutoVO;
 import br.com.sidtmcafe.service.FormatarDado;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -14,15 +15,15 @@ import static br.com.sidtmcafe.interfaces.Constants.DECIMAL_FORMAT;
 
 public class TabModel {
 
-//    static JFXTreeTableColumn<TabProdutoVO, Integer> colunaIdProduto;
-//    static JFXTreeTableColumn<TabProdutoVO, String> colunaCodigo;
-//    static JFXTreeTableColumn<TabProdutoVO, String> colunaDescricao;
-//    static JFXTreeTableColumn<TabProdutoVO, String> colunaUndCom;
-//    static JFXTreeTableColumn<TabProdutoVO, String> colunaPrecoFabrica;
-//    static JFXTreeTableColumn<TabProdutoVO, String> colunaPrecoConsumidor;
-//    static JFXTreeTableColumn<TabProdutoVO, Integer> colunaQtdEstoque;
-//    static JFXTreeTableColumn<TabProdutoVO, String> colunaSituacaoSistema;
-//    static JFXTreeTableColumn<TabProdutoVO, Integer> colunaVarejo;
+    static JFXTreeTableColumn<TabProdutoVO, Integer> colunaIdProduto;
+    static JFXTreeTableColumn<TabProdutoVO, String> colunaCodigo;
+    static JFXTreeTableColumn<TabProdutoVO, String> colunaDescricao;
+    static JFXTreeTableColumn<TabProdutoVO, String> colunaUndCom;
+    static JFXTreeTableColumn<TabProdutoVO, String> colunaPrecoFabrica;
+    static JFXTreeTableColumn<TabProdutoVO, String> colunaPrecoConsumidor;
+    static JFXTreeTableColumn<TabProdutoVO, Integer> colunaQtdEstoque;
+    static JFXTreeTableColumn<TabProdutoVO, String> colunaSituacaoSistema;
+    static JFXTreeTableColumn<TabProdutoVO, Integer> colunaVarejo;
 
     static JFXTreeTableColumn<TabEmpresaVO, Integer> colunaIdEmpresa;
     static JFXTreeTableColumn<TabEmpresaVO, String> colunaCnpj;
@@ -42,41 +43,41 @@ public class TabModel {
     static JFXTreeTableColumn<TabEmpresaReceitaFederalVO, String> colunaQsaValue;
 
 
-//    public static JFXTreeTableColumn<TabProdutoVO, Integer> getColunaIdProduto() {
-//        return colunaIdProduto;
-//    }
-//
-//    public static JFXTreeTableColumn<TabProdutoVO, String> getColunaCodigo() {
-//        return colunaCodigo;
-//    }
-//
-//    public static JFXTreeTableColumn<TabProdutoVO, String> getColunaDescricao() {
-//        return colunaDescricao;
-//    }
-//
-//    public static JFXTreeTableColumn<TabProdutoVO, String> getColunaUndCom() {
-//        return colunaUndCom;
-//    }
-//
-//    public static JFXTreeTableColumn<TabProdutoVO, String> getColunaPrecoFabrica() {
-//        return colunaPrecoFabrica;
-//    }
-//
-//    public static JFXTreeTableColumn<TabProdutoVO, String> getColunaPrecoConsumidor() {
-//        return colunaPrecoConsumidor;
-//    }
-//
-//    public static JFXTreeTableColumn<TabProdutoVO, Integer> getColunaQtdEstoque() {
-//        return colunaQtdEstoque;
-//    }
-//
-//    public static JFXTreeTableColumn<TabProdutoVO, String> getColunaSituacaoSistema() {
-//        return colunaSituacaoSistema;
-//    }
-//
-//    public static JFXTreeTableColumn<TabProdutoVO, Integer> getColunaVarejo() {
-//        return colunaVarejo;
-//    }
+    public static JFXTreeTableColumn<TabProdutoVO, Integer> getColunaIdProduto() {
+        return colunaIdProduto;
+    }
+
+    public static JFXTreeTableColumn<TabProdutoVO, String> getColunaCodigo() {
+        return colunaCodigo;
+    }
+
+    public static JFXTreeTableColumn<TabProdutoVO, String> getColunaDescricao() {
+        return colunaDescricao;
+    }
+
+    public static JFXTreeTableColumn<TabProdutoVO, String> getColunaUndCom() {
+        return colunaUndCom;
+    }
+
+    public static JFXTreeTableColumn<TabProdutoVO, String> getColunaPrecoFabrica() {
+        return colunaPrecoFabrica;
+    }
+
+    public static JFXTreeTableColumn<TabProdutoVO, String> getColunaPrecoConsumidor() {
+        return colunaPrecoConsumidor;
+    }
+
+    public static JFXTreeTableColumn<TabProdutoVO, Integer> getColunaQtdEstoque() {
+        return colunaQtdEstoque;
+    }
+
+    public static JFXTreeTableColumn<TabProdutoVO, String> getColunaSituacaoSistema() {
+        return colunaSituacaoSistema;
+    }
+
+    public static JFXTreeTableColumn<TabProdutoVO, Integer> getColunaVarejo() {
+        return colunaVarejo;
+    }
 
 
     public static JFXTreeTableColumn<TabEmpresaVO, Integer> getColunaIdEmpresa() {
@@ -143,93 +144,93 @@ public class TabModel {
 //        return colunaQsaValue;
 //    }
 
-//    public static void tabelaProduto() {
-//        try {
-//            Label lblId = new Label("id");
-//            lblId.setPrefWidth(28);
-//            colunaIdProduto = new JFXTreeTableColumn<TabProdutoVO, Integer>();
-//            colunaIdProduto.setGraphic(lblId);
-//            colunaIdProduto.setPrefWidth(28);
-//            colunaIdProduto.setStyle("-fx-alignment: center-right;");
-//            colunaIdProduto.setCellValueFactory(param -> param.getValue().getValue().idProperty().asObject());
-//
-//            Label lblCodigo = new Label("Código");
-//            lblCodigo.setPrefWidth(60);
-//            colunaCodigo = new JFXTreeTableColumn<TabProdutoVO, String>();
-//            colunaCodigo.setGraphic(lblCodigo);
-//            colunaCodigo.setPrefWidth(60);
-//            colunaCodigo.setStyle("-fx-alignment: center-right;");
-//            colunaCodigo.setCellValueFactory(param -> param.getValue().getValue().codigoProperty());
-//
-//            Label lblDescricao = new Label("Descrição");
-//            lblDescricao.setPrefWidth(350);
-//            colunaDescricao = new JFXTreeTableColumn<TabProdutoVO, String>();
-//            colunaDescricao.setGraphic(lblDescricao);
-//            colunaDescricao.setPrefWidth(350);
-//            colunaDescricao.setCellValueFactory(param -> param.getValue().getValue().descricaoProperty());
-//
-//            Label lblUndComercial = new Label("Und Com");
-//            lblUndComercial.setPrefWidth(70);
-//            colunaUndCom = new JFXTreeTableColumn<TabProdutoVO, String>();
-//            colunaUndCom.setGraphic(lblUndComercial);
-//            colunaUndCom.setPrefWidth(70);
-//            colunaUndCom.setCellValueFactory(param -> param.getValue().getValue().getUnidadeComercialVO().siglaProperty());
-//
-//            Label lblVarejo = new Label("Varejo");
-//            lblVarejo.setPrefWidth(50);
-//            colunaVarejo = new JFXTreeTableColumn<TabProdutoVO, Integer>();
-//            colunaVarejo.setGraphic(lblVarejo);
-//            colunaVarejo.setPrefWidth(50);
-//            colunaVarejo.setStyle("-fx-alignment: center-right;");
-//            colunaVarejo.setCellValueFactory(param -> param.getValue().getValue().varejoProperty().asObject());
-//
-//            Label lblPrecoFab = new Label("Preço Fab.");
-//            lblPrecoFab.setPrefWidth(90);
-//            colunaPrecoFabrica = new JFXTreeTableColumn<TabProdutoVO, String>();
-//            colunaPrecoFabrica.setGraphic(lblPrecoFab);
-//            colunaPrecoFabrica.setPrefWidth(90);
-//            colunaPrecoFabrica.setStyle("-fx-alignment: center-right;");
-//            colunaPrecoFabrica.setCellValueFactory(param -> {
-//                try {
-//                    return new SimpleStringProperty(DECIMAL_FORMAT.format(param.getValue().getValue().precoFabricaProperty().getValue()).replace(".", ","));
-//                } catch (Exception ex) {
-//                    return new SimpleStringProperty("0");
-//                }
-//            });
-//
-//            Label lblPrecoCons = new Label("Preço Cons.");
-//            lblPrecoCons.setPrefWidth(90);
-//            colunaPrecoConsumidor = new JFXTreeTableColumn<TabProdutoVO, String>();
-//            colunaPrecoConsumidor.setGraphic(lblPrecoCons);
-//            colunaPrecoConsumidor.setPrefWidth(90);
-//            colunaPrecoConsumidor.setStyle("-fx-alignment: center-right;");
-//            colunaPrecoConsumidor.setCellValueFactory(param -> {
-//                try {
-//                    return new SimpleStringProperty(DECIMAL_FORMAT.format(param.getValue().getValue().precoConsumidorProperty().getValue()).replace(".", ","));
-//                } catch (Exception ex) {
-//                    return new SimpleStringProperty("0");
-//                }
-//            });
-//
-//            Label lblSituacaoSistema = new Label("Situação");
-//            lblSituacaoSistema.setPrefWidth(100);
-//            colunaSituacaoSistema = new JFXTreeTableColumn<TabProdutoVO, String>();
-//            colunaSituacaoSistema.setGraphic(lblSituacaoSistema);
-//            colunaSituacaoSistema.setPrefWidth(100);
-//            colunaSituacaoSistema.setCellValueFactory(param -> param.getValue().getValue().getSituacaoSistemaVO().descricaoProperty());
-//
-//            Label lblEstoque = new Label("Estoque");
-//            lblEstoque.setPrefWidth(65);
-//            colunaQtdEstoque = new JFXTreeTableColumn<TabProdutoVO, Integer>();
-//            colunaQtdEstoque.setGraphic(lblEstoque);
-//            colunaQtdEstoque.setPrefWidth(65);
-//            colunaQtdEstoque.setStyle("-fx-alignment: center-right;");
-//            colunaQtdEstoque.setCellValueFactory(param -> param.getValue().getValue().estoqueProperty().asObject());
-//
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
+    public static void tabelaProduto() {
+        try {
+            Label lblId = new Label("id");
+            lblId.setPrefWidth(28);
+            colunaIdProduto = new JFXTreeTableColumn<TabProdutoVO, Integer>();
+            colunaIdProduto.setGraphic(lblId);
+            colunaIdProduto.setPrefWidth(28);
+            colunaIdProduto.setStyle("-fx-alignment: center-right;");
+            colunaIdProduto.setCellValueFactory(param -> param.getValue().getValue().idProperty().asObject());
+
+            Label lblCodigo = new Label("Código");
+            lblCodigo.setPrefWidth(60);
+            colunaCodigo = new JFXTreeTableColumn<TabProdutoVO, String>();
+            colunaCodigo.setGraphic(lblCodigo);
+            colunaCodigo.setPrefWidth(60);
+            colunaCodigo.setStyle("-fx-alignment: center-right;");
+            colunaCodigo.setCellValueFactory(param -> param.getValue().getValue().codigoProperty());
+
+            Label lblDescricao = new Label("Descrição");
+            lblDescricao.setPrefWidth(350);
+            colunaDescricao = new JFXTreeTableColumn<TabProdutoVO, String>();
+            colunaDescricao.setGraphic(lblDescricao);
+            colunaDescricao.setPrefWidth(350);
+            colunaDescricao.setCellValueFactory(param -> param.getValue().getValue().descricaoProperty());
+
+            Label lblUndComercial = new Label("Und Com");
+            lblUndComercial.setPrefWidth(70);
+            colunaUndCom = new JFXTreeTableColumn<TabProdutoVO, String>();
+            colunaUndCom.setGraphic(lblUndComercial);
+            colunaUndCom.setPrefWidth(70);
+            colunaUndCom.setCellValueFactory(param -> param.getValue().getValue().getSisUnidadeComercialVO().siglaProperty());
+
+            Label lblVarejo = new Label("Varejo");
+            lblVarejo.setPrefWidth(50);
+            colunaVarejo = new JFXTreeTableColumn<TabProdutoVO, Integer>();
+            colunaVarejo.setGraphic(lblVarejo);
+            colunaVarejo.setPrefWidth(50);
+            colunaVarejo.setStyle("-fx-alignment: center-right;");
+            colunaVarejo.setCellValueFactory(param -> param.getValue().getValue().varejoProperty().asObject());
+
+            Label lblPrecoFab = new Label("Preço Fab.");
+            lblPrecoFab.setPrefWidth(90);
+            colunaPrecoFabrica = new JFXTreeTableColumn<TabProdutoVO, String>();
+            colunaPrecoFabrica.setGraphic(lblPrecoFab);
+            colunaPrecoFabrica.setPrefWidth(90);
+            colunaPrecoFabrica.setStyle("-fx-alignment: center-right;");
+            colunaPrecoFabrica.setCellValueFactory(param -> {
+                try {
+                    return new SimpleStringProperty(DECIMAL_FORMAT.format(param.getValue().getValue().precoFabricaProperty().getValue()).replace(".", ","));
+                } catch (Exception ex) {
+                    return new SimpleStringProperty("0");
+                }
+            });
+
+            Label lblPrecoCons = new Label("Preço Cons.");
+            lblPrecoCons.setPrefWidth(90);
+            colunaPrecoConsumidor = new JFXTreeTableColumn<TabProdutoVO, String>();
+            colunaPrecoConsumidor.setGraphic(lblPrecoCons);
+            colunaPrecoConsumidor.setPrefWidth(90);
+            colunaPrecoConsumidor.setStyle("-fx-alignment: center-right;");
+            colunaPrecoConsumidor.setCellValueFactory(param -> {
+                try {
+                    return new SimpleStringProperty(DECIMAL_FORMAT.format(param.getValue().getValue().precoConsumidorProperty().getValue()).replace(".", ","));
+                } catch (Exception ex) {
+                    return new SimpleStringProperty("0");
+                }
+            });
+
+            Label lblSituacaoSistema = new Label("Situação");
+            lblSituacaoSistema.setPrefWidth(100);
+            colunaSituacaoSistema = new JFXTreeTableColumn<TabProdutoVO, String>();
+            colunaSituacaoSistema.setGraphic(lblSituacaoSistema);
+            colunaSituacaoSistema.setPrefWidth(100);
+            colunaSituacaoSistema.setCellValueFactory(param -> param.getValue().getValue().getSituacaoSistemaVO().descricaoProperty());
+
+            Label lblEstoque = new Label("Estoque");
+            lblEstoque.setPrefWidth(65);
+            colunaQtdEstoque = new JFXTreeTableColumn<TabProdutoVO, Integer>();
+            colunaQtdEstoque.setGraphic(lblEstoque);
+            colunaQtdEstoque.setPrefWidth(65);
+            colunaQtdEstoque.setStyle("-fx-alignment: center-right;");
+            colunaQtdEstoque.setCellValueFactory(param -> param.getValue().getValue().estoqueProperty().asObject());
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public static void tabelaEmpresa() {
         try {

@@ -231,40 +231,45 @@ public class Tarefa implements Constants {
         Task<Void> voidTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                updateMessage("carregando");
+                updateMessage("carregando.");
                 for (Pair tarefaAtual : tarefas) {
                     updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
-                    Thread.sleep(200);
+                    Thread.sleep(201);
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
-//                        case "criarTabelaProduto":
-//                            TabModel.tabelaProduto();
+                        case "criarTabelaProduto":
+                            TabModel
+//                        case "criarTabelaEmpresa":
+//                            TabModel.tabelaEmpresa();
+//                            //TabModel.tabelaQsaReceita();
 //                            break;
-//                        case "carregarListaProduto":
-//                            cadastroProduto.carregarListaProduto();
+//                        case "preencherCboFiltroPesquisa":
+//                            cadastroEmpresa.preencherCboFiltroPesquisa();
 //                            break;
-//                        case "preencherTabelaProduto":
-//                            cadastroProduto.preencherTabelaProduto();
-//                            break;
-//                        case "preencherCboUndCom":
-//                            cadastroProduto.preencherCboUndCom();
+//                        case "preencherCboClassificacaoJuridica":
+//                            cadastroEmpresa.preencherCboClassificacaoJuridica();
 //                            break;
 //                        case "preencherCboSituacaoSistema":
-//                            cadastroProduto.preencherCboSituacaoSistema();
+//                            cadastroEmpresa.preencherCboSituacaoSistema();
 //                            break;
-//                        case "preencherCboFiscalOrigem":
-//                            cadastroProduto.preencherCboFiscalOrigem();
+//                        case "preencherCboEndUF":
+//                            cadastroEmpresa.preencherCboEndUF();
 //                            break;
-//                        case "preencherCboFiscalIcms":
-//                            cadastroProduto.preencherCboFiscalIcms();
+//                        case "carregarTabCargo":
+//                            cadastroEmpresa.carregarTabCargo();
 //                            break;
-//                        case "preencherCboFiscalPis":
-//                            cadastroProduto.preencherCboFiscalPis();
+//                        case "carregarSisTipoEndereco":
+//                            cadastroEmpresa.carregarSisTipoEndereco();
 //                            break;
-//                        case "preencherCboFiscalCofins":
-//                            cadastroProduto.preencherCboFiscalCofins();
+//                        case "carregarSisTelefoneOperadora":
+//                            cadastroEmpresa.carregarSisTelefoneOperadora();
 //                            break;
-//
+//                        case "carregarListaEmpresa":
+//                            cadastroEmpresa.carregarListaEmpresa();
+//                            break;
+//                        case "preencherTabelaEmpresa":
+//                            cadastroEmpresa.preencherTabelaEmpresa();
+//                            break;
                     }
                 }
                 updateProgress(qtdTarefas, qtdTarefas);
@@ -273,8 +278,7 @@ public class Tarefa implements Constants {
         };
         new AlertMensagem("Aguarde carregando dados do sistema...", "",
                 "ic_aguarde_sentado_orange_32dp.png")
-                .getProgressBar(voidTask, true, false, qtdTarefas);
-    }
+                .getProgressBar(voidTask, true, false, qtdTarefas);    }
 
     public void tarefaAbreEntradaProduto(ControllerEntradaProduto entradaProduto, List<Pair> tarefas) {
         qtdTarefas = tarefas.size();

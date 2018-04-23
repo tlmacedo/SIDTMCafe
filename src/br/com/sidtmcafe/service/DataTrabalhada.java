@@ -15,16 +15,26 @@ public class DataTrabalhada implements Constants {
         if (data2 == null)
             data2 = LocalDate.now();
         Period period = Period.between(data1, data2);
-        String periodoTemp = "";
-        if (period.getYears() > 0)
-            periodoTemp += period.getYears() + " Anos ";
-        if (period.getMonths() > 0)
-            periodoTemp += period.getMonths() + " Meses ";
-        if (period.getDays() > 0)
-            periodoTemp += period.getDays() + " dias ";
-        if (periodoTemp.equals(""))
-            periodoTemp = " hoje ";
-        return periodoTemp;
+        String strPeriodo = "";
+        if (period.getYears() > 0) {
+            strPeriodo += period.getYears() + " ";
+            if (period.getYears() == 1) strPeriodo += "Ano ";
+            else strPeriodo += "Anos ";
+        }
+        if (period.getMonths() > 0) {
+            strPeriodo += period.getMonths() + " ";
+            if (period.getMonths() == 1) strPeriodo += "Mês ";
+            else strPeriodo += "Meses ";
+        }
+        if (period.getDays() > 0) {
+            strPeriodo += "e " + period.getDays() + " ";
+            if (period.getDays() == 1) strPeriodo += "dia ";
+            else strPeriodo += "dias ";
+        }
+        if (strPeriodo.equals("")) {
+            strPeriodo = " hoje ";
+        }
+        return strPeriodo;
     }
 
 }

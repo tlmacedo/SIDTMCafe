@@ -73,12 +73,16 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
 
     @Override
     public void fechar() {
-
+        for (int i = 0; i < ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().size(); i++)
+            if (ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getTabs().get(i).getText().toLowerCase().equals(tituloTab.toLowerCase())) {
+                ControllerPrincipal.ctrlPrincipal.fecharTab(i);
+                ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.removeEventHandler(KeyEvent.KEY_PRESSED, eventCadastroEmpresa);
+            }
     }
 
     @Override
     public void criarObjetos() {
-
+        listaTarefas.add(new Pair("criarTabelaProduto", "criando tabela produtos"));
     }
 
     @Override
@@ -281,14 +285,29 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
     @SuppressWarnings("Duplicates")
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        preencherObjetos();
-//        fatorarObjetos();
-//        escutarTeclas();
-//        setStatusFormulario("Pesquisa");
-//        Platform.runLater(() -> {
-//            painelViewCadastroProduto.fireEvent(ExecutaComandoTecladoMouse.pressTecla(KeyCode.F7));
-//        });
+        listaTarefas = new ArrayList<>();
+        criarObjetos();
+        preencherObjetos();
+        fatorarObjetos();
+        escutarTeclas();
+        setStatusFormulario("Pesquisa");
+        Platform.runLater(() -> {
+            ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.fireEvent(ExecutaComandoTecladoMouse.pressTecla(KeyCode.F7));
+        });
     }
+
+    int qtdRegistrosLocalizados = 0;
+    int indexObservableProduto = 0;
+    String tituloTab = ViewCadastroProduto.getTituloJanela();
+    String statusFormulario, statusBarFormulario;
+    EventHandler<KeyEvent> eventCadastroProduto;
+
+    static String STATUSBARPESQUISA = "[F1-Novo]  [F3-Excluir]  [F4-Editar]  [F7-Pesquisar]  [F8-Filtro pesquisa]  [F12-Sair]  ";
+    static String STATUSBAREDITAR = "[F3-Cancelar edição]  [F5-Atualizar]  ";
+    static String STATUSBARINCLUIR = "[F2-Incluir]  [F3-Cancelar inclusão]  ";
+
+    FormatarDado formatCNPJ_CPF, formatIE;
+    List<Pair> listaTarefas;
 
 //    EventHandler<KeyEvent> eventCadastroProduto;
 //
