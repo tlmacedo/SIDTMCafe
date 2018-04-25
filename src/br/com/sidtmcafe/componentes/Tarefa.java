@@ -28,6 +28,7 @@ public class Tarefa implements Constants {
     BigDecimal getSaldo;
     WsCnpjReceitaWsVO wsCnpjReceitaWsVO;
     TabEmpresaVO tabEmpresaVO;
+    TabProdutoVO tabProdutoVO;
     TabEnderecoVO tabEnderecoVO;
     WsCepPostmonVO wsCepPostmonVO;
     WsEanCosmosVO wsEanCosmosVO;
@@ -122,19 +123,22 @@ public class Tarefa implements Constants {
         return tabEmpresaVO;
     }
 
-    public WsEanCosmosVO tarefaWsEanCosmos(List<Pair> tarefas) {
+    public TabProdutoVO tarefaWsEanCosmos(List<Pair> tarefas) {
         qtdTarefas = tarefas.size();
         Task<Void> voidTask = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                updateMessage("carregando");
+                updateMessage("carregando.");
                 for (Pair tarefaAtual : tarefas) {
-                    updateProgress(tarefas.indexOf(tarefaAtual), qtdTarefas);
-                    Thread.sleep(200);
-                    updateMessage(tarefaAtual.getValue().toString());
-                    String valEan = tarefaAtual.getValue().toString().replaceAll("[\\-/. \\[\\]]", "");
-                    valEan = valEan.substring(valEan.length() - 13);
-                    wsEanCosmosVO = new WsEanCosmosDAO().getWsEanCosmosVO(valEan);
+                    switch (tarefaAtual.getKey().toString()){
+                        case "buscaEan":
+                            updateProgress(tarefas.indexOf(tarefaAtual),qtdTarefas);
+                            Thread.sleep(201);
+                            String ean  = tarefaAtual.getValue().toString();
+                            updateMessage("Pesquisando EAN: [" + ean + "]");
+                            tabProdutoVO = new WsEanCosmosDAO().getProdutoVO(tarefaAtual.getValue().toString());
+                            break;
+                    }
                 }
                 updateProgress(qtdTarefas, qtdTarefas);
                 return null;
@@ -143,7 +147,7 @@ public class Tarefa implements Constants {
         new AlertMensagem("Aguarde pesquisando código Ean...", "",
                 "ic_aguarde_sentado_orange_32dp.png")
                 .getProgressBar(voidTask, true, false, qtdTarefas);
-        return wsEanCosmosVO;
+        return tabProdutoVO;
     }
 
     public TabEnderecoVO tarefaWsCepPostmon(List<Pair> tarefas) {
@@ -238,38 +242,32 @@ public class Tarefa implements Constants {
                     updateMessage(tarefaAtual.getValue().toString());
                     switch (tarefaAtual.getKey().toString()) {
                         case "criarTabelaProduto":
-                            TabModel
-//                        case "criarTabelaEmpresa":
-//                            TabModel.tabelaEmpresa();
-//                            //TabModel.tabelaQsaReceita();
-//                            break;
-//                        case "preencherCboFiltroPesquisa":
-//                            cadastroEmpresa.preencherCboFiltroPesquisa();
-//                            break;
-//                        case "preencherCboClassificacaoJuridica":
-//                            cadastroEmpresa.preencherCboClassificacaoJuridica();
-//                            break;
-//                        case "preencherCboSituacaoSistema":
-//                            cadastroEmpresa.preencherCboSituacaoSistema();
-//                            break;
-//                        case "preencherCboEndUF":
-//                            cadastroEmpresa.preencherCboEndUF();
-//                            break;
-//                        case "carregarTabCargo":
-//                            cadastroEmpresa.carregarTabCargo();
-//                            break;
-//                        case "carregarSisTipoEndereco":
-//                            cadastroEmpresa.carregarSisTipoEndereco();
-//                            break;
-//                        case "carregarSisTelefoneOperadora":
-//                            cadastroEmpresa.carregarSisTelefoneOperadora();
-//                            break;
-//                        case "carregarListaEmpresa":
-//                            cadastroEmpresa.carregarListaEmpresa();
-//                            break;
-//                        case "preencherTabelaEmpresa":
-//                            cadastroEmpresa.preencherTabelaEmpresa();
-//                            break;
+                            TabModel.tabelaProduto();
+                            break;
+                        case "preencherCboUnidadeComercial":
+                            cadastroProduto.preencherCboUnidadeComercial();
+                            break;
+                        case "preencherCboSituacaoSistema":
+                            cadastroProduto.preencherCboSituacaoSistema();
+                            break;
+                        case "preencherCboFiscalOrigem":
+                            cadastroProduto.preencherCboFiscalOrigem();
+                            break;
+                        case "preencherCboFiscalIcms":
+                            cadastroProduto.preencherCboFiscalIcms();
+                            break;
+                        case "preencherCboFiscalPis":
+                            cadastroProduto.preencherCboFiscalPis();
+                            break;
+                        case "preencherCboFiscalCofins":
+                            cadastroProduto.preencherCboFiscalCofins();
+                            break;
+                        case "carregarListaProduto":
+                            cadastroProduto.carregarListaProduto();
+                            break;
+                        case "preencherTabelaProduto":
+                            cadastroProduto.preencherTabelaProduto();
+                            break;
                     }
                 }
                 updateProgress(qtdTarefas, qtdTarefas);
@@ -278,7 +276,8 @@ public class Tarefa implements Constants {
         };
         new AlertMensagem("Aguarde carregando dados do sistema...", "",
                 "ic_aguarde_sentado_orange_32dp.png")
-                .getProgressBar(voidTask, true, false, qtdTarefas);    }
+                .getProgressBar(voidTask, true, false, qtdTarefas);
+    }
 
     public void tarefaAbreEntradaProduto(ControllerEntradaProduto entradaProduto, List<Pair> tarefas) {
         qtdTarefas = tarefas.size();

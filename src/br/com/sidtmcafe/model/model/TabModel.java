@@ -6,6 +6,7 @@ import br.com.sidtmcafe.model.vo.TabProdutoVO;
 import br.com.sidtmcafe.service.FormatarDado;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -192,7 +193,7 @@ public class TabModel {
             colunaPrecoFabrica.setStyle("-fx-alignment: center-right;");
             colunaPrecoFabrica.setCellValueFactory(param -> {
                 try {
-                    return new SimpleStringProperty(DECIMAL_FORMAT.format(param.getValue().getValue().precoFabricaProperty().getValue()).replace(".", ","));
+                    return new SimpleStringProperty(FormatarDado.getValueMoeda(param.getValue().getValue().precoFabricaProperty().getValue().toString(),2));
                 } catch (Exception ex) {
                     return new SimpleStringProperty("0");
                 }
@@ -206,7 +207,7 @@ public class TabModel {
             colunaPrecoConsumidor.setStyle("-fx-alignment: center-right;");
             colunaPrecoConsumidor.setCellValueFactory(param -> {
                 try {
-                    return new SimpleStringProperty(DECIMAL_FORMAT.format(param.getValue().getValue().precoConsumidorProperty().getValue()).replace(".", ","));
+                    return new SimpleStringProperty(param.getValue().getValue().precoVendaProperty().getValue().toString());
                 } catch (Exception ex) {
                     return new SimpleStringProperty("0");
                 }
@@ -217,15 +218,15 @@ public class TabModel {
             colunaSituacaoSistema = new JFXTreeTableColumn<TabProdutoVO, String>();
             colunaSituacaoSistema.setGraphic(lblSituacaoSistema);
             colunaSituacaoSistema.setPrefWidth(100);
-            colunaSituacaoSistema.setCellValueFactory(param -> param.getValue().getValue().getSituacaoSistemaVO().descricaoProperty());
+            colunaSituacaoSistema.setCellValueFactory(param -> param.getValue().getValue().getSisSituacaoSistemaVO().descricaoProperty());
 
             Label lblEstoque = new Label("Estoque");
             lblEstoque.setPrefWidth(65);
             colunaQtdEstoque = new JFXTreeTableColumn<TabProdutoVO, Integer>();
             colunaQtdEstoque.setGraphic(lblEstoque);
             colunaQtdEstoque.setPrefWidth(65);
-            colunaQtdEstoque.setStyle("-fx-alignment: center-right;");
-            colunaQtdEstoque.setCellValueFactory(param -> param.getValue().getValue().estoqueProperty().asObject());
+//            colunaQtdEstoque.setStyle("-fx-alignment: center-right;");
+//            colunaQtdEstoque.setCellValueFactory(new SimpleIntegerProperty(0));
 
         } catch (Exception ex) {
             ex.printStackTrace();

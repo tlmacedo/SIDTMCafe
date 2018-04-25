@@ -224,10 +224,10 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
 ////
 ////                        salvarEmpresa();
 ////                        setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
-////                        empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
+////                        tabEmpresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
 ////
 ////                        setStatusFormulario("Pesquisa");
-////                        carregarPesquisaEmpresas(txtPesquisa.getText());
+////                        carregarPesquisaEmpresa(txtPesquisa.getText());
 ////                        break;
 ////                    case F3:
 ////                        if (!getStatusBarFormulario().contains(event.getCode().toString())) break;
@@ -245,17 +245,17 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
 ////                                        "ic_cadastro_empresas_white_24dp.png").getRetornoAlert_YES_NO().get() == ButtonType.NO)
 ////                                    return;
 ////                                setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
-////                                empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
+////                                tabEmpresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
 ////                                break;
 ////                        }
 ////                        setStatusFormulario("Pesquisa");
-////                        carregarPesquisaEmpresas(txtPesquisa.getText());
+////                        carregarPesquisaEmpresa(txtPesquisa.getText());
 ////                        exibirDadosEmpresa();
 ////                        break;
 ////                    case F4:
 ////                        if ((!getStatusBarFormulario().contains(event.getCode().toString())) || (getTtvEmpresaVO() == null))
 ////                            break;
-////                        indexObservableEmpresa = empresaVOObservableList.indexOf(getTtvEmpresaVO());
+////                        indexObservableEmpresa = tabEmpresaVOObservableList.indexOf(getTtvEmpresaVO());
 ////                        setStatusFormulario("Editar");
 ////                        break;
 ////                    case F5:
@@ -265,10 +265,10 @@ public class ControllerEntradaProduto extends Variavel implements Initializable,
 ////
 ////                        salvarEmpresa();
 ////                        setTtvEmpresaVO(new TabEmpresaDAO().getEmpresaVO(getTtvEmpresaVO().getId()));
-////                        empresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
+////                        tabEmpresaVOObservableList.set(indexObservableEmpresa, getTtvEmpresaVO());
 ////
 ////                        setStatusFormulario("Pesquisa");
-////                        carregarPesquisaEmpresas(txtPesquisa.getText());
+////                        carregarPesquisaEmpresa(txtPesquisa.getText());
 ////                        exibirDadosEmpresa();
 ////                        ttvEmpresa.requestFocus();
 ////                        break;

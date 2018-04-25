@@ -40,4 +40,12 @@ public class FiscalPISCOFINSVO extends RecursiveTreeObject<FiscalPISCOFINSVO> {
         descricaoProperty().set(descricao);
     }
 
+    @Override
+    public String toString() {
+        String cod = String.valueOf(idProperty().get());
+        for (int i = cod.length(); i < 2; i++)
+            cod = "0" + cod;
+        return cod + " - " + descricaoProperty().get();
+    }
+
 }

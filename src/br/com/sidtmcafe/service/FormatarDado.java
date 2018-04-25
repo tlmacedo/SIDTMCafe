@@ -72,10 +72,15 @@ public class FormatarDado implements Constants {
             return "##/##/####";
         } else if (tipM.contains("cpf")) {
             return "###.###.###-##";
+        } else if (tipM.contains("barcode") || tipM.contains("ean") || tipM.contains("codbarras")) {
+            return "#############";
         } else if (tipM.contains("cep")) {
             return "##.###-###";
-        } else if (tipM.contains("moeda")) {
-            return "0.00";
+        } else if (tipM.contains("moeda") || tipM.contains("numero") || tipM.contains("peso")) {
+            String casasDec = "0.";
+            for (int i = 0; i < qtd; i++)
+                casasDec += "0";
+            return casasDec;
         } else if (tipM.contains("ncm")) {
             return "####.##.##";
         } else if (tipM.contains("cest")) {

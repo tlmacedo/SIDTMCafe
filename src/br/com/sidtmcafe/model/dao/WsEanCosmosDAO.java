@@ -1,6 +1,7 @@
 package br.com.sidtmcafe.model.dao;
 
 import br.com.sidtmcafe.interfaces.Constants;
+import br.com.sidtmcafe.model.vo.TabProdutoVO;
 import br.com.sidtmcafe.model.vo.WsEanCosmosVO;
 import javafx.util.Pair;
 import org.json.JSONArray;
@@ -31,6 +32,22 @@ public class WsEanCosmosDAO extends BuscaWebService implements Constants {
                 ex.printStackTrace();
         }
         return wsEanCosmosVO;
+    }
+
+    public TabProdutoVO getProdutoVO(String codEan) {
+        jsonObject = getJsonObjectHttpUrlConnection(WS_COSMOS_URL + WS_COSMOS_SER_GTINS + codEan + ".json", WS_COSMOS_TOKEN, "");
+        TabProdutoVO tabProdutoVO = null;
+        if (jsonObject == null)
+            return tabProdutoVO;
+        try {
+            tabProdutoVO = new TabProdutoVO();
+            tabProdutoVO.setDescricao(jsonObject.getString("description"));
+            tabProdutoVO.setNfeNcm(jsonObject.getJSONObject("ncm").getString("code"));
+        } catch (Exception ex) {
+            if (!(ex instanceof JSONException))
+                ex.printStackTrace();
+        }
+        return tabProdutoVO;
     }
 
 }

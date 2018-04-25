@@ -6,12 +6,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class FiscalICMSVO extends RecursiveTreeObject<FiscalICMSVO> {
+public class FiscalCSTOrigemVO extends RecursiveTreeObject<FiscalCSTOrigemVO> {
 
     IntegerProperty id;
     StringProperty descricao;
 
-    public FiscalICMSVO() {
+    public FiscalCSTOrigemVO() {
     }
 
     public int getId() {
@@ -42,9 +42,6 @@ public class FiscalICMSVO extends RecursiveTreeObject<FiscalICMSVO> {
 
     @Override
     public String toString() {
-        String cod = String.valueOf(idProperty().get());
-        for (int i = cod.length(); i < 2; i++)
-            cod = "0" + cod;
-        return cod + " - " + descricaoProperty().get();
+        return idProperty().get() + " - " + descricaoProperty().get();
     }
 }

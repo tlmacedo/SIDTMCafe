@@ -143,7 +143,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         ControllerPrincipal.ctrlPrincipal.tabPaneViewPrincipal.getSelectionModel().selectedItemProperty().addListener((ov, o, n) -> {
             if (!(ControllerPrincipal.ctrlPrincipal.getTabAtual().equals(tituloTab)))
                 return;
-            if ((n != null) & (n != o))
+            if (n != null && n != o)
                 setStatusBarFormulario(getStatusFormulario());
         });
 
@@ -168,7 +168,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                         setStatusFormulario("Pesquisa");
                         carregarListaEmpresa();
                         preencherTabelaEmpresa();
-                        carregarPesquisaEmpresas(txtPesquisa.getText());
+                        carregarPesquisaEmpresa(txtPesquisa.getText());
                         txtPesquisa.requestFocus();
                         break;
                     case F3:
@@ -189,8 +189,8 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                                 limparCampoDadoCadastral();
                                 carregarListaEmpresa();
                                 preencherTabelaEmpresa();
-                                carregarPesquisaEmpresas(txtPesquisa.getText());
-                                setTabEmpresaVO(empresaVOObservableList.get(indexObservableEmpresa));
+                                carregarPesquisaEmpresa(txtPesquisa.getText());
+                                setTabEmpresaVO(tabEmpresaVOObservableList.get(indexObservableEmpresa));
                                 break;
                         }
                         setStatusFormulario("Pesquisa");
@@ -198,7 +198,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
                     case F4:
                         if ((!getStatusBarFormulario().contains(event.getCode().toString())) || !(ttvEmpresa.getSelectionModel().getSelectedIndex() >= 0))
                             break;
-                        indexObservableEmpresa = empresaVOObservableList.indexOf(getTabEmpresaVO());
+                        indexObservableEmpresa = tabEmpresaVOObservableList.indexOf(getTabEmpresaVO());
                         setStatusFormulario("Editar");
                         break;
                     case F6:
@@ -232,11 +232,11 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.addEventHandler(KeyEvent.KEY_RELEASED, eventCadastroEmpresa);
 
         txtPesquisa.textProperty().addListener((ov, o, n) -> {
-            carregarPesquisaEmpresas(n);
+            carregarPesquisaEmpresa(n);
         });
 
         cboFiltroPesquisa.getSelectionModel().selectedIndexProperty().addListener((ov, o, n) -> {
-            carregarPesquisaEmpresas(txtPesquisa.getText());
+            carregarPesquisaEmpresa(txtPesquisa.getText());
         });
 
         txtPesquisa.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
@@ -303,7 +303,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
                     if (getTabEmpresaReceitaFederalVOList().size() > 0) {
                         if (deletadosTabEmpresaReceitaFederalVOList == null)
-                            deletadosTabEmpresaReceitaFederalVOList = new ArrayList<>();
+                            deletadosTabEmpresaReceitaFederalVOList = new ArrayList<TabEmpresaReceitaFederalVO>();
                         for (int i = 0; i < getTabEmpresaReceitaFederalVOList().size(); i++)
                             for (int j = 0; j < tabEmpresaVO.getTabEmpresaReceitaFederalVOList().size(); j++)
                                 if (getTabEmpresaReceitaFederalVOList().get(i).getStr_Value().toLowerCase().equals(tabEmpresaVO.getTabEmpresaReceitaFederalVOList().get(j).getStr_Value())) {
@@ -401,6 +401,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     }
 
     @Override
+    @SuppressWarnings("Duplicates")
     public void initialize(URL location, ResourceBundle resources) {
         listaTarefas = new ArrayList<>();
         criarObjetos();
@@ -426,8 +427,8 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
     FormatarDado formatCNPJ_CPF, formatIE;
     List<Pair> listaTarefas;
-    ObservableList<TabEmpresaVO> empresaVOObservableList;
-    FilteredList<TabEmpresaVO> empresaVOFilteredList;
+    ObservableList<TabEmpresaVO> tabEmpresaVOObservableList;
+    FilteredList<TabEmpresaVO> tabEmpresaVOFilteredList;
     TabEmpresaVO tabEmpresaVO;
     TabContatoVO tabContatoVO;
     List<TabEnderecoVO> tabEnderecoVOList;
@@ -452,116 +453,6 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     List<SisCargoVO> sisCargoVOList;
     List<SisTipoEnderecoVO> sisTipoEnderecoVOList;
     List<SisTelefoneOperadoraVO> sisTelefoneOperadoraVOList;
-
-    public void preencherCboFiltroPesquisa() {
-        cboFiltroPesquisa.getItems().clear();
-        cboFiltroPesquisa.getItems().add(0, "");
-        cboFiltroPesquisa.getItems().add(1, "Clientes");
-        cboFiltroPesquisa.getItems().add(2, "Fornecedores");
-        cboFiltroPesquisa.getItems().add(3, "Transportadoras");
-        cboFiltroPesquisa.getSelectionModel().select(0);
-    }
-
-    public void preencherCboClassificacaoJuridica() {
-        cboClassificacaoJuridica.getItems().clear();
-        cboClassificacaoJuridica.getItems().add(0, "FÍSICA");
-        cboClassificacaoJuridica.getItems().add(1, "JURÍDICA");
-        cboClassificacaoJuridica.getSelectionModel().select(1);
-    }
-
-    public void preencherCboSituacaoSistema() {
-        sisSituacaoSistemaVOList = new ArrayList<SisSituacaoSistemaVO>(new SisSituacaoSistemaDAO().getSisSituacaoSistemaVOList());
-        if (sisSituacaoSistemaVOList == null) {
-            cboSituacaoSistema.getItems().clear();
-            return;
-        }
-        cboSituacaoSistema.getItems().setAll(new SisSituacaoSistemaDAO().getSisSituacaoSistemaVOList());
-        cboSituacaoSistema.getSelectionModel().select(0);
-    }
-
-    public void preencherCboEndUF() {
-        sisUFVOList = new ArrayList<SisUFVO>(new SisUFDAO().getSisUFVOList_DetMunicipios());
-        if (sisUFVOList == null) {
-            cboEndUF.getItems().clear();
-            return;
-        }
-        sisMunicipioVOList = new ArrayList<>();
-        cboEndUF.getItems().setAll(sisUFVOList);
-        cboEndUF.getSelectionModel().select(0);
-    }
-
-    public void preencherTabelaEmpresa() {
-        try {
-            if (empresaVOFilteredList == null)
-                carregarPesquisaEmpresas(txtPesquisa.getText());
-            setQtdRegistrosLocalizados(empresaVOFilteredList.size());
-            final TreeItem<TabEmpresaVO> root = new RecursiveTreeItem<TabEmpresaVO>(empresaVOFilteredList, RecursiveTreeObject::getChildren);
-            ttvEmpresa.getColumns().setAll(TabModel.getColunaIdEmpresa(), TabModel.getColunaCnpj(), TabModel.getColunaIe(),
-                    TabModel.getColunaRazao(), TabModel.getColunaFantasia(), TabModel.getColunaEndereco(),
-                    TabModel.getColunaIsCliente(), TabModel.getColunaIsFornecedor(), TabModel.getColunaIsTransportadora());
-            ttvEmpresa.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-            ttvEmpresa.setRoot(root);
-            ttvEmpresa.setShowRoot(false);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    void carregarPesquisaEmpresas(String strPesq) {
-        String busca = strPesq.toLowerCase().trim();
-
-        empresaVOFilteredList = new FilteredList<TabEmpresaVO>(empresaVOObservableList, empresa -> true);
-        int filtro = cboFiltroPesquisa.getSelectionModel().getSelectedIndex();
-        empresaVOFilteredList.setPredicate(empresa -> {
-            if (filtro > 0) {
-                switch (filtro) {
-                    case 1:
-                        if (!empresa.isIsCliente()) return false;
-                        break;
-                    case 2:
-                        if (!empresa.isIsFornecedor()) return false;
-                        break;
-                    case 3:
-                        if (!empresa.isIsTransportadora()) return false;
-                        break;
-                }
-            }
-            if (busca.length() <= 0) return true;
-
-            if (empresa.getCnpj().toLowerCase().contains(busca)) return true;
-            if (empresa.getIe().toLowerCase().contains(busca)) return true;
-            if (empresa.getRazao().toLowerCase().contains(busca)) return true;
-            if (empresa.getFantasia().toLowerCase().contains(busca)) return true;
-
-            return false;
-        });
-        preencherTabelaEmpresa();
-    }
-
-    public void carregarListaEmpresa() {
-        empresaVOObservableList = FXCollections.observableArrayList(new TabEmpresaDAO().getTabEmpresaVOList(false));
-    }
-
-    void preencherCboEndMunicipio() {
-        if (sisMunicipioVOList == null) {
-            cboEndMunicipio.getItems().clear();
-            return;
-        }
-        cboEndMunicipio.getItems().setAll(sisMunicipioVOList);
-        cboEndMunicipio.getSelectionModel().select(0);
-    }
-
-    public void carregarTabCargo() {
-        sisCargoVOList = new ArrayList<SisCargoVO>(new SisCargoDAO().getSisCargoVOList());
-    }
-
-    public void carregarSisTipoEndereco() {
-        sisTipoEnderecoVOList = new ArrayList<SisTipoEnderecoVO>(new SisTipoEnderecoDAO().getSisTipoEnderecoVOList());
-    }
-
-    public void carregarSisTelefoneOperadora() {
-        sisTelefoneOperadoraVOList = new ArrayList<SisTelefoneOperadoraVO>(new SisTelefoneOperadoraDAO().getSisTelefoneOperadoraVOList());
-    }
 
     public int getQtdRegistrosLocalizados() {
         return qtdRegistrosLocalizados;
@@ -672,8 +563,8 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     public void setTabContatoVOList(List<TabContatoVO> tabContatoVOList) {
         if (tabContatoVOList == null) {
             tabContatoVOList = new ArrayList<TabContatoVO>();
-            tabContatoEmailHomePageVOList = new ArrayList<>();
-            tabContatoTelefoneVOList = new ArrayList<>();
+            tabContatoEmailHomePageVOList = new ArrayList<TabEmailHomePageVO>();
+            tabContatoTelefoneVOList = new ArrayList<TabTelefoneVO>();
         }
         this.tabContatoVOList = tabContatoVOList;
         atualizaListaContato();
@@ -719,12 +610,113 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
 
     public void setTabEmpresaReceitaFederalVOList(List<TabEmpresaReceitaFederalVO> tabEmpresaReceitaFederalVOList) {
         if (tabEmpresaReceitaFederalVOList == null)
-            tabEmpresaReceitaFederalVOList = new ArrayList<>();
+            tabEmpresaReceitaFederalVOList = new ArrayList<TabEmpresaReceitaFederalVO>();
         if (receitaFederalQsaVOList == null)
-            receitaFederalQsaVOList = new ArrayList<>();
+            receitaFederalQsaVOList = new ArrayList<TabEmpresaReceitaFederalVO>();
 
         this.tabEmpresaReceitaFederalVOList = tabEmpresaReceitaFederalVOList;
         atualizaListaReceitaFederal();
+    }
+
+    public void preencherCboFiltroPesquisa() {
+        cboFiltroPesquisa.getItems().clear();
+        cboFiltroPesquisa.getItems().add(0, "");
+        cboFiltroPesquisa.getItems().add(1, "Clientes");
+        cboFiltroPesquisa.getItems().add(2, "Fornecedores");
+        cboFiltroPesquisa.getItems().add(3, "Transportadoras");
+        cboFiltroPesquisa.getSelectionModel().select(0);
+    }
+
+    public void preencherCboClassificacaoJuridica() {
+        cboClassificacaoJuridica.getItems().clear();
+        cboClassificacaoJuridica.getItems().add(0, "FÍSICA");
+        cboClassificacaoJuridica.getItems().add(1, "JURÍDICA");
+        cboClassificacaoJuridica.getSelectionModel().select(1);
+    }
+
+    public void preencherCboSituacaoSistema() {
+        cboSituacaoSistema.getItems().clear();
+        if ((sisSituacaoSistemaVOList = new ArrayList<SisSituacaoSistemaVO>(new SisSituacaoSistemaDAO().getSisSituacaoSistemaVOList())) == null)
+            return;
+        cboSituacaoSistema.getItems().setAll(sisSituacaoSistemaVOList);
+    }
+
+    public void preencherCboEndUF() {
+        cboEndUF.getItems().clear();
+        if ((sisUFVOList = new ArrayList<SisUFVO>(new SisUFDAO().getSisUFVOList_DetMunicipios())) == null)
+            return;
+        cboEndUF.getItems().setAll(sisUFVOList);
+    }
+
+    public void preencherTabelaEmpresa() {
+        try {
+            if (tabEmpresaVOFilteredList == null)
+                carregarPesquisaEmpresa(txtPesquisa.getText());
+            setQtdRegistrosLocalizados(tabEmpresaVOFilteredList.size());
+            final TreeItem<TabEmpresaVO> root = new RecursiveTreeItem<TabEmpresaVO>(tabEmpresaVOFilteredList, RecursiveTreeObject::getChildren);
+            ttvEmpresa.getColumns().setAll(TabModel.getColunaIdEmpresa(), TabModel.getColunaCnpj(), TabModel.getColunaIe(),
+                    TabModel.getColunaRazao(), TabModel.getColunaFantasia(), TabModel.getColunaEndereco(),
+                    TabModel.getColunaIsCliente(), TabModel.getColunaIsFornecedor(), TabModel.getColunaIsTransportadora());
+            ttvEmpresa.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            ttvEmpresa.setRoot(root);
+            ttvEmpresa.setShowRoot(false);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    void carregarPesquisaEmpresa(String strPesq) {
+        String busca = strPesq.toLowerCase().trim();
+
+        tabEmpresaVOFilteredList = new FilteredList<TabEmpresaVO>(tabEmpresaVOObservableList, empresa -> true);
+        int filtro = cboFiltroPesquisa.getSelectionModel().getSelectedIndex();
+        tabEmpresaVOFilteredList.setPredicate(empresa -> {
+            if (filtro > 0) {
+                switch (filtro) {
+                    case 1:
+                        if (!empresa.isIsCliente()) return false;
+                        break;
+                    case 2:
+                        if (!empresa.isIsFornecedor()) return false;
+                        break;
+                    case 3:
+                        if (!empresa.isIsTransportadora()) return false;
+                        break;
+                }
+            }
+            if (busca.length() <= 0) return true;
+
+            if (empresa.getCnpj().toLowerCase().contains(busca)) return true;
+            if (empresa.getIe().toLowerCase().contains(busca)) return true;
+            if (empresa.getRazao().toLowerCase().contains(busca)) return true;
+            if (empresa.getFantasia().toLowerCase().contains(busca)) return true;
+
+            return false;
+        });
+        preencherTabelaEmpresa();
+    }
+
+    public void carregarListaEmpresa() {
+        tabEmpresaVOObservableList = FXCollections.observableArrayList(new TabEmpresaDAO().getTabEmpresaVOList(false));
+    }
+
+    void preencherCboEndMunicipio() {
+        cboEndMunicipio.getItems().clear();
+        if (sisMunicipioVOList == null)
+            return;
+        cboEndMunicipio.getItems().setAll(sisMunicipioVOList);
+    }
+
+    public void carregarTabCargo() {
+        sisCargoVOList = new ArrayList<SisCargoVO>(new SisCargoDAO().getSisCargoVOList());
+    }
+
+    public void carregarSisTipoEndereco() {
+        sisTipoEnderecoVOList = new ArrayList<SisTipoEnderecoVO>(new SisTipoEnderecoDAO().getSisTipoEnderecoVOList());
+    }
+
+    public void carregarSisTelefoneOperadora() {
+        sisTelefoneOperadoraVOList = new ArrayList<SisTelefoneOperadoraVO>(new SisTelefoneOperadoraDAO().getSisTelefoneOperadoraVOList());
     }
 
     TabEmpresaVO novaEmpresa() {
@@ -810,10 +802,9 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     }
 
     void atualizaListaEndereco() {
-        if (getTabEnderecoVOList() == null) {
-            listEndereco.getItems().clear();
+        listEndereco.getItems().clear();
+        if (getTabEnderecoVOList() == null)
             return;
-        }
         listEndereco.getItems().setAll(getTabEnderecoVOList());
         listEndereco.getSelectionModel().select(0);
     }
@@ -833,18 +824,16 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     }
 
     void atualizaListaTelefone() {
-        if (getTabTelefoneVOList() == null) {
-            listTelefone.getItems().clear();
+        listTelefone.getItems().clear();
+        if (getTabTelefoneVOList() == null)
             return;
-        }
         listTelefone.getItems().setAll(getTabTelefoneVOList());
     }
 
     void atualizaListaContato() {
-        if (getTabContatoVOList() == null) {
-            listContatoNome.getItems().clear();
+        listContatoNome.getItems().clear();
+        if (getTabContatoVOList() == null)
             return;
-        }
         listContatoNome.getItems().setAll(getTabContatoVOList());
         listContatoNome.getSelectionModel().select(0);
     }
@@ -862,10 +851,9 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     }
 
     void atualizaListaContatoTelefone() {
-        if (getTabContatoTelefoneVOList() == null) {
-            listContatoTelefone.getItems().clear();
+        listContatoTelefone.getItems().clear();
+        if (getTabContatoTelefoneVOList() == null)
             return;
-        }
         getTabContatoVO().setTabTelefoneVOList(getTabContatoTelefoneVOList());
         listContatoTelefone.getItems().setAll(getTabContatoTelefoneVOList());
     }
@@ -1061,7 +1049,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     void deletaEndereco(TabEnderecoVO enderecoVO) {
         if (enderecoVO.getId() != 0) {
             if (deletadosTabEnderecoVOList == null)
-                deletadosTabEnderecoVOList = new ArrayList<>();
+                deletadosTabEnderecoVOList = new ArrayList<TabEnderecoVO>();
             deletadosTabEnderecoVOList.add(enderecoVO);
         }
         getTabEnderecoVOList().remove(enderecoVO);
@@ -1071,7 +1059,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     void deletaContato(TabContatoVO contatoVO) {
         if (contatoVO.getId() != 0) {
             if (deletadosTabContatoVOList == null)
-                deletadosTabContatoVOList = new ArrayList<>();
+                deletadosTabContatoVOList = new ArrayList<TabContatoVO>();
             deletadosTabContatoVOList.add(listContatoNome.getSelectionModel().getSelectedItem());
         }
         if (deletadosTabContatoEmailHomePageVOList != null)
@@ -1088,7 +1076,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         if (isEmpresa) {
             if (emailHomePageVO.getId() != 0) {
                 if (deletadosTabEmailHomePageVOList == null)
-                    deletadosTabEmailHomePageVOList = new ArrayList<>();
+                    deletadosTabEmailHomePageVOList = new ArrayList<TabEmailHomePageVO>();
                 deletadosTabEmailHomePageVOList.add(emailHomePageVO);
             }
             getTabEmailHomePageVOList().remove(emailHomePageVO);
@@ -1096,7 +1084,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         } else {
             if (emailHomePageVO.getId() != 0) {
                 if (deletadosTabContatoEmailHomePageVOList == null)
-                    deletadosTabContatoEmailHomePageVOList = new ArrayList<>();
+                    deletadosTabContatoEmailHomePageVOList = new ArrayList<TabEmailHomePageVO>();
                 deletadosTabContatoEmailHomePageVOList.add(emailHomePageVO);
             }
             getTabContatoVO().getTabEmailHomePageVOList().remove(emailHomePageVO);
@@ -1108,7 +1096,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         if (isEmpresa) {
             if (telefoneVO.getId() != 0) {
                 if (deletadosTabTelefoneVOList == null)
-                    deletadosTabTelefoneVOList = new ArrayList<>();
+                    deletadosTabTelefoneVOList = new ArrayList<TabTelefoneVO>();
                 deletadosTabTelefoneVOList.add(telefoneVO);
             }
             getTabTelefoneVOList().remove(telefoneVO);
@@ -1116,7 +1104,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
         } else {
             if (telefoneVO.getId() != 0) {
                 if (deletadosTabContatoTelefoneVOList == null)
-                    deletadosTabContatoTelefoneVOList = new ArrayList<>();
+                    deletadosTabContatoTelefoneVOList = new ArrayList<TabTelefoneVO>();
                 deletadosTabContatoTelefoneVOList.add(telefoneVO);
             }
             getTabContatoVO().getTabTelefoneVOList().remove(telefoneVO);
@@ -1283,7 +1271,7 @@ public class ControllerCadastroEmpresa extends Variavel implements Initializable
     }
 
     List<SisTipoEnderecoVO> getTipoEnderecoDisponivel() {
-        List<SisTipoEnderecoVO> endDisponivel = new ArrayList<>();
+        List<SisTipoEnderecoVO> endDisponivel = new ArrayList<SisTipoEnderecoVO>();
         for (SisTipoEnderecoVO tipEnd : sisTipoEnderecoVOList) {
             int exite = 0;
             for (int i = 0; i < getTabEnderecoVOList().size(); i++) {

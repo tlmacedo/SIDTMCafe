@@ -19,7 +19,8 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="142.0" prefWidth="1278.0">
                     <children>
-                        <JFXTextField fx:id="txtPesquisaProduto" accessibleText="060@_0" labelFloat="true" layoutX="10.0"
+                        <JFXTextField fx:id="txtPesquisaProduto" accessibleText="060@_0" labelFloat="true"
+                                      layoutX="10.0"
                                       layoutY="10.0" maxHeight="20.0" prefColumnCount="8" prefHeight="20.0"
                                       prefWidth="360.0" promptText="Pesquisar produto">
                             <tooltip>

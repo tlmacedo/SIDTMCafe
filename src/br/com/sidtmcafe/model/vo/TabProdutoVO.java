@@ -1,13 +1,11 @@
 package br.com.sidtmcafe.model.vo;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.util.List;
 
 public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
 
@@ -16,13 +14,17 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
     FiscalICMSVO fiscalICMSVO;
     FiscalPISCOFINSVO fiscalPISVO;
     FiscalPISCOFINSVO fiscalCOFINSVO;
+    FiscalCSTOrigemVO fiscalCSTOrigemVO;
     TabColaboradorVO usuarioCadastroVO;
     TabColaboradorVO usuarioAtualizacaoVO;
+    List<TabProdutoEanVO> tabProdutoEanVOList;
 
     Timestamp dataCadastro, dataAtualizacao;
-    IntegerProperty id, sisUnidadeComercial_id, varejo, fiscalICMS_id, fiscalPIS_id, fiscalCOFINS_id, nfeOrigem, usuarioCadastro_id, usuarioAtualizacao_id;
+    IntegerProperty id, sisUnidadeComercial_id, sisSituacaoSistema_id, varejo, fiscalICMS_id, fiscalPIS_id, fiscalCOFINS_id, fiscalCSTOrigem_id,
+            usuarioCadastro_id, usuarioAtualizacao_id;
     StringProperty codigo, descricao, nfeNcm, nfeCest, nfeGenero;
-    DecimalFormat peso, precoFabrica, precoVenda, comissao;
+    DoubleProperty peso, precoFabrica, precoVenda, comissao;
+
 
     public TabProdutoVO() {
     }
@@ -67,6 +69,14 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
         this.fiscalCOFINSVO = fiscalCOFINSVO;
     }
 
+    public FiscalCSTOrigemVO getFiscalCSTOrigemVO() {
+        return fiscalCSTOrigemVO;
+    }
+
+    public void setFiscalCSTOrigemVO(FiscalCSTOrigemVO fiscalCSTOrigemVO) {
+        this.fiscalCSTOrigemVO = fiscalCSTOrigemVO;
+    }
+
     public TabColaboradorVO getUsuarioCadastroVO() {
         return usuarioCadastroVO;
     }
@@ -81,6 +91,14 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
 
     public void setUsuarioAtualizacaoVO(TabColaboradorVO usuarioAtualizacaoVO) {
         this.usuarioAtualizacaoVO = usuarioAtualizacaoVO;
+    }
+
+    public List<TabProdutoEanVO> getTabProdutoEanVOList() {
+        return tabProdutoEanVOList;
+    }
+
+    public void setTabProdutoEanVOList(List<TabProdutoEanVO> tabProdutoEanVOList) {
+        this.tabProdutoEanVOList = tabProdutoEanVOList;
     }
 
     public Timestamp getDataCadastro() {
@@ -123,6 +141,19 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
 
     public void setSisUnidadeComercial_id(int sisUnidadeComercial_id) {
         sisUnidadeComercial_idProperty().set(sisUnidadeComercial_id);
+    }
+
+    public int getSisSituacaoSistema_id() {
+        return sisSituacaoSistema_idProperty().get();
+    }
+
+    public IntegerProperty sisSituacaoSistema_idProperty() {
+        if (sisSituacaoSistema_id == null) sisSituacaoSistema_id = new SimpleIntegerProperty(0);
+        return sisSituacaoSistema_id;
+    }
+
+    public void setSisSituacaoSistema_id(int sisSituacaoSistema_id) {
+        sisSituacaoSistema_idProperty().set(sisSituacaoSistema_id);
     }
 
     public int getVarejo() {
@@ -177,17 +208,17 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
         fiscalCOFINS_idProperty().set(fiscalCOFINS_id);
     }
 
-    public int getNfeOrigem() {
-        return nfeOrigemProperty().get();
+    public int getFiscalCSTOrigem_id() {
+        return fiscalCSTOrigem_idProperty().get();
     }
 
-    public IntegerProperty nfeOrigemProperty() {
-        if (nfeOrigem == null) nfeOrigem = new SimpleIntegerProperty(0);
-        return nfeOrigem;
+    public IntegerProperty fiscalCSTOrigem_idProperty() {
+        if (fiscalCSTOrigem_id == null) fiscalCSTOrigem_id = new SimpleIntegerProperty(0);
+        return fiscalCSTOrigem_id;
     }
 
-    public void setNfeOrigem(int nfeOrigem) {
-        nfeOrigemProperty().set(nfeOrigem);
+    public void setFiscalCSTOrigem_id(int fiscalCSTOrigem_id) {
+        fiscalCSTOrigem_idProperty().set(fiscalCSTOrigem_id);
     }
 
     public int getUsuarioCadastro_id() {
@@ -281,39 +312,55 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
         nfeGeneroProperty().set(nfeGenero);
     }
 
-    public DecimalFormat getPeso() {
-        if (peso == null) peso = new DecimalFormat("0.00");
+    public double getPeso() {
+        return pesoProperty().get();
+    }
+
+    public DoubleProperty pesoProperty() {
+        if (peso == null) peso = new SimpleDoubleProperty(0);
         return peso;
     }
 
-    public void setPeso(DecimalFormat peso) {
-        peso = peso;
+    public void setPeso(double peso) {
+        pesoProperty().set(peso);
     }
 
-    public DecimalFormat getPrecoFabrica() {
-        if (precoFabrica == null) precoFabrica = new DecimalFormat("0.00");
+    public double getPrecoFabrica() {
+        return precoFabricaProperty().get();
+    }
+
+    public DoubleProperty precoFabricaProperty() {
+        if (precoFabrica == null) precoFabrica = new SimpleDoubleProperty(0);
         return precoFabrica;
     }
 
-    public void setPrecoFabrica(DecimalFormat precoFabrica) {
-        precoFabrica = precoFabrica;
+    public void setPrecoFabrica(double precoFabrica) {
+        precoFabricaProperty().set(precoFabrica);
     }
 
-    public DecimalFormat getPrecoVenda() {
-        if (precoVenda == null) precoVenda = new DecimalFormat("0.00");
+    public double getPrecoVenda() {
+        return precoVendaProperty().get();
+    }
+
+    public DoubleProperty precoVendaProperty() {
+        if (precoVenda == null) precoVenda = new SimpleDoubleProperty(0);
         return precoVenda;
     }
 
-    public void setPrecoVenda(DecimalFormat precoVenda) {
-        precoVenda = precoVenda;
+    public void setPrecoVenda(double precoVenda) {
+        precoVendaProperty().set(precoVenda);
     }
 
-    public DecimalFormat getComissao() {
-        if (comissao == null) comissao = new DecimalFormat("0.00");
+    public double getComissao() {
+        return comissaoProperty().get();
+    }
+
+    public DoubleProperty comissaoProperty() {
+        if (comissao == null) comissao = new SimpleDoubleProperty(0);
         return comissao;
     }
 
-    public void setComissao(DecimalFormat comissao) {
-        comissao = comissao;
+    public void setComissao(double comissao) {
+        comissaoProperty().set(comissao);
     }
 }

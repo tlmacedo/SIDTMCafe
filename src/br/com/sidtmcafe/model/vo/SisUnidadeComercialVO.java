@@ -55,6 +55,7 @@ public class SisUnidadeComercialVO extends RecursiveTreeObject<SisUnidadeComerci
 
     @Override
     public String toString() {
-        return descricaoProperty().get();
+        return siglaProperty().get();
     }
+
 }
