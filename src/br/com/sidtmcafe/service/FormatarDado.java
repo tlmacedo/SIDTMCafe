@@ -215,39 +215,76 @@ public class FormatarDado implements Constants {
 
     public static String getValueMoeda(String valor, int casaDecimal) {
         //String value = String.valueOf(Integer.parseInt(valor.replaceAll("[^0-9]", "")));
-        String value = valor.replaceAll("[^0-9]", "");
+//        String value = valor.replaceAll("[^0-9]", "");
+        String value = valor;
         for (int i = value.length(); i < (casaDecimal + 1); i++) {
             value = "0" + value;
         }
-        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 15) + "})$", "$1.$2");
-        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 13) + "})$", "$1.$2");
-        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 11) + "})$", "$1.$2");
-        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 9) + "})$", "$1.$2");
-        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 6) + "})$", "$1.$2");
-        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 3) + "})$", "$1.$2");
-        if (casaDecimal > 0)
-            value = value.replaceAll("([0-9]{1})([0-9]{" + casaDecimal + "})$", "$1,$2");
+
+        //if (casaDecimal > 0)
+            value = value.replaceAll("(\\d{0,1})(\\d{0,9})(\\d{0,6})(\\d{0,3})(\\d{" + casaDecimal + "})$", "$1.$2.$3.$4,$5");
+//        else
+//            value = value.replaceAll("(\\d{1})(\\d{9})(\\d{6})(\\d{3})$", "$1.$2.$3.$4");
+
+//        if (value.length() < (casaDecimal + 1)) {
+//            if (casaDecimal > 0)
+//                value = value.replaceAll("(\\d{1,3})(\\d{2})$", "$1,$2");
+//        } else {
+//            switch (value.length() - casaDecimal) {
+//                case 1:
+//                case 2:
+//                case 3:
+//                    if (casaDecimal > 0)
+//                        value = value.replaceAll("(\\d{1})(\\d{" + casaDecimal + "})$", "$1,$2");
+//                    else
+//                        value = value.replaceAll("(\\d{3})", "$1");
+//                    break;
+//                case 4:
+//                case 5:
+//                case 6:
+//                    if (casaDecimal > 0)
+//                        value = value.replaceAll("(\\d{1})(\\d{3})(\\d{" + casaDecimal + "})$", "$1.$2,$3");
+//                    else
+//                        value = value.replaceAll("(\\d{1})(\\d{3})$", "$1.$2");
+//                    break;
+//                case 7:
+//                case 8:
+//                case 9:
+//                    if (casaDecimal > 0)
+//                        value = value.replaceAll("(\\d{1})(\\d{6})(\\d{3})(\\d{" + casaDecimal + "})$", "$1.$2.$3,$4");
+//                    else
+//                        value = value.replaceAll("(\\d{1})(\\d{6})(\\d{3})$", "$1.$2.$3");
+//                    break;
+//                case 10:
+//                case 11:
+//                case 12:
+//                    if (casaDecimal > 0)
+//                        value = value.replaceAll("(\\d{1})(\\d{9})(\\d{6})(\\d{3})(\\d{" + casaDecimal + "})$", "$1.$2.$3.$4,$5");
+//                    else
+//                        value = value.replaceAll("(\\d{1})(\\d{9})(\\d{6})(\\d{3})$", "$1.$2.$3.$4");
+//                    break;
+//            }
+//        }
         return value;
     }
 
     public void maskFieldMoeda(final JFXTextField textField, int casaDecimal) {
         textField.setAlignment(Pos.CENTER_RIGHT);
-        textField.lengthProperty().addListener(new ChangeListener<Number>() {
+//        textField.lengthProperty().addListener(new ChangeListener<Number>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Number> ov, Number o, Number n) {
+//                String value = String.valueOf(Long.parseLong(textField.getText().replaceAll("[^0-9]", "")));
+//
+//                textField.setText(getValueMoeda(value, casaDecimal));
+//                positionCaret(textField);
+//
+//            }
+//        });
+        textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends Number> ov, Number o, Number n) {
-                String value = String.valueOf(Integer.parseInt(textField.getText().replaceAll("[^0-9]", "")));
-//                for (int i = value.length(); i < (casaDecimal + 1); i++) {
-//                    value = "0" + value;
-//                }
-//                value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 11) + "})$", "$1.$2");
-//                value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 9) + "})$", "$1.$2");
-//                value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 6) + "})$", "$1.$2");
-//                value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 3) + "})$", "$1.$2");
-//                if (casaDecimal > 0)
-//                    value = value.replaceAll("([0-9]{1})([0-9]{" + casaDecimal + "})$", "$1,$2");
-                textField.setText(getValueMoeda(value, casaDecimal));
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                textField.setText(getValueMoeda(String.valueOf(Long.parseLong(newValue.replaceAll("[^0-9]", ""))), casaDecimal));
                 positionCaret(textField);
-
             }
         });
     }
