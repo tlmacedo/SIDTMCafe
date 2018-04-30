@@ -61,10 +61,13 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
     public JFXTextField txtPrecoFabrica;
     public JFXTextField txtMargem;
     public JFXTextField txtPrecoConsumidor;
+    public JFXTextField txtVarejo;
+    public JFXTextField txtComissaoPorc;
+    public JFXTextField txtLucroBruto;
+    public JFXTextField txtUltimoFrete;
+    public JFXTextField txtComissaoReal;
     public JFXTextField txtLucroLiquido;
     public JFXTextField txtLucratividade;
-    public JFXTextField txtVarejo;
-    public JFXTextField txtComissao;
     public Label lblDataCadastro;
     public Label lblDataCadastroDiff;
     public Label lblDataAtualizacao;
@@ -77,6 +80,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
     public JFXComboBox<FiscalICMSVO> cboFiscalIcms;
     public JFXComboBox<FiscalPISCOFINSVO> cboFiscalPis;
     public JFXComboBox<FiscalPISCOFINSVO> cboFiscalCofins;
+
 
     @Override
     public void fechar() {
@@ -232,25 +236,46 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         txtPrecoFabrica.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (txtPrecoFabrica.isFocused())
-                    vlrConsumidor();
+                if (!txtPrecoFabrica.isFocused()) return;
+                vlrConsumidor();
+                vlrLucroBruto();
             }
         });
 
         txtMargem.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (txtMargem.isFocused())
-                    //vlrConsumidor();
-                    ;
+                if (!txtMargem.isFocused()) {
+                    return;
+                }
+                vlrConsumidor();
+                vlrLucroBruto();
             }
         });
 
         txtPrecoConsumidor.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (txtPrecoConsumidor.isFocused())
-                    vlrMargem();
+                if (!txtPrecoConsumidor.isFocused()) return;
+                vlrMargem();
+                vlrLucroBruto();
+            }
+        });
+
+        txtComissaoPorc.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!txtComissaoPorc.isFocused()) return;
+                vlrComissaoReal();
+                vlrLucroBruto();
+            }
+        });
+
+        txtUltimoFrete.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!txtUltimoFrete.isFocused()) return;
+                vlrLucroBruto();
             }
         });
 
@@ -269,10 +294,6 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
             ControllerPrincipal.ctrlPrincipal.painelViewPrincipal.fireEvent(ExecutaComandoTecladoMouse.pressTecla(KeyCode.F7));
         });
     }
-
-    boolean campoFab = false;
-    boolean campoMargem = false;
-    boolean campoCons = false;
 
     int qtdRegistrosLocalizados = 0;
     int indexObservableProduto = 0;
@@ -479,7 +500,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         vlrLucroLiq();
         vlrLucratividade();
         txtVarejo.setText(getTabProdutoVO().varejoProperty().toString());
-        txtComissao.setText(FormatarDado.getValueMoeda(getTabProdutoVO().comissaoProperty().toString(), 2));
+        txtComissaoPorc.setText(FormatarDado.getValueMoeda(getTabProdutoVO().comissaoProperty().toString(), 2));
         txtFiscalNcm.setText(FormatarDado.getCampoFormatado(getTabProdutoVO().getNfeNcm(), "ncm"));
         txtFiscalGenero.setText(getTabProdutoVO().getNfeGenero());
         txtFiscalCest.setText(FormatarDado.getCampoFormatado(getTabProdutoVO().getNfeCest(), "cest"));
@@ -529,7 +550,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
             getTabProdutoVO().setPrecoFabrica(Double.parseDouble(txtPrecoFabrica.getText()));
             getTabProdutoVO().setPrecoVenda(Double.parseDouble(txtPrecoConsumidor.getText()));
             getTabProdutoVO().setVarejo(Integer.parseInt(txtVarejo.getText()));
-            getTabProdutoVO().setComissao(Double.parseDouble(txtComissao.getText()));
+            getTabProdutoVO().setComissao(Double.parseDouble(txtComissaoPorc.getText()));
             getTabProdutoVO().setNfeNcm(txtFiscalNcm.getText());
             getTabProdutoVO().setNfeGenero(txtFiscalGenero.getText());
             getTabProdutoVO().setNfeCest(txtFiscalCest.getText());
@@ -657,43 +678,83 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
     }
 
     void vlrConsumidor() {
-        Double prcFabrica = FormatarDado.getDoubleValorCampo(txtPrecoFabrica.getText()),
-                margem = FormatarDado.getDoubleValorCampo(txtMargem.getText()), prcConsumidor;
-        prcConsumidor = prcFabrica;
-        System.out.println("prcFabrica: [" + prcFabrica + "]");
-        System.out.println("margem: [" + margem + "]");
-        System.out.println("prcConsumidor: [" + prcConsumidor + "]");
-        if (margem > 0.0)
-            prcConsumidor = (prcFabrica * (1 + (margem / 100)));
-        System.out.println("prcConsumidor-final: [" + prcConsumidor + "]");
+        Double prcFabrica = FormatarDado.getDoubleValorCampo(txtPrecoFabrica.getText());
+        Double margem = FormatarDado.getDoubleValorCampo(txtMargem.getText());
+        Double prcConsumidor = 0.;
+
+        if (margem == 0.)
+            prcConsumidor = prcFabrica;
+        else
+            prcConsumidor = (prcFabrica * (1. + (margem / 100.)));
+
         txtPrecoConsumidor.setText(FormatarDado.getValueMoeda(BigDecimal.valueOf(prcConsumidor).setScale(2, RoundingMode.HALF_UP).toString(), 2));
     }
 
     void vlrMargem() {
-        Double prcFabrica = FormatarDado.getDoubleValorCampo(txtPrecoFabrica.getText()),
-                margem = 0.0, prcConsumidor = FormatarDado.getDoubleValorCampo(txtPrecoConsumidor.getText());
-        if (prcConsumidor != prcFabrica)
-            margem = (((prcConsumidor - prcFabrica) * 100) / prcFabrica);
+        Double prcFabrica = FormatarDado.getDoubleValorCampo(txtPrecoFabrica.getText());
+        Double prcConsumidor = FormatarDado.getDoubleValorCampo(txtPrecoConsumidor.getText());
+        Double margem;
+
+        if (prcConsumidor == prcFabrica)
+            margem = 0.;
+        else
+            margem = (((prcConsumidor - prcFabrica) * 100.) / prcFabrica);
+
         txtMargem.setText(FormatarDado.getValueMoeda(BigDecimal.valueOf(margem).setScale(2, RoundingMode.HALF_UP).toString(), 2));
+    }
+
+    void vlrLucroBruto() {
+        Double prcFabrica = FormatarDado.getDoubleValorCampo(txtPrecoFabrica.getText());
+        Double prcConsumidor = FormatarDado.getDoubleValorCampo(txtPrecoConsumidor.getText());
+        Double lucroBruto;
+
+        if (prcConsumidor == prcFabrica)
+            lucroBruto = 0.;
+        else
+            lucroBruto = (prcConsumidor - prcFabrica);
+
+        txtLucroBruto.setText(FormatarDado.getValueMoeda(BigDecimal.valueOf(lucroBruto).setScale(2, RoundingMode.HALF_UP).toString(), 2));
         vlrLucroLiq();
-        vlrLucratividade();
     }
 
     void vlrLucroLiq() {
-        Double prcFabrica = FormatarDado.getDoubleValorCampo(txtPrecoFabrica.getText()),
-                prcConsumidor = FormatarDado.getDoubleValorCampo(txtPrecoConsumidor.getText()),
-                lucroLiquido = (prcConsumidor - prcFabrica);
+        Double lucroBruto = FormatarDado.getDoubleValorCampo(txtLucroBruto.getText());
+        Double ultimoFrete = FormatarDado.getDoubleValorCampo(txtUltimoFrete.getText());
+        Double comissaoReal = FormatarDado.getDoubleValorCampo(txtComissaoReal.getText());
+        Double lucroLiquido;
+
+        if (lucroBruto == 0.)
+            lucroLiquido = 0.;
+        else
+            lucroLiquido = (lucroBruto - (ultimoFrete + comissaoReal));
+
         txtLucroLiquido.setText(FormatarDado.getValueMoeda(BigDecimal.valueOf(lucroLiquido).setScale(2, RoundingMode.HALF_UP).toString(), 2));
+        vlrLucratividade();
     }
 
     void vlrLucratividade() {
-        Double prcConsumidor = FormatarDado.getDoubleValorCampo(txtPrecoConsumidor.getText()),
-                lucroLiquido = FormatarDado.getDoubleValorCampo(txtLucroLiquido.getText()),
-                lucratividade = 0.0;
+        Double prcConsumidor = FormatarDado.getDoubleValorCampo(txtPrecoConsumidor.getText());
+        Double lucroLiquido = FormatarDado.getDoubleValorCampo(txtLucroLiquido.getText());
+        Double lucratividade;
 
-        if (((lucroLiquido * 100) / prcConsumidor) > 0)
-            lucratividade = ((lucroLiquido * 100) / prcConsumidor);
+        if (lucroLiquido == 0.)
+            lucratividade = 0.;
+        else
+            lucratividade = ((lucroLiquido * 100.) / prcConsumidor);
+
         txtLucratividade.setText(FormatarDado.getValueMoeda(BigDecimal.valueOf(lucratividade).setScale(2, RoundingMode.HALF_UP).toString(), 2));
     }
 
+    void vlrComissaoReal() {
+        Double prcConsumidor = FormatarDado.getDoubleValorCampo(txtPrecoConsumidor.getText());
+        Double comissaoPorc = FormatarDado.getDoubleValorCampo(txtComissaoPorc.getText());
+        Double comissaoReal;
+
+        if (comissaoPorc == 0.)
+            comissaoReal = 0.;
+        else
+            comissaoReal = prcConsumidor * (comissaoPorc / 100.);
+
+        txtComissaoReal.setText(FormatarDado.getValueMoeda(BigDecimal.valueOf(comissaoReal).setScale(2, RoundingMode.HALF_UP).toString(), 2));
+    }
 }

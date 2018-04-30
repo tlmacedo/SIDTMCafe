@@ -57,26 +57,23 @@ public class FormatarDado implements Constants {
         return strValue;
     }
 
-    public static Double getDoubleValorCampo(String value) {
-        double retorno = 0.0;
-        for (int i = value.length(); i < (2 + 1); i++) {
+    public static Double getDoubleValorCampo(String valor) {
+        double multiplicador = 1.;
+//        System.out.println("valor: [" + valor + "]");
+        if (valor.contains("-")) multiplicador = -1.;
+//        System.out.println("multiplicador: [" + multiplicador + "]");
+        String value = valor.replaceAll("\\D", "");
+//        System.out.println("value(0): [" + value + "]");
+        if (value.isEmpty()) value = "000";
+        for (int i = value.length(); i < 3; i++)
             value = "0" + value;
-        }
-        System.out.println("getDoubleValorCampo 0: [" + value + "]");
-        double multiplicador = 1;
-        if (value.contains("-"))
-            multiplicador = -1;
-        value = value.replaceAll("\\D", "");
-        System.out.println("getDoubleValorCampo 1: [" + value + "]");
-        if (value.isEmpty())
-            value = "000";
-        System.out.println("getDoubleValorCampo 2: [" + value + "]");
-        System.out.println("value.replaceAll: [" + value.replaceAll("(\\d{1})(\\d{2})$", "$1.$2") + "]");
-        retorno = Double.parseDouble(value.replaceAll("(\\d{1})(\\d{2})$", "$1.$2"));
-        System.out.println("getDoubleValorCampo retorno: [" + retorno + "]");
-        System.out.println("getDoubleValorCampo return: [" + (retorno * multiplicador) + "]");
-        return (retorno * multiplicador);
-//        return Double.parseDouble(value.replaceAll("(\\d{1})(\\d{2})$", "$1.$2"));
+//        System.out.println("value(1): [" + value + "]");
+//
+//        System.out.println("value(2): [" + (Double.parseDouble(value.replaceAll("(\\d{1})(\\d{2})$", "$1.$2"))) + "]");
+//
+//        System.out.println("value(retorno): [" + (multiplicador * (Double.parseDouble(value.replaceAll("(\\d{1})(\\d{2})$", "$1.$2")))) + "]");
+
+        return (multiplicador * (Double.parseDouble(value.replaceAll("(\\d{1})(\\d{2})$", "$1.$2"))));
     }
 
     public static String gerarMascara(String tipMasc, int qtd, String caractere) {
@@ -229,33 +226,32 @@ public class FormatarDado implements Constants {
     }
 
     public static String getValueMoeda(String valor, int casaDecimal) {
-        String value = valor;
-        for (int i = value.length(); i < (casaDecimal + 1); i++) {
+        String sinal = "";
+        String value = String.valueOf(Long.parseLong(valor.replaceAll("\\D", "")));
+        for (int i = value.length(); i < (casaDecimal + 1); i++)
             value = "0" + value;
-        }
-        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 18) + "})$", "$1.$2");
-        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 15) + "})$", "$1.$2");
-        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 12) + "})$", "$1.$2");
-        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 9) + "})$", "$1.$2");
-        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 6) + "})$", "$1.$2");
-        value = value.replaceAll("([0-9]{1})([0-9]{" + (casaDecimal + 3) + "})$", "$1.$2");
+
+        value = value.replaceAll("(\\d{1})(\\d{" + (casaDecimal + 18) + "})$", "$1.$2");
+        value = value.replaceAll("(\\d{1})(\\d{" + (casaDecimal + 15) + "})$", "$1.$2");
+        value = value.replaceAll("(\\d{1})(\\d{" + (casaDecimal + 12) + "})$", "$1.$2");
+        value = value.replaceAll("(\\d{1})(\\d{" + (casaDecimal + 9) + "})$", "$1.$2");
+        value = value.replaceAll("(\\d{1})(\\d{" + (casaDecimal + 6) + "})$", "$1.$2");
+        value = value.replaceAll("(\\d{1})(\\d{" + (casaDecimal + 3) + "})$", "$1.$2");
         if (casaDecimal > 0) {
-            value = value.replaceAll("([0-9]{1})([0-9]{" + casaDecimal + "})$", "$1,$2");
+            value = value.replaceAll("(\\d{1})(\\d{" + casaDecimal + "})$", "$1,$2");
         }
-        return value;
+        if (valor.substring(0, 1).equals("-")) sinal = "-";
+        return sinal + value;
     }
 
     public void maskFieldMoeda(final JFXTextField textField, int casaDecimal) {
         textField.setAlignment(Pos.CENTER_RIGHT);
-        textField.lengthProperty().addListener(new ChangeListener<Number>() {
+        textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 Platform.runLater(() -> {
-                    String value = String.valueOf(Long.parseLong(textField.getText().replaceAll("\\D", "")));
-//                    if (textField.getText().contains("-"))
-//                        value = "-" + value;
-                    textField.setText(getValueMoeda(value, casaDecimal));
-                    textField.positionCaret(newValue.intValue());
+                    textField.setText(getValueMoeda(newValue, casaDecimal));
+                    textField.positionCaret(newValue.length());
                 });
             }
         });

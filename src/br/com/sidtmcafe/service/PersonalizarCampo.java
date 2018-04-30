@@ -155,30 +155,48 @@ public class PersonalizarCampo implements Constants {
     public static void desabilitaCampos(AnchorPane anchorPane, boolean setDisable) {
         for (Node node : anchorPane.getChildren()) {
             String accessibleText = null;
-            boolean deshabilitado = true;
+            boolean deshabilitado = setDisable;
+            boolean editavel = true;
             if (node.getAccessibleText() != null)
                 if ((accessibleText = node.getAccessibleText().toLowerCase()) != null)
                     if (accessibleText.length() > 5)
-                        if (accessibleText.substring(5, 6).equals("1"))
-                            if (!setDisable)
-                                deshabilitado = false;
+                        switch (accessibleText.substring(5, 6)) {
+                            case "0":
+                                deshabilitado = setDisable;
+                                break;
+                            case "1":
+                                deshabilitado = true;
+                                break;
+                            case "2":
+                                editavel = false;
+                                deshabilitado = setDisable;
+                                break;
+                        }
+
             if (node instanceof DatePicker) {
-                //((DatePicker) node).setEditable(setDisable & deshabilitado);
-                ((DatePicker) node).setDisable(setDisable & deshabilitado);
+                if (!editavel)
+                    ((DatePicker) node).setEditable(editavel);
+                ((DatePicker) node).setDisable(deshabilitado);
             } else if (node instanceof JFXTextField) {
-                //((JFXTextField) node).setEditable(setDisable & deshabilitado);
-                ((JFXTextField) node).setDisable(setDisable & deshabilitado);
+                if (!editavel)
+                    ((JFXTextField) node).setEditable(editavel);
+                ((JFXTextField) node).setDisable(deshabilitado);
             } else if (node instanceof JFXTextArea) {
-                //((JFXTextArea) node).setEditable(setDisable & deshabilitado);
-                ((JFXTextArea) node).setDisable(setDisable & deshabilitado);
+                if (!editavel)
+                    ((JFXTextArea) node).setEditable(editavel);
+                ((JFXTextArea) node).setDisable(deshabilitado);
             } else if (node instanceof JFXComboBox) {
-//                ((JFXComboBox) node).setEditable(setDisable & deshabilitado);
-                ((JFXComboBox) node).setDisable(setDisable & deshabilitado);
+                if (!editavel)
+                    ((JFXComboBox) node).setEditable(editavel);
+                ((JFXComboBox) node).setDisable(deshabilitado);
             } else if (node instanceof JFXCheckBox) {
-                ((JFXCheckBox) node).setDisable(setDisable & deshabilitado);
+//                if (!editavel)
+//                    ((JFXCheckBox) node).setEditable(editavel);
+                ((JFXCheckBox) node).setDisable(deshabilitado);
             } else if (node instanceof JFXTreeTableView) {
-//                ((JFXTreeTableView) node).setEditable(setDisable & deshabilitado);
-                ((JFXTreeTableView) node).setDisable(setDisable & deshabilitado);
+                if (!editavel)
+                    ((JFXTreeTableView) node).setEditable(editavel);
+                ((JFXTreeTableView) node).setDisable(deshabilitado);
             } else if (node instanceof AnchorPane) {
                 desabilitaCampos((AnchorPane) node, setDisable);
             } else if (node instanceof TitledPane) {
