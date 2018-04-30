@@ -16,11 +16,11 @@
 
     <dependencies>
         <!--<dependency>-->
-            <!--<groupId>br.com.nfe-hom4</groupId>-->
-            <!--<artifactId>nfe-hom4</artifactId>-->
-            <!--<version>4.0</version>-->
-            <!--&lt;!&ndash;<scope>system</scope>&ndash;&gt;-->
-            <!--<systemPath>${project.basedir}/resources/libs/NFe/NFe-Hom4.jar</systemPath>-->
+        <!--<groupId>br.com.nfe-hom4</groupId>-->
+        <!--<artifactId>nfe-hom4</artifactId>-->
+        <!--<version>4.0</version>-->
+        <!--&lt;!&ndash;<scope>system</scope>&ndash;&gt;-->
+        <!--<systemPath>${project.basedir}/resources/libs/NFe/NFe-Hom4.jar</systemPath>-->
         <!--</dependency>-->
 
 
@@ -57,6 +57,39 @@
             <version>20171018</version>
         </dependency>
 
+
+
+
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-calendar</artifactId>
+            <version>v3-rev260-1.23.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.http-client</groupId>
+            <artifactId>google-http-client-jackson2</artifactId>
+            <version>1.23.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client-jetty</artifactId>
+            <version>1.23.0</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.google.api-client</groupId>-->
+            <!--<artifactId>google-api-client</artifactId>-->
+            <!--<version>1.23.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.google.apis</groupId>-->
+            <!--<artifactId>google-api-services-calendar</artifactId>-->
+            <!--<version>v3-rev312-1.23.0</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>com.google.http-client</groupId>-->
+            <!--<artifactId>google-http-client-gson</artifactId>-->
+            <!--<version>1.23.0</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 </project>

@@ -241,7 +241,8 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (txtMargem.isFocused())
-                    vlrConsumidor();
+                    //vlrConsumidor();
+                    ;
             }
         });
 
@@ -659,11 +660,13 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         Double prcFabrica = FormatarDado.getDoubleValorCampo(txtPrecoFabrica.getText()),
                 margem = FormatarDado.getDoubleValorCampo(txtMargem.getText()), prcConsumidor;
         prcConsumidor = prcFabrica;
+        System.out.println("prcFabrica: [" + prcFabrica + "]");
+        System.out.println("margem: [" + margem + "]");
+        System.out.println("prcConsumidor: [" + prcConsumidor + "]");
         if (margem > 0.0)
-            prcConsumidor = prcFabrica * (1 + (margem / 100));
+            prcConsumidor = (prcFabrica * (1 + (margem / 100)));
+        System.out.println("prcConsumidor-final: [" + prcConsumidor + "]");
         txtPrecoConsumidor.setText(FormatarDado.getValueMoeda(BigDecimal.valueOf(prcConsumidor).setScale(2, RoundingMode.HALF_UP).toString(), 2));
-        vlrLucroLiq();
-        vlrLucratividade();
     }
 
     void vlrMargem() {

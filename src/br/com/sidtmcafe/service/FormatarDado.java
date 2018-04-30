@@ -58,14 +58,25 @@ public class FormatarDado implements Constants {
     }
 
     public static Double getDoubleValorCampo(String value) {
-//        double multiplicador = 1;
-//        if (value.contains("-"))
-//            multiplicador = -1;
-        value = value.replaceAll("[^0-9]", "");
+        double retorno = 0.0;
+        for (int i = value.length(); i < (2 + 1); i++) {
+            value = "0" + value;
+        }
+        System.out.println("getDoubleValorCampo 0: [" + value + "]");
+        double multiplicador = 1;
+        if (value.contains("-"))
+            multiplicador = -1;
+        value = value.replaceAll("\\D", "");
+        System.out.println("getDoubleValorCampo 1: [" + value + "]");
         if (value.isEmpty())
             value = "000";
-//        return multiplicador * Double.parseDouble(value.replaceAll("(\\d{1})(\\d{2})", "$1.$2"));
-        return Double.parseDouble(value.replaceAll("(\\d{1})(\\d{2})", "$1.$2"));
+        System.out.println("getDoubleValorCampo 2: [" + value + "]");
+        System.out.println("value.replaceAll: [" + value.replaceAll("(\\d{1})(\\d{2})$", "$1.$2") + "]");
+        retorno = Double.parseDouble(value.replaceAll("(\\d{1})(\\d{2})$", "$1.$2"));
+        System.out.println("getDoubleValorCampo retorno: [" + retorno + "]");
+        System.out.println("getDoubleValorCampo return: [" + (retorno * multiplicador) + "]");
+        return (retorno * multiplicador);
+//        return Double.parseDouble(value.replaceAll("(\\d{1})(\\d{2})$", "$1.$2"));
     }
 
     public static String gerarMascara(String tipMasc, int qtd, String caractere) {

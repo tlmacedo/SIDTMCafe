@@ -1,5 +1,6 @@
 package br.com.sidtmcafe.interfaces;
 
+import com.google.api.client.util.store.FileDataStoreFactory;
 import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import org.apache.axis2.databinding.types.xsd.Decimal;
@@ -22,6 +23,11 @@ public interface Constants {
     Pattern PATTERN = Pattern.compile("[\\-/. \\[\\]]");
     String COPYRIGHT = "Café Perfeito " + "\u00a9 " + LocalDate.now().getYear();
     String LOJA_ID = "1";
+
+    /*Constants para acesso Google Calendar*/
+    public static final String GOOGLE_CALENDAR_KEY = "/libs/client_secret.json";
+    public static final String GOOGLE_CALENDAR_PADRAO = "65q1ae60dbon58epveq5e0qq14@group.calendar.google.com";
+    public static final String GOOGLE_CALENDAR_APPLICATION_NAME = "Google Calendar API";
 
     /*Constants para conexao Mysql*/
     String BD_DATABASE = "cafeperfeito";
