@@ -11,20 +11,23 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
 
     SisUnidadeComercialVO sisUnidadeComercialVO;
     SisSituacaoSistemaVO sisSituacaoSistemaVO;
+    FiscalCestNcmVO fiscalCestNcmVO;
+    FiscalCSTOrigemVO fiscalCSTOrigemVO;
     FiscalICMSVO fiscalICMSVO;
     FiscalPISCOFINSVO fiscalPISVO;
     FiscalPISCOFINSVO fiscalCOFINSVO;
-    FiscalCSTOrigemVO fiscalCSTOrigemVO;
     TabColaboradorVO usuarioCadastroVO;
     TabColaboradorVO usuarioAtualizacaoVO;
     List<TabProdutoEanVO> tabProdutoEanVOList;
 
     Timestamp dataCadastro, dataAtualizacao;
-    IntegerProperty id, sisUnidadeComercial_id, sisSituacaoSistema_id, varejo, fiscalICMS_id, fiscalPIS_id, fiscalCOFINS_id, fiscalCSTOrigem_id,
-            usuarioCadastro_id, usuarioAtualizacao_id;
-    StringProperty codigo, descricao, nfeNcm, nfeCest, nfeGenero;
-    DoubleProperty peso, precoFabrica, precoVenda, precoUltimoFrete, comissao;
 
+    IntegerProperty id, sisUnidadeComercial_id, sisSituacaoSistema_id, varejo, fiscalCestNcm_id, fiscalCSTOrigem_id,
+            fiscalICMS_id, fiscalPIS_id, fiscalCOFINS_id, usuarioCadastro_id, usuarioAtualizacao_id;
+
+    StringProperty codigo, descricao, nfeGenero;
+
+    DoubleProperty peso, precoFabrica, precoVenda, precoUltimoFrete, comissao;
 
     public TabProdutoVO() {
     }
@@ -43,6 +46,22 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
 
     public void setSisSituacaoSistemaVO(SisSituacaoSistemaVO sisSituacaoSistemaVO) {
         this.sisSituacaoSistemaVO = sisSituacaoSistemaVO;
+    }
+
+    public FiscalCestNcmVO getFiscalCestNcmVO() {
+        return fiscalCestNcmVO;
+    }
+
+    public void setFiscalCestNcmVO(FiscalCestNcmVO fiscalCestNcmVO) {
+        this.fiscalCestNcmVO = fiscalCestNcmVO;
+    }
+
+    public FiscalCSTOrigemVO getFiscalCSTOrigemVO() {
+        return fiscalCSTOrigemVO;
+    }
+
+    public void setFiscalCSTOrigemVO(FiscalCSTOrigemVO fiscalCSTOrigemVO) {
+        this.fiscalCSTOrigemVO = fiscalCSTOrigemVO;
     }
 
     public FiscalICMSVO getFiscalICMSVO() {
@@ -67,14 +86,6 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
 
     public void setFiscalCOFINSVO(FiscalPISCOFINSVO fiscalCOFINSVO) {
         this.fiscalCOFINSVO = fiscalCOFINSVO;
-    }
-
-    public FiscalCSTOrigemVO getFiscalCSTOrigemVO() {
-        return fiscalCSTOrigemVO;
-    }
-
-    public void setFiscalCSTOrigemVO(FiscalCSTOrigemVO fiscalCSTOrigemVO) {
-        this.fiscalCSTOrigemVO = fiscalCSTOrigemVO;
     }
 
     public TabColaboradorVO getUsuarioCadastroVO() {
@@ -169,6 +180,32 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
         varejoProperty().set(varejo);
     }
 
+    public int getFiscalCestNcm_id() {
+        return fiscalCestNcm_idProperty().get();
+    }
+
+    public IntegerProperty fiscalCestNcm_idProperty() {
+        if (fiscalCestNcm_id == null) fiscalCestNcm_id = new SimpleIntegerProperty(0);
+        return fiscalCestNcm_id;
+    }
+
+    public void setFiscalCestNcm_id(int fiscalCestNcm_id) {
+        fiscalCestNcm_idProperty().set(fiscalCestNcm_id);
+    }
+
+    public int getFiscalCSTOrigem_id() {
+        return fiscalCSTOrigem_idProperty().get();
+    }
+
+    public IntegerProperty fiscalCSTOrigem_idProperty() {
+        if (fiscalCSTOrigem_id == null) fiscalCSTOrigem_id = new SimpleIntegerProperty(0);
+        return fiscalCSTOrigem_id;
+    }
+
+    public void setFiscalCSTOrigem_id(int fiscalCSTOrigem_id) {
+        fiscalCSTOrigem_idProperty().set(fiscalCSTOrigem_id);
+    }
+
     public int getFiscalICMS_id() {
         return fiscalICMS_idProperty().get();
     }
@@ -206,19 +243,6 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
 
     public void setFiscalCOFINS_id(int fiscalCOFINS_id) {
         fiscalCOFINS_idProperty().set(fiscalCOFINS_id);
-    }
-
-    public int getFiscalCSTOrigem_id() {
-        return fiscalCSTOrigem_idProperty().get();
-    }
-
-    public IntegerProperty fiscalCSTOrigem_idProperty() {
-        if (fiscalCSTOrigem_id == null) fiscalCSTOrigem_id = new SimpleIntegerProperty(0);
-        return fiscalCSTOrigem_id;
-    }
-
-    public void setFiscalCSTOrigem_id(int fiscalCSTOrigem_id) {
-        fiscalCSTOrigem_idProperty().set(fiscalCSTOrigem_id);
     }
 
     public int getUsuarioCadastro_id() {
@@ -271,32 +295,6 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
 
     public void setDescricao(String descricao) {
         descricaoProperty().set(descricao);
-    }
-
-    public String getNfeNcm() {
-        return nfeNcmProperty().get();
-    }
-
-    public StringProperty nfeNcmProperty() {
-        if (nfeNcm == null) nfeNcm = new SimpleStringProperty("");
-        return nfeNcm;
-    }
-
-    public void setNfeNcm(String nfeNcm) {
-        nfeNcmProperty().set(nfeNcm);
-    }
-
-    public String getNfeCest() {
-        return nfeCestProperty().get();
-    }
-
-    public StringProperty nfeCestProperty() {
-        if (nfeCest == null) nfeCest = new SimpleStringProperty("");
-        return nfeCest;
-    }
-
-    public void setNfeCest(String nfeCest) {
-        nfeCestProperty().set(nfeCest);
     }
 
     public String getNfeGenero() {
