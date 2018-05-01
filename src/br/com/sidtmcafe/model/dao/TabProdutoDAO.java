@@ -29,8 +29,8 @@ public class TabProdutoDAO extends BuscaBandoDados {
     }
 
     void buscaTabProdutoVO(int id) {
-        comandoSql = "SELECT id, codigo, descricao, peso, sisUnidadeComercial_id, sisSituacaoSistema_id, precoFabrica, precoVenda, ";
-        comandoSql += "varejo, comissao, fiscalICMS_id, fiscalPIS_id, fiscalCOFINS_id, nfeNcm, nfeCest, fiscalCSTOrigem_id, nfeGenero, ";
+        comandoSql = "SELECT id, codigo, descricao, peso, sisUnidadeComercial_id, sisSituacaoSistema_id, precoFabrica, precoVenda, precoUltimoFrete, ";
+        comandoSql += "comissao, varejo, fiscalICMS_id, fiscalPIS_id, fiscalCOFINS_id, nfeNcm, nfeCest, fiscalCSTOrigem_id, nfeGenero, ";
         comandoSql += "usuarioCadastro_id, dataCadastro, usuarioAtualizacao_id, dataAtualizacao ";
         comandoSql += "FROM tabProduto ";
         if (id > 0) comandoSql += "WHERE id = " + id + " ";
@@ -50,8 +50,9 @@ public class TabProdutoDAO extends BuscaBandoDados {
                 tabProdutoVO.setSisSituacaoSistema_id(rs.getInt("sisSituacaoSistema_id"));
                 tabProdutoVO.setPrecoFabrica(rs.getDouble("precoFabrica"));
                 tabProdutoVO.setPrecoVenda(rs.getDouble("precoVenda"));
-                tabProdutoVO.setVarejo(rs.getInt("varejo"));
+                tabProdutoVO.setPrecoUltimoFrete(rs.getDouble("precoUltimoFrete"));
                 tabProdutoVO.setComissao(rs.getDouble("comissao"));
+                tabProdutoVO.setVarejo(rs.getInt("varejo"));
                 tabProdutoVO.setFiscalICMS_id(rs.getInt("fiscalICMS_id"));
                 tabProdutoVO.setFiscalPIS_id(rs.getInt("fiscalPIS_id"));
                 tabProdutoVO.setFiscalCOFINS_id(rs.getInt("fiscalCOFINS_id"));
@@ -106,8 +107,9 @@ public class TabProdutoDAO extends BuscaBandoDados {
         comandoSql += "sisSituacaoSistema_id = " + produtoVO.getSisSituacaoSistema_id() + ", ";
         comandoSql += "precoFabrica = " + produtoVO.getPrecoFabrica() + ", ";
         comandoSql += "precoVenda = " + produtoVO.getPrecoVenda() + ", ";
-        comandoSql += "varejo = " + produtoVO.getVarejo() + ", ";
+        comandoSql += "precoUltimoFrete = " + produtoVO.getPrecoUltimoFrete() + ", ";
         comandoSql += "comissao = " + produtoVO.getComissao() + ", ";
+        comandoSql += "varejo = " + produtoVO.getVarejo() + ", ";
         comandoSql += "fiscalICMS_id = " + produtoVO.getFiscalICMS_id() + ", ";
         comandoSql += "fiscalPIS_id = " + produtoVO.getFiscalPIS_id() + ", ";
         comandoSql += "fiscalCOFINS_id = " + produtoVO.getFiscalCOFINS_id() + ", ";
@@ -124,7 +126,7 @@ public class TabProdutoDAO extends BuscaBandoDados {
     public int insertTabProdutoVO(Connection conn, TabProdutoVO produtoVO) throws SQLException {
         comandoSql = "INSERT INTO tabProduto ";
         comandoSql += "(codigo, descricao, peso, sisUnidadeComercial_id, sisSituacaoSistema_id, precoFabrica, precoVenda, ";
-        comandoSql += "varejo, comissao, fiscalICMS_id, fiscalPIS_id, fiscalCOFINS_id, nfeNcm, nfeCest, fiscalCSTOrigem_id, ";
+        comandoSql += "precoUltimoFrete, comissao, varejo, fiscalICMS_id, fiscalPIS_id, fiscalCOFINS_id, nfeNcm, nfeCest, fiscalCSTOrigem_id, ";
         comandoSql += "nfeGenero, usuarioCadastro_id) ";
         comandoSql += "VALUES ( ";
         comandoSql += "'" + produtoVO.getCodigo() + "', ";
@@ -134,8 +136,9 @@ public class TabProdutoDAO extends BuscaBandoDados {
         comandoSql += produtoVO.getSisSituacaoSistema_id() + ", ";
         comandoSql += produtoVO.getPrecoFabrica() + ", ";
         comandoSql += produtoVO.getPrecoVenda() + ", ";
-        comandoSql += produtoVO.getVarejo() + ", ";
+        comandoSql += produtoVO.getPrecoUltimoFrete() + ", ";
         comandoSql += produtoVO.getComissao() + ", ";
+        comandoSql += produtoVO.getVarejo() + ", ";
         comandoSql += produtoVO.getFiscalICMS_id() + ", ";
         comandoSql += produtoVO.getFiscalPIS_id() + ", ";
         comandoSql += produtoVO.getFiscalCOFINS_id() + ", ";

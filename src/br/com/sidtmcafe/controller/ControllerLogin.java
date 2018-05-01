@@ -9,16 +9,24 @@ import br.com.sidtmcafe.service.PasswordUtil;
 import br.com.sidtmcafe.service.ServiceError;
 import br.com.sidtmcafe.view.ViewLogin;
 import br.com.sidtmcafe.view.ViewPrincipal;
+import com.jfoenix.controls.JFXAutoCompletePopup;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Window;
 import javafx.util.Callback;
 
 import java.net.URL;
@@ -27,8 +35,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 public class ControllerLogin extends Variavel implements Initializable, FormularioModelo, Constants {
+
     public AnchorPane painelViewLogin;
     public JFXComboBox cboUsuarioLogin;
     public JFXPasswordField pswUsuarioSenha;
@@ -85,6 +95,26 @@ public class ControllerLogin extends Variavel implements Initializable, Formular
 
     @Override
     public void escutarTeclas() {
+        JFXAutoCompletePopup<String> autoCompletePopup = new JFXAutoCompletePopup<>();
+        autoCompletePopup.getSuggestions().addAll(cboUsuarioLogin.getItems());
+
+        autoCompletePopup.setSelectionHandler(event -> {
+            cboUsuarioLogin.setValue(event.getObject());
+        });
+
+        TextField editor = cboUsuarioLogin.getEditor();
+        editor.textProperty().addListener(observable -> {
+            //The filter method uses the Predicate to filter the Suggestions defined above
+            //I choose to use the contains method while ignoring cases
+            autoCompletePopup.filter(item -> item.toLowerCase().contains(editor.getText().toLowerCase()));
+            //Hide the autocomplete popup if the filtered suggestions is empty or when the box's original popup is open
+            if (autoCompletePopup.getFilteredSuggestions().isEmpty() || cboUsuarioLogin.showingProperty().get()) {
+                autoCompletePopup.hide();
+            } else {
+                autoCompletePopup.show(editor);
+            }
+        });
+
         painelViewLogin.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (event.getCode() == KeyCode.ENTER & btnOK.isDisable()) {
                 if (cboUsuarioLogin.isFocused()) {
@@ -123,11 +153,26 @@ public class ControllerLogin extends Variavel implements Initializable, Formular
         preencherObjetos();
         fatorarObjetos();
         escutarTeclas();
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             Locale.setDefault(MY_LOCALE);
         });
 
     }
+
+//    void carregarPesquisaColaborador() {
+//        String busca = pesquisa.toLowerCase().trim();
+//
+//        tabColaboradorVOFilteredList = new FilteredList<TabColaboradorVO>(tabColaboradorVOObservableList, colaborador -> true);
+//        tabColaboradorVOFilteredList.setPredicate(colaborador -> {
+//            if (busca.length() <= 0) return true;
+//
+//            if (colaborador.getNome().toLowerCase().contains(busca)) return true;
+//            if (colaborador.getApelido().toLowerCase().contains(busca)) return true;
+//
+//            return false;
+//        });
+//        cboUsuarioLogin.getItems().setAll(tabColaboradorVOFilteredList);
+//    }
 
     void habilitarBotaoOK() {
         btnOK.setDisable((cboUsuarioLogin.getSelectionModel().getSelectedIndex() < 0) || (pswUsuarioSenha.getText().length() == 0));
@@ -164,4 +209,5 @@ public class ControllerLogin extends Variavel implements Initializable, Formular
         USUARIO_LOGADO_HORA_STR = USUARIO_LOGADO_HORA.format(DTF_HORA);
 
     }
+
 }

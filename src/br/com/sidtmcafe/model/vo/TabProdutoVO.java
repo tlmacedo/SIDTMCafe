@@ -23,7 +23,7 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
     IntegerProperty id, sisUnidadeComercial_id, sisSituacaoSistema_id, varejo, fiscalICMS_id, fiscalPIS_id, fiscalCOFINS_id, fiscalCSTOrigem_id,
             usuarioCadastro_id, usuarioAtualizacao_id;
     StringProperty codigo, descricao, nfeNcm, nfeCest, nfeGenero;
-    DoubleProperty peso, precoFabrica, precoVenda, comissao;
+    DoubleProperty peso, precoFabrica, precoVenda, precoUltimoFrete, comissao;
 
 
     public TabProdutoVO() {
@@ -349,6 +349,19 @@ public class TabProdutoVO extends RecursiveTreeObject<TabProdutoVO> {
 
     public void setPrecoVenda(double precoVenda) {
         precoVendaProperty().set(precoVenda);
+    }
+
+    public double getPrecoUltimoFrete() {
+        return precoUltimoFreteProperty().get();
+    }
+
+    public DoubleProperty precoUltimoFreteProperty() {
+        if (precoUltimoFrete == null) precoUltimoFrete = new SimpleDoubleProperty(0);
+        return precoUltimoFrete;
+    }
+
+    public void setPrecoUltimoFrete(double precoUltimoFrete) {
+        precoUltimoFreteProperty().set(precoUltimoFrete);
     }
 
     public double getComissao() {

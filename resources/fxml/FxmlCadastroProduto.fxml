@@ -133,7 +133,7 @@
                                 <Tooltip text="lucro bruto do produto"/>
                             </tooltip>
                         </JFXTextField>
-                        <JFXTextField fx:id="txtUltimoFrete" accessibleText="011$022" layoutX="560.0" layoutY="40.0"
+                        <JFXTextField fx:id="txtPrecoUltimoFrete" accessibleText="011$022" layoutX="560.0" layoutY="40.0"
                                       maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                                       minWidth="-Infinity" prefHeight="20.0" prefWidth="90.0"
                                       promptText="Útimo Frete (R$)" styleClass="a-direita" text="Útimo frete (R$)">

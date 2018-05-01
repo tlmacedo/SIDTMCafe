@@ -64,7 +64,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
     public JFXTextField txtVarejo;
     public JFXTextField txtComissaoPorc;
     public JFXTextField txtLucroBruto;
-    public JFXTextField txtUltimoFrete;
+    public JFXTextField txtPrecoUltimoFrete;
     public JFXTextField txtComissaoReal;
     public JFXTextField txtLucroLiquido;
     public JFXTextField txtLucratividade;
@@ -271,10 +271,10 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
             }
         });
 
-        txtUltimoFrete.textProperty().addListener(new ChangeListener<String>() {
+        txtPrecoUltimoFrete.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!txtUltimoFrete.isFocused()) return;
+                if (!txtPrecoUltimoFrete.isFocused()) return;
                 vlrLucroBruto();
             }
         });
@@ -495,7 +495,11 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
                 break;
         }
         txtPrecoFabrica.setText(FormatarDado.getValueMoeda(getTabProdutoVO().precoFabricaProperty().toString(), 2));
+        System.out.println("txtPrecoFabrica: [" + txtPrecoFabrica.getText() + "]");
         txtPrecoConsumidor.setText(FormatarDado.getValueMoeda(getTabProdutoVO().precoVendaProperty().toString(), 2));
+        System.out.println("txtPrecoConsumidor: [" + txtPrecoConsumidor.getText() + "]");
+        txtPrecoUltimoFrete.setText(FormatarDado.getValueMoeda(getTabProdutoVO().precoUltimoFreteProperty().toString(), 2));
+        System.out.println("txtPrecoUltimoFrete: [" + txtPrecoUltimoFrete.getText() + "]");
         vlrMargem();
         vlrLucroLiq();
         vlrLucratividade();
@@ -605,8 +609,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
     }
 
     TabProdutoEanVO addCodigoBarras(TabProdutoEanVO produtoEanVO) {
-        String tipoInclusao, donoProdutoEanVO, strIco, codigoBarrasAdicao;
-        donoProdutoEanVO = "o  empresa: " + txtDescricao.getText();
+        String strIco, codigoBarrasAdicao;
         strIco = "ic_codigo_barras_orange_24dp.png";
         try {
             if (produtoEanVO == null) {
@@ -639,7 +642,9 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         if (tabProdutoVO != null) {
             guardarProduto();
             getTabProdutoVO().setNfeNcm(tabProdutoVO.getNfeNcm());
+            //txtFiscalNcm.setText(getTabProdutoVO().getNfeNcm());
             getTabProdutoVO().setDescricao(tabProdutoVO.getDescricao());
+            //txtDescricao.setText(getTabProdutoVO().getDescricao());
             exibirDadosProduto();
         }
 
@@ -682,7 +687,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         Double margem = FormatarDado.getDoubleValorCampo(txtMargem.getText());
         Double prcConsumidor = 0.;
 
-        if (margem == 0.)
+        if (margem.equals(0.))
             prcConsumidor = prcFabrica;
         else
             prcConsumidor = (prcFabrica * (1. + (margem / 100.)));
@@ -692,13 +697,19 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
 
     void vlrMargem() {
         Double prcFabrica = FormatarDado.getDoubleValorCampo(txtPrecoFabrica.getText());
+        System.out.println("prcFabrica: [" + prcFabrica + "]");
         Double prcConsumidor = FormatarDado.getDoubleValorCampo(txtPrecoConsumidor.getText());
-        Double margem;
+        System.out.println("prcConsumidor: [" + prcConsumidor + "]");
+        Double margem = 0.;
+        System.out.println("margem(0): [" + margem + "]");
 
-        if (prcConsumidor == prcFabrica)
+        if (prcConsumidor.equals(prcFabrica)) {
             margem = 0.;
-        else
+            System.out.println("margem(1): [" + margem + "]");
+        } else {
             margem = (((prcConsumidor - prcFabrica) * 100.) / prcFabrica);
+            System.out.println("margem(2): [" + margem + "]");
+        }
 
         txtMargem.setText(FormatarDado.getValueMoeda(BigDecimal.valueOf(margem).setScale(2, RoundingMode.HALF_UP).toString(), 2));
     }
@@ -708,7 +719,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         Double prcConsumidor = FormatarDado.getDoubleValorCampo(txtPrecoConsumidor.getText());
         Double lucroBruto;
 
-        if (prcConsumidor == prcFabrica)
+        if (prcConsumidor.equals(prcFabrica))
             lucroBruto = 0.;
         else
             lucroBruto = (prcConsumidor - prcFabrica);
@@ -719,11 +730,11 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
 
     void vlrLucroLiq() {
         Double lucroBruto = FormatarDado.getDoubleValorCampo(txtLucroBruto.getText());
-        Double ultimoFrete = FormatarDado.getDoubleValorCampo(txtUltimoFrete.getText());
+        Double ultimoFrete = FormatarDado.getDoubleValorCampo(txtPrecoUltimoFrete.getText());
         Double comissaoReal = FormatarDado.getDoubleValorCampo(txtComissaoReal.getText());
         Double lucroLiquido;
 
-        if (lucroBruto == 0.)
+        if (lucroBruto.equals(0.))
             lucroLiquido = 0.;
         else
             lucroLiquido = (lucroBruto - (ultimoFrete + comissaoReal));
@@ -737,7 +748,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         Double lucroLiquido = FormatarDado.getDoubleValorCampo(txtLucroLiquido.getText());
         Double lucratividade;
 
-        if (lucroLiquido == 0.)
+        if (lucroLiquido.equals(0.))
             lucratividade = 0.;
         else
             lucratividade = ((lucroLiquido * 100.) / prcConsumidor);
@@ -750,7 +761,7 @@ public class ControllerCadastroProduto extends Variavel implements Initializable
         Double comissaoPorc = FormatarDado.getDoubleValorCampo(txtComissaoPorc.getText());
         Double comissaoReal;
 
-        if (comissaoPorc == 0.)
+        if (comissaoPorc.equals(0.))
             comissaoReal = 0.;
         else
             comissaoReal = prcConsumidor * (comissaoPorc / 100.);
